@@ -17,12 +17,8 @@ Weapon::Weapon(Loadable *tmp) : Module (tmp) {
 
 }
 
-void Weapon::startFiring() {
-    firing = true;
-}
-
-void Weapon::stopFiring() {
-    firing = false;
+void Weapon::setFiring(bool condition) {
+    firing = condition;
 }
 
 void Weapon::loop(Context *context, Event *event) {
@@ -30,7 +26,7 @@ void Weapon::loop(Context *context, Event *event) {
         Json::Value projectile = root["projectile"];
         if(projectile.isString()) {
             Projectile *object = static_cast<Projectile*>(context->getAssets()->copyAsset(projectile.asString()));
-            object->place(parent->getPosition(), Vector::createByAngle(getProjectileSpead(), this->parent->getAngle()));
+            object->place(parent->getPosition(), Vector::createByAngle(getProjectileSpead(), this->parent->getAngle()), Vector(), this->parent->getAngle());
             context->getUnits()->push_back(object);
 
             //this.parent.audioPlayer.play(this, 14);

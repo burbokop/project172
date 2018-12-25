@@ -18,8 +18,7 @@ public:
     Weapon();
     Weapon(Loadable *tmp);
 
-    void startFiring();
-    void stopFiring();
+    void setFiring(bool condition);
 
     // Worker interface
 public:

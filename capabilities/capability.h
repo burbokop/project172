@@ -10,8 +10,8 @@ class Capability : public Worker
 protected:
     Unit *parent = nullptr;
 public:
-    bool setParent(Unit *parent);
-    void unsetParent();
+    virtual bool setParent(Unit *parent);
+    virtual void unsetParent();
 };
 
 #endif // COMPONENTS_H

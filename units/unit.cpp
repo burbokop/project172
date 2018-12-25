@@ -36,7 +36,6 @@ void Unit::removeCapability(Capability *capability) {
 #include <iostream>
 ModuleHandler *Unit::getModuleHandler() {
     for(Capability *cap : capabilities) {
-        std::cout << "type: " << typeid (cap).name() << "\n";
         ModuleHandler* mh = dynamic_cast<ModuleHandler*>(cap);
         if(mh != nullptr) {
             return  mh;

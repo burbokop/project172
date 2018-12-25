@@ -52,9 +52,10 @@ Loadable *AssetManager::copyAsset(std::string key) {
 
     if(assetClass == "movable") return new Movable(tmp);
     //if(assetClass == "ship") return new Movable(tmp);
+    if(assetClass == "projectile") return new Projectile(tmp);
+
     if(assetClass == "module") return new Module(tmp);
     if(assetClass == "weapon") return new Weapon(tmp);
-    //if(assetClass == "movable") return new Movable(tmp);
     //if(assetClass == "movable") return new Movable(tmp);
     //if(assetClass == "movable") return new Movable(tmp);
 
@@ -88,9 +89,19 @@ void AssetManager::processFile(std::string file, std::string location) {
                  anim.play(Animator::LOOP);
             }
 
+            long intervalValue = 1000;
 
+            Json::Value rate = root["rate"];
+            Json::Value interval = root["interval"];
 
-            assets[key.asString()] = new Loadable(root, anim);
+            if(rate.isNumeric()) {
+                intervalValue = static_cast<long>(60000 / rate.asDouble());
+            } else if (interval.isNumeric()) {
+                intervalValue = static_cast<long>(interval.asDouble());
+            }
+            Timer timer(intervalValue);
+
+            assets[key.asString()] = new Loadable(root, anim, AudioPlayer(), timer);
         }
     }
 

@@ -2,6 +2,7 @@
 #define PLAYER_H
 
 #include "controller.h"
+#include "./modules/weapon.h"
 
 class Player : public Controller {
 private:

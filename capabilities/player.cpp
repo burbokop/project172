@@ -16,9 +16,17 @@ void Player::loop(Context *context, Event *event) {
 
     ModuleHandler *modules = parent->getModuleHandler();
 
-    std::cout << "modules: " << modules << "\n";
+    std::vector<Module*> *weapons = modules->getModulesByClass("weapon");
 
-    modules->getModulesByClass("weapon");
+
+    for(Module *module : *weapons) {
+        Weapon *weapon = dynamic_cast<Weapon*>(module);
+        if(weapon) {
+            weapon->setFiring(event->getKey(44));
+        }
+    }
+
+
 
 /*
     const weapon = this.parent.moduleHandler.getFreeType('weapon');
