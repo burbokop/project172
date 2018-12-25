@@ -1,0 +1,7 @@
+{
+    "key": "dock-1",
+    "class": "dock",
+    "sprite": "./dock.png",
+    "offset": { "coords": [46, -26] },
+    "props": {}
+}

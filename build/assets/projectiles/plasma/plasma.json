@@ -1,0 +1,5 @@
+{
+    "key": "proj-plasma",
+    "class": "projectile",
+    "sprite": "./plasma.png"
+}

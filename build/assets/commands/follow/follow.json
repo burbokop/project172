@@ -1,0 +1,5 @@
+{
+    "key": "follow",
+    "title": "follow",
+    "work": "/Function(() => { console.log('gogadoda'); })/"
+}

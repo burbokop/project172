@@ -1,0 +1,17 @@
+{
+    "key":"engine",
+    "class": "engine",
+    
+    "animation": { 
+        "spritesheet": "./anim.png",
+        "w":20,
+        "h":12
+    },
+    "offset": { "coords": [-26, 0] },
+    
+    "audio": {
+        "start": "./engineStart.ogg",
+        "loop": "./engineLoop.ogg",
+        "stop": "./engineStop.ogg"
+    }
+}
