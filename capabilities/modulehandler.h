@@ -21,6 +21,7 @@ public:
     void removeModule(Module *module);
 
     std::vector<Module *> *getModulesByClass(std::string moduleClass);
+    bool hasModuleOfClass(std::string moduleClass);
 
     // Worker interface
 public:

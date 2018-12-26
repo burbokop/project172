@@ -32,21 +32,46 @@ Movable::Movable(Loadable *tmp) : Unit (tmp) {
 
 
 void Movable::place(Vector pos, Vector vel, Vector acc, double angle) {
-    this->pos = pos;
+    Unit::place(pos, angle);
     this->vel = vel;
     this->acc = acc;
-    this->angle = angle;
 }
 
-void Movable::accelerateForward() {
-    acc = Vector::createByAngle(getAccelerationValue(), angle);
+bool Movable::accelerateForward() {
+    if(!accelerationLocked) {
+        ModuleHandler *modules = getModuleHandler();
+        if(modules && modules->hasModuleOfClass("engine")) {
+            std::vector<Module*> *engines = modules->getModulesByClass("engine");
+            if(engines) {
+                for(Module *module : *engines) {
+                    module->animate(Animator::LOOP, Animator::NOTRENDER);
+                }
+            }
+
+
+
+            acc = Vector::createByAngle(getAccelerationValue(), getAngle());
+            accelerationLocked = true;
+            return true;
+        }
+    }
+    return false;
 }
 
 
 void Movable::accelerateIdle() {
+    if(!accelerationLocked) {
     acc = vel.module() > STOP_MOVING_VELOCITY ?
         Vector::createByAngle(-0.01, vel.angle()) :
-                Vector();
+        Vector();
+    }
+}
+
+void Movable::accelerate(Vector acc) {
+    if(!accelerationLocked) {
+        this->acc = acc;
+        accelerationLocked = true;
+    }
 }
 
 Vector Movable::getVelocity() {
@@ -55,8 +80,10 @@ Vector Movable::getVelocity() {
 
 void Movable::updatePosition() {
 
+    accelerateIdle();
     vel = vel.relativisticAddition(acc, getMaxSpeed());
     pos += vel;
+    accelerationLocked = false;
 }
 
 void Movable::loop(Context *context, Event *event) {

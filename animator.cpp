@@ -6,8 +6,14 @@ const Uint8 Animator::ONEFRAME = 2;
 const Uint8 Animator::FROZE = 3;
 const Uint8 Animator::NOTRENDER = 4;
 const Uint8 Animator::TOTHEFRAME = 5;
+const Uint8 Animator::DEFAULT_INACTIVE = 6;
 
 
+
+
+void Animator::setDefaultMode(const Uint8 &value) {
+    defaultMode = value;
+}
 
 Animator::Animator() {
 
@@ -53,6 +59,7 @@ void Animator::setZoom(double zoom) {
 }
 
 void Animator::render(Renderer *renderer, Vector offset) {
+
     if (renderer != nullptr && this->mode != NOTRENDER) {
         Vector local = pos + offset;
         //const local = pos.add(api.oh.math.Vector.createByAngle(-offset.module(), -angle / 180 * 3.14));
@@ -64,4 +71,5 @@ void Animator::render(Renderer *renderer, Vector offset) {
             if(this->currentFrame >= maxFrame) this->currentFrame = 0;
         }
     }
+    if(defaultMode != DEFAULT_INACTIVE) mode = defaultMode;
 }

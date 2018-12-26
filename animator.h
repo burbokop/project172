@@ -14,6 +14,7 @@ public:
     static const Uint8 FROZE;
     static const Uint8 NOTRENDER;
     static const Uint8 TOTHEFRAME;
+    static const Uint8 DEFAULT_INACTIVE;
 
 
 private:
@@ -23,6 +24,8 @@ private:
 
 
     Uint8 mode = NOTRENDER;
+    Uint8 defaultMode = DEFAULT_INACTIVE;
+
     Timer timer = Timer(100);
     SDL_Surface *origin;
     std::vector<SDL_Surface*> frames;
@@ -35,6 +38,7 @@ public:
     Animator();
     Animator(SDL_Surface *origin, int frames = 1, int tracks = 1);
     void play(Uint8 mode);
+    void setDefaultMode(const Uint8 &value);
     void setPosition(Vector pos);
     void setAngle(double angle);
     void setZoom(double zoom);

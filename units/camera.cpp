@@ -16,9 +16,11 @@ void Camera::setTarget(Controller *target) {
     this->target = target;
 }
 
-void Camera::loop(Context *context, Event *event)
-{
+void Camera::loop(Context *context, Event *event) {
+
+
     if(target != nullptr) {
+
         Unit *targetUnit = target->getParent();
         if(targetUnit != nullptr) {
 
@@ -29,11 +31,11 @@ void Camera::loop(Context *context, Event *event)
                 Movable *movable = dynamic_cast<Movable*>(targetUnit);
                 if(movable) {
                     double velocity = movable->getVelocity().module();
-                    acc = direction * velocity;
+                    accelerate(direction * velocity);
                     root["max-speed"] = Json::Value(distance * MAX_SPEED_MULTIPLIER);
                 }
             } else {
-                acc = Vector(0, 0);
+                accelerate(Vector());
             }
         }
     }

@@ -35,7 +35,9 @@ SOURCES += \
     audioplayer.cpp \
     capabilities/modules/weapon.cpp \
     units/projectile.cpp \
-    context.cpp
+    context.cpp \
+    capabilities/modules/engine.cpp \
+    capabilities/modules/warpdrive.cpp
 
 
 
@@ -65,7 +67,9 @@ HEADERS += \
     audioplayer.h \
     capabilities/modules/weapon.h \
     units/projectile.h \
-    context.h
+    context.h \
+    capabilities/modules/engine.h \
+    capabilities/modules/warpdrive.h
 
 
 

@@ -1,13 +1,17 @@
 {
-    "key":"engine",
+    "key":"engine1",
     "class": "engine",
     
     "animation": { 
         "spritesheet": "./anim.png",
-        "w":20,
-        "h":12
+        "frames": 4,
+        "tracks": 1,
+        "play": "not-render"
     },
-    "offset": { "coords": [-26, 0] },
+    "offset": {
+        "x": -26,
+        "y": 0
+    },
     
     "audio": {
         "start": "./engineStart.ogg",

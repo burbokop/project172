@@ -23,7 +23,6 @@ public:
     // Worker interface
 public:
     void loop(Context *context, Event *event);
-    void render(Renderer *renderer, Vector offset);
 };
 
 #endif // WEAPON_H

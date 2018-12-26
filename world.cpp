@@ -20,6 +20,7 @@ void World::init(AssetManager *assets, std::vector<Worker *> *units) {
     playerShip->addCapability(player);
     ModuleHandler *playerModuleHandler = new ModuleHandler();
     playerModuleHandler->addModule(static_cast<Module*>(assets->copyAsset("pistol")));
+    playerModuleHandler->addModule(static_cast<Module*>(assets->copyAsset("engine1")));
     playerShip->addCapability(playerModuleHandler);
 
 

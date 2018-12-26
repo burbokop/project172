@@ -1,6 +1,7 @@
 #include "loadable.h"
 
 
+
 Loadable::Loadable() {
 }
 
@@ -8,11 +9,12 @@ Loadable::Loadable(Loadable *tmp) {
     tmp->clone(this);
 }
 
-Loadable::Loadable(Json::Value root, Animator animator, AudioPlayer audioPlayer, Timer timer) {
+Loadable::Loadable(Json::Value root, Animator animator, AudioPlayer audioPlayer, Timer timer, Vector offset) {
     this->root = root;
     this->animator = animator;
     this->audioPlayer = audioPlayer;
     this->timer = timer;
+    this->offset = offset;
 }
 
 Loadable::Loadable(const Loadable & object) {
@@ -20,9 +22,10 @@ Loadable::Loadable(const Loadable & object) {
     this->animator = object.animator;
     this->audioPlayer = object.audioPlayer;
     this->timer = object.timer;
+    this->offset = object.offset;
 }
 
-std::string Loadable::getClass() {
+std::string Loadable::getAssetClass() {
     Json::Value classValue = root.get("class", "undefined");
     if(classValue.isString()) {
         return classValue.asString();
@@ -35,4 +38,5 @@ void Loadable::clone(Loadable *dst) {
     dst->animator = animator;
     dst->audioPlayer = audioPlayer;
     dst->timer = timer;
+    dst->offset = offset;
 }

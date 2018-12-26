@@ -11,6 +11,9 @@ public:
 
     // Worker interface
 public:
+
+    void animate(Uint8 mode, Uint8 def);
+
     void loop(Context *context, Event *event);
     void render(Renderer *renderer, Vector offset);
 };

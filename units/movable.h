@@ -4,6 +4,11 @@
 #include "units/unit.h"
 
 class Movable : public Unit {
+private:
+    Vector vel;
+    Vector acc;
+    bool accelerationLocked = false;
+
 protected:
     static const double STOP_MOVING_VELOCITY;
     static const double DEFAULT_ACCELERATION_VALUE;
@@ -12,11 +17,11 @@ protected:
     double getMaxSpeed();
 
 
-    Vector vel;
-    Vector acc;
 
     void updatePosition();
 
+    void accelerateIdle();
+    void accelerate(Vector acc);
 public:
     Movable();
     Movable(Loadable *tmp);
@@ -25,8 +30,7 @@ public:
 
     void place(Vector pos, Vector vel = Vector(), Vector acc = Vector(), double angle = 0);
 
-    void accelerateForward();
-    void accelerateIdle();
+    bool accelerateForward();
 
     Vector getVelocity();
 

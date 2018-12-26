@@ -1,7 +1,7 @@
 #include "weapon.h"
 #include "../../context.h"
 
-const double Weapon::DEFAULT_PROJECTILE_SPEED = 1.0;
+const double Weapon::DEFAULT_PROJECTILE_SPEED = 4.0;
 double Weapon::getProjectileSpead() {
     Json::Value projectileSpeed = root["projectile-speed"];
     if(projectileSpeed.isNumeric()) {
@@ -14,7 +14,6 @@ Weapon::Weapon() {
 }
 
 Weapon::Weapon(Loadable *tmp) : Module (tmp) {
-
 }
 
 void Weapon::setFiring(bool condition) {
@@ -32,8 +31,4 @@ void Weapon::loop(Context *context, Event *event) {
             //this.parent.audioPlayer.play(this, 14);
         }
     }
-}
-
-void Weapon::render(Renderer *renderer, Vector offset) {
-
 }

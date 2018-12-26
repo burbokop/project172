@@ -12,14 +12,15 @@ protected:
     Animator animator;
     AudioPlayer audioPlayer;
     Timer timer = Timer(100);
+    Vector offset;
 
 public:
     Loadable();
     Loadable(Loadable *tmp);
-    Loadable(Json::Value root, Animator animator = Animator(), AudioPlayer audioPlayer = AudioPlayer(), Timer timer = Timer(100));
+    Loadable(Json::Value root, Animator animator = Animator(), AudioPlayer audioPlayer = AudioPlayer(), Timer timer = Timer(100), Vector offset = Vector());
     Loadable(const Loadable &object);
 
-    std::string getClass();
+    std::string getAssetClass();
 
     void clone(Loadable *dst);
 };

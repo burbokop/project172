@@ -14,12 +14,14 @@ void Environment::init() {
     this->renderer = Renderer::create("project172", *resolution);
 }
 
+#include <iostream>
 void Environment::start() {
     assetManager->search("./assets");
     world.init(assetManager, units);
     event->run();
     while (1) {
         Vector offset = *resolution * 0.5 - world.getCamera()->getPosition();
+        std::cout << offset.getIntX() << "\n";
         background->loop(this->context, event);
         background->render(renderer, offset);
         for(unsigned long i = 0, L = units->size(); i < L; i++) {

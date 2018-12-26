@@ -11,16 +11,20 @@
 
 
 class Unit : public Worker, public Loadable {
+private:
+    double angle = 0;
+    double dstAngle = 0;
+    bool angleLocked = false;
+
 protected:
     static const double DEFAULT_ROTATION_SPEED;
     double getRotationSpeed();
 
     std::vector<Capability*> capabilities;
 
+
     Vector pos;
-    double angle = 0;
-    double dstAngle = 0;
-    bool angleLocked = false;
+
 
 public:
     Unit();

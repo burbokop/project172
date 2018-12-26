@@ -44,7 +44,7 @@ Loadable *AssetManager::getAsset(std::string key) {
 
 Loadable *AssetManager::copyAsset(std::string key) {
     Loadable *tmp = getAsset(key);
-    std::string assetClass = tmp->getClass();
+    std::string assetClass = tmp->getAssetClass();
 
     //deprecated
     if(assetClass == "ship") assetClass = "movable";
@@ -56,6 +56,10 @@ Loadable *AssetManager::copyAsset(std::string key) {
 
     if(assetClass == "module") return new Module(tmp);
     if(assetClass == "weapon") return new Weapon(tmp);
+    if(assetClass == "engine") return new Engine(tmp);
+    if(assetClass == "warp-drive") return new WarpDrive(tmp);
+
+
     //if(assetClass == "movable") return new Movable(tmp);
     //if(assetClass == "movable") return new Movable(tmp);
 
@@ -77,12 +81,24 @@ void AssetManager::processFile(std::string file, std::string location) {
             Animator anim;
             Json::Value animation = root["animation"];
             Json::Value sprite = root["sprite"];
+            Json::Value offset = root["offset"];
+
             if(!animation.isNull()) {
                  Json::Value spritesheet = animation["spritesheet"];
                  Json::Value frames = animation["frames"];
                  Json::Value tracks = animation["tracks"];
+                 Json::Value play = animation["play"];
                  if(!spritesheet.isNull()) {
                      anim = Animator(IMG_Load(addPrefix(spritesheet.asString(), location).c_str()), frames.isNull() ? 1 : frames.asInt(), tracks.isNull() ? 1 : tracks.asInt());
+                     if(play.isString()) {
+                         if(play == "loop") {
+                             anim.play(Animator::LOOP);
+                         } else {
+                             anim.play(Animator::NOTRENDER);
+                         }
+                     } else {
+                        anim.play(Animator::LOOP);
+                     }
                  }
             } else if (!sprite.isNull()) {
                  anim = Animator(IMG_Load(addPrefix(sprite.asString(), location).c_str()));
@@ -101,7 +117,14 @@ void AssetManager::processFile(std::string file, std::string location) {
             }
             Timer timer(intervalValue);
 
-            assets[key.asString()] = new Loadable(root, anim, AudioPlayer(), timer);
+            double offsetX = 0, offsetY = 0;
+            if(!offset.isNull()) {
+                offsetX = offset.get("x", 0.0).asDouble();
+                offsetY = offset.get("y", 0.0).asDouble();
+            }
+            Vector offsetVector(offsetX, offsetY);
+
+            assets[key.asString()] = new Loadable(root, anim, AudioPlayer(), timer, offsetVector);
         }
     }
 
