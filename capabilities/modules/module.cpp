@@ -16,13 +16,9 @@ void Module::loop(Context *context, Event *event) {
 
 }
 
-#include <iostream>
 void Module::render(Renderer *renderer, Vector offset) {
     this->animator.setAngle(parent->getAngle());
-
-    std::cout << "offset LLL: " << this->offset.getDoubleX() << " " << this->offset.getDoubleY() << "\n";
     Vector local = parent->getPosition() + Vector::createByAngle(-this->offset.module(), parent->getAngle());
-
     this->animator.setPosition(local);
     this->animator.render(renderer, offset);
 }

@@ -6,7 +6,7 @@
 
 class Player : public Controller {
 private:
-    bool forwardKeyPressed = false;
+    bool warpKeyPressed = false;
 
 public:
     Player();

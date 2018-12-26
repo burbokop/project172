@@ -37,7 +37,8 @@ SOURCES += \
     units/projectile.cpp \
     context.cpp \
     capabilities/modules/engine.cpp \
-    capabilities/modules/warpdrive.cpp
+    capabilities/modules/warpdrive.cpp \
+    units/ship.cpp
 
 
 
@@ -69,7 +70,8 @@ HEADERS += \
     units/projectile.h \
     context.h \
     capabilities/modules/engine.h \
-    capabilities/modules/warpdrive.h
+    capabilities/modules/warpdrive.h \
+    units/ship.h
 
 
 

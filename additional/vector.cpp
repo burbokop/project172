@@ -144,6 +144,24 @@ double Vector::map(Vector *destination, double value) {
     return result;
 }
 
+Vector Vector::operator+(double term) {
+    double module = this->module();
+    if(module != 0.0) {
+        double mul = 1 + term / module;
+        return Vector(this->x * mul, this->y * mul);
+    }
+    return Vector();
+}
+
+Vector Vector::operator-(double subtrahend) {
+    double module = this->module();
+    if(module != 0.0) {
+        double mul = 1 - subtrahend / module;
+        return Vector(this->x * mul, this->y * mul);
+    }
+    return Vector();
+}
+
 int Vector::getIntX() {
     return static_cast<int>(this->x);
 }

@@ -7,14 +7,12 @@
 
 #include "filesystem.h"
 #include "loadable.h"
-#include "units/movable.h"
+#include "units/ship.h"
 #include "capabilities/modules/weapon.h"
 #include "capabilities/modules/engine.h"
 #include "capabilities/modules/warpdrive.h"
 
-
-class AssetManager : public Object
-{   
+class AssetManager : public Object {
 private:
     bool loadAudio;
 

@@ -30,7 +30,7 @@ void Camera::loop(Context *context, Event *event) {
             if(distance > STOP_DISTANCE) {
                 Movable *movable = dynamic_cast<Movable*>(targetUnit);
                 if(movable) {
-                    double velocity = movable->getVelocity().module();
+                    double velocity = std::pow(movable->getVelocity().module(), 2);
                     accelerate(direction * velocity);
                     root["max-speed"] = Json::Value(distance * MAX_SPEED_MULTIPLIER);
                 }

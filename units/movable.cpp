@@ -3,6 +3,19 @@
 
 const double Movable::STOP_MOVING_VELOCITY = 0.015;
 const double Movable::DEFAULT_ACCELERATION_VALUE = 0.1;
+void Movable::setIdleEnabled(bool value) {
+    idleEnabled = value;
+}
+
+void Movable::forcedMaxSpeed(double value) {
+    forcedMaxSpeedEnabled = true;
+    forcedMaxSpeedValue = value;
+}
+
+void Movable::disableForcedMaxSpeed() {
+    forcedMaxSpeedEnabled = false;
+}
+
 double Movable::getAccelerationValue() {
     Json::Value value = root["acceleration"];
     if(value.isNumeric()) {
@@ -13,11 +26,15 @@ double Movable::getAccelerationValue() {
 
 const double Movable::DEFAULT_MAX_SPEED = 2;
 double Movable::getMaxSpeed() {
-    Json::Value value = root["max-speed"];
-    if(value.isNumeric()) {
-        return value.asDouble();
+    if(!forcedMaxSpeedEnabled) {
+        Json::Value value = root["max-speed"];
+        if(value.isNumeric()) {
+            return value.asDouble();
+        }
+        return DEFAULT_MAX_SPEED;
+    } else {
+        return forcedMaxSpeedValue;
     }
-    return DEFAULT_MAX_SPEED;
 }
 
 
@@ -47,9 +64,6 @@ bool Movable::accelerateForward() {
                     module->animate(Animator::LOOP, Animator::NOTRENDER);
                 }
             }
-
-
-
             acc = Vector::createByAngle(getAccelerationValue(), getAngle());
             accelerationLocked = true;
             return true;
@@ -60,7 +74,7 @@ bool Movable::accelerateForward() {
 
 
 void Movable::accelerateIdle() {
-    if(!accelerationLocked) {
+    if(!accelerationLocked && idleEnabled) {
     acc = vel.module() > STOP_MOVING_VELOCITY ?
         Vector::createByAngle(-0.01, vel.angle()) :
         Vector();
@@ -79,7 +93,6 @@ Vector Movable::getVelocity() {
 }
 
 void Movable::updatePosition() {
-
     accelerateIdle();
     vel = vel.relativisticAddition(acc, getMaxSpeed());
     pos += vel;

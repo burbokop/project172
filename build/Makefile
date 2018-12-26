@@ -78,7 +78,8 @@ SOURCES       = ../main.cpp \
 		../units/projectile.cpp \
 		../context.cpp \
 		../capabilities/modules/engine.cpp \
-		../capabilities/modules/warpdrive.cpp 
+		../capabilities/modules/warpdrive.cpp \
+		../units/ship.cpp 
 OBJECTS       = main.o \
 		object.o \
 		worker.o \
@@ -107,7 +108,8 @@ OBJECTS       = main.o \
 		projectile.o \
 		context.o \
 		engine.o \
-		warpdrive.o
+		warpdrive.o \
+		ship.o
 DIST          = /home/boris/Installed/Qt/5.11.1/gcc_64/mkspecs/features/spec_pre.prf \
 		/home/boris/Installed/Qt/5.11.1/gcc_64/mkspecs/common/unix.conf \
 		/home/boris/Installed/Qt/5.11.1/gcc_64/mkspecs/common/linux.conf \
@@ -322,7 +324,8 @@ DIST          = /home/boris/Installed/Qt/5.11.1/gcc_64/mkspecs/features/spec_pre
 		../units/projectile.h \
 		../context.h \
 		../capabilities/modules/engine.h \
-		../capabilities/modules/warpdrive.h ../main.cpp \
+		../capabilities/modules/warpdrive.h \
+		../units/ship.h ../main.cpp \
 		../object.cpp \
 		../worker.cpp \
 		../renderer.cpp \
@@ -350,7 +353,8 @@ DIST          = /home/boris/Installed/Qt/5.11.1/gcc_64/mkspecs/features/spec_pre
 		../units/projectile.cpp \
 		../context.cpp \
 		../capabilities/modules/engine.cpp \
-		../capabilities/modules/warpdrive.cpp
+		../capabilities/modules/warpdrive.cpp \
+		../units/ship.cpp
 QMAKE_TARGET  = project172
 DESTDIR       = 
 TARGET        = project172
@@ -756,8 +760,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /home/boris/Installed/Qt/5.11.1/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../object.h ../worker.h ../renderer.h ../environment.h ../world.h ../assetmanager.h ../filesystem.h ../animator.h ../background.h ../units/unit.h ../units/movable.h ../units/camera.h ../capabilities/capability.h ../capabilities/controller.h ../capabilities/player.h ../capabilities/modulehandler.h ../capabilities/modules/module.h ../additional/spm.h ../additional/timer.h ../additional/event.h ../additional/vector.h ../loadable.h ../audioplayer.h ../capabilities/modules/weapon.h ../units/projectile.h ../context.h ../capabilities/modules/engine.h ../capabilities/modules/warpdrive.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../main.cpp ../object.cpp ../worker.cpp ../renderer.cpp ../environment.cpp ../world.cpp ../assetmanager.cpp ../filesystem.cpp ../animator.cpp ../background.cpp ../units/unit.cpp ../units/movable.cpp ../units/camera.cpp ../capabilities/capability.cpp ../capabilities/controller.cpp ../capabilities/player.cpp ../capabilities/modulehandler.cpp ../capabilities/modules/module.cpp ../additional/spm.cpp ../additional/timer.cpp ../additional/event.cpp ../additional/vector.cpp ../loadable.cpp ../audioplayer.cpp ../capabilities/modules/weapon.cpp ../units/projectile.cpp ../context.cpp ../capabilities/modules/engine.cpp ../capabilities/modules/warpdrive.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../object.h ../worker.h ../renderer.h ../environment.h ../world.h ../assetmanager.h ../filesystem.h ../animator.h ../background.h ../units/unit.h ../units/movable.h ../units/camera.h ../capabilities/capability.h ../capabilities/controller.h ../capabilities/player.h ../capabilities/modulehandler.h ../capabilities/modules/module.h ../additional/spm.h ../additional/timer.h ../additional/event.h ../additional/vector.h ../loadable.h ../audioplayer.h ../capabilities/modules/weapon.h ../units/projectile.h ../context.h ../capabilities/modules/engine.h ../capabilities/modules/warpdrive.h ../units/ship.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../main.cpp ../object.cpp ../worker.cpp ../renderer.cpp ../environment.cpp ../world.cpp ../assetmanager.cpp ../filesystem.cpp ../animator.cpp ../background.cpp ../units/unit.cpp ../units/movable.cpp ../units/camera.cpp ../capabilities/capability.cpp ../capabilities/controller.cpp ../capabilities/player.cpp ../capabilities/modulehandler.cpp ../capabilities/modules/module.cpp ../additional/spm.cpp ../additional/timer.cpp ../additional/event.cpp ../additional/vector.cpp ../loadable.cpp ../audioplayer.cpp ../capabilities/modules/weapon.cpp ../units/projectile.cpp ../context.cpp ../capabilities/modules/engine.cpp ../capabilities/modules/warpdrive.cpp ../units/ship.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -828,7 +832,9 @@ main.o: ../main.cpp ../environment.h \
 		../world.h \
 		../assetmanager.h \
 		../filesystem.h \
+		../units/ship.h \
 		../units/movable.h \
+		../capabilities/modules/warpdrive.h \
 		../capabilities/modules/weapon.h \
 		../units/projectile.h \
 		../capabilities/modules/engine.h \
@@ -874,7 +880,9 @@ environment.o: ../environment.cpp ../environment.h \
 		../world.h \
 		../assetmanager.h \
 		../filesystem.h \
+		../units/ship.h \
 		../units/movable.h \
+		../capabilities/modules/warpdrive.h \
 		../capabilities/modules/weapon.h \
 		../units/projectile.h \
 		../capabilities/modules/engine.h \
@@ -898,11 +906,13 @@ world.o: ../world.cpp ../world.h \
 		../additional/event.h \
 		../additional/timer.h \
 		../audioplayer.h \
+		../units/ship.h \
 		../units/movable.h \
 		../units/unit.h \
 		../capabilities/modulehandler.h \
 		../capabilities/modules/module.h \
 		../capabilities/capability.h \
+		../capabilities/modules/warpdrive.h \
 		../capabilities/modules/weapon.h \
 		../units/projectile.h \
 		../capabilities/modules/engine.h \
@@ -923,11 +933,13 @@ assetmanager.o: ../assetmanager.cpp ../assetmanager.h \
 		../additional/event.h \
 		../additional/timer.h \
 		../audioplayer.h \
+		../units/ship.h \
 		../units/movable.h \
 		../units/unit.h \
 		../capabilities/modulehandler.h \
 		../capabilities/modules/module.h \
 		../capabilities/capability.h \
+		../capabilities/modules/warpdrive.h \
 		../capabilities/modules/weapon.h \
 		../units/projectile.h \
 		../capabilities/modules/engine.h
@@ -1134,6 +1146,8 @@ weapon.o: ../capabilities/modules/weapon.cpp ../capabilities/modules/weapon.h \
 		../context.h \
 		../assetmanager.h \
 		../filesystem.h \
+		../units/ship.h \
+		../capabilities/modules/warpdrive.h \
 		../capabilities/modules/engine.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o weapon.o ../capabilities/modules/weapon.cpp
 
@@ -1168,11 +1182,13 @@ context.o: ../context.cpp ../context.h \
 		../animator.h \
 		../additional/timer.h \
 		../audioplayer.h \
+		../units/ship.h \
 		../units/movable.h \
 		../units/unit.h \
 		../capabilities/modulehandler.h \
 		../capabilities/modules/module.h \
 		../capabilities/capability.h \
+		../capabilities/modules/warpdrive.h \
 		../capabilities/modules/weapon.h \
 		../units/projectile.h \
 		../capabilities/modules/engine.h
@@ -1207,6 +1223,25 @@ warpdrive.o: ../capabilities/modules/warpdrive.cpp ../capabilities/modules/warpd
 		../additional/timer.h \
 		../audioplayer.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o warpdrive.o ../capabilities/modules/warpdrive.cpp
+
+ship.o: ../units/ship.cpp ../units/ship.h \
+		../units/movable.h \
+		../units/unit.h \
+		../worker.h \
+		../object.h \
+		../renderer.h \
+		../additional/spm.h \
+		../additional/vector.h \
+		../additional/event.h \
+		../capabilities/modulehandler.h \
+		../capabilities/modules/module.h \
+		../capabilities/capability.h \
+		../loadable.h \
+		../animator.h \
+		../additional/timer.h \
+		../audioplayer.h \
+		../capabilities/modules/warpdrive.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ship.o ../units/ship.cpp
 
 ####### Install
 

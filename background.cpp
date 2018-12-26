@@ -1,12 +1,19 @@
 #include "background.h"
+#include "context.h"
 
+const double Background::STARS_SLIDING_SPEED = 12;
+
+void Background::setSpeed(const Vector &value)
+{
+    speed = value;
+}
 
 Background::Background(Vector *resolution) {
     this->resolution = resolution;
 }
 
-void Background::init(unsigned int amount)
-{
+void Background::init(unsigned int amount, double slidingStart) {
+    this->slidingStart = slidingStart;
     Uint32 colors[] = { 0xdeff17, 0xfe4600, 0xf9990f, 0x8a27ff };
     mainColor = 0x333353;
 
@@ -19,9 +26,17 @@ void Background::init(unsigned int amount)
 }
 
 void Background::loop(Context *context, Event *event) {
+
+
+
 }
+#include <iostream>
 
 void Background::render(Renderer *renderer, Vector offset) {
+    std::cout << speed.module() << " m/s\n";
+
+
+
     if(renderer) {
         renderer->fill(mainColor);
         Vector localOffset = offset * -0.4;
@@ -35,7 +50,11 @@ void Background::render(Renderer *renderer, Vector offset) {
             if(y >= 0) y = y % resolution->getIntY();
             else y = y % resolution->getIntY() + resolution->getIntY();
 
-            renderer->pixel(Vector(x, y), star.color);
+            if(speed.module() < slidingStart) {
+                renderer->pixel(Vector(x, y), star.color);
+            } else {
+                renderer->line(Vector(x, y), Vector(x, y) - (speed - slidingStart), star.color);
+            }
         }
     }
 }

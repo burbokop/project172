@@ -7,22 +7,23 @@ Environment::Environment() {
     this->event = new Event();
 }
 
-void Environment::init() {
+void Environment::init(int argc, char *argv[]) {
+
     resolution = new Vector(1280, 720);
     this->background = new Background(this->resolution);
-    this->background->init(128);
+    if(argc > 1) this->background->init(128, std::stod(argv[1]));
+    else this->background->init(128);
     this->renderer = Renderer::create("project172", *resolution);
 }
 
-#include <iostream>
 void Environment::start() {
     assetManager->search("./assets");
     world.init(assetManager, units);
     event->run();
     while (1) {
         Vector offset = *resolution * 0.5 - world.getCamera()->getPosition();
-        std::cout << offset.getIntX() << "\n";
         background->loop(this->context, event);
+        background->setSpeed(world.getCamera()->getVelocity());
         background->render(renderer, offset);
         for(unsigned long i = 0, L = units->size(); i < L; i++) {
             this->units->at(i)->loop(this->context, event);

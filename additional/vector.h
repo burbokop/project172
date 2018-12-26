@@ -36,6 +36,10 @@ public:
     char quarter(char offset);
     double map(Vector *destination, double value);
 
+    Vector operator+(double term);
+    Vector operator-(double subtrahend);
+
+
     int getIntX();
     int getIntY();
     long getLongX();

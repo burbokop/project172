@@ -15,6 +15,8 @@ void Event::loop()
                 if(event.key.keysym.scancode == SDL_SCANCODE_F12) exitFlag = true;
                 if(event.key.keysym.scancode == SDL_SCANCODE_F1 || event.key.keysym.scancode == SDL_SCANCODE_F2) pauseFlag = false;
                 this->setKey(event.key.keysym.scancode, true);
+                //printf("e %i\n", event.key.keysym.scancode);
+
             }
             else if(event.type == SDL_KEYUP) {
                 if(event.key.keysym.scancode == SDL_SCANCODE_F2) pauseFlag = true;
@@ -23,7 +25,6 @@ void Event::loop()
             else if(event.type == SDL_MOUSEMOTION) {
                 this->mouse = Vector(event.motion.x, event.motion.y);
             }
-
             //this->handleEvent(&event);
         }
     }

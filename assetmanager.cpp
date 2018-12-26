@@ -46,19 +46,14 @@ Loadable *AssetManager::copyAsset(std::string key) {
     Loadable *tmp = getAsset(key);
     std::string assetClass = tmp->getAssetClass();
 
-    //deprecated
-    if(assetClass == "ship") assetClass = "movable";
-    //----------
-
     if(assetClass == "movable") return new Movable(tmp);
-    //if(assetClass == "ship") return new Movable(tmp);
+    if(assetClass == "ship") return new Ship(tmp);
     if(assetClass == "projectile") return new Projectile(tmp);
 
     if(assetClass == "module") return new Module(tmp);
     if(assetClass == "weapon") return new Weapon(tmp);
     if(assetClass == "engine") return new Engine(tmp);
     if(assetClass == "warp-drive") return new WarpDrive(tmp);
-
 
     //if(assetClass == "movable") return new Movable(tmp);
     //if(assetClass == "movable") return new Movable(tmp);

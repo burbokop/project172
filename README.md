@@ -28,4 +28,17 @@ sudo make install
 ```
 
 
+## Documentation
+
+#### keys:
+```
+W A S D = moving
+F       = charging / run / stop warp drive
+SPACE   = fire
+```
+
+#### command line parameters:
+```bash
+./project172 [stars slidind start (the minimum spead of camera when background unables special effect) default = 12 pixel/tick]
+```
 Nice to play

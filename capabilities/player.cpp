@@ -1,5 +1,5 @@
 #include "player.h"
-#include "units/movable.h"
+#include "units/ship.h"
 
 Player::Player() : Controller () {
 
@@ -26,22 +26,27 @@ void Player::loop(Context *context, Event *event) {
         }
     }
 
-    Movable *obj = dynamic_cast<Movable*>(parent);
-    if(obj == nullptr) std::cout << "error (parent is not Movable): " << typeid (parent).name() << "\n";
+    Ship *ship = dynamic_cast<Ship*>(parent);
+    if(ship == nullptr) std::cout << "error (parent is not Ship): " << typeid (parent).name() << "\n";
 
     if(event->getKey(26)) {
-        if(dynamic_cast<Movable*>(parent)->accelerateForward() && !forwardKeyPressed) {
-            forwardKeyPressed = true;
-            //this.parent.audioPlayer.play(engine, 24);
-            //if(engine.animation !== undefined) engine.animation.play('loop');
+        ship->accelerateForward();
+    }
+
+    if(event->getKey(9)) {
+        if(!warpKeyPressed) {
+            warpKeyPressed = true;
+            if(!ship->warp()) {
+                if(!ship->prepareWarp()) {
+                    if(!ship->abortWarp()) {
+                    }
+                }
+            }
         }
     } else {
-        if(forwardKeyPressed) {
-            forwardKeyPressed = false;
-            //this.parent.audioPlayer.stop(engine);
-            //if(engine.animation !== undefined) engine.animation.stop();
-        }
+        warpKeyPressed = false;
     }
+
 }
 
 void Player::render(Renderer *renderer, Vector offset) {

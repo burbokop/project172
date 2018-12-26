@@ -6,6 +6,6 @@
 int main(int argc, char *argv[])
 {
     Environment env;
-    env.init();
+    env.init(argc, argv);
     env.start();
 }
