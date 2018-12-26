@@ -7,7 +7,7 @@
 class Camera : public Movable
 {
 protected:
-    static const int STOP_DISTANCE;
+    static const double STOP_DISTANCE;
     static const double MAX_SPEED_MULTIPLIER;
 
     Controller *target;

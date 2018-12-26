@@ -1,6 +1,6 @@
 #include "camera.h"
 
-const int Camera::STOP_DISTANCE = 2;
+const double Camera::STOP_DISTANCE = 2;
 const double Camera::MAX_SPEED_MULTIPLIER = 0.005;
 
 Camera::Camera() : Movable () {
@@ -25,7 +25,6 @@ void Camera::loop(Context *context, Event *event)
             Vector direction = targetUnit->getPosition() - this->pos;
             const double distance = direction.module();
 
-
             if(distance > STOP_DISTANCE) {
                 Movable *movable = dynamic_cast<Movable*>(targetUnit);
                 if(movable) {
@@ -34,8 +33,7 @@ void Camera::loop(Context *context, Event *event)
                     root["max-speed"] = Json::Value(distance * MAX_SPEED_MULTIPLIER);
                 }
             } else {
-                acc = Vector();
-                vel = Vector();
+                acc = Vector(0, 0);
             }
         }
     }
@@ -43,4 +41,5 @@ void Camera::loop(Context *context, Event *event)
 }
 
 void Camera::render(Renderer *renderer, Vector offset) {
+    renderer->rect(this->pos - Vector(2, 2) + offset, this->pos + Vector(2, 2) + offset, 0x5fcf81);
 }
