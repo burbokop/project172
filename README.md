@@ -2,6 +2,10 @@
 
 # PROJECT 172
 
+
+![alt text](https://github.com/burbokop/project172/blob/master/rewiev.png)
+
+
 only one you need to know: this is the game.
 
 ## installation:
