@@ -14,7 +14,7 @@ public:
     bool prepareWarp();
     bool warp();
     Uint8 abortWarp();
-
+    WarpDrive *getFirstWarp();
 
     // Worker interface
 public:

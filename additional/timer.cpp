@@ -21,6 +21,11 @@ void Timer::reset()
     this->duration = Timer::getMilliseconds();
 }
 
+double Timer::ready() {
+    const double milliseconds = Timer::getMilliseconds();
+    return (milliseconds - this->duration) / this->interval;
+}
+
 long Timer::getMilliseconds(){
     timeb tb;
     ftime(&tb);

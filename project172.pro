@@ -31,6 +31,7 @@ SOURCES += \
     additional/timer.cpp \
     additional/event.cpp \
     additional/vector.cpp \
+    additional/stringformer.cpp \
     loadable.cpp \
     audioplayer.cpp \
     capabilities/modules/weapon.cpp \
@@ -38,7 +39,11 @@ SOURCES += \
     context.cpp \
     capabilities/modules/engine.cpp \
     capabilities/modules/warpdrive.cpp \
-    units/ship.cpp
+    units/ship.cpp \
+    gui/guielement.cpp \
+    gui/guicontainer.cpp \
+    gui/guilabel.cpp \
+    gui/guibutton.cpp
 
 
 
@@ -64,6 +69,7 @@ HEADERS += \
     additional/timer.h \
     additional/event.h \
     additional/vector.h \
+    additional/stringformer.h \
     loadable.h \
     audioplayer.h \
     capabilities/modules/weapon.h \
@@ -71,7 +77,11 @@ HEADERS += \
     context.h \
     capabilities/modules/engine.h \
     capabilities/modules/warpdrive.h \
-    units/ship.h
+    units/ship.h \
+    gui/guielement.h \
+    gui/guicontainer.h \
+    gui/guilabel.h \
+    gui/guibutton.h
 
 
 

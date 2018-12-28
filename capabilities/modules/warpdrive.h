@@ -23,6 +23,11 @@ public:
     WarpDrive(Loadable *tmp);
 
     int getState();
+    std::string getStateAsString();
+    std::string getStateAsIcon();
+    double getCharging();
+    double getReady();
+
     double getSpeadUnit();
 
     bool prepareWarp();

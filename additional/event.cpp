@@ -1,6 +1,7 @@
 #include "event.h"
 
 
+
 void Event::loop()
 {
     while (!this->exitFlag) {
@@ -15,6 +16,8 @@ void Event::loop()
                 if(event.key.keysym.scancode == SDL_SCANCODE_F12) exitFlag = true;
                 if(event.key.keysym.scancode == SDL_SCANCODE_F1 || event.key.keysym.scancode == SDL_SCANCODE_F2) pauseFlag = false;
                 this->setKey(event.key.keysym.scancode, true);
+                this->setPresed(event.key.keysym.scancode, true);
+
                 //printf("e %i\n", event.key.keysym.scancode);
 
             }
@@ -32,40 +35,51 @@ void Event::loop()
 
 
 
-Event::Event()
-{
+Event::Event() {
     this->exitFlag = false;
     this->pauseFlag = false;
     this->scancode = new bool[512];
+    this->pressed = new bool[512];
 }
 
-void Event::run()
-{
+void Event::run() {
     this->thread = std::thread(&Event::loop, this);
 }
 
-void Event::quit()
-{
+void Event::quit() {
     this->exitFlag = true;
     this->thread.join();
 }
 
 
 
-bool Event::getKey(int key)
-{
+bool Event::getKey(int key) {
     return this->scancode[key];
 }
 
-bool Event::getExitFlag()
-{
+bool Event::getPressed(int key) {
+    if(this->pressed[key]) {
+        setPresed(key, false);
+        return true;
+    }
+    return false;
+}
+
+bool Event::getExitFlag() {
     return this->exitFlag;
 }
 
-void Event::setKey(int key, bool value)
-{
+void Event::setKey(int key, bool value) {
     if(key >= 0 && key < 512) {
         this->scancode[key] = value;
+    } else {
+        printf("setKey error: out of bound exeption");
+    }
+}
+
+void Event::setPresed(int key, bool value) {
+    if(key >= 0 && key < 512) {
+        this->pressed[key] = value;
     } else {
         printf("setKey error: out of bound exeption");
     }

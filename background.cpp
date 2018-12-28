@@ -26,17 +26,9 @@ void Background::init(unsigned int amount, double slidingStart) {
 }
 
 void Background::loop(Context *context, Event *event) {
-
-
-
 }
-#include <iostream>
 
 void Background::render(Renderer *renderer, Vector offset) {
-    std::cout << speed.module() << " m/s\n";
-
-
-
     if(renderer) {
         renderer->fill(mainColor);
         Vector localOffset = offset * -0.4;

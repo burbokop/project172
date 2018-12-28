@@ -12,6 +12,9 @@ public:
     Timer(long interval);
     bool count(bool condition);
     void reset();
+    double ready();
+
     static long getMilliseconds();
+
 };
 #endif // TIMER_H

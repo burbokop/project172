@@ -1,8 +1,10 @@
 #include "world.h"
 
-World::World()
-{
+GUIElement *World::getGui() const {
+    return gui;
+}
 
+World::World() {
 }
 
 #include <iostream>
@@ -33,6 +35,15 @@ void World::init(AssetManager *assets, std::vector<Worker *> *units) {
     Unit *someShip = static_cast<Unit*>(assets->copyAsset("sh1"));
     someShip->place(Vector(-200, -100), -0.7);
     units->push_back(someShip);
+
+
+    gui = new GUIContainer(player);
+    static_cast<GUIContainer*>(gui)->addElement(new GUILabel(player, "buffalo"));
+    static_cast<GUIContainer*>(gui)->addElement(new GUILabel(player, "buffalo2"));
+    static_cast<GUIContainer*>(gui)->addElement(new GUILabel(player, "buffalo"));
+    static_cast<GUIContainer*>(gui)->addElement(new GUIButton(player, "bufkjhy"));
+    static_cast<GUIContainer*>(gui)->addElement(new GUILabel(player, "buf353"));
+    static_cast<GUIContainer*>(gui)->addElement(new GUIButton(player, "gog"));
 }
 
 Camera *World::getCamera() {

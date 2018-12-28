@@ -72,6 +72,7 @@ SOURCES       = ../main.cpp \
 		../additional/timer.cpp \
 		../additional/event.cpp \
 		../additional/vector.cpp \
+		../additional/stringformer.cpp \
 		../loadable.cpp \
 		../audioplayer.cpp \
 		../capabilities/modules/weapon.cpp \
@@ -79,7 +80,11 @@ SOURCES       = ../main.cpp \
 		../context.cpp \
 		../capabilities/modules/engine.cpp \
 		../capabilities/modules/warpdrive.cpp \
-		../units/ship.cpp 
+		../units/ship.cpp \
+		../gui/guielement.cpp \
+		../gui/guicontainer.cpp \
+		../gui/guilabel.cpp \
+		../gui/guibutton.cpp 
 OBJECTS       = main.o \
 		object.o \
 		worker.o \
@@ -102,6 +107,7 @@ OBJECTS       = main.o \
 		timer.o \
 		event.o \
 		vector.o \
+		stringformer.o \
 		loadable.o \
 		audioplayer.o \
 		weapon.o \
@@ -109,7 +115,11 @@ OBJECTS       = main.o \
 		context.o \
 		engine.o \
 		warpdrive.o \
-		ship.o
+		ship.o \
+		guielement.o \
+		guicontainer.o \
+		guilabel.o \
+		guibutton.o
 DIST          = /home/boris/Installed/Qt/5.11.1/gcc_64/mkspecs/features/spec_pre.prf \
 		/home/boris/Installed/Qt/5.11.1/gcc_64/mkspecs/common/unix.conf \
 		/home/boris/Installed/Qt/5.11.1/gcc_64/mkspecs/common/linux.conf \
@@ -318,6 +328,7 @@ DIST          = /home/boris/Installed/Qt/5.11.1/gcc_64/mkspecs/features/spec_pre
 		../additional/timer.h \
 		../additional/event.h \
 		../additional/vector.h \
+		../additional/stringformer.h \
 		../loadable.h \
 		../audioplayer.h \
 		../capabilities/modules/weapon.h \
@@ -325,7 +336,11 @@ DIST          = /home/boris/Installed/Qt/5.11.1/gcc_64/mkspecs/features/spec_pre
 		../context.h \
 		../capabilities/modules/engine.h \
 		../capabilities/modules/warpdrive.h \
-		../units/ship.h ../main.cpp \
+		../units/ship.h \
+		../gui/guielement.h \
+		../gui/guicontainer.h \
+		../gui/guilabel.h \
+		../gui/guibutton.h ../main.cpp \
 		../object.cpp \
 		../worker.cpp \
 		../renderer.cpp \
@@ -347,6 +362,7 @@ DIST          = /home/boris/Installed/Qt/5.11.1/gcc_64/mkspecs/features/spec_pre
 		../additional/timer.cpp \
 		../additional/event.cpp \
 		../additional/vector.cpp \
+		../additional/stringformer.cpp \
 		../loadable.cpp \
 		../audioplayer.cpp \
 		../capabilities/modules/weapon.cpp \
@@ -354,7 +370,11 @@ DIST          = /home/boris/Installed/Qt/5.11.1/gcc_64/mkspecs/features/spec_pre
 		../context.cpp \
 		../capabilities/modules/engine.cpp \
 		../capabilities/modules/warpdrive.cpp \
-		../units/ship.cpp
+		../units/ship.cpp \
+		../gui/guielement.cpp \
+		../gui/guicontainer.cpp \
+		../gui/guilabel.cpp \
+		../gui/guibutton.cpp
 QMAKE_TARGET  = project172
 DESTDIR       = 
 TARGET        = project172
@@ -760,8 +780,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /home/boris/Installed/Qt/5.11.1/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../object.h ../worker.h ../renderer.h ../environment.h ../world.h ../assetmanager.h ../filesystem.h ../animator.h ../background.h ../units/unit.h ../units/movable.h ../units/camera.h ../capabilities/capability.h ../capabilities/controller.h ../capabilities/player.h ../capabilities/modulehandler.h ../capabilities/modules/module.h ../additional/spm.h ../additional/timer.h ../additional/event.h ../additional/vector.h ../loadable.h ../audioplayer.h ../capabilities/modules/weapon.h ../units/projectile.h ../context.h ../capabilities/modules/engine.h ../capabilities/modules/warpdrive.h ../units/ship.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../main.cpp ../object.cpp ../worker.cpp ../renderer.cpp ../environment.cpp ../world.cpp ../assetmanager.cpp ../filesystem.cpp ../animator.cpp ../background.cpp ../units/unit.cpp ../units/movable.cpp ../units/camera.cpp ../capabilities/capability.cpp ../capabilities/controller.cpp ../capabilities/player.cpp ../capabilities/modulehandler.cpp ../capabilities/modules/module.cpp ../additional/spm.cpp ../additional/timer.cpp ../additional/event.cpp ../additional/vector.cpp ../loadable.cpp ../audioplayer.cpp ../capabilities/modules/weapon.cpp ../units/projectile.cpp ../context.cpp ../capabilities/modules/engine.cpp ../capabilities/modules/warpdrive.cpp ../units/ship.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../object.h ../worker.h ../renderer.h ../environment.h ../world.h ../assetmanager.h ../filesystem.h ../animator.h ../background.h ../units/unit.h ../units/movable.h ../units/camera.h ../capabilities/capability.h ../capabilities/controller.h ../capabilities/player.h ../capabilities/modulehandler.h ../capabilities/modules/module.h ../additional/spm.h ../additional/timer.h ../additional/event.h ../additional/vector.h ../additional/stringformer.h ../loadable.h ../audioplayer.h ../capabilities/modules/weapon.h ../units/projectile.h ../context.h ../capabilities/modules/engine.h ../capabilities/modules/warpdrive.h ../units/ship.h ../gui/guielement.h ../gui/guicontainer.h ../gui/guilabel.h ../gui/guibutton.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../main.cpp ../object.cpp ../worker.cpp ../renderer.cpp ../environment.cpp ../world.cpp ../assetmanager.cpp ../filesystem.cpp ../animator.cpp ../background.cpp ../units/unit.cpp ../units/movable.cpp ../units/camera.cpp ../capabilities/capability.cpp ../capabilities/controller.cpp ../capabilities/player.cpp ../capabilities/modulehandler.cpp ../capabilities/modules/module.cpp ../additional/spm.cpp ../additional/timer.cpp ../additional/event.cpp ../additional/vector.cpp ../additional/stringformer.cpp ../loadable.cpp ../audioplayer.cpp ../capabilities/modules/weapon.cpp ../units/projectile.cpp ../context.cpp ../capabilities/modules/engine.cpp ../capabilities/modules/warpdrive.cpp ../units/ship.cpp ../gui/guielement.cpp ../gui/guicontainer.cpp ../gui/guilabel.cpp ../gui/guibutton.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -841,6 +861,11 @@ main.o: ../main.cpp ../environment.h \
 		../units/camera.h \
 		../capabilities/controller.h \
 		../capabilities/player.h \
+		../gui/guicontainer.h \
+		../gui/guielement.h \
+		../gui/guibutton.h \
+		../gui/guilabel.h \
+		../additional/stringformer.h \
 		../context.h \
 		../background.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../main.cpp
@@ -889,6 +914,11 @@ environment.o: ../environment.cpp ../environment.h \
 		../units/camera.h \
 		../capabilities/controller.h \
 		../capabilities/player.h \
+		../gui/guicontainer.h \
+		../gui/guielement.h \
+		../gui/guibutton.h \
+		../gui/guilabel.h \
+		../additional/stringformer.h \
 		../context.h \
 		../background.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o environment.o ../environment.cpp
@@ -918,7 +948,12 @@ world.o: ../world.cpp ../world.h \
 		../capabilities/modules/engine.h \
 		../units/camera.h \
 		../capabilities/controller.h \
-		../capabilities/player.h
+		../capabilities/player.h \
+		../gui/guicontainer.h \
+		../gui/guielement.h \
+		../gui/guibutton.h \
+		../gui/guilabel.h \
+		../additional/stringformer.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o world.o ../world.cpp
 
 assetmanager.o: ../assetmanager.cpp ../assetmanager.h \
@@ -964,7 +999,24 @@ background.o: ../background.cpp ../background.h \
 		../renderer.h \
 		../additional/spm.h \
 		../additional/vector.h \
-		../additional/event.h
+		../additional/event.h \
+		../context.h \
+		../assetmanager.h \
+		../filesystem.h \
+		../loadable.h \
+		../animator.h \
+		../additional/timer.h \
+		../audioplayer.h \
+		../units/ship.h \
+		../units/movable.h \
+		../units/unit.h \
+		../capabilities/modulehandler.h \
+		../capabilities/modules/module.h \
+		../capabilities/capability.h \
+		../capabilities/modules/warpdrive.h \
+		../capabilities/modules/weapon.h \
+		../units/projectile.h \
+		../capabilities/modules/engine.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o background.o ../background.cpp
 
 unit.o: ../units/unit.cpp ../units/unit.h \
@@ -1056,7 +1108,9 @@ player.o: ../capabilities/player.cpp ../capabilities/player.h \
 		../units/projectile.h \
 		../units/movable.h \
 		../units/unit.h \
-		../capabilities/modulehandler.h
+		../capabilities/modulehandler.h \
+		../units/ship.h \
+		../capabilities/modules/warpdrive.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o player.o ../capabilities/player.cpp
 
 modulehandler.o: ../capabilities/modulehandler.cpp ../capabilities/modulehandler.h \
@@ -1104,6 +1158,10 @@ event.o: ../additional/event.cpp ../additional/event.h \
 vector.o: ../additional/vector.cpp ../additional/vector.h \
 		../object.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o vector.o ../additional/vector.cpp
+
+stringformer.o: ../additional/stringformer.cpp ../additional/stringformer.h \
+		../object.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o stringformer.o ../additional/stringformer.cpp
 
 loadable.o: ../loadable.cpp ../loadable.h \
 		../animator.h \
@@ -1242,6 +1300,78 @@ ship.o: ../units/ship.cpp ../units/ship.h \
 		../audioplayer.h \
 		../capabilities/modules/warpdrive.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ship.o ../units/ship.cpp
+
+guielement.o: ../gui/guielement.cpp ../gui/guielement.h \
+		../renderer.h \
+		../additional/spm.h \
+		../additional/vector.h \
+		../object.h \
+		../capabilities/controller.h \
+		../worker.h \
+		../additional/event.h \
+		../capabilities/capability.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o guielement.o ../gui/guielement.cpp
+
+guicontainer.o: ../gui/guicontainer.cpp ../gui/guicontainer.h \
+		../gui/guielement.h \
+		../renderer.h \
+		../additional/spm.h \
+		../additional/vector.h \
+		../object.h \
+		../capabilities/controller.h \
+		../worker.h \
+		../additional/event.h \
+		../capabilities/capability.h \
+		../gui/guibutton.h \
+		../gui/guilabel.h \
+		../units/ship.h \
+		../units/movable.h \
+		../units/unit.h \
+		../capabilities/modulehandler.h \
+		../capabilities/modules/module.h \
+		../loadable.h \
+		../animator.h \
+		../additional/timer.h \
+		../audioplayer.h \
+		../capabilities/modules/warpdrive.h \
+		../additional/stringformer.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o guicontainer.o ../gui/guicontainer.cpp
+
+guilabel.o: ../gui/guilabel.cpp ../gui/guilabel.h \
+		../gui/guielement.h \
+		../renderer.h \
+		../additional/spm.h \
+		../additional/vector.h \
+		../object.h \
+		../capabilities/controller.h \
+		../worker.h \
+		../additional/event.h \
+		../capabilities/capability.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o guilabel.o ../gui/guilabel.cpp
+
+guibutton.o: ../gui/guibutton.cpp ../gui/guibutton.h \
+		../gui/guilabel.h \
+		../gui/guielement.h \
+		../renderer.h \
+		../additional/spm.h \
+		../additional/vector.h \
+		../object.h \
+		../capabilities/controller.h \
+		../worker.h \
+		../additional/event.h \
+		../capabilities/capability.h \
+		../units/ship.h \
+		../units/movable.h \
+		../units/unit.h \
+		../capabilities/modulehandler.h \
+		../capabilities/modules/module.h \
+		../loadable.h \
+		../animator.h \
+		../additional/timer.h \
+		../audioplayer.h \
+		../capabilities/modules/warpdrive.h \
+		../additional/stringformer.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o guibutton.o ../gui/guibutton.cpp
 
 ####### Install
 

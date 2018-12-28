@@ -19,9 +19,53 @@ int WarpDrive::getState() {
     return warpState;
 }
 
+std::string WarpDrive::getStateAsString() {
+    switch (warpState) {
+    case WARP_DISABLED:
+        return "WARP_DISABLED";
+    case WARP_LOADING:
+        return "WARP_LOADING";
+    case WARP_READY:
+        return "WARP_READY";
+    case WARP_EXECUTING:
+        return "WARP_EXECUTING";
+    case WARP_RECHARGING:
+        return "WARP_RECHARGING";
+    default:
+        return std::to_string(warpState);
+    }
+}
+
+std::string WarpDrive::getStateAsIcon() {
+    switch (warpState) {
+    case WARP_DISABLED:
+        return "disabled";
+    case WARP_LOADING:
+        return ">>";
+    case WARP_READY:
+        return "ready";
+    case WARP_EXECUTING:
+        return "=>";
+    case WARP_RECHARGING:
+        return "<<";
+    default:
+        return std::to_string(warpState);
+    }
+}
+
+double WarpDrive::getCharging() {
+    return (static_cast<double>(currentChargindIteration) / chargindIterations);
+}
+
+double WarpDrive::getReady() {
+    return timer.ready();
+}
+
 double WarpDrive::getSpeadUnit() {
     return  root.get("warp-speed", 0.1).asDouble();
 }
+
+
 
 bool WarpDrive::prepareWarp() {
     if(warpState == WARP_DISABLED) {
@@ -48,30 +92,6 @@ Uint8 WarpDrive::abortWarp() {
 
 #include <iostream>
 void WarpDrive::loop(Context *context, Event *event) {
-
-    std::cout << "it: " << currentChargindIteration << " warp state: ";
-    switch (warpState) {
-    case WARP_DISABLED:
-        std::cout << "WARP_DISABLED";
-        break;
-    case WARP_LOADING:
-        std::cout << "WARP_LOADING";
-        break;
-    case WARP_READY:
-        std::cout << "WARP_READY";
-        break;
-    case WARP_EXECUTING:
-        std::cout << "WARP_EXECUTING";
-        break;
-    case WARP_RECHARGING:
-        std::cout << "WARP_RECHARGING";
-        break;
-    default:
-        break;
-    }
-    std::cout << "\n";
-
-
     if(warpState == WARP_LOADING) {
         if(timer.count(true)) {
             warpState = WARP_READY;

@@ -14,16 +14,19 @@ private:
     bool pauseFlag;
     Vector mouse;
     bool *scancode;
+    bool *pressed;
     std::thread thread;
 
     void loop();
     void setKey(int key, bool value);
-
+    void setPresed(int key, bool value);
 public:
     Event();
     void run();
     void quit();
     bool getKey(int key);
+    bool getPressed(int key);
+
     bool getExitFlag();
 };
 #endif // EVENT_H

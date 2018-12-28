@@ -33,7 +33,6 @@ void Unit::removeCapability(Capability *capability) {
     }
 }
 
-#include <iostream>
 ModuleHandler *Unit::getModuleHandler() {
     for(Capability *cap : capabilities) {
         ModuleHandler* mh = dynamic_cast<ModuleHandler*>(cap);
