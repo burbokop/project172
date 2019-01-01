@@ -1,0 +1,41 @@
+#!/bin/bash
+
+# ---
+# project
+# ---
+
+PROJECT_NAME=project172
+
+# ---
+# ---
+# ---
+
+SRC_DIRECTORY=`pwd`
+BUILD_DIRECTORY="$SRC_DIRECTORY"/build-cmake  
+
+function function_configure() {
+  echo configuring...
+  mkdir -p $BUILD_DIRECTORY
+  cd $BUILD_DIRECTORY
+  cmake $SRC_DIRECTORY -DPROJECT_NAME="$PROJECT_NAME"
+}
+
+function function_compile() {
+  echo compiling...
+  cd $BUILD_DIRECTORY
+  make
+}
+
+function function_clear() {
+  echo clearing...
+  rm -r $BUILD_DIRECTORY
+}
+
+if [ "$1" == "--compile" ]; then
+  function_configure
+  function_compile
+elif [ "$1" == "--clear" ]; then
+  function_clear
+else
+  function_configure
+fi
