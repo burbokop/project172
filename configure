@@ -11,11 +11,14 @@ PROJECT_NAME=project172
 # ---
 
 SRC_DIRECTORY=`pwd`
-BUILD_DIRECTORY="$SRC_DIRECTORY"/build-cmake  
+BUILD_DIRECTORY="$SRC_DIRECTORY"/build-cmake
+
+CMAKE_LISTS='cmake_minimum_required(VERSION 2.8)\n\noption(PROJECT_NAME "Project name" OFF)\nproject(${PROJECT_NAME})\n\nfile(GLOB_RECURSE CPPS "*.cpp")\n\nmessage(STATUS "CMAKE_CURRENT_SOURCE_DIR: ${CMAKE_CURRENT_SOURCE_DIR}")\nmessage(STATUS "CMAKE_CURRENT_BINARY_DIR: ${CMAKE_CURRENT_BINARY_DIR}")\n\nlist(REMOVE_ITEM CPPS "${CMAKE_CURRENT_BINARY_DIR}/CMakeFiles/3.5.1/CompilerIdCXX/CMakeCXXCompilerId.cpp")\nmessage(STATUS "CPPS: ${CPPS}")\n\nadd_executable(${PROJECT_NAME} ${CPPS})'
 
 function function_configure() {
   echo configuring...
   mkdir -p $BUILD_DIRECTORY
+  echo -e $CMAKE_LISTS > $SRC_DIRECTORY/CMakeLists.txt
   cd $BUILD_DIRECTORY
   cmake $SRC_DIRECTORY -DPROJECT_NAME="$PROJECT_NAME"
 }
@@ -34,8 +37,19 @@ function function_clear() {
 if [ "$1" == "--compile" ]; then
   function_configure
   function_compile
+elif [ "$1" == "--only-compile" ]; then
+  function_compile  
 elif [ "$1" == "--clear" ]; then
   function_clear
+  
+elif [ "$1" == "--help" ]; then
+  echo -e "\n### BURBOKOP'S COMMON CONFIGURATION SCRIPT ###\n"
+  echo -e "dependencies:\n g++\n cmake\n make\n"
+  echo "usage: "
+  echo "./configure                == configure."
+  echo "./configure --compile      == configure, then make."
+  echo "./configure --only-compile == only run make."
+  echo "./configure --clear        == delete build directory."
 else
   function_configure
 fi
