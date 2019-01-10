@@ -44,4 +44,9 @@ SPACE   = fire
 ```bash
 ./project172 [stars slidind start (the minimum spead of camera when background unables special effect) default = 12 pixel/tick]
 ```
+
+## video:
+https://youtu.be/FNfC3FlQ1YY
+
+
 Nice to play
