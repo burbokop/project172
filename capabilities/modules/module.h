@@ -3,8 +3,9 @@
 
 #include "capabilities/capability.h"
 #include "loadable.h"
+#include "../iinformative.h"
 
-class Module : public Capability, public Loadable {
+class Module : public Capability, public Loadable, public IInformative {
 public:
     Module();
     Module(Loadable *tmp);

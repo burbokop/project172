@@ -9,9 +9,12 @@ GUILabel::GUILabel(Controller *player, std::string label) : GUIElement (player) 
     this->label = label;
 }
 
+GUILabel::GUILabel(Controller *player, IInformative *informative) : GUIElement (player) {
+    this->informative = informative;
+}
 
 std::string GUILabel::getTitle() {
-    return label;
+    return informative ? informative->getInfo() : label;
 }
 
 void GUILabel::update() {

@@ -1,23 +1,28 @@
 #include "guicontainer.h"
 
-GUIContainer::GUIContainer(Controller *player) : GUIElement (player) {
+GUIContainer::GUIContainer(Controller *player) : GUIButton (player) {
 }
 
+GUIContainer::GUIContainer(Controller *player, std::string label) : GUIButton (player, label) {
+}
 
+GUIContainer::GUIContainer(Controller *player, IInformative *informative) : GUIButton (player, informative) {
+}
 
 void GUIContainer::addElement(GUIElement *element){
     elements->push_back(element);
     selectDown();
 }
 
-std::string GUIContainer::getTitle() {
-    return "gogadoda";
-}
-
 void GUIContainer::update() {
     for(GUIElement *element : *elements) {
         element->update();
     }
+}
+
+void GUIContainer::setStack(GUIStack *value)
+{
+    stack = value;
 }
 
 GUIButton *GUIContainer::selectDown() {
@@ -60,8 +65,12 @@ void GUIContainer::render(Renderer *renderer, Vector *resolution, Event *event) 
         selectedButton = selectUp();
     } else if(event->getPressed(40)) {
         if(selectedButton != nullptr) {
-            selectedButton->press();
+            if(selectedButton->press()) {
+                stack->push(selectedButton);
+            }
         }
+    } else if(event->getPressed(SDL_SCANCODE_BACKSPACE)) {
+        stack->pop();
     }
 
     Vector pointer = Vector(margin, margin);
@@ -77,4 +86,8 @@ void GUIContainer::render(Renderer *renderer, Vector *resolution, Event *event) 
         pointer += Vector(4, interval);
         i++;
     }
+}
+
+bool GUIContainer::press() {
+    return 1;
 }

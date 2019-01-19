@@ -20,7 +20,8 @@ public:
     void addModule(Module *module);
     void removeModule(Module *module);
 
-    std::vector<Module *> *getModulesByClass(std::string moduleClass);
+    std::vector<Module*> *getAllModules();
+    std::vector<Module*> *getModulesByClass(std::string moduleClass);
     bool hasModuleOfClass(std::string moduleClass);
 
     // Worker interface

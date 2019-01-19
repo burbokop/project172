@@ -12,6 +12,10 @@ public:
     // Worker interface
 public:
     void loop(Context *context, Event *event);
+
+    // IInformative interface
+public:
+    std::string getInfo();
 };
 
 #endif // ENGINE_H

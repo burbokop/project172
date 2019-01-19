@@ -9,8 +9,9 @@ class GUIButton : public GUILabel {
 public:
     GUIButton(Controller *player);
     GUIButton(Controller *player, std::string label);
+    GUIButton(Controller *player, IInformative *informative);
 
-    void press();
+    virtual bool press();
 
     // GUIElement interface
 public:

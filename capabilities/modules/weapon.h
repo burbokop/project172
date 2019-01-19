@@ -19,6 +19,7 @@ public:
     Weapon(Loadable *tmp);
 
     void setFiring(bool condition);
+    std::string getInfo();
 
     // Worker interface
 public:

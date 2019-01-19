@@ -1,6 +1,6 @@
 #include "renderer.h"
 
-const int Renderer::DEFAULT_FONT_SIZE = 16;
+const int Renderer::DEFAULT_FONT_SIZE = 18;
 
 
 Renderer::Renderer(SDL_Window *window, SDL_Surface *surface, TTF_Font *font) {

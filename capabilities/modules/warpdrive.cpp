@@ -57,8 +57,20 @@ double WarpDrive::getCharging() {
     return (static_cast<double>(currentChargindIteration) / chargindIterations);
 }
 
-double WarpDrive::getReady() {
-    return timer.ready();
+std::string WarpDrive::getInfo() {
+    std::string chargingBar;
+    if(warpState == WarpDrive::WARP_RECHARGING) {
+        chargingBar = StringFormer::line(static_cast<unsigned int>((1 - getCharging()) * 4));
+    } else if (warpState == WarpDrive::WARP_LOADING) {
+        chargingBar = StringFormer::line(static_cast<unsigned int>((timer.ready() * 4)));
+    } else if (warpState == WarpDrive::WARP_DISABLED) {
+        chargingBar = "";
+    } else if (warpState == WarpDrive::WARP_EXECUTING) {
+        chargingBar = "----";
+    } else if (warpState == WarpDrive::WARP_READY) {
+        chargingBar = "----";
+    }
+    return "WD   |" + chargingBar + "|   " + getStateAsIcon();
 }
 
 double WarpDrive::getSpeadUnit() {

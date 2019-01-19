@@ -43,7 +43,9 @@ SOURCES += \
     gui/guielement.cpp \
     gui/guicontainer.cpp \
     gui/guilabel.cpp \
-    gui/guibutton.cpp
+    gui/guibutton.cpp \
+    iinformative.cpp \
+    gui/guistack.cpp
 
 
 
@@ -81,7 +83,9 @@ HEADERS += \
     gui/guielement.h \
     gui/guicontainer.h \
     gui/guilabel.h \
-    gui/guibutton.h
+    gui/guibutton.h \
+    iinformative.h \
+    gui/guistack.h
 
 
 

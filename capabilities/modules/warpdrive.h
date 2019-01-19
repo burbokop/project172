@@ -2,6 +2,7 @@
 #define WARPDRIVE_H
 
 #include "module.h"
+#include "../../additional/stringformer.h"
 
 class WarpDrive : public Module {
 public:
@@ -18,15 +19,17 @@ private:
     int currentChargindIteration = 0;
     int chargindIterations = DEFAULT_CYCLES_NUMBER;
 
+
+    double getCharging();
+    std::string getStateAsString();
+    std::string getStateAsIcon();
 public:
     WarpDrive();
     WarpDrive(Loadable *tmp);
 
     int getState();
-    std::string getStateAsString();
-    std::string getStateAsIcon();
-    double getCharging();
-    double getReady();
+
+    std::string getInfo();
 
     double getSpeadUnit();
 

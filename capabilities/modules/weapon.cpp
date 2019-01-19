@@ -11,13 +11,23 @@ double Weapon::getProjectileSpead() {
 }
 
 Weapon::Weapon() {
+    timer.reset();
 }
 
 Weapon::Weapon(Loadable *tmp) : Module (tmp) {
+    timer.reset();
 }
 
 void Weapon::setFiring(bool condition) {
     firing = condition;
+}
+
+#include <iostream>
+std::string Weapon::getInfo() {
+    return "WP   |"
+            + StringFormer::line(static_cast<unsigned int>((timer.ready() * 4)), static_cast<unsigned int>(4))
+            + "|   "
+            + ((timer.ready() > 1) ? "ready" : "");
 }
 
 void Weapon::loop(Context *context, Event *event) {

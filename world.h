@@ -8,7 +8,7 @@
 #include "capabilities/modulehandler.h"
 #include "gui/guicontainer.h"
 #include "gui/guibutton.h"
-
+#include "gui/guistack.h"
 
 class World : public Object
 {

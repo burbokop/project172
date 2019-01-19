@@ -283,7 +283,7 @@ void SPM::BlendedText(SDL_Surface *surface, std::string text_line, TTF_Font *tex
     SDL_FreeSurface(text_surface);
 }
 
-void SPM::BlendedText(SDL_Surface *surface, std::string text_line, TTF_Font *text_font, int text_x, int text_y, Uint32 color) {
+void SPM::BlendedText(SDL_Surface *surface, std::string text_line, TTF_Font *text_font, int text_x, int text_y, Uint32 color, Uint32 wrap) {
     SDL_Surface *text_surface = nullptr;
     SDL_Rect text_rect;
     SDL_Color rgbColor;
@@ -291,7 +291,7 @@ void SPM::BlendedText(SDL_Surface *surface, std::string text_line, TTF_Font *tex
     rgbColor.r = (color >> 16) & 255;
     rgbColor.g = (color >> 8) & 255;
     rgbColor.b = (color >> 0) & 255;
-    text_surface = TTF_RenderUTF8_Blended(text_font, text_line.c_str(), rgbColor);
+    text_surface = TTF_RenderUTF8_Blended_Wrapped(text_font, text_line.c_str(), rgbColor, wrap);
     text_rect.x = text_x;
     text_rect.y = text_y;
     SDL_BlitSurface(text_surface, nullptr, surface, &text_rect);

@@ -28,7 +28,7 @@ namespace SPM {
     void BlitRotatedSurface(SDL_Surface *surface, SDL_Surface *screen_surface, int x, int y, double angle, double zoom, int smooth);
 
     void BlendedText(SDL_Surface *surface, std::string text_line, TTF_Font *text_font, int text_x, int text_y, SDL_Color text_color);
-    void BlendedText(SDL_Surface *surface, std::string text_line, TTF_Font *text_font, int text_x, int text_y, Uint32 color);
+    void BlendedText(SDL_Surface *surface, std::string text_line, TTF_Font *text_font, int text_x, int text_y, Uint32 color, Uint32 wrap = 1024);
 
     SDL_Surface *CutOutSurface(SDL_Surface *surface, int x, int y, int w, int h);
     SDL_Surface *Flip(SDL_Surface *surface, bool xFlip, bool yFlip);

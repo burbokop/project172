@@ -35,6 +35,10 @@ void ModuleHandler::removeModule(Module *module) {
     }
 }
 
+std::vector<Module *> *ModuleHandler::getAllModules() {
+    return &this->modules;
+}
+
 std::vector<Module *> *ModuleHandler::getModulesByClass(std::string moduleClass) {
     if(categories != nullptr && categories->find(moduleClass) != categories->end()) {
         return categories->at(moduleClass);
