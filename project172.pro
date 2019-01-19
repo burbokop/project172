@@ -45,7 +45,9 @@ SOURCES += \
     gui/guilabel.cpp \
     gui/guibutton.cpp \
     iinformative.cpp \
-    gui/guistack.cpp
+    gui/guistack.cpp \
+    capabilities/ai.cpp \
+    units/station.cpp
 
 
 
@@ -85,7 +87,9 @@ HEADERS += \
     gui/guilabel.h \
     gui/guibutton.h \
     iinformative.h \
-    gui/guistack.h
+    gui/guistack.h \
+    capabilities/ai.h \
+    units/station.h
 
 
 

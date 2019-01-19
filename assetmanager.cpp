@@ -50,6 +50,8 @@ Loadable *AssetManager::copyAsset(std::string key) {
     if(assetClass == "ship") return new Ship(tmp);
     if(assetClass == "projectile") return new Projectile(tmp);
 
+    if(assetClass == "station") return new Station(tmp);
+
     if(assetClass == "module") return new Module(tmp);
     if(assetClass == "weapon") return new Weapon(tmp);
     if(assetClass == "engine") return new Engine(tmp);

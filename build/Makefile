@@ -86,7 +86,9 @@ SOURCES       = ../main.cpp \
 		../gui/guilabel.cpp \
 		../gui/guibutton.cpp \
 		../iinformative.cpp \
-		../gui/guistack.cpp 
+		../gui/guistack.cpp \
+		../capabilities/ai.cpp \
+		../units/station.cpp 
 OBJECTS       = main.o \
 		object.o \
 		worker.o \
@@ -123,7 +125,9 @@ OBJECTS       = main.o \
 		guilabel.o \
 		guibutton.o \
 		iinformative.o \
-		guistack.o
+		guistack.o \
+		ai.o \
+		station.o
 DIST          = /home/boris/Installed/Qt/5.11.1/gcc_64/mkspecs/features/spec_pre.prf \
 		/home/boris/Installed/Qt/5.11.1/gcc_64/mkspecs/common/unix.conf \
 		/home/boris/Installed/Qt/5.11.1/gcc_64/mkspecs/common/linux.conf \
@@ -346,7 +350,9 @@ DIST          = /home/boris/Installed/Qt/5.11.1/gcc_64/mkspecs/features/spec_pre
 		../gui/guilabel.h \
 		../gui/guibutton.h \
 		../iinformative.h \
-		../gui/guistack.h ../main.cpp \
+		../gui/guistack.h \
+		../capabilities/ai.h \
+		../units/station.h ../main.cpp \
 		../object.cpp \
 		../worker.cpp \
 		../renderer.cpp \
@@ -382,7 +388,9 @@ DIST          = /home/boris/Installed/Qt/5.11.1/gcc_64/mkspecs/features/spec_pre
 		../gui/guilabel.cpp \
 		../gui/guibutton.cpp \
 		../iinformative.cpp \
-		../gui/guistack.cpp
+		../gui/guistack.cpp \
+		../capabilities/ai.cpp \
+		../units/station.cpp
 QMAKE_TARGET  = project172
 DESTDIR       = 
 TARGET        = project172
@@ -788,8 +796,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /home/boris/Installed/Qt/5.11.1/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../object.h ../worker.h ../renderer.h ../environment.h ../world.h ../assetmanager.h ../filesystem.h ../animator.h ../background.h ../units/unit.h ../units/movable.h ../units/camera.h ../capabilities/capability.h ../capabilities/controller.h ../capabilities/player.h ../capabilities/modulehandler.h ../capabilities/modules/module.h ../additional/spm.h ../additional/timer.h ../additional/event.h ../additional/vector.h ../additional/stringformer.h ../loadable.h ../audioplayer.h ../capabilities/modules/weapon.h ../units/projectile.h ../context.h ../capabilities/modules/engine.h ../capabilities/modules/warpdrive.h ../units/ship.h ../gui/guielement.h ../gui/guicontainer.h ../gui/guilabel.h ../gui/guibutton.h ../iinformative.h ../gui/guistack.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../main.cpp ../object.cpp ../worker.cpp ../renderer.cpp ../environment.cpp ../world.cpp ../assetmanager.cpp ../filesystem.cpp ../animator.cpp ../background.cpp ../units/unit.cpp ../units/movable.cpp ../units/camera.cpp ../capabilities/capability.cpp ../capabilities/controller.cpp ../capabilities/player.cpp ../capabilities/modulehandler.cpp ../capabilities/modules/module.cpp ../additional/spm.cpp ../additional/timer.cpp ../additional/event.cpp ../additional/vector.cpp ../additional/stringformer.cpp ../loadable.cpp ../audioplayer.cpp ../capabilities/modules/weapon.cpp ../units/projectile.cpp ../context.cpp ../capabilities/modules/engine.cpp ../capabilities/modules/warpdrive.cpp ../units/ship.cpp ../gui/guielement.cpp ../gui/guicontainer.cpp ../gui/guilabel.cpp ../gui/guibutton.cpp ../iinformative.cpp ../gui/guistack.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../object.h ../worker.h ../renderer.h ../environment.h ../world.h ../assetmanager.h ../filesystem.h ../animator.h ../background.h ../units/unit.h ../units/movable.h ../units/camera.h ../capabilities/capability.h ../capabilities/controller.h ../capabilities/player.h ../capabilities/modulehandler.h ../capabilities/modules/module.h ../additional/spm.h ../additional/timer.h ../additional/event.h ../additional/vector.h ../additional/stringformer.h ../loadable.h ../audioplayer.h ../capabilities/modules/weapon.h ../units/projectile.h ../context.h ../capabilities/modules/engine.h ../capabilities/modules/warpdrive.h ../units/ship.h ../gui/guielement.h ../gui/guicontainer.h ../gui/guilabel.h ../gui/guibutton.h ../iinformative.h ../gui/guistack.h ../capabilities/ai.h ../units/station.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../main.cpp ../object.cpp ../worker.cpp ../renderer.cpp ../environment.cpp ../world.cpp ../assetmanager.cpp ../filesystem.cpp ../animator.cpp ../background.cpp ../units/unit.cpp ../units/movable.cpp ../units/camera.cpp ../capabilities/capability.cpp ../capabilities/controller.cpp ../capabilities/player.cpp ../capabilities/modulehandler.cpp ../capabilities/modules/module.cpp ../additional/spm.cpp ../additional/timer.cpp ../additional/event.cpp ../additional/vector.cpp ../additional/stringformer.cpp ../loadable.cpp ../audioplayer.cpp ../capabilities/modules/weapon.cpp ../units/projectile.cpp ../context.cpp ../capabilities/modules/engine.cpp ../capabilities/modules/warpdrive.cpp ../units/ship.cpp ../gui/guielement.cpp ../gui/guicontainer.cpp ../gui/guilabel.cpp ../gui/guibutton.cpp ../iinformative.cpp ../gui/guistack.cpp ../capabilities/ai.cpp ../units/station.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -876,6 +884,7 @@ main.o: ../main.cpp ../environment.h \
 		../gui/guibutton.h \
 		../gui/guilabel.h \
 		../gui/guistack.h \
+		../capabilities/ai.h \
 		../context.h \
 		../background.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../main.cpp
@@ -931,6 +940,7 @@ environment.o: ../environment.cpp ../environment.h \
 		../gui/guibutton.h \
 		../gui/guilabel.h \
 		../gui/guistack.h \
+		../capabilities/ai.h \
 		../context.h \
 		../background.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o environment.o ../environment.cpp
@@ -967,7 +977,8 @@ world.o: ../world.cpp ../world.h \
 		../gui/guielement.h \
 		../gui/guibutton.h \
 		../gui/guilabel.h \
-		../gui/guistack.h
+		../gui/guistack.h \
+		../capabilities/ai.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o world.o ../world.cpp
 
 assetmanager.o: ../assetmanager.cpp ../assetmanager.h \
@@ -1370,7 +1381,8 @@ guicontainer.o: ../gui/guicontainer.cpp ../gui/guicontainer.h \
 		../additional/timer.h \
 		../audioplayer.h \
 		../capabilities/modules/warpdrive.h \
-		../additional/stringformer.h
+		../additional/stringformer.h \
+		../gui/guistack.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o guicontainer.o ../gui/guicontainer.cpp
 
 guilabel.o: ../gui/guilabel.cpp ../gui/guilabel.h \
@@ -1423,8 +1435,52 @@ guistack.o: ../gui/guistack.cpp ../gui/guistack.h \
 		../capabilities/controller.h \
 		../worker.h \
 		../additional/event.h \
-		../capabilities/capability.h
+		../capabilities/capability.h \
+		../gui/guicontainer.h \
+		../gui/guibutton.h \
+		../gui/guilabel.h \
+		../iinformative.h \
+		../units/ship.h \
+		../units/movable.h \
+		../units/unit.h \
+		../capabilities/modulehandler.h \
+		../capabilities/modules/module.h \
+		../loadable.h \
+		../animator.h \
+		../additional/timer.h \
+		../audioplayer.h \
+		../capabilities/modules/warpdrive.h \
+		../additional/stringformer.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o guistack.o ../gui/guistack.cpp
+
+ai.o: ../capabilities/ai.cpp ../capabilities/ai.h \
+		../capabilities/controller.h \
+		../worker.h \
+		../object.h \
+		../renderer.h \
+		../additional/spm.h \
+		../additional/vector.h \
+		../additional/event.h \
+		../capabilities/capability.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ai.o ../capabilities/ai.cpp
+
+station.o: ../units/station.cpp ../units/station.h \
+		../units/unit.h \
+		../worker.h \
+		../object.h \
+		../renderer.h \
+		../additional/spm.h \
+		../additional/vector.h \
+		../additional/event.h \
+		../capabilities/modulehandler.h \
+		../capabilities/modules/module.h \
+		../capabilities/capability.h \
+		../loadable.h \
+		../animator.h \
+		../additional/timer.h \
+		../audioplayer.h \
+		../iinformative.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o station.o ../units/station.cpp
 
 ####### Install
 

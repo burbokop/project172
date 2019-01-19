@@ -13,7 +13,7 @@ void Environment::init(int argc, char *argv[]) {
     this->background = new Background(this->resolution);
     if(argc > 1) this->background->init(128, std::stod(argv[1]));
     else this->background->init(128);
-    this->renderer = Renderer::create("project172", *resolution, "./assets/ZCOOL.ttf");
+    this->renderer = Renderer::create("project172", *resolution, "./assets/fonts/ZCOOL.ttf");
 }
 
 void Environment::start() {

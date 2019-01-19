@@ -9,6 +9,7 @@
 #include "gui/guicontainer.h"
 #include "gui/guibutton.h"
 #include "gui/guistack.h"
+#include "capabilities/ai.h"
 
 class World : public Object
 {
