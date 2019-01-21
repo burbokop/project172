@@ -27,6 +27,7 @@ SOURCES += \
     capabilities/player.cpp \
     capabilities/modulehandler.cpp \
     capabilities/modules/module.cpp \
+    additional/rotozoom.cpp \
     additional/spm.cpp \
     additional/timer.cpp \
     additional/event.cpp \
@@ -69,6 +70,7 @@ HEADERS += \
     capabilities/player.h \
     capabilities/modulehandler.h \
     capabilities/modules/module.h \
+    additional/rotozoom.h \
     additional/spm.h \
     additional/timer.h \
     additional/event.h \
