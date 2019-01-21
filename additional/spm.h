@@ -5,9 +5,10 @@
 #define RADS_MULTIPLIER -180 / SPM_PI
 
 #include <SDL2/SDL.h>
-#include <SDL2/SDL2_rotozoom.h>
 #include <SDL2/SDL_ttf.h>
 #include <string>
+
+#include "rotozoom.h"
 
 namespace SPM {
     Uint32 ColorRGB(Uint8 R, Uint8 G, Uint8 B);
