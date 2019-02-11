@@ -1,19 +1,19 @@
 #include "socket.h"
 
 
-inline int inline_connect(SOCKET_TYPE socket, const struct sockaddr *name, int namelen) {
+inline int inline_connect(CROSS_SOCKET socket, const struct sockaddr *name, int namelen) {
     return connect(socket, name, namelen);
 }
 
-inline int inline_listen(SOCKET_TYPE socket, int backlog) {
+inline int inline_listen(CROSS_SOCKET socket, int backlog) {
     return listen(socket, backlog);
 }
 
-inline int inline_send(SOCKET_TYPE socket, const char *buffer, int length, int flags) {
+inline int inline_send(CROSS_SOCKET socket, const char *buffer, int length, int flags) {
     return send(socket, buffer, length, flags);
 }
 
-inline int inline_recv(SOCKET_TYPE socket, char *buffer, int length, int flags) {
+inline int inline_recv(CROSS_SOCKET socket, char *buffer, int length, int flags) {
     return recv(socket, buffer, length, flags);
 }
 
@@ -46,7 +46,7 @@ bool Socket::init() {
 
 
 
-Socket::Socket(SOCKET_TYPE sys_socket, SOCKADDR_IN_TYPE addr) {
+Socket::Socket(CROSS_SOCKET sys_socket, CROSS_SOCKADDR_IN addr) {
     this->sys_socket = sys_socket;
     this->addr = addr;
 }
@@ -58,6 +58,7 @@ Socket::Socket(unsigned short port, std::string ip) {
         }
     }
 #ifdef __WIN32__
+
     if(instance_initialized) {
         addr.sin_addr.s_addr = inet_addr(ip.c_str());
         addr.sin_port = htons(port);
@@ -70,12 +71,13 @@ Socket::Socket(unsigned short port, std::string ip) {
 
 Socket *Socket::listen() {
 #ifdef __WIN32__
+
     int sizeofaddr = sizeof(addr);
-    bind(sys_socket, reinterpret_cast<SOCKADDR_TYPE*>(&addr), sizeofaddr);
+    bind(sys_socket, reinterpret_cast<SOCKADDR*>(&addr), sizeofaddr);
     inline_listen(sys_socket, MAXCONN);
 
-    SOCKET_TYPE connection_socket;
-    connection_socket = accept(sys_socket, reinterpret_cast<SOCKADDR_TYPE*>(&addr), &sizeofaddr);
+    SOCKET connection_socket;
+    connection_socket = accept(sys_socket, reinterpret_cast<SOCKADDR*>(&addr), &sizeofaddr);
     if(connection_socket != 0) {
         return new Socket(connection_socket, addr);
     }
@@ -85,11 +87,14 @@ Socket *Socket::listen() {
 }
 
 bool burbokop::Socket::connect() {
-    if(inline_connect(sys_socket, reinterpret_cast<SOCKADDR_TYPE*>(&addr), sizeof(addr))) {
+#ifdef __WIN32__
+
+    if(inline_connect(sys_socket, reinterpret_cast<SOCKADDR*>(&addr), sizeof(addr))) {
         setError("<connection error>");
         return false;
     }
     return true;
+#endif
 }
 
 void burbokop::Socket::send(std::string massage) {
@@ -108,6 +113,7 @@ char *burbokop::Socket::recv(int length) {
 
 void Socket::close() {
 #ifdef __WIN32__
+
     closesocket(sys_socket);
 #endif
 }

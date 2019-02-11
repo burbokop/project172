@@ -12,8 +12,6 @@
 #include "effects/visualeffect.h"
 #include "rotozoom.h"
 
-#include "rotozoom.h"
-
 namespace SPM {
 
     Uint32 ColorRGB(Uint8 R, Uint8 G, Uint8 B);

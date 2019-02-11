@@ -2,6 +2,5 @@
     "key": "p-p",
     "class": "projectile",
     "sprite": "./projectile2.png",
-    "zoom": 1,
-	"health":10
+    "zoom": 1
 }

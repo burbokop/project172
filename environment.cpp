@@ -35,6 +35,7 @@ void Environment::start() {
     std::thread logicThread(&Environment::logic, this);
     //-------
 
+
     netListener->start();
     while (1) {
         event->loop();

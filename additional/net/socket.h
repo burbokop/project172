@@ -4,18 +4,17 @@
 #ifdef __WIN32__
 
 #include <winsock2.h>
-typedef SOCKADDR SOCKADDR_TYPE;
-typedef SOCKADDR_IN SOCKADDR_IN_TYPE;
-typedef SOCKET SOCKET_TYPE;
+typedef SOCKET CROSS_SOCKET;
+typedef SOCKADDR CROSS_SOCKADDR;
+typedef SOCKADDR_IN CROSS_SOCKADDR_IN;
 
 #else
 
 #include <sys/socket.h>
 #include <netinet/in.h>
-
-typedef sockaddr SOCKADDR_TYPE;
-typedef sockaddr_in SOCKADDR_IN_TYPE;
-typedef int SOCKET_TYPE;
+typedef int CROSS_SOCKET;
+typedef sockaddr CROSS_SOCKADDR;
+typedef sockaddr_in CROSS_SOCKADDR_IN;
 
 #endif
 
@@ -30,8 +29,9 @@ typedef int SOCKET_TYPE;
 namespace burbokop {
 class Socket {
 private:
-    SOCKADDR_IN_TYPE addr;
-    SOCKET_TYPE sys_socket;
+    CROSS_SOCKADDR_IN addr;
+    CROSS_SOCKET sys_socket;
+
     static bool initialized;
 
     static std::string err_line;
@@ -39,7 +39,7 @@ private:
 
     bool instance_initialized = true;
 
-    Socket(SOCKET_TYPE sys_socket, SOCKADDR_IN_TYPE addr);
+    Socket(CROSS_SOCKET sys_socket, CROSS_SOCKADDR_IN addr);
 public:
     static bool init();
 
