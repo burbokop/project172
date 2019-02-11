@@ -1,0 +1,8 @@
+{
+    "key": "mega-launcher",
+    "class": "weapon",
+    "audio": { "start": "./shoot.wav" },
+    "rate": 100,
+    "projectile":"proj-plasma",
+    "props": {}
+}

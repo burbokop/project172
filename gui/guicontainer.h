@@ -2,10 +2,14 @@
 #define GUICONTAINER_H
 
 #include <vector>
+#include <functional>
+
+#include "../additional/effects/anaglyph.h"
 
 #include "guielement.h"
 #include "gui/guibutton.h"
 #include "guistack.h"
+
 
 class GUIContainer : public GUIButton {
 private:
@@ -36,7 +40,7 @@ public:
     // GUIElement interface
 public:
     void update();
-    void render(Renderer *renderer, Vector *resolution, Event *event);
+    void render(Renderer *renderer, Event *event);
 
     // GUIButton interface
 public:

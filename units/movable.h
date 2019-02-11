@@ -15,9 +15,13 @@ private:
 protected:
     static const double STOP_MOVING_VELOCITY;
     static const double DEFAULT_ACCELERATION_VALUE;
+    static const double DEFAULT_RELEASE_SPEAD;
+
     double getAccelerationValue();
     static const double DEFAULT_MAX_SPEED;
     double getMaxSpeed();
+
+    bool relativisticVelocity = true;
 
 
     void updatePosition();
@@ -39,6 +43,8 @@ public:
 
 
     Vector getVelocity();
+    double getReleaseSpead();
+
 
     void loop(Context *context, Event *event);
 };

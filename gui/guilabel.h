@@ -17,7 +17,7 @@ public:
 public:
     std::string getTitle();
     void update();
-    void render(Renderer *renderer, Vector *resolution, Event *event);
+    void render(Renderer *renderer, Event *event);
 };
 
 #endif // GUILABEL_H

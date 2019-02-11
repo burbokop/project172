@@ -1,0 +1,7 @@
+{
+    "key": "astro",
+    "class": "ship",
+    "sprite": "./astro.png",
+	"health": 4,
+	"explosive":8
+}

@@ -4,27 +4,34 @@
 #include <SDL2/SDL.h>
 
 #include "units/unit.h"
-#include "world.h"
+#include "worldmanager.h"
+#include "worlds/defaultworld.h"
+#include "worlds/arenaworld.h"
 #include "additional/event.h"
 #include "context.h"
 #include "background.h"
+#include "netlistener.h"
+#include "state.h"
 
-class Environment : public Object
-{
+
+class Environment : public Object {
 private:
-    Vector *resolution;
+    State *state;
     Renderer *renderer;
     std::vector<Worker*> *units;
     AssetManager *assetManager;
     Context *context;
     Event *event;
-    World world;
     Background *background;
+    FPSMonitor *fps;
+    NetListener *netListener;
+    WorldManager *worldManager;
 
 public:
     Environment();
     void init(int argc, char *argv[]);
     void start();
+    void logic();
     void quit();
 };
 

@@ -1,5 +1,42 @@
 #include "spm.h"
 
+/*
+ * experimantal
+ */
+
+extern VisualEffect *applied_effect;
+extern bool effect_locked;
+
+VisualEffect *applied_effect;
+bool effect_locked = false;
+
+void SPM::ApplyEffect(VisualEffect *effect) {
+    applied_effect = effect;
+}
+
+void SPM::LockEffect(VisualEffect *effect) {
+    effect_locked = true;
+    applied_effect = effect;
+}
+
+void SPM::UnlockEffect() {
+    effect_locked = false;
+}
+
+
+SDL_Surface *effect(SDL_Surface *surface) {
+    SDL_Surface *result = (applied_effect != nullptr) ? (*applied_effect)(surface) : surface;
+    if(!effect_locked) applied_effect = nullptr;
+    return result;
+}
+
+
+
+/*
+ * ------------
+ */
+
+
 Uint32 SPM::ColorRGB(Uint8 R, Uint8 G, Uint8 B) {
     return 65536 * R + 256 * G + B;
 }
@@ -260,6 +297,14 @@ void SPM::Grid(SDL_Surface *surface, int point1_x, int point1_y, int point2_x, i
     }
 }
 
+void SPM::DiagonalGrid(SDL_Surface *surface, int point1_x, int point1_y, int point2_x, int point2_y, int interval, Uint32 color) {
+    SDL_Surface *canvas = SPM::CreateRGBA32Surface(std::abs(point2_x - point1_x), std::abs(point2_y - point1_y));
+    for (int i = 0, L = std::abs(point2_x - point1_x) / (point2_y - point1_y) * interval + interval; i < L; i++) {
+        SPM::Line(canvas, canvas->h * (i - interval / 2) / interval, 0, canvas->h * (i + interval / 2) / interval, canvas->h, color);
+    }
+    SDL_BlitSurface(canvas, nullptr, surface, new SDL_Rect { point1_x, point1_y, 0, 0 });
+}
+
 void SPM::BlitRotatedSurface(SDL_Surface *surface, SDL_Surface *screen_surface, int x, int y, double angle, double zoom, int smooth) {
     SDL_Surface *temp_surface = nullptr;
     SDL_Rect rect = {
@@ -270,7 +315,7 @@ void SPM::BlitRotatedSurface(SDL_Surface *surface, SDL_Surface *screen_surface, 
     temp_surface = rotozoomSurface(surface, angle, zoom, smooth);
     rect.x = static_cast<int>(rect.x - temp_surface->w / 2 + surface->w * zoom / 2);
     rect.y = static_cast<int>(rect.y - temp_surface->h / 2 + surface->h * zoom / 2);
-    SDL_BlitSurface(temp_surface, nullptr, screen_surface, &rect);
+    SDL_BlitSurface(effect(temp_surface), nullptr, screen_surface, &rect);
 }
 
 void SPM::BlendedText(SDL_Surface *surface, std::string text_line, TTF_Font *text_font, int text_x, int text_y, SDL_Color text_color) {
@@ -279,7 +324,7 @@ void SPM::BlendedText(SDL_Surface *surface, std::string text_line, TTF_Font *tex
     text_surface = TTF_RenderText_Blended(text_font, text_line.c_str(), text_color);
     text_rect.x = text_x;
     text_rect.y = text_y;
-    SDL_BlitSurface(text_surface, nullptr, surface, &text_rect);
+    SDL_BlitSurface(effect(text_surface), nullptr, surface, &text_rect);
     SDL_FreeSurface(text_surface);
 }
 
@@ -294,7 +339,7 @@ void SPM::BlendedText(SDL_Surface *surface, std::string text_line, TTF_Font *tex
     text_surface = TTF_RenderUTF8_Blended_Wrapped(text_font, text_line.c_str(), rgbColor, wrap);
     text_rect.x = text_x;
     text_rect.y = text_y;
-    SDL_BlitSurface(text_surface, nullptr, surface, &text_rect);
+    SDL_BlitSurface(effect(text_surface), nullptr, surface, &text_rect);
     SDL_FreeSurface(text_surface);
 }
 
@@ -335,4 +380,17 @@ SDL_Surface *SPM::Flip(SDL_Surface *surface, bool xFlip, bool yFlip) {
         }
     }
     return result;
+}
+
+
+SDL_Surface *SPM::CreateARGB32Surface(int width, int height) {
+    return SDL_CreateRGBSurface(0, width, height, 32, 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
+}
+
+SDL_Surface *SPM::CreateRGBA32Surface(int width, int height) {
+    return SDL_CreateRGBSurface(0, width, height, 32, 0xff000000, 0x00ff0000, 0x0000ff00, 0x000000ff);
+}
+
+SDL_Surface *SPM::CreateABGR32Surface(int width, int height) {
+    return SDL_CreateRGBSurface(0, width, height, 32, 0x000000ff, 0x0000ff00, 0x00ff0000, 0xff000000);
 }

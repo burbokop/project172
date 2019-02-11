@@ -13,6 +13,10 @@ public:
 
     virtual bool press();
 
+    virtual void inc();
+    virtual void dec();
+
+
     // GUIElement interface
 public:
     void update();

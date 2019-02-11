@@ -1,4 +1,5 @@
 #include "unit.h"
+#include "context.h"
 
 const double Unit::DEFAULT_ROTATION_SPEED = 0.02;
 
@@ -68,6 +69,30 @@ double Unit::getAngle() {
     return angle;
 }
 
+#include <iostream>
+void Unit::hit(Context* context, int value) {
+    Json::Value health = root["health"];
+    Json::Value maxHealth = root["health-max"];
+    if(maxHealth.isNull()) root["health-max"] = health.asInt();
+    root["health"] = health.asInt() - value;
+
+    for(Capability *capability : capabilities) {
+        Controller *controller = dynamic_cast<Controller*>(capability);
+        if(controller) {
+            controller->onHit(context, root["health"].asInt());
+            context->addEvent(this, Context::FLOATING_MESSAGE, root["health"].asInt());
+        }
+    }
+
+    if(root["health"].asInt() < 0) {
+        Json::Value explosive = root["explosive"];
+        if(explosive.isNumeric()) {
+            context->addEvent(this, Context::SPAWN_EXPLOSIVE, explosive.asDouble());
+        }
+        context->addEvent(this, Context::DELETE_UNIT);
+    }
+}
+
 void Unit::loop(Context *context, Event *event) {
     const double rotationSpeed = getRotationSpeed();
     if(angleLocked && std::abs(angle - dstAngle) > rotationSpeed * 5) {
@@ -80,11 +105,11 @@ void Unit::loop(Context *context, Event *event) {
     }
 }
 
-void Unit::render(Renderer *renderer, Vector offset) {
+void Unit::render(Renderer *renderer) {
     this->animator.setAngle(angle);
     this->animator.setPosition(pos);
-    this->animator.render(renderer, offset);
+    this->animator.render(renderer);
     for(Capability *cap : capabilities) {
-        cap->render(renderer, offset);
+        cap->render(renderer);
     }
 }

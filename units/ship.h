@@ -23,6 +23,10 @@ public:
     // Worker interface
 public:
     void loop(Context *context, Event *event);
+
+    // Worker interface
+public:
+    void render(Renderer *renderer);
 };
 
 #endif // SHIP_H

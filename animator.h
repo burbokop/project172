@@ -3,7 +3,7 @@
 
 #include "worker.h"
 #include "additional/timer.h"
-#include "spm.h"
+#include "additional/spm.h"
 
 class Animator : public Worker
 {
@@ -46,7 +46,7 @@ public:
     // Worker interface
 public:
     void loop(Context *context, Event *event);
-    void render(Renderer *renderer, Vector offset);
+    void render(Renderer *renderer);
 };
 
 #endif // ANIMATOR_H

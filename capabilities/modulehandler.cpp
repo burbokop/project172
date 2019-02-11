@@ -76,9 +76,9 @@ void ModuleHandler::loop(Context *context, Event *event) {
     }
 }
 
-void ModuleHandler::render(Renderer *renderer, Vector offset) {
+void ModuleHandler::render(Renderer *renderer) {
     for(Module *module : modules) {
-        module->render(renderer, offset);
+        module->render(renderer);
     }
 }
 

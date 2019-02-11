@@ -1,0 +1,21 @@
+{
+    "key":"engine2",
+    "class": "engine",
+    
+    "animation": { 
+        "spritesheet": "./engine2.png",
+        "frames": 4,
+        "tracks": 1,
+        "play": "not-render"
+    },
+    "offset": {
+        "x": -26,
+        "y": 0
+    },
+    
+    "audio": {
+        "start": "./engineStart.ogg",
+        "loop": "./engineLoop.ogg",
+        "stop": "./engineStop.ogg"
+    }
+}

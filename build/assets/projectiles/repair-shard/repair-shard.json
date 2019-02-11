@@ -1,0 +1,8 @@
+{
+    "key": "repair-shard",
+    "class": "projectile",
+    "sprite": "./repair-shard.png",
+    "zoom": 1,
+	"health":9,
+	"damage":-1,
+}

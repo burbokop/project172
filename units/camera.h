@@ -20,7 +20,11 @@ public:
     // Worker interface
 public:
     void loop(Context *context, Event *event);
-    void render(Renderer *renderer, Vector offset);
+    void render(Renderer *renderer);
+
+    // Unit interface
+public:
+    void hit(Context *context, int value);
 };
 
 #endif // CAMERA_H

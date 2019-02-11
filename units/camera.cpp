@@ -42,6 +42,9 @@ void Camera::loop(Context *context, Event *event) {
     this->Movable::loop(context, event);
 }
 
-void Camera::render(Renderer *renderer, Vector offset) {
+void Camera::render(Renderer *renderer) {
+    Vector offset = renderer->getOffset();
     renderer->rect(this->pos - Vector(2, 2) + offset, this->pos + Vector(2, 2) + offset, 0x5fcf81);
 }
+
+void Camera::hit(Context *context, int value) {}

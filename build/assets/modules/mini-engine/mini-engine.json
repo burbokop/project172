@@ -1,0 +1,21 @@
+{
+    "key":"mini-engine",
+    "class": "engine",
+    
+    "animation": { 
+        "spritesheet": "./anim.png",
+        "frames": 4,
+        "tracks": 1,
+        "play": "not-render"
+    },
+    "offset": {
+        "x": -4,
+        "y": 0
+    },
+    
+    "audio": {
+        "start": "./engineStart.ogg",
+        "loop": "./engineLoop.ogg",
+        "stop": "./engineStop.ogg"
+    }
+}

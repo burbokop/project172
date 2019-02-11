@@ -11,7 +11,16 @@ GUIContainer::GUIContainer(Controller *player, IInformative *informative) : GUIB
 
 void GUIContainer::addElement(GUIElement *element){
     elements->push_back(element);
-    selectDown();
+
+    selected = 0;
+    for(GUIElement *element : *elements) {
+        GUIButton *button = dynamic_cast<GUIButton*>(element);
+        if(button != nullptr) {
+            selectedButton = button;
+            break;
+        }
+        selected++;
+    }
 }
 
 void GUIContainer::update() {
@@ -58,7 +67,7 @@ GUIButton *GUIContainer::selectUp() {
 }
 
 
-void GUIContainer::render(Renderer *renderer, Vector *resolution, Event *event) {
+void GUIContainer::render(Renderer *renderer, Event *event) {
     if(event->getPressed(81)) {
         selectedButton = selectDown();
     } else if(event->getPressed(82)) {
@@ -68,6 +77,14 @@ void GUIContainer::render(Renderer *renderer, Vector *resolution, Event *event) 
             if(selectedButton->press()) {
                 stack->push(selectedButton);
             }
+        }
+    } else if(event->getPressed(SDL_SCANCODE_LEFT)) {
+        if(selectedButton != nullptr) {
+            selectedButton->dec();
+        }
+    } else if(event->getPressed(SDL_SCANCODE_RIGHT)) {
+        if(selectedButton != nullptr) {
+            selectedButton->inc();
         }
     } else if(event->getPressed(SDL_SCANCODE_BACKSPACE)) {
         stack->pop();
@@ -82,12 +99,17 @@ void GUIContainer::render(Renderer *renderer, Vector *resolution, Event *event) 
 
     int i = 0;
     for(GUIElement *element : *elements) {
+
+        //if(i == selected) renderer->effect(std::bind(anaglyph, std::placeholders::_1, 2, 1));
+        if(i == selected) renderer->effect(new Anaglyph(Vector(2, 1)));
         renderer->string(element->getTitle(), pointer, (i == selected) ? SELECTED_COLOR : DEFAULT_COLOR);
+        //renderer->string(element->getTitle(), pointer, DEFAULT_COLOR);
+
         pointer += Vector(4, interval);
         i++;
     }
 }
 
 bool GUIContainer::press() {
-    return 1;
+    return true;
 }

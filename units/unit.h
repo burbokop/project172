@@ -46,11 +46,12 @@ public:
     Vector getPosition();
     double getAngle();
 
+    virtual void hit(Context *context, int value);
 
     // Worker interface
 public:
     void loop(Context *context, Event *event);
-    void render(Renderer *renderer, Vector offset);
+    void render(Renderer *renderer);
 };
 
 #endif // UNIT_H

@@ -1,5 +1,6 @@
 {
     "key": "proj-plasma",
     "class": "projectile",
-    "sprite": "./plasma.png"
+    "sprite": "./plasma.png",
+	"health":40
 }

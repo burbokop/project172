@@ -14,7 +14,7 @@ Loadable::Loadable(Json::Value root, Animator animator, AudioPlayer audioPlayer,
     this->animator = animator;
     this->audioPlayer = audioPlayer;
     this->timer = timer;
-    this->offset = offset;
+    this->attachOffset = offset;
 }
 
 Loadable::Loadable(const Loadable & object) {
@@ -22,7 +22,7 @@ Loadable::Loadable(const Loadable & object) {
     this->animator = object.animator;
     this->audioPlayer = object.audioPlayer;
     this->timer = object.timer;
-    this->offset = object.offset;
+    this->attachOffset = object.attachOffset;
 }
 
 std::string Loadable::getAssetClass() {
@@ -38,5 +38,7 @@ void Loadable::clone(Loadable *dst) {
     dst->animator = animator;
     dst->audioPlayer = audioPlayer;
     dst->timer = timer;
-    dst->offset = offset;
+    dst->attachOffset = attachOffset;
 }
+
+Loadable::~Loadable() {}

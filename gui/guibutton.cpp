@@ -10,8 +10,11 @@ GUIButton::GUIButton(Controller *player, IInformative *informative) : GUILabel (
 }
 
 bool GUIButton::press() {
-    return 0;
+    return false;
 }
 
-void GUIButton::update() {
-}
+void GUIButton::inc() {}
+
+void GUIButton::dec() {}
+
+void GUIButton::update() {}

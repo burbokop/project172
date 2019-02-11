@@ -21,5 +21,5 @@ void GUILabel::update() {
 
 }
 
-void GUILabel::render(Renderer *renderer, Vector *resolution, Event *event) {
+void GUILabel::render(Renderer *renderer, Event *event) {
 }

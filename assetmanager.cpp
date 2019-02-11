@@ -22,7 +22,7 @@ std::string AssetManager::addPrefix(std::string string, std::string prefix) {
 void AssetManager::search(std::string path) {
     if(path[path.length() - 1] == '/') path.pop_back();
     std::vector<std::string> items = FileSystem::readDir(path);
-    for(unsigned long i = 0, L = items.size(); i < L; i++) {
+    for(unsigned long long i = 0, L = items.size(); i < L; i++) {
         std::string item = items[i];
         std::string file = path + '/' + item;
         if(FileSystem::isDir(file)) {
@@ -46,6 +46,8 @@ Loadable *AssetManager::copyAsset(std::string key) {
     Loadable *tmp = getAsset(key);
     std::string assetClass = tmp->getAssetClass();
 
+    if(assetClass == "player") return new Player(tmp);
+
     if(assetClass == "movable") return new Movable(tmp);
     if(assetClass == "ship") return new Ship(tmp);
     if(assetClass == "projectile") return new Projectile(tmp);
@@ -62,6 +64,14 @@ Loadable *AssetManager::copyAsset(std::string key) {
 
     std::cout << "AssetManager (error):\n undefined asset class\n";
     return nullptr;
+}
+
+std::vector<std::string> AssetManager::getKeys() {
+    std::vector<std::string> result;
+    for (std::map<std::string, Loadable*>::iterator it = assets.begin(); it != assets.end(); it++) {
+        result.push_back(it->first);
+    }
+    return result;
 }
 
 void AssetManager::processFile(std::string file, std::string location) {
@@ -98,8 +108,35 @@ void AssetManager::processFile(std::string file, std::string location) {
                      }
                  }
             } else if (!sprite.isNull()) {
-                 anim = Animator(IMG_Load(addPrefix(sprite.asString(), location).c_str()));
-                 anim.play(Animator::LOOP);
+                anim = Animator(IMG_Load(addPrefix(sprite.asString(), location).c_str()));
+                anim.play(Animator::LOOP);
+            }
+
+            AudioPlayer audioPlayer;
+            Json::Value audio = root["audio"];
+            if(audio.isObject()) {
+                Json::Value audioStart = audio["start"];
+                Json::Value audioLoop = audio["loop"];
+                Json::Value audioStop = audio["stop"];
+
+                if(audioStart.isString()) {
+                    if(audioLoop.isString() && audioStop.isString()) {
+                        Debug::log("audio exists: " + audioStart.asString() + " : " + key.asString());
+                        audioPlayer = AudioPlayer(
+                            Mix_LoadWAV(addPrefix(audioStart.asString(), location).c_str()),
+                            Mix_LoadWAV(addPrefix(audioLoop.asString(), location).c_str()),
+                            Mix_LoadWAV(addPrefix(audioStop.asString(), location).c_str())
+                        );
+                    } else {
+                        audioPlayer = AudioPlayer(
+                            Mix_LoadWAV(addPrefix(audioStart.asString(), location).c_str())
+                        );
+                    }
+                }
+            } else if (audio.isString()) {
+                audioPlayer = AudioPlayer(
+                    Mix_LoadWAV(addPrefix(audio.asString(), location).c_str())
+                );
             }
 
             long intervalValue = 1000;
@@ -121,106 +158,7 @@ void AssetManager::processFile(std::string file, std::string location) {
             }
             Vector offsetVector(offsetX, offsetY);
 
-            assets[key.asString()] = new Loadable(root, anim, AudioPlayer(), timer, offsetVector);
+            assets[key.asString()] = new Loadable(root, anim, audioPlayer, timer, offsetVector);
         }
-    }
-
-
-        /*
-        if(!root["animation"].isNull()) {
-        }
-
-
-
-        /*
-        } else resource.hasSprite = false;
-
-        if(resource.animation && resource.animation.spritesheet) {
-            resource.animation = new api.Anim(api.oh.loadSurface(
-                addPrefix(resource.animation.spritesheet, path)),
-                resource.animation.w,
-                resource.animation.h,
-                resource.animation.mode,
-                resource.animation.interval
-            );
-        }
-
-        if(resource.offset && resource.offset.coords) {
-            resource.offset = new api.oh.math.Vector(resource.offset.coords[0], resource.offset.coords[1]);
-        }
-
-        if(resource.audio && !noAudio) {
-            for(const sample in resource.audio) {
-                resource.audio[sample] = api.oh.sound.load(addPrefix(resource.audio[sample], path));
-            }
-        }
-
-        if(resource.key) {
-            resources[resource.key] = resource;
-        }
-    }
-
-        /*
-    } else if ((sufix == ".mp3" || sufix == ".ogg" || sufix == ".wav") && loadAudio) {
-        std::cout << "file: " << file << "  type: sound\n";
-        /*
-        let name = file.split('/');
-        name = name[name.length - 1];
-        name = name.split('.')[0];
-        sounds[name] = api.oh.sound.load(file);
-    }
-        */
-
-};
-
-
-/*
-
-const processFile = (file, path, noAudio) => {
-    const sufix = getSufix(file);
-    if(sufix === 'json') {
-        const resource = JSON.parse(api.fs.readFileSync(file, { encoding: 'utf8' }), functionParser);
-        if(resource.sprite) {
-            resource.sprite = api.oh.loadSurface(addPrefix(resource.sprite, path));
-            resource.hasSprite = true;
-        } else resource.hasSprite = false;
-
-        if(resource.animation && resource.animation.spritesheet) {
-            resource.animation = new api.Anim(api.oh.loadSurface(
-                addPrefix(resource.animation.spritesheet, path)),
-                resource.animation.w,
-                resource.animation.h,
-                resource.animation.mode,
-                resource.animation.interval
-            );
-        }
-
-        if(resource.offset && resource.offset.coords) {
-            resource.offset = new api.oh.math.Vector(resource.offset.coords[0], resource.offset.coords[1]);
-        }
-
-        if(resource.audio && !noAudio) {
-            for(const sample in resource.audio) {
-                resource.audio[sample] = api.oh.sound.load(addPrefix(resource.audio[sample], path));
-            }
-        }
-
-        if(resource.key) {
-            resources[resource.key] = resource;
-        }
-    } else if ((sufix === 'mp3' || sufix === 'ogg' || sufix === 'wav') && !noAudio) {
-        let name = file.split('/');
-        name = name[name.length - 1];
-        name = name.split('.')[0];
-        sounds[name] = api.oh.sound.load(file);
     }
 };
-
-//oh.sound.play(, 1);
-
-
-const loadDir = (path, noAudio) => {
-
-}
-
-*/

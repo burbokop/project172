@@ -2,7 +2,7 @@
 #define ASSETMANAGER_H
 
 #include <iostream>
-#include <jsoncpp/json/json.h>
+#include <json/json.h>
 #include <SDL2/SDL_image.h>
 
 #include "filesystem.h"
@@ -12,6 +12,7 @@
 #include "capabilities/modules/engine.h"
 #include "capabilities/modules/warpdrive.h"
 #include "units/station.h"
+#include "capabilities/player.h"
 
 class AssetManager : public Object {
 private:
@@ -28,6 +29,7 @@ public:
     void search(std::string path);
     Loadable *getAsset(std::string key);
     Loadable *copyAsset(std::string key);
+    std::vector<std::string> getKeys();
 };
 
 #endif // ASSETMANAGER_H

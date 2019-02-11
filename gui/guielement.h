@@ -19,7 +19,7 @@ public:
     virtual std::string getTitle() = 0;
 
     virtual void update() = 0;
-    virtual void render(Renderer *renderer, Vector *resolution, Event *event) = 0;
+    virtual void render(Renderer *renderer, Event *event) = 0;
     virtual ~GUIElement();
 };
 

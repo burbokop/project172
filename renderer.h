@@ -3,33 +3,58 @@
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
+#include <map>
 
 #include "additional/spm.h"
-#include "../additional/vector.h"
+#include "additional/auto.h"
 
-class Renderer : public Object
-{
+class Camera;
+
+class Renderer : public Object {
 public:
     static const int DEFAULT_FONT_SIZE;
-
 private:
+    Camera *camera;
+    Vector offset;
 
     SDL_Window *window;
     SDL_Surface *surface;
-    TTF_Font *font;
-public:
-    Renderer(SDL_Window *window, SDL_Surface *surface, TTF_Font *font);
-    static Renderer *create(const char *title, int w, int h, std::string fontPath);
-    static Renderer *create(const char *title, Vector resolution, std::string fontPath);
+    std::map<int, TTF_Font *> fonts;
+    std::string fontPath;
 
+    bool fullscreen = false;
+    Vector resolution;
+public:
+    Renderer(SDL_Window *window, Vector resolution, SDL_Surface *surface, TTF_Font *font);
+    static Renderer *create(const char *title, int x, int y, std::string fontPath);
+
+    void effect(VisualEffect *applied_effect, bool lock = false);
     void fill(Uint32 color);
+    void setFullscreen();
     void pixel(Vector point, Uint32 color);
     void line(Vector point1, Vector point2, Uint32 color);
     void rect(Vector point1, Vector point2, Uint32 color);
+    void square(Vector point, int radius, Uint32 color);
+    void circle(Vector point, int radius, Uint32 color);
+    void diagonalGrid(Vector point1, Vector point2, int interval, Uint32 color);
+
     void image(SDL_Surface *image, Vector pos, double angle, double zoom);
     void string(std::string string, Vector pos, Uint32 color);
+    void string(std::string string, Vector pos, Uint32 color, int size);
+    void stringCentered(std::string string, Vector pos, Uint32 color, int size);
+    Vector getStringSize(std::string string, int size);
+
+
     void update();
     void quit();
+
+    Vector getResolution();
+    Vector getOffset();
+
+
+    void setResolution(Vector value);
+    void setResolutionCallback(Auto value);
+    void setCamera(Camera *value);
 };
 
 #endif // RENDERER_H

@@ -3,6 +3,9 @@
 
 const double Movable::STOP_MOVING_VELOCITY = 0.015;
 const double Movable::DEFAULT_ACCELERATION_VALUE = 0.1;
+const double Movable::DEFAULT_RELEASE_SPEAD = 1.0;
+
+
 void Movable::setIdleEnabled(bool value) {
     idleEnabled = value;
 }
@@ -94,9 +97,17 @@ Vector Movable::getVelocity() {
 
 void Movable::updatePosition() {
     accelerateIdle();
-    vel = vel.relativisticAddition(acc, getMaxSpeed());
+    if(relativisticVelocity) {
+        vel = vel.relativisticAddition(acc, getMaxSpeed());
+    } else {
+        vel += acc;
+    }
     pos += vel;
     accelerationLocked = false;
+}
+
+double Movable::getReleaseSpead() {
+    return root.get("release-spead", DEFAULT_RELEASE_SPEAD).asDouble();
 }
 
 void Movable::loop(Context *context, Event *event) {

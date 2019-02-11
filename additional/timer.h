@@ -10,7 +10,7 @@ private:
     long duration;
 public:
     Timer(long interval);
-    bool count(bool condition);
+    bool count(bool condition = true);
     void reset();
     double ready();
 

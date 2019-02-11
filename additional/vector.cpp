@@ -60,6 +60,23 @@ void Vector::operator*=(double multiplier) {
     this->y *= multiplier;
 }
 
+Vector Vector::operator/(double divider) {
+    return Vector(this->x / divider, this->y / divider);
+}
+
+void Vector::operator/=(double divider) {
+    this->x /= divider;
+    this->y /= divider;
+}
+
+bool Vector::operator==(Vector vector) {
+    return (this->x == vector.x) && (this->y == vector.y);
+}
+
+bool Vector::operator!=(Vector vector) {
+    return (this->x != vector.x) || (this->y != vector.y);
+}
+
 double Vector::operator*(Vector multiplier) {
     return this->x * multiplier.x + this->y * multiplier.y;
 }

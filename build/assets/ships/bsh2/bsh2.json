@@ -1,0 +1,7 @@
+{
+    "key": "bsh2",
+    "class": "ship",
+    "sprite": "./bsh2.png",
+	"health": 40,
+	"explosive":84
+}

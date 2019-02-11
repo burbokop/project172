@@ -3,7 +3,7 @@
 
 #include "animator.h"
 #include "audioplayer.h"
-#include "jsoncpp/json/json.h"
+#include "json/json.h"
 
 class Loadable
 {
@@ -12,7 +12,7 @@ protected:
     Animator animator;
     AudioPlayer audioPlayer;
     Timer timer = Timer(100);
-    Vector offset;
+    Vector attachOffset;
 
 public:
     Loadable();
@@ -23,6 +23,8 @@ public:
     std::string getAssetClass();
 
     void clone(Loadable *dst);
+
+    virtual ~Loadable();
 };
 
 #endif // LOADABLE_H

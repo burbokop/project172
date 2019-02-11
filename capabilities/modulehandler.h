@@ -26,8 +26,8 @@ public:
 
     // Worker interface
 public:
-    void loop(Context *context, Event *event);
-    void render(Renderer *renderer, Vector offset);
+    void loop(Context *context, Event *event) override;
+    void render(Renderer *renderer) override;
 };
 
 #endif // MODULEHANDLER_H

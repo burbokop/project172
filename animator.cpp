@@ -58,10 +58,10 @@ void Animator::setZoom(double zoom) {
     this->zoom = zoom;
 }
 
-void Animator::render(Renderer *renderer, Vector offset) {
+void Animator::render(Renderer *renderer) {
 
     if (renderer != nullptr && this->mode != NOTRENDER) {
-        Vector local = pos + offset;
+        Vector local = pos + renderer->getOffset();
         //const local = pos.add(api.oh.math.Vector.createByAngle(-offset.module(), -angle / 180 * 3.14));
         renderer->image(frames[static_cast<unsigned long>(currentFrame)], local, angle, zoom);
     }

@@ -1,0 +1,7 @@
+{
+    "key": "mega",
+    "class": "projectile",
+    "sprite": "./mega.png",
+	"health":2,
+	"damage":24,
+}

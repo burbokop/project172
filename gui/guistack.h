@@ -16,7 +16,7 @@ public:
 
     // GUIElement interface
 public:
-    void render(Renderer *renderer, Vector *resolution, Event *event);
+    void render(Renderer *renderer, Event *event);
     void update();
     std::string getTitle();
 };

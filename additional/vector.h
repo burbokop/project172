@@ -3,7 +3,7 @@
 
 #define RELATIVISTIC_ADDITION_CONSTANT 0.7
 
-#include <object.h>
+#include "../object.h"
 
 class Vector : public Object
 {
@@ -23,6 +23,12 @@ public:
     void operator-=(Vector subtrahend);
     Vector operator*(double multiplier);
     void operator*=(double multiplier);
+    Vector operator/(double divider);
+    void operator/=(double divider);
+
+
+    bool operator==(Vector vector);
+    bool operator!=(Vector vector);
 
     double operator*(Vector multiplier);
 

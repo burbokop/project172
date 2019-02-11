@@ -1,0 +1,12 @@
+{
+	"key":"player1",
+	"class":"player",
+	"keymap": {
+		"forward":"w",
+		"left":"a",
+		"right":"d",
+		"warp":"f",
+		"action":"space",
+		"armor":"e"
+	}
+}

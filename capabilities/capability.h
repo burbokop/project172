@@ -5,8 +5,7 @@
 
 class Unit;
 
-class Capability : public Worker
-{
+class Capability : public Worker {
 protected:
     Unit *parent = nullptr;
 public:

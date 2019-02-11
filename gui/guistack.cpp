@@ -3,7 +3,6 @@
 
 GUIStack::GUIStack() : GUIElement () {}
 
-
 void GUIStack::push(GUIElement *element) {
     GUIContainer *container = dynamic_cast<GUIContainer*>(element);
     if(container) {
@@ -13,14 +12,17 @@ void GUIStack::push(GUIElement *element) {
 }
 
 void GUIStack::pop() {
-    if(elements.size() == 1) {
-        reserved = elements[0];
+    if(elements.size() > 0) {
+        if(elements.size() == 1) {
+            reserved = elements[0];
+        }
+        elements.pop_back();
     }
-    elements.pop_back();
 }
 
-void GUIStack::render(Renderer *renderer, Vector *resolution, Event *event) {
-    if(elements.size() > 0) elements[elements.size() - 1]->render(renderer, resolution, event);
+void GUIStack::render(Renderer *renderer, Event *event) {
+    if(elements.size() > 0) elements[elements.size() - 1]->render(renderer, event);
+    else event->getPressed(SDL_SCANCODE_BACKSPACE);
 
     if(event->getPressed(SDL_SCANCODE_RETURN) && reserved) {
         push(reserved);
