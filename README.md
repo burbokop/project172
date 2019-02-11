@@ -45,8 +45,9 @@ SPACE   = fire
 ./project172 [stars slidind start (the minimum spead of camera when background unables special effect) default = 12 pixel/tick]
 ```
 
-## video:
+## videos:
 https://vimeo.com/user93747798/review/310594049/d3638ff2b0
+https://vimeo.com/user93747798/review/316627120/9c236e024f
 
 
 Nice to play
