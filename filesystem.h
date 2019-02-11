@@ -8,8 +8,7 @@
 #include <sys/stat.h>
 #include <fstream>
 
-class FileSystem
-{
+class FileSystem {
 public:
     static std::string readFile(std::string path);
     static std::vector<std::string> readDir(std::string path);

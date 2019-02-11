@@ -32,7 +32,7 @@ void NetListener::loop() {
 void NetListener::quit() {
     serverSocket->close();
     quitFlag = true;
-    if(thread != nullptr) {
+    if(thread != nullptr && thread->joinable()) {
         thread->join();
     }
 }

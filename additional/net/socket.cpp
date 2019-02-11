@@ -129,7 +129,7 @@ void Socket::sendFrame(std::vector<char> data) {
 std::string H(std::vector<char> data) {
     std::stringstream stream;
     for(char c : data) {
-        stream << std::hex << (((unsigned int)c) & 0x000000ff) << " : ";
+        stream << std::hex << ((static_cast<unsigned int>(c)) & 0x000000ff) << " : ";
     }
     std::string result(stream.str());
     return result;

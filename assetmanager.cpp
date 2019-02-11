@@ -1,8 +1,7 @@
 #include "assetmanager.h"
 
 
-AssetManager::AssetManager()
-{
+AssetManager::AssetManager() {
 
 }
 
@@ -59,10 +58,7 @@ Loadable *AssetManager::copyAsset(std::string key) {
     if(assetClass == "engine") return new Engine(tmp);
     if(assetClass == "warp-drive") return new WarpDrive(tmp);
 
-    //if(assetClass == "movable") return new Movable(tmp);
-    //if(assetClass == "movable") return new Movable(tmp);
-
-    std::cout << "AssetManager (error):\n undefined asset class\n";
+    std::cout << "AssetManager (error):\n undefined asset class ( key: " << key << " )\n";
     return nullptr;
 }
 

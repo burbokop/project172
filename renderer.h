@@ -14,11 +14,11 @@ class Renderer : public Object {
 public:
     static const int DEFAULT_FONT_SIZE;
 private:
-    Camera *camera;
+    Camera *camera = nullptr;
     Vector offset;
 
-    SDL_Window *window;
-    SDL_Surface *surface;
+    SDL_Window *window = nullptr;
+    SDL_Surface *surface = nullptr;
     std::map<int, TTF_Font *> fonts;
     std::string fontPath;
 

@@ -9,7 +9,6 @@ class State : public Object {
 public:
     State();
 
-
     int getMaxFPS() const;
     void setMaxFPS(int value);
 };

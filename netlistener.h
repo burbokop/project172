@@ -9,10 +9,10 @@
 
 class NetListener {
 private:
-    std::thread *thread;
+    std::thread *thread = nullptr;
     bool quitFlag = false;
-    burbokop::Socket *serverSocket;
-    Context *context;
+    burbokop::Socket *serverSocket = nullptr;
+    Context *context = nullptr;
 public:
     NetListener(Context *context);
     void start();

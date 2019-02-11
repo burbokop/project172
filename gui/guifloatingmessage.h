@@ -8,8 +8,7 @@ protected:
     static const Uint32 DEFAULT_COLOR;
     static const int DEFAULT_FONT_SIZE;
 
-
-    Unit *parent;
+    Unit *parent = nullptr;
     int horisontalOffset = 0;
 
 public:

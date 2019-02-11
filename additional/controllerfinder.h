@@ -7,8 +7,8 @@
 class ControllerFinder : public IInformative {
 
 private:
-    Controller *p1;
-    Controller *p2;
+    Controller *p1 = nullptr;
+    Controller *p2 = nullptr;
 public:
     ControllerFinder(Controller *p1, Controller *p2);
 

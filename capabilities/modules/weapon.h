@@ -5,8 +5,7 @@
 #include "units/projectile.h"
 
 
-class Weapon : public Module
-{
+class Weapon : public Module {
 private:
     static const double DEFAULT_PROJECTILE_SPEED;
     double getProjectileSpead();

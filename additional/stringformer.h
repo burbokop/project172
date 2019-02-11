@@ -5,8 +5,7 @@
 
 #include "object.h"
 
-class StringFormer : public Object
-{
+class StringFormer : public Object {
 public:
     static std::string line(unsigned int number);
     static std::string line(unsigned int number, char simbol);

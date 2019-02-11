@@ -16,16 +16,16 @@
 
 class Environment : public Object {
 private:
-    State *state;
-    Renderer *renderer;
-    std::vector<Worker*> *units;
-    AssetManager *assetManager;
-    Context *context;
-    Event *event;
-    Background *background;
-    FPSMonitor *fps;
-    NetListener *netListener;
-    WorldManager *worldManager;
+    State *state = nullptr;
+    Renderer *renderer = nullptr;
+    std::vector<Worker*> *units = nullptr;
+    AssetManager *assetManager = nullptr;
+    Context *context = nullptr;
+    Event *event = nullptr;
+    Background *background = nullptr;
+    FPSMonitor *fps = nullptr;
+    NetListener *netListener = nullptr;
+    WorldManager *worldManager = nullptr;
 
 public:
     Environment();

@@ -10,7 +10,7 @@ protected:
     static const Uint32 SELECTED_COLOR = 0xD2BB5F;
 
 
-    Controller *player;
+    Controller *player = nullptr;
     int margin = 24;
 public:
     GUIElement();

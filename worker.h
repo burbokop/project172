@@ -9,8 +9,7 @@
 
 class Context;
 
-class Worker : public Object
-{
+class Worker : public Object {
 public:
     Worker();
     void virtual loop(Context *context, Event *event) = 0;

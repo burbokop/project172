@@ -5,8 +5,7 @@
 #include "audioplayer.h"
 #include "json/json.h"
 
-class Loadable
-{
+class Loadable {
 protected:
     Json::Value root;
     Animator animator;

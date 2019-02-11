@@ -28,7 +28,7 @@ void Environment::logic() {
 
 void Environment::start() {
     assetManager->search("./assets");
-    worldManager->init(context, assetManager, units, renderer, fps);
+    worldManager->checkState(context, assetManager, units, renderer, fps);
     context->setBackground(background);
 
     //test---
@@ -37,12 +37,11 @@ void Environment::start() {
 
 
     netListener->start();
+
     while (1) {
         event->loop();
-
         background->loop(this->context, event);
         background->setSpeed(worldManager->getCamera()->getVelocity());
-
         background->render(renderer);
         for(unsigned long long i = 0, L = units->size(); i < L; i++) {
             this->units->at(i)->loop(this->context, event);
@@ -55,9 +54,7 @@ void Environment::start() {
         }
         renderer->update();
         context->handleEvents();
-
         worldManager->checkState(context, assetManager, units, renderer, fps);
-
         if(event->getExitFlag()) break;
         fps->count();
         std::this_thread::sleep_for(std::chrono::milliseconds(fps->toUint32() * 1000 / static_cast<long long>(std::pow(state->getMaxFPS(), 2))));

@@ -83,7 +83,7 @@ std::vector<Controller *> DefaultWorld::generate(AssetManager *assets, std::vect
         std::vector<std::string> assetKeys = assets->getKeys();
         unsigned int i = 0;
         for (std::string key : assetKeys) {
-            std::cout << "loading key: " << key << "\n";
+            std::cout << "Default world: loading key: " << key << "\n";
             Movable *unit = dynamic_cast<Movable*>(assets->copyAsset(key));
             if(unit) {
                 unit->place(Vector(static_cast<int>((i + 4) * 64), -200), Vector(), Vector(), 0);
@@ -99,8 +99,6 @@ std::vector<Controller *> DefaultWorld::generate(AssetManager *assets, std::vect
                 units->push_back(unit);
                 i++;
             }
-
-
         }
     }
 

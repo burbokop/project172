@@ -7,7 +7,6 @@ class GUICentralMessage : public GUILabel {
 private:
     static const long DEFAULT_FLASHING_INTERVAL;
 
-
     Timer *flashingTimer = nullptr;
     bool visible;
     int flashesRemains;

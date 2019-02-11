@@ -2,13 +2,11 @@
 
 const long GUIMain::FLOATING_LIFE_TIME = 1000;
 
-void GUIMain::setMessage(GUICentralMessage *value)
-{
+void GUIMain::setMessage(GUICentralMessage *value) {
     centralMessage = value;
 }
 
-void GUIMain::setMenu(GUIStack *value)
-{
+void GUIMain::setMenu(GUIStack *value) {
     menu = value;
 }
 

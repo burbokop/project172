@@ -10,9 +10,9 @@ class GUIMain : public GUIElement {
 private:
     static const long FLOATING_LIFE_TIME;
 
-    GUIStack *menu;
-    GUICentralMessage *centralMessage;
-    GUIFloatingMessage *floatingMessage;
+    GUIStack *menu = nullptr;
+    GUICentralMessage *centralMessage = nullptr;
+    GUIFloatingMessage *floatingMessage = nullptr;
     Timer floatingMessageLifeTimer = Timer(FLOATING_LIFE_TIME);
 
 public:

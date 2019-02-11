@@ -21,8 +21,6 @@
 #include "additional/controllerfinder.h"
 
 class World : public Object {
-private:
-
 public:
     World();
     virtual std::vector<Controller*> generate(AssetManager *assets, std::vector<Worker*> *units) = 0;

@@ -10,7 +10,7 @@ protected:
     static const double STOP_DISTANCE;
     static const double MAX_SPEED_MULTIPLIER;
 
-    Controller *target;
+    Controller *target = nullptr;
 
 public:
     Camera();

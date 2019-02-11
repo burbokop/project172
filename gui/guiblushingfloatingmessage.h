@@ -5,7 +5,8 @@
 #include "additional/math.h"
 
 class GUIBlushingFloatingMessage : public GUIFloatingMessage {
-int value;
+private:
+    int value;
 
 public:
     GUIBlushingFloatingMessage(Unit *parent);

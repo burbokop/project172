@@ -9,7 +9,7 @@
 class ModuleHandler : public Capability {
 protected:
     std::vector<Module*> modules;
-    std::map<std::string, std::vector<Module*>*> *categories;
+    std::map<std::string, std::vector<Module*>*> *categories = nullptr;
 
 public:
     ModuleHandler();

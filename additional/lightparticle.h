@@ -20,8 +20,6 @@ private:
     Vector pos;
     Vector vel;
 
-
-
     Uint8 shape = PIXEL;
     int radius = 2;
     Uint32 color = 0xff00ff;

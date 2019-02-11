@@ -56,7 +56,6 @@ void Player::setArmor(Ship *armor) {
     this->armor = armor;
 }
 
-#include <iostream>
 void Player::loop(Context *context, Event *event) {
     if(getPersonalKey(event, "left")) {
         parent->rotateLeft() ;

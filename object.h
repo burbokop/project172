@@ -3,8 +3,7 @@
 
 
 
-class Object
-{
+class Object {
 public:
     Object();
 };
