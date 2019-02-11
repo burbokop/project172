@@ -10,6 +10,7 @@ void NetListener::start() {
 }
 
 void NetListener::loop() {
+#ifdef __WIN32__
     while(!quitFlag) {
         burbokop::Socket *connection = serverSocket->listen();
         if(connection) {
@@ -25,6 +26,7 @@ void NetListener::loop() {
             SDL_Delay(1000);
         }
     }
+#endif
 }
 
 void NetListener::quit() {

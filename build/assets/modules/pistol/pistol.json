@@ -2,7 +2,7 @@
     "key": "pistol",
     "class": "weapon",
     "audio": { "start": "./shoot.wav" },
-    "rate": 60,
+    "rate":160,
     "projectile":"p-p",
     "props": {},
     "commands": [
