@@ -531,3 +531,86 @@ audio exists: ./engineStart.ogg : mini-engine
 audio exists: ./engineStart.ogg : engine2
 audio exists: ./engineStart.ogg : engine1
 audio exists: ./engineStart.ogg : mini-engine
+
+--------- DEBUG START ---------
+
+
+audio exists: ./engineStart.ogg : engine2
+audio exists: ./engineStart.ogg : engine1
+audio exists: ./engineStart.ogg : mini-engine
+
+--------- DEBUG START ---------
+
+
+audio exists: ./engineStart.ogg : engine2
+audio exists: ./engineStart.ogg : engine1
+audio exists: ./engineStart.ogg : mini-engine
+
+--------- DEBUG START ---------
+
+
+Debug: segmentation fault (signum: 11)
+
+
+--------- DEBUG START ---------
+
+
+audio exists: ./engineStart.ogg : engine2
+audio exists: ./engineStart.ogg : engine1
+audio exists: ./engineStart.ogg : mini-engine
+
+--------- DEBUG START ---------
+
+
+audio exists: ./engineStart.ogg : engine2
+audio exists: ./engineStart.ogg : engine1
+audio exists: ./engineStart.ogg : mini-engine
+
+--------- DEBUG START ---------
+
+
+audio exists: ./engineStart.ogg : engine2
+audio exists: ./engineStart.ogg : engine1
+audio exists: ./engineStart.ogg : mini-engine
+audio exists: ./engineStart.ogg : engine2
+audio exists: ./engineStart.ogg : engine1
+audio exists: ./engineStart.ogg : mini-engine
+
+--------- DEBUG START ---------
+
+
+audio exists: ./engineStart.ogg : engine2
+audio exists: ./engineStart.ogg : engine1
+audio exists: ./engineStart.ogg : mini-engine
+
+--------- DEBUG START ---------
+
+
+audio exists: ./engineStart.ogg : engine2
+audio exists: ./engineStart.ogg : engine1
+audio exists: ./engineStart.ogg : mini-engine
+
+--------- DEBUG START ---------
+
+
+audio exists: ./engineStart.ogg : engine2
+audio exists: ./engineStart.ogg : engine1
+audio exists: ./engineStart.ogg : mini-engine
+
+--------- DEBUG START ---------
+
+
+audio exists: ./engineStart.ogg : engine2
+audio exists: ./engineStart.ogg : engine1
+audio exists: ./engineStart.ogg : mini-engine
+
+--------- DEBUG START ---------
+
+
+audio exists: ./engineStart.ogg : engine2
+audio exists: ./engineStart.ogg : engine1
+audio exists: ./engineStart.ogg : mini-engine
+
+--------- DEBUG START ---------
+
+

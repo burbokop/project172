@@ -33,12 +33,8 @@ Particle::Particle(Loadable *tmp) : Movable (tmp) {
     destroyTimer.reset();
 }
 
-#include <iostream>
 void Particle::render(Renderer *renderer) {
-    std::cout << "render particle\n";
     if(shape == PIXEL) {
-        std::cout << "     (pixel)\n";
-
         renderer->pixel(renderer->getOffset() + pos, color);
     } else if(shape == SQUARE) {
         renderer->square(renderer->getOffset() + pos, radius, color);

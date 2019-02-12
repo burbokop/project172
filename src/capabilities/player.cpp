@@ -64,7 +64,6 @@ void Player::loop(Context *context, Event *event) {
     }
 
     Ship *ship = dynamic_cast<Ship*>(parent);
-    if(ship == nullptr) std::cout << "error (parent is not Ship): " << typeid (parent).name() << "\n";
 
     ModuleHandler *modules = parent->getModuleHandler();
     if(modules) {
@@ -79,7 +78,7 @@ void Player::loop(Context *context, Event *event) {
             }
         }
 
-        if(getPersonalKey(event, "warp")) {
+        if(ship && getPersonalKey(event, "warp")) {
             if(!warpKeyPressed) {
                 warpKeyPressed = true;
                 if(!ship->warp()) {
@@ -94,7 +93,7 @@ void Player::loop(Context *context, Event *event) {
         }
     }
 
-    if(getPersonalKey(event, "forward")) {
+    if(ship && getPersonalKey(event, "forward")) {
         ship->accelerateForward();
     }
 

@@ -9,35 +9,28 @@ Environment::Environment() {
     this->fps = new FPSMonitor();
     this->netListener = new NetListener(context);
     this->worldManager = new WorldManager({ new DefaultWorld(), new ArenaWorld() });
+    this->background = new Background();
 }
 
 void Environment::init(int argc, char *argv[]) {
-    this->renderer = Renderer::create("project172", 600, 600, "./assets/fonts/ZCOOL.ttf");
-    this->background = new Background();
+    std::cout << "INIT GAME\n";
+    assetManager->search("../assets");
+
+    this->renderer = Renderer::create("project172", 600, 600, "../assets/fonts/ZCOOL.ttf");
+
     if(argc > 1) this->background->init(this->renderer->getResolution(), 128, std::stod(argv[1]));
     else this->background->init(this->renderer->getResolution(), 128);
-    Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096);
-    Debug::init();
-}
 
-//---test
-void Environment::logic() {
-
-}
-//---
-
-void Environment::start() {
-    assetManager->search("./assets");
     worldManager->checkState(context, assetManager, units, renderer, fps);
     context->setBackground(background);
 
-    //test---
-    std::thread logicThread(&Environment::logic, this);
-    //-------
+    Debug::init();
+}
 
 
+void Environment::start() {
+    std::cout << "GAME STARTED\n";
     netListener->start();
-
     while (1) {
         event->loop();
         background->loop(this->context, event);

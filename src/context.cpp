@@ -12,20 +12,15 @@ const Uint8 Context::BACKGROUND_FLASHING = 7;
 const Uint8 Context::FLOATING_MESSAGE = 8;
 
 
-#include <iostream>
-
 double rv() {
-    double result = (static_cast<double>(rand() % 20) - 10) / 5.0;
-    std::cout << "result: " << result << "\n";
-    return result;
+    return (static_cast<double>(rand() % 20) - 10) / 5.0;
 }
 
 void Context::setGui(GUIMain *value) {
     gui = value;
 }
 
-void Context::setBackground(Background *value)
-{
+void Context::setBackground(Background *value) {
     background = value;
 }
 
@@ -37,30 +32,28 @@ void Context::handleRequest(Request request) {
             units->erase(pos);
         }
     } else if (request.command == SPAWN_EXPLOSIVE) {
-
+        std::cout << "BADABOOM: " << request.requester << "\n";
         Unit *requester = dynamic_cast<Unit*>(request.requester);
         if(requester) {
-            std::cout << "BADABOOM: " << request.requester << "\n";
 
             for(int i = 0; i < 26; i++) {
                 Uint8 types[] = { Particle::PIXEL, Particle::CIRCLE, Particle::SQUARE };
 
-                if(false) {
-                    Particle *particle = new Particle(types[rand() % 3]);
-                    particle->place(requester->getPosition(), Vector(rv(), rv()));
-                    units->push_back(particle);
-                } else {
+                bool useLightParticle = true;
+                if(useLightParticle) {
                     LightParticle *particle = new LightParticle(types[rand() % 3]);
                     particle->place(requester->getPosition(), Vector(rv(), rv()));
                     units->push_back(particle);
-
+                } else {
+                    Particle *particle = new Particle(types[rand() % 3]);
+                    particle->place(requester->getPosition(), Vector(rv(), rv()));
+                    units->push_back(particle);
                 }
-
             }
         }
     } else if (request.command == SPAWN_UNIT) {
+        std::cout << "SPAWN_UNIT: " << request.requester << "\n";
         if(request.argument.isObject()) {
-
             Unit *unitToSpawn = reinterpret_cast<Ship*>(request.argument.toObject());
             Ship *shipToSpawn = dynamic_cast<Ship*>(unitToSpawn);
             Ship *parent = dynamic_cast<Ship*>(request.requester);
@@ -75,6 +68,7 @@ void Context::handleRequest(Request request) {
             }
         }
     } else if (request.command == SPAWN_SURFACE) {
+        std::cout << "SPAWN_SURFACE: " << request.requester << "\n";
         if(request.argument.isObject()) {
             SDL_Surface *surface = reinterpret_cast<SDL_Surface*>(request.argument.toObject());
 
@@ -96,6 +90,7 @@ void Context::handleRequest(Request request) {
             }
         }
     } else if (request.command == ADD_CAPABILITY) {
+        std::cout << "ADD_CAPABILITY: " << request.requester << "\n";
         if(request.argument.isObject()) {
             Unit *unit = dynamic_cast<Unit*>(request.requester);
             Capability *capability = reinterpret_cast<Capability*>(request.argument.toObject());
@@ -104,6 +99,7 @@ void Context::handleRequest(Request request) {
             }
         }
     } else if (request.command == REMOVE_CAPABILITY) {
+        std::cout << "REMOVE_CAPABILITY: " << request.requester << "\n";
         if(request.argument.isObject()) {
             Unit *unit = dynamic_cast<Unit*>(request.requester);
             Capability *capability = reinterpret_cast<Capability*>(request.argument.toObject());
@@ -112,20 +108,21 @@ void Context::handleRequest(Request request) {
             }
         }
     } else if (request.command == EMERGENCY_MESSAGE) {
+        std::cout << "EMERGENCY_MESSAGE: " << request.requester << "\n";
         if(request.argument.isObject()) {
             const char *message = static_cast<char*>(request.argument.toObject());
-            std::cout << "message: " << message << "\n";
-
             GUICentralMessage *element = new GUICentralMessage(nullptr, message);
             element->start(2);
             gui->setMessage(element);
         }
     } else if (request.command == BACKGROUND_FLASHING) {
+        std::cout << "BACKGROUND_FLASHING: " << request.requester << "\n";
         if(request.argument.isNumber()) {
             int repeats = request.argument.toInt32();
             background->flashing(repeats);
         }
     } else if (request.command == FLOATING_MESSAGE) {
+        std::cout << "FLOATING_MESSAGE: " << request.requester << "\n";
         if(request.argument.isNumber()) {
             Unit *unit = dynamic_cast<Unit*>(request.requester);
             if(unit) {

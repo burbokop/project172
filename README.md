@@ -25,11 +25,6 @@ make
 ./project172
 ```
 
-#### or install to root:
-```bash
-sudo make install
-```
-
 
 ## Documentation
 
@@ -38,6 +33,9 @@ sudo make install
 W A S D = moving
 F       = charging / run / stop warp drive
 SPACE   = fire
+
+full controll table: https://github.com/burbokop/project172/blob/master/build/assets/player1.json
+
 ```
 
 #### command line parameters:

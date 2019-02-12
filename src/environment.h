@@ -31,7 +31,6 @@ public:
     Environment();
     void init(int argc, char *argv[]);
     void start();
-    void logic();
     void quit();
 };
 

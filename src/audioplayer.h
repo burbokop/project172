@@ -20,6 +20,12 @@ private:
     Mix_Chunk *startChunk = nullptr;
     Mix_Chunk *loopChunk = nullptr;
     Mix_Chunk *stopChunk = nullptr;
+
+
+    static bool initialized;
+    static void initAudio();
+    static void checkInitialized();
+
 public:
     AudioPlayer();
     AudioPlayer(Mix_Chunk *start, Mix_Chunk *loop = nullptr, Mix_Chunk *stop = nullptr);
