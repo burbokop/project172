@@ -18,8 +18,7 @@
 struct Request {
     Worker *requester;
     Uint8 command;
-    double value;
-    void *pointer;
+    Auto argument;
 };
 
 class Context : public Object {
@@ -49,8 +48,8 @@ public:
 
     std::vector<Worker *> *getUnits() const;
     AssetManager *getAssets() const;
-    void addEvent(Worker *requester, Uint8 command, double value = 0.0);
-    void addEvent(Worker *requester, Uint8 command, void *pointer);
+
+    void addEvent(Worker *requester, Uint8 command, Auto argument = Auto());
 
     void handleEvents();
 

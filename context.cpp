@@ -20,8 +20,7 @@ double rv() {
     return result;
 }
 
-void Context::setGui(GUIMain *value)
-{
+void Context::setGui(GUIMain *value) {
     gui = value;
 }
 
@@ -60,64 +59,78 @@ void Context::handleRequest(Request request) {
             }
         }
     } else if (request.command == SPAWN_UNIT) {
-        Unit *unitToSpawn = reinterpret_cast<Ship*>(request.pointer);
-        Ship *shipToSpawn = dynamic_cast<Ship*>(unitToSpawn);
-        Ship *parent = dynamic_cast<Ship*>(request.requester);
+        if(request.argument.isObject()) {
 
-        if(parent) {
-            if(shipToSpawn) {
-                shipToSpawn->place(parent->getPosition(), Vector::createByAngle(parent->getReleaseSpead(), parent->getAngle()), Vector(), parent->getAngle());
-            } else if(unitToSpawn) {
-                unitToSpawn->place(parent->getPosition(), 0.785);
+            Unit *unitToSpawn = reinterpret_cast<Ship*>(request.argument.toObject());
+            Ship *shipToSpawn = dynamic_cast<Ship*>(unitToSpawn);
+            Ship *parent = dynamic_cast<Ship*>(request.requester);
+
+            if(parent) {
+                if(shipToSpawn) {
+                    shipToSpawn->place(parent->getPosition(), Vector::createByAngle(parent->getReleaseSpead(), parent->getAngle()), Vector(), parent->getAngle());
+                } else if(unitToSpawn) {
+                    unitToSpawn->place(parent->getPosition(), 0.785);
+                }
+                units->push_back(unitToSpawn);
             }
-            units->push_back(unitToSpawn);
         }
-
     } else if (request.command == SPAWN_SURFACE) {
-        SDL_Surface *surface = reinterpret_cast<SDL_Surface*>(request.pointer);
+        if(request.argument.isObject()) {
+            SDL_Surface *surface = reinterpret_cast<SDL_Surface*>(request.argument.toObject());
 
-        Animator anim = Animator(surface);
-        anim.play(Animator::LOOP);
-        Json::Value root;
+            Animator anim = Animator(surface);
+            anim.play(Animator::LOOP);
+            Json::Value root;
 
-        root["key"] = "sh1";
-        root["class"] = "ship";
-        root["health"] = 80;
-        root["explosive"] = 64;
+            root["key"] = "sh1";
+            root["class"] = "ship";
+            root["health"] = 80;
+            root["explosive"] = 64;
 
-        Loadable *tmp = new Loadable(root, anim);
-        Unit *unit = new Ship(tmp);
+            Loadable *tmp = new Loadable(root, anim);
+            Unit *unit = new Ship(tmp);
 
-        if(unit) {
-            unit->place(Vector(), 0.0);
-            units->push_back(unit);
+            if(unit) {
+                unit->place(Vector(), 0.0);
+                units->push_back(unit);
+            }
         }
     } else if (request.command == ADD_CAPABILITY) {
-        Unit *unit = dynamic_cast<Unit*>(request.requester);
-        Capability *capability = reinterpret_cast<Capability*>(request.pointer);
-        if(unit && capability) {
-            unit->addCapability(capability);
+        if(request.argument.isObject()) {
+            Unit *unit = dynamic_cast<Unit*>(request.requester);
+            Capability *capability = reinterpret_cast<Capability*>(request.argument.toObject());
+            if(unit && capability) {
+                unit->addCapability(capability);
+            }
         }
     } else if (request.command == REMOVE_CAPABILITY) {
-        Unit *unit = dynamic_cast<Unit*>(request.requester);
-        Capability *capability = reinterpret_cast<Capability*>(request.pointer);
-        if(unit && capability) {
-            unit->removeCapability(capability);
+        if(request.argument.isObject()) {
+            Unit *unit = dynamic_cast<Unit*>(request.requester);
+            Capability *capability = reinterpret_cast<Capability*>(request.argument.toObject());
+            if(unit && capability) {
+                unit->removeCapability(capability);
+            }
         }
     } else if (request.command == EMERGENCY_MESSAGE) {
-        const char *message = static_cast<char*>(request.pointer);
-        std::cout << "message: " << message << "\n";
+        if(request.argument.isObject()) {
+            const char *message = static_cast<char*>(request.argument.toObject());
+            std::cout << "message: " << message << "\n";
 
-        GUICentralMessage *element = new GUICentralMessage(nullptr, message);
-        element->start(2);
-        gui->setMessage(element);
+            GUICentralMessage *element = new GUICentralMessage(nullptr, message);
+            element->start(2);
+            gui->setMessage(element);
+        }
     } else if (request.command == BACKGROUND_FLASHING) {
-        int repeats = static_cast<int>(request.value);
-        background->flashing(repeats);
+        if(request.argument.isNumber()) {
+            int repeats = request.argument.toInt32();
+            background->flashing(repeats);
+        }
     } else if (request.command == FLOATING_MESSAGE) {
-        Unit *unit = dynamic_cast<Unit*>(request.requester);
-        if(unit) {
-            gui->addBlushingFloatingMessage(unit, static_cast<int>(request.value));
+        if(request.argument.isNumber()) {
+            Unit *unit = dynamic_cast<Unit*>(request.requester);
+            if(unit) {
+                gui->addBlushingFloatingMessage(unit, request.argument.toInt32());
+            }
         }
     }
 }
@@ -137,21 +150,11 @@ AssetManager *Context::getAssets() const {
 }
 
 
-void Context::addEvent(Worker *requester, Uint8 command, double value) {
+void Context::addEvent(Worker *requester, Uint8 command, Auto argument) {
     eventQueue.push({
         requester,
         command,
-        value,
-        nullptr
-    });
-}
-
-void Context::addEvent(Worker *requester, Uint8 command, void *pointer) {
-    eventQueue.push({
-        requester,
-        command,
-        0.0,
-        pointer
+        argument
     });
 }
 
