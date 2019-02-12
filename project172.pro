@@ -82,7 +82,8 @@ SOURCES += \
     worldmanager.cpp \
     worlds/defaultworld.cpp \
     worlds/arenaworld.cpp \
-    additional/auto.cpp
+    additional/auto.cpp \
+    capabilities/docker.cpp
 
 
 
@@ -162,7 +163,8 @@ HEADERS += \
     worldmanager.h \
     worlds/defaultworld.h \
     worlds/arenaworld.h \
-    additional/auto.h
+    additional/auto.h \
+    capabilities/docker.h
 
 
 

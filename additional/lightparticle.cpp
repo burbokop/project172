@@ -28,6 +28,7 @@ void LightParticle::place(Vector pos, Vector vel) {
 
 
 void LightParticle::loop(Context *context, Event *event) {
+    UNUSED(event);
     if(destroyTimer.count(true)) {
         context->addEvent(this, Context::DELETE_UNIT);
     }

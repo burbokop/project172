@@ -43,7 +43,8 @@ void Animator::play(Uint8 mode) {
 
 
 void Animator::loop(Context *context, Event *event) {
-
+    UNUSED(context);
+    UNUSED(event);
 }
 
 void Animator::setPosition(Vector pos) {

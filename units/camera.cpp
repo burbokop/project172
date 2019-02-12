@@ -47,4 +47,7 @@ void Camera::render(Renderer *renderer) {
     renderer->rect(this->pos - Vector(2, 2) + offset, this->pos + Vector(2, 2) + offset, 0x5fcf81);
 }
 
-void Camera::hit(Context *context, int value) {}
+void Camera::hit(Context *context, int value) {
+    UNUSED(context);
+    UNUSED(value);
+}

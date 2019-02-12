@@ -6,10 +6,13 @@ ModuleHandler::ModuleHandler() {
 }
 
 bool ModuleHandler::setParent(Unit *parent) {
-    for(Module *module : modules) {
-        module->setParent(parent);
+    if(this->Capability::setParent(parent)) {
+        for(Module *module : modules) {
+            module->setParent(parent);
+        }
+        return true;
     }
-    this->Capability::setParent(parent);
+    return false;
 }
 
 void ModuleHandler::unsetParent() {

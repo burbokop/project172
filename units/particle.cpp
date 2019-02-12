@@ -47,7 +47,10 @@ void Particle::render(Renderer *renderer) {
     }
 }
 
-void Particle::hit(Context *context, int value) {}
+void Particle::hit(Context *context, int value) {
+    UNUSED(context);
+    UNUSED(value);
+}
 
 void Particle::loop(Context *context, Event *event) {
     if(destroyTimer.count(true)) {

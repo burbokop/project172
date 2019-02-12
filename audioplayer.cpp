@@ -31,6 +31,8 @@ void AudioPlayer::stop() {
 }
 
 void AudioPlayer::loop(Context *context, Event *event) {
+    UNUSED(context);
+    UNUSED(event);
     if(!playPressed && state != NONE) stop();
     playPressed = false;
 
@@ -45,5 +47,5 @@ void AudioPlayer::loop(Context *context, Event *event) {
 }
 
 void AudioPlayer::render(Renderer *renderer) {
-
+    UNUSED(renderer);
 }

@@ -17,6 +17,7 @@ GUIFloatingMessage::GUIFloatingMessage(Unit *parent, IInformative *informative) 
 }
 
 void GUIFloatingMessage::render(Renderer *renderer, Event *event) {
+    UNUSED(event);
     renderer->stringCentered(getTitle(), parent->getPosition() + renderer->getOffset() + Vector(0, horisontalOffset), DEFAULT_COLOR, DEFAULT_FONT_SIZE);
     horisontalOffset--;
 }

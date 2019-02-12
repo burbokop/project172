@@ -20,6 +20,7 @@ void GUICentralMessage::start(int flashesRemains, long interval) {
 }
 
 void GUICentralMessage::render(Renderer *renderer, Event *event) {
+    UNUSED(event);
     if(visible) {
         Vector center = renderer->getResolution() / 2.0;
         std::string string = getTitle();

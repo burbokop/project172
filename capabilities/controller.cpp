@@ -23,9 +23,13 @@ Unit *Controller::getParent() {
     return parent;
 }
 
-void Controller::onHit(Context *context, int health) {}
+void Controller::onHit(Context *context, int health) {
+    UNUSED(context);
+    UNUSED(health);
+}
 
 void Controller::loop(Context *context, Event *event) {
+    UNUSED(event);
     if(armorReleaseMessageTrigger.check()) {
         context->addEvent(parent, Context::EMERGENCY_MESSAGE, const_cast<char*>(ARMOR_RELEASE_MESSAGE));
     }
@@ -41,5 +45,5 @@ void Controller::loop(Context *context, Event *event) {
 }
 
 void Controller::render(Renderer *renderer) {
-
+    UNUSED(renderer);
 }

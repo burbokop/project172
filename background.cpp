@@ -37,6 +37,8 @@ void Background::init(Vector resolution, unsigned int amount, double slidingStar
 }
 
 void Background::loop(Context *context, Event *event) {
+    UNUSED(context);
+    UNUSED(event);
 }
 
 void Background::render(Renderer *renderer) {

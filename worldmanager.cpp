@@ -18,7 +18,7 @@ WorldManager::WorldManager(std::vector<World *> worlds) {
     this->activeWorld = worlds[0];
 }
 
-void WorldManager::init(Context *context, AssetManager *assets, std::vector<Worker *> *units, Renderer *renderer, FPSMonitor *fps) {
+void WorldManager::init(AssetManager *assets, std::vector<Worker *> *units, Renderer *renderer, FPSMonitor *fps) {
     if(activeWorld) {
         worldIsChanged = false;
         std::vector<Controller*> players = activeWorld->generate(assets, units);
@@ -95,13 +95,12 @@ void WorldManager::init(Context *context, AssetManager *assets, std::vector<Work
 void WorldManager::checkState(Context *context, AssetManager *assets, std::vector<Worker *> *units, Renderer *renderer, FPSMonitor *fps) {
     if(worldIsChanged) {
         clear(units);
-        init(context, assets, units, renderer, fps);
+        init(assets, units, renderer, fps);
         context->setGui(getGui());
         renderer->setCamera(getCamera());
     }
 }
 
-#include <iostream>
 void WorldManager::onChangeReset(Auto caseValue) {
      activeWorld = worlds[caseValue.toUint64()];
      worldIsChanged = true;

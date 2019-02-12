@@ -13,6 +13,7 @@ GUIBlushingFloatingMessage::GUIBlushingFloatingMessage(Unit *parent, IInformativ
 
 
 void GUIBlushingFloatingMessage::render(Renderer *renderer, Event *event) {
+    UNUSED(event);
     Uint32 color
         = value < 0
         ? 0xff0000

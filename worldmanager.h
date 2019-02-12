@@ -17,7 +17,7 @@ private:
     void onChangeReset(Auto caseValue);
     void clear(std::vector<Worker *> *units);
 
-    void init(Context *context, AssetManager *assets, std::vector<Worker *> *units, Renderer *renderer, FPSMonitor *fps);
+    void init(AssetManager *assets, std::vector<Worker *> *units, Renderer *renderer, FPSMonitor *fps);
 public:
     WorldManager(std::vector<World*> worlds);
 

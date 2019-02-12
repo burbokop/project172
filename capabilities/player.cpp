@@ -106,9 +106,10 @@ void Player::loop(Context *context, Event *event) {
 }
 
 void Player::render(Renderer *renderer) {
-
+    UNUSED(renderer);
 }
 
 void Player::onHit(Context *context, int health) {
+    UNUSED(health);
     context->addEvent(nullptr, Context::BACKGROUND_FLASHING, 8);
 }

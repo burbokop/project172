@@ -22,4 +22,6 @@ void GUILabel::update() {
 }
 
 void GUILabel::render(Renderer *renderer, Event *event) {
+    UNUSED(renderer);
+    UNUSED(event);
 }
