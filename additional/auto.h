@@ -1,12 +1,13 @@
 #ifndef AUTO_H
 #define AUTO_H
 
+#include <cstdint>
+
 #include "vector.h"
 
 class Auto : public Object {
 private:
-    void *pointer = nullptr;
-    unsigned long long integerValue = 0;
+    uintptr_t pointer = 0;
     double doubleValue = 0.0;
     Vector vectorValue = Vector();
 

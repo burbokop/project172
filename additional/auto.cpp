@@ -6,15 +6,15 @@ Auto::Auto() : Object() {
 }
 
 Auto::Auto(void *value) : Object() {
-    pointer = value;
+    pointer = reinterpret_cast<uintptr_t>(value);
 }
 
 Auto::Auto(int value) : Object() {
-    integerValue = value;
+    pointer = static_cast<uintptr_t>(value);
 }
 
 Auto::Auto(unsigned long value) {
-    integerValue = value;
+    pointer = value;
 }
 
 Auto::Auto(double value) : Object() {
@@ -26,19 +26,19 @@ Auto::Auto(Vector value) : Object() {
 }
 
 int Auto::toInt32() {
-    return integerValue;
+    return static_cast<int>(pointer);
 }
 
 long Auto::toInt64() {
-    return integerValue;
+    return static_cast<long>(pointer);
 }
 
 unsigned int Auto::toUint32() {
-    return integerValue;
+    return static_cast<unsigned int>(pointer);
 }
 
 unsigned long Auto::toUint64() {
-    return integerValue;
+    return pointer;
 }
 
 double Auto::toDouble() {
@@ -50,5 +50,5 @@ Vector Auto::toVector() {
 }
 
 void *Auto::toOthers() {
-    return pointer;
+    return reinterpret_cast<void*>(pointer);
 }

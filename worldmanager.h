@@ -21,12 +21,10 @@ private:
 public:
     WorldManager(std::vector<World*> worlds);
 
-
     void checkState(Context *context, AssetManager *assets, std::vector<Worker *> *units, Renderer *renderer, FPSMonitor *fps);
 
     Camera *getCamera() const;
     GUIMain *getGui() const;
-
 };
 
 #endif // WORLDMANAGER_H

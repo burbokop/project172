@@ -1,5 +1,6 @@
 #include "unit.h"
 #include "context.h"
+#include "projectile.h"
 
 const double Unit::DEFAULT_ROTATION_SPEED = 0.02;
 
@@ -71,25 +72,34 @@ double Unit::getAngle() {
 
 #include <iostream>
 void Unit::hit(Context* context, int value) {
-    Json::Value health = root["health"];
-    Json::Value maxHealth = root["health-max"];
-    if(maxHealth.isNull()) root["health-max"] = health.asInt();
-    root["health"] = health.asInt() - value;
+    if(value != 0) {
+        Json::Value health = root["health"];
+        Json::Value maxHealth = root["health-max"];
+        if(maxHealth.isNull()) root["health-max"] = health.asInt();
+        root["health"] = health.asInt() - value;
 
-    for(Capability *capability : capabilities) {
-        Controller *controller = dynamic_cast<Controller*>(capability);
-        if(controller) {
-            controller->onHit(context, root["health"].asInt());
+        for(Capability *capability : capabilities) {
+            Controller *controller = dynamic_cast<Controller*>(capability);
+            if(controller) {
+                controller->onHit(context, root["health"].asInt());
+            }
+        }
+
+        if(dynamic_cast<Projectile*>(this) == nullptr) {
             context->addEvent(this, Context::FLOATING_MESSAGE, root["health"].asInt());
         }
-    }
 
-    if(root["health"].asInt() < 0) {
-        Json::Value explosive = root["explosive"];
-        if(explosive.isNumeric()) {
-            context->addEvent(this, Context::SPAWN_EXPLOSIVE, explosive.asDouble());
+        if(root["health"].asInt() < 0) {
+            Json::Value explosive = root["explosive"];
+            if(explosive.isNumeric()) {
+                context->addEvent(this, Context::SPAWN_EXPLOSIVE, explosive.asDouble());
+            }
+            context->addEvent(this, Context::DELETE_UNIT);
         }
-        context->addEvent(this, Context::DELETE_UNIT);
+    } else {
+        if(dynamic_cast<Projectile*>(this) == nullptr) {
+            context->addEvent(this, Context::FLOATING_MESSAGE, const_cast<char*>("no damage"));
+        }
     }
 }
 

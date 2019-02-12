@@ -3,6 +3,6 @@
     "class": "weapon",
     "audio": { "start": "./shoot.wav" },
     "rate": 100,
-    "projectile":"proj-plasma",
+    "projectile":"mega",
     "props": {}
 }

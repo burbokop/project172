@@ -46,7 +46,7 @@ std::vector<Controller *> ArenaWorld::generate(AssetManager *assets, std::vector
     player2ModuleHandler->addModule(static_cast<Module*>(assets->copyAsset("plasma-launcher")));
     player2ModuleHandler->addModule(static_cast<Module*>(assets->copyAsset("engine1")));
     player2ModuleHandler->addModule(static_cast<Module*>(assets->copyAsset("warp-drive1")));
-    player2ship->addCapability(playerModuleHandler);
+    player2ship->addCapability(player2ModuleHandler);
     player2ship->addCapability(player2);
     units->push_back(player2ship);
 
