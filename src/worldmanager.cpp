@@ -23,6 +23,7 @@ void WorldManager::init(AssetManager *assets, std::vector<Worker *> *units, Rend
         worldIsChanged = false;
         std::vector<Controller*> players = activeWorld->generate(assets, units);
         if(players.size() > 0) {
+            near = new Near(units, players[0], 400);
             camera = new Camera();
             camera->setTarget(players[0]);
             units->push_back(camera);
@@ -55,6 +56,22 @@ void WorldManager::init(AssetManager *assets, std::vector<Worker *> *units, Rend
                                 modulesMenu->addElement(new GUILabel(players[0], module));
                             }
                         } mainMenu->addElement(modulesMenu);
+
+                        GUIList *radarMenu = new GUIList(players[0], "radar"); {
+                            /*
+                            std::vector<IInformative *> *focus = new std::vector<IInformative *>();
+                            if(near && near->getFocus()->size() > 0) {
+                                for(Worker* worker : *near->getFocus()) {
+                                    Unit *unit = dynamic_cast<Unit*>(worker);
+                                    if(unit) {
+                                        focus->push_back(unit);
+                                    }
+                                }
+                            }
+                            */
+
+                            radarMenu->addArray(near->getFocus());
+                        } mainMenu->addElement(radarMenu);
 
                         GUIContainer *testMenu = new GUIContainer(players[0], "for developers"); {
                             testMenu->addElement(new GUILabel(players[0], std::string("other players:")));
@@ -92,6 +109,7 @@ void WorldManager::init(AssetManager *assets, std::vector<Worker *> *units, Rend
     }
 }
 
+#include <iostream>
 void WorldManager::checkState(Context *context, AssetManager *assets, std::vector<Worker *> *units, Renderer *renderer, FPSMonitor *fps) {
     if(worldIsChanged) {
         clear(units);
@@ -99,10 +117,17 @@ void WorldManager::checkState(Context *context, AssetManager *assets, std::vecto
         context->setGui(getGui());
         renderer->setCamera(getCamera());
     }
+    near->update();
+}
+
+
+Near *WorldManager::getNear() const
+{
+    return near;
 }
 
 void WorldManager::onChangeReset(Auto caseValue) {
-     activeWorld = worlds[caseValue.toUint64()];
+    activeWorld = worlds[caseValue.toUint64()];
      worldIsChanged = true;
 }
 

@@ -3,12 +3,15 @@
 
 #include "units/camera.h"
 #include "gui/guimain.h"
+#include "gui/guilist.h"
 #include "worlds/world.h"
+#include "near.h"
 
 class WorldManager : public Object {
 private:
     Camera *camera = nullptr;
     GUIMain *gui = nullptr;
+    Near *near = nullptr;
 
     std::vector<World*> worlds;
     World *activeWorld = nullptr;
@@ -25,6 +28,7 @@ public:
 
     Camera *getCamera() const;
     GUIMain *getGui() const;
+    Near *getNear() const;
 };
 
 #endif // WORLDMANAGER_H

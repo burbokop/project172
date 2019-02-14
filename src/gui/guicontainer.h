@@ -12,7 +12,14 @@
 
 
 class GUIContainer : public GUIButton {
+protected:
+    std::vector<GUIElement*> *elements = new std::vector<GUIElement*>();
+
+    GUIButton *selectDown();
+    GUIButton *selectUp();
+
 private:
+
     int interval = 24;
     int selected = -1;
 
@@ -22,11 +29,8 @@ private:
     GUIButton *selectedButton = nullptr;
     GUIStack *stack = nullptr;
 
-    std::vector<GUIElement*> *elements = new std::vector<GUIElement*>();
 
 
-    GUIButton *selectDown();
-    GUIButton *selectUp();
 
 
 public:
@@ -36,6 +40,7 @@ public:
 
     void setStack(GUIStack *value);
     void addElement(GUIElement *element);
+    void removeElement(GUIElement *element);
 
     // GUIElement interface
 public:

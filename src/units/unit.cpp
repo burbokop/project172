@@ -123,3 +123,7 @@ void Unit::render(Renderer *renderer) {
         cap->render(renderer);
     }
 }
+
+std::string Unit::getInfo() {
+    return root.get("key", "nuknown").asString();
+}

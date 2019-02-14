@@ -12,7 +12,7 @@
 #include "background.h"
 #include "netlistener.h"
 #include "state.h"
-
+#include "near.h"
 
 class Environment : public Object {
 private:

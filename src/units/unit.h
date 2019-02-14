@@ -10,7 +10,7 @@
 #include "loadable.h"
 
 
-class Unit : public Worker, public Loadable {
+class Unit : public Worker, public Loadable, public IInformative {
 private:
     double angle = 0;
     double dstAngle = 0;
@@ -52,6 +52,10 @@ public:
 public:
     void loop(Context *context, Event *event);
     void render(Renderer *renderer);
+
+    // IInformative interface
+public:
+    std::string getInfo();
 };
 
 #endif // UNIT_H

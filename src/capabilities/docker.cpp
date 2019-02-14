@@ -1,5 +1,9 @@
 #include "docker.h"
 
+void Docker::attach(Unit *target) {
+
+}
+
 Docker::Docker() {
 
 }

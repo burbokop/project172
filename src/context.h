@@ -36,7 +36,7 @@ public:
 
 private:
     std::queue<Request> eventQueue;
-    std::vector<Worker *> *units;
+    std::vector<Worker*> *units;
     AssetManager *assets;
 
     GUIMain *gui;
@@ -46,7 +46,7 @@ private:
 public:
     Context(std::vector<Worker*> *units = nullptr, AssetManager *assets = nullptr, GUIMain *gui = nullptr);
 
-    std::vector<Worker *> *getUnits() const;
+    std::vector<Worker*> *getUnits() const;
     AssetManager *getAssets() const;
 
     void addEvent(Worker *requester, Uint8 command, Auto argument = Auto());

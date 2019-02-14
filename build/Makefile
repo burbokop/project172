@@ -117,7 +117,9 @@ SOURCES       = ../src/main.cpp \
 		../src/worlds/defaultworld.cpp \
 		../src/worlds/arenaworld.cpp \
 		../src/additional/auto.cpp \
-		../src/capabilities/docker.cpp 
+		../src/capabilities/docker.cpp \
+		../src/near.cpp \
+		../src/gui/guilist.cpp 
 OBJECTS       = main.o \
 		object.o \
 		worker.o \
@@ -185,7 +187,9 @@ OBJECTS       = main.o \
 		defaultworld.o \
 		arenaworld.o \
 		auto.o \
-		docker.o
+		docker.o \
+		near.o \
+		guilist.o
 DIST          = /home/boris/Installed/Qt/5.11.1/gcc_64/mkspecs/features/spec_pre.prf \
 		/home/boris/Installed/Qt/5.11.1/gcc_64/mkspecs/common/unix.conf \
 		/home/boris/Installed/Qt/5.11.1/gcc_64/mkspecs/common/linux.conf \
@@ -449,7 +453,9 @@ DIST          = /home/boris/Installed/Qt/5.11.1/gcc_64/mkspecs/features/spec_pre
 		../src/worlds/defaultworld.h \
 		../src/worlds/arenaworld.h \
 		../src/additional/auto.h \
-		../src/capabilities/docker.h ../src/main.cpp \
+		../src/capabilities/docker.h \
+		../src/near.h \
+		../src/gui/guilist.h ../src/main.cpp \
 		../src/object.cpp \
 		../src/worker.cpp \
 		../src/renderer.cpp \
@@ -516,7 +522,9 @@ DIST          = /home/boris/Installed/Qt/5.11.1/gcc_64/mkspecs/features/spec_pre
 		../src/worlds/defaultworld.cpp \
 		../src/worlds/arenaworld.cpp \
 		../src/additional/auto.cpp \
-		../src/capabilities/docker.cpp
+		../src/capabilities/docker.cpp \
+		../src/near.cpp \
+		../src/gui/guilist.cpp
 QMAKE_TARGET  = project172
 DESTDIR       = 
 TARGET        = project172
@@ -922,8 +930,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /home/boris/Installed/Qt/5.11.1/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../src/object.h ../src/worker.h ../src/renderer.h ../src/environment.h ../src/worlds/world.h ../src/assetmanager.h ../src/filesystem.h ../src/animator.h ../src/background.h ../src/units/unit.h ../src/units/movable.h ../src/units/camera.h ../src/capabilities/capability.h ../src/capabilities/controller.h ../src/capabilities/player.h ../src/capabilities/modulehandler.h ../src/capabilities/modules/module.h ../src/additional/rotozoom.h ../src/additional/spm.h ../src/additional/timer.h ../src/additional/event.h ../src/additional/vector.h ../src/additional/stringformer.h ../src/additional/effects/anaglyph.h ../src/loadable.h ../src/audioplayer.h ../src/capabilities/modules/weapon.h ../src/units/projectile.h ../src/context.h ../src/capabilities/modules/engine.h ../src/capabilities/modules/warpdrive.h ../src/units/ship.h ../src/gui/guielement.h ../src/gui/guicontainer.h ../src/gui/guilabel.h ../src/gui/guibutton.h ../src/iinformative.h ../src/gui/guistack.h ../src/capabilities/ai.h ../src/units/station.h ../src/json/writer.h ../src/json/allocator.h ../src/json/assertions.h ../src/json/autolink.h ../src/json/config.h ../src/json/features.h ../src/json/forwards.h ../src/json/json.h ../src/json/reader.h ../src/json/value.h ../src/json/version.h src/json_tool.h src/json_valueiterator.inl ../src/debug.h ../src/gui/guiswitch.h ../src/additional/effects/visualeffect.h ../src/gui/guichoice.h ../src/application.h ../src/additional/fpsmonitor.h ../src/units/particle.h ../src/additional/net/framebuilder.h ../src/additional/net/socket.h ../src/netlistener.h ../src/state.h ../src/additional/trigger.h ../src/gui/guimain.h ../src/gui/guicentralmessage.h ../src/additional/controllerfinder.h ../src/gui/guifloatingmessage.h ../src/gui/guiblushingfloatingmessage.h ../src/additional/math.h ../src/additional/lightparticle.h ../src/worldmanager.h ../src/worlds/defaultworld.h ../src/worlds/arenaworld.h ../src/additional/auto.h ../src/capabilities/docker.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../src/main.cpp ../src/object.cpp ../src/worker.cpp ../src/renderer.cpp ../src/environment.cpp ../src/worlds/world.cpp ../src/assetmanager.cpp ../src/filesystem.cpp ../src/animator.cpp ../src/background.cpp ../src/units/unit.cpp ../src/units/movable.cpp ../src/units/camera.cpp ../src/capabilities/capability.cpp ../src/capabilities/controller.cpp ../src/capabilities/player.cpp ../src/capabilities/modulehandler.cpp ../src/capabilities/modules/module.cpp ../src/additional/rotozoom.cpp ../src/additional/spm.cpp ../src/additional/timer.cpp ../src/additional/event.cpp ../src/additional/vector.cpp ../src/additional/stringformer.cpp ../src/additional/effects/anaglyph.cpp ../src/loadable.cpp ../src/audioplayer.cpp ../src/capabilities/modules/weapon.cpp ../src/units/projectile.cpp ../src/context.cpp ../src/capabilities/modules/engine.cpp ../src/capabilities/modules/warpdrive.cpp ../src/units/ship.cpp ../src/gui/guielement.cpp ../src/gui/guicontainer.cpp ../src/gui/guilabel.cpp ../src/gui/guibutton.cpp ../src/iinformative.cpp ../src/gui/guistack.cpp ../src/capabilities/ai.cpp ../src/units/station.cpp ../src/json/json_reader.cpp ../src/json/json_value.cpp ../src/json/json_writer.cpp ../src/debug.cpp ../src/gui/guiswitch.cpp ../src/additional/effects/visualeffect.cpp ../src/gui/guichoice.cpp ../src/application.cpp ../src/additional/fpsmonitor.cpp ../src/units/particle.cpp ../src/additional/net/framebuilder.cpp ../src/additional/net/socket.cpp ../src/netlistener.cpp ../src/state.cpp ../src/additional/trigger.cpp ../src/gui/guimain.cpp ../src/gui/guicentralmessage.cpp ../src/additional/controllerfinder.cpp ../src/gui/guifloatingmessage.cpp ../src/gui/guiblushingfloatingmessage.cpp ../src/additional/math.cpp ../src/additional/lightparticle.cpp ../src/worldmanager.cpp ../src/worlds/defaultworld.cpp ../src/worlds/arenaworld.cpp ../src/additional/auto.cpp ../src/capabilities/docker.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../src/object.h ../src/worker.h ../src/renderer.h ../src/environment.h ../src/worlds/world.h ../src/assetmanager.h ../src/filesystem.h ../src/animator.h ../src/background.h ../src/units/unit.h ../src/units/movable.h ../src/units/camera.h ../src/capabilities/capability.h ../src/capabilities/controller.h ../src/capabilities/player.h ../src/capabilities/modulehandler.h ../src/capabilities/modules/module.h ../src/additional/rotozoom.h ../src/additional/spm.h ../src/additional/timer.h ../src/additional/event.h ../src/additional/vector.h ../src/additional/stringformer.h ../src/additional/effects/anaglyph.h ../src/loadable.h ../src/audioplayer.h ../src/capabilities/modules/weapon.h ../src/units/projectile.h ../src/context.h ../src/capabilities/modules/engine.h ../src/capabilities/modules/warpdrive.h ../src/units/ship.h ../src/gui/guielement.h ../src/gui/guicontainer.h ../src/gui/guilabel.h ../src/gui/guibutton.h ../src/iinformative.h ../src/gui/guistack.h ../src/capabilities/ai.h ../src/units/station.h ../src/json/writer.h ../src/json/allocator.h ../src/json/assertions.h ../src/json/autolink.h ../src/json/config.h ../src/json/features.h ../src/json/forwards.h ../src/json/json.h ../src/json/reader.h ../src/json/value.h ../src/json/version.h src/json_tool.h src/json_valueiterator.inl ../src/debug.h ../src/gui/guiswitch.h ../src/additional/effects/visualeffect.h ../src/gui/guichoice.h ../src/application.h ../src/additional/fpsmonitor.h ../src/units/particle.h ../src/additional/net/framebuilder.h ../src/additional/net/socket.h ../src/netlistener.h ../src/state.h ../src/additional/trigger.h ../src/gui/guimain.h ../src/gui/guicentralmessage.h ../src/additional/controllerfinder.h ../src/gui/guifloatingmessage.h ../src/gui/guiblushingfloatingmessage.h ../src/additional/math.h ../src/additional/lightparticle.h ../src/worldmanager.h ../src/worlds/defaultworld.h ../src/worlds/arenaworld.h ../src/additional/auto.h ../src/capabilities/docker.h ../src/near.h ../src/gui/guilist.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../src/main.cpp ../src/object.cpp ../src/worker.cpp ../src/renderer.cpp ../src/environment.cpp ../src/worlds/world.cpp ../src/assetmanager.cpp ../src/filesystem.cpp ../src/animator.cpp ../src/background.cpp ../src/units/unit.cpp ../src/units/movable.cpp ../src/units/camera.cpp ../src/capabilities/capability.cpp ../src/capabilities/controller.cpp ../src/capabilities/player.cpp ../src/capabilities/modulehandler.cpp ../src/capabilities/modules/module.cpp ../src/additional/rotozoom.cpp ../src/additional/spm.cpp ../src/additional/timer.cpp ../src/additional/event.cpp ../src/additional/vector.cpp ../src/additional/stringformer.cpp ../src/additional/effects/anaglyph.cpp ../src/loadable.cpp ../src/audioplayer.cpp ../src/capabilities/modules/weapon.cpp ../src/units/projectile.cpp ../src/context.cpp ../src/capabilities/modules/engine.cpp ../src/capabilities/modules/warpdrive.cpp ../src/units/ship.cpp ../src/gui/guielement.cpp ../src/gui/guicontainer.cpp ../src/gui/guilabel.cpp ../src/gui/guibutton.cpp ../src/iinformative.cpp ../src/gui/guistack.cpp ../src/capabilities/ai.cpp ../src/units/station.cpp ../src/json/json_reader.cpp ../src/json/json_value.cpp ../src/json/json_writer.cpp ../src/debug.cpp ../src/gui/guiswitch.cpp ../src/additional/effects/visualeffect.cpp ../src/gui/guichoice.cpp ../src/application.cpp ../src/additional/fpsmonitor.cpp ../src/units/particle.cpp ../src/additional/net/framebuilder.cpp ../src/additional/net/socket.cpp ../src/netlistener.cpp ../src/state.cpp ../src/additional/trigger.cpp ../src/gui/guimain.cpp ../src/gui/guicentralmessage.cpp ../src/additional/controllerfinder.cpp ../src/gui/guifloatingmessage.cpp ../src/gui/guiblushingfloatingmessage.cpp ../src/additional/math.cpp ../src/additional/lightparticle.cpp ../src/worldmanager.cpp ../src/worlds/defaultworld.cpp ../src/worlds/arenaworld.cpp ../src/additional/auto.cpp ../src/capabilities/docker.cpp ../src/near.cpp ../src/gui/guilist.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -1022,6 +1030,10 @@ main.o: ../src/main.cpp ../src/environment.h \
 		../src/gui/guifloatingmessage.h \
 		../src/gui/guiblushingfloatingmessage.h \
 		../src/additional/math.h \
+		../src/gui/guilist.h \
+		../src/gui/guicontainer.h \
+		../src/additional/effects/anaglyph.h \
+		../src/gui/guibutton.h \
 		../src/worlds/world.h \
 		../src/assetmanager.h \
 		../src/filesystem.h \
@@ -1030,14 +1042,12 @@ main.o: ../src/main.cpp ../src/environment.h \
 		../src/capabilities/modules/engine.h \
 		../src/units/station.h \
 		../src/capabilities/player.h \
-		../src/gui/guicontainer.h \
-		../src/additional/effects/anaglyph.h \
-		../src/gui/guibutton.h \
 		../src/gui/guiswitch.h \
 		../src/gui/guichoice.h \
 		../src/capabilities/ai.h \
 		../src/additional/fpsmonitor.h \
 		../src/additional/controllerfinder.h \
+		../src/near.h \
 		../src/worlds/defaultworld.h \
 		../src/worlds/arenaworld.h \
 		../src/context.h \
@@ -1149,6 +1159,10 @@ environment.o: ../src/environment.cpp ../src/environment.h \
 		../src/gui/guifloatingmessage.h \
 		../src/gui/guiblushingfloatingmessage.h \
 		../src/additional/math.h \
+		../src/gui/guilist.h \
+		../src/gui/guicontainer.h \
+		../src/additional/effects/anaglyph.h \
+		../src/gui/guibutton.h \
 		../src/worlds/world.h \
 		../src/assetmanager.h \
 		../src/filesystem.h \
@@ -1157,14 +1171,12 @@ environment.o: ../src/environment.cpp ../src/environment.h \
 		../src/capabilities/modules/engine.h \
 		../src/units/station.h \
 		../src/capabilities/player.h \
-		../src/gui/guicontainer.h \
-		../src/additional/effects/anaglyph.h \
-		../src/gui/guibutton.h \
 		../src/gui/guiswitch.h \
 		../src/gui/guichoice.h \
 		../src/capabilities/ai.h \
 		../src/additional/fpsmonitor.h \
 		../src/additional/controllerfinder.h \
+		../src/near.h \
 		../src/worlds/defaultworld.h \
 		../src/worlds/arenaworld.h \
 		../src/context.h \
@@ -2863,6 +2875,10 @@ worldmanager.o: ../src/worldmanager.cpp ../src/worldmanager.h \
 		../src/gui/guifloatingmessage.h \
 		../src/gui/guiblushingfloatingmessage.h \
 		../src/additional/math.h \
+		../src/gui/guilist.h \
+		../src/gui/guicontainer.h \
+		../src/additional/effects/anaglyph.h \
+		../src/gui/guibutton.h \
 		../src/worlds/world.h \
 		../src/assetmanager.h \
 		../src/filesystem.h \
@@ -2871,14 +2887,12 @@ worldmanager.o: ../src/worldmanager.cpp ../src/worldmanager.h \
 		../src/capabilities/modules/engine.h \
 		../src/units/station.h \
 		../src/capabilities/player.h \
-		../src/gui/guicontainer.h \
-		../src/additional/effects/anaglyph.h \
-		../src/gui/guibutton.h \
 		../src/gui/guiswitch.h \
 		../src/gui/guichoice.h \
 		../src/capabilities/ai.h \
 		../src/additional/fpsmonitor.h \
 		../src/additional/controllerfinder.h \
+		../src/near.h \
 		../src/context.h \
 		../src/units/particle.h \
 		../src/additional/lightparticle.h \
@@ -3029,6 +3043,88 @@ docker.o: ../src/capabilities/docker.cpp ../src/capabilities/docker.h \
 		../src/additional/event.h \
 		../src/debug.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o docker.o ../src/capabilities/docker.cpp
+
+near.o: ../src/near.cpp ../src/near.h \
+		../src/capabilities/controller.h \
+		../src/worker.h \
+		../src/object.h \
+		../src/renderer.h \
+		../src/additional/spm.h \
+		../src/additional/effects/visualeffect.h \
+		../src/additional/vector.h \
+		../src/additional/rotozoom.h \
+		../src/additional/auto.h \
+		../src/additional/event.h \
+		../src/debug.h \
+		../src/capabilities/capability.h \
+		../src/units/ship.h \
+		../src/units/movable.h \
+		../src/units/unit.h \
+		../src/capabilities/modulehandler.h \
+		../src/capabilities/modules/module.h \
+		../src/loadable.h \
+		../src/animator.h \
+		../src/additional/timer.h \
+		../src/audioplayer.h \
+		../src/json/json.h \
+		../src/json/autolink.h \
+		../src/json/config.h \
+		../src/json/allocator.h \
+		../src/json/version.h \
+		../src/json/features.h \
+		../src/json/forwards.h \
+		../src/json/reader.h \
+		../src/json/value.h \
+		../src/json/writer.h \
+		../src/iinformative.h \
+		../src/capabilities/modules/warpdrive.h \
+		../src/additional/stringformer.h \
+		../src/additional/trigger.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o near.o ../src/near.cpp
+
+guilist.o: ../src/gui/guilist.cpp ../src/gui/guilist.h \
+		../src/gui/guicontainer.h \
+		../src/additional/effects/anaglyph.h \
+		../src/additional/effects/visualeffect.h \
+		../src/additional/vector.h \
+		../src/object.h \
+		../src/gui/guielement.h \
+		../src/renderer.h \
+		../src/additional/spm.h \
+		../src/additional/rotozoom.h \
+		../src/additional/auto.h \
+		../src/capabilities/controller.h \
+		../src/worker.h \
+		../src/additional/event.h \
+		../src/debug.h \
+		../src/capabilities/capability.h \
+		../src/units/ship.h \
+		../src/units/movable.h \
+		../src/units/unit.h \
+		../src/capabilities/modulehandler.h \
+		../src/capabilities/modules/module.h \
+		../src/loadable.h \
+		../src/animator.h \
+		../src/additional/timer.h \
+		../src/audioplayer.h \
+		../src/json/json.h \
+		../src/json/autolink.h \
+		../src/json/config.h \
+		../src/json/allocator.h \
+		../src/json/version.h \
+		../src/json/features.h \
+		../src/json/forwards.h \
+		../src/json/reader.h \
+		../src/json/value.h \
+		../src/json/writer.h \
+		../src/iinformative.h \
+		../src/capabilities/modules/warpdrive.h \
+		../src/additional/stringformer.h \
+		../src/additional/trigger.h \
+		../src/gui/guibutton.h \
+		../src/gui/guilabel.h \
+		../src/gui/guistack.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o guilist.o ../src/gui/guilist.cpp
 
 ####### Install
 

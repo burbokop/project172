@@ -4,6 +4,10 @@
 #include "capability.h"
 
 class Docker : public Capability {
+private:
+
+    void attach(Unit *target);
+
 public:
     Docker();
 

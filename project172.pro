@@ -85,7 +85,9 @@ SOURCES += \
     src/worlds/defaultworld.cpp \
     src/worlds/arenaworld.cpp \
     src/additional/auto.cpp \
-    src/capabilities/docker.cpp
+    src/capabilities/docker.cpp \
+    src/near.cpp \
+    src/gui/guilist.cpp
 
 
 
@@ -166,7 +168,9 @@ HEADERS += \
     src/worlds/defaultworld.h \
     src/worlds/arenaworld.h \
     src/additional/auto.h \
-    src/capabilities/docker.h
+    src/capabilities/docker.h \
+    src/near.h \
+    src/gui/guilist.h
 
 
 
