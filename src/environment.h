@@ -7,6 +7,7 @@
 #include "worldmanager.h"
 #include "worlds/defaultworld.h"
 #include "worlds/arenaworld.h"
+#include "worlds/heapworld.h"
 #include "additional/event.h"
 #include "context.h"
 #include "background.h"

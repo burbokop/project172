@@ -11,13 +11,12 @@ const int LightParticle::DEFAULT_LIFE_TIME_DELTA = 4000;
 const double LightParticle::STOP_MOVING_VELOCITY = 0.015;
 
 
-
-LightParticle::LightParticle(Uint8 shape) : Worker () {
+LightParticle::LightParticle(Uint8 shape, int averageLifeTime, int lifeTimeDelta) : Worker () {
     Uint32 colors[] = { 0xdeff17, 0xfe4600, 0xf9990f, 0x8a27ff };
     color = colors[std::rand() % 4];
     this->shape = shape;
-    destroyTimer.reset();
-
+    destroyTimer = new Timer((rand() % (2 * lifeTimeDelta)) + (averageLifeTime - lifeTimeDelta));
+    destroyTimer->reset();
     velocityMultiplier = static_cast<double>((std::rand() % 3 + 96)) / 100;
 }
 
@@ -29,7 +28,7 @@ void LightParticle::place(Vector pos, Vector vel) {
 
 void LightParticle::loop(Context *context, Event *event) {
     UNUSED(event);
-    if(destroyTimer.count(true)) {
+    if(destroyTimer && destroyTimer->count()) {
         context->addEvent(this, Context::DELETE_UNIT);
     }
     vel *= velocityMultiplier;

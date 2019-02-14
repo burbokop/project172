@@ -3,5 +3,5 @@
     "class": "station",
     "sprite": "./st1.png",
     "health": 400,
-    "explosive": 134
+    "explosive": 268
 }

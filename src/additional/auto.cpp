@@ -41,7 +41,7 @@ Auto::Auto(unsigned long value) {
 }
 
 Auto::Auto(double value) : Object() {
-    pointer = static_cast<uintptr_t>(value);
+    pointer = verbatim_cast<double, uintptr_t>(value);
     type = TYPE_DOUBLE;
 }
 
@@ -51,23 +51,39 @@ Auto::Auto(Vector value) : Object() {
 }
 
 int Auto::toInt32() {
-    return static_cast<int>(pointer);
+    if(type == TYPE_DOUBLE) {
+        return static_cast<int>(toDouble());
+    } else {
+        return static_cast<int>(pointer);
+    }
 }
 
 long Auto::toInt64() {
-    return static_cast<long>(pointer);
+    if(type == TYPE_DOUBLE) {
+        return static_cast<long>(toDouble());
+    } else {
+        return static_cast<long>(pointer);
+    }
 }
 
 unsigned int Auto::toUint32() {
-    return static_cast<unsigned int>(pointer);
+    if(type == TYPE_DOUBLE) {
+        return static_cast<unsigned int>(toDouble());
+    } else {
+        return static_cast<unsigned int>(pointer);
+    }
 }
 
 unsigned long Auto::toUint64() {
-    return pointer;
+    if(type == TYPE_DOUBLE) {
+        return static_cast<unsigned long>(toDouble());
+    } else {
+        return static_cast<unsigned long>(pointer);
+    }
 }
 
 double Auto::toDouble() {
-    return pointer;
+    return verbatim_cast<uintptr_t, double>(pointer);
 }
 
 Vector Auto::toVector() {

@@ -1,6 +1,10 @@
 #include "object.h"
 
-Object::Object()
-{
+#include <cstdint>
+
+
+
+
+Object::Object() {
 
 }

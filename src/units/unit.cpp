@@ -94,6 +94,18 @@ void Unit::hit(Context* context, int value) {
             if(explosive.isNumeric()) {
                 context->addEvent(this, Context::SPAWN_EXPLOSIVE, explosive.asDouble());
             }
+            audioPlayer.stop();
+            ModuleHandler *mh = getModuleHandler();
+            if(mh) {
+                std::vector<Module*> *modules = mh->getAllModules();
+                if(modules) {
+                    for(Module* module : *modules) {
+                        if(module) {
+                            module->animate(Animator::NOTRENDER, Animator::NOTRENDER);
+                        }
+                    }
+                }
+            }
             context->addEvent(this, Context::DELETE_UNIT);
         }
     } else {

@@ -5,8 +5,7 @@
 #include "additional/timer.h"
 #include "additional/spm.h"
 
-class Animator : public Worker
-{
+class Animator : public Worker {
 public:
     static const Uint8 PING_PONG;
     static const Uint8 LOOP;

@@ -33,6 +33,10 @@ Vector Vector::createByAngle(double module, double angle) {
     return Vector(module * std::cos(angle), module * std::sin(angle));
 }
 
+Vector Vector::createRandom(int max) {
+    return Vector::createByAngle(static_cast<double>(rand() % (max * max)) / max, rand());
+}
+
 Vector Vector::operator+(Vector term) {
     return Vector(this->x + term.x, this->y + term.y);
 }

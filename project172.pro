@@ -87,7 +87,9 @@ SOURCES += \
     src/additional/auto.cpp \
     src/capabilities/docker.cpp \
     src/near.cpp \
-    src/gui/guilist.cpp
+    src/gui/guilist.cpp \
+    src/capabilities/aggressive.cpp \
+    src/worlds/heapworld.cpp
 
 
 
@@ -170,7 +172,9 @@ HEADERS += \
     src/additional/auto.h \
     src/capabilities/docker.h \
     src/near.h \
-    src/gui/guilist.h
+    src/gui/guilist.h \
+    src/capabilities/aggressive.h \
+    src/worlds/heapworld.h
 
 
 

@@ -18,11 +18,11 @@ private:
     int radius = 2;
     Uint32 color = 0xff00ff;
     Uint32 generateColor();
-    Timer destroyTimer = Timer((rand() % (2 * DEFAULT_LIFE_TIME_DELTA)) + (DEFAULT_AVERAGE_LIFE_TIME - DEFAULT_LIFE_TIME_DELTA));
+    Timer *destroyTimer = nullptr;
 
 public:
     Particle();
-    Particle(Uint8 shape);
+    Particle(Uint8 shape, int averageLifeTime = DEFAULT_AVERAGE_LIFE_TIME, int lifeTimeDelta = DEFAULT_LIFE_TIME_DELTA);
     Particle(Loadable *tmp);
 
     // Worker interface

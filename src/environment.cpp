@@ -8,7 +8,7 @@ Environment::Environment() {
     this->event = new Event();
     this->fps = new FPSMonitor();
     this->netListener = new NetListener(context);
-    this->worldManager = new WorldManager({ new DefaultWorld(), new ArenaWorld() });
+    this->worldManager = new WorldManager({ new DefaultWorld(), new ArenaWorld(), new HeapWorld() });
     this->background = new Background();
 }
 

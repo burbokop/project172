@@ -5,8 +5,7 @@
 
 #include "../object.h"
 
-class Vector : public Object
-{
+class Vector : public Object {
 private:
     double x;
     double y;
@@ -16,6 +15,7 @@ public:
     Vector(long x, long y);
     Vector(int x, int y);
     static Vector createByAngle(double module, double angle); //checkpoint
+    static Vector createRandom(int max);
 
     Vector operator+(Vector term);
     void operator+=(Vector term);

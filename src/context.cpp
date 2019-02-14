@@ -11,11 +11,6 @@ const Uint8 Context::EMERGENCY_MESSAGE = 6;
 const Uint8 Context::BACKGROUND_FLASHING = 7;
 const Uint8 Context::FLOATING_MESSAGE = 8;
 
-
-double rv(int r) {
-    return (static_cast<double>(rand() % (r * 2)) - r) / r * 2;
-}
-
 void Context::setGui(GUIMain *value) {
     gui = value;
 }
@@ -36,22 +31,14 @@ void Context::handleRequest(Request request) {
         std::cout << "BADABOOM: " << request.requester << "\n";
         Unit *requester = dynamic_cast<Unit*>(request.requester);
         int radius = request.argument.isNumber() ? request.argument.toInt32() : 10;
-        std::cout << "radius: " << radius << "\n";
+        int v0 = static_cast<int>(std::sqrt(radius));
 
         if(requester) {
-            for(int i = 0; i < radius * 2; i++) {
+            for(int i = 0; i < radius * 4; i++) {
                 Uint8 types[] = { Particle::PIXEL, Particle::CIRCLE, Particle::SQUARE };
-
-                const bool useLightParticle = true;
-                if(useLightParticle) {
-                    LightParticle *particle = new LightParticle(types[rand() % 3]);
-                    particle->place(requester->getPosition(), Vector(rv(radius), rv(radius)));
-                    units->push_back(particle);
-                } else {
-                    Particle *particle = new Particle(types[rand() % 3]);
-                    particle->place(requester->getPosition(), Vector(rv(radius), rv(radius)));
-                    units->push_back(particle);
-                }
+                LightParticle *particle = new LightParticle(types[rand() % 3], radius * 600, radius * 400);
+                particle->place(requester->getPosition(), Vector::createRandom(v0));
+                units->push_back(particle);
             }
         }
     } else if (request.command == SPAWN_UNIT) {
