@@ -3,5 +3,5 @@
     "class": "ship",
     "sprite": "./bsh2.png",
 	"health": 40,
-	"explosive":84
+	"explosive": 20
 }

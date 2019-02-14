@@ -1,5 +1,7 @@
 {
     "key": "st2",
     "class": "station",
-    "sprite": "./st2.png"
+    "sprite": "./st2.png",
+    "health": 340,
+    "explosive": 114
 }

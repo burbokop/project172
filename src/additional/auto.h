@@ -19,7 +19,6 @@ private:
     uint8_t type;
 
     uintptr_t pointer = 0;
-    double doubleValue = 0.0;
     Vector vectorValue = Vector();
 
 public:

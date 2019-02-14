@@ -41,7 +41,7 @@ Auto::Auto(unsigned long value) {
 }
 
 Auto::Auto(double value) : Object() {
-    doubleValue = value;
+    pointer = static_cast<uintptr_t>(value);
     type = TYPE_DOUBLE;
 }
 
@@ -67,7 +67,7 @@ unsigned long Auto::toUint64() {
 }
 
 double Auto::toDouble() {
-    return doubleValue;
+    return pointer;
 }
 
 Vector Auto::toVector() {

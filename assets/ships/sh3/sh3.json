@@ -2,6 +2,6 @@
     "key": "sh3",
     "class": "ship",
     "sprite": "./sh3.png",
-	"health":80,
-	"explosive":64
+	"health": 80,
+	"explosive": 10
 }
