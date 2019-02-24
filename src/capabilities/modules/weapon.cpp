@@ -1,5 +1,8 @@
 #include "weapon.h"
-#include "../../context.h"
+
+#include "context.h"
+#include "additional/stringformer.h"
+#include "units/projectile.h"
 
 const double Weapon::DEFAULT_PROJECTILE_SPEED = 4.0;
 double Weapon::getProjectileSpead() {

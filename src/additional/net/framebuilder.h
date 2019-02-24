@@ -3,8 +3,7 @@
 
 #include <vector>
 
-class FrameBuilder
-{
+class FrameBuilder {
 public:
 
     static std::vector<char> cover(std::vector<char> data);

@@ -1,9 +1,9 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include "controller.h"
-#include "./modules/weapon.h"
-#include "../loadable.h"
+
+#include "capabilities/controller.h"
+
 
 class Player : public Controller, public Loadable {
 private:

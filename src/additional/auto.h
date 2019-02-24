@@ -3,7 +3,9 @@
 
 #include <cstdint>
 
-#include "vector.h"
+#include "additional/vector.h"
+#include "object.h"
+
 
 class Auto : public Object {
 private:
@@ -49,6 +51,10 @@ public:
 
     bool isVector();
     bool isObject();
+
+    // Object interface
+public:
+    std::string getType() const;
 };
 
 #endif // AUTO_H

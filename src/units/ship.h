@@ -1,8 +1,10 @@
 #ifndef SHIP_H
 #define SHIP_H
 
-#include "movable.h"
+
+#include "units/movable.h"
 #include "capabilities/modules/warpdrive.h"
+
 
 class Ship : public Movable {
 private:
@@ -13,7 +15,7 @@ public:
 
     bool prepareWarp();
     bool warp();
-    Uint8 abortWarp();
+    Uint8 abortWarp(Context *context);
     WarpDrive *getFirstWarp();
 
     // Worker interface
@@ -23,10 +25,6 @@ public:
     // Worker interface
 public:
     void loop(Context *context, Event *event);
-
-    // Worker interface
-public:
-    void render(Renderer *renderer);
 };
 
 #endif // SHIP_H

@@ -4,11 +4,10 @@
 #include <vector>
 #include <functional>
 
-#include "../additional/effects/anaglyph.h"
 
-#include "guielement.h"
 #include "gui/guibutton.h"
-#include "guistack.h"
+#include "gui/guistack.h"
+
 
 
 class GUIContainer : public GUIButton {

@@ -1,9 +1,12 @@
 #ifndef LOADABLE_H
 #define LOADABLE_H
 
-#include "animator.h"
-#include "audioplayer.h"
+
 #include "json/json.h"
+#include "animator.h"
+#include "additional/timer.h"
+#include "audio/audioplayer.h"
+
 
 class Loadable {
 protected:

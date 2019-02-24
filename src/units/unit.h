@@ -4,10 +4,8 @@
 #include <iterator>
 #include <algorithm>
 
-#include "worker.h"
-#include "additional/vector.h"
+
 #include "capabilities/modulehandler.h"
-#include "loadable.h"
 
 
 class Unit : public Worker, public Loadable, public IInformative {
@@ -53,9 +51,18 @@ public:
     void loop(Context *context, Event *event);
     void render(Renderer *renderer);
 
+    ~Unit();
+
     // IInformative interface
 public:
     std::string getInfo();
+
+
+
+
+    // Object interface
+public:
+    std::string getType() const;
 };
 
 #endif // UNIT_H

@@ -1,8 +1,11 @@
 #ifndef VISUALEFFECT_H
 #define VISUALEFFECT_H
 
-#include "../vector.h"
-#include "SDL2/SDL.h"
+#include <SDL2/SDL.h>
+
+
+#include "additional/vector.h"
+
 
 class VisualEffect {
 protected:

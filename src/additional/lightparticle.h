@@ -1,8 +1,10 @@
 #ifndef LIGHTPARTICLE_H
 #define LIGHTPARTICLE_H
 
-#include "../worker.h"
-#include "timer.h"
+
+#include "worker.h"
+#include "additional/timer.h"
+
 
 class LightParticle : public Worker {
 public:

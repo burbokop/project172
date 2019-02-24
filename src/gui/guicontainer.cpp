@@ -1,5 +1,7 @@
 #include "guicontainer.h"
 
+#include "additional/effects/anaglyph.h"
+
 GUIContainer::GUIContainer(Controller *player) : GUIButton (player) {
 }
 

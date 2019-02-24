@@ -1,9 +1,12 @@
 #ifndef MODULE_H
 #define MODULE_H
 
+
 #include "capabilities/capability.h"
 #include "loadable.h"
-#include "../../iinformative.h"
+#include "iinformative.h"
+
+
 
 class Module : public Capability, public Loadable, public IInformative {
 public:

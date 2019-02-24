@@ -1,5 +1,7 @@
 #include "module.h"
 #include "units/unit.h"
+#include "units/camera.h"
+#include "additional/math.h"
 
 Module::Module() {
 }
@@ -20,6 +22,11 @@ void Module::loop(Context *context, Event *event) {
 }
 
 void Module::render(Renderer *renderer) {
+    Camera* cam = renderer->getCamera();
+    if(cam) {
+        audioPlayer.setVolumeByDistance((parent->getPosition() - cam->getPosition()).module());
+    }
+
     this->animator.setAngle(parent->getAngle());
     Vector local = parent->getPosition() + Vector::createByAngle(-this->attachOffset.module(), parent->getAngle());
     this->animator.setPosition(local);

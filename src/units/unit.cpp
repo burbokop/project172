@@ -128,14 +128,24 @@ void Unit::loop(Context *context, Event *event) {
 }
 
 void Unit::render(Renderer *renderer) {
-    this->animator.setAngle(angle);
-    this->animator.setPosition(pos);
-    this->animator.render(renderer);
+    animator.setAngle(angle);
+    animator.setPosition(pos);
+    animator.render(renderer);
     for(Capability *cap : capabilities) {
         cap->render(renderer);
     }
 }
 
+Unit::~Unit() {
+    for(Capability *cap : capabilities) {
+        removeCapability(cap);
+    }
+}
+
 std::string Unit::getInfo() {
     return root.get("key", "nuknown").asString();
+}
+
+std::string Unit::getType() const {
+    return typeid (this).name();
 }

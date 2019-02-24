@@ -125,3 +125,7 @@ bool Auto::isVector() {
 bool Auto::isObject() {
     return type == TYPE_OBJECT;
 }
+
+std::string Auto::getType() const {
+    return "gogadoda";
+}

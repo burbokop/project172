@@ -1,8 +1,9 @@
 #ifndef GUIBLUSHINGFLOATINGMESSAGE_H
 #define GUIBLUSHINGFLOATINGMESSAGE_H
 
-#include "guifloatingmessage.h"
-#include "additional/math.h"
+
+#include "gui/guifloatingmessage.h"
+
 
 class GUIBlushingFloatingMessage : public GUIFloatingMessage {
 private:

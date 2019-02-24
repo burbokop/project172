@@ -1,6 +1,9 @@
 #include "player.h"
 #include "units/ship.h"
 #include "context.h"
+#include "objectregistry.h"
+#include "capabilities/modules/weapon.h"
+
 
 const std::map<std::string, int> Player::scancode = {
     { "q", SDL_SCANCODE_Q },
@@ -57,6 +60,19 @@ void Player::setArmor(Ship *armor) {
 }
 
 void Player::loop(Context *context, Event *event) {
+    EXISTS(parent) {
+
+    } else {
+        std::cout << "ERRROOOORR\n";
+    }
+
+    EXISTS(armor) {
+
+    } else {
+        std::cout << "ERRROOOORR\n";
+    }
+
+
     if(getPersonalKey(event, "left")) {
         parent->rotateLeft() ;
     } else if(getPersonalKey(event, "right")) {
@@ -83,7 +99,7 @@ void Player::loop(Context *context, Event *event) {
                 warpKeyPressed = true;
                 if(!ship->warp()) {
                     if(!ship->prepareWarp()) {
-                        if(!ship->abortWarp()) {
+                        if(!ship->abortWarp(context)) {
                         }
                     }
                 }

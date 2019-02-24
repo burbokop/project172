@@ -1,7 +1,10 @@
 #ifndef GUICENTRALMESSAGE_H
 #define GUICENTRALMESSAGE_H
 
-#include "guilabel.h"
+
+#include "gui/guilabel.h"
+#include "additional/timer.h"
+
 
 class GUICentralMessage : public GUILabel {
 private:

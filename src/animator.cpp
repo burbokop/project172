@@ -1,5 +1,7 @@
 #include "animator.h"
 
+#include "additional/spm.h"
+
 const Uint8 Animator::PING_PONG = 0;
 const Uint8 Animator::LOOP = 1;
 const Uint8 Animator::ONEFRAME = 2;
@@ -7,7 +9,6 @@ const Uint8 Animator::FROZE = 3;
 const Uint8 Animator::NOTRENDER = 4;
 const Uint8 Animator::TOTHEFRAME = 5;
 const Uint8 Animator::DEFAULT_INACTIVE = 6;
-
 
 
 

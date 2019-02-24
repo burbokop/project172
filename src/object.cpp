@@ -3,8 +3,6 @@
 #include <cstdint>
 
 
+Object::Object() {}
 
-
-Object::Object() {
-
-}
+Object::~Object() {}

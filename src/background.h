@@ -1,8 +1,13 @@
 #ifndef BACKGROUND_H
 #define BACKGROUND_H
 
+#include <SDL2/SDL.h>
+
+
+#include "additional/vector.h"
 #include "worker.h"
 #include "additional/timer.h"
+
 
 struct Star {
     Vector pos;

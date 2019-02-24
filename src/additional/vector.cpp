@@ -1,8 +1,9 @@
-#include "vector.h"
-
-#include "vector.h"
-
 #include <math.h>
+
+
+#include "vector.h"
+#include "math.h"
+
 
 #ifdef NULL
 #undef NULL
@@ -74,11 +75,11 @@ void Vector::operator/=(double divider) {
 }
 
 bool Vector::operator==(Vector vector) {
-    return (this->x == vector.x) && (this->y == vector.y);
+    return Math::cmpd(this->x, vector.x) && Math::cmpd(this->y, vector.y);
 }
 
 bool Vector::operator!=(Vector vector) {
-    return (this->x != vector.x) || (this->y != vector.y);
+    return !Math::cmpd(this->x, vector.x) || !Math::cmpd(this->y, vector.y);
 }
 
 double Vector::operator*(Vector multiplier) {
@@ -91,7 +92,7 @@ double Vector::module() {
 
 Vector Vector::normalized() {
     double module = this->module();
-    if(module != 0) {
+    if(!Math::cmpd(module, 0)) {
         return Vector(this->x / module, this->y / module);
     } else {
         return Vector();
@@ -108,8 +109,7 @@ double Vector::angle() {
 
 Vector Vector::relativisticAddition(Vector term, double c) {
     double termModule = term.module();
-    if(termModule != 0)
-    {
+    if(!Math::cmpd(termModule, 0)) {
         c = c * RELATIVISTIC_ADDITION_CONSTANT;
         Vector classicSum = *this + term;
 
@@ -124,11 +124,8 @@ Vector Vector::relativisticAddition(Vector term, double c) {
     return *this;
 }
 
-
-
-double Vector::tg()
-{
-    if(this->y != 0) return -(this->x / this->y);
+double Vector::tg() {
+    if(!Math::cmpd(this->y, 0)) return -(this->x / this->y);
     return 0.0;
 }
 
@@ -157,7 +154,7 @@ double Vector::map(Vector *destination, double value) {
     double kd = destination->y - destination->x;
     double kt = this->y - this->x;
 
-    if(kt == 0) result = value * kd;
+    if(Math::cmpd(kt, 0)) result = value * kd;
     else result = value * kd / kt;
 
     result += destination->x;
@@ -205,4 +202,10 @@ double Vector::getDoubleX() {
 
 double Vector::getDoubleY() {
     return this->y;
+}
+
+#include <ostream>
+std::ostream &operator<<(std::ostream &os, const Vector &dt) {
+    os << "Vector(" << std::to_string(dt.x).c_str() << ", " << std::to_string(dt.y).c_str() << ")";
+    return os;
 }

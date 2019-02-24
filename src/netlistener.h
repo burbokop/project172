@@ -3,9 +3,10 @@
 
 #include <thread>
 
-#include "additional/net/socket.h"
 
+#include "additional/net/socket.h"
 #include "context.h"
+
 
 class NetListener {
 private:

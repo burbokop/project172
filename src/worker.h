@@ -3,9 +3,11 @@
 
 #include <vector>
 
+
+#include "additional/event.h"
 #include "object.h"
 #include "renderer.h"
-#include "additional/event.h"
+
 
 class Context;
 
@@ -14,7 +16,8 @@ public:
     Worker();
     void virtual loop(Context *context, Event *event) = 0;
     void virtual render(Renderer *renderer) = 0;
-    virtual ~Worker() = 0;
+    virtual ~Worker();
 };
+
 
 #endif // WORKER_H

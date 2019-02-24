@@ -1,5 +1,9 @@
 #include "spm.h"
 
+
+#include "additional/rotozoom.h"
+
+
 /*
  * experimantal
  */

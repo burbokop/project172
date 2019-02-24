@@ -4,8 +4,9 @@
 #include <thread>
 #include <SDL2/SDL.h>
 
+
 #include "additional/vector.h"
-#include "../debug.h"
+
 
 class Event {
 private:

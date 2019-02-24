@@ -29,8 +29,6 @@ namespace Json {
 
 /** \brief Unserialize a <a HREF="http://www.json.org">JSON</a> document into a
  *Value.
- *
- * \deprecated Use CharReader and CharReaderBuilder.
  */
 class JSON_API Reader {
 public:

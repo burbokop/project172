@@ -1,5 +1,9 @@
 #include "guiblushingfloatingmessage.h"
 
+#include "additional/math.h"
+
+
+
 GUIBlushingFloatingMessage::GUIBlushingFloatingMessage(Unit *parent) : GUIFloatingMessage (parent) {
 }
 
@@ -9,7 +13,6 @@ GUIBlushingFloatingMessage::GUIBlushingFloatingMessage(Unit *parent, int value) 
 
 GUIBlushingFloatingMessage::GUIBlushingFloatingMessage(Unit *parent, IInformative *informative) : GUIFloatingMessage(parent, informative) {
 }
-
 
 
 void GUIBlushingFloatingMessage::render(Renderer *renderer, Event *event) {

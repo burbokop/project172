@@ -1,11 +1,11 @@
 #include "worker.h"
 
-Worker::Worker()
-{
+#include "objectregistry.h"
 
+Worker::Worker() {
+    ObjectRegistry::getInstance()->registerObject(this);
 }
 
-Worker::~Worker()
-{
-
+Worker::~Worker() {
+    ObjectRegistry::getInstance()->markAsDeleted(this);
 }

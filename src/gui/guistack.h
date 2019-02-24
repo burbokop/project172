@@ -1,7 +1,9 @@
 #ifndef GUISTACK_H
 #define GUISTACK_H
 
-#include "guielement.h"
+
+#include "gui/guielement.h"
+
 
 class GUIStack : public GUIElement {
 private:

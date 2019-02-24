@@ -1,9 +1,9 @@
 #ifndef GUIBUTTON_H
 #define GUIBUTTON_H
 
+
 #include "gui/guilabel.h"
-#include "units/ship.h"
-#include "additional/stringformer.h"
+
 
 class GUIButton : public GUILabel {
 public:

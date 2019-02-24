@@ -2,7 +2,8 @@
 #define ANAGLYPH_H
 
 #include <math.h>
-#include "visualeffect.h"
+
+#include "additional/effects/visualeffect.h"
 
 
 class Anaglyph : public VisualEffect {

@@ -1,8 +1,9 @@
 #ifndef GUIELEMENT_H
 #define GUIELEMENT_H
 
-#include "renderer.h"
+
 #include "capabilities/controller.h"
+
 
 class GUIElement : public Object {
 protected:

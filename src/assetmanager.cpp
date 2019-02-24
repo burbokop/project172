@@ -1,9 +1,16 @@
 #include "assetmanager.h"
 
 
-AssetManager::AssetManager() {
+#include "filesystem.h"
+#include "debug.h"
+#include "capabilities/player.h"
+#include "capabilities/modules/weapon.h"
+#include "capabilities/modules/engine.h"
+#include "units/projectile.h"
+#include "units/station.h"
 
-}
+
+AssetManager::AssetManager() {}
 
 
 std::string AssetManager::getSufix(std::string string) {
@@ -34,7 +41,7 @@ void AssetManager::search(std::string path) {
 
 Loadable *AssetManager::getAsset(std::string key) {
     if(assets.find(key) == assets.end()) {
-        std::cerr << "AssetManager (error):\n key: " << key << " not found\n";
+        Debug::err(Debug::ASSET_KEY_NOT_FOUND, DEBUG_IMPRINT, key);
         return new Loadable();
     } else {
         return assets[key];
@@ -58,7 +65,8 @@ Loadable *AssetManager::copyAsset(std::string key) {
     if(assetClass == "engine") return new Engine(tmp);
     if(assetClass == "warp-drive") return new WarpDrive(tmp);
 
-    std::cout << "AssetManager (error):\n undefined asset class ( key: " << key << " )\n";
+    Debug::err(Debug::UNKNOWN_ASSET_KEY, DEBUG_IMPRINT, key);
+
     return nullptr;
 }
 
@@ -72,9 +80,7 @@ std::vector<std::string> AssetManager::getKeys() {
 
 void AssetManager::processFile(std::string file, std::string location) {
     std::string sufix = getSufix(file);
-
     if(sufix == ".json") {
-        //std::cout << "AssetManager:\n file: " << file << "\n type: json\n";
         std::string content = FileSystem::readFile(file);
         Json::Reader reader;
         Json::Value root;

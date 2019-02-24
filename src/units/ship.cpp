@@ -1,5 +1,6 @@
 #include "ship.h"
 
+#include "context.h"
 
 const double Ship::ONE_WARP_POINT = 95.1398639961;
 
@@ -29,11 +30,13 @@ bool Ship::warp() {
     return false;
 }
 
-Uint8 Ship::abortWarp() {
+Uint8 Ship::abortWarp(Context *context) {
     WarpDrive *driveUnit = getFirstWarp();
     if(driveUnit) {
-        bool success = driveUnit->abortWarp();
-        if(success) disableForcedMaxSpeed();
+        bool success = driveUnit->abortWarp(context);
+        if(success) {
+            disableForcedMaxSpeed();
+        }
         return success;
     }
     return false;
@@ -67,19 +70,3 @@ void Ship::loop(Context *context, Event *event) {
 
     this->Movable::loop(context, event);
 }
-
-
-//DEPRECATED
-void Ship::render(Renderer *renderer) {
-    this->Movable::render(renderer);
-
-    /* maybi will return in future versions
-    int health = root.get("health", 1).asInt();
-    int healthMax = root.get("health-max", 80).asInt();
-    Vector offset = renderer->getOffset();
-    renderer->rect(pos + offset + Vector(-21, -23), pos + offset + Vector(21, -19), 0xFFA773);
-    renderer->rect(pos + offset + Vector(-21, -23), pos + offset + Vector(-19 + health * 40 / healthMax, -19), 0xB2F63D);
-    */
-}
-//-----------
-

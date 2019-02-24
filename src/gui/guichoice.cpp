@@ -1,5 +1,6 @@
 #include "guichoice.h"
 
+
 GUIChoice::GUIChoice(Controller *player, Auto value, std::function<void(Auto)> set) : GUIButton (player) {
     this->value = value;
     this->set = set;

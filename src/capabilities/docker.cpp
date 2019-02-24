@@ -1,11 +1,10 @@
 #include "docker.h"
 
 void Docker::attach(Unit *target) {
-
+    UNUSED(target);
 }
 
 Docker::Docker() {
-
 }
 
 void Docker::loop(Context *context, Event *event) {

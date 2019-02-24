@@ -1,11 +1,12 @@
 #ifndef CAMERA_H
 #define CAMERA_H
 
-#include "movable.h"
+
+#include "units/movable.h"
 #include "capabilities/controller.h"
 
-class Camera : public Movable
-{
+
+class Camera : public Movable {
 protected:
     static const double STOP_DISTANCE;
     static const double MAX_SPEED_MULTIPLIER;

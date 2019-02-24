@@ -1,7 +1,9 @@
 #ifndef DEFAULTWORLD_H
 #define DEFAULTWORLD_H
 
-#include "world.h"
+
+#include "worlds/world.h"
+
 
 class DefaultWorld : public World {
 public:
@@ -9,7 +11,7 @@ public:
 
     // World interface
 public:
-    std::vector<Controller *> generate(AssetManager *assets, std::vector<Worker *> *units);
+    std::vector<Controller *> generate(AssetManager *assets, std::vector<Worker*> *units);
     std::string getName();
 };
 

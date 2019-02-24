@@ -2,11 +2,11 @@
 #define FPSMONITOR_H
 
 #include <SDL2/SDL.h>
-
-#include "../iinformative.h"
-
 #include <vector>
-#include "timer.h"
+
+#include "iinformative.h"
+#include "additional/timer.h"
+
 
 class FPSMonitor : public IInformative {
 private:

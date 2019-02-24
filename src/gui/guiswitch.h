@@ -3,7 +3,8 @@
 
 #include <functional>
 
-#include "guibutton.h"
+
+#include "gui/guibutton.h"
 
 
 class GUISwitch : public GUIButton {

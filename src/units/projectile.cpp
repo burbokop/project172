@@ -1,19 +1,30 @@
 #include "projectile.h"
-#include "context.h"
 
+#include "context.h"
+#include "units/particle.h"
+#include "units/camera.h"
+#include "additional/lightparticle.h"
+#include "objectregistry.h"
+#include "debug.h"
 
 const double Projectile::DEFAULT_HIT_RADIUS = 16.0;
+const int Projectile::DEFAULT_DAMAGE = 4;
+
 
 const int Projectile::DEFAULT_AVERAGE_LIFE_TIME = 6000;
 const int Projectile::DEFAULT_LIFE_TIME_DELTA = 4000;
 
 
 bool Projectile::collision(Context* context, Unit *collider) {
-    Camera *camera = dynamic_cast<Camera*>(collider);
-    Particle *particle = dynamic_cast<Particle*>(collider);
-    if(collider != mother && !camera && !particle) {
-        collider->hit(context, root.get("damage", 4).asInt());
-        this->hit(context, 4);
+    if(
+        collider->isNot<Camera*>() &&
+        collider->isNot<Particle*>() &&
+        collider->isNot<LightParticle*>() &&
+        collider->isNot<Projectile*>() &&
+        collider != mother
+    ) {
+        collider->hit(context, root.get("damage", DEFAULT_DAMAGE).asInt());
+        this->hit(context, DEFAULT_DAMAGE);
         return true;
     }
     return false;
@@ -41,11 +52,15 @@ void Projectile::loop(Context *context, Event *event) {
     }
 
     for(Worker *worker : *(context->getUnits())) {
-        Unit *unit = dynamic_cast<Unit*>(worker);
-        if(unit != nullptr && unit != this) {
-            if((unit->getPosition() - getPosition()).module() < DEFAULT_HIT_RADIUS) {
-                collision(context, unit);
+        EXISTS(worker) {
+            Unit *unit = dynamic_cast<Unit*>(worker);
+            if(unit != nullptr && unit != this) {
+                if((unit->getPosition() - getPosition()).module() < DEFAULT_HIT_RADIUS) {
+                    collision(context, unit);
+                }
             }
+        } else {
+            Debug::err(Debug::APPEAL_TO_REMOVED, DEBUG_IMPRINT);
         }
     }
     this->Movable::loop(context, event);

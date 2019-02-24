@@ -1,10 +1,11 @@
 #ifndef GUIMAIN_H
 #define GUIMAIN_H
 
-#include "guistack.h"
-#include "guicentralmessage.h"
-#include "guifloatingmessage.h"
-#include "guiblushingfloatingmessage.h"
+
+#include "gui/guistack.h"
+#include "gui/guicentralmessage.h"
+#include "gui/guifloatingmessage.h"
+
 
 class GUIMain : public GUIElement {
 private:

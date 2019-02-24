@@ -9,11 +9,11 @@
 #include <string>
 #include <functional>
 
-#include "effects/visualeffect.h"
-#include "rotozoom.h"
+
+#include "additional/effects/visualeffect.h"
+
 
 namespace SPM {
-
     Uint32 ColorRGB(Uint8 R, Uint8 G, Uint8 B);
 
     void FillPixel(SDL_Surface *surface, int x, int y, Uint32 color);

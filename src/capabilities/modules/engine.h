@@ -1,7 +1,7 @@
 #ifndef ENGINE_H
 #define ENGINE_H
 
-#include "module.h"
+#include "capabilities/modules/module.h"
 
 class Engine : public Module {
 public:

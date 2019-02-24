@@ -8,6 +8,8 @@ private:
 public:
     Trigger();
     void enable();
+    void disanable();
+
     bool check();
 };
 

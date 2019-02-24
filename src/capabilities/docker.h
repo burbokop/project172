@@ -1,7 +1,9 @@
 #ifndef DOCKER_H
 #define DOCKER_H
 
-#include "capability.h"
+
+#include "capabilities/capability.h"
+
 
 class Docker : public Capability {
 private:

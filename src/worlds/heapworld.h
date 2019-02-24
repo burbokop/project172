@@ -1,8 +1,9 @@
 #ifndef HEAPWORLD_H
 #define HEAPWORLD_H
 
-#include "world.h"
-#include "capabilities/aggressive.h"
+
+#include "worlds/world.h"
+
 
 class HeapWorld : public World {
 public:
@@ -10,7 +11,7 @@ public:
 
     // World interface
 public:
-    std::vector<Controller *> generate(AssetManager *assets, std::vector<Worker *> *units);
+    std::vector<Controller *> generate(AssetManager *assets, std::vector<Worker*> *units);
     std::string getName();
 };
 

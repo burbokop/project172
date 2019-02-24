@@ -1,5 +1,10 @@
 #include "guimain.h"
 
+
+#include "gui/guiblushingfloatingmessage.h"
+
+
+
 const long GUIMain::FLOATING_LIFE_TIME = 1000;
 
 void GUIMain::setMessage(GUICentralMessage *value) {

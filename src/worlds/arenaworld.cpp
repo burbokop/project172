@@ -1,5 +1,10 @@
 #include "arenaworld.h"
 
+
+#include "capabilities/player.h"
+#include "capabilities/aggressive.h"
+
+
 ArenaWorld::ArenaWorld() {
 
 }
@@ -49,6 +54,19 @@ std::vector<Controller *> ArenaWorld::generate(AssetManager *assets, std::vector
     player2ship->addCapability(player2ModuleHandler);
     player2ship->addCapability(player2);
     units->push_back(player2ship);
+
+
+
+    Movable *unit = dynamic_cast<Movable*>(assets->copyAsset("sh1"));
+    unit->place(Vector(), Vector(), Vector(), 0);
+    unit->addCapability(new Aggressive(units));
+    ModuleHandler *mh = new ModuleHandler();
+    mh->addModule(static_cast<Module*>(assets->copyAsset("pistol")));
+    mh->addModule(static_cast<Module*>(assets->copyAsset("engine1")));
+    mh->addModule(static_cast<Module*>(assets->copyAsset("warp-drive1")));
+    unit->addCapability(mh);
+    units->push_back(unit);
+
 
 
     return result;

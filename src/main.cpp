@@ -1,17 +1,30 @@
-
-#include <environment.h>
 #include <iostream>
 #include <locale>
 
+
+#include "environment.h"
+#include "debug.h"
+
+
+int foo() {
+
+    int *a = reinterpret_cast<int*>(-1);
+    int b = *a;
+    return b;
+
+
+}
+
+void bar() { foo(); }
+void baz() { bar(); }
+void bab() { baz(); }
+
+
 int main(int argc, char *argv[]) {
-    Auto aaa = 5.6;
+    Debug::init(false, true);
+    //Debug::init(false, false);
 
-    std::cout << "double: " << aaa.toDouble() << "\n";
-    std::cout << "int 32: " << aaa.toInt32() << "\n";
-    std::cout << "int 64: " << aaa.toInt64() << "\n";
-    std::cout << "uint32: " << aaa.toUint32() << "\n";
-    std::cout << "uint64: " << aaa.toUint64() << "\n";
-
+    //bab();
 
     Environment env;
     env.init(argc, argv);

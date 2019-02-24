@@ -14,7 +14,7 @@ CC            = gcc
 CXX           = g++
 DEFINES       = -DQT_DEPRECATED_WARNINGS -DQT_NO_DEBUG -DQT_CORE_LIB
 CFLAGS        = -pipe -O2 -Wall -W -D_REENTRANT -fPIC $(DEFINES)
-CXXFLAGS      = -pipe -O2 -std=gnu++11 -Wall -W -D_REENTRANT -fPIC $(DEFINES)
+CXXFLAGS      = -pipe -rdynamic -O2 -O2 -std=gnu++11 -Wall -W -D_REENTRANT -fPIC $(DEFINES)
 INCPATH       = -I../../project172 -I. -I../src -I/home/boris/Installed/Qt/5.11.1/gcc_64/include -I/home/boris/Installed/Qt/5.11.1/gcc_64/include/QtCore -I. -I/home/boris/Installed/Qt/5.11.1/gcc_64/mkspecs/linux-g++
 QMAKE         = /home/boris/Installed/Qt/5.11.1/gcc_64/bin/qmake
 DEL_FILE      = rm -f
@@ -38,7 +38,7 @@ DISTNAME      = project1721.0.0
 DISTDIR = /home/boris/Sketchbook/Qt/mint/project172/build/.tmp/project1721.0.0
 LINK          = g++
 LFLAGS        = -Wl,-O1 -Wl,-rpath,/home/boris/Installed/Qt/5.11.1/gcc_64/lib
-LIBS          = $(SUBLIBS) -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer -L/home/boris/Installed/Qt/5.11.1/gcc_64/lib -lQt5Core -lpthread 
+LIBS          = $(SUBLIBS) -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer -ldl -L/home/boris/Installed/Qt/5.11.1/gcc_64/lib -lQt5Core -lpthread 
 AR            = ar cqs
 RANLIB        = 
 SED           = sed
@@ -76,7 +76,6 @@ SOURCES       = ../src/main.cpp \
 		../src/additional/stringformer.cpp \
 		../src/additional/effects/anaglyph.cpp \
 		../src/loadable.cpp \
-		../src/audioplayer.cpp \
 		../src/capabilities/modules/weapon.cpp \
 		../src/units/projectile.cpp \
 		../src/context.cpp \
@@ -99,7 +98,7 @@ SOURCES       = ../src/main.cpp \
 		../src/additional/effects/visualeffect.cpp \
 		../src/gui/guichoice.cpp \
 		../src/application.cpp \
-		../src/additional/fpsmonitor.cpp \
+		../src/additional/informative/fpsmonitor.cpp \
 		../src/units/particle.cpp \
 		../src/additional/net/framebuilder.cpp \
 		../src/additional/net/socket.cpp \
@@ -108,7 +107,7 @@ SOURCES       = ../src/main.cpp \
 		../src/additional/trigger.cpp \
 		../src/gui/guimain.cpp \
 		../src/gui/guicentralmessage.cpp \
-		../src/additional/controllerfinder.cpp \
+		../src/additional/informative/controllerfinder.cpp \
 		../src/gui/guifloatingmessage.cpp \
 		../src/gui/guiblushingfloatingmessage.cpp \
 		../src/additional/math.cpp \
@@ -121,7 +120,13 @@ SOURCES       = ../src/main.cpp \
 		../src/near.cpp \
 		../src/gui/guilist.cpp \
 		../src/capabilities/aggressive.cpp \
-		../src/worlds/heapworld.cpp 
+		../src/worlds/heapworld.cpp \
+		../src/objectregistry.cpp \
+		../src/additional/informative/registryinfo.cpp \
+		../src/audio/audio.cpp \
+		../src/audio/audiochannel.cpp \
+		../src/audio/audiohardwarebank.cpp \
+		../src/audio/audioplayer.cpp 
 OBJECTS       = main.o \
 		object.o \
 		worker.o \
@@ -148,7 +153,6 @@ OBJECTS       = main.o \
 		stringformer.o \
 		anaglyph.o \
 		loadable.o \
-		audioplayer.o \
 		weapon.o \
 		projectile.o \
 		context.o \
@@ -193,7 +197,13 @@ OBJECTS       = main.o \
 		near.o \
 		guilist.o \
 		aggressive.o \
-		heapworld.o
+		heapworld.o \
+		objectregistry.o \
+		registryinfo.o \
+		audio.o \
+		audiochannel.o \
+		audiohardwarebank.o \
+		audioplayer.o
 DIST          = /home/boris/Installed/Qt/5.11.1/gcc_64/mkspecs/features/spec_pre.prf \
 		/home/boris/Installed/Qt/5.11.1/gcc_64/mkspecs/common/unix.conf \
 		/home/boris/Installed/Qt/5.11.1/gcc_64/mkspecs/common/linux.conf \
@@ -406,7 +416,6 @@ DIST          = /home/boris/Installed/Qt/5.11.1/gcc_64/mkspecs/features/spec_pre
 		../src/additional/stringformer.h \
 		../src/additional/effects/anaglyph.h \
 		../src/loadable.h \
-		../src/audioplayer.h \
 		../src/capabilities/modules/weapon.h \
 		../src/units/projectile.h \
 		../src/context.h \
@@ -439,7 +448,7 @@ DIST          = /home/boris/Installed/Qt/5.11.1/gcc_64/mkspecs/features/spec_pre
 		../src/additional/effects/visualeffect.h \
 		../src/gui/guichoice.h \
 		../src/application.h \
-		../src/additional/fpsmonitor.h \
+		../src/additional/informative/fpsmonitor.h \
 		../src/units/particle.h \
 		../src/additional/net/framebuilder.h \
 		../src/additional/net/socket.h \
@@ -448,7 +457,7 @@ DIST          = /home/boris/Installed/Qt/5.11.1/gcc_64/mkspecs/features/spec_pre
 		../src/additional/trigger.h \
 		../src/gui/guimain.h \
 		../src/gui/guicentralmessage.h \
-		../src/additional/controllerfinder.h \
+		../src/additional/informative/controllerfinder.h \
 		../src/gui/guifloatingmessage.h \
 		../src/gui/guiblushingfloatingmessage.h \
 		../src/additional/math.h \
@@ -461,7 +470,13 @@ DIST          = /home/boris/Installed/Qt/5.11.1/gcc_64/mkspecs/features/spec_pre
 		../src/near.h \
 		../src/gui/guilist.h \
 		../src/capabilities/aggressive.h \
-		../src/worlds/heapworld.h ../src/main.cpp \
+		../src/worlds/heapworld.h \
+		../src/objectregistry.h \
+		../src/additional/informative/registryinfo.h \
+		../src/audio/audio.h \
+		../src/audio/audiochannel.h \
+		../src/audio/audiohardwarebank.h \
+		../src/audio/audioplayer.h ../src/main.cpp \
 		../src/object.cpp \
 		../src/worker.cpp \
 		../src/renderer.cpp \
@@ -487,7 +502,6 @@ DIST          = /home/boris/Installed/Qt/5.11.1/gcc_64/mkspecs/features/spec_pre
 		../src/additional/stringformer.cpp \
 		../src/additional/effects/anaglyph.cpp \
 		../src/loadable.cpp \
-		../src/audioplayer.cpp \
 		../src/capabilities/modules/weapon.cpp \
 		../src/units/projectile.cpp \
 		../src/context.cpp \
@@ -510,7 +524,7 @@ DIST          = /home/boris/Installed/Qt/5.11.1/gcc_64/mkspecs/features/spec_pre
 		../src/additional/effects/visualeffect.cpp \
 		../src/gui/guichoice.cpp \
 		../src/application.cpp \
-		../src/additional/fpsmonitor.cpp \
+		../src/additional/informative/fpsmonitor.cpp \
 		../src/units/particle.cpp \
 		../src/additional/net/framebuilder.cpp \
 		../src/additional/net/socket.cpp \
@@ -519,7 +533,7 @@ DIST          = /home/boris/Installed/Qt/5.11.1/gcc_64/mkspecs/features/spec_pre
 		../src/additional/trigger.cpp \
 		../src/gui/guimain.cpp \
 		../src/gui/guicentralmessage.cpp \
-		../src/additional/controllerfinder.cpp \
+		../src/additional/informative/controllerfinder.cpp \
 		../src/gui/guifloatingmessage.cpp \
 		../src/gui/guiblushingfloatingmessage.cpp \
 		../src/additional/math.cpp \
@@ -532,7 +546,13 @@ DIST          = /home/boris/Installed/Qt/5.11.1/gcc_64/mkspecs/features/spec_pre
 		../src/near.cpp \
 		../src/gui/guilist.cpp \
 		../src/capabilities/aggressive.cpp \
-		../src/worlds/heapworld.cpp
+		../src/worlds/heapworld.cpp \
+		../src/objectregistry.cpp \
+		../src/additional/informative/registryinfo.cpp \
+		../src/audio/audio.cpp \
+		../src/audio/audiochannel.cpp \
+		../src/audio/audiohardwarebank.cpp \
+		../src/audio/audioplayer.cpp
 QMAKE_TARGET  = project172
 DESTDIR       = 
 TARGET        = project172
@@ -938,8 +958,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /home/boris/Installed/Qt/5.11.1/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../src/object.h ../src/worker.h ../src/renderer.h ../src/environment.h ../src/worlds/world.h ../src/assetmanager.h ../src/filesystem.h ../src/animator.h ../src/background.h ../src/units/unit.h ../src/units/movable.h ../src/units/camera.h ../src/capabilities/capability.h ../src/capabilities/controller.h ../src/capabilities/player.h ../src/capabilities/modulehandler.h ../src/capabilities/modules/module.h ../src/additional/rotozoom.h ../src/additional/spm.h ../src/additional/timer.h ../src/additional/event.h ../src/additional/vector.h ../src/additional/stringformer.h ../src/additional/effects/anaglyph.h ../src/loadable.h ../src/audioplayer.h ../src/capabilities/modules/weapon.h ../src/units/projectile.h ../src/context.h ../src/capabilities/modules/engine.h ../src/capabilities/modules/warpdrive.h ../src/units/ship.h ../src/gui/guielement.h ../src/gui/guicontainer.h ../src/gui/guilabel.h ../src/gui/guibutton.h ../src/iinformative.h ../src/gui/guistack.h ../src/capabilities/ai.h ../src/units/station.h ../src/json/writer.h ../src/json/allocator.h ../src/json/assertions.h ../src/json/autolink.h ../src/json/config.h ../src/json/features.h ../src/json/forwards.h ../src/json/json.h ../src/json/reader.h ../src/json/value.h ../src/json/version.h src/json_tool.h src/json_valueiterator.inl ../src/debug.h ../src/gui/guiswitch.h ../src/additional/effects/visualeffect.h ../src/gui/guichoice.h ../src/application.h ../src/additional/fpsmonitor.h ../src/units/particle.h ../src/additional/net/framebuilder.h ../src/additional/net/socket.h ../src/netlistener.h ../src/state.h ../src/additional/trigger.h ../src/gui/guimain.h ../src/gui/guicentralmessage.h ../src/additional/controllerfinder.h ../src/gui/guifloatingmessage.h ../src/gui/guiblushingfloatingmessage.h ../src/additional/math.h ../src/additional/lightparticle.h ../src/worldmanager.h ../src/worlds/defaultworld.h ../src/worlds/arenaworld.h ../src/additional/auto.h ../src/capabilities/docker.h ../src/near.h ../src/gui/guilist.h ../src/capabilities/aggressive.h ../src/worlds/heapworld.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../src/main.cpp ../src/object.cpp ../src/worker.cpp ../src/renderer.cpp ../src/environment.cpp ../src/worlds/world.cpp ../src/assetmanager.cpp ../src/filesystem.cpp ../src/animator.cpp ../src/background.cpp ../src/units/unit.cpp ../src/units/movable.cpp ../src/units/camera.cpp ../src/capabilities/capability.cpp ../src/capabilities/controller.cpp ../src/capabilities/player.cpp ../src/capabilities/modulehandler.cpp ../src/capabilities/modules/module.cpp ../src/additional/rotozoom.cpp ../src/additional/spm.cpp ../src/additional/timer.cpp ../src/additional/event.cpp ../src/additional/vector.cpp ../src/additional/stringformer.cpp ../src/additional/effects/anaglyph.cpp ../src/loadable.cpp ../src/audioplayer.cpp ../src/capabilities/modules/weapon.cpp ../src/units/projectile.cpp ../src/context.cpp ../src/capabilities/modules/engine.cpp ../src/capabilities/modules/warpdrive.cpp ../src/units/ship.cpp ../src/gui/guielement.cpp ../src/gui/guicontainer.cpp ../src/gui/guilabel.cpp ../src/gui/guibutton.cpp ../src/iinformative.cpp ../src/gui/guistack.cpp ../src/capabilities/ai.cpp ../src/units/station.cpp ../src/json/json_reader.cpp ../src/json/json_value.cpp ../src/json/json_writer.cpp ../src/debug.cpp ../src/gui/guiswitch.cpp ../src/additional/effects/visualeffect.cpp ../src/gui/guichoice.cpp ../src/application.cpp ../src/additional/fpsmonitor.cpp ../src/units/particle.cpp ../src/additional/net/framebuilder.cpp ../src/additional/net/socket.cpp ../src/netlistener.cpp ../src/state.cpp ../src/additional/trigger.cpp ../src/gui/guimain.cpp ../src/gui/guicentralmessage.cpp ../src/additional/controllerfinder.cpp ../src/gui/guifloatingmessage.cpp ../src/gui/guiblushingfloatingmessage.cpp ../src/additional/math.cpp ../src/additional/lightparticle.cpp ../src/worldmanager.cpp ../src/worlds/defaultworld.cpp ../src/worlds/arenaworld.cpp ../src/additional/auto.cpp ../src/capabilities/docker.cpp ../src/near.cpp ../src/gui/guilist.cpp ../src/capabilities/aggressive.cpp ../src/worlds/heapworld.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../src/object.h ../src/worker.h ../src/renderer.h ../src/environment.h ../src/worlds/world.h ../src/assetmanager.h ../src/filesystem.h ../src/animator.h ../src/background.h ../src/units/unit.h ../src/units/movable.h ../src/units/camera.h ../src/capabilities/capability.h ../src/capabilities/controller.h ../src/capabilities/player.h ../src/capabilities/modulehandler.h ../src/capabilities/modules/module.h ../src/additional/rotozoom.h ../src/additional/spm.h ../src/additional/timer.h ../src/additional/event.h ../src/additional/vector.h ../src/additional/stringformer.h ../src/additional/effects/anaglyph.h ../src/loadable.h ../src/capabilities/modules/weapon.h ../src/units/projectile.h ../src/context.h ../src/capabilities/modules/engine.h ../src/capabilities/modules/warpdrive.h ../src/units/ship.h ../src/gui/guielement.h ../src/gui/guicontainer.h ../src/gui/guilabel.h ../src/gui/guibutton.h ../src/iinformative.h ../src/gui/guistack.h ../src/capabilities/ai.h ../src/units/station.h ../src/json/writer.h ../src/json/allocator.h ../src/json/assertions.h ../src/json/autolink.h ../src/json/config.h ../src/json/features.h ../src/json/forwards.h ../src/json/json.h ../src/json/reader.h ../src/json/value.h ../src/json/version.h src/json_tool.h src/json_valueiterator.inl ../src/debug.h ../src/gui/guiswitch.h ../src/additional/effects/visualeffect.h ../src/gui/guichoice.h ../src/application.h ../src/additional/informative/fpsmonitor.h ../src/units/particle.h ../src/additional/net/framebuilder.h ../src/additional/net/socket.h ../src/netlistener.h ../src/state.h ../src/additional/trigger.h ../src/gui/guimain.h ../src/gui/guicentralmessage.h ../src/additional/informative/controllerfinder.h ../src/gui/guifloatingmessage.h ../src/gui/guiblushingfloatingmessage.h ../src/additional/math.h ../src/additional/lightparticle.h ../src/worldmanager.h ../src/worlds/defaultworld.h ../src/worlds/arenaworld.h ../src/additional/auto.h ../src/capabilities/docker.h ../src/near.h ../src/gui/guilist.h ../src/capabilities/aggressive.h ../src/worlds/heapworld.h ../src/objectregistry.h ../src/additional/informative/registryinfo.h ../src/audio/audio.h ../src/audio/audiochannel.h ../src/audio/audiohardwarebank.h ../src/audio/audioplayer.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../src/main.cpp ../src/object.cpp ../src/worker.cpp ../src/renderer.cpp ../src/environment.cpp ../src/worlds/world.cpp ../src/assetmanager.cpp ../src/filesystem.cpp ../src/animator.cpp ../src/background.cpp ../src/units/unit.cpp ../src/units/movable.cpp ../src/units/camera.cpp ../src/capabilities/capability.cpp ../src/capabilities/controller.cpp ../src/capabilities/player.cpp ../src/capabilities/modulehandler.cpp ../src/capabilities/modules/module.cpp ../src/additional/rotozoom.cpp ../src/additional/spm.cpp ../src/additional/timer.cpp ../src/additional/event.cpp ../src/additional/vector.cpp ../src/additional/stringformer.cpp ../src/additional/effects/anaglyph.cpp ../src/loadable.cpp ../src/capabilities/modules/weapon.cpp ../src/units/projectile.cpp ../src/context.cpp ../src/capabilities/modules/engine.cpp ../src/capabilities/modules/warpdrive.cpp ../src/units/ship.cpp ../src/gui/guielement.cpp ../src/gui/guicontainer.cpp ../src/gui/guilabel.cpp ../src/gui/guibutton.cpp ../src/iinformative.cpp ../src/gui/guistack.cpp ../src/capabilities/ai.cpp ../src/units/station.cpp ../src/json/json_reader.cpp ../src/json/json_value.cpp ../src/json/json_writer.cpp ../src/debug.cpp ../src/gui/guiswitch.cpp ../src/additional/effects/visualeffect.cpp ../src/gui/guichoice.cpp ../src/application.cpp ../src/additional/informative/fpsmonitor.cpp ../src/units/particle.cpp ../src/additional/net/framebuilder.cpp ../src/additional/net/socket.cpp ../src/netlistener.cpp ../src/state.cpp ../src/additional/trigger.cpp ../src/gui/guimain.cpp ../src/gui/guicentralmessage.cpp ../src/additional/informative/controllerfinder.cpp ../src/gui/guifloatingmessage.cpp ../src/gui/guiblushingfloatingmessage.cpp ../src/additional/math.cpp ../src/additional/lightparticle.cpp ../src/worldmanager.cpp ../src/worlds/defaultworld.cpp ../src/worlds/arenaworld.cpp ../src/additional/auto.cpp ../src/capabilities/docker.cpp ../src/near.cpp ../src/gui/guilist.cpp ../src/capabilities/aggressive.cpp ../src/worlds/heapworld.cpp ../src/objectregistry.cpp ../src/additional/informative/registryinfo.cpp ../src/audio/audio.cpp ../src/audio/audiochannel.cpp ../src/audio/audiohardwarebank.cpp ../src/audio/audioplayer.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -974,7 +994,7 @@ compiler_moc_predefs_make_all: moc_predefs.h
 compiler_moc_predefs_clean:
 	-$(DEL_FILE) moc_predefs.h
 moc_predefs.h: /home/boris/Installed/Qt/5.11.1/gcc_64/mkspecs/features/data/dummy.cpp
-	g++ -pipe -O2 -std=gnu++11 -Wall -W -dM -E -o moc_predefs.h /home/boris/Installed/Qt/5.11.1/gcc_64/mkspecs/features/data/dummy.cpp
+	g++ -pipe -rdynamic -O2 -O2 -std=gnu++11 -Wall -W -dM -E -o moc_predefs.h /home/boris/Installed/Qt/5.11.1/gcc_64/mkspecs/features/data/dummy.cpp
 
 compiler_moc_header_make_all:
 compiler_moc_header_clean:
@@ -993,24 +1013,15 @@ compiler_clean: compiler_moc_predefs_clean
 ####### Compile
 
 main.o: ../src/main.cpp ../src/environment.h \
-		../src/units/unit.h \
-		../src/worker.h \
 		../src/object.h \
-		../src/renderer.h \
-		../src/additional/spm.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/vector.h \
-		../src/additional/rotozoom.h \
+		../src/state.h \
 		../src/additional/auto.h \
+		../src/additional/vector.h \
+		../src/renderer.h \
+		../src/additional/effects/visualeffect.h \
+		../src/worker.h \
 		../src/additional/event.h \
-		../src/debug.h \
-		../src/capabilities/modulehandler.h \
-		../src/capabilities/modules/module.h \
-		../src/capabilities/capability.h \
-		../src/loadable.h \
-		../src/animator.h \
-		../src/additional/timer.h \
-		../src/audioplayer.h \
+		../src/assetmanager.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -1021,90 +1032,64 @@ main.o: ../src/main.cpp ../src/environment.h \
 		../src/json/reader.h \
 		../src/json/value.h \
 		../src/json/writer.h \
-		../src/iinformative.h \
-		../src/worldmanager.h \
-		../src/units/camera.h \
-		../src/units/movable.h \
-		../src/capabilities/controller.h \
-		../src/units/ship.h \
-		../src/capabilities/modules/warpdrive.h \
-		../src/additional/stringformer.h \
-		../src/additional/trigger.h \
-		../src/gui/guimain.h \
-		../src/gui/guistack.h \
-		../src/gui/guielement.h \
-		../src/gui/guicentralmessage.h \
-		../src/gui/guilabel.h \
-		../src/gui/guifloatingmessage.h \
-		../src/gui/guiblushingfloatingmessage.h \
-		../src/additional/math.h \
-		../src/gui/guilist.h \
-		../src/gui/guicontainer.h \
-		../src/additional/effects/anaglyph.h \
-		../src/gui/guibutton.h \
-		../src/gui/guichoice.h \
-		../src/units/projectile.h \
-		../src/worlds/world.h \
-		../src/assetmanager.h \
-		../src/filesystem.h \
-		../src/capabilities/modules/weapon.h \
-		../src/capabilities/modules/engine.h \
-		../src/units/station.h \
-		../src/capabilities/player.h \
-		../src/gui/guiswitch.h \
-		../src/capabilities/ai.h \
-		../src/additional/fpsmonitor.h \
-		../src/additional/controllerfinder.h \
-		../src/near.h \
-		../src/worlds/defaultworld.h \
-		../src/worlds/arenaworld.h \
-		../src/worlds/heapworld.h \
-		../src/capabilities/aggressive.h \
-		../src/context.h \
-		../src/units/particle.h \
-		../src/additional/lightparticle.h \
+		../src/loadable.h \
+		../src/animator.h \
+		../src/additional/timer.h \
 		../src/background.h \
+		../src/additional/informative/fpsmonitor.h \
+		../src/iinformative.h \
 		../src/netlistener.h \
 		../src/additional/net/socket.h \
 		../src/additional/net/framebuilder.h \
-		../src/state.h
+		../src/context.h \
+		../src/gui/guimain.h \
+		../src/gui/guistack.h \
+		../src/gui/guielement.h \
+		../src/capabilities/controller.h \
+		../src/capabilities/capability.h \
+		../src/units/ship.h \
+		../src/units/movable.h \
+		../src/units/unit.h \
+		../src/capabilities/modulehandler.h \
+		../src/capabilities/modules/module.h \
+		../src/capabilities/modules/warpdrive.h \
+		../src/additional/trigger.h \
+		../src/gui/guicentralmessage.h \
+		../src/gui/guilabel.h \
+		../src/gui/guifloatingmessage.h \
+		../src/near.h \
+		../src/worldmanager.h \
+		../src/worlds/world.h \
+		../src/debug.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../src/main.cpp
 
 object.o: ../src/object.cpp ../src/object.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o object.o ../src/object.cpp
 
 worker.o: ../src/worker.cpp ../src/worker.h \
+		../src/additional/event.h \
+		../src/additional/vector.h \
 		../src/object.h \
 		../src/renderer.h \
-		../src/additional/spm.h \
 		../src/additional/effects/visualeffect.h \
-		../src/additional/vector.h \
-		../src/additional/rotozoom.h \
 		../src/additional/auto.h \
-		../src/additional/event.h \
-		../src/debug.h
+		../src/objectregistry.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o worker.o ../src/worker.cpp
 
 renderer.o: ../src/renderer.cpp ../src/renderer.h \
-		../src/additional/spm.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/vector.h \
-		../src/object.h \
-		../src/additional/rotozoom.h \
 		../src/additional/auto.h \
+		../src/object.h \
 		../src/units/camera.h \
 		../src/units/movable.h \
 		../src/units/unit.h \
-		../src/worker.h \
-		../src/additional/event.h \
-		../src/debug.h \
 		../src/capabilities/modulehandler.h \
 		../src/capabilities/modules/module.h \
 		../src/capabilities/capability.h \
+		../src/worker.h \
+		../src/additional/event.h \
 		../src/loadable.h \
-		../src/animator.h \
-		../src/additional/timer.h \
-		../src/audioplayer.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -1115,33 +1100,27 @@ renderer.o: ../src/renderer.cpp ../src/renderer.h \
 		../src/json/reader.h \
 		../src/json/value.h \
 		../src/json/writer.h \
+		../src/animator.h \
+		../src/additional/timer.h \
 		../src/iinformative.h \
 		../src/capabilities/controller.h \
 		../src/units/ship.h \
 		../src/capabilities/modules/warpdrive.h \
-		../src/additional/stringformer.h \
-		../src/additional/trigger.h
+		../src/additional/trigger.h \
+		../src/additional/spm.h \
+		../src/debug.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o renderer.o ../src/renderer.cpp
 
 environment.o: ../src/environment.cpp ../src/environment.h \
-		../src/units/unit.h \
-		../src/worker.h \
 		../src/object.h \
-		../src/renderer.h \
-		../src/additional/spm.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/vector.h \
-		../src/additional/rotozoom.h \
+		../src/state.h \
 		../src/additional/auto.h \
+		../src/additional/vector.h \
+		../src/renderer.h \
+		../src/additional/effects/visualeffect.h \
+		../src/worker.h \
 		../src/additional/event.h \
-		../src/debug.h \
-		../src/capabilities/modulehandler.h \
-		../src/capabilities/modules/module.h \
-		../src/capabilities/capability.h \
-		../src/loadable.h \
-		../src/animator.h \
-		../src/additional/timer.h \
-		../src/audioplayer.h \
+		../src/assetmanager.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -1152,57 +1131,58 @@ environment.o: ../src/environment.cpp ../src/environment.h \
 		../src/json/reader.h \
 		../src/json/value.h \
 		../src/json/writer.h \
-		../src/iinformative.h \
-		../src/worldmanager.h \
-		../src/units/camera.h \
-		../src/units/movable.h \
-		../src/capabilities/controller.h \
-		../src/units/ship.h \
-		../src/capabilities/modules/warpdrive.h \
-		../src/additional/stringformer.h \
-		../src/additional/trigger.h \
-		../src/gui/guimain.h \
-		../src/gui/guistack.h \
-		../src/gui/guielement.h \
-		../src/gui/guicentralmessage.h \
-		../src/gui/guilabel.h \
-		../src/gui/guifloatingmessage.h \
-		../src/gui/guiblushingfloatingmessage.h \
-		../src/additional/math.h \
-		../src/gui/guilist.h \
-		../src/gui/guicontainer.h \
-		../src/additional/effects/anaglyph.h \
-		../src/gui/guibutton.h \
-		../src/gui/guichoice.h \
-		../src/units/projectile.h \
-		../src/worlds/world.h \
-		../src/assetmanager.h \
-		../src/filesystem.h \
-		../src/capabilities/modules/weapon.h \
-		../src/capabilities/modules/engine.h \
-		../src/units/station.h \
-		../src/capabilities/player.h \
-		../src/gui/guiswitch.h \
-		../src/capabilities/ai.h \
-		../src/additional/fpsmonitor.h \
-		../src/additional/controllerfinder.h \
-		../src/near.h \
-		../src/worlds/defaultworld.h \
-		../src/worlds/arenaworld.h \
-		../src/worlds/heapworld.h \
-		../src/capabilities/aggressive.h \
-		../src/context.h \
-		../src/units/particle.h \
-		../src/additional/lightparticle.h \
+		../src/loadable.h \
+		../src/animator.h \
+		../src/additional/timer.h \
 		../src/background.h \
+		../src/additional/informative/fpsmonitor.h \
+		../src/iinformative.h \
 		../src/netlistener.h \
 		../src/additional/net/socket.h \
 		../src/additional/net/framebuilder.h \
-		../src/state.h
+		../src/context.h \
+		../src/gui/guimain.h \
+		../src/gui/guistack.h \
+		../src/gui/guielement.h \
+		../src/capabilities/controller.h \
+		../src/capabilities/capability.h \
+		../src/units/ship.h \
+		../src/units/movable.h \
+		../src/units/unit.h \
+		../src/capabilities/modulehandler.h \
+		../src/capabilities/modules/module.h \
+		../src/capabilities/modules/warpdrive.h \
+		../src/additional/trigger.h \
+		../src/gui/guicentralmessage.h \
+		../src/gui/guilabel.h \
+		../src/gui/guifloatingmessage.h \
+		../src/near.h \
+		../src/worldmanager.h \
+		../src/worlds/world.h \
+		../src/worlds/defaultworld.h \
+		../src/worlds/arenaworld.h \
+		../src/worlds/heapworld.h \
+		../src/debug.h \
+		../src/units/camera.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o environment.o ../src/environment.cpp
 
 world.o: ../src/worlds/world.cpp ../src/worlds/world.h \
-		../src/assetmanager.h \
+		../src/object.h \
+		../src/capabilities/controller.h \
+		../src/capabilities/capability.h \
+		../src/worker.h \
+		../src/additional/event.h \
+		../src/additional/vector.h \
+		../src/renderer.h \
+		../src/additional/effects/visualeffect.h \
+		../src/additional/auto.h \
+		../src/additional/timer.h \
+		../src/units/ship.h \
+		../src/units/movable.h \
+		../src/units/unit.h \
+		../src/capabilities/modulehandler.h \
+		../src/capabilities/modules/module.h \
+		../src/loadable.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -1213,54 +1193,11 @@ world.o: ../src/worlds/world.cpp ../src/worlds/world.h \
 		../src/json/reader.h \
 		../src/json/value.h \
 		../src/json/writer.h \
-		../src/filesystem.h \
-		../src/loadable.h \
 		../src/animator.h \
-		../src/worker.h \
-		../src/object.h \
-		../src/renderer.h \
-		../src/additional/spm.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/vector.h \
-		../src/additional/rotozoom.h \
-		../src/additional/auto.h \
-		../src/additional/event.h \
-		../src/debug.h \
-		../src/additional/timer.h \
-		../src/audioplayer.h \
-		../src/units/ship.h \
-		../src/units/movable.h \
-		../src/units/unit.h \
-		../src/capabilities/modulehandler.h \
-		../src/capabilities/modules/module.h \
-		../src/capabilities/capability.h \
 		../src/iinformative.h \
 		../src/capabilities/modules/warpdrive.h \
-		../src/additional/stringformer.h \
-		../src/capabilities/modules/weapon.h \
-		../src/units/projectile.h \
-		../src/units/camera.h \
-		../src/capabilities/controller.h \
 		../src/additional/trigger.h \
-		../src/capabilities/modules/engine.h \
-		../src/units/station.h \
-		../src/capabilities/player.h \
-		../src/gui/guicontainer.h \
-		../src/additional/effects/anaglyph.h \
-		../src/gui/guielement.h \
-		../src/gui/guibutton.h \
-		../src/gui/guilabel.h \
-		../src/gui/guistack.h \
-		../src/gui/guiswitch.h \
-		../src/gui/guichoice.h \
-		../src/gui/guimain.h \
-		../src/gui/guicentralmessage.h \
-		../src/gui/guifloatingmessage.h \
-		../src/gui/guiblushingfloatingmessage.h \
-		../src/additional/math.h \
-		../src/capabilities/ai.h \
-		../src/additional/fpsmonitor.h \
-		../src/additional/controllerfinder.h
+		../src/assetmanager.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o world.o ../src/worlds/world.cpp
 
 assetmanager.o: ../src/assetmanager.cpp ../src/assetmanager.h \
@@ -1274,132 +1211,104 @@ assetmanager.o: ../src/assetmanager.cpp ../src/assetmanager.h \
 		../src/json/reader.h \
 		../src/json/value.h \
 		../src/json/writer.h \
-		../src/filesystem.h \
 		../src/loadable.h \
 		../src/animator.h \
+		../src/additional/timer.h \
 		../src/worker.h \
+		../src/additional/event.h \
+		../src/additional/vector.h \
 		../src/object.h \
 		../src/renderer.h \
-		../src/additional/spm.h \
 		../src/additional/effects/visualeffect.h \
-		../src/additional/vector.h \
-		../src/additional/rotozoom.h \
 		../src/additional/auto.h \
-		../src/additional/event.h \
+		../src/filesystem.h \
 		../src/debug.h \
-		../src/additional/timer.h \
-		../src/audioplayer.h \
+		../src/capabilities/player.h \
+		../src/capabilities/controller.h \
+		../src/capabilities/capability.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
 		../src/units/unit.h \
 		../src/capabilities/modulehandler.h \
 		../src/capabilities/modules/module.h \
-		../src/capabilities/capability.h \
 		../src/iinformative.h \
 		../src/capabilities/modules/warpdrive.h \
-		../src/additional/stringformer.h \
-		../src/capabilities/modules/weapon.h \
-		../src/units/projectile.h \
-		../src/units/camera.h \
-		../src/capabilities/controller.h \
 		../src/additional/trigger.h \
+		../src/capabilities/modules/weapon.h \
 		../src/capabilities/modules/engine.h \
-		../src/units/station.h \
-		../src/capabilities/player.h
+		../src/units/projectile.h \
+		../src/units/station.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o assetmanager.o ../src/assetmanager.cpp
 
 filesystem.o: ../src/filesystem.cpp ../src/filesystem.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o filesystem.o ../src/filesystem.cpp
 
 animator.o: ../src/animator.cpp ../src/animator.h \
+		../src/additional/timer.h \
 		../src/worker.h \
+		../src/additional/event.h \
+		../src/additional/vector.h \
 		../src/object.h \
 		../src/renderer.h \
-		../src/additional/spm.h \
 		../src/additional/effects/visualeffect.h \
-		../src/additional/vector.h \
-		../src/additional/rotozoom.h \
 		../src/additional/auto.h \
-		../src/additional/event.h \
-		../src/debug.h \
-		../src/additional/timer.h
+		../src/additional/spm.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o animator.o ../src/animator.cpp
 
 background.o: ../src/background.cpp ../src/background.h \
+		../src/additional/vector.h \
 		../src/worker.h \
+		../src/additional/event.h \
 		../src/object.h \
 		../src/renderer.h \
-		../src/additional/spm.h \
 		../src/additional/effects/visualeffect.h \
-		../src/additional/vector.h \
-		../src/additional/rotozoom.h \
 		../src/additional/auto.h \
-		../src/additional/event.h \
-		../src/debug.h \
 		../src/additional/timer.h \
 		../src/context.h \
-		../src/units/particle.h \
+		../src/assetmanager.h \
+		../src/json/json.h \
+		../src/json/autolink.h \
+		../src/json/config.h \
+		../src/json/allocator.h \
+		../src/json/version.h \
+		../src/json/features.h \
+		../src/json/forwards.h \
+		../src/json/reader.h \
+		../src/json/value.h \
+		../src/json/writer.h \
+		../src/loadable.h \
+		../src/animator.h \
+		../src/gui/guimain.h \
+		../src/gui/guistack.h \
+		../src/gui/guielement.h \
+		../src/capabilities/controller.h \
+		../src/capabilities/capability.h \
+		../src/units/ship.h \
 		../src/units/movable.h \
 		../src/units/unit.h \
 		../src/capabilities/modulehandler.h \
 		../src/capabilities/modules/module.h \
-		../src/capabilities/capability.h \
-		../src/loadable.h \
-		../src/animator.h \
-		../src/audioplayer.h \
-		../src/json/json.h \
-		../src/json/autolink.h \
-		../src/json/config.h \
-		../src/json/allocator.h \
-		../src/json/version.h \
-		../src/json/features.h \
-		../src/json/forwards.h \
-		../src/json/reader.h \
-		../src/json/value.h \
-		../src/json/writer.h \
 		../src/iinformative.h \
-		../src/additional/lightparticle.h \
-		../src/assetmanager.h \
-		../src/filesystem.h \
-		../src/units/ship.h \
 		../src/capabilities/modules/warpdrive.h \
-		../src/additional/stringformer.h \
-		../src/capabilities/modules/weapon.h \
-		../src/units/projectile.h \
-		../src/units/camera.h \
-		../src/capabilities/controller.h \
 		../src/additional/trigger.h \
-		../src/capabilities/modules/engine.h \
-		../src/units/station.h \
-		../src/capabilities/player.h \
-		../src/gui/guimain.h \
-		../src/gui/guistack.h \
-		../src/gui/guielement.h \
 		../src/gui/guicentralmessage.h \
 		../src/gui/guilabel.h \
 		../src/gui/guifloatingmessage.h \
-		../src/gui/guiblushingfloatingmessage.h \
-		../src/additional/math.h
+		../src/near.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o background.o ../src/background.cpp
 
 unit.o: ../src/units/unit.cpp ../src/units/unit.h \
-		../src/worker.h \
-		../src/object.h \
-		../src/renderer.h \
-		../src/additional/spm.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/vector.h \
-		../src/additional/rotozoom.h \
-		../src/additional/auto.h \
-		../src/additional/event.h \
-		../src/debug.h \
 		../src/capabilities/modulehandler.h \
 		../src/capabilities/modules/module.h \
 		../src/capabilities/capability.h \
+		../src/worker.h \
+		../src/additional/event.h \
+		../src/additional/vector.h \
+		../src/object.h \
+		../src/renderer.h \
+		../src/additional/effects/visualeffect.h \
+		../src/additional/auto.h \
 		../src/loadable.h \
-		../src/animator.h \
-		../src/additional/timer.h \
-		../src/audioplayer.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -1410,54 +1319,40 @@ unit.o: ../src/units/unit.cpp ../src/units/unit.h \
 		../src/json/reader.h \
 		../src/json/value.h \
 		../src/json/writer.h \
+		../src/animator.h \
+		../src/additional/timer.h \
 		../src/iinformative.h \
 		../src/context.h \
-		../src/units/particle.h \
-		../src/units/movable.h \
-		../src/additional/lightparticle.h \
 		../src/assetmanager.h \
-		../src/filesystem.h \
-		../src/units/ship.h \
-		../src/capabilities/modules/warpdrive.h \
-		../src/additional/stringformer.h \
-		../src/capabilities/modules/weapon.h \
-		../src/units/projectile.h \
-		../src/units/camera.h \
-		../src/capabilities/controller.h \
-		../src/additional/trigger.h \
-		../src/capabilities/modules/engine.h \
-		../src/units/station.h \
-		../src/capabilities/player.h \
 		../src/gui/guimain.h \
 		../src/gui/guistack.h \
 		../src/gui/guielement.h \
+		../src/capabilities/controller.h \
+		../src/units/ship.h \
+		../src/units/movable.h \
+		../src/capabilities/modules/warpdrive.h \
+		../src/additional/trigger.h \
 		../src/gui/guicentralmessage.h \
 		../src/gui/guilabel.h \
 		../src/gui/guifloatingmessage.h \
-		../src/gui/guiblushingfloatingmessage.h \
-		../src/additional/math.h \
-		../src/background.h
+		../src/near.h \
+		../src/background.h \
+		../src/units/projectile.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o unit.o ../src/units/unit.cpp
 
 movable.o: ../src/units/movable.cpp ../src/units/movable.h \
 		../src/units/unit.h \
-		../src/worker.h \
-		../src/object.h \
-		../src/renderer.h \
-		../src/additional/spm.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/vector.h \
-		../src/additional/rotozoom.h \
-		../src/additional/auto.h \
-		../src/additional/event.h \
-		../src/debug.h \
 		../src/capabilities/modulehandler.h \
 		../src/capabilities/modules/module.h \
 		../src/capabilities/capability.h \
+		../src/worker.h \
+		../src/additional/event.h \
+		../src/additional/vector.h \
+		../src/object.h \
+		../src/renderer.h \
+		../src/additional/effects/visualeffect.h \
+		../src/additional/auto.h \
 		../src/loadable.h \
-		../src/animator.h \
-		../src/additional/timer.h \
-		../src/audioplayer.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -1468,29 +1363,25 @@ movable.o: ../src/units/movable.cpp ../src/units/movable.h \
 		../src/json/reader.h \
 		../src/json/value.h \
 		../src/json/writer.h \
+		../src/animator.h \
+		../src/additional/timer.h \
 		../src/iinformative.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o movable.o ../src/units/movable.cpp
 
 camera.o: ../src/units/camera.cpp ../src/units/camera.h \
 		../src/units/movable.h \
 		../src/units/unit.h \
-		../src/worker.h \
-		../src/object.h \
-		../src/renderer.h \
-		../src/additional/spm.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/vector.h \
-		../src/additional/rotozoom.h \
-		../src/additional/auto.h \
-		../src/additional/event.h \
-		../src/debug.h \
 		../src/capabilities/modulehandler.h \
 		../src/capabilities/modules/module.h \
 		../src/capabilities/capability.h \
+		../src/worker.h \
+		../src/additional/event.h \
+		../src/additional/vector.h \
+		../src/object.h \
+		../src/renderer.h \
+		../src/additional/effects/visualeffect.h \
+		../src/additional/auto.h \
 		../src/loadable.h \
-		../src/animator.h \
-		../src/additional/timer.h \
-		../src/audioplayer.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -1501,48 +1392,41 @@ camera.o: ../src/units/camera.cpp ../src/units/camera.h \
 		../src/json/reader.h \
 		../src/json/value.h \
 		../src/json/writer.h \
+		../src/animator.h \
+		../src/additional/timer.h \
 		../src/iinformative.h \
 		../src/capabilities/controller.h \
 		../src/units/ship.h \
 		../src/capabilities/modules/warpdrive.h \
-		../src/additional/stringformer.h \
 		../src/additional/trigger.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o camera.o ../src/units/camera.cpp
 
 capability.o: ../src/capabilities/capability.cpp ../src/capabilities/capability.h \
 		../src/worker.h \
+		../src/additional/event.h \
+		../src/additional/vector.h \
 		../src/object.h \
 		../src/renderer.h \
-		../src/additional/spm.h \
 		../src/additional/effects/visualeffect.h \
-		../src/additional/vector.h \
-		../src/additional/rotozoom.h \
-		../src/additional/auto.h \
-		../src/additional/event.h \
-		../src/debug.h
+		../src/additional/auto.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o capability.o ../src/capabilities/capability.cpp
 
 controller.o: ../src/capabilities/controller.cpp ../src/capabilities/controller.h \
+		../src/capabilities/capability.h \
 		../src/worker.h \
+		../src/additional/event.h \
+		../src/additional/vector.h \
 		../src/object.h \
 		../src/renderer.h \
-		../src/additional/spm.h \
 		../src/additional/effects/visualeffect.h \
-		../src/additional/vector.h \
-		../src/additional/rotozoom.h \
 		../src/additional/auto.h \
-		../src/additional/event.h \
-		../src/debug.h \
-		../src/capabilities/capability.h \
+		../src/additional/timer.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
 		../src/units/unit.h \
 		../src/capabilities/modulehandler.h \
 		../src/capabilities/modules/module.h \
 		../src/loadable.h \
-		../src/animator.h \
-		../src/additional/timer.h \
-		../src/audioplayer.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -1553,54 +1437,39 @@ controller.o: ../src/capabilities/controller.cpp ../src/capabilities/controller.
 		../src/json/reader.h \
 		../src/json/value.h \
 		../src/json/writer.h \
+		../src/animator.h \
 		../src/iinformative.h \
 		../src/capabilities/modules/warpdrive.h \
-		../src/additional/stringformer.h \
 		../src/additional/trigger.h \
 		../src/context.h \
-		../src/units/particle.h \
-		../src/additional/lightparticle.h \
 		../src/assetmanager.h \
-		../src/filesystem.h \
-		../src/capabilities/modules/weapon.h \
-		../src/units/projectile.h \
-		../src/units/camera.h \
-		../src/capabilities/modules/engine.h \
-		../src/units/station.h \
-		../src/capabilities/player.h \
 		../src/gui/guimain.h \
 		../src/gui/guistack.h \
 		../src/gui/guielement.h \
 		../src/gui/guicentralmessage.h \
 		../src/gui/guilabel.h \
 		../src/gui/guifloatingmessage.h \
-		../src/gui/guiblushingfloatingmessage.h \
-		../src/additional/math.h \
+		../src/near.h \
 		../src/background.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o controller.o ../src/capabilities/controller.cpp
 
 player.o: ../src/capabilities/player.cpp ../src/capabilities/player.h \
 		../src/capabilities/controller.h \
+		../src/capabilities/capability.h \
 		../src/worker.h \
+		../src/additional/event.h \
+		../src/additional/vector.h \
 		../src/object.h \
 		../src/renderer.h \
-		../src/additional/spm.h \
 		../src/additional/effects/visualeffect.h \
-		../src/additional/vector.h \
-		../src/additional/rotozoom.h \
 		../src/additional/auto.h \
-		../src/additional/event.h \
-		../src/debug.h \
-		../src/capabilities/capability.h \
+		../src/additional/timer.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
 		../src/units/unit.h \
 		../src/capabilities/modulehandler.h \
 		../src/capabilities/modules/module.h \
 		../src/loadable.h \
-		../src/animator.h \
-		../src/additional/timer.h \
-		../src/audioplayer.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -1611,48 +1480,35 @@ player.o: ../src/capabilities/player.cpp ../src/capabilities/player.h \
 		../src/json/reader.h \
 		../src/json/value.h \
 		../src/json/writer.h \
+		../src/animator.h \
 		../src/iinformative.h \
 		../src/capabilities/modules/warpdrive.h \
-		../src/additional/stringformer.h \
 		../src/additional/trigger.h \
-		../src/capabilities/modules/weapon.h \
-		../src/units/projectile.h \
-		../src/units/camera.h \
 		../src/context.h \
-		../src/units/particle.h \
-		../src/additional/lightparticle.h \
 		../src/assetmanager.h \
-		../src/filesystem.h \
-		../src/capabilities/modules/engine.h \
-		../src/units/station.h \
 		../src/gui/guimain.h \
 		../src/gui/guistack.h \
 		../src/gui/guielement.h \
 		../src/gui/guicentralmessage.h \
 		../src/gui/guilabel.h \
 		../src/gui/guifloatingmessage.h \
-		../src/gui/guiblushingfloatingmessage.h \
-		../src/additional/math.h \
-		../src/background.h
+		../src/near.h \
+		../src/background.h \
+		../src/objectregistry.h \
+		../src/capabilities/modules/weapon.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o player.o ../src/capabilities/player.cpp
 
 modulehandler.o: ../src/capabilities/modulehandler.cpp ../src/capabilities/modulehandler.h \
 		../src/capabilities/modules/module.h \
 		../src/capabilities/capability.h \
 		../src/worker.h \
+		../src/additional/event.h \
+		../src/additional/vector.h \
 		../src/object.h \
 		../src/renderer.h \
-		../src/additional/spm.h \
 		../src/additional/effects/visualeffect.h \
-		../src/additional/vector.h \
-		../src/additional/rotozoom.h \
 		../src/additional/auto.h \
-		../src/additional/event.h \
-		../src/debug.h \
 		../src/loadable.h \
-		../src/animator.h \
-		../src/additional/timer.h \
-		../src/audioplayer.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -1663,25 +1519,21 @@ modulehandler.o: ../src/capabilities/modulehandler.cpp ../src/capabilities/modul
 		../src/json/reader.h \
 		../src/json/value.h \
 		../src/json/writer.h \
+		../src/animator.h \
+		../src/additional/timer.h \
 		../src/iinformative.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o modulehandler.o ../src/capabilities/modulehandler.cpp
 
 module.o: ../src/capabilities/modules/module.cpp ../src/capabilities/modules/module.h \
 		../src/capabilities/capability.h \
 		../src/worker.h \
+		../src/additional/event.h \
+		../src/additional/vector.h \
 		../src/object.h \
 		../src/renderer.h \
-		../src/additional/spm.h \
 		../src/additional/effects/visualeffect.h \
-		../src/additional/vector.h \
-		../src/additional/rotozoom.h \
 		../src/additional/auto.h \
-		../src/additional/event.h \
-		../src/debug.h \
 		../src/loadable.h \
-		../src/animator.h \
-		../src/additional/timer.h \
-		../src/audioplayer.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -1692,9 +1544,18 @@ module.o: ../src/capabilities/modules/module.cpp ../src/capabilities/modules/mod
 		../src/json/reader.h \
 		../src/json/value.h \
 		../src/json/writer.h \
+		../src/animator.h \
+		../src/additional/timer.h \
 		../src/iinformative.h \
 		../src/units/unit.h \
-		../src/capabilities/modulehandler.h
+		../src/capabilities/modulehandler.h \
+		../src/units/camera.h \
+		../src/units/movable.h \
+		../src/capabilities/controller.h \
+		../src/units/ship.h \
+		../src/capabilities/modules/warpdrive.h \
+		../src/additional/trigger.h \
+		../src/additional/math.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o module.o ../src/capabilities/modules/module.cpp
 
 rotozoom.o: ../src/additional/rotozoom.cpp ../src/additional/rotozoom.h
@@ -1703,7 +1564,6 @@ rotozoom.o: ../src/additional/rotozoom.cpp ../src/additional/rotozoom.h
 spm.o: ../src/additional/spm.cpp ../src/additional/spm.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/vector.h \
-		../src/object.h \
 		../src/additional/rotozoom.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o spm.o ../src/additional/spm.cpp
 
@@ -1711,13 +1571,11 @@ timer.o: ../src/additional/timer.cpp ../src/additional/timer.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o timer.o ../src/additional/timer.cpp
 
 event.o: ../src/additional/event.cpp ../src/additional/event.h \
-		../src/additional/vector.h \
-		../src/object.h \
-		../src/debug.h
+		../src/additional/vector.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o event.o ../src/additional/event.cpp
 
 vector.o: ../src/additional/vector.cpp ../src/additional/vector.h \
-		../src/object.h
+		../src/additional/math.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o vector.o ../src/additional/vector.cpp
 
 stringformer.o: ../src/additional/stringformer.cpp ../src/additional/stringformer.h \
@@ -1726,24 +1584,10 @@ stringformer.o: ../src/additional/stringformer.cpp ../src/additional/stringforme
 
 anaglyph.o: ../src/additional/effects/anaglyph.cpp ../src/additional/effects/anaglyph.h \
 		../src/additional/effects/visualeffect.h \
-		../src/additional/vector.h \
-		../src/object.h
+		../src/additional/vector.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o anaglyph.o ../src/additional/effects/anaglyph.cpp
 
 loadable.o: ../src/loadable.cpp ../src/loadable.h \
-		../src/animator.h \
-		../src/worker.h \
-		../src/object.h \
-		../src/renderer.h \
-		../src/additional/spm.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/vector.h \
-		../src/additional/rotozoom.h \
-		../src/additional/auto.h \
-		../src/additional/event.h \
-		../src/debug.h \
-		../src/additional/timer.h \
-		../src/audioplayer.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -1753,39 +1597,29 @@ loadable.o: ../src/loadable.cpp ../src/loadable.h \
 		../src/json/forwards.h \
 		../src/json/reader.h \
 		../src/json/value.h \
-		../src/json/writer.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o loadable.o ../src/loadable.cpp
-
-audioplayer.o: ../src/audioplayer.cpp ../src/audioplayer.h \
+		../src/json/writer.h \
+		../src/animator.h \
+		../src/additional/timer.h \
 		../src/worker.h \
+		../src/additional/event.h \
+		../src/additional/vector.h \
 		../src/object.h \
 		../src/renderer.h \
-		../src/additional/spm.h \
 		../src/additional/effects/visualeffect.h \
-		../src/additional/vector.h \
-		../src/additional/rotozoom.h \
-		../src/additional/auto.h \
-		../src/additional/event.h \
-		../src/debug.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o audioplayer.o ../src/audioplayer.cpp
+		../src/additional/auto.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o loadable.o ../src/loadable.cpp
 
 weapon.o: ../src/capabilities/modules/weapon.cpp ../src/capabilities/modules/weapon.h \
 		../src/capabilities/modules/module.h \
 		../src/capabilities/capability.h \
 		../src/worker.h \
+		../src/additional/event.h \
+		../src/additional/vector.h \
 		../src/object.h \
 		../src/renderer.h \
-		../src/additional/spm.h \
 		../src/additional/effects/visualeffect.h \
-		../src/additional/vector.h \
-		../src/additional/rotozoom.h \
 		../src/additional/auto.h \
-		../src/additional/event.h \
-		../src/debug.h \
 		../src/loadable.h \
-		../src/animator.h \
-		../src/additional/timer.h \
-		../src/audioplayer.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -1796,57 +1630,44 @@ weapon.o: ../src/capabilities/modules/weapon.cpp ../src/capabilities/modules/wea
 		../src/json/reader.h \
 		../src/json/value.h \
 		../src/json/writer.h \
+		../src/animator.h \
+		../src/additional/timer.h \
 		../src/iinformative.h \
-		../src/units/projectile.h \
-		../src/units/camera.h \
-		../src/units/movable.h \
-		../src/units/unit.h \
-		../src/capabilities/modulehandler.h \
-		../src/capabilities/controller.h \
-		../src/units/ship.h \
-		../src/capabilities/modules/warpdrive.h \
-		../src/additional/stringformer.h \
-		../src/additional/trigger.h \
 		../src/context.h \
-		../src/units/particle.h \
-		../src/additional/lightparticle.h \
 		../src/assetmanager.h \
-		../src/filesystem.h \
-		../src/capabilities/modules/engine.h \
-		../src/units/station.h \
-		../src/capabilities/player.h \
 		../src/gui/guimain.h \
 		../src/gui/guistack.h \
 		../src/gui/guielement.h \
+		../src/capabilities/controller.h \
+		../src/units/ship.h \
+		../src/units/movable.h \
+		../src/units/unit.h \
+		../src/capabilities/modulehandler.h \
+		../src/capabilities/modules/warpdrive.h \
+		../src/additional/trigger.h \
 		../src/gui/guicentralmessage.h \
 		../src/gui/guilabel.h \
 		../src/gui/guifloatingmessage.h \
-		../src/gui/guiblushingfloatingmessage.h \
-		../src/additional/math.h \
-		../src/background.h
+		../src/near.h \
+		../src/background.h \
+		../src/additional/stringformer.h \
+		../src/units/projectile.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o weapon.o ../src/capabilities/modules/weapon.cpp
 
 projectile.o: ../src/units/projectile.cpp ../src/units/projectile.h \
-		../src/units/camera.h \
 		../src/units/movable.h \
 		../src/units/unit.h \
-		../src/worker.h \
-		../src/object.h \
-		../src/renderer.h \
-		../src/additional/spm.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/vector.h \
-		../src/additional/rotozoom.h \
-		../src/additional/auto.h \
-		../src/additional/event.h \
-		../src/debug.h \
 		../src/capabilities/modulehandler.h \
 		../src/capabilities/modules/module.h \
 		../src/capabilities/capability.h \
+		../src/worker.h \
+		../src/additional/event.h \
+		../src/additional/vector.h \
+		../src/object.h \
+		../src/renderer.h \
+		../src/additional/effects/visualeffect.h \
+		../src/additional/auto.h \
 		../src/loadable.h \
-		../src/animator.h \
-		../src/additional/timer.h \
-		../src/audioplayer.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -1857,53 +1678,32 @@ projectile.o: ../src/units/projectile.cpp ../src/units/projectile.h \
 		../src/json/reader.h \
 		../src/json/value.h \
 		../src/json/writer.h \
+		../src/animator.h \
+		../src/additional/timer.h \
 		../src/iinformative.h \
-		../src/capabilities/controller.h \
-		../src/units/ship.h \
-		../src/capabilities/modules/warpdrive.h \
-		../src/additional/stringformer.h \
-		../src/additional/trigger.h \
 		../src/context.h \
-		../src/units/particle.h \
-		../src/additional/lightparticle.h \
 		../src/assetmanager.h \
-		../src/filesystem.h \
-		../src/capabilities/modules/weapon.h \
-		../src/capabilities/modules/engine.h \
-		../src/units/station.h \
-		../src/capabilities/player.h \
 		../src/gui/guimain.h \
 		../src/gui/guistack.h \
 		../src/gui/guielement.h \
+		../src/capabilities/controller.h \
+		../src/units/ship.h \
+		../src/capabilities/modules/warpdrive.h \
+		../src/additional/trigger.h \
 		../src/gui/guicentralmessage.h \
 		../src/gui/guilabel.h \
 		../src/gui/guifloatingmessage.h \
-		../src/gui/guiblushingfloatingmessage.h \
-		../src/additional/math.h \
-		../src/background.h
+		../src/near.h \
+		../src/background.h \
+		../src/units/particle.h \
+		../src/units/camera.h \
+		../src/additional/lightparticle.h \
+		../src/objectregistry.h \
+		../src/debug.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o projectile.o ../src/units/projectile.cpp
 
 context.o: ../src/context.cpp ../src/context.h \
-		../src/units/particle.h \
-		../src/units/movable.h \
-		../src/units/unit.h \
-		../src/worker.h \
-		../src/object.h \
-		../src/renderer.h \
-		../src/additional/spm.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/vector.h \
-		../src/additional/rotozoom.h \
-		../src/additional/auto.h \
-		../src/additional/event.h \
-		../src/debug.h \
-		../src/capabilities/modulehandler.h \
-		../src/capabilities/modules/module.h \
-		../src/capabilities/capability.h \
-		../src/loadable.h \
-		../src/animator.h \
-		../src/additional/timer.h \
-		../src/audioplayer.h \
+		../src/assetmanager.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -1914,49 +1714,51 @@ context.o: ../src/context.cpp ../src/context.h \
 		../src/json/reader.h \
 		../src/json/value.h \
 		../src/json/writer.h \
-		../src/iinformative.h \
-		../src/additional/lightparticle.h \
-		../src/assetmanager.h \
-		../src/filesystem.h \
-		../src/units/ship.h \
-		../src/capabilities/modules/warpdrive.h \
-		../src/additional/stringformer.h \
-		../src/capabilities/modules/weapon.h \
-		../src/units/projectile.h \
-		../src/units/camera.h \
-		../src/capabilities/controller.h \
-		../src/additional/trigger.h \
-		../src/capabilities/modules/engine.h \
-		../src/units/station.h \
-		../src/capabilities/player.h \
+		../src/loadable.h \
+		../src/animator.h \
+		../src/additional/timer.h \
+		../src/worker.h \
+		../src/additional/event.h \
+		../src/additional/vector.h \
+		../src/object.h \
+		../src/renderer.h \
+		../src/additional/effects/visualeffect.h \
+		../src/additional/auto.h \
 		../src/gui/guimain.h \
 		../src/gui/guistack.h \
 		../src/gui/guielement.h \
+		../src/capabilities/controller.h \
+		../src/capabilities/capability.h \
+		../src/units/ship.h \
+		../src/units/movable.h \
+		../src/units/unit.h \
+		../src/capabilities/modulehandler.h \
+		../src/capabilities/modules/module.h \
+		../src/iinformative.h \
+		../src/capabilities/modules/warpdrive.h \
+		../src/additional/trigger.h \
 		../src/gui/guicentralmessage.h \
 		../src/gui/guilabel.h \
 		../src/gui/guifloatingmessage.h \
-		../src/gui/guiblushingfloatingmessage.h \
-		../src/additional/math.h \
-		../src/background.h
+		../src/near.h \
+		../src/background.h \
+		../src/objectregistry.h \
+		../src/debug.h \
+		../src/units/particle.h \
+		../src/additional/lightparticle.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o context.o ../src/context.cpp
 
 engine.o: ../src/capabilities/modules/engine.cpp ../src/capabilities/modules/engine.h \
 		../src/capabilities/modules/module.h \
 		../src/capabilities/capability.h \
 		../src/worker.h \
+		../src/additional/event.h \
+		../src/additional/vector.h \
 		../src/object.h \
 		../src/renderer.h \
-		../src/additional/spm.h \
 		../src/additional/effects/visualeffect.h \
-		../src/additional/vector.h \
-		../src/additional/rotozoom.h \
 		../src/additional/auto.h \
-		../src/additional/event.h \
-		../src/debug.h \
 		../src/loadable.h \
-		../src/animator.h \
-		../src/additional/timer.h \
-		../src/audioplayer.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -1967,6 +1769,8 @@ engine.o: ../src/capabilities/modules/engine.cpp ../src/capabilities/modules/eng
 		../src/json/reader.h \
 		../src/json/value.h \
 		../src/json/writer.h \
+		../src/animator.h \
+		../src/additional/timer.h \
 		../src/iinformative.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o engine.o ../src/capabilities/modules/engine.cpp
 
@@ -1974,19 +1778,13 @@ warpdrive.o: ../src/capabilities/modules/warpdrive.cpp ../src/capabilities/modul
 		../src/capabilities/modules/module.h \
 		../src/capabilities/capability.h \
 		../src/worker.h \
+		../src/additional/event.h \
+		../src/additional/vector.h \
 		../src/object.h \
 		../src/renderer.h \
-		../src/additional/spm.h \
 		../src/additional/effects/visualeffect.h \
-		../src/additional/vector.h \
-		../src/additional/rotozoom.h \
 		../src/additional/auto.h \
-		../src/additional/event.h \
-		../src/debug.h \
 		../src/loadable.h \
-		../src/animator.h \
-		../src/additional/timer.h \
-		../src/audioplayer.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -1997,30 +1795,42 @@ warpdrive.o: ../src/capabilities/modules/warpdrive.cpp ../src/capabilities/modul
 		../src/json/reader.h \
 		../src/json/value.h \
 		../src/json/writer.h \
+		../src/animator.h \
+		../src/additional/timer.h \
 		../src/iinformative.h \
+		../src/context.h \
+		../src/assetmanager.h \
+		../src/gui/guimain.h \
+		../src/gui/guistack.h \
+		../src/gui/guielement.h \
+		../src/capabilities/controller.h \
+		../src/units/ship.h \
+		../src/units/movable.h \
+		../src/units/unit.h \
+		../src/capabilities/modulehandler.h \
+		../src/additional/trigger.h \
+		../src/gui/guicentralmessage.h \
+		../src/gui/guilabel.h \
+		../src/gui/guifloatingmessage.h \
+		../src/near.h \
+		../src/background.h \
 		../src/additional/stringformer.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o warpdrive.o ../src/capabilities/modules/warpdrive.cpp
 
 ship.o: ../src/units/ship.cpp ../src/units/ship.h \
 		../src/units/movable.h \
 		../src/units/unit.h \
-		../src/worker.h \
-		../src/object.h \
-		../src/renderer.h \
-		../src/additional/spm.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/vector.h \
-		../src/additional/rotozoom.h \
-		../src/additional/auto.h \
-		../src/additional/event.h \
-		../src/debug.h \
 		../src/capabilities/modulehandler.h \
 		../src/capabilities/modules/module.h \
 		../src/capabilities/capability.h \
+		../src/worker.h \
+		../src/additional/event.h \
+		../src/additional/vector.h \
+		../src/object.h \
+		../src/renderer.h \
+		../src/additional/effects/visualeffect.h \
+		../src/additional/auto.h \
 		../src/loadable.h \
-		../src/animator.h \
-		../src/additional/timer.h \
-		../src/audioplayer.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -2031,33 +1841,41 @@ ship.o: ../src/units/ship.cpp ../src/units/ship.h \
 		../src/json/reader.h \
 		../src/json/value.h \
 		../src/json/writer.h \
+		../src/animator.h \
+		../src/additional/timer.h \
 		../src/iinformative.h \
 		../src/capabilities/modules/warpdrive.h \
-		../src/additional/stringformer.h
+		../src/context.h \
+		../src/assetmanager.h \
+		../src/gui/guimain.h \
+		../src/gui/guistack.h \
+		../src/gui/guielement.h \
+		../src/capabilities/controller.h \
+		../src/additional/trigger.h \
+		../src/gui/guicentralmessage.h \
+		../src/gui/guilabel.h \
+		../src/gui/guifloatingmessage.h \
+		../src/near.h \
+		../src/background.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ship.o ../src/units/ship.cpp
 
 guielement.o: ../src/gui/guielement.cpp ../src/gui/guielement.h \
-		../src/renderer.h \
-		../src/additional/spm.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/vector.h \
-		../src/object.h \
-		../src/additional/rotozoom.h \
-		../src/additional/auto.h \
 		../src/capabilities/controller.h \
+		../src/capabilities/capability.h \
 		../src/worker.h \
 		../src/additional/event.h \
-		../src/debug.h \
-		../src/capabilities/capability.h \
+		../src/additional/vector.h \
+		../src/object.h \
+		../src/renderer.h \
+		../src/additional/effects/visualeffect.h \
+		../src/additional/auto.h \
+		../src/additional/timer.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
 		../src/units/unit.h \
 		../src/capabilities/modulehandler.h \
 		../src/capabilities/modules/module.h \
 		../src/loadable.h \
-		../src/animator.h \
-		../src/additional/timer.h \
-		../src/audioplayer.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -2068,36 +1886,32 @@ guielement.o: ../src/gui/guielement.cpp ../src/gui/guielement.h \
 		../src/json/reader.h \
 		../src/json/value.h \
 		../src/json/writer.h \
+		../src/animator.h \
 		../src/iinformative.h \
 		../src/capabilities/modules/warpdrive.h \
-		../src/additional/stringformer.h \
 		../src/additional/trigger.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o guielement.o ../src/gui/guielement.cpp
 
 guicontainer.o: ../src/gui/guicontainer.cpp ../src/gui/guicontainer.h \
-		../src/additional/effects/anaglyph.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/vector.h \
-		../src/object.h \
+		../src/gui/guibutton.h \
+		../src/gui/guilabel.h \
 		../src/gui/guielement.h \
-		../src/renderer.h \
-		../src/additional/spm.h \
-		../src/additional/rotozoom.h \
-		../src/additional/auto.h \
 		../src/capabilities/controller.h \
+		../src/capabilities/capability.h \
 		../src/worker.h \
 		../src/additional/event.h \
-		../src/debug.h \
-		../src/capabilities/capability.h \
+		../src/additional/vector.h \
+		../src/object.h \
+		../src/renderer.h \
+		../src/additional/effects/visualeffect.h \
+		../src/additional/auto.h \
+		../src/additional/timer.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
 		../src/units/unit.h \
 		../src/capabilities/modulehandler.h \
 		../src/capabilities/modules/module.h \
 		../src/loadable.h \
-		../src/animator.h \
-		../src/additional/timer.h \
-		../src/audioplayer.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -2108,38 +1922,32 @@ guicontainer.o: ../src/gui/guicontainer.cpp ../src/gui/guicontainer.h \
 		../src/json/reader.h \
 		../src/json/value.h \
 		../src/json/writer.h \
+		../src/animator.h \
 		../src/iinformative.h \
 		../src/capabilities/modules/warpdrive.h \
-		../src/additional/stringformer.h \
 		../src/additional/trigger.h \
-		../src/gui/guibutton.h \
-		../src/gui/guilabel.h \
-		../src/gui/guistack.h
+		../src/gui/guistack.h \
+		../src/additional/effects/anaglyph.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o guicontainer.o ../src/gui/guicontainer.cpp
 
 guilabel.o: ../src/gui/guilabel.cpp ../src/gui/guilabel.h \
 		../src/gui/guielement.h \
-		../src/renderer.h \
-		../src/additional/spm.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/vector.h \
-		../src/object.h \
-		../src/additional/rotozoom.h \
-		../src/additional/auto.h \
 		../src/capabilities/controller.h \
+		../src/capabilities/capability.h \
 		../src/worker.h \
 		../src/additional/event.h \
-		../src/debug.h \
-		../src/capabilities/capability.h \
+		../src/additional/vector.h \
+		../src/object.h \
+		../src/renderer.h \
+		../src/additional/effects/visualeffect.h \
+		../src/additional/auto.h \
+		../src/additional/timer.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
 		../src/units/unit.h \
 		../src/capabilities/modulehandler.h \
 		../src/capabilities/modules/module.h \
 		../src/loadable.h \
-		../src/animator.h \
-		../src/additional/timer.h \
-		../src/audioplayer.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -2150,36 +1958,31 @@ guilabel.o: ../src/gui/guilabel.cpp ../src/gui/guilabel.h \
 		../src/json/reader.h \
 		../src/json/value.h \
 		../src/json/writer.h \
+		../src/animator.h \
 		../src/iinformative.h \
 		../src/capabilities/modules/warpdrive.h \
-		../src/additional/stringformer.h \
 		../src/additional/trigger.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o guilabel.o ../src/gui/guilabel.cpp
 
 guibutton.o: ../src/gui/guibutton.cpp ../src/gui/guibutton.h \
 		../src/gui/guilabel.h \
 		../src/gui/guielement.h \
-		../src/renderer.h \
-		../src/additional/spm.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/vector.h \
-		../src/object.h \
-		../src/additional/rotozoom.h \
-		../src/additional/auto.h \
 		../src/capabilities/controller.h \
+		../src/capabilities/capability.h \
 		../src/worker.h \
 		../src/additional/event.h \
-		../src/debug.h \
-		../src/capabilities/capability.h \
+		../src/additional/vector.h \
+		../src/object.h \
+		../src/renderer.h \
+		../src/additional/effects/visualeffect.h \
+		../src/additional/auto.h \
+		../src/additional/timer.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
 		../src/units/unit.h \
 		../src/capabilities/modulehandler.h \
 		../src/capabilities/modules/module.h \
 		../src/loadable.h \
-		../src/animator.h \
-		../src/additional/timer.h \
-		../src/audioplayer.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -2190,9 +1993,9 @@ guibutton.o: ../src/gui/guibutton.cpp ../src/gui/guibutton.h \
 		../src/json/reader.h \
 		../src/json/value.h \
 		../src/json/writer.h \
+		../src/animator.h \
 		../src/iinformative.h \
 		../src/capabilities/modules/warpdrive.h \
-		../src/additional/stringformer.h \
 		../src/additional/trigger.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o guibutton.o ../src/gui/guibutton.cpp
 
@@ -2201,27 +2004,22 @@ iinformative.o: ../src/iinformative.cpp ../src/iinformative.h
 
 guistack.o: ../src/gui/guistack.cpp ../src/gui/guistack.h \
 		../src/gui/guielement.h \
-		../src/renderer.h \
-		../src/additional/spm.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/vector.h \
-		../src/object.h \
-		../src/additional/rotozoom.h \
-		../src/additional/auto.h \
 		../src/capabilities/controller.h \
+		../src/capabilities/capability.h \
 		../src/worker.h \
 		../src/additional/event.h \
-		../src/debug.h \
-		../src/capabilities/capability.h \
+		../src/additional/vector.h \
+		../src/object.h \
+		../src/renderer.h \
+		../src/additional/effects/visualeffect.h \
+		../src/additional/auto.h \
+		../src/additional/timer.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
 		../src/units/unit.h \
 		../src/capabilities/modulehandler.h \
 		../src/capabilities/modules/module.h \
 		../src/loadable.h \
-		../src/animator.h \
-		../src/additional/timer.h \
-		../src/audioplayer.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -2232,38 +2030,32 @@ guistack.o: ../src/gui/guistack.cpp ../src/gui/guistack.h \
 		../src/json/reader.h \
 		../src/json/value.h \
 		../src/json/writer.h \
+		../src/animator.h \
 		../src/iinformative.h \
 		../src/capabilities/modules/warpdrive.h \
-		../src/additional/stringformer.h \
 		../src/additional/trigger.h \
 		../src/gui/guicontainer.h \
-		../src/additional/effects/anaglyph.h \
 		../src/gui/guibutton.h \
 		../src/gui/guilabel.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o guistack.o ../src/gui/guistack.cpp
 
 ai.o: ../src/capabilities/ai.cpp ../src/capabilities/ai.h \
 		../src/capabilities/controller.h \
+		../src/capabilities/capability.h \
 		../src/worker.h \
+		../src/additional/event.h \
+		../src/additional/vector.h \
 		../src/object.h \
 		../src/renderer.h \
-		../src/additional/spm.h \
 		../src/additional/effects/visualeffect.h \
-		../src/additional/vector.h \
-		../src/additional/rotozoom.h \
 		../src/additional/auto.h \
-		../src/additional/event.h \
-		../src/debug.h \
-		../src/capabilities/capability.h \
+		../src/additional/timer.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
 		../src/units/unit.h \
 		../src/capabilities/modulehandler.h \
 		../src/capabilities/modules/module.h \
 		../src/loadable.h \
-		../src/animator.h \
-		../src/additional/timer.h \
-		../src/audioplayer.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -2274,31 +2066,25 @@ ai.o: ../src/capabilities/ai.cpp ../src/capabilities/ai.h \
 		../src/json/reader.h \
 		../src/json/value.h \
 		../src/json/writer.h \
+		../src/animator.h \
 		../src/iinformative.h \
 		../src/capabilities/modules/warpdrive.h \
-		../src/additional/stringformer.h \
 		../src/additional/trigger.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ai.o ../src/capabilities/ai.cpp
 
 station.o: ../src/units/station.cpp ../src/units/station.h \
 		../src/units/unit.h \
-		../src/worker.h \
-		../src/object.h \
-		../src/renderer.h \
-		../src/additional/spm.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/vector.h \
-		../src/additional/rotozoom.h \
-		../src/additional/auto.h \
-		../src/additional/event.h \
-		../src/debug.h \
 		../src/capabilities/modulehandler.h \
 		../src/capabilities/modules/module.h \
 		../src/capabilities/capability.h \
+		../src/worker.h \
+		../src/additional/event.h \
+		../src/additional/vector.h \
+		../src/object.h \
+		../src/renderer.h \
+		../src/additional/effects/visualeffect.h \
+		../src/additional/auto.h \
 		../src/loadable.h \
-		../src/animator.h \
-		../src/additional/timer.h \
-		../src/audioplayer.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -2309,6 +2095,8 @@ station.o: ../src/units/station.cpp ../src/units/station.h \
 		../src/json/reader.h \
 		../src/json/value.h \
 		../src/json/writer.h \
+		../src/animator.h \
+		../src/additional/timer.h \
 		../src/iinformative.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o station.o ../src/units/station.cpp
 
@@ -2342,34 +2130,60 @@ json_writer.o: ../src/json/json_writer.cpp ../src/json/json_tool.h \
 		../src/json/forwards.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o json_writer.o ../src/json/json_writer.cpp
 
-debug.o: ../src/debug.cpp ../src/debug.h
+debug.o: ../src/debug.cpp ../src/debug.h \
+		../src/near.h \
+		../src/capabilities/controller.h \
+		../src/capabilities/capability.h \
+		../src/worker.h \
+		../src/additional/event.h \
+		../src/additional/vector.h \
+		../src/object.h \
+		../src/renderer.h \
+		../src/additional/effects/visualeffect.h \
+		../src/additional/auto.h \
+		../src/additional/timer.h \
+		../src/units/ship.h \
+		../src/units/movable.h \
+		../src/units/unit.h \
+		../src/capabilities/modulehandler.h \
+		../src/capabilities/modules/module.h \
+		../src/loadable.h \
+		../src/json/json.h \
+		../src/json/autolink.h \
+		../src/json/config.h \
+		../src/json/allocator.h \
+		../src/json/version.h \
+		../src/json/features.h \
+		../src/json/forwards.h \
+		../src/json/reader.h \
+		../src/json/value.h \
+		../src/json/writer.h \
+		../src/animator.h \
+		../src/iinformative.h \
+		../src/capabilities/modules/warpdrive.h \
+		../src/additional/trigger.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug.o ../src/debug.cpp
 
 guiswitch.o: ../src/gui/guiswitch.cpp ../src/gui/guiswitch.h \
 		../src/gui/guibutton.h \
 		../src/gui/guilabel.h \
 		../src/gui/guielement.h \
-		../src/renderer.h \
-		../src/additional/spm.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/vector.h \
-		../src/object.h \
-		../src/additional/rotozoom.h \
-		../src/additional/auto.h \
 		../src/capabilities/controller.h \
+		../src/capabilities/capability.h \
 		../src/worker.h \
 		../src/additional/event.h \
-		../src/debug.h \
-		../src/capabilities/capability.h \
+		../src/additional/vector.h \
+		../src/object.h \
+		../src/renderer.h \
+		../src/additional/effects/visualeffect.h \
+		../src/additional/auto.h \
+		../src/additional/timer.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
 		../src/units/unit.h \
 		../src/capabilities/modulehandler.h \
 		../src/capabilities/modules/module.h \
 		../src/loadable.h \
-		../src/animator.h \
-		../src/additional/timer.h \
-		../src/audioplayer.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -2380,42 +2194,36 @@ guiswitch.o: ../src/gui/guiswitch.cpp ../src/gui/guiswitch.h \
 		../src/json/reader.h \
 		../src/json/value.h \
 		../src/json/writer.h \
+		../src/animator.h \
 		../src/iinformative.h \
 		../src/capabilities/modules/warpdrive.h \
-		../src/additional/stringformer.h \
 		../src/additional/trigger.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o guiswitch.o ../src/gui/guiswitch.cpp
 
 visualeffect.o: ../src/additional/effects/visualeffect.cpp ../src/additional/effects/visualeffect.h \
-		../src/additional/vector.h \
-		../src/object.h
+		../src/additional/vector.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o visualeffect.o ../src/additional/effects/visualeffect.cpp
 
 guichoice.o: ../src/gui/guichoice.cpp ../src/gui/guichoice.h \
 		../src/gui/guibutton.h \
 		../src/gui/guilabel.h \
 		../src/gui/guielement.h \
-		../src/renderer.h \
-		../src/additional/spm.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/vector.h \
-		../src/object.h \
-		../src/additional/rotozoom.h \
-		../src/additional/auto.h \
 		../src/capabilities/controller.h \
+		../src/capabilities/capability.h \
 		../src/worker.h \
 		../src/additional/event.h \
-		../src/debug.h \
-		../src/capabilities/capability.h \
+		../src/additional/vector.h \
+		../src/object.h \
+		../src/renderer.h \
+		../src/additional/effects/visualeffect.h \
+		../src/additional/auto.h \
+		../src/additional/timer.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
 		../src/units/unit.h \
 		../src/capabilities/modulehandler.h \
 		../src/capabilities/modules/module.h \
 		../src/loadable.h \
-		../src/animator.h \
-		../src/additional/timer.h \
-		../src/audioplayer.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -2426,42 +2234,35 @@ guichoice.o: ../src/gui/guichoice.cpp ../src/gui/guichoice.h \
 		../src/json/reader.h \
 		../src/json/value.h \
 		../src/json/writer.h \
+		../src/animator.h \
 		../src/iinformative.h \
 		../src/capabilities/modules/warpdrive.h \
-		../src/additional/stringformer.h \
 		../src/additional/trigger.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o guichoice.o ../src/gui/guichoice.cpp
 
 application.o: ../src/application.cpp ../src/application.h \
-		../src/additional/vector.h \
 		../src/object.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o application.o ../src/application.cpp
 
-fpsmonitor.o: ../src/additional/fpsmonitor.cpp ../src/additional/fpsmonitor.h \
+fpsmonitor.o: ../src/additional/informative/fpsmonitor.cpp ../src/additional/informative/fpsmonitor.h \
 		../src/iinformative.h \
 		../src/additional/timer.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o fpsmonitor.o ../src/additional/fpsmonitor.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o fpsmonitor.o ../src/additional/informative/fpsmonitor.cpp
 
 particle.o: ../src/units/particle.cpp ../src/units/particle.h \
 		../src/units/movable.h \
 		../src/units/unit.h \
-		../src/worker.h \
-		../src/object.h \
-		../src/renderer.h \
-		../src/additional/spm.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/vector.h \
-		../src/additional/rotozoom.h \
-		../src/additional/auto.h \
-		../src/additional/event.h \
-		../src/debug.h \
 		../src/capabilities/modulehandler.h \
 		../src/capabilities/modules/module.h \
 		../src/capabilities/capability.h \
+		../src/worker.h \
+		../src/additional/event.h \
+		../src/additional/vector.h \
+		../src/object.h \
+		../src/renderer.h \
+		../src/additional/effects/visualeffect.h \
+		../src/additional/auto.h \
 		../src/loadable.h \
-		../src/animator.h \
-		../src/additional/timer.h \
-		../src/audioplayer.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -2472,30 +2273,22 @@ particle.o: ../src/units/particle.cpp ../src/units/particle.h \
 		../src/json/reader.h \
 		../src/json/value.h \
 		../src/json/writer.h \
+		../src/animator.h \
+		../src/additional/timer.h \
 		../src/iinformative.h \
 		../src/context.h \
-		../src/additional/lightparticle.h \
 		../src/assetmanager.h \
-		../src/filesystem.h \
-		../src/units/ship.h \
-		../src/capabilities/modules/warpdrive.h \
-		../src/additional/stringformer.h \
-		../src/capabilities/modules/weapon.h \
-		../src/units/projectile.h \
-		../src/units/camera.h \
-		../src/capabilities/controller.h \
-		../src/additional/trigger.h \
-		../src/capabilities/modules/engine.h \
-		../src/units/station.h \
-		../src/capabilities/player.h \
 		../src/gui/guimain.h \
 		../src/gui/guistack.h \
 		../src/gui/guielement.h \
+		../src/capabilities/controller.h \
+		../src/units/ship.h \
+		../src/capabilities/modules/warpdrive.h \
+		../src/additional/trigger.h \
 		../src/gui/guicentralmessage.h \
 		../src/gui/guilabel.h \
 		../src/gui/guifloatingmessage.h \
-		../src/gui/guiblushingfloatingmessage.h \
-		../src/additional/math.h \
+		../src/near.h \
 		../src/background.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o particle.o ../src/units/particle.cpp
 
@@ -2510,26 +2303,7 @@ netlistener.o: ../src/netlistener.cpp ../src/netlistener.h \
 		../src/additional/net/socket.h \
 		../src/additional/net/framebuilder.h \
 		../src/context.h \
-		../src/units/particle.h \
-		../src/units/movable.h \
-		../src/units/unit.h \
-		../src/worker.h \
-		../src/object.h \
-		../src/renderer.h \
-		../src/additional/spm.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/vector.h \
-		../src/additional/rotozoom.h \
-		../src/additional/auto.h \
-		../src/additional/event.h \
-		../src/debug.h \
-		../src/capabilities/modulehandler.h \
-		../src/capabilities/modules/module.h \
-		../src/capabilities/capability.h \
-		../src/loadable.h \
-		../src/animator.h \
-		../src/additional/timer.h \
-		../src/audioplayer.h \
+		../src/assetmanager.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -2540,33 +2314,39 @@ netlistener.o: ../src/netlistener.cpp ../src/netlistener.h \
 		../src/json/reader.h \
 		../src/json/value.h \
 		../src/json/writer.h \
-		../src/iinformative.h \
-		../src/additional/lightparticle.h \
-		../src/assetmanager.h \
-		../src/filesystem.h \
-		../src/units/ship.h \
-		../src/capabilities/modules/warpdrive.h \
-		../src/additional/stringformer.h \
-		../src/capabilities/modules/weapon.h \
-		../src/units/projectile.h \
-		../src/units/camera.h \
-		../src/capabilities/controller.h \
-		../src/additional/trigger.h \
-		../src/capabilities/modules/engine.h \
-		../src/units/station.h \
-		../src/capabilities/player.h \
+		../src/loadable.h \
+		../src/animator.h \
+		../src/additional/timer.h \
+		../src/worker.h \
+		../src/additional/event.h \
+		../src/additional/vector.h \
+		../src/object.h \
+		../src/renderer.h \
+		../src/additional/effects/visualeffect.h \
+		../src/additional/auto.h \
 		../src/gui/guimain.h \
 		../src/gui/guistack.h \
 		../src/gui/guielement.h \
+		../src/capabilities/controller.h \
+		../src/capabilities/capability.h \
+		../src/units/ship.h \
+		../src/units/movable.h \
+		../src/units/unit.h \
+		../src/capabilities/modulehandler.h \
+		../src/capabilities/modules/module.h \
+		../src/iinformative.h \
+		../src/capabilities/modules/warpdrive.h \
+		../src/additional/trigger.h \
 		../src/gui/guicentralmessage.h \
 		../src/gui/guilabel.h \
 		../src/gui/guifloatingmessage.h \
-		../src/gui/guiblushingfloatingmessage.h \
-		../src/additional/math.h \
+		../src/near.h \
 		../src/background.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o netlistener.o ../src/netlistener.cpp
 
 state.o: ../src/state.cpp ../src/state.h \
+		../src/additional/auto.h \
+		../src/additional/vector.h \
 		../src/object.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o state.o ../src/state.cpp
 
@@ -2576,27 +2356,22 @@ trigger.o: ../src/additional/trigger.cpp ../src/additional/trigger.h
 guimain.o: ../src/gui/guimain.cpp ../src/gui/guimain.h \
 		../src/gui/guistack.h \
 		../src/gui/guielement.h \
-		../src/renderer.h \
-		../src/additional/spm.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/vector.h \
-		../src/object.h \
-		../src/additional/rotozoom.h \
-		../src/additional/auto.h \
 		../src/capabilities/controller.h \
+		../src/capabilities/capability.h \
 		../src/worker.h \
 		../src/additional/event.h \
-		../src/debug.h \
-		../src/capabilities/capability.h \
+		../src/additional/vector.h \
+		../src/object.h \
+		../src/renderer.h \
+		../src/additional/effects/visualeffect.h \
+		../src/additional/auto.h \
+		../src/additional/timer.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
 		../src/units/unit.h \
 		../src/capabilities/modulehandler.h \
 		../src/capabilities/modules/module.h \
 		../src/loadable.h \
-		../src/animator.h \
-		../src/additional/timer.h \
-		../src/audioplayer.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -2607,41 +2382,35 @@ guimain.o: ../src/gui/guimain.cpp ../src/gui/guimain.h \
 		../src/json/reader.h \
 		../src/json/value.h \
 		../src/json/writer.h \
+		../src/animator.h \
 		../src/iinformative.h \
 		../src/capabilities/modules/warpdrive.h \
-		../src/additional/stringformer.h \
 		../src/additional/trigger.h \
 		../src/gui/guicentralmessage.h \
 		../src/gui/guilabel.h \
 		../src/gui/guifloatingmessage.h \
-		../src/gui/guiblushingfloatingmessage.h \
-		../src/additional/math.h
+		../src/gui/guiblushingfloatingmessage.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o guimain.o ../src/gui/guimain.cpp
 
 guicentralmessage.o: ../src/gui/guicentralmessage.cpp ../src/gui/guicentralmessage.h \
 		../src/gui/guilabel.h \
 		../src/gui/guielement.h \
-		../src/renderer.h \
-		../src/additional/spm.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/vector.h \
-		../src/object.h \
-		../src/additional/rotozoom.h \
-		../src/additional/auto.h \
 		../src/capabilities/controller.h \
+		../src/capabilities/capability.h \
 		../src/worker.h \
 		../src/additional/event.h \
-		../src/debug.h \
-		../src/capabilities/capability.h \
+		../src/additional/vector.h \
+		../src/object.h \
+		../src/renderer.h \
+		../src/additional/effects/visualeffect.h \
+		../src/additional/auto.h \
+		../src/additional/timer.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
 		../src/units/unit.h \
 		../src/capabilities/modulehandler.h \
 		../src/capabilities/modules/module.h \
 		../src/loadable.h \
-		../src/animator.h \
-		../src/additional/timer.h \
-		../src/audioplayer.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -2652,36 +2421,30 @@ guicentralmessage.o: ../src/gui/guicentralmessage.cpp ../src/gui/guicentralmessa
 		../src/json/reader.h \
 		../src/json/value.h \
 		../src/json/writer.h \
+		../src/animator.h \
 		../src/iinformative.h \
 		../src/capabilities/modules/warpdrive.h \
-		../src/additional/stringformer.h \
 		../src/additional/trigger.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o guicentralmessage.o ../src/gui/guicentralmessage.cpp
 
-controllerfinder.o: ../src/additional/controllerfinder.cpp ../src/additional/controllerfinder.h \
+controllerfinder.o: ../src/additional/informative/controllerfinder.cpp ../src/additional/informative/controllerfinder.h \
 		../src/iinformative.h \
-		../src/capabilities/player.h \
 		../src/capabilities/controller.h \
+		../src/capabilities/capability.h \
 		../src/worker.h \
+		../src/additional/event.h \
+		../src/additional/vector.h \
 		../src/object.h \
 		../src/renderer.h \
-		../src/additional/spm.h \
 		../src/additional/effects/visualeffect.h \
-		../src/additional/vector.h \
-		../src/additional/rotozoom.h \
 		../src/additional/auto.h \
-		../src/additional/event.h \
-		../src/debug.h \
-		../src/capabilities/capability.h \
+		../src/additional/timer.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
 		../src/units/unit.h \
 		../src/capabilities/modulehandler.h \
 		../src/capabilities/modules/module.h \
 		../src/loadable.h \
-		../src/animator.h \
-		../src/additional/timer.h \
-		../src/audioplayer.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -2692,38 +2455,30 @@ controllerfinder.o: ../src/additional/controllerfinder.cpp ../src/additional/con
 		../src/json/reader.h \
 		../src/json/value.h \
 		../src/json/writer.h \
+		../src/animator.h \
 		../src/capabilities/modules/warpdrive.h \
-		../src/additional/stringformer.h \
-		../src/additional/trigger.h \
-		../src/capabilities/modules/weapon.h \
-		../src/units/projectile.h \
-		../src/units/camera.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o controllerfinder.o ../src/additional/controllerfinder.cpp
+		../src/additional/trigger.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o controllerfinder.o ../src/additional/informative/controllerfinder.cpp
 
 guifloatingmessage.o: ../src/gui/guifloatingmessage.cpp ../src/gui/guifloatingmessage.h \
 		../src/gui/guilabel.h \
 		../src/gui/guielement.h \
-		../src/renderer.h \
-		../src/additional/spm.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/vector.h \
-		../src/object.h \
-		../src/additional/rotozoom.h \
-		../src/additional/auto.h \
 		../src/capabilities/controller.h \
+		../src/capabilities/capability.h \
 		../src/worker.h \
 		../src/additional/event.h \
-		../src/debug.h \
-		../src/capabilities/capability.h \
+		../src/additional/vector.h \
+		../src/object.h \
+		../src/renderer.h \
+		../src/additional/effects/visualeffect.h \
+		../src/additional/auto.h \
+		../src/additional/timer.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
 		../src/units/unit.h \
 		../src/capabilities/modulehandler.h \
 		../src/capabilities/modules/module.h \
 		../src/loadable.h \
-		../src/animator.h \
-		../src/additional/timer.h \
-		../src/audioplayer.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -2734,9 +2489,9 @@ guifloatingmessage.o: ../src/gui/guifloatingmessage.cpp ../src/gui/guifloatingme
 		../src/json/reader.h \
 		../src/json/value.h \
 		../src/json/writer.h \
+		../src/animator.h \
 		../src/iinformative.h \
 		../src/capabilities/modules/warpdrive.h \
-		../src/additional/stringformer.h \
 		../src/additional/trigger.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o guifloatingmessage.o ../src/gui/guifloatingmessage.cpp
 
@@ -2744,27 +2499,22 @@ guiblushingfloatingmessage.o: ../src/gui/guiblushingfloatingmessage.cpp ../src/g
 		../src/gui/guifloatingmessage.h \
 		../src/gui/guilabel.h \
 		../src/gui/guielement.h \
-		../src/renderer.h \
-		../src/additional/spm.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/vector.h \
-		../src/object.h \
-		../src/additional/rotozoom.h \
-		../src/additional/auto.h \
 		../src/capabilities/controller.h \
+		../src/capabilities/capability.h \
 		../src/worker.h \
 		../src/additional/event.h \
-		../src/debug.h \
-		../src/capabilities/capability.h \
+		../src/additional/vector.h \
+		../src/object.h \
+		../src/renderer.h \
+		../src/additional/effects/visualeffect.h \
+		../src/additional/auto.h \
+		../src/additional/timer.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
 		../src/units/unit.h \
 		../src/capabilities/modulehandler.h \
 		../src/capabilities/modules/module.h \
 		../src/loadable.h \
-		../src/animator.h \
-		../src/additional/timer.h \
-		../src/audioplayer.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -2775,9 +2525,9 @@ guiblushingfloatingmessage.o: ../src/gui/guiblushingfloatingmessage.cpp ../src/g
 		../src/json/reader.h \
 		../src/json/value.h \
 		../src/json/writer.h \
+		../src/animator.h \
 		../src/iinformative.h \
 		../src/capabilities/modules/warpdrive.h \
-		../src/additional/stringformer.h \
 		../src/additional/trigger.h \
 		../src/additional/math.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o guiblushingfloatingmessage.o ../src/gui/guiblushingfloatingmessage.cpp
@@ -2787,26 +2537,15 @@ math.o: ../src/additional/math.cpp ../src/additional/math.h
 
 lightparticle.o: ../src/additional/lightparticle.cpp ../src/additional/lightparticle.h \
 		../src/worker.h \
+		../src/additional/event.h \
+		../src/additional/vector.h \
 		../src/object.h \
 		../src/renderer.h \
-		../src/additional/spm.h \
 		../src/additional/effects/visualeffect.h \
-		../src/additional/vector.h \
-		../src/additional/rotozoom.h \
 		../src/additional/auto.h \
-		../src/additional/event.h \
-		../src/debug.h \
 		../src/additional/timer.h \
 		../src/context.h \
-		../src/units/particle.h \
-		../src/units/movable.h \
-		../src/units/unit.h \
-		../src/capabilities/modulehandler.h \
-		../src/capabilities/modules/module.h \
-		../src/capabilities/capability.h \
-		../src/loadable.h \
-		../src/animator.h \
-		../src/audioplayer.h \
+		../src/assetmanager.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -2817,52 +2556,48 @@ lightparticle.o: ../src/additional/lightparticle.cpp ../src/additional/lightpart
 		../src/json/reader.h \
 		../src/json/value.h \
 		../src/json/writer.h \
-		../src/iinformative.h \
-		../src/assetmanager.h \
-		../src/filesystem.h \
-		../src/units/ship.h \
-		../src/capabilities/modules/warpdrive.h \
-		../src/additional/stringformer.h \
-		../src/capabilities/modules/weapon.h \
-		../src/units/projectile.h \
-		../src/units/camera.h \
-		../src/capabilities/controller.h \
-		../src/additional/trigger.h \
-		../src/capabilities/modules/engine.h \
-		../src/units/station.h \
-		../src/capabilities/player.h \
+		../src/loadable.h \
+		../src/animator.h \
 		../src/gui/guimain.h \
 		../src/gui/guistack.h \
 		../src/gui/guielement.h \
+		../src/capabilities/controller.h \
+		../src/capabilities/capability.h \
+		../src/units/ship.h \
+		../src/units/movable.h \
+		../src/units/unit.h \
+		../src/capabilities/modulehandler.h \
+		../src/capabilities/modules/module.h \
+		../src/iinformative.h \
+		../src/capabilities/modules/warpdrive.h \
+		../src/additional/trigger.h \
 		../src/gui/guicentralmessage.h \
 		../src/gui/guilabel.h \
 		../src/gui/guifloatingmessage.h \
-		../src/gui/guiblushingfloatingmessage.h \
-		../src/additional/math.h \
+		../src/near.h \
 		../src/background.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o lightparticle.o ../src/additional/lightparticle.cpp
 
 worldmanager.o: ../src/worldmanager.cpp ../src/worldmanager.h \
-		../src/units/camera.h \
-		../src/units/movable.h \
-		../src/units/unit.h \
+		../src/gui/guimain.h \
+		../src/gui/guistack.h \
+		../src/gui/guielement.h \
+		../src/capabilities/controller.h \
+		../src/capabilities/capability.h \
 		../src/worker.h \
+		../src/additional/event.h \
+		../src/additional/vector.h \
 		../src/object.h \
 		../src/renderer.h \
-		../src/additional/spm.h \
 		../src/additional/effects/visualeffect.h \
-		../src/additional/vector.h \
-		../src/additional/rotozoom.h \
 		../src/additional/auto.h \
-		../src/additional/event.h \
-		../src/debug.h \
+		../src/additional/timer.h \
+		../src/units/ship.h \
+		../src/units/movable.h \
+		../src/units/unit.h \
 		../src/capabilities/modulehandler.h \
 		../src/capabilities/modules/module.h \
-		../src/capabilities/capability.h \
 		../src/loadable.h \
-		../src/animator.h \
-		../src/additional/timer.h \
-		../src/audioplayer.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -2873,47 +2608,50 @@ worldmanager.o: ../src/worldmanager.cpp ../src/worldmanager.h \
 		../src/json/reader.h \
 		../src/json/value.h \
 		../src/json/writer.h \
+		../src/animator.h \
 		../src/iinformative.h \
-		../src/capabilities/controller.h \
-		../src/units/ship.h \
 		../src/capabilities/modules/warpdrive.h \
-		../src/additional/stringformer.h \
 		../src/additional/trigger.h \
-		../src/gui/guimain.h \
-		../src/gui/guistack.h \
-		../src/gui/guielement.h \
 		../src/gui/guicentralmessage.h \
 		../src/gui/guilabel.h \
 		../src/gui/guifloatingmessage.h \
-		../src/gui/guiblushingfloatingmessage.h \
-		../src/additional/math.h \
-		../src/gui/guilist.h \
-		../src/gui/guicontainer.h \
-		../src/additional/effects/anaglyph.h \
-		../src/gui/guibutton.h \
-		../src/gui/guichoice.h \
-		../src/units/projectile.h \
+		../src/near.h \
 		../src/worlds/world.h \
 		../src/assetmanager.h \
-		../src/filesystem.h \
-		../src/capabilities/modules/weapon.h \
-		../src/capabilities/modules/engine.h \
-		../src/units/station.h \
-		../src/capabilities/player.h \
-		../src/gui/guiswitch.h \
-		../src/capabilities/ai.h \
-		../src/additional/fpsmonitor.h \
-		../src/additional/controllerfinder.h \
-		../src/near.h \
+		../src/additional/informative/fpsmonitor.h \
 		../src/context.h \
-		../src/units/particle.h \
-		../src/additional/lightparticle.h \
-		../src/background.h
+		../src/background.h \
+		../src/units/camera.h \
+		../src/gui/guicontainer.h \
+		../src/gui/guibutton.h \
+		../src/gui/guilist.h \
+		../src/gui/guichoice.h \
+		../src/gui/guiswitch.h \
+		../src/additional/informative/registryinfo.h \
+		../src/additional/informative/controllerfinder.h \
+		../src/state.h \
+		../src/additional/spm.h \
+		../src/additional/effects/anaglyph.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o worldmanager.o ../src/worldmanager.cpp
 
 defaultworld.o: ../src/worlds/defaultworld.cpp ../src/worlds/defaultworld.h \
 		../src/worlds/world.h \
-		../src/assetmanager.h \
+		../src/object.h \
+		../src/capabilities/controller.h \
+		../src/capabilities/capability.h \
+		../src/worker.h \
+		../src/additional/event.h \
+		../src/additional/vector.h \
+		../src/renderer.h \
+		../src/additional/effects/visualeffect.h \
+		../src/additional/auto.h \
+		../src/additional/timer.h \
+		../src/units/ship.h \
+		../src/units/movable.h \
+		../src/units/unit.h \
+		../src/capabilities/modulehandler.h \
+		../src/capabilities/modules/module.h \
+		../src/loadable.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -2924,59 +2662,34 @@ defaultworld.o: ../src/worlds/defaultworld.cpp ../src/worlds/defaultworld.h \
 		../src/json/reader.h \
 		../src/json/value.h \
 		../src/json/writer.h \
-		../src/filesystem.h \
-		../src/loadable.h \
 		../src/animator.h \
-		../src/worker.h \
-		../src/object.h \
-		../src/renderer.h \
-		../src/additional/spm.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/vector.h \
-		../src/additional/rotozoom.h \
-		../src/additional/auto.h \
-		../src/additional/event.h \
-		../src/debug.h \
-		../src/additional/timer.h \
-		../src/audioplayer.h \
-		../src/units/ship.h \
-		../src/units/movable.h \
-		../src/units/unit.h \
-		../src/capabilities/modulehandler.h \
-		../src/capabilities/modules/module.h \
-		../src/capabilities/capability.h \
 		../src/iinformative.h \
 		../src/capabilities/modules/warpdrive.h \
-		../src/additional/stringformer.h \
-		../src/capabilities/modules/weapon.h \
-		../src/units/projectile.h \
-		../src/units/camera.h \
-		../src/capabilities/controller.h \
 		../src/additional/trigger.h \
-		../src/capabilities/modules/engine.h \
-		../src/units/station.h \
+		../src/assetmanager.h \
 		../src/capabilities/player.h \
-		../src/gui/guicontainer.h \
-		../src/additional/effects/anaglyph.h \
-		../src/gui/guielement.h \
-		../src/gui/guibutton.h \
-		../src/gui/guilabel.h \
-		../src/gui/guistack.h \
-		../src/gui/guiswitch.h \
-		../src/gui/guichoice.h \
-		../src/gui/guimain.h \
-		../src/gui/guicentralmessage.h \
-		../src/gui/guifloatingmessage.h \
-		../src/gui/guiblushingfloatingmessage.h \
-		../src/additional/math.h \
 		../src/capabilities/ai.h \
-		../src/additional/fpsmonitor.h \
-		../src/additional/controllerfinder.h
+		../src/debug.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o defaultworld.o ../src/worlds/defaultworld.cpp
 
 arenaworld.o: ../src/worlds/arenaworld.cpp ../src/worlds/arenaworld.h \
 		../src/worlds/world.h \
-		../src/assetmanager.h \
+		../src/object.h \
+		../src/capabilities/controller.h \
+		../src/capabilities/capability.h \
+		../src/worker.h \
+		../src/additional/event.h \
+		../src/additional/vector.h \
+		../src/renderer.h \
+		../src/additional/effects/visualeffect.h \
+		../src/additional/auto.h \
+		../src/additional/timer.h \
+		../src/units/ship.h \
+		../src/units/movable.h \
+		../src/units/unit.h \
+		../src/capabilities/modulehandler.h \
+		../src/capabilities/modules/module.h \
+		../src/loadable.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -2987,54 +2700,13 @@ arenaworld.o: ../src/worlds/arenaworld.cpp ../src/worlds/arenaworld.h \
 		../src/json/reader.h \
 		../src/json/value.h \
 		../src/json/writer.h \
-		../src/filesystem.h \
-		../src/loadable.h \
 		../src/animator.h \
-		../src/worker.h \
-		../src/object.h \
-		../src/renderer.h \
-		../src/additional/spm.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/vector.h \
-		../src/additional/rotozoom.h \
-		../src/additional/auto.h \
-		../src/additional/event.h \
-		../src/debug.h \
-		../src/additional/timer.h \
-		../src/audioplayer.h \
-		../src/units/ship.h \
-		../src/units/movable.h \
-		../src/units/unit.h \
-		../src/capabilities/modulehandler.h \
-		../src/capabilities/modules/module.h \
-		../src/capabilities/capability.h \
 		../src/iinformative.h \
 		../src/capabilities/modules/warpdrive.h \
-		../src/additional/stringformer.h \
-		../src/capabilities/modules/weapon.h \
-		../src/units/projectile.h \
-		../src/units/camera.h \
-		../src/capabilities/controller.h \
 		../src/additional/trigger.h \
-		../src/capabilities/modules/engine.h \
-		../src/units/station.h \
+		../src/assetmanager.h \
 		../src/capabilities/player.h \
-		../src/gui/guicontainer.h \
-		../src/additional/effects/anaglyph.h \
-		../src/gui/guielement.h \
-		../src/gui/guibutton.h \
-		../src/gui/guilabel.h \
-		../src/gui/guistack.h \
-		../src/gui/guiswitch.h \
-		../src/gui/guichoice.h \
-		../src/gui/guimain.h \
-		../src/gui/guicentralmessage.h \
-		../src/gui/guifloatingmessage.h \
-		../src/gui/guiblushingfloatingmessage.h \
-		../src/additional/math.h \
-		../src/capabilities/ai.h \
-		../src/additional/fpsmonitor.h \
-		../src/additional/controllerfinder.h
+		../src/capabilities/aggressive.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o arenaworld.o ../src/worlds/arenaworld.cpp
 
 auto.o: ../src/additional/auto.cpp ../src/additional/auto.h \
@@ -3045,39 +2717,31 @@ auto.o: ../src/additional/auto.cpp ../src/additional/auto.h \
 docker.o: ../src/capabilities/docker.cpp ../src/capabilities/docker.h \
 		../src/capabilities/capability.h \
 		../src/worker.h \
+		../src/additional/event.h \
+		../src/additional/vector.h \
 		../src/object.h \
 		../src/renderer.h \
-		../src/additional/spm.h \
 		../src/additional/effects/visualeffect.h \
-		../src/additional/vector.h \
-		../src/additional/rotozoom.h \
-		../src/additional/auto.h \
-		../src/additional/event.h \
-		../src/debug.h
+		../src/additional/auto.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o docker.o ../src/capabilities/docker.cpp
 
 near.o: ../src/near.cpp ../src/near.h \
 		../src/capabilities/controller.h \
+		../src/capabilities/capability.h \
 		../src/worker.h \
+		../src/additional/event.h \
+		../src/additional/vector.h \
 		../src/object.h \
 		../src/renderer.h \
-		../src/additional/spm.h \
 		../src/additional/effects/visualeffect.h \
-		../src/additional/vector.h \
-		../src/additional/rotozoom.h \
 		../src/additional/auto.h \
-		../src/additional/event.h \
-		../src/debug.h \
-		../src/capabilities/capability.h \
+		../src/additional/timer.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
 		../src/units/unit.h \
 		../src/capabilities/modulehandler.h \
 		../src/capabilities/modules/module.h \
 		../src/loadable.h \
-		../src/animator.h \
-		../src/additional/timer.h \
-		../src/audioplayer.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -3088,37 +2752,34 @@ near.o: ../src/near.cpp ../src/near.h \
 		../src/json/reader.h \
 		../src/json/value.h \
 		../src/json/writer.h \
+		../src/animator.h \
 		../src/iinformative.h \
 		../src/capabilities/modules/warpdrive.h \
-		../src/additional/stringformer.h \
-		../src/additional/trigger.h
+		../src/additional/trigger.h \
+		../src/objectregistry.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o near.o ../src/near.cpp
 
 guilist.o: ../src/gui/guilist.cpp ../src/gui/guilist.h \
 		../src/gui/guicontainer.h \
-		../src/additional/effects/anaglyph.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/vector.h \
-		../src/object.h \
+		../src/gui/guibutton.h \
+		../src/gui/guilabel.h \
 		../src/gui/guielement.h \
-		../src/renderer.h \
-		../src/additional/spm.h \
-		../src/additional/rotozoom.h \
-		../src/additional/auto.h \
 		../src/capabilities/controller.h \
+		../src/capabilities/capability.h \
 		../src/worker.h \
 		../src/additional/event.h \
-		../src/debug.h \
-		../src/capabilities/capability.h \
+		../src/additional/vector.h \
+		../src/object.h \
+		../src/renderer.h \
+		../src/additional/effects/visualeffect.h \
+		../src/additional/auto.h \
+		../src/additional/timer.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
 		../src/units/unit.h \
 		../src/capabilities/modulehandler.h \
 		../src/capabilities/modules/module.h \
 		../src/loadable.h \
-		../src/animator.h \
-		../src/additional/timer.h \
-		../src/audioplayer.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -3129,40 +2790,32 @@ guilist.o: ../src/gui/guilist.cpp ../src/gui/guilist.h \
 		../src/json/reader.h \
 		../src/json/value.h \
 		../src/json/writer.h \
+		../src/animator.h \
 		../src/iinformative.h \
 		../src/capabilities/modules/warpdrive.h \
-		../src/additional/stringformer.h \
 		../src/additional/trigger.h \
-		../src/gui/guibutton.h \
-		../src/gui/guilabel.h \
 		../src/gui/guistack.h \
-		../src/gui/guichoice.h \
 		../src/units/projectile.h \
-		../src/units/camera.h
+		../src/gui/guichoice.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o guilist.o ../src/gui/guilist.cpp
 
 aggressive.o: ../src/capabilities/aggressive.cpp ../src/capabilities/aggressive.h \
 		../src/capabilities/controller.h \
+		../src/capabilities/capability.h \
 		../src/worker.h \
+		../src/additional/event.h \
+		../src/additional/vector.h \
 		../src/object.h \
 		../src/renderer.h \
-		../src/additional/spm.h \
 		../src/additional/effects/visualeffect.h \
-		../src/additional/vector.h \
-		../src/additional/rotozoom.h \
 		../src/additional/auto.h \
-		../src/additional/event.h \
-		../src/debug.h \
-		../src/capabilities/capability.h \
+		../src/additional/timer.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
 		../src/units/unit.h \
 		../src/capabilities/modulehandler.h \
 		../src/capabilities/modules/module.h \
 		../src/loadable.h \
-		../src/animator.h \
-		../src/additional/timer.h \
-		../src/audioplayer.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -3173,15 +2826,37 @@ aggressive.o: ../src/capabilities/aggressive.cpp ../src/capabilities/aggressive.
 		../src/json/reader.h \
 		../src/json/value.h \
 		../src/json/writer.h \
+		../src/animator.h \
 		../src/iinformative.h \
 		../src/capabilities/modules/warpdrive.h \
-		../src/additional/stringformer.h \
-		../src/additional/trigger.h
+		../src/additional/trigger.h \
+		../src/objectregistry.h \
+		../src/units/particle.h \
+		../src/units/projectile.h \
+		../src/units/camera.h \
+		../src/additional/lightparticle.h \
+		../src/debug.h \
+		../src/capabilities/modules/weapon.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o aggressive.o ../src/capabilities/aggressive.cpp
 
 heapworld.o: ../src/worlds/heapworld.cpp ../src/worlds/heapworld.h \
 		../src/worlds/world.h \
-		../src/assetmanager.h \
+		../src/object.h \
+		../src/capabilities/controller.h \
+		../src/capabilities/capability.h \
+		../src/worker.h \
+		../src/additional/event.h \
+		../src/additional/vector.h \
+		../src/renderer.h \
+		../src/additional/effects/visualeffect.h \
+		../src/additional/auto.h \
+		../src/additional/timer.h \
+		../src/units/ship.h \
+		../src/units/movable.h \
+		../src/units/unit.h \
+		../src/capabilities/modulehandler.h \
+		../src/capabilities/modules/module.h \
+		../src/loadable.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -3192,56 +2867,69 @@ heapworld.o: ../src/worlds/heapworld.cpp ../src/worlds/heapworld.h \
 		../src/json/reader.h \
 		../src/json/value.h \
 		../src/json/writer.h \
-		../src/filesystem.h \
-		../src/loadable.h \
 		../src/animator.h \
+		../src/iinformative.h \
+		../src/capabilities/modules/warpdrive.h \
+		../src/additional/trigger.h \
+		../src/assetmanager.h \
+		../src/capabilities/player.h \
+		../src/capabilities/aggressive.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o heapworld.o ../src/worlds/heapworld.cpp
+
+objectregistry.o: ../src/objectregistry.cpp ../src/objectregistry.h \
+		../src/object.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o objectregistry.o ../src/objectregistry.cpp
+
+registryinfo.o: ../src/additional/informative/registryinfo.cpp ../src/additional/informative/registryinfo.h \
+		../src/iinformative.h \
+		../src/objectregistry.h \
+		../src/object.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o registryinfo.o ../src/additional/informative/registryinfo.cpp
+
+audio.o: ../src/audio/audio.cpp ../src/audio/audio.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o audio.o ../src/audio/audio.cpp
+
+audiochannel.o: ../src/audio/audiochannel.cpp ../src/audio/audiochannel.h \
+		../src/audio/audio.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o audiochannel.o ../src/audio/audiochannel.cpp
+
+audiohardwarebank.o: ../src/audio/audiohardwarebank.cpp ../src/audio/audiohardwarebank.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o audiohardwarebank.o ../src/audio/audiohardwarebank.cpp
+
+audioplayer.o: ../src/audio/audioplayer.cpp ../src/audio/audioplayer.h \
 		../src/worker.h \
+		../src/additional/event.h \
+		../src/additional/vector.h \
 		../src/object.h \
 		../src/renderer.h \
-		../src/additional/spm.h \
 		../src/additional/effects/visualeffect.h \
-		../src/additional/vector.h \
-		../src/additional/rotozoom.h \
 		../src/additional/auto.h \
-		../src/additional/event.h \
-		../src/debug.h \
-		../src/additional/timer.h \
-		../src/audioplayer.h \
-		../src/units/ship.h \
+		../src/units/camera.h \
 		../src/units/movable.h \
 		../src/units/unit.h \
 		../src/capabilities/modulehandler.h \
 		../src/capabilities/modules/module.h \
 		../src/capabilities/capability.h \
+		../src/loadable.h \
+		../src/json/json.h \
+		../src/json/autolink.h \
+		../src/json/config.h \
+		../src/json/allocator.h \
+		../src/json/version.h \
+		../src/json/features.h \
+		../src/json/forwards.h \
+		../src/json/reader.h \
+		../src/json/value.h \
+		../src/json/writer.h \
+		../src/animator.h \
+		../src/additional/timer.h \
 		../src/iinformative.h \
-		../src/capabilities/modules/warpdrive.h \
-		../src/additional/stringformer.h \
-		../src/capabilities/modules/weapon.h \
-		../src/units/projectile.h \
-		../src/units/camera.h \
 		../src/capabilities/controller.h \
+		../src/units/ship.h \
+		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h \
-		../src/capabilities/modules/engine.h \
-		../src/units/station.h \
-		../src/capabilities/player.h \
-		../src/gui/guicontainer.h \
-		../src/additional/effects/anaglyph.h \
-		../src/gui/guielement.h \
-		../src/gui/guibutton.h \
-		../src/gui/guilabel.h \
-		../src/gui/guistack.h \
-		../src/gui/guiswitch.h \
-		../src/gui/guichoice.h \
-		../src/gui/guimain.h \
-		../src/gui/guicentralmessage.h \
-		../src/gui/guifloatingmessage.h \
-		../src/gui/guiblushingfloatingmessage.h \
-		../src/additional/math.h \
-		../src/capabilities/ai.h \
-		../src/additional/fpsmonitor.h \
-		../src/additional/controllerfinder.h \
-		../src/capabilities/aggressive.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o heapworld.o ../src/worlds/heapworld.cpp
+		../src/additional/math.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o audioplayer.o ../src/audio/audioplayer.cpp
 
 ####### Install
 

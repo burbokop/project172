@@ -1,20 +1,21 @@
 #include "guilist.h"
 
 
-bool GUIList::isArrayChanged(std::vector<Worker *> *array) {
-    return true;
-}
+#include "units/projectile.h"
+#include "gui/guichoice.h"
 
-#include <iostream>
+
 std::vector<GUIElement *> *GUIList::informativeToElement(std::vector<Worker *> *array) {
     std::vector<GUIElement *> *result = new std::vector<GUIElement *>();
 
     if(array && array->size() > 0) {
         for(Worker *worker : *array) {
-            IInformative *info = dynamic_cast<IInformative*>(worker);
-            Projectile *proj = dynamic_cast<Projectile*>(worker);
-            if(info && !proj) {
-                result->push_back(new GUIChoice(player, info, worker, std::bind(&GUIList::onChoice, this, std::placeholders::_1)));
+            if(dynamic_cast<Unit*>(worker)) {
+                IInformative *info = dynamic_cast<IInformative*>(worker);
+                Projectile *proj = dynamic_cast<Projectile*>(worker);
+                if(info && !proj) {
+                    result->push_back(new GUIChoice(player, info, worker, std::bind(&GUIList::onChoice, this, std::placeholders::_1)));
+                }
             }
         }
     }
@@ -22,6 +23,7 @@ std::vector<GUIElement *> *GUIList::informativeToElement(std::vector<Worker *> *
     return result;
 }
 
+#include <iostream>
 void GUIList::onChoice(Auto value) {
     std::cout << reinterpret_cast<Unit*>(value.toObject())->getInfo() << "\n";
 }
@@ -37,9 +39,7 @@ void GUIList::addArray(std::vector<Worker *> *array) {
 }
 
 void GUIList::render(Renderer *renderer, Event *event) {
-    if(isArrayChanged(array)) {
-        delete elements;
-        elements = informativeToElement(array);
-    }
+    delete elements;
+    elements = informativeToElement(array);
     this->GUIContainer::render(renderer, event);
 }

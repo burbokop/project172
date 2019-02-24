@@ -1,5 +1,11 @@
 #include "defaultworld.h"
 
+
+#include "capabilities/player.h"
+#include "capabilities/ai.h"
+#include "debug.h"
+
+
 DefaultWorld::DefaultWorld() {
 
 }
@@ -66,12 +72,17 @@ std::vector<Controller *> DefaultWorld::generate(AssetManager *assets, std::vect
             s->place(Vector(-50 + i * 50, 100), -0.7);
 
             s->addCapability(new AI());
-            ModuleHandler *playerModuleHandler = new ModuleHandler();
-            playerModuleHandler->addModule(static_cast<Module*>(assets->copyAsset((i == 1) ? "plasma-launcher" : "pistol")));
-            playerModuleHandler->addModule(static_cast<Module*>(assets->copyAsset("engine1")));
-            playerModuleHandler->addModule(static_cast<Module*>(assets->copyAsset("warp-drive1")));
+            ModuleHandler *mx = new ModuleHandler();
+            if(i == 1) {
+                mx->addModule(static_cast<Module*>(assets->copyAsset("pistol")));
+                mx->addModule(static_cast<Module*>(assets->copyAsset("mega-launcher")));
+            } else {
+                mx->addModule(static_cast<Module*>(assets->copyAsset("pistol")));
+            }
+            mx->addModule(static_cast<Module*>(assets->copyAsset("engine1")));
+            mx->addModule(static_cast<Module*>(assets->copyAsset("warp-drive1")));
 
-            s->addCapability(playerModuleHandler);
+            s->addCapability(mx);
 
             if(i == 1) s->addCapability(player2);
             units->push_back(s);
@@ -83,18 +94,18 @@ std::vector<Controller *> DefaultWorld::generate(AssetManager *assets, std::vect
         std::vector<std::string> assetKeys = assets->getKeys();
         unsigned int i = 0;
         for (std::string key : assetKeys) {
-            std::cout << "Default world: loading key: " << key << "\n";
+            Debug::out("DefaultWorld::generate(assets, units): loading key ( key" + key + " )");
             Movable *unit = dynamic_cast<Movable*>(assets->copyAsset(key));
             if(unit) {
                 unit->place(Vector(static_cast<int>((i + 4) * 64), -200), Vector(), Vector(), 0);
 
                 unit->addCapability(new AI());
-                ModuleHandler *playerModuleHandler = new ModuleHandler();
-                playerModuleHandler->addModule(static_cast<Module*>(assets->copyAsset((i == 1) ? "plasma-launcher" : "pistol")));
-                playerModuleHandler->addModule(static_cast<Module*>(assets->copyAsset("engine1")));
-                playerModuleHandler->addModule(static_cast<Module*>(assets->copyAsset("warp-drive1")));
+                ModuleHandler *mhx = new ModuleHandler();
+                mhx->addModule(static_cast<Module*>(assets->copyAsset((i == 1) ? "plasma-launcher" : "pistol")));
+                mhx->addModule(static_cast<Module*>(assets->copyAsset("engine1")));
+                mhx->addModule(static_cast<Module*>(assets->copyAsset("warp-drive1")));
 
-                unit->addCapability(playerModuleHandler);
+                unit->addCapability(mhx);
 
                 units->push_back(unit);
                 i++;

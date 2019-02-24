@@ -1,9 +1,10 @@
 #ifndef AUDIOPLAYER_H
 #define AUDIOPLAYER_H
 
+
+#include "audio/audiochannel.h"
 #include "worker.h"
 
-#include <SDL2/SDL_mixer.h>
 
 class AudioPlayer : public Worker {
 public:
@@ -12,23 +13,21 @@ public:
     static Uint8 LOOP_PLAYING;
     static Uint8 STOP_PLAYING;
 
+    static int CUT_VOLUME_DISTANCE;
+    static int FULL_VOLUME_DISTANCE;
+
+
 private:
-    int channel = -1;
+    AudioChannel channel;
     Uint8 state = NONE;
     bool playPressed = false;
 
-    Mix_Chunk *startChunk = nullptr;
-    Mix_Chunk *loopChunk = nullptr;
-    Mix_Chunk *stopChunk = nullptr;
-
-
-    static bool initialized;
-    static void initAudio();
-    static void checkInitialized();
+    AudioSample *startChunk = nullptr;
+    AudioSample *loopChunk = nullptr;
+    AudioSample *stopChunk = nullptr;
 
 public:
-    AudioPlayer();
-    AudioPlayer(Mix_Chunk *start, Mix_Chunk *loop = nullptr, Mix_Chunk *stop = nullptr);
+    AudioPlayer(AudioSample *start = nullptr, AudioSample *loop = nullptr, AudioSample *stop = nullptr);
 
     // Worker interface
 public:
@@ -38,6 +37,9 @@ public:
 
     void loop(Context *context, Event *event);
     void render(Renderer *renderer);
+
+    void setVolume(int volume);
+    void setVolumeByDistance(double distance);
 };
 
 #endif // AUDIOPLAYER_H

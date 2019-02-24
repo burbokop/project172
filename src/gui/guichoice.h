@@ -1,8 +1,11 @@
 #ifndef GUICHOICE_H
 #define GUICHOICE_H
 
-#include "guibutton.h"
-#include "additional/auto.h"
+#include <functional>
+
+
+#include "gui/guibutton.h"
+
 
 class GUIChoice : public GUIButton {
 private:

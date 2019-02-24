@@ -3,17 +3,18 @@
 
 #include <SDL2/SDL.h>
 
-#include "units/unit.h"
-#include "worldmanager.h"
-#include "worlds/defaultworld.h"
-#include "worlds/arenaworld.h"
-#include "worlds/heapworld.h"
-#include "additional/event.h"
-#include "context.h"
-#include "background.h"
-#include "netlistener.h"
+
+#include "object.h"
 #include "state.h"
-#include "near.h"
+#include "renderer.h"
+#include "worker.h"
+#include "assetmanager.h"
+#include "additional/event.h"
+#include "background.h"
+#include "additional/informative/fpsmonitor.h"
+#include "netlistener.h"
+#include "worldmanager.h"
+
 
 class Environment : public Object {
 private:

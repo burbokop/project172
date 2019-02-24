@@ -1,9 +1,9 @@
 #ifndef ANIMATOR_H
 #define ANIMATOR_H
 
-#include "worker.h"
+
 #include "additional/timer.h"
-#include "additional/spm.h"
+#include "worker.h"
 
 class Animator : public Worker {
 public:

@@ -1,19 +1,14 @@
 #ifndef CONTEXT_H
 #define CONTEXT_H
 
-
-#include "units/particle.h"
-#include "additional/lightparticle.h"
-
-#include "assetmanager.h"
-
 #include <queue>
 
-#include "gui/guimain.h"
-#include "gui/guicentralmessage.h"
-#include "gui/guiblushingfloatingmessage.h"
 
+#include "assetmanager.h"
+#include "gui/guimain.h"
+#include "near.h"
 #include "background.h"
+
 
 struct Request {
     Worker *requester;
@@ -25,6 +20,8 @@ class Context : public Object {
 public:
     static const Uint8 DELETE_UNIT;
     static const Uint8 SPAWN_EXPLOSIVE;
+    static const Uint8 SPAWN_ENGINE_EXPLOSIVE;
+    static const Uint8 SPAWN_ENGINE_PARTICLES;
     static const Uint8 SPAWN_UNIT;
     static const Uint8 SPAWN_SURFACE;
     static const Uint8 ADD_CAPABILITY;
@@ -37,10 +34,12 @@ public:
 private:
     std::queue<Request> eventQueue;
     std::vector<Worker*> *units;
+
     AssetManager *assets;
 
-    GUIMain *gui;
-    Background *background;
+    GUIMain *gui = nullptr;
+    Background *background = nullptr;
+    Near *near = nullptr;
 
     void handleRequest(Request request);
 public:
@@ -55,6 +54,7 @@ public:
 
     void setGui(GUIMain *value);
     void setBackground(Background *value);
+    void setNear(Near *value);
 };
 
 #endif // CONTEXT_H

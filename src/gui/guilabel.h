@@ -1,8 +1,9 @@
 #ifndef GUILABEL_H
 #define GUILABEL_H
 
+
 #include "gui/guielement.h"
-#include "iinformative.h"
+
 
 class GUILabel : public GUIElement {
 protected:

@@ -3,8 +3,7 @@
 
 #include <sys/timeb.h>
 
-class Timer
-{
+class Timer {
 private:
     long interval;
     long duration;

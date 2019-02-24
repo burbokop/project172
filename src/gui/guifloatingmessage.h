@@ -1,7 +1,9 @@
 #ifndef GUIFLOATINGMESSAGE_H
 #define GUIFLOATINGMESSAGE_H
 
-#include "guilabel.h"
+
+#include "gui/guilabel.h"
+
 
 class GUIFloatingMessage : public GUILabel {
 protected:

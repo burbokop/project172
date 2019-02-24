@@ -1,7 +1,9 @@
 #ifndef AI_H
 #define AI_H
 
-#include "controller.h"
+
+#include "capabilities/controller.h"
+
 
 class AI : public Controller {
 public:

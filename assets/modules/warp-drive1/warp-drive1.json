@@ -1,6 +1,6 @@
 {
 	"key": "warp-drive1",
 	"class": "warp-drive",
-	"interval": 200,
+	"interval": 2000,
 	"warp-speed": 1
 }

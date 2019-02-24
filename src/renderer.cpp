@@ -1,5 +1,7 @@
 #include "renderer.h"
+
 #include "units/camera.h"
+#include "additional/spm.h"
 
 const int Renderer::DEFAULT_FONT_SIZE = 20;
 
@@ -27,9 +29,13 @@ void Renderer::setResolutionCallback(Auto value) {
 }
 
 
-void Renderer::setCamera(Camera *value)
-{
+void Renderer::setCamera(Camera *value) {
     camera = value;
+}
+
+Camera *Renderer::getCamera() const
+{
+    return camera;
 }
 
 Renderer::Renderer(SDL_Window *window, Vector resolution, SDL_Surface *surface, TTF_Font *font) {

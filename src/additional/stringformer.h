@@ -3,7 +3,9 @@
 
 #include <string>
 
+
 #include "object.h"
+
 
 class StringFormer : public Object {
 public:

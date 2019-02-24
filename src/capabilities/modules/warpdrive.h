@@ -1,8 +1,7 @@
 #ifndef WARPDRIVE_H
 #define WARPDRIVE_H
 
-#include "module.h"
-#include "../../additional/stringformer.h"
+#include "capabilities/modules/module.h"
 
 class WarpDrive : public Module {
 public:
@@ -35,7 +34,7 @@ public:
 
     bool prepareWarp();
     bool warp();
-    Uint8 abortWarp();
+    Uint8 abortWarp(Context *context);
 
     // Worker interface
 public:

@@ -1,7 +1,9 @@
 #ifndef PARTICLE_H
 #define PARTICLE_H
 
-#include "movable.h"
+
+#include "units/movable.h"
+
 
 class Particle : public Movable {
 public:

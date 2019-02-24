@@ -5,8 +5,11 @@
 #include <SDL2/SDL_ttf.h>
 #include <map>
 
-#include "additional/spm.h"
+
+#include "additional/effects/visualeffect.h"
+#include "additional/vector.h"
 #include "additional/auto.h"
+
 
 class Camera;
 
@@ -55,6 +58,7 @@ public:
     void setResolution(Vector value);
     void setResolutionCallback(Auto value);
     void setCamera(Camera *value);
+    Camera *getCamera() const;
 };
 
 #endif // RENDERER_H

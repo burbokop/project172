@@ -2,7 +2,7 @@
 #define PLAYER2FINDER_H
 
 #include "iinformative.h"
-#include "../capabilities/player.h"
+#include "capabilities/controller.h"
 
 class ControllerFinder : public IInformative {
 

@@ -1,10 +1,12 @@
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
 
-#include "worker.h"
-#include "capability.h"
-#include "../units/ship.h"
-#include "../additional/trigger.h"
+
+#include "capabilities/capability.h"
+#include "additional/timer.h"
+#include "units/ship.h"
+#include "additional/trigger.h"
+
 
 class Controller : public Capability {    
 protected:
@@ -12,7 +14,7 @@ protected:
     static const char *ARMOR_RELEASE_MESSAGE;
 
 
-    Ship *armor = nullptr;
+    Ship *armor;
     Timer *armorReleaseTimer = nullptr;
     Trigger armorReleaseMessageTrigger;
 

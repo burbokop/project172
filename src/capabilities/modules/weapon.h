@@ -1,8 +1,8 @@
 #ifndef WEAPON_H
 #define WEAPON_H
 
+
 #include "capabilities/modules/module.h"
-#include "units/projectile.h"
 
 
 class Weapon : public Module {

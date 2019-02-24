@@ -3,9 +3,9 @@
 
 #define RELATIVISTIC_ADDITION_CONSTANT 0.7
 
-#include "../object.h"
+#include <sstream>
 
-class Vector : public Object {
+class Vector {
 private:
     double x;
     double y;
@@ -52,5 +52,8 @@ public:
     long getLongY();
     double getDoubleX();
     double getDoubleY();
+
+
+    friend std::ostream &operator<<(std::ostream &os, const Vector &dt);
 };
 #endif // VECTOR_H

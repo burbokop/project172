@@ -1,4 +1,6 @@
 #include "warpdrive.h"
+#include "context.h"
+#include "additional/stringformer.h"
 
 
 const Uint8 WarpDrive::WARP_DISABLED = 0;
@@ -96,8 +98,9 @@ bool WarpDrive::warp() {
     return false;
 }
 
-Uint8 WarpDrive::abortWarp() {
+Uint8 WarpDrive::abortWarp(Context* context) {
     Uint8 result = warpState;
+    if(warpState == WARP_EXECUTING) context->addEvent(parent, Context::SPAWN_ENGINE_EXPLOSIVE, 16);
     if(warpState == WARP_EXECUTING || warpState == WARP_READY || warpState == WARP_LOADING) warpState = WARP_RECHARGING;
     return result;
 }

@@ -5,6 +5,7 @@ CONFIG -= app_bundle
 
 DEFINES += QT_DEPRECATED_WARNINGS
 
+QMAKE_CXXFLAGS += -rdynamic -O2
 
 win32 {
     INCLUDEPATH += C:\Qt\Tools\mingw730_64\include
@@ -13,7 +14,7 @@ win32 {
 
 unix {
     INCLUDEPATH += ./src
-    LIBS += -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer
+    LIBS += -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer -ldl
 }
 
 
@@ -44,7 +45,6 @@ SOURCES += \
     src/additional/stringformer.cpp \
     src/additional/effects/anaglyph.cpp \
     src/loadable.cpp \
-    src/audioplayer.cpp \
     src/capabilities/modules/weapon.cpp \
     src/units/projectile.cpp \
     src/context.cpp \
@@ -67,7 +67,7 @@ SOURCES += \
     src/additional/effects/visualeffect.cpp \
     src/gui/guichoice.cpp \
     src/application.cpp \
-    src/additional/fpsmonitor.cpp \
+    src/additional/informative/fpsmonitor.cpp \
     src/units/particle.cpp \
     src/additional/net/framebuilder.cpp \
     src/additional/net/socket.cpp \
@@ -76,7 +76,7 @@ SOURCES += \
     src/additional/trigger.cpp \
     src/gui/guimain.cpp \
     src/gui/guicentralmessage.cpp \
-    src/additional/controllerfinder.cpp \
+    src/additional/informative/controllerfinder.cpp \
     src/gui/guifloatingmessage.cpp \
     src/gui/guiblushingfloatingmessage.cpp \
     src/additional/math.cpp \
@@ -89,8 +89,13 @@ SOURCES += \
     src/near.cpp \
     src/gui/guilist.cpp \
     src/capabilities/aggressive.cpp \
-    src/worlds/heapworld.cpp
-
+    src/worlds/heapworld.cpp \
+    src/objectregistry.cpp \
+    src/additional/informative/registryinfo.cpp \
+    src/audio/audio.cpp \
+    src/audio/audiochannel.cpp \
+    src/audio/audiohardwarebank.cpp \
+    src/audio/audioplayer.cpp
 
 
 HEADERS += \
@@ -119,7 +124,6 @@ HEADERS += \
     src/additional/stringformer.h \
     src/additional/effects/anaglyph.h \
     src/loadable.h \
-    src/audioplayer.h \
     src/capabilities/modules/weapon.h \
     src/units/projectile.h \
     src/context.h \
@@ -152,7 +156,7 @@ HEADERS += \
     src/additional/effects/visualeffect.h \
     src/gui/guichoice.h \
     src/application.h \
-    src/additional/fpsmonitor.h \
+    src/additional/informative/fpsmonitor.h \
     src/units/particle.h \
     src/additional/net/framebuilder.h \
     src/additional/net/socket.h \
@@ -161,7 +165,7 @@ HEADERS += \
     src/additional/trigger.h \
     src/gui/guimain.h \
     src/gui/guicentralmessage.h \
-    src/additional/controllerfinder.h \
+    src/additional/informative/controllerfinder.h \
     src/gui/guifloatingmessage.h \
     src/gui/guiblushingfloatingmessage.h \
     src/additional/math.h \
@@ -174,9 +178,13 @@ HEADERS += \
     src/near.h \
     src/gui/guilist.h \
     src/capabilities/aggressive.h \
-    src/worlds/heapworld.h
-
-
+    src/worlds/heapworld.h \
+    src/objectregistry.h \
+    src/additional/informative/registryinfo.h \
+    src/audio/audio.h \
+    src/audio/audiochannel.h \
+    src/audio/audiohardwarebank.h \
+    src/audio/audioplayer.h
 
 
 

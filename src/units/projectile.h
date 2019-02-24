@@ -1,12 +1,14 @@
 #ifndef PROJECTILE_H
 #define PROJECTILE_H
 
-#include "units/camera.h"
+
+#include "units/movable.h"
 
 
 class Projectile : public Movable {
 private:
     static const double DEFAULT_HIT_RADIUS;
+    static const int DEFAULT_DAMAGE;
 
     static const int DEFAULT_AVERAGE_LIFE_TIME;
     static const int DEFAULT_LIFE_TIME_DELTA;
