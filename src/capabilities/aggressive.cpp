@@ -95,6 +95,7 @@ void Aggressive::loop(Context *context, Event *event) {
         }
     } else {
         Debug::err(Debug::APPEAL_TO_REMOVED, DEBUG_IMPRINT);
+        targeted = false;
         target = chooseTarget();
     }
     this->Controller::loop(context, event);
