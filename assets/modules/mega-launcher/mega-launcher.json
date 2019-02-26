@@ -1,7 +1,7 @@
 {
     "key": "mega-launcher",
     "class": "weapon",
-    "audio": { "start": "./shoot.wav" },
+    "audio": { "start": "./mega-shoot.ogg" },
     "rate": 100,
     "projectile":"mega",
     "props": {}

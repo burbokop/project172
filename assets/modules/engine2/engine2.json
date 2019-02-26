@@ -14,8 +14,8 @@
     },
     
     "audio": {
-        "start": "./engineStart.ogg",
-        "loop": "./engineLoop.ogg",
-        "stop": "./engineStop.ogg"
+        "start": "./engineStart-v.ogg",
+        "loop": "./engineLoop-v.ogg",
+        "stop": "./engineStop-v.ogg"
     }
 }
