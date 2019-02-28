@@ -3,4 +3,11 @@
 	"class": "warp-drive",
 	"interval": 2000,
 	"warp-speed": 1
+	
+    "audio": {
+        "start": "./warp-s.ogg",
+        "loop": "./warp-l.ogg",
+        "stop": "./warp-st.ogg"
+    }
+
 }

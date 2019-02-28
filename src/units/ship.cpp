@@ -66,7 +66,5 @@ void Ship::loop(Context *context, Event *event) {
             }
         }
     }
-
-
     this->Movable::loop(context, event);
 }

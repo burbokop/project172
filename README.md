@@ -8,21 +8,24 @@
 
 only one you need to know: this is the game.
 
-## installation:
+## building:
 ```bash
-sudo apt-get install libsdl2-2.0.0 libsdl2-dev libsdl2-imege-2.0.0 libsdl2-imege-dev libsdl2-ttf-2.0.0 libsdl2-ttf-dev libsdl2-mixer-2.0.0 libsdl2-mixer-dev
+sudo apt-get install libsdl2-2.0.0 libsdl2-dev libsdl2-image-2.0.0 libsdl2-image-dev libsdl2-ttf-2.0.0 libsdl2-ttf-dev libsdl2-mixer-2.0.0 libsdl2-mixer-dev
 or
 sudo apt-get install libsdl2-2.0-0 libsdl2-dev libsdl2-image-2.0-0 libsdl2-image-dev libsdl2-ttf-2.0-0 libsdl2-ttf-dev libsdl2-mixer-2.0-0 libsdl2-mixer-dev
 
+
 git clone https://github.com/burbokop/project172.git
-cd ./build
-make
+cd ./project172
+sudo apt-get install qt4-qmake
+./build.run
+
 ```
 
 
 #### run:
 ```bash
-./project172
+./project172.run
 ```
 
 

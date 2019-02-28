@@ -20,10 +20,6 @@ public:
 
     // Worker interface
 public:
-
-
-    // Worker interface
-public:
     void loop(Context *context, Event *event);
 };
 

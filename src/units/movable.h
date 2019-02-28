@@ -41,7 +41,7 @@ public:
 
     void place(Vector pos, Vector vel = Vector(), Vector acc = Vector(), double angle = 0);
 
-    bool accelerateForward();
+    virtual bool accelerateForward();
 
 
     Vector getVelocity();
