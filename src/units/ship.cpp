@@ -71,10 +71,11 @@ void Ship::loop(Context *context, Event *event) {
     this->Movable::loop(context, event);
 }
 
-void Ship::onAcceleration(bool start, double acc) {    
+bool Ship::onAcceleration(bool start) {
     WarpDrive *warp = getFirstWarp();
 
     if(!(warp && warp->getState() == WarpDrive::WARP_EXECUTING)) {
-        this->Movable::onAcceleration(start, acc);
+        return this->Movable::onAcceleration(start);
     }
+    return true;
 }

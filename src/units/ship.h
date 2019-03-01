@@ -24,7 +24,7 @@ public:
 
     // Movable interface
 protected:
-    void onAcceleration(bool start, double acc);
+    bool onAcceleration(bool start);
 };
 
 #endif // SHIP_H

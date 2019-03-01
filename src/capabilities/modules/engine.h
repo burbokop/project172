@@ -11,6 +11,10 @@ public:
 
     // Worker interface
 public:
+    bool forward();
+    void stop();
+
+
     void loop(Context *context, Event *event);
 
     // IInformative interface

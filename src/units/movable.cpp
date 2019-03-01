@@ -1,5 +1,5 @@
 #include "movable.h"
-
+#include "capabilities/modules/engine.h"
 
 const double Movable::STOP_MOVING_VELOCITY = 0.015;
 const double Movable::DEFAULT_ACCELERATION_VALUE = 0.1;
@@ -19,16 +19,27 @@ void Movable::disableForcedMaxSpeed() {
     forcedMaxSpeedEnabled = false;
 }
 
-void Movable::onAcceleration(bool start, double acc) {
+#include <iostream>
+bool Movable::onAcceleration(bool start) {
+    std::cout << "gogadoda: \n";
     ModuleHandler *modules = getModuleHandler();
     if(modules) {
         std::vector<Module*> *engines = modules->getModulesByClass("engine");
         if(engines) {
             for(Module *module : *engines) {
-                module->animate(start ? Animator::LOOP : Animator::NOTRENDER);
+                Engine *engine = dynamic_cast<Engine*>(module);
+                if(engine) {
+                    if(start) {
+                        if(engine->forward()) return true;
+                    } else {
+                        engine->stop();
+                        return true;
+                    }
+                }
             }
         }
     }
+    return false;
 }
 
 double Movable::getAccelerationValue() {
@@ -70,6 +81,9 @@ void Movable::place(Vector pos, Vector vel, Vector acc, double angle) {
 }
 
 bool Movable::accelerateForward() {
+
+
+
     if(!accelerationLocked) {
         ModuleHandler *modules = getModuleHandler();
         if(modules && modules->hasModuleOfClass("engine")) {
@@ -118,8 +132,9 @@ double Movable::getReleaseSpead() {
 
 void Movable::loop(Context *context, Event *event) {
     if(alTmpFlag != accelerationLocked) {
-        onAcceleration(accelerationLocked, getAccelerationValue());
-        alTmpFlag = accelerationLocked;
+        if(onAcceleration(accelerationLocked)) {
+            alTmpFlag = accelerationLocked;
+        }
     }
 
     updatePosition();

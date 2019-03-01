@@ -13,10 +13,14 @@ public:
     Module();
     Module(Loadable *tmp);
 
-    // Worker interface
 public:
 
     void animate(Uint8 mode, Uint8 def = Animator::DEFAULT_INACTIVE);
+
+
+    // Worker interface
+public:
+
 
     void loop(Context *context, Event *event);
     void render(Renderer *renderer);

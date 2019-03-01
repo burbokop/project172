@@ -36,8 +36,7 @@ protected:
     void forcedMaxSpeed(double value);
     void disableForcedMaxSpeed();
 
-
-    virtual void onAcceleration(bool start, double acc);
+    virtual bool onAcceleration(bool start);
 public:
     Movable();
     Movable(Loadable *tmp);

@@ -94,6 +94,7 @@ bool WarpDrive::warp() {
     if(warpState == WARP_READY) {
         warpState = WARP_EXECUTING;
         audioPlayer.play();
+        animator.play(Animator::LOOP);
         return true;
     }
     return false;
@@ -104,6 +105,7 @@ Uint8 WarpDrive::abortWarp(Context* context) {
     if(warpState == WARP_EXECUTING) {
         context->addEvent(parent, Context::SPAWN_ENGINE_EXPLOSIVE, 16);
         audioPlayer.stop();
+        animator.play(Animator::NOTRENDER);
     }
     if(warpState == WARP_EXECUTING || warpState == WARP_READY || warpState == WARP_LOADING) warpState = WARP_RECHARGING;
     return result;
