@@ -19,6 +19,18 @@ void Movable::disableForcedMaxSpeed() {
     forcedMaxSpeedEnabled = false;
 }
 
+void Movable::onAcceleration(bool start, double acc) {
+    ModuleHandler *modules = getModuleHandler();
+    if(modules) {
+        std::vector<Module*> *engines = modules->getModulesByClass("engine");
+        if(engines) {
+            for(Module *module : *engines) {
+                module->animate(start ? Animator::LOOP : Animator::NOTRENDER);
+            }
+        }
+    }
+}
+
 double Movable::getAccelerationValue() {
     Json::Value value = root["acceleration"];
     if(value.isNumeric()) {
@@ -61,12 +73,6 @@ bool Movable::accelerateForward() {
     if(!accelerationLocked) {
         ModuleHandler *modules = getModuleHandler();
         if(modules && modules->hasModuleOfClass("engine")) {
-            std::vector<Module*> *engines = modules->getModulesByClass("engine");
-            if(engines) {
-                for(Module *module : *engines) {
-                    module->animate(Animator::LOOP, Animator::NOTRENDER);
-                }
-            }
             acc = Vector::createByAngle(getAccelerationValue(), getAngle());
             accelerationLocked = true;
             return true;
@@ -111,6 +117,11 @@ double Movable::getReleaseSpead() {
 }
 
 void Movable::loop(Context *context, Event *event) {
+    if(alTmpFlag != accelerationLocked) {
+        onAcceleration(accelerationLocked, getAccelerationValue());
+        alTmpFlag = accelerationLocked;
+    }
+
     updatePosition();
     this->Unit::loop(context, event);
 }

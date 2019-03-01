@@ -93,6 +93,7 @@ bool WarpDrive::prepareWarp() {
 bool WarpDrive::warp() {
     if(warpState == WARP_READY) {
         warpState = WARP_EXECUTING;
+        audioPlayer.play();
         return true;
     }
     return false;
@@ -100,7 +101,10 @@ bool WarpDrive::warp() {
 
 Uint8 WarpDrive::abortWarp(Context* context) {
     Uint8 result = warpState;
-    if(warpState == WARP_EXECUTING) context->addEvent(parent, Context::SPAWN_ENGINE_EXPLOSIVE, 16);
+    if(warpState == WARP_EXECUTING) {
+        context->addEvent(parent, Context::SPAWN_ENGINE_EXPLOSIVE, 16);
+        audioPlayer.stop();
+    }
     if(warpState == WARP_EXECUTING || warpState == WARP_READY || warpState == WARP_LOADING) warpState = WARP_RECHARGING;
     return result;
 }

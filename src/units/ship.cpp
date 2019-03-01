@@ -24,7 +24,9 @@ bool Ship::warp() {
     WarpDrive *driveUnit = getFirstWarp();
     if(driveUnit) {
         bool success = driveUnit->warp();
-        if(success) forcedMaxSpeed(driveUnit->getSpeadUnit() * ONE_WARP_POINT);
+        if(success) {
+            forcedMaxSpeed(driveUnit->getSpeadUnit() * ONE_WARP_POINT);
+        }
         return success;
     }
     return false;
@@ -67,4 +69,12 @@ void Ship::loop(Context *context, Event *event) {
         }
     }
     this->Movable::loop(context, event);
+}
+
+void Ship::onAcceleration(bool start, double acc) {    
+    WarpDrive *warp = getFirstWarp();
+
+    if(!(warp && warp->getState() == WarpDrive::WARP_EXECUTING)) {
+        this->Movable::onAcceleration(start, acc);
+    }
 }

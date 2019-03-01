@@ -16,7 +16,7 @@ public:
     // Worker interface
 public:
 
-    void animate(Uint8 mode, Uint8 def);
+    void animate(Uint8 mode, Uint8 def = Animator::DEFAULT_INACTIVE);
 
     void loop(Context *context, Event *event);
     void render(Renderer *renderer);

@@ -21,6 +21,10 @@ public:
     // Worker interface
 public:
     void loop(Context *context, Event *event);
+
+    // Movable interface
+protected:
+    void onAcceleration(bool start, double acc);
 };
 
 #endif // SHIP_H

@@ -22,7 +22,6 @@ AudioPlayer::AudioPlayer(AudioSample *start, AudioSample *loop, AudioSample *sto
 }
 
 void AudioPlayer::play() {
-    playPressed = true;
     if(state == NONE) {
         channel.play(startChunk, 1);
         state = START_PLAYING;
@@ -37,8 +36,6 @@ void AudioPlayer::stop() {
 void AudioPlayer::loop(Context *context, Event *event) {
     UNUSED(context);
     UNUSED(event);
-    if(!playPressed && state != NONE) stop();
-    playPressed = false;
 
     if(state == START_PLAYING && !channel.isPlaying()) {
         if(loopChunk != nullptr) {

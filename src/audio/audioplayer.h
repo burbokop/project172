@@ -20,12 +20,10 @@ public:
 private:
     AudioChannel channel;
     Uint8 state = NONE;
-    bool playPressed = false;
 
     AudioSample *startChunk = nullptr;
     AudioSample *loopChunk = nullptr;
     AudioSample *stopChunk = nullptr;
-
 public:
     AudioPlayer(AudioSample *start = nullptr, AudioSample *loop = nullptr, AudioSample *stop = nullptr);
 

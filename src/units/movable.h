@@ -9,7 +9,10 @@ class Movable : public Unit {
 private:
     Vector vel;
     Vector acc;
+
+    bool alTmpFlag = false;
     bool accelerationLocked = false;
+
     bool idleEnabled = true;
 
     bool forcedMaxSpeedEnabled = false;
@@ -25,7 +28,6 @@ protected:
 
     bool relativisticVelocity = true;
 
-
     void updatePosition();
 
     void accelerateIdle();
@@ -33,16 +35,16 @@ protected:
     void setIdleEnabled(bool value);
     void forcedMaxSpeed(double value);
     void disableForcedMaxSpeed();
+
+
+    virtual void onAcceleration(bool start, double acc);
 public:
     Movable();
     Movable(Loadable *tmp);
 
-
-
     void place(Vector pos, Vector vel = Vector(), Vector acc = Vector(), double angle = 0);
 
-    virtual bool accelerateForward();
-
+    bool accelerateForward();
 
     Vector getVelocity();
     double getReleaseSpead();
