@@ -41,6 +41,8 @@ bool Socket::init() {
         initialized = true;
         return true;
     }
+#else
+    return true;
 #endif
 }
 

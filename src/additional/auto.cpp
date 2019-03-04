@@ -1,14 +1,14 @@
 #include "auto.h"
 
 
-const uint8_t Auto::TYPE_INT32 = 0;
-const uint8_t Auto::TYPE_INT64 = 1;
-const uint8_t Auto::TYPE_UINT32 = 2;
-const uint8_t Auto::TYPE_UINT64 = 3;
-const uint8_t Auto::TYPE_DOUBLE = 4;
+const unsigned Auto::TYPE_INT32 = 0;
+const unsigned Auto::TYPE_INT64 = 1;
+const unsigned Auto::TYPE_UINT32 = 2;
+const unsigned Auto::TYPE_UINT64 = 3;
+const unsigned Auto::TYPE_DOUBLE = 4;
 
-const uint8_t Auto::TYPE_VECTOR = 5;
-const uint8_t Auto::TYPE_OBJECT = 6;
+const unsigned Auto::TYPE_VECTOR = 5;
+const unsigned Auto::TYPE_OBJECT = 6;
 
 
 Auto::Auto() : Object() {

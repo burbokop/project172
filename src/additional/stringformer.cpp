@@ -1,28 +1,27 @@
 #include "stringformer.h"
 
 
-std::string StringFormer::line(unsigned int number) {
+std::string StringFormer::line(unsigned number) {
     return line(number, '-');
 }
 
-std::string StringFormer::line(unsigned int number, char simbol) {
+std::string StringFormer::line(unsigned number, char simbol) {
     std::string result = "";
-    for(unsigned int i = 0; i < number; i++) {
+    for(unsigned i = 0; i < number; i++) {
         result += simbol;
     };
     return result;
 }
 
-std::string StringFormer::line(unsigned int number, unsigned int max) {
+std::string StringFormer::line(unsigned number, unsigned max) {
     return number < max ? line(number) : line(max);
 }
 
-std::string StringFormer::line(unsigned int number, char simbol, unsigned int max) {
+std::string StringFormer::line(unsigned number, char simbol, unsigned max) {
     return number < max ? line(number, simbol) : line(max, simbol);
 }
 
-std::string StringFormer::bar(unsigned int number)
-{
+std::string StringFormer::bar(unsigned number) {
     switch (number) {
     case 0:
         return "";
@@ -45,11 +44,9 @@ std::string StringFormer::bar(unsigned int number)
     default:
         return "\uE007";
     }
-
 }
 
-std::string StringFormer::horisontalBar(unsigned int number)
-{
+std::string StringFormer::horisontalBar(unsigned number) {
     switch (number) {
     case 0:
         return "";

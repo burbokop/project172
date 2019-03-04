@@ -4,42 +4,27 @@
 #include "additional/rotozoom.h"
 
 
-/*
- * experimantal
- */
-
-extern VisualEffect *applied_effect;
-extern bool effect_locked;
-
-VisualEffect *applied_effect;
-bool effect_locked = false;
+VisualEffect *SPM::appliedEffect = nullptr;
+bool SPM::effectLocked = false;
 
 void SPM::ApplyEffect(VisualEffect *effect) {
-    applied_effect = effect;
+    appliedEffect = effect;
 }
 
 void SPM::LockEffect(VisualEffect *effect) {
-    effect_locked = true;
-    applied_effect = effect;
+    effectLocked = true;
+    appliedEffect = effect;
 }
 
 void SPM::UnlockEffect() {
-    effect_locked = false;
+    effectLocked = false;
 }
 
-
-SDL_Surface *effect(SDL_Surface *surface) {
-    SDL_Surface *result = (applied_effect != nullptr) ? (*applied_effect)(surface) : surface;
-    if(!effect_locked) applied_effect = nullptr;
+SDL_Surface *SPM::effect(SDL_Surface *surface) {
+    SDL_Surface *result = (appliedEffect != nullptr) ? (*appliedEffect)(surface) : surface;
+    if(!effectLocked) appliedEffect = nullptr;
     return result;
 }
-
-
-
-/*
- * ------------
- */
-
 
 Uint32 SPM::ColorRGB(Uint8 R, Uint8 G, Uint8 B) {
     return 65536 * R + 256 * G + B;
@@ -319,7 +304,12 @@ void SPM::BlitRotatedSurface(SDL_Surface *surface, SDL_Surface *screen_surface, 
     temp_surface = rotozoomSurface(surface, angle, zoom, smooth);
     rect.x = static_cast<int>(rect.x - temp_surface->w / 2 + surface->w * zoom / 2);
     rect.y = static_cast<int>(rect.y - temp_surface->h / 2 + surface->h * zoom / 2);
-    SDL_BlitSurface(effect(temp_surface), nullptr, screen_surface, &rect);
+
+    SDL_Surface *ets = effect(temp_surface);
+    SDL_BlitSurface(ets, nullptr, screen_surface, &rect);
+    if(ets != temp_surface)
+    SDL_FreeSurface(ets);
+    SDL_FreeSurface(temp_surface);
 }
 
 void SPM::BlendedText(SDL_Surface *surface, std::string text_line, TTF_Font *text_font, int text_x, int text_y, SDL_Color text_color) {
@@ -328,7 +318,10 @@ void SPM::BlendedText(SDL_Surface *surface, std::string text_line, TTF_Font *tex
     text_surface = TTF_RenderText_Blended(text_font, text_line.c_str(), text_color);
     text_rect.x = text_x;
     text_rect.y = text_y;
-    SDL_BlitSurface(effect(text_surface), nullptr, surface, &text_rect);
+    SDL_Surface *ets = effect(text_surface);
+    SDL_BlitSurface(ets, nullptr, surface, &text_rect);
+    if(ets != text_surface)
+    SDL_FreeSurface(ets);
     SDL_FreeSurface(text_surface);
 }
 
@@ -342,8 +335,11 @@ void SPM::BlendedText(SDL_Surface *surface, std::string text_line, TTF_Font *tex
     rgbColor.b = (color >> 0) & 255;
     text_surface = TTF_RenderUTF8_Blended_Wrapped(text_font, text_line.c_str(), rgbColor, wrap);
     text_rect.x = text_x;
-    text_rect.y = text_y;
-    SDL_BlitSurface(effect(text_surface), nullptr, surface, &text_rect);
+    text_rect.y = text_y;    
+    SDL_Surface *ets = effect(text_surface);
+    SDL_BlitSurface(ets, nullptr, surface, &text_rect);
+    if(ets != text_surface)
+    SDL_FreeSurface(ets);
     SDL_FreeSurface(text_surface);
 }
 

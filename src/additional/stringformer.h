@@ -9,14 +9,14 @@
 
 class StringFormer : public Object {
 public:
-    static std::string line(unsigned int number);
-    static std::string line(unsigned int number, char simbol);
-    static std::string line(unsigned int number, unsigned int max);
-    static std::string line(unsigned int number, char simbol, unsigned int max);
+    static std::string line(unsigned number);
+    static std::string line(unsigned number, char simbol);
+    static std::string line(unsigned number, unsigned max);
+    static std::string line(unsigned number, char simbol, unsigned max);
 
 
-    static std::string bar(unsigned int number);
-    static std::string horisontalBar(unsigned int number);
+    static std::string bar(unsigned number);
+    static std::string horisontalBar(unsigned number);
 };
 
 #endif // STRING_H

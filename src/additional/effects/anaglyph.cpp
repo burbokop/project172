@@ -5,11 +5,11 @@ SDL_Surface *separateChannel(SDL_Surface *origin, Uint32 mask) {
     SDL_Surface* result = SDL_CreateRGBSurface(0, origin->w, origin->h, 32, 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
     SDL_SetSurfaceAlphaMod(result, (mask & 0xff000000) >> 24);
 
-    Uint32 *src_pixels = (Uint32*)(origin->pixels);
-    Uint32 *dst_pixels = (Uint32*)(result->pixels);
+    Uint32 *src_pixels = static_cast<Uint32*>(origin->pixels);
+    Uint32 *dst_pixels = static_cast<Uint32*>(result->pixels);
 
     SDL_LockSurface(result);
-    for(Uint32 i = 0, l = origin->w * origin->h; i < l; i++) {
+    for(int i = 0, l = origin->w * origin->h; i < l; i++) {
         dst_pixels[i] = (src_pixels[i] & (mask | 0xff000000));
     }
     SDL_UnlockSurface(result);
@@ -36,16 +36,16 @@ Uint32 blendColor(Uint32 color1, Uint32 color2) {
     Uint8 A = (255 - ((255 - A1) * (255 - A2) / 255));
     //Uint8 A = (A1 < A2) ? A1 : A2;
 
-    Uint8 R = blendChanel(R1, A1, R2, A2);
-    Uint8 G = blendChanel(G1, A1, G2, A2);
-    Uint8 B = blendChanel(B1, A1, B2, A2);
+    Uint32 R = blendChanel(R1, A1, R2, A2);
+    Uint32 G = blendChanel(G1, A1, G2, A2);
+    Uint32 B = blendChanel(B1, A1, B2, A2);
 
 
     //Uint8 R = (A1 + A2) != 0 ? ((R1 * A1 + R2 * A2) / (A1 + A2)) : 0;
     //Uint8 G = (A1 + A2) != 0 ? ((G1 * A1 + G2 * A2) / (A1 + A2)) : 0;
     //Uint8 B = (A1 + A2) != 0 ? ((B1 * A1 + B2 * A2) / (A1 + A2)) : 0;
 
-    return (A << 24) | (R << 16) | (G << 8) | (B << 0);
+    return ((A << 24) | (R << 16) | (G << 8) | (B << 0));
 }
 
 
@@ -63,8 +63,8 @@ Uint32 SPM_GetPixel(SDL_Surface *surface, int x, int y) {
 SDL_Surface *blendSurface(SDL_Surface *src1, SDL_Surface *src2, int x, int y) {
     SDL_Surface* result = SDL_CreateRGBSurface(0, src1->w + std::abs(x), src1->h + std::abs(y), 32, 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
     SDL_LockSurface(result);
-    for(Uint32 i = 0, l = result->w; i < l; i++) {
-        for(Uint32 j = 0, l = result->h; j < l; j++) {
+    for(int i = 0, l = result->w; i < l; i++) {
+        for(int j = 0, l = result->h; j < l; j++) {
             int x1, y1, x2, y2;
             if (x > 0) {
                 if(y > 0) {

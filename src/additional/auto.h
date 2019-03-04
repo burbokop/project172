@@ -9,20 +9,19 @@
 
 class Auto : public Object {
 private:
-    static const uint8_t TYPE_INT32;
-    static const uint8_t TYPE_INT64;
-    static const uint8_t TYPE_UINT32;
-    static const uint8_t TYPE_UINT64;
-    static const uint8_t TYPE_DOUBLE;
+    static const unsigned TYPE_INT32;
+    static const unsigned TYPE_INT64;
+    static const unsigned TYPE_UINT32;
+    static const unsigned TYPE_UINT64;
+    static const unsigned TYPE_DOUBLE;
 
-    static const uint8_t TYPE_VECTOR;
-    static const uint8_t TYPE_OBJECT;
+    static const unsigned TYPE_VECTOR;
+    static const unsigned TYPE_OBJECT;
 
-    uint8_t type;
+    unsigned type;
 
     uintptr_t pointer = 0;
     Vector vectorValue = Vector();
-
 public:
     Auto();
     Auto(void *value);

@@ -40,6 +40,11 @@ public:
     static void out(std::string message);
     static void err(uint8_t code, std::string site, std::string comment = "");
     static void init(bool out = false, bool err = false);
+
+    static double getRuntimeVM();
+    static double getRuntimeRSS();
+
+
 };
 
 #endif // DEBUG_H

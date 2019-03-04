@@ -8,18 +8,16 @@
 
 class AudioPlayer : public Worker {
 public:
-    static Uint8 NONE;
-    static Uint8 START_PLAYING;
-    static Uint8 LOOP_PLAYING;
-    static Uint8 STOP_PLAYING;
+    static const unsigned NONE;
+    static const unsigned START_PLAYING;
+    static const unsigned LOOP_PLAYING;
+    static const unsigned STOP_PLAYING;
 
-    static int CUT_VOLUME_DISTANCE;
-    static int FULL_VOLUME_DISTANCE;
-
-
+    static const int CUT_VOLUME_DISTANCE;
+    static const int FULL_VOLUME_DISTANCE;
 private:
     AudioChannel channel;
-    Uint8 state = NONE;
+    unsigned state = NONE;
 
     AudioSample *startChunk = nullptr;
     AudioSample *loopChunk = nullptr;

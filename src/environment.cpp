@@ -9,6 +9,8 @@
 #include "units/camera.h"
 
 
+
+
 Environment::Environment() {
     this->state = new State();
     this->units = new std::vector<Worker*>();
@@ -35,7 +37,6 @@ void Environment::init(int argc, char *argv[]) {
 void Environment::start() {
     Debug::out("GAME STARTED");
     netListener->start();
-
     Timer loopTimer = Timer(1000 / state->getMaxFPS());
     loopTimer.reset();
 
@@ -49,25 +50,17 @@ void Environment::start() {
             this->units->at(i)->render(this->renderer);
         }
 
-        //std::cout << "gui1\n";
         GUIElement *gui = worldManager->getGui();
-        //std::cout << "gui2\n";
         if(gui != nullptr) {
-        //            std::cout << "gui3\n";
             gui->update();
-        //            std::cout << "gui4\n";
             gui->render(renderer, event);
-        //            std::cout << "gui5\n";
         }
         renderer->update();
-        //std::cout << "context\n";
         context->handleEvents();
-        //std::cout << "context end\n";
         worldManager->checkState(context, assetManager, units, renderer, fps);
         if(event->getExitFlag()) break;
         fps->count();
 
-        //std::cout << "State::getLoopBehaviour(): " << (uint16_t)State::getLoopBehaviour() << "\n";
         if(State::getLoopBehaviour() == State::TIMER) {
             while (!loopTimer.count()) {
                 std::this_thread::sleep_for(std::chrono::milliseconds(2));

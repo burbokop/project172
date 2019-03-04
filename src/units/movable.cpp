@@ -19,9 +19,7 @@ void Movable::disableForcedMaxSpeed() {
     forcedMaxSpeedEnabled = false;
 }
 
-#include <iostream>
 bool Movable::onAcceleration(bool start) {
-    std::cout << "gogadoda: \n";
     ModuleHandler *modules = getModuleHandler();
     if(modules) {
         std::vector<Module*> *engines = modules->getModulesByClass("engine");
@@ -81,9 +79,6 @@ void Movable::place(Vector pos, Vector vel, Vector acc, double angle) {
 }
 
 bool Movable::accelerateForward() {
-
-
-
     if(!accelerationLocked) {
         ModuleHandler *modules = getModuleHandler();
         if(modules && modules->hasModuleOfClass("engine")) {

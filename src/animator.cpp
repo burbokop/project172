@@ -61,13 +61,11 @@ void Animator::setZoom(double zoom) {
 }
 
 void Animator::render(Renderer *renderer) {
-
     if (renderer != nullptr && this->mode != NOTRENDER) {
         Vector local = pos + renderer->getOffset();
-        //const local = pos.add(api.oh.math.Vector.createByAngle(-offset.module(), -angle / 180 * 3.14));
         renderer->image(frames[static_cast<unsigned long>(currentFrame)], local, angle, zoom);
     }
-    if(this->timer.count(true)) {
+    if(this->timer.count()) {
         if(this->mode == LOOP) {
             this->currentFrame++;
             if(this->currentFrame >= maxFrame) this->currentFrame = 0;

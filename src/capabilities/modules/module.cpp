@@ -9,13 +9,9 @@ Module::Module() {
 Module::Module(Loadable *tmp) : Loadable (tmp) {
 }
 
-#include "iostream"
 void Module::animate(Uint8 mode, Uint8 def) {
     animator.setDefaultMode(def);
     animator.play(mode);
-
-    std::cout << ":" << (int)mode << " " << (int)Animator::LOOP << "\n";
-
     if(mode == Animator::LOOP) audioPlayer.play();
     else audioPlayer.stop();
 }

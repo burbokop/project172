@@ -111,7 +111,6 @@ Uint8 WarpDrive::abortWarp(Context* context) {
     return result;
 }
 
-#include <iostream>
 void WarpDrive::loop(Context *context, Event *event) {
     if(warpState == WARP_LOADING) {
         if(timer.count(true)) {

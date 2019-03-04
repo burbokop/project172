@@ -3,13 +3,13 @@
 #include "additional/math.h"
 
 
-Uint8 AudioPlayer::NONE = 0;
-Uint8 AudioPlayer::START_PLAYING = 1;
-Uint8 AudioPlayer::LOOP_PLAYING = 2;
-Uint8 AudioPlayer::STOP_PLAYING = 3;
+const unsigned AudioPlayer::NONE = 0;
+const unsigned AudioPlayer::START_PLAYING = 1;
+const unsigned AudioPlayer::LOOP_PLAYING = 2;
+const unsigned AudioPlayer::STOP_PLAYING = 3;
 
-int AudioPlayer::CUT_VOLUME_DISTANCE = 1024;
-int AudioPlayer::FULL_VOLUME_DISTANCE = 128;
+const int AudioPlayer::CUT_VOLUME_DISTANCE = 1024;
+const int AudioPlayer::FULL_VOLUME_DISTANCE = 128;
 
 
 

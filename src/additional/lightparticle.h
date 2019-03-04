@@ -8,9 +8,9 @@
 
 class LightParticle : public Worker {
 public:
-    static const Uint8 PIXEL;
-    static const Uint8 SQUARE;
-    static const Uint8 CIRCLE;
+    static const unsigned PIXEL;
+    static const unsigned SQUARE;
+    static const unsigned CIRCLE;
 
     static const int DEFAULT_AVERAGE_LIFE_TIME;
     static const int DEFAULT_LIFE_TIME_DELTA;
@@ -22,7 +22,7 @@ private:
     Vector pos;
     Vector vel;
 
-    Uint8 shape = PIXEL;
+    unsigned shape = PIXEL;
     int radius = 2;
     Uint32 color = 0xff00ff;
     Timer *destroyTimer = nullptr;
@@ -30,7 +30,7 @@ private:
 
 
 public:
-    LightParticle(Uint8 shape = PIXEL, int averageLifeTime = DEFAULT_AVERAGE_LIFE_TIME, int lifeTimeDelta = DEFAULT_LIFE_TIME_DELTA);
+    LightParticle(unsigned shape = PIXEL, int averageLifeTime = DEFAULT_AVERAGE_LIFE_TIME, int lifeTimeDelta = DEFAULT_LIFE_TIME_DELTA);
     void place(Vector pos, Vector vel);
 
     // Worker interface
