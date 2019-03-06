@@ -33,9 +33,14 @@ sudo apt-get install qt4-qmake
 
 #### keys:
 ```
-W A S D = moving
-F       = charging / run / stop warp drive
-SPACE   = fire
+W A D                       => moving
+F                           => charging / run / stop warp drive
+SPACE                       => fire
+
++ / -                       => minimap scale
+
+arrows / enter / backspace  => menu navigation
+       
 
 full controll table: https://github.com/burbokop/project172/blob/master/build/assets/player1.json
 
