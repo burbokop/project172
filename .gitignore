@@ -1,2 +1,5 @@
 *.log
 *.pro.user
+*.o
+
+.qmake.stash
