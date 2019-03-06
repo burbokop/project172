@@ -7,18 +7,18 @@
 #include "additional/lightparticle.h"
 
 
-const Uint8 Context::DELETE_UNIT = 0;
-const Uint8 Context::SPAWN_EXPLOSIVE = 1;
-const Uint8 Context::SPAWN_ENGINE_EXPLOSIVE = 2;
-const Uint8 Context::SPAWN_ENGINE_PARTICLES = 3;
-const Uint8 Context::SPAWN_UNIT = 4;
-const Uint8 Context::SPAWN_SURFACE = 5;
-const Uint8 Context::ADD_CAPABILITY = 6;
-const Uint8 Context::REMOVE_CAPABILITY = 7;
+const unsigned Context::DELETE_UNIT = 0;
+const unsigned Context::SPAWN_EXPLOSIVE = 1;
+const unsigned Context::SPAWN_ENGINE_EXPLOSIVE = 2;
+const unsigned Context::SPAWN_ENGINE_PARTICLES = 3;
+const unsigned Context::SPAWN_UNIT = 4;
+const unsigned Context::SPAWN_SURFACE = 5;
+const unsigned Context::ADD_CAPABILITY = 6;
+const unsigned Context::REMOVE_CAPABILITY = 7;
 
-const Uint8 Context::EMERGENCY_MESSAGE = 8;
-const Uint8 Context::BACKGROUND_FLASHING = 9;
-const Uint8 Context::FLOATING_MESSAGE = 10;
+const unsigned Context::EMERGENCY_MESSAGE = 8;
+const unsigned Context::BACKGROUND_FLASHING = 9;
+const unsigned Context::FLOATING_MESSAGE = 10;
 
 void Context::setGui(GUIMain *value) {
     gui = value;
@@ -52,7 +52,7 @@ void Context::handleRequest(Request request) {
 
         if(requester) {
             for(int i = 0; i < radius * 4; i++) {
-                Uint8 types[] = { Particle::PIXEL, Particle::CIRCLE, Particle::SQUARE };
+                unsigned types[] = { Particle::PIXEL, Particle::CIRCLE, Particle::SQUARE };
                 LightParticle *particle = new LightParticle(types[rand() % 3], radius * 600, radius * 400);
                 Movable *requesterAsMovable = dynamic_cast<Movable*>(request.requester);
                 if(requesterAsMovable) {
@@ -75,7 +75,7 @@ void Context::handleRequest(Request request) {
 
         if(requester) {
             for(int i = 0; i < radius * 4; i++) {
-                Uint8 types[] = { Particle::PIXEL, Particle::CIRCLE, Particle::SQUARE };
+                unsigned types[] = { Particle::PIXEL, Particle::CIRCLE, Particle::SQUARE };
                 LightParticle *particle = new LightParticle(types[rand() % 3], radius * 600, radius * 400);
                 particle->place(requester->getPosition(), Vector::createRandom(v0) / 2 + Vector::createByAngle(requester->getVelocity().module() / 2, requester->getAngle()));
                 units->push_back(particle);
@@ -179,7 +179,7 @@ AssetManager *Context::getAssets() const {
 }
 
 
-void Context::addEvent(Worker *requester, Uint8 command, Auto argument) {
+void Context::addEvent(Worker *requester, unsigned command, Variant argument) {
     eventQueue.push({
         requester,
         command,

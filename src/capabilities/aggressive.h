@@ -13,8 +13,9 @@ private:
     std::vector<Worker*> *targets = nullptr;
     Unit *target = nullptr;
     bool targeted = false;
+    bool inWarp = false;
     Trigger stopWarpTrigger = Trigger();
-    Timer warpFatigueTimer = Timer(30000);
+    Timer warpFatigueTimer = Timer(10000);
 
 
     Unit *chooseTarget();

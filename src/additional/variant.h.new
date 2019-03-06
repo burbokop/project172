@@ -7,7 +7,7 @@
 #include "object.h"
 
 
-class Auto : public Object {
+class Variant : public Object {
 private:
     static const unsigned TYPE_INT32;
     static const unsigned TYPE_INT64;
@@ -20,17 +20,19 @@ private:
 
     unsigned type;
 
+
+
     uintptr_t pointer = 0;
     Vector vectorValue = Vector();
 public:
-    Auto();
-    Auto(void *value);
-    Auto(int value);
-    Auto(long value);
-    Auto(unsigned int value);
-    Auto(unsigned long value);
-    Auto(double value);
-    Auto(Vector value);
+    Variant();
+    Variant(void *value);
+    Variant(int value);
+    Variant(long value);
+    Variant(unsigned int value);
+    Variant(unsigned long value);
+    Variant(double value);
+    Variant(Vector value);
 
     int toInt32();
     long toInt64();
@@ -50,10 +52,6 @@ public:
 
     bool isVector();
     bool isObject();
-
-    // Object interface
-public:
-    std::string getType() const;
 };
 
 #endif // AUTO_H

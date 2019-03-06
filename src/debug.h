@@ -19,26 +19,26 @@
 
 class Debug {
 public:
-    static const uint8_t APPEAL_TO_REMOVED = 1;
-    static const uint8_t ASSET_KEY_NOT_FOUND = 2;
-    static const uint8_t UNKNOWN_ASSET_KEY = 3;
-    static const uint8_t SEGMENTATION_FAULT = 4;
+    static const unsigned APPEAL_TO_REMOVED = 1;
+    static const unsigned ASSET_KEY_NOT_FOUND = 2;
+    static const unsigned UNKNOWN_ASSET_KEY = 3;
+    static const unsigned SEGMENTATION_FAULT = 4;
 
 private:
     static bool errEnbled;
     static bool outEnbled;
 
-    static uint8_t lastError;
+    static unsigned lastError;
     static std::string lastSite;
 
     static void onSegSignal [[ noreturn ]] (int signum);
-    static std::string codeToString(uint8_t code);
+    static std::string codeToString(unsigned code);
 public:
 
 
     static void log(std::string message);
     static void out(std::string message);
-    static void err(uint8_t code, std::string site, std::string comment = "");
+    static void err(unsigned code, std::string site, std::string comment = "");
     static void init(bool out = false, bool err = false);
 
     static double getRuntimeVM();

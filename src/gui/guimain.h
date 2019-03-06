@@ -5,6 +5,7 @@
 #include "gui/guistack.h"
 #include "gui/guicentralmessage.h"
 #include "gui/guifloatingmessage.h"
+#include "gui/guiminimap.h"
 
 
 class GUIMain : public GUIElement {
@@ -14,6 +15,7 @@ private:
     GUIStack *menu = nullptr;
     GUICentralMessage *centralMessage = nullptr;
     GUIFloatingMessage *floatingMessage = nullptr;
+    GUIMiniMap *miniMap = nullptr;
     Timer floatingMessageLifeTimer = Timer(FLOATING_LIFE_TIME);
 
 public:
@@ -30,6 +32,7 @@ public:
 
     void setMenu(GUIStack *value);
     void setMessage(GUICentralMessage *value);
+    void setMiniMap(GUIMiniMap *value);
 };
 
 #endif // GUIMAIN_H

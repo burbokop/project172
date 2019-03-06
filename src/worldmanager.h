@@ -18,7 +18,7 @@ private:
     World *activeWorld = nullptr;
     bool worldIsChanged = true;
 
-    void onChangeReset(Auto caseValue);
+    void onChangeReset(Variant caseValue);
     void clear(std::vector<Worker*> *units);
 
     void init(AssetManager *assets, std::vector<Worker*> *units, Renderer *renderer, FPSMonitor *fps);

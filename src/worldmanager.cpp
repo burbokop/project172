@@ -90,6 +90,11 @@ void WorldManager::init(AssetManager *assets, std::vector<Worker*> *units, Rende
                             testMenu->addElement(new GUIChoice(players[0], "DELAY", State::DELAY, State::setLoopBehaviour));
                             testMenu->addElement(new GUIChoice(players[0], "TIMER", State::TIMER, State::setLoopBehaviour));
 
+                            testMenu->addElement(new GUISwitch(players[0], "inc fps", State::incMaxFps));
+                            testMenu->addElement(new GUISwitch(players[0], "dec fps", State::decMaxFps));
+
+                            testMenu->addElement(new GUILabel(players[0], fps));
+
                         } mainMenu->addElement(testMenu);
 
                         GUIContainer *optionsMenu = new GUIContainer(players[0], "options"); {
@@ -103,9 +108,9 @@ void WorldManager::init(AssetManager *assets, std::vector<Worker*> *units, Rende
                             } optionsMenu->addElement(resolutionMenu);
                             optionsMenu->addElement(new GUISwitch(players[0], std::string("fullscreen"), std::bind(&Renderer::setFullscreen, renderer)));
                         } mainMenu->addElement(optionsMenu);
-                        mainMenu->addElement(new GUILabel(players[0], fps));
                     } stack->push(mainMenu);
                 } gui->setMenu(stack);
+                gui->setMiniMap(new GUIMiniMap(players[0], units));
             }
         }
     }
@@ -127,7 +132,7 @@ Near *WorldManager::getNear() const {
     return near;
 }
 
-void WorldManager::onChangeReset(Auto caseValue) {
+void WorldManager::onChangeReset(Variant caseValue) {
     activeWorld = worlds[caseValue.toUint64()];
     worldIsChanged = true;
 }

@@ -24,7 +24,7 @@ void Renderer::setResolution(Vector value) {
     resolution = value;
 }
 
-void Renderer::setResolutionCallback(Auto value) {
+void Renderer::setResolutionCallback(Variant value) {
     setResolution(value.toVector());
 }
 
@@ -49,8 +49,6 @@ Renderer *Renderer::create(const char *title, int x, int y, std::string fontPath
     SDL_Init(SDL_INIT_EVERYTHING);
     TTF_Init();
     SDL_Window *window = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, x, y, 0);
-
-    ;
 
     SDL_Surface *surface = SDL_GetWindowSurface(window);
     Renderer *result = new Renderer(window, Vector(x, y), surface, TTF_OpenFont(fontPath.c_str(), DEFAULT_FONT_SIZE));
@@ -118,6 +116,13 @@ void Renderer::diagonalGrid(Vector point1, Vector point2, int interval, Uint32 c
 
 void Renderer::image(SDL_Surface *image, Vector pos, double angle, double zoom) {
     SPM::BlitRotatedSurface(image, surface, pos.getIntX(), pos.getIntY(), angle, zoom, 1);
+
+    /*
+    if(pos.getIntX() >= 0 && pos.getIntY() >= 0 && pos.getIntX() <= resolution.getIntX() && pos.getIntY() <= resolution.getIntY()) {
+        SDL_BlitSurface(image, nullptr, surface, new SDL_Rect { pos.getIntX(), pos.getIntY(), 0, 0 });
+        std::cout << "pos: " << pos << "\n";
+    }
+    */
 }
 
 void Renderer::string(std::string string, Vector pos, Uint32 color) {

@@ -5,10 +5,11 @@
 #include "math.h"
 
 
-#ifdef NULL
-#undef NULL
-#endif
-#define NULL nullptr
+const unsigned Vector::QUARTER_RIGHT_DOWN = 0;
+const unsigned Vector::QUARTER_LEFT_DOWN = 1;
+const unsigned Vector::QUARTER_LEFT_UP = 2;
+const unsigned Vector::QUARTER_RIGHT_UP = 3;
+
 
 Vector::Vector() {
     this->x = 0;
@@ -31,7 +32,7 @@ Vector::Vector(int x, int y) {
 }
 
 Vector Vector::createByAngle(double module, double angle) {
-    return Vector(module * std::cos(angle), module * std::sin(angle));
+    return Vector(module * Math::cos(angle), module * Math::sin(angle));
 }
 
 Vector Vector::createRandom(int max) {
@@ -101,8 +102,8 @@ Vector Vector::normalized() {
 
 double Vector::angle() {
     double cos = this->normalized() * Vector(1, 0);
-    if(this->y >= 0) return std::acos(cos);
-    else return -std::acos(cos);
+    if(this->y >= 0) return Math::acos(cos);
+    else return -Math::acos(cos);
 }
 
 
@@ -110,13 +111,13 @@ double Vector::angle() {
 Vector Vector::relativisticAddition(Vector term, double c) {
     double termModule = term.module();
     if(!Math::cmpd(termModule, 0)) {
-        c = c * RELATIVISTIC_ADDITION_CONSTANT;
+        c *= RELATIVISTIC_ADDITION_CONSTANT;
         Vector classicSum = *this + term;
 
         double thisModule = this->module();
         double classicSumModule = classicSum.module();
 
-        double k = std::sqrt(1 + thisModule * termModule / (c * c));
+        double k = Math::sqrt((1 + thisModule * termModule / (c * c)));
         double u = classicSumModule / k;
 
         return Vector(u * classicSum.x / classicSumModule, u * classicSum.y / classicSumModule);
@@ -129,8 +130,7 @@ double Vector::tg() {
     return 0.0;
 }
 
-char Vector::quarter(char offset)
-{
+unsigned Vector::quarter(unsigned offset) {
     if(this->y >= 0) {
         if(this->x >= 0) {
             return (0 + offset) % 4;

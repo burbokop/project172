@@ -7,13 +7,13 @@
 
 class Animator : public Worker {
 public:
-    static const Uint8 PING_PONG;
-    static const Uint8 LOOP;
-    static const Uint8 ONEFRAME;
-    static const Uint8 FROZE;
-    static const Uint8 NOTRENDER;
-    static const Uint8 TOTHEFRAME;
-    static const Uint8 DEFAULT_INACTIVE;
+    static const unsigned PING_PONG;
+    static const unsigned LOOP;
+    static const unsigned ONEFRAME;
+    static const unsigned FROZE;
+    static const unsigned NOTRENDER;
+    static const unsigned TOTHEFRAME;
+    static const unsigned DEFAULT_INACTIVE;
 
 
 private:
@@ -22,8 +22,8 @@ private:
     double zoom;
 
 
-    Uint8 mode = NOTRENDER;
-    Uint8 defaultMode = DEFAULT_INACTIVE;
+    unsigned mode = NOTRENDER;
+    unsigned defaultMode = DEFAULT_INACTIVE;
 
     Timer timer = Timer(100);
     SDL_Surface *origin;
@@ -36,7 +36,7 @@ private:
 public:
     Animator();
     Animator(SDL_Surface *origin, int frames = 1, int tracks = 1);
-    void play(Uint8 mode);
+    void play(unsigned mode);
     void setDefaultMode(const Uint8 &value);
     void setPosition(Vector pos);
     void setAngle(double angle);

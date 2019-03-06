@@ -1,30 +1,42 @@
 #include "state.h"
 
 
-const uint8_t State::TIMER = 0;
-const uint8_t State::DELAY = 1;
+const unsigned State::TIMER = 0;
+const unsigned State::DELAY = 1;
 
-uint8_t State::loopBehaviour = TIMER;
+unsigned State::loopBehaviour = TIMER;
+int State::maxFPS = 60;
 
 
-int State::getMaxFPS() const {
+int State::getMaxFPS() {
     return maxFPS;
 }
-
-void State::setMaxFPS(int value)
-{
+/*
+void State::setMaxFPS(int value) {
     maxFPS = value;
 }
+*/
 
-uint8_t State::getLoopBehaviour() {
+unsigned State::getLoopBehaviour() {
     return loopBehaviour;
 }
 
-void State::setLoopBehaviour(Auto value) {
+void State::setLoopBehaviour(Variant value) {
     loopBehaviour = value.isUint32();
 }
 
-State::State()
-{
+#include <iostream>
+void State::incMaxFps() {
+    maxFPS++;
+    std::cout << "maxFPS: " << maxFPS << "\n";
+}
+
+void State::decMaxFps() {
+    maxFPS--;
+    std::cout << "maxFPS: " << maxFPS << "\n";
+}
+
+
+State::State() {
 
 }

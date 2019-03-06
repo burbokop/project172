@@ -2,13 +2,13 @@
 
 #include "additional/spm.h"
 
-const Uint8 Animator::PING_PONG = 0;
-const Uint8 Animator::LOOP = 1;
-const Uint8 Animator::ONEFRAME = 2;
-const Uint8 Animator::FROZE = 3;
-const Uint8 Animator::NOTRENDER = 4;
-const Uint8 Animator::TOTHEFRAME = 5;
-const Uint8 Animator::DEFAULT_INACTIVE = 6;
+const unsigned Animator::PING_PONG = 0;
+const unsigned Animator::LOOP = 1;
+const unsigned Animator::ONEFRAME = 2;
+const unsigned Animator::FROZE = 3;
+const unsigned Animator::NOTRENDER = 4;
+const unsigned Animator::TOTHEFRAME = 5;
+const unsigned Animator::DEFAULT_INACTIVE = 6;
 
 
 
@@ -38,7 +38,7 @@ Animator::Animator(SDL_Surface *origin, int frames, int tracks) {
     }
 }
 
-void Animator::play(Uint8 mode) {
+void Animator::play(unsigned mode) {
     this->mode = mode;
 }
 

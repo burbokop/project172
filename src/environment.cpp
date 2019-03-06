@@ -66,7 +66,7 @@ void Environment::start() {
                 std::this_thread::sleep_for(std::chrono::milliseconds(2));
             }
         } else {
-            std::this_thread::sleep_for(std::chrono::milliseconds(fps->toUint32() * 1000 / static_cast<long long>(std::pow(state->getMaxFPS(), 2))));
+            std::this_thread::sleep_for(std::chrono::milliseconds(fps->toUint32() * 1000 / static_cast<long long>(std::pow(State::getMaxFPS(), 2))));
         }
     }
     quit();

@@ -11,7 +11,7 @@ private:
 
     std::vector<GUIElement*> *informativeToElement(std::vector<Worker*> *array);
 
-    void onChoice(Auto value);
+    void onChoice(Variant value);
 
 public:
     GUIList(Controller *player);

@@ -6,6 +6,12 @@
 #include <sstream>
 
 class Vector {
+public:
+    static const unsigned QUARTER_RIGHT_DOWN;
+    static const unsigned QUARTER_LEFT_DOWN;
+    static const unsigned QUARTER_LEFT_UP;
+    static const unsigned QUARTER_RIGHT_UP;
+
 private:
     double x;
     double y;
@@ -39,7 +45,7 @@ public:
 
     Vector relativisticAddition(Vector term, double c);
     double tg();
-    char quarter(char offset);
+    unsigned quarter(unsigned offset = 0);
     double map(Vector *destination, double value);
 
     Vector operator+(double term);

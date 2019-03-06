@@ -3,7 +3,7 @@
 bool Debug::errEnbled = false;
 bool Debug::outEnbled = false;
 
-uint8_t Debug::lastError = 0;
+unsigned Debug::lastError = 0;
 std::string Debug::lastSite = "";
 
 #include <execinfo.h>  // for backtrace
@@ -43,7 +43,7 @@ void Debug::onSegSignal(int signum) {
     exit(1);
 }
 
-std::string Debug::codeToString(uint8_t code) {
+std::string Debug::codeToString(unsigned code) {
     switch (code) {
         case 0: return  "NO_ERROR";
         case APPEAL_TO_REMOVED: return "APPEAL_TO_REMOVED";
@@ -67,7 +67,7 @@ void Debug::out(std::string message) {
     }
 }
 
-void Debug::err(uint8_t code, std::string site, std::string comment) {
+void Debug::err(unsigned code, std::string site, std::string comment) {
     if(errEnbled && code != 0) {
         if(code != lastError || site != lastSite) {
             if(comment == "") {

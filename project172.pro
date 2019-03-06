@@ -84,7 +84,6 @@ SOURCES += \
     src/worldmanager.cpp \
     src/worlds/defaultworld.cpp \
     src/worlds/arenaworld.cpp \
-    src/additional/auto.cpp \
     src/capabilities/docker.cpp \
     src/near.cpp \
     src/gui/guilist.cpp \
@@ -95,7 +94,9 @@ SOURCES += \
     src/audio/audio.cpp \
     src/audio/audiochannel.cpp \
     src/audio/audiohardwarebank.cpp \
-    src/audio/audioplayer.cpp
+    src/audio/audioplayer.cpp \
+    src/additional/variant.cpp \
+    src/gui/guiminimap.cpp
 
 
 HEADERS += \
@@ -173,7 +174,6 @@ HEADERS += \
     src/worldmanager.h \
     src/worlds/defaultworld.h \
     src/worlds/arenaworld.h \
-    src/additional/auto.h \
     src/capabilities/docker.h \
     src/near.h \
     src/gui/guilist.h \
@@ -184,7 +184,9 @@ HEADERS += \
     src/audio/audio.h \
     src/audio/audiochannel.h \
     src/audio/audiohardwarebank.h \
-    src/audio/audioplayer.h
+    src/audio/audioplayer.h \
+    src/additional/variant.h \
+    src/gui/guiminimap.h
 
 
 

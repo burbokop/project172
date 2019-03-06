@@ -8,7 +8,7 @@
 
 #include "additional/effects/visualeffect.h"
 #include "additional/vector.h"
-#include "additional/auto.h"
+#include "additional/variant.h"
 
 
 class Camera;
@@ -56,7 +56,7 @@ public:
 
 
     void setResolution(Vector value);
-    void setResolutionCallback(Auto value);
+    void setResolutionCallback(Variant value);
     void setCamera(Camera *value);
     Camera *getCamera() const;
 };

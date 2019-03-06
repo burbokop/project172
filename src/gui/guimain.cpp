@@ -25,6 +25,11 @@ void GUIMain::addBlushingFloatingMessage(Unit *unit, int value) {
     floatingMessageLifeTimer.reset();
 }
 
+void GUIMain::setMiniMap(GUIMiniMap *value)
+{
+    miniMap = value;
+}
+
 GUIMain::GUIMain() : GUIElement () {
 }
 
@@ -38,6 +43,7 @@ std::string GUIMain::getTitle() {
 void GUIMain::update() {
     if(menu) menu->update();
     if(centralMessage) centralMessage->update();
+    if(miniMap) miniMap->update();
 }
 
 void GUIMain::render(Renderer *renderer, Event *event) {
@@ -48,4 +54,5 @@ void GUIMain::render(Renderer *renderer, Event *event) {
     if(floatingMessageLifeTimer.count()) {
         floatingMessage = nullptr;
     }
+    if(miniMap) miniMap->render(renderer, event);
 }

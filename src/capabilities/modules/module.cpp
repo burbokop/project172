@@ -9,7 +9,7 @@ Module::Module() {
 Module::Module(Loadable *tmp) : Loadable (tmp) {
 }
 
-void Module::animate(Uint8 mode, Uint8 def) {
+void Module::animate(unsigned mode, unsigned def) {
     animator.setDefaultMode(def);
     animator.play(mode);
     if(mode == Animator::LOOP) audioPlayer.play();

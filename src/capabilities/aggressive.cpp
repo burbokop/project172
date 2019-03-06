@@ -49,7 +49,7 @@ void Aggressive::loop(Context *context, Event *event) {
                 parent->rotateRight();
             }
 
-            targeted = !(parent->getAngle() > dstAngle + ANGLE_DELTA * 2 || parent->getAngle() < dstAngle - ANGLE_DELTA * 2);
+            targeted = !(parent->getAngle() > dstAngle + ANGLE_DELTA * 2 || parent->getAngle() < dstAngle - ANGLE_DELTA * 2) && !inWarp;
 
             Ship *ship = dynamic_cast<Ship*>(parent);
 
@@ -72,10 +72,14 @@ void Aggressive::loop(Context *context, Event *event) {
                                 stopWarpTrigger.enable();
                                 warpFatigueTimer.reset();
                             }
+                        } else {
+                            inWarp = true;
                         }
                     } else if((dstModule < 1000 || warpFatigueTimer.count()) && stopWarpTrigger.check()) {
                         if(!ship->abortWarp(context)) {
                             stopWarpTrigger.disanable();
+                        } else {
+                            inWarp = false;
                         }
                     }
                 }

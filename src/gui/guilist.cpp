@@ -24,7 +24,7 @@ std::vector<GUIElement *> *GUIList::informativeToElement(std::vector<Worker *> *
 }
 
 #include <iostream>
-void GUIList::onChoice(Auto value) {
+void GUIList::onChoice(Variant value) {
     std::cout << reinterpret_cast<Unit*>(value.toObject())->getInfo() << "\n";
 }
 

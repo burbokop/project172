@@ -47,10 +47,12 @@ ModuleHandler *Unit::getModuleHandler() {
 
 void Unit::rotateLeft() {
     angle -= getRotationSpeed();
+    if(angle < 0) angle = (M_PI * 2);
 }
 
 void Unit::rotateRight() {
     angle += getRotationSpeed();
+    if(angle > M_PI * 2) angle = 0;
 }
 
 void Unit::lockAngle(double angle) {

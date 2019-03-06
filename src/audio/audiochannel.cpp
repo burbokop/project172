@@ -5,12 +5,9 @@ const int AudioChannel::INFINITELY = -1;
 int AudioChannel::channelsReserved = 0;
 
 
-#include <iostream>
 void AudioChannel::allocate() {
     Mix_AllocateChannels(200);
     ptr = channelsReserved++;
-    //ptr = 0;
-    std::cout << "channel: " << ptr << "\n";
 }
 
 AudioChannel::AudioChannel() {

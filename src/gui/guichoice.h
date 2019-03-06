@@ -9,13 +9,13 @@
 
 class GUIChoice : public GUIButton {
 private:
-    Auto value;
-    std::function<void(Auto)> set;
+    Variant value;
+    std::function<void(Variant)> set;
 
 public:
-    GUIChoice(Controller *player, Auto value, std::function<void(Auto)> set);
-    GUIChoice(Controller *player, std::string label, Auto value, std::function<void(Auto)> set);
-    GUIChoice(Controller *player, IInformative *informative, Auto value, std::function<void(Auto)> set);
+    GUIChoice(Controller *player, Variant value, std::function<void(Variant)> set);
+    GUIChoice(Controller *player, std::string label, Variant value, std::function<void(Variant)> set);
+    GUIChoice(Controller *player, IInformative *informative, Variant value, std::function<void(Variant)> set);
 
     // GUIButton interface
 public:
