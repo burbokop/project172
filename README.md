@@ -48,12 +48,12 @@ full controll table: https://github.com/burbokop/project172/blob/master/build/as
 
 #### command line parameters:
 ```bash
-./project172 [stars slidind start (the minimum spead of camera when background unables special effect) default = 12 pixel/tick]
+./project172 [stars sliding start (the minimum speed of camera when background enables special effect) default = 12 pixel/tick]
 ```
 
 ## videos:
-https://vimeo.com/user93747798/review/310594049/d3638ff2b0
-https://vimeo.com/user93747798/review/316627120/9c236e024f
+https://vimeo.com/310594049
+https://vimeo.com/316627120
 
 
 Nice to play
