@@ -13,7 +13,7 @@
 
 
 Environment::Environment(std::vector<std::string> args) {
-    Debug::init(true, true);
+    Debug::init(false, true);
     Debug::out("INIT GAME");
     Audio::init();
 
