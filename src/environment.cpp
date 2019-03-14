@@ -25,7 +25,9 @@ Environment::Environment(std::vector<std::string> args) {
     event = new Event(); // io {no}
     netListener = new NetListener(context);
 
-    renderer = new Renderer("project172", 600, 600, FileSystem::cutPath(args[0], 2) + "/assets/fonts/ZCOOL.ttf"); //render [no]
+    //renderer = new Renderer("project172", 600, 600, FileSystem::cutPath(args[0], 2) + "/assets/fonts/ZCOOL.ttf"); //render [no]
+    renderer = new Renderer("project172", 600, 600, "../assets/fonts/ZCOOL.ttf"); //render [no]
+
     background = new Background(renderer->getResolution(), 128);
 
     worldManager = new WorldManager({ new DefaultWorld(), new ArenaWorld(), new HeapWorld() });
@@ -33,7 +35,11 @@ Environment::Environment(std::vector<std::string> args) {
     fps = new FPSMonitor("FPS:");
     tps = new FPSMonitor("TPS:");
 
-    assetManager->search(FileSystem::cutPath(args[0], 2) + "/assets");
+    std::cout << "lll: " << args[0] << "\n";
+
+    //assetManager->search(FileSystem::cutPath(args[0], 2) + "/assets");
+    assetManager->search("../assets");
+
     worldManager->checkState(context, assetManager, units, renderer, fps, tps);
     context->setBackground(background);
 }

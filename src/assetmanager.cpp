@@ -15,6 +15,8 @@ AssetManager::AssetManager() {}
 
 
 void AssetManager::search(std::string path) {
+    Debug::out("AssetManager: assets path: " + path);
+
     if(path[path.length() - 1] == '/') path.pop_back();
     std::vector<std::string> items = FileSystem::readDir(path);
     for(unsigned long long i = 0, L = items.size(); i < L; i++) {
