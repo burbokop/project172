@@ -6,24 +6,13 @@
 #include "capabilities/player.h"
 #include "capabilities/modules/weapon.h"
 #include "capabilities/modules/engine.h"
+#include "capabilities/modules/thruster.h"
 #include "units/projectile.h"
 #include "units/station.h"
 
 
 AssetManager::AssetManager() {}
 
-
-std::string AssetManager::getSufix(std::string string) {
-    return string.substr(string.find_last_of('.'), string.length() - 1);
-}
-
-std::string AssetManager::addPrefix(std::string string, std::string prefix) {
-    if(string[0] == '.') string.erase(0, 1);
-    if(string[0] != '/') string = '/' + string;
-    if(prefix[prefix.length() - 1] == '/') prefix.pop_back();
-
-    return prefix + string;
-}
 
 void AssetManager::search(std::string path) {
     if(path[path.length() - 1] == '/') path.pop_back();
@@ -63,9 +52,10 @@ Loadable *AssetManager::copyAsset(std::string key) {
     if(assetClass == "module") return new Module(tmp);
     if(assetClass == "weapon") return new Weapon(tmp);
     if(assetClass == "engine") return new Engine(tmp);
+    if(assetClass == "thruster") return new Thruster(tmp);
     if(assetClass == "warp-drive") return new WarpDrive(tmp);
 
-    Debug::err(Debug::UNKNOWN_ASSET_KEY, DEBUG_IMPRINT, key);
+    Debug::err(Debug::UNKNOWN_ASSET_CLASS, DEBUG_IMPRINT, assetClass);
 
     return nullptr;
 }
@@ -79,7 +69,7 @@ std::vector<std::string> AssetManager::getKeys() {
 }
 
 void AssetManager::processFile(std::string file, std::string location) {
-    std::string sufix = getSufix(file);
+    std::string sufix = FileSystem::getSufix(file);
     if(sufix == ".json") {
         std::string content = FileSystem::readFile(file);
         Json::Reader reader;
@@ -98,7 +88,7 @@ void AssetManager::processFile(std::string file, std::string location) {
                  Json::Value tracks = animation["tracks"];
                  Json::Value play = animation["play"];
                  if(!spritesheet.isNull()) {
-                     anim = Animator(IMG_Load(addPrefix(spritesheet.asString(), location).c_str()), frames.isNull() ? 1 : frames.asInt(), tracks.isNull() ? 1 : tracks.asInt());
+                     anim = Animator(IMG_Load(FileSystem::addPrefix(spritesheet.asString(), location).c_str()), frames.isNull() ? 1 : frames.asInt(), tracks.isNull() ? 1 : tracks.asInt());
                      if(play.isString()) {
                          if(play == "loop") {
                              anim.play(Animator::LOOP);
@@ -110,7 +100,7 @@ void AssetManager::processFile(std::string file, std::string location) {
                      }
                  }
             } else if (!sprite.isNull()) {
-                anim = Animator(IMG_Load(addPrefix(sprite.asString(), location).c_str()));
+                anim = Animator(IMG_Load(FileSystem::addPrefix(sprite.asString(), location).c_str()));
                 anim.play(Animator::LOOP);
             }
 
@@ -125,31 +115,31 @@ void AssetManager::processFile(std::string file, std::string location) {
                     if(audioLoop.isString() && audioStop.isString()) {
                         Debug::log("audio exists: " + audioStart.asString() + " : " + key.asString());
                         audioPlayer = AudioPlayer(
-                            Mix_LoadWAV(addPrefix(audioStart.asString(), location).c_str()),
-                            Mix_LoadWAV(addPrefix(audioLoop.asString(), location).c_str()),
-                            Mix_LoadWAV(addPrefix(audioStop.asString(), location).c_str())
+                            Mix_LoadWAV(FileSystem::addPrefix(audioStart.asString(), location).c_str()),
+                            Mix_LoadWAV(FileSystem::addPrefix(audioLoop.asString(), location).c_str()),
+                            Mix_LoadWAV(FileSystem::addPrefix(audioStop.asString(), location).c_str())
                         );
                     } else {
                         audioPlayer = AudioPlayer(
-                            Mix_LoadWAV(addPrefix(audioStart.asString(), location).c_str())
+                            Mix_LoadWAV(FileSystem::addPrefix(audioStart.asString(), location).c_str())
                         );
                     }
                 }
             } else if (audio.isString()) {
                 audioPlayer = AudioPlayer(
-                    Mix_LoadWAV(addPrefix(audio.asString(), location).c_str())
+                    Mix_LoadWAV(FileSystem::addPrefix(audio.asString(), location).c_str())
                 );
             }
 
-            long intervalValue = 1000;
+            unsigned intervalValue = 1000;
 
             Json::Value rate = root["rate"];
             Json::Value interval = root["interval"];
 
             if(rate.isNumeric()) {
-                intervalValue = static_cast<long>(60000 / rate.asDouble());
+                intervalValue = static_cast<unsigned>(60000 / rate.asDouble());
             } else if (interval.isNumeric()) {
-                intervalValue = static_cast<long>(interval.asDouble());
+                intervalValue = static_cast<unsigned>(interval.asDouble());
             }
             Timer timer(intervalValue);
 

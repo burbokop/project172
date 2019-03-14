@@ -1,0 +1,7 @@
+{
+    "key":"thruster1",
+    "class": "thruster",
+	
+	"left-thrust":true,
+	"right-thrust":true	
+}

@@ -46,7 +46,7 @@ void Projectile::setMother(Unit *value) {
     mother = value;
 }
 
-void Projectile::loop(Context *context, Event *event) {
+void Projectile::tick(Context *context, Event *event) {
     if(destroyTimer && destroyTimer->count()) {
         context->addEvent(this, Context::DELETE_UNIT);
     }
@@ -63,5 +63,5 @@ void Projectile::loop(Context *context, Event *event) {
             Debug::err(Debug::APPEAL_TO_REMOVED, DEBUG_IMPRINT);
         }
     }
-    this->Movable::loop(context, event);
+    this->Movable::tick(context, event);
 }

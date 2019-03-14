@@ -9,6 +9,7 @@ class GUIStack : public GUIElement {
 private:
     std::vector<GUIElement*> elements;
     GUIElement* reserved = nullptr;
+    GUIElement* current = nullptr;
 
 public:
     GUIStack();
@@ -16,11 +17,11 @@ public:
     void push(GUIElement *element);
     void pop();
 
-    // GUIElement interface
+
+    // Worker interface
 public:
-    void render(Renderer *renderer, Event *event);
-    void update();
-    std::string getTitle();
+    void tick(Context *context, Event *event);
+    void render(Renderer *renderer);
 };
 
 #endif // GUISTACK_H

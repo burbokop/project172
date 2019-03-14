@@ -1,26 +1,25 @@
 #include "guicentralmessage.h"
 
-const long GUICentralMessage::DEFAULT_FLASHING_INTERVAL = 500;
+const unsigned GUICentralMessage::DEFAULT_FLASHING_INTERVAL = 500;
 
 
-GUICentralMessage::GUICentralMessage(Controller *player) : GUILabel (player) {
+GUICentralMessage::GUICentralMessage(Controller *player) : GUIMenuElement (player) {
 }
 
-GUICentralMessage::GUICentralMessage(Controller *player, std::string label) : GUILabel (player, label) {
+GUICentralMessage::GUICentralMessage(Controller *player, std::string label) : GUIMenuElement (player, label) {
 }
 
-GUICentralMessage::GUICentralMessage(Controller *player, IInformative *informative) : GUILabel (player, informative) {
+GUICentralMessage::GUICentralMessage(Controller *player, IInformative *informative) : GUIMenuElement (player, informative) {
 }
 
-void GUICentralMessage::start(int flashesRemains, long interval) {
+void GUICentralMessage::start(int flashesRemains, unsigned interval) {
     this->flashesRemains = flashesRemains;
     this->flashingTimer = new Timer(interval);
     this->flashingTimer->reset();
     this->visible = true;
 }
 
-void GUICentralMessage::render(Renderer *renderer, Event *event) {
-    UNUSED(event);
+void GUICentralMessage::render(Renderer *renderer) {
     if(visible) {
         Vector center = renderer->getResolution() / 2.0;
         std::string string = getTitle();

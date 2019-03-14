@@ -3,7 +3,7 @@
 
 
 #include "capabilities/capability.h"
-#include "additional/timer.h"
+#include "time/timer.h"
 #include "units/ship.h"
 #include "additional/trigger.h"
 
@@ -14,9 +14,11 @@ protected:
     static const char *ARMOR_RELEASE_MESSAGE;
 
 
-    Ship *armor;
+    Ship *armor = nullptr;
     Timer *armorReleaseTimer = nullptr;
     Trigger armorReleaseMessageTrigger;
+
+    Unit *selected = nullptr;
 
     void releaseArmor();
 public:
@@ -29,8 +31,9 @@ public:
 
     // Worker interface
 public:
-    void loop(Context *context, Event *event);
+    void tick(Context *context, Event *event);
     void render(Renderer *renderer);
+    void setSelected(Unit *value);
 };
 
 #endif // CONTROLLER_H

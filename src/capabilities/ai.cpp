@@ -3,7 +3,7 @@
 AI::AI() : Controller () {
 }
 
-void AI::loop(Context *context, Event *event) {
+void AI::tick(Context *context, Event *event) {
     UNUSED(context);
     UNUSED(event);
 }

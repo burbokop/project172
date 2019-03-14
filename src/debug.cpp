@@ -48,7 +48,7 @@ std::string Debug::codeToString(unsigned code) {
         case 0: return  "NO_ERROR";
         case APPEAL_TO_REMOVED: return "APPEAL_TO_REMOVED";
         case ASSET_KEY_NOT_FOUND : return "ASSET_KEY_NOT_FOUND";
-        case UNKNOWN_ASSET_KEY : return "UNKNOWN_ASSET_KEY";
+        case UNKNOWN_ASSET_CLASS : return "UNKNOWN_ASSET_CLASS";
         case SEGMENTATION_FAULT : return "SEGMENTATION_FAULT";
         default: return "UNKNOWN_ERROR";
     }

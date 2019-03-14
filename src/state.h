@@ -12,13 +12,13 @@ public:
 
 private:
 
-    static int maxFPS;
+    static unsigned maxFPS;
     static unsigned loopBehaviour;
 
 public:
     State();
 
-    static int getMaxFPS();
+    static unsigned getMaxFPS();
     //static void setMaxFPS(int value);
     static unsigned getLoopBehaviour();
     static void setLoopBehaviour(Variant value);

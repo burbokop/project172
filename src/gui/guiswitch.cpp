@@ -1,22 +1,26 @@
 #include "guiswitch.h"
 
 
-GUISwitch::GUISwitch(Controller *player, std::function<void()> on,  std::function<void()> off) : GUIButton (player) {
+GUISwitch::GUISwitch(Controller *player, std::function<void()> on,  std::function<void()> off) : GUIMenuElement (player) {
     this->on = on;
     this->off = off;
 }
 
-GUISwitch::GUISwitch(Controller *player, std::string label, std::function<void()> on,  std::function<void()> off) : GUIButton (player, label) {
+GUISwitch::GUISwitch(Controller *player, std::string label, std::function<void()> on,  std::function<void()> off) : GUIMenuElement (player, label) {
     this->on = on;
     this->off = off;
 }
 
-GUISwitch::GUISwitch(Controller *player, IInformative *informative, std::function<void()> on,  std::function<void()> off) : GUIButton (player, informative) {
+GUISwitch::GUISwitch(Controller *player, IInformative *informative, std::function<void()> on,  std::function<void()> off) : GUIMenuElement (player, informative) {
     this->on = on;
     this->off = off;
 }
 
-bool GUISwitch::press() {
+bool GUISwitch::isSelectable() {
+    return true;
+}
+
+void GUISwitch::onEnter() {
     if(on != nullptr) {
         if(off != nullptr) {
             if(!enabled) {
@@ -30,5 +34,4 @@ bool GUISwitch::press() {
             on();
         }
     }
-    return false;
 }

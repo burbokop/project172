@@ -2,66 +2,60 @@
 
 #include "additional/effects/anaglyph.h"
 
-GUIContainer::GUIContainer(Controller *player) : GUIButton (player) {
+GUIContainer::GUIContainer(Controller *player) : GUIMenuElement (player) {
 }
 
-GUIContainer::GUIContainer(Controller *player, std::string label) : GUIButton (player, label) {
+GUIContainer::GUIContainer(Controller *player, std::string label) : GUIMenuElement (player, label) {
 }
 
-GUIContainer::GUIContainer(Controller *player, IInformative *informative) : GUIButton (player, informative) {
+GUIContainer::GUIContainer(Controller *player, IInformative *informative) : GUIMenuElement (player, informative) {
 }
 
-void GUIContainer::addElement(GUIElement *element){
+void GUIContainer::addElement(GUIMenuElement *element){
     elements->push_back(element);
 
     selected = 0;
-    for(GUIElement *element : *elements) {
-        GUIButton *button = dynamic_cast<GUIButton*>(element);
-        if(button != nullptr) {
-            selectedButton = button;
+    for(GUIMenuElement *element : *elements) {
+        if(element->isSelectable()) {
+            selectedElement = element;
             break;
         }
         selected++;
     }
 }
 
-void GUIContainer::removeElement(GUIElement *element) {
-    std::vector<GUIElement*>::iterator it = std::find(elements->begin(), elements->end(), element);
+void GUIContainer::removeElement(GUIMenuElement *element) {
+    std::vector<GUIMenuElement*>::iterator it = std::find(elements->begin(), elements->end(), element);
     if(it != elements->end()) {
         elements->erase(it);
     }
 }
 
-void GUIContainer::update() {
-    for(GUIElement *element : *elements) {
-        element->update();
-    }
-}
 
 void GUIContainer::setStack(GUIStack *value) {
     stack = value;
 }
 
 
-GUIButton *GUIContainer::selectDown() {
+GUIMenuElement *GUIContainer::selectDown() {
     if(elements->size() > 0) {
         selected++;
         if(selected >= static_cast<int>(elements->size())) {
             selected = minSelectable;
             unsigned long i = static_cast<unsigned long>(selected);
             if(i < elements->size()) {
-                return dynamic_cast<GUIButton*>(elements->at(i));
+                return elements->at(i);
             }
             return selectUp();
         } else {
             unsigned long i = static_cast<unsigned long>(selected);
             if(i < elements->size()) {
-                GUIButton* button = dynamic_cast<GUIButton*>(elements->at(i));
-                if(!button) {
-                    return selectDown();
-                } else {
+                GUIMenuElement *element = elements->at(i);
+                if(element->isSelectable()) {
                     maxSelectable = selected;
-                    return button;
+                    return element;
+                } else {
+                    return selectDown();
                 }
             }
             return selectUp();
@@ -70,25 +64,25 @@ GUIButton *GUIContainer::selectDown() {
     return nullptr;
 }
 
-GUIButton *GUIContainer::selectUp() {
+GUIMenuElement *GUIContainer::selectUp() {
     if(elements->size() > 0) {
         selected--;
         if(selected < 0) {
             selected = maxSelectable;
             unsigned long i = static_cast<unsigned long>(selected);
             if(i < elements->size()) {
-                return dynamic_cast<GUIButton*>(elements->at(i));
+                return elements->at(i);
             }
             return selectUp();
         } else {
             unsigned long i = static_cast<unsigned long>(selected);
             if(i < elements->size()) {
-            GUIButton* button = dynamic_cast<GUIButton*>(elements->at(i));
-                if(!button) {
-                    return selectUp();
-                } else {
+                GUIMenuElement *element = elements->at(i);
+                if(element->isSelectable()) {
                     minSelectable = selected;
-                    return button;
+                    return element;
+                } else {
+                    return selectUp();
                 }
             }
             return selectUp();
@@ -97,42 +91,52 @@ GUIButton *GUIContainer::selectUp() {
     return nullptr;
 }
 
-void GUIContainer::render(Renderer *renderer, Event *event) {
 
-    if(event->getPressed(81)) {
-        selectedButton = selectDown();
-    } else if(event->getPressed(82)) {
-        selectedButton = selectUp();
-    } else if(event->getPressed(40)) {
-        if(selectedButton != nullptr) {
-            if(selectedButton->press()) {
-                stack->push(selectedButton);
+bool GUIContainer::isSelectable() {
+    return true;
+}
+
+bool GUIContainer::hasSubElements() {
+    return true;
+}
+
+#include <iostream>
+void GUIContainer::tick(Context *context, Event *event) {
+    UNUSED(context);
+    if(event->getPressed(SDL_SCANCODE_DOWN)) {
+        std::cout << "gogdoda: " << "3" << "\n";
+
+        selectedElement = selectDown();
+    } else if(event->getPressed(SDL_SCANCODE_UP)) {
+        selectedElement = selectUp();
+        std::cout << "gogdoda: " << "2" << "\n";
+    } else if(event->getPressed(SDL_SCANCODE_RETURN)) {
+
+        std::cout << "gogdoda: " << "1" << "\n";
+
+        if(selectedElement != nullptr) {
+            selectedElement->onEnter();
+            if(selectedElement->hasSubElements()) {
+                stack->push(selectedElement);
             }
-        }
-    } else if(event->getPressed(SDL_SCANCODE_LEFT)) {
-        if(selectedButton != nullptr) {
-            selectedButton->dec();
-        }
-    } else if(event->getPressed(SDL_SCANCODE_RIGHT)) {
-        if(selectedButton != nullptr) {
-            selectedButton->inc();
         }
     } else if(event->getPressed(SDL_SCANCODE_BACKSPACE)) {
         stack->pop();
     }
+}
 
 
-
-    Vector pointer = Vector(margin, margin);
-    std::string title = getTitle();
-    renderer->string(title, pointer, DEFAULT_COLOR);
-    pointer += Vector(0, Renderer::DEFAULT_FONT_SIZE * 2);
-    renderer->line(pointer, pointer + Vector(title.size() * static_cast<Uint32>(Renderer::DEFAULT_FONT_SIZE), 0.0), DEFAULT_COLOR);
-    pointer += Vector(0, Renderer::DEFAULT_FONT_SIZE);
-
+void GUIContainer::render(Renderer *renderer) {
     if(elements) {
+        Vector pointer = Vector(margin, margin);
+        std::string title = getTitle();
+        renderer->string(title, pointer, DEFAULT_COLOR);
+        pointer += Vector(0, Renderer::DEFAULT_FONT_SIZE * 2);
+        renderer->line(pointer, pointer + Vector(title.size() * static_cast<Uint32>(Renderer::DEFAULT_FONT_SIZE), 0.0), DEFAULT_COLOR);
+        pointer += Vector(0, Renderer::DEFAULT_FONT_SIZE);
+
         int i = 0;
-        for(GUIElement *element : *elements) {
+        for(GUIMenuElement *element : *elements) {
             if(element) {
                 if(i == selected) renderer->effect(new Anaglyph(Vector(2, 1)));
                 renderer->string(element->getTitle(), pointer, (i == selected) ? SELECTED_COLOR : DEFAULT_COLOR);
@@ -141,8 +145,4 @@ void GUIContainer::render(Renderer *renderer, Event *event) {
             }
         }
     }
-}
-
-bool GUIContainer::press() {
-    return true;
 }

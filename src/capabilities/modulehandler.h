@@ -28,7 +28,7 @@ public:
 
     // Worker interface
 public:
-    void loop(Context *context, Event *event) override;
+    void tick(Context *context, Event *event) override;
     void render(Renderer *renderer) override;
 };
 

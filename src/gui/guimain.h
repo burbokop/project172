@@ -10,7 +10,7 @@
 
 class GUIMain : public GUIElement {
 private:
-    static const long FLOATING_LIFE_TIME;
+    static const unsigned FLOATING_LIFE_TIME;
 
     GUIStack *menu = nullptr;
     GUICentralMessage *centralMessage = nullptr;
@@ -21,18 +21,19 @@ private:
 public:
     GUIMain();
     GUIMain(Controller *player);
+
+
     void addFloatingMessage(Unit *unit, std::string message);
     void addBlushingFloatingMessage(Unit *unit, int value);
-
-    // GUIElement interface
-public:
-    std::string getTitle();
-    void update();
-    void render(Renderer *renderer, Event *event);
 
     void setMenu(GUIStack *value);
     void setMessage(GUICentralMessage *value);
     void setMiniMap(GUIMiniMap *value);
+
+    // Worker interface
+public:
+    void tick(Context *context, Event *event);
+    void render(Renderer *renderer);
 };
 
 #endif // GUIMAIN_H

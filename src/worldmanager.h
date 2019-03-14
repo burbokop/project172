@@ -21,11 +21,11 @@ private:
     void onChangeReset(Variant caseValue);
     void clear(std::vector<Worker*> *units);
 
-    void init(AssetManager *assets, std::vector<Worker*> *units, Renderer *renderer, FPSMonitor *fps);
+    void init(AssetManager *assets, std::vector<Worker*> *units, Renderer *renderer, FPSMonitor *fps, FPSMonitor *tps);
 public:
     WorldManager(std::vector<World*> worlds);
 
-    void checkState(Context *context, AssetManager *assets, std::vector<Worker*> *units, Renderer *renderer, FPSMonitor *fps);
+    void checkState(Context *context, AssetManager *assets, std::vector<Worker*> *units, Renderer *renderer, FPSMonitor *fps, FPSMonitor *tps);
 
     Camera *getCamera() const;
     GUIMain *getGui() const;

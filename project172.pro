@@ -23,7 +23,6 @@ SOURCES += \
     src/object.cpp \
     src/worker.cpp \
     src/renderer.cpp \
-    src/environment.cpp \
     src/worlds/world.cpp \
     src/assetmanager.cpp \
     src/filesystem.cpp \
@@ -39,7 +38,7 @@ SOURCES += \
     src/capabilities/modules/module.cpp \
     src/additional/rotozoom.cpp \
     src/additional/spm.cpp \
-    src/additional/timer.cpp \
+    src/time/timer.cpp \
     src/additional/event.cpp \
     src/additional/vector.cpp \
     src/additional/stringformer.cpp \
@@ -53,8 +52,6 @@ SOURCES += \
     src/units/ship.cpp \
     src/gui/guielement.cpp \
     src/gui/guicontainer.cpp \
-    src/gui/guilabel.cpp \
-    src/gui/guibutton.cpp \
     src/iinformative.cpp \
     src/gui/guistack.cpp \
     src/capabilities/ai.cpp \
@@ -96,14 +93,20 @@ SOURCES += \
     src/audio/audiohardwarebank.cpp \
     src/audio/audioplayer.cpp \
     src/additional/variant.cpp \
-    src/gui/guiminimap.cpp
+    src/gui/guiminimap.cpp \
+    src/gui/guiradar.cpp \
+    src/capabilities/modules/thruster.cpp \
+    src/time/time.cpp \
+    src/gui/guimenuelement.cpp \
+    src/additional/mutex.cpp \
+    src/additional/informative/unitsamountinfo.cpp \
+    src/environment.cpp
 
 
 HEADERS += \
     src/object.h \
     src/worker.h \
     src/renderer.h \
-    src/environment.h \
     src/worlds/world.h \
     src/assetmanager.h \
     src/filesystem.h \
@@ -119,7 +122,7 @@ HEADERS += \
     src/capabilities/modules/module.h \
     src/additional/rotozoom.h \
     src/additional/spm.h \
-    src/additional/timer.h \
+    src/time/timer.h \
     src/additional/event.h \
     src/additional/vector.h \
     src/additional/stringformer.h \
@@ -133,8 +136,6 @@ HEADERS += \
     src/units/ship.h \
     src/gui/guielement.h \
     src/gui/guicontainer.h \
-    src/gui/guilabel.h \
-    src/gui/guibutton.h \
     src/iinformative.h \
     src/gui/guistack.h \
     src/capabilities/ai.h \
@@ -186,8 +187,14 @@ HEADERS += \
     src/audio/audiohardwarebank.h \
     src/audio/audioplayer.h \
     src/additional/variant.h \
-    src/gui/guiminimap.h
-
+    src/gui/guiminimap.h \
+    src/gui/guiradar.h \
+    src/capabilities/modules/thruster.h \
+    src/time/time.h \
+    src/gui/guimenuelement.h \
+    src/additional/mutex.h \
+    src/additional/informative/unitsamountinfo.h \
+    src/environment.h
 
 
 

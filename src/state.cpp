@@ -5,10 +5,10 @@ const unsigned State::TIMER = 0;
 const unsigned State::DELAY = 1;
 
 unsigned State::loopBehaviour = TIMER;
-int State::maxFPS = 60;
+unsigned State::maxFPS = 60;
 
 
-int State::getMaxFPS() {
+unsigned State::getMaxFPS() {
     return maxFPS;
 }
 /*

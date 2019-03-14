@@ -38,7 +38,7 @@ std::vector<Controller *> HeapWorld::generate(AssetManager *assets, std::vector<
     std::vector<std::string> assetKeys = assets->getKeys();
     unsigned int i = 0;
     for (std::string key : assetKeys) {
-        for(int j = 0; j < 9; j++) {
+        for(int j = 0; j < 32; j++) {
             Movable *unit = dynamic_cast<Movable*>(assets->copyAsset(key));
             if(unit) {
                 unit->place(Vector::createByAngle(10000, rand()), Vector(), Vector(), 0);

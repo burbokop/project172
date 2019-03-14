@@ -1,8 +1,12 @@
 #include "unit.h"
 #include "context.h"
 #include "projectile.h"
+#include "units/station.h"
+#include "time/time.h"
+#include "additional/math.h"
 
-const double Unit::DEFAULT_ROTATION_SPEED = 0.02;
+const double Unit::DEFAULT_ROTATION_SPEED = 0.0014 * 1000;
+const double Unit::ANGLE_DELTA_MULTIPLIER = 2;
 
 double Unit::getRotationSpeed() {
     return DEFAULT_ROTATION_SPEED;
@@ -45,19 +49,52 @@ ModuleHandler *Unit::getModuleHandler() {
     return nullptr;
 }
 
+Docker *Unit::getDocker() {
+    for(Capability *cap : capabilities) {
+        Docker* docker = dynamic_cast<Docker*>(cap);
+        if(docker != nullptr) {
+            return  docker;
+        }
+    }
+    return nullptr;
+}
+
 void Unit::rotateLeft() {
-    angle -= getRotationSpeed();
-    if(angle < 0) angle = (M_PI * 2);
+    angle = Math::constrainAngle(angle - (getRotationSpeed() * Time::getDeltaTime()));
 }
 
 void Unit::rotateRight() {
-    angle += getRotationSpeed();
-    if(angle > M_PI * 2) angle = 0;
+    angle = Math::constrainAngle(angle + (getRotationSpeed() * Time::getDeltaTime()));
 }
 
 void Unit::lockAngle(double angle) {
     angleLocked = true;
-    dstAngle = angle;
+    dstAngle = Math::constrainAngle(angle);
+}
+
+
+void Unit::rotateToAngle(double angle) {
+    angle = Math::constrainAngle(angle);
+    const double delta = getRotationSpeed() * Time::getDeltaTime() * ANGLE_DELTA_MULTIPLIER;
+    if(angle + delta - getAngle() < 0) {
+        if(std::abs(angle - getAngle()) < M_PI) {
+            rotateLeft();
+        } else {
+            rotateRight();
+        }
+    } else if(angle - delta - getAngle() > 0) {
+        if(std::abs(angle - getAngle()) < M_PI) {
+            rotateRight();
+        } else {
+            rotateLeft();
+        }
+    }
+}
+
+bool Unit::isOnAngle(double angle) {
+    angle = Math::constrainAngle(angle);
+    const double doubleDelta = getRotationSpeed() * Time::getDeltaTime() * ANGLE_DELTA_MULTIPLIER * 2;
+    return !(getAngle() > angle + doubleDelta || getAngle() < angle - doubleDelta);
 }
 
 void Unit::unlockAngle() {
@@ -68,11 +105,14 @@ Vector Unit::getPosition() {
     return pos;
 }
 
+Vector Unit::getVelocity() {
+    return Vector();
+}
+
 double Unit::getAngle() {
     return angle;
 }
 
-#include <iostream>
 void Unit::hit(Context* context, int value) {
     if(value != 0) {
         Json::Value health = root["health"];
@@ -117,7 +157,7 @@ void Unit::hit(Context* context, int value) {
     }
 }
 
-void Unit::loop(Context *context, Event *event) {
+void Unit::tick(Context *context, Event *event) {
     const double rotationSpeed = getRotationSpeed();
     if(angleLocked && std::abs(angle - dstAngle) > rotationSpeed * 5) {
         if(angle > dstAngle) angle -= rotationSpeed;
@@ -125,7 +165,7 @@ void Unit::loop(Context *context, Event *event) {
     }
 
     for(Capability *cap : capabilities) {
-        cap->loop(context, event);
+        cap->tick(context, event);
     }
 }
 

@@ -14,7 +14,7 @@ class Context;
 class Worker : public Object {
 public:
     Worker();
-    void virtual loop(Context *context, Event *event) = 0;
+    void virtual tick(Context *context, Event *event) = 0;
     void virtual render(Renderer *renderer) = 0;
     virtual ~Worker();
 };

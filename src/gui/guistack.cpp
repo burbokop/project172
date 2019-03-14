@@ -20,15 +20,24 @@ void GUIStack::pop() {
     }
 }
 
-void GUIStack::render(Renderer *renderer, Event *event) {
-    if(elements.size() > 0) elements[elements.size() - 1]->render(renderer, event);
-    else event->getPressed(SDL_SCANCODE_BACKSPACE);
+void GUIStack::tick(Context *context, Event *event) {
+    UNUSED(context);
+    if(elements.size() > 0) {
+        current = elements[elements.size() - 1];
+    } else {
+        current = nullptr;
+        if(event->getPressed(SDL_SCANCODE_RETURN) && reserved) {
+            push(reserved);
+        }
+    }
 
-    if(event->getPressed(SDL_SCANCODE_RETURN) && reserved) {
-        push(reserved);
+    if(current) {
+        current->tick(context, event);
     }
 }
 
-void GUIStack::update() {}
-
-std::string GUIStack::getTitle() { return ""; }
+void GUIStack::render(Renderer *renderer) {
+    if(current) {
+        current->render(renderer);
+    }
+}

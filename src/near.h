@@ -10,6 +10,8 @@
 class Near : public Object {
 private:
     static const double RADIUS_DELTA;
+    static const double DEFAULT_RADIUS;
+    static const double WARP_RADIUS_MILTIPLIER;
 
     std::vector<Worker*> *origin = nullptr;
     std::vector<Worker*> *focus = nullptr;
@@ -22,11 +24,12 @@ private:
     void remove();
     void add();
 
+    double getLocalRadius(Unit *center);
 
 public:
 
 
-    Near(std::vector<Worker*> *origin, Controller *center, double radius);
+    Near(std::vector<Worker*> *origin, Controller *center, double radius = DEFAULT_RADIUS);
     void update();
 
     std::vector<Worker*> *getFocus();

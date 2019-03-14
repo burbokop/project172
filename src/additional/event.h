@@ -13,8 +13,9 @@ private:
     bool exitFlag = false;
     bool pauseFlag = false;
     Vector mouse;
-    bool *scancode = new bool[512];
-    bool *pressed = new bool[512];
+    const int bufferSize = 512;
+    bool *scancode = new bool[bufferSize];
+    bool *pressed = new bool[bufferSize];
 
     std::thread *thread = nullptr;
 
@@ -34,5 +35,7 @@ public:
     bool getPressed(int key);
 
     bool getExitFlag();
+
+    void unpressAll();
 };
 #endif // EVENT_H

@@ -7,9 +7,6 @@
 
 class Aggressive : public Controller {
 private:
-    static const double ANGLE_DELTA;
-
-
     std::vector<Worker*> *targets = nullptr;
     Unit *target = nullptr;
     bool targeted = false;
@@ -25,7 +22,7 @@ public:
 
     // Worker interface
 public:
-    void loop(Context *context, Event *event);
+    void tick(Context *context, Event *event);
     void render(Renderer *renderer);
 
     // Controller interface

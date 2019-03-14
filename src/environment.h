@@ -14,6 +14,7 @@
 #include "additional/informative/fpsmonitor.h"
 #include "netlistener.h"
 #include "worldmanager.h"
+#include "additional/mutex.h"
 
 
 class Environment : public Object {
@@ -26,12 +27,12 @@ private:
     Event *event = nullptr;
     Background *background = nullptr;
     FPSMonitor *fps = nullptr;
+    FPSMonitor *tps = nullptr;
     NetListener *netListener = nullptr;
     WorldManager *worldManager = nullptr;
 
 public:
-    Environment();
-    void init(int argc, char *argv[]);
+    Environment(std::vector<std::string> args);
     void start();
     void quit();
 };

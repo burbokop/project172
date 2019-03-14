@@ -15,8 +15,8 @@ void Engine::stop() {
     animate(Animator::NOTRENDER);
 }
 
-void Engine::loop(Context *context, Event *event) {
-    this->Module::loop(context, event);
+void Engine::tick(Context *context, Event *event) {
+    this->Module::tick(context, event);
 }
 
 std::string Engine::getInfo() {

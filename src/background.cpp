@@ -1,7 +1,10 @@
 #include "background.h"
 #include "context.h"
 
-const double Background::STARS_SLIDING_SPEED = 12;
+
+
+const double Background::STARS_SLIDING_SPEED = 400.0;
+const double Background::SLIDING_LEGHTH = 0.05;
 const Uint32 Background::DEFAULT_MAIN_COLOR = 0x333353;
 const Uint32 Background::DEFAULT_FLASHING_COLOR = 0xff0000;
 const long Background::DEFAULT_FLASHING_INTERVAL = 32;
@@ -18,13 +21,14 @@ void Background::flashing(int repeats) {
     flashesRemains = repeats;
 }
 
-Background::Background() {
-}
-
-void Background::init(Vector resolution, unsigned int amount, double slidingStart) {
-    this->resolution = resolution;
+Background::Background(Vector resolution, unsigned int amount, double slidingStart) {
     this->slidingStart = slidingStart;
     this->amount = amount;
+    onResolutionChange(resolution);
+}
+
+void Background::onResolutionChange(Vector resolution) {
+    this->resolution = resolution;
     Uint32 colors[] = { 0xdeff17, 0xfe4600, 0xf9990f, 0x8a27ff };
 
     stars.clear();
@@ -36,7 +40,7 @@ void Background::init(Vector resolution, unsigned int amount, double slidingStar
     }
 }
 
-void Background::loop(Context *context, Event *event) {
+void Background::tick(Context *context, Event *event) {
     UNUSED(context);
     UNUSED(event);
 }
@@ -44,7 +48,7 @@ void Background::loop(Context *context, Event *event) {
 void Background::render(Renderer *renderer) {
     if(observer.count(true)) {
         if(resolution != renderer->getResolution()) {
-            init(renderer->getResolution(), amount, slidingStart);
+            onResolutionChange(renderer->getResolution());
         }
     }
 
@@ -79,7 +83,7 @@ void Background::render(Renderer *renderer) {
             if(speed.module() < slidingStart) {
                 renderer->pixel(Vector(x, y), star.color);
             } else {
-                renderer->line(Vector(x, y), Vector(x, y) - (speed - slidingStart), star.color);
+                renderer->line(Vector(x, y), Vector(x, y) - (speed - slidingStart) * SLIDING_LEGHTH, star.color);
             }
         }
     }

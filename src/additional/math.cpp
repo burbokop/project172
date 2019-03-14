@@ -93,3 +93,11 @@ double Math::sqrt(double value) {
         return sqrtCache[value];
     }
 }
+
+double Math::constrainAngle(double value) {
+    const double max = M_PI * 2;
+    value = fmod(value, max);
+    if (value < 0)
+        value += max;
+    return value;
+}

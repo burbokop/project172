@@ -2,16 +2,18 @@
 #define GUIFLOATINGMESSAGE_H
 
 
-#include "gui/guilabel.h"
+#include "gui/guimenuelement.h"
 
 
-class GUIFloatingMessage : public GUILabel {
+class GUIFloatingMessage : public GUIMenuElement {
 protected:
     static const Uint32 DEFAULT_COLOR;
     static const int DEFAULT_FONT_SIZE;
+    static const double DEFAULT_FLOATING_SPEED;
+
 
     Unit *parent = nullptr;
-    int horisontalOffset = 0;
+    double horisontalOffset = 0;
 
 public:
     GUIFloatingMessage(Unit *parent);
@@ -21,7 +23,7 @@ public:
 
     // GUIElement interface
 public:
-    void render(Renderer *renderer, Event *event);
+    void render(Renderer *renderer);
 };
 
 #endif // GUIFLOATINGMESSAGE_H

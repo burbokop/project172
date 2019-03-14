@@ -59,7 +59,7 @@ void Player::setArmor(Ship *armor) {
     this->armor = armor;
 }
 
-void Player::loop(Context *context, Event *event) {
+void Player::tick(Context *context, Event *event) {
     EXISTS(parent) {
 
     } else {
@@ -117,7 +117,7 @@ void Player::loop(Context *context, Event *event) {
         releaseArmor();
     }
 
-    this->Controller::loop(context, event);
+    this->Controller::tick(context, event);
 }
 
 void Player::render(Renderer *renderer) {

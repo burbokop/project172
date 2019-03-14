@@ -111,7 +111,7 @@ Uint8 WarpDrive::abortWarp(Context* context) {
     return result;
 }
 
-void WarpDrive::loop(Context *context, Event *event) {
+void WarpDrive::tick(Context *context, Event *event) {
     if(warpState == WARP_LOADING) {
         if(timer.count(true)) {
             warpState = WARP_READY;
@@ -126,5 +126,5 @@ void WarpDrive::loop(Context *context, Event *event) {
         }
     }
 
-    this->Module::loop(context, event);
+    this->Module::tick(context, event);
 }

@@ -11,7 +11,7 @@ public:
 
     // Worker interface
 public:
-    void loop(Context *context, Event *event);
+    void tick(Context *context, Event *event);
 };
 
 #endif // AI_H

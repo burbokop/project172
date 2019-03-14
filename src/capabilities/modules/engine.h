@@ -15,7 +15,7 @@ public:
     void stop();
 
 
-    void loop(Context *context, Event *event);
+    void tick(Context *context, Event *event);
 
     // IInformative interface
 public:

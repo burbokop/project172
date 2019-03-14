@@ -9,7 +9,9 @@ class GUIList : public GUIContainer {
 private:
     std::vector<Worker*> *array;
 
-    std::vector<GUIElement*> *informativeToElement(std::vector<Worker*> *array);
+    virtual GUIMenuElement *forEach(Unit *unit);
+
+    std::vector<GUIMenuElement*> *informativeToElement(std::vector<Worker*> *array);
 
     void onChoice(Variant value);
 
@@ -22,7 +24,7 @@ public:
 
     // GUIElement interface
 public:
-    void render(Renderer *renderer, Event *event);
+    void render(Renderer *renderer);
 };
 
 #endif // GUILIST_H

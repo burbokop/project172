@@ -1,5 +1,6 @@
 #include "event.h"
 
+
 void Event::handleEvent(SDL_Event event) {
     if (event.type == SDL_QUIT) {
         this->exitFlag = true;
@@ -36,10 +37,10 @@ void Event::loop() {
 Event::Event() {
     this->exitFlag = false;
     this->pauseFlag = false;
-    this->scancode = new bool[512];
-    this->pressed = new bool[512];
+    this->scancode = new bool[bufferSize];
+    this->pressed = new bool[bufferSize];
 
-    for(unsigned int i = 0; i < 512; i++) {
+    for(int i = 0; i < bufferSize; i++) {
         scancode[i] = false;
         pressed[i] = false;
     }
@@ -63,11 +64,7 @@ bool Event::getKey(int key) {
 }
 
 bool Event::getPressed(int key) {
-    if(this->pressed[key]) {
-        setPresed(key, false);
-        return true;
-    }
-    return false;
+    return this->pressed[key];
 }
 
 bool Event::getExitFlag() {
@@ -75,7 +72,7 @@ bool Event::getExitFlag() {
 }
 
 void Event::setKey(int key, bool value) {
-    if(key >= 0 && key < 512) {
+    if(key >= 0 && key < bufferSize) {
         this->scancode[key] = value;
     } else {
         printf("setKey error: out of bound exeption");
@@ -83,9 +80,15 @@ void Event::setKey(int key, bool value) {
 }
 
 void Event::setPresed(int key, bool value) {
-    if(key >= 0 && key < 512) {
+    if(key >= 0 && key < bufferSize) {
         this->pressed[key] = value;
     } else {
         printf("setKey error: out of bound exeption");
+    }
+}
+
+void Event::unpressAll() {
+    for(int i = 0; i < bufferSize; i++) {
+        setPresed(i, false);
     }
 }

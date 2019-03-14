@@ -12,7 +12,7 @@ const unsigned Animator::DEFAULT_INACTIVE = 6;
 
 
 
-void Animator::setDefaultMode(const Uint8 &value) {
+void Animator::setDefaultMode(unsigned value) {
     defaultMode = value;
 }
 
@@ -43,7 +43,7 @@ void Animator::play(unsigned mode) {
 }
 
 
-void Animator::loop(Context *context, Event *event) {
+void Animator::tick(Context *context, Event *event) {
     UNUSED(context);
     UNUSED(event);
 }

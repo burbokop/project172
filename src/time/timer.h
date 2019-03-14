@@ -3,17 +3,17 @@
 
 #include <sys/timeb.h>
 
+
 class Timer {
 private:
-    long interval;
-    long duration;
+    unsigned interval;
+    unsigned duration;
 public:
-    Timer(long interval);
+    Timer(unsigned interval = 0);
     bool count(bool condition = true);
     void reset();
     double ready();
 
-    static long getMilliseconds();
-
+    static unsigned getMilliseconds();
 };
 #endif // TIMER_H

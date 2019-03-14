@@ -1,6 +1,7 @@
 #include "fpsmonitor.h"
 
-FPSMonitor::FPSMonitor() {
+FPSMonitor::FPSMonitor(std::string title) {
+    this->title = title;
 }
 
 void FPSMonitor::count() {
@@ -34,5 +35,5 @@ Uint32 FPSMonitor::toUint32() {
 }
 
 std::string FPSMonitor::getInfo() {
-    return "fps: " + std::to_string(averageFPS);
+    return title + ' ' + std::to_string(averageFPS);
 }

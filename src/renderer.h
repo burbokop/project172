@@ -28,8 +28,7 @@ private:
     bool fullscreen = false;
     Vector resolution;
 public:
-    Renderer(SDL_Window *window, Vector resolution, SDL_Surface *surface, TTF_Font *font);
-    static Renderer *create(const char *title, int x, int y, std::string fontPath);
+    Renderer(const char *title, int x, int y, std::string fontPath);
 
     void effect(VisualEffect *applied_effect, bool lock = false);
     void fill(Uint32 color);

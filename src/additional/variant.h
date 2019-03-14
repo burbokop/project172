@@ -6,27 +6,31 @@
 #include "additional/vector.h"
 #include "object.h"
 
+class Unit;
 
 class Variant : public Object {
 private:
-    static const unsigned TYPE_INT32;
-    static const unsigned TYPE_INT64;
-    static const unsigned TYPE_UINT32;
-    static const unsigned TYPE_UINT64;
-    static const unsigned TYPE_FLOAT32;
-    static const unsigned TYPE_FLOAT64;
+    enum Type {
+        INT32,
+        INT64,
+        UINT32,
+        UINT64,
+        FLOAT32,
+        FLOAT64,
 
-    static const unsigned TYPE_UNDEFINED;
+        UNDEFINED,
 
-    static const unsigned TYPE_VECTOR;
-    static const unsigned TYPE_OBJECT;
+        OBJECT,
+        UNIT,
+        VECTOR,
+    } type = UNDEFINED;
 
-    unsigned type;
 
     union VariantUnion {
         VariantUnion();
         double number;
         void *ptr;
+        Unit *unit;
         Vector vector;
     } data;
 
@@ -42,17 +46,20 @@ public:
     Variant(double value);
 
     Variant(void *value);
+    Variant(Unit *value);
     Variant(Vector value);
 
     signed int toInt32();
     signed long long toInt64();
     unsigned int toUint32();
     unsigned long long toUint64();
-
     float toFloat32();
     double toFloat64();
-    Vector toVector();
+
     void *toObject();
+    Unit *toUnit();
+    Vector toVector();
+
 
     bool isInt32();
     bool isInt64();
@@ -63,8 +70,9 @@ public:
     bool isNumber();
 
     bool isUndefined();
-    bool isVector();
     bool isObject();
+    bool isUnit();
+    bool isVector();
 };
 
 #endif // AUTO_H

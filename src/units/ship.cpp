@@ -2,7 +2,7 @@
 
 #include "context.h"
 
-const double Ship::ONE_WARP_POINT = 95.1398639961;
+const double Ship::ONE_WARP_POINT = 9513.98639961;
 
 
 Ship::Ship() {
@@ -55,7 +55,7 @@ WarpDrive *Ship::getFirstWarp() {
     return nullptr;
 }
 
-void Ship::loop(Context *context, Event *event) {
+void Ship::tick(Context *context, Event *event) {
     ModuleHandler *modules = getModuleHandler();
     if(modules) {
         std::vector<Module*> *drives = modules->getModulesByClass("warp-drive");
@@ -68,7 +68,7 @@ void Ship::loop(Context *context, Event *event) {
             }
         }
     }
-    this->Movable::loop(context, event);
+    this->Movable::tick(context, event);
 }
 
 bool Ship::onAcceleration(bool start) {

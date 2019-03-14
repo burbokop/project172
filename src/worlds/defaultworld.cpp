@@ -3,6 +3,7 @@
 
 #include "capabilities/player.h"
 #include "capabilities/ai.h"
+#include "capabilities/docker.h"
 #include "debug.h"
 
 
@@ -38,11 +39,13 @@ std::vector<Controller *> DefaultWorld::generate(AssetManager *assets, std::vect
     Unit *playerShip = static_cast<Unit*>(assets->copyAsset("sh1"));
     playerShip->place(Vector(100, 100), -0.7);
 
+    playerShip->addCapability(new Docker());
     playerShip->addCapability(player1);
     ModuleHandler *playerModuleHandler = new ModuleHandler();
     playerModuleHandler->addModule(static_cast<Module*>(assets->copyAsset("pistol")));
     playerModuleHandler->addModule(static_cast<Module*>(assets->copyAsset("engine2")));
     playerModuleHandler->addModule(static_cast<Module*>(assets->copyAsset("warp-drive1")));
+    playerModuleHandler->addModule(static_cast<Module*>(assets->copyAsset("thruster1")));
 
     playerShip->addCapability(playerModuleHandler);
 
@@ -84,6 +87,8 @@ std::vector<Controller *> DefaultWorld::generate(AssetManager *assets, std::vect
 
             s->addCapability(mx);
 
+            s->addCapability(new Docker());
+
             if(i == 1) s->addCapability(player2);
             units->push_back(s);
         }
@@ -106,6 +111,7 @@ std::vector<Controller *> DefaultWorld::generate(AssetManager *assets, std::vect
                 mhx->addModule(static_cast<Module*>(assets->copyAsset("warp-drive1")));
 
                 unit->addCapability(mhx);
+                unit->addCapability(new Docker());
 
                 units->push_back(unit);
                 i++;

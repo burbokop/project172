@@ -4,10 +4,10 @@
 #include <functional>
 
 
-#include "gui/guibutton.h"
+#include "gui/guimenuelement.h"
 
 
-class GUIChoice : public GUIButton {
+class GUIChoice : public GUIMenuElement {
 private:
     Variant value;
     std::function<void(Variant)> set;
@@ -17,9 +17,10 @@ public:
     GUIChoice(Controller *player, std::string label, Variant value, std::function<void(Variant)> set);
     GUIChoice(Controller *player, IInformative *informative, Variant value, std::function<void(Variant)> set);
 
-    // GUIButton interface
+    // GUIElement interface
 public:
-    bool press();
+    bool isSelectable();
+    void onEnter();
 };
 
 #endif // GUICHOICE_H

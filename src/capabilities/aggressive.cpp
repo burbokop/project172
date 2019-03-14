@@ -10,7 +10,6 @@
 #include "capabilities/modules/weapon.h"
 
 
-const double Aggressive::ANGLE_DELTA = 0.005;
 
 
 Unit *Aggressive::chooseTarget() {
@@ -35,22 +34,15 @@ Aggressive::Aggressive(std::vector<Worker *> *units) {
     target = chooseTarget();
 }
 
-void Aggressive::loop(Context *context, Event *event) {
+void Aggressive::tick(Context *context, Event *event) {
     EXISTS(target) {
         if(target != nullptr && parent != nullptr && target->is<Ship*>() && target != parent) {
-
             Vector dst = target->getPosition() - parent->getPosition();
             const double dstAngle = dst.angle();
             const double dstModule = dst.module();
 
-            if(parent->getAngle() > dstAngle + ANGLE_DELTA) {
-                parent->rotateLeft() ;
-            } else if(parent->getAngle() < dstAngle - ANGLE_DELTA) {
-                parent->rotateRight();
-            }
-
-            targeted = !(parent->getAngle() > dstAngle + ANGLE_DELTA * 2 || parent->getAngle() < dstAngle - ANGLE_DELTA * 2) && !inWarp;
-
+            parent->rotateToAngle(dstAngle);
+            targeted = parent->isOnAngle(dstAngle) && !inWarp && dstModule < 400;
             Ship *ship = dynamic_cast<Ship*>(parent);
 
             ModuleHandler *modules = parent->getModuleHandler();
@@ -102,7 +94,7 @@ void Aggressive::loop(Context *context, Event *event) {
         targeted = false;
         target = chooseTarget();
     }
-    this->Controller::loop(context, event);
+    this->Controller::tick(context, event);
 }
 
 void Aggressive::render(Renderer *renderer) {

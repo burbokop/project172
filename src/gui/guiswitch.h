@@ -4,10 +4,10 @@
 #include <functional>
 
 
-#include "gui/guibutton.h"
+#include "gui/guimenuelement.h"
 
 
-class GUISwitch : public GUIButton {
+class GUISwitch : public GUIMenuElement {
 private:
     std::function<void()> on;
     std::function<void()> off;
@@ -18,9 +18,10 @@ public:
     GUISwitch(Controller *player, std::string label, std::function<void()> on = nullptr,  std::function<void()> off = nullptr);
     GUISwitch(Controller *player, IInformative *informative, std::function<void()> on = nullptr,  std::function<void()> off = nullptr);
 
-    // GUIButton interface
+    // GUILabel interface
 public:
-    bool press();
+    bool isSelectable();
+    void onEnter();
 };
 
 #endif // GUISWITCH_H

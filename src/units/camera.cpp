@@ -1,45 +1,34 @@
 #include "camera.h"
 
-const double Camera::STOP_DISTANCE = 2;
-const double Camera::MAX_SPEED_MULTIPLIER = 0.005;
+#include "time/time.h"
+#include "additional/math.h"
+
+const double Camera::STOP_DISTANCE = 4;
+const double Camera::MAX_SPEED_MULTIPLIER = 0.002 * 1000;
 
 Camera::Camera() : Movable () {
     target = nullptr;
+    //setRelativisticVelocity(false);
+    place(Vector(), Vector(1, 1), Vector(), 0);
 }
 
 Camera::Camera(Controller *target) : Movable () {
     this->target = target;
+    //setRelativisticVelocity(false);
+    place(Vector(), Vector(1, 1), Vector(), 0);
 }
-
 
 void Camera::setTarget(Controller *target) {
     this->target = target;
 }
 
-void Camera::loop(Context *context, Event *event) {
-
-
-    if(target != nullptr) {
-
-        Unit *targetUnit = target->getParent();
-        if(targetUnit != nullptr) {
-
-            Vector direction = targetUnit->getPosition() - this->pos;
-            const double distance = direction.module();
-
-            if(distance > STOP_DISTANCE) {
-                Movable *movable = dynamic_cast<Movable*>(targetUnit);
-                if(movable) {
-                    double velocity = std::pow(movable->getVelocity().module(), 2);
-                    accelerate(direction * velocity);
-                    root["max-speed"] = Json::Value(distance * MAX_SPEED_MULTIPLIER);
-                }
-            } else {
-                accelerate(Vector());
-            }
+void Camera::tick(Context *context, Event *event) {
+    if(target) {
+        if(Unit *targetUnit = target->getParent()) {
+            relativisticPursuit(targetUnit);
         }
     }
-    this->Movable::loop(context, event);
+    this->Movable::tick(context, event);
 }
 
 void Camera::render(Renderer *renderer) {

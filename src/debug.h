@@ -21,7 +21,7 @@ class Debug {
 public:
     static const unsigned APPEAL_TO_REMOVED = 1;
     static const unsigned ASSET_KEY_NOT_FOUND = 2;
-    static const unsigned UNKNOWN_ASSET_KEY = 3;
+    static const unsigned UNKNOWN_ASSET_CLASS = 3;
     static const unsigned SEGMENTATION_FAULT = 4;
 
 private:

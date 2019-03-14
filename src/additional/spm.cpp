@@ -254,8 +254,7 @@ void SPM::FillArea(SDL_Surface *surface, int point1_x, int point1_y, int point2_
 }
 
 void SPM::Circle(SDL_Surface *surface, int center_x, int center_y, int radius, Uint32 color) {
-    for(int i = 0; i < sqrt(radius * radius - i * i); i++)
-    {
+    for(int i = 0; i < sqrt(radius * radius - i * i); i++) {
         int i2 = static_cast<int>(sqrt(radius * radius - i * i));
         SPM::FillPixel(surface, center_x + i, center_y + i2, color);
         SPM::FillPixel(surface, center_x - i, center_y - i2, color);

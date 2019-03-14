@@ -33,28 +33,23 @@ void Renderer::setCamera(Camera *value) {
     camera = value;
 }
 
-Camera *Renderer::getCamera() const
-{
+Camera *Renderer::getCamera() const {
     return camera;
 }
 
-Renderer::Renderer(SDL_Window *window, Vector resolution, SDL_Surface *surface, TTF_Font *font) {
-    this->window = window;
-    this->resolution = resolution;
-    this->surface = surface;
-    this->fonts[DEFAULT_FONT_SIZE] = font;
-}
-
-Renderer *Renderer::create(const char *title, int x, int y, std::string fontPath) {
+Renderer::Renderer(const char *title, int x, int y, std::string fontPath) {
     SDL_Init(SDL_INIT_EVERYTHING);
     TTF_Init();
     SDL_Window *window = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, x, y, 0);
-
     SDL_Surface *surface = SDL_GetWindowSurface(window);
-    Renderer *result = new Renderer(window, Vector(x, y), surface, TTF_OpenFont(fontPath.c_str(), DEFAULT_FONT_SIZE));
-    result->fontPath = fontPath;
-    return result;
+
+    this->fontPath = fontPath;
+    this->window = window;
+    this->resolution = Vector(x, y);
+    this->surface = surface;
+    this->fonts[DEFAULT_FONT_SIZE] = TTF_OpenFont(fontPath.c_str(), DEFAULT_FONT_SIZE);
 }
+
 
 void Renderer::effect(VisualEffect *effect, bool lock) {
     if(lock) {

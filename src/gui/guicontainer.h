@@ -5,17 +5,16 @@
 #include <functional>
 
 
-#include "gui/guibutton.h"
+#include "gui/guimenuelement.h"
 #include "gui/guistack.h"
 
 
-
-class GUIContainer : public GUIButton {
+class GUIContainer : public GUIMenuElement {
 protected:
-    std::vector<GUIElement*> *elements = new std::vector<GUIElement*>();
+    std::vector<GUIMenuElement*> *elements = new std::vector<GUIMenuElement*>();
 
-    GUIButton *selectDown();
-    GUIButton *selectUp();
+    GUIMenuElement *selectDown();
+    GUIMenuElement *selectUp();
 
 private:
 
@@ -25,11 +24,8 @@ private:
     int minSelectable = 0;
     int maxSelectable = 0;
 
-    GUIButton *selectedButton = nullptr;
+    GUIMenuElement *selectedElement = nullptr;
     GUIStack *stack = nullptr;
-
-
-
 
 
 public:
@@ -38,17 +34,18 @@ public:
     GUIContainer(Controller *player, IInformative *informative);
 
     void setStack(GUIStack *value);
-    void addElement(GUIElement *element);
-    void removeElement(GUIElement *element);
+    void addElement(GUIMenuElement *element);
+    void removeElement(GUIMenuElement *element);
 
     // GUIElement interface
 public:
-    void update();
-    void render(Renderer *renderer, Event *event);
+    bool isSelectable();
+    bool hasSubElements();
 
-    // GUIButton interface
+    // Worker interface
 public:
-    bool press();
+    void tick(Context *context, Event *event);
+    void render(Renderer *renderer);
 };
 
 #endif // GUICONTAINER_H

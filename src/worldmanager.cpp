@@ -4,11 +4,12 @@
 #include "context.h"
 #include "units/camera.h"
 #include "gui/guicontainer.h"
-#include "gui/guilist.h"
+#include "gui/guiradar.h"
 #include "gui/guichoice.h"
 #include "gui/guiswitch.h"
 #include "additional/informative/registryinfo.h"
 #include "additional/informative/controllerfinder.h"
+#include "additional/informative/unitsamountinfo.h"
 #include "state.h"
 #include "additional/spm.h"
 #include "additional/effects/anaglyph.h"
@@ -31,12 +32,12 @@ WorldManager::WorldManager(std::vector<World *> worlds) {
     this->activeWorld = worlds[0];
 }
 
-void WorldManager::init(AssetManager *assets, std::vector<Worker*> *units, Renderer *renderer, FPSMonitor *fps) {
+void WorldManager::init(AssetManager *assets, std::vector<Worker*> *units, Renderer *renderer, FPSMonitor *fps, FPSMonitor *tps) {
     if(activeWorld) {
         worldIsChanged = false;
         std::vector<Controller*> players = activeWorld->generate(assets, units);
         if(players.size() > 0) {
-            near = new Near(units, players[0], 400);
+            near = new Near(units, players[0]);
             camera = new Camera();
             camera->setTarget(players[0]);
             units->push_back(camera);
@@ -45,7 +46,7 @@ void WorldManager::init(AssetManager *assets, std::vector<Worker*> *units, Rende
                 GUIStack *stack = new GUIStack(); {
                     GUIContainer *mainMenu = new GUIContainer(players[0], "main menu"); {
                         GUIContainer *infoMenu = new GUIContainer(players[0], "info menu"); {
-                            infoMenu->addElement(new GUILabel(players[0], std::string("\
+                            infoMenu->addElement(new GUIMenuElement(players[0], std::string("\
                                 \n---info---\
                                 \n   --project:\
                                 \n      name: project172\
@@ -64,19 +65,19 @@ void WorldManager::init(AssetManager *assets, std::vector<Worker*> *units, Rende
                         } mainMenu->addElement(infoMenu);
                         GUIContainer *modulesMenu = new GUIContainer(players[0], "modules"); {
                             for(Module *module : *players[0]->getParent()->getModuleHandler()->getAllModules()) {
-                                modulesMenu->addElement(new GUILabel(players[0], module));
+                                modulesMenu->addElement(new GUIMenuElement(players[0], module));
                             }
                         } mainMenu->addElement(modulesMenu);
-                        GUIList *radarMenu = new GUIList(players[0], "radar"); {
+                        GUIRadar *radarMenu = new GUIRadar(players[0], "radar"); {
                             radarMenu->addArray(near->getFocus());
                         } mainMenu->addElement(radarMenu);
 
                         GUIContainer *testMenu = new GUIContainer(players[0], "for developers"); {
-                            testMenu->addElement(new GUILabel(players[0], std::string("other players:")));
+                            testMenu->addElement(new GUIMenuElement(players[0], std::string("other players:")));
                             if(players.size() > 1) {
                                 for(Controller *player : players) {
                                     if(player != players[0]) {
-                                        testMenu->addElement(new GUIButton(players[0], new ControllerFinder(players[0], player)));
+                                        testMenu->addElement(new GUIMenuElement(players[0], new ControllerFinder(players[0], player)));
                                     }
                                 }
                             }
@@ -86,14 +87,11 @@ void WorldManager::init(AssetManager *assets, std::vector<Worker*> *units, Rende
                                     worldsMenu->addElement(new GUIChoice(players[0], world->getName(), i++, std::bind(&WorldManager::onChangeReset, this, std::placeholders::_1)));
                                 }
                             } testMenu->addElement(worldsMenu);
-                            testMenu->addElement(new GUILabel(players[0], new RegistryInfo()));
-                            testMenu->addElement(new GUIChoice(players[0], "DELAY", State::DELAY, State::setLoopBehaviour));
-                            testMenu->addElement(new GUIChoice(players[0], "TIMER", State::TIMER, State::setLoopBehaviour));
+                            testMenu->addElement(new GUIMenuElement(players[0], new RegistryInfo()));
+                            testMenu->addElement(new GUIMenuElement(players[0], new UnitsAmountInfo(units)));
 
-                            testMenu->addElement(new GUISwitch(players[0], "inc fps", State::incMaxFps));
-                            testMenu->addElement(new GUISwitch(players[0], "dec fps", State::decMaxFps));
-
-                            testMenu->addElement(new GUILabel(players[0], fps));
+                            testMenu->addElement(new GUIMenuElement(players[0], fps));
+                            testMenu->addElement(new GUIMenuElement(players[0], tps));
 
                         } mainMenu->addElement(testMenu);
 
@@ -108,6 +106,11 @@ void WorldManager::init(AssetManager *assets, std::vector<Worker*> *units, Rende
                             } optionsMenu->addElement(resolutionMenu);
                             optionsMenu->addElement(new GUISwitch(players[0], std::string("fullscreen"), std::bind(&Renderer::setFullscreen, renderer)));
                         } mainMenu->addElement(optionsMenu);
+
+                        GUIContainer *stationMenu = new GUIContainer(players[0], "station"); {
+                            //stationMenu->addElement(new GUIChoice());
+                        } mainMenu->addElement(stationMenu);
+
                     } stack->push(mainMenu);
                 } gui->setMenu(stack);
                 gui->setMiniMap(new GUIMiniMap(players[0], units));
@@ -116,10 +119,10 @@ void WorldManager::init(AssetManager *assets, std::vector<Worker*> *units, Rende
     }
 }
 
-void WorldManager::checkState(Context *context, AssetManager *assets, std::vector<Worker *> *units, Renderer *renderer, FPSMonitor *fps) {
+void WorldManager::checkState(Context *context, AssetManager *assets, std::vector<Worker *> *units, Renderer *renderer, FPSMonitor *fps, FPSMonitor *tps) {
     if(worldIsChanged) {
         clear(units);
-        init(assets, units, renderer, fps);
+        init(assets, units, renderer, fps, tps);
         context->setGui(getGui());
         context->setNear(getNear());
         renderer->setCamera(getCamera());
@@ -136,4 +139,3 @@ void WorldManager::onChangeReset(Variant caseValue) {
     activeWorld = worlds[caseValue.toUint64()];
     worldIsChanged = true;
 }
-

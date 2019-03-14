@@ -2,13 +2,13 @@
 #define GUICENTRALMESSAGE_H
 
 
-#include "gui/guilabel.h"
-#include "additional/timer.h"
+#include "gui/guimenuelement.h"
+#include "time/timer.h"
 
 
-class GUICentralMessage : public GUILabel {
+class GUICentralMessage : public GUIMenuElement {
 private:
-    static const long DEFAULT_FLASHING_INTERVAL;
+    static const unsigned DEFAULT_FLASHING_INTERVAL;
 
     Timer *flashingTimer = nullptr;
     bool visible;
@@ -19,11 +19,11 @@ public:
     GUICentralMessage(Controller *player, std::string label);
     GUICentralMessage(Controller *player, IInformative *informative);
 
-    void start(int flashesRemains, long interval = DEFAULT_FLASHING_INTERVAL);
+    void start(int flashesRemains, unsigned interval = DEFAULT_FLASHING_INTERVAL);
 
     // GUIElement interface
 public:
-    void render(Renderer *renderer, Event *event);
+    void render(Renderer *renderer);
 };
 
 #endif // GUICENTRALMESSAGE_H

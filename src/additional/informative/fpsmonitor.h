@@ -5,7 +5,7 @@
 #include <vector>
 
 #include "iinformative.h"
-#include "additional/timer.h"
+#include "time/timer.h"
 
 
 class FPSMonitor : public IInformative {
@@ -18,8 +18,10 @@ private:
     std::vector<Uint32> fpsArray;
     Timer outputTimer = Timer(500);
 
+    std::string title;
+
 public:
-    FPSMonitor();
+    FPSMonitor(std::string title = "FPS:");
     void count();
     int operator* (int term);
     Uint32 toUint32();

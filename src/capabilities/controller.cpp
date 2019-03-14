@@ -4,6 +4,10 @@
 const long Controller::ARMOR_RELEASE_DELAY = 1000;
 const char *Controller::ARMOR_RELEASE_MESSAGE = "emergency catapult";
 
+void Controller::setSelected(Unit *value) {
+    selected = value;
+}
+
 void Controller::releaseArmor() {
     if(armor && parent && armor != parent) {
         armorReleaseTimer = new Timer(ARMOR_RELEASE_DELAY);
@@ -28,7 +32,7 @@ void Controller::onHit(Context *context, int health) {
     UNUSED(health);
 }
 
-void Controller::loop(Context *context, Event *event) {
+void Controller::tick(Context *context, Event *event) {
     UNUSED(event);
     if(armorReleaseMessageTrigger.check()) {
         context->addEvent(parent, Context::EMERGENCY_MESSAGE, const_cast<char*>(ARMOR_RELEASE_MESSAGE));

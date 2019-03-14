@@ -36,3 +36,25 @@ bool FileSystem::isDir(std::string path) {
         return false;
     }
 }
+
+std::string FileSystem::getSufix(std::string string) {
+    return string.substr(string.find_last_of('.'), string.length() - 1);
+}
+
+std::string FileSystem::addPrefix(std::string string, std::string prefix) {
+    if(string[0] == '.') string.erase(0, 1);
+    if(string[0] != '/') string = '/' + string;
+    if(prefix[prefix.length() - 1] == '/') prefix.pop_back();
+
+    return prefix + string;
+}
+
+std::string FileSystem::cutPath(std::string string, unsigned level) {
+    size_t pos = string.find_last_of('/');
+    std::string result = string.substr(0, pos);
+    if(level > 1) {
+        return cutPath(result, level - 1);
+    }
+    return result;
+}
+

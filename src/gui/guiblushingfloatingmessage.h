@@ -17,7 +17,7 @@ public:
 
     // GUIElement interface
 public:
-    void render(Renderer *renderer, Event *event);
+    void render(Renderer *renderer);
 };
 
 #endif // GUIBLUSHINGFLOATINGMESSAGE_H

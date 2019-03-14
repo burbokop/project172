@@ -6,7 +6,6 @@
 #include "units/particle.h"
 #include "additional/lightparticle.h"
 
-
 const unsigned Context::DELETE_UNIT = 0;
 const unsigned Context::SPAWN_EXPLOSIVE = 1;
 const unsigned Context::SPAWN_ENGINE_EXPLOSIVE = 2;
@@ -28,10 +27,10 @@ void Context::setBackground(Background *value) {
     background = value;
 }
 
-#include <iostream>
 void Context::setNear(Near *value) {
     near = value;
 }
+
 
 void Context::handleRequest(Request request) {
     PROTECT_OBJECT(request.requester);
@@ -48,7 +47,7 @@ void Context::handleRequest(Request request) {
         Debug::out("BADABOOM: " + std::to_string(reinterpret_cast<uintptr_t>(request.requester)));
         Unit *requester = dynamic_cast<Unit*>(request.requester);
         int radius = request.argument.isNumber() ? request.argument.toInt32() : 10;
-        int v0 = static_cast<int>(std::sqrt(radius));
+        int v0 = static_cast<int>(std::sqrt(radius)) * 350;
 
         if(requester) {
             for(int i = 0; i < radius * 4; i++) {
@@ -84,8 +83,8 @@ void Context::handleRequest(Request request) {
     } else if (request.command == SPAWN_UNIT) {
         Debug::out("SPAWN_UNIT: " + std::to_string(reinterpret_cast<uintptr_t>(request.requester)));
 
-        if(request.argument.isObject()) {
-            Unit *unitToSpawn = reinterpret_cast<Ship*>(request.argument.toObject());
+        if(request.argument.isUnit()) {
+            Unit *unitToSpawn = request.argument.toUnit();
             Ship *shipToSpawn = dynamic_cast<Ship*>(unitToSpawn);
             Ship *parent = dynamic_cast<Ship*>(request.requester);
 

@@ -1,23 +1,28 @@
 #include "guifloatingmessage.h"
 
+#include "time/time.h"
+
 const Uint32 GUIFloatingMessage::DEFAULT_COLOR = 0xFFEF40;
 const int GUIFloatingMessage::DEFAULT_FONT_SIZE = 14;
+const double GUIFloatingMessage::DEFAULT_FLOATING_SPEED = 30.0;
 
 
-GUIFloatingMessage::GUIFloatingMessage(Unit *parent) : GUILabel(nullptr) {
+GUIFloatingMessage::GUIFloatingMessage(Unit *parent) : GUIMenuElement(nullptr) {
     this->parent = parent;
 }
 
-GUIFloatingMessage::GUIFloatingMessage(Unit *parent, std::string label) : GUILabel (nullptr, label) {
+GUIFloatingMessage::GUIFloatingMessage(Unit *parent, std::string label) : GUIMenuElement (nullptr, label) {
     this->parent = parent;
 }
 
-GUIFloatingMessage::GUIFloatingMessage(Unit *parent, IInformative *informative) : GUILabel (nullptr, informative) {
+GUIFloatingMessage::GUIFloatingMessage(Unit *parent, IInformative *informative) : GUIMenuElement (nullptr, informative) {
     this->parent = parent;
 }
 
-void GUIFloatingMessage::render(Renderer *renderer, Event *event) {
-    UNUSED(event);
-    renderer->stringCentered(getTitle(), parent->getPosition() + renderer->getOffset() + Vector(0, horisontalOffset), DEFAULT_COLOR, DEFAULT_FONT_SIZE);
-    horisontalOffset--;
+void GUIFloatingMessage::render(Renderer *renderer) {
+    renderer->stringCentered(getTitle(), parent->getPosition() + renderer->getOffset() + Vector(0.0, horisontalOffset), DEFAULT_COLOR, DEFAULT_FONT_SIZE);
+
+    //tttt
+    horisontalOffset -= Time::getDeltaTime() * DEFAULT_FLOATING_SPEED;
+    //tttt
 }

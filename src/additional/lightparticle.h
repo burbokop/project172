@@ -3,7 +3,7 @@
 
 
 #include "worker.h"
-#include "additional/timer.h"
+#include "time/timer.h"
 
 
 class LightParticle : public Worker {
@@ -35,7 +35,7 @@ public:
 
     // Worker interface
 public:
-    void loop(Context *context, Event *event);
+    void tick(Context *context, Event *event);
     void render(Renderer *renderer);
 };
 

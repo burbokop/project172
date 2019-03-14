@@ -15,9 +15,6 @@ private:
 
     std::map<std::string, Loadable*> assets;
 
-    std::string getSufix(std::string string);
-    std::string addPrefix(std::string string, std::string prefix);
-
     void processFile(std::string file, std::string location);
 public:
     AssetManager();

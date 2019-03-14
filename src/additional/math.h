@@ -29,6 +29,9 @@ public:
     static double cos(double angle);
     static double acos(double value);
     static double sqrt(double value);
+
+
+    static double constrainAngle(double value);
 };
 
 #endif // MATH_H

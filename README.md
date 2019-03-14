@@ -35,6 +35,7 @@ sudo apt-get install qt4-qmake
 ```
 W A D                       => moving
 F                           => charging / run / stop warp drive
+E                           => catapulting
 SPACE                       => fire
 
 + / -                       => minimap scale
@@ -57,3 +58,8 @@ https://vimeo.com/316627120
 
 
 Nice to play
+
+
+P.S.
+
+try menu -> for developers -> worlds (you can find AI here)

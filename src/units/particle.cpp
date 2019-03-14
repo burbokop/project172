@@ -16,7 +16,7 @@ Uint32 Particle::generateColor() {
 
 Particle::Particle() : Movable() {
     color = generateColor();
-    relativisticVelocity = false;
+    setRelativisticVelocity(false);
     destroyTimer = new Timer((rand() % (2 * DEFAULT_LIFE_TIME_DELTA)) + (DEFAULT_AVERAGE_LIFE_TIME - DEFAULT_LIFE_TIME_DELTA));
     destroyTimer->reset();
 
@@ -25,14 +25,14 @@ Particle::Particle() : Movable() {
 Particle::Particle(Uint8 shape, int averageLifeTime, int lifeTimeDelta) {
     color = generateColor();
     this->shape = shape;
-    relativisticVelocity = false;
+    setRelativisticVelocity(false);
     destroyTimer = new Timer((rand() % (2 * lifeTimeDelta)) + (averageLifeTime - lifeTimeDelta));
     destroyTimer->reset();
 }
 
 Particle::Particle(Loadable *tmp) : Movable (tmp) {
     color = generateColor();
-    relativisticVelocity = false;
+    setRelativisticVelocity(false);
     destroyTimer->reset();
 }
 
@@ -51,9 +51,9 @@ void Particle::hit(Context *context, int value) {
     UNUSED(value);
 }
 
-void Particle::loop(Context *context, Event *event) {
+void Particle::tick(Context *context, Event *event) {
     if(destroyTimer && destroyTimer->count()) {
         context->addEvent(this, Context::DELETE_UNIT);
     }
-    this->Movable::loop(context, event);
+    this->Movable::tick(context, event);
 }

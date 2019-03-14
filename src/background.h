@@ -6,7 +6,7 @@
 
 #include "additional/vector.h"
 #include "worker.h"
-#include "additional/timer.h"
+#include "time/timer.h"
 
 
 struct Star {
@@ -17,6 +17,7 @@ struct Star {
 class Background : public Worker {
 private:
     static const double STARS_SLIDING_SPEED;
+    static const double SLIDING_LEGHTH;
     static const Uint32 DEFAULT_MAIN_COLOR;
     static const Uint32 DEFAULT_FLASHING_COLOR;
     static const long DEFAULT_FLASHING_INTERVAL;
@@ -37,13 +38,14 @@ private:
     Uint32 colorBuffer = DEFAULT_MAIN_COLOR;
     int flashesRemains = 0;
 
+    void onResolutionChange(Vector resolution);
 public:
-    Background();
-    void init(Vector resolution, unsigned int amount, double slidingStart = STARS_SLIDING_SPEED);
+    Background(Vector resolution, unsigned int amount, double slidingStart = STARS_SLIDING_SPEED);
+
 
     // Worker interface
 public:
-    void loop(Context *context, Event *event);
+    void tick(Context *context, Event *event);
     void render(Renderer *renderer);
     void setSpeed(const Vector &value);
 

@@ -33,7 +33,7 @@ void AudioPlayer::stop() {
     state = NONE;
 }
 
-void AudioPlayer::loop(Context *context, Event *event) {
+void AudioPlayer::tick(Context *context, Event *event) {
     UNUSED(context);
     UNUSED(event);
 

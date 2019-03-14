@@ -17,21 +17,26 @@ private:
 
     bool forcedMaxSpeedEnabled = false;
     double forcedMaxSpeedValue = DEFAULT_MAX_SPEED;
+
+    bool relativisticVelocity = true;
 protected:
     static const double STOP_MOVING_VELOCITY;
     static const double DEFAULT_ACCELERATION_VALUE;
     static const double DEFAULT_RELEASE_SPEAD;
+    static const double DEFAULT_IDLE_SPEAD;
+    static const double RELATIVISTIC_PURSUIT_COEFFICIENT;
+
 
     double getAccelerationValue();
     static const double DEFAULT_MAX_SPEED;
     double getMaxSpeed();
 
-    bool relativisticVelocity = true;
+
+    void setRelativisticVelocity(bool value);
 
     void updatePosition();
 
     void accelerateIdle();
-    void accelerate(Vector acc);
     void setIdleEnabled(bool value);
     void forcedMaxSpeed(double value);
     void disableForcedMaxSpeed();
@@ -43,13 +48,19 @@ public:
 
     void place(Vector pos, Vector vel = Vector(), Vector acc = Vector(), double angle = 0);
 
+    void accelerate(Vector acc);
     bool accelerateForward();
+    bool accelerateLeft();
+    bool accelerateRight();
+
 
     Vector getVelocity();
     double getReleaseSpead();
 
+    void pursuit(Unit *target);
+    void relativisticPursuit(Unit *target);
 
-    void loop(Context *context, Event *event);
+    void tick(Context *context, Event *event);
 };
 
 #endif // MOVABLE_H

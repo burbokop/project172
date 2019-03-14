@@ -1,5 +1,6 @@
 #include "lightparticle.h"
-#include "../context.h"
+#include "context.h"
+#include "time/time.h"
 
 const unsigned LightParticle::PIXEL = 0;
 const unsigned LightParticle::SQUARE = 1;
@@ -15,9 +16,9 @@ LightParticle::LightParticle(unsigned shape, int averageLifeTime, int lifeTimeDe
     Uint32 colors[] = { 0xdeff17, 0xfe4600, 0xf9990f, 0x8a27ff };
     color = colors[std::rand() % 4];
     this->shape = shape;
-    destroyTimer = new Timer((rand() % (2 * lifeTimeDelta)) + (averageLifeTime - lifeTimeDelta));
+    destroyTimer = new Timer(static_cast<unsigned>((rand() % (2 * lifeTimeDelta)) + (averageLifeTime - lifeTimeDelta)));
     destroyTimer->reset();
-    velocityMultiplier = static_cast<double>((std::rand() % 3 + 96)) / 100;
+    velocityMultiplier = static_cast<double>((std::rand() % 4 + 3)) / 5;
 }
 
 void LightParticle::place(Vector pos, Vector vel) {
@@ -26,13 +27,16 @@ void LightParticle::place(Vector pos, Vector vel) {
 }
 
 
-void LightParticle::loop(Context *context, Event *event) {
+void LightParticle::tick(Context *context, Event *event) {
     UNUSED(event);
     if(destroyTimer && destroyTimer->count()) {
         context->addEvent(this, Context::DELETE_UNIT);
     }
-    vel *= velocityMultiplier;
-    pos += vel;
+    vel = vel * (1 - Time::getDeltaTime() * velocityMultiplier);
+
+    //vel -= (vel * 1 * Time::getDeltaTime());
+
+    pos += vel * Time::getDeltaTime() * 0.1;
 }
 
 void LightParticle::render(Renderer *renderer) {

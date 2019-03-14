@@ -7,68 +7,77 @@
 #include "worlds/heapworld.h"
 #include "debug.h"
 #include "units/camera.h"
+#include "time/time.h"
+#include "filesystem.h"
 
 
 
-
-Environment::Environment() {
-    this->state = new State();
-    this->units = new std::vector<Worker*>();
-    this->assetManager = new AssetManager();
-    this->context = new Context(units, assetManager);
-    this->event = new Event();
-    this->fps = new FPSMonitor();
-    this->netListener = new NetListener(context);
-    this->worldManager = new WorldManager({ new DefaultWorld(), new ArenaWorld(), new HeapWorld() });
-    this->background = new Background();
-}
-
-void Environment::init(int argc, char *argv[]) {
+Environment::Environment(std::vector<std::string> args) {
+    Debug::init(true, true);
     Debug::out("INIT GAME");
-    this->renderer = Renderer::create("project172", 600, 600, "../assets/fonts/ZCOOL.ttf");
     Audio::init();
-    assetManager->search("../assets");
-    if(argc > 1) this->background->init(this->renderer->getResolution(), 128, std::stod(argv[1]));
-    else this->background->init(this->renderer->getResolution(), 128);
-    worldManager->checkState(context, assetManager, units, renderer, fps);
+
+    units = new std::vector<Worker*>();
+    assetManager = new AssetManager();
+    context = new Context(units, assetManager); //tick {no}
+
+    state = new State();
+    event = new Event(); // io {no}
+    netListener = new NetListener(context);
+
+    renderer = new Renderer("project172", 600, 600, FileSystem::cutPath(args[0], 2) + "/assets/fonts/ZCOOL.ttf"); //render [no]
+    background = new Background(renderer->getResolution(), 128);
+
+    worldManager = new WorldManager({ new DefaultWorld(), new ArenaWorld(), new HeapWorld() });
+
+    fps = new FPSMonitor("FPS:");
+    tps = new FPSMonitor("TPS:");
+
+    assetManager->search(FileSystem::cutPath(args[0], 2) + "/assets");
+    worldManager->checkState(context, assetManager, units, renderer, fps, tps);
     context->setBackground(background);
 }
+
 
 void Environment::start() {
     Debug::out("GAME STARTED");
     netListener->start();
-    Timer loopTimer = Timer(1000 / state->getMaxFPS());
-    loopTimer.reset();
 
-    while(1) {
-        event->loop();
-        background->loop(this->context, event);
+    while (1) {
+        Time::update();
+        background->tick(this->context, event);
         background->setSpeed(worldManager->getCamera()->getVelocity());
+
+        for(size_t i = 0, L = units->size(); i < L; i++) {
+            this->units->at(i)->tick(this->context, event);
+        }
+
+        context->handleEvents();
+        worldManager->checkState(context, assetManager, units, renderer, fps, tps);
+
+        tps->count();
+
+        //IO
+        event->loop();
         background->render(renderer);
-        for(unsigned long long i = 0, L = units->size(); i < L; i++) {
-            this->units->at(i)->loop(this->context, event);
+
+        for(size_t i = 0, L = units->size(); i < L; i++) {
             this->units->at(i)->render(this->renderer);
         }
 
-        GUIElement *gui = worldManager->getGui();
-        if(gui != nullptr) {
-            gui->update();
-            gui->render(renderer, event);
+        if(GUIElement *gui = worldManager->getGui()) {
+            gui->tick(context, event);
+            gui->render(renderer);
         }
-        renderer->update();
-        context->handleEvents();
-        worldManager->checkState(context, assetManager, units, renderer, fps);
-        if(event->getExitFlag()) break;
-        fps->count();
 
-        if(State::getLoopBehaviour() == State::TIMER) {
-            while (!loopTimer.count()) {
-                std::this_thread::sleep_for(std::chrono::milliseconds(2));
-            }
-        } else {
-            std::this_thread::sleep_for(std::chrono::milliseconds(fps->toUint32() * 1000 / static_cast<long long>(std::pow(State::getMaxFPS(), 2))));
-        }
+        renderer->update();
+
+        event->unpressAll();
+
+        fps->count();
+        if(event->getExitFlag()) break;
     }
+
     quit();
 }
 
@@ -79,3 +88,48 @@ void Environment::quit() {
     event->quit();
     Debug::out("GAME STOPED");
 }
+
+
+
+/*
+void Environment::gameLogicLoop() {
+    while(1) {
+        Time::update();
+        background->tick(this->context, event);
+        background->setSpeed(worldManager->getCamera()->getVelocity());
+
+        for(size_t i = 0, L = units->size(); i < L; i++) {
+            this->units->at(i)->tick(this->context, event);
+        }
+
+        context->handleEvents();
+        worldManager->checkState(context, assetManager, units, renderer, fps, tps);
+
+        tps->count();
+        if(event->getExitFlag()) break;
+    }
+}
+
+void Environment::ioLoop() {
+    while(1) {
+        event->loop();
+        background->render(renderer);
+
+        for(size_t i = 0, L = units->size(); i < L; i++) {
+            std::cout << "io   : ( i: " << i << ", size: " << units->size() << " )\n";
+            if(i < units->size()) {
+                this->units->at(i)->render(this->renderer);
+            }
+        }
+
+        if(GUIElement *gui = worldManager->getGui()) {
+            gui->render(renderer, event);
+        }
+
+        renderer->update();
+
+        fps->count();
+        if(event->getExitFlag()) break;
+    }
+}
+*/

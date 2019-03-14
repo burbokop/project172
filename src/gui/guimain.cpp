@@ -5,7 +5,7 @@
 
 
 
-const long GUIMain::FLOATING_LIFE_TIME = 1000;
+const unsigned GUIMain::FLOATING_LIFE_TIME = 1000;
 
 void GUIMain::setMessage(GUICentralMessage *value) {
     centralMessage = value;
@@ -30,29 +30,24 @@ void GUIMain::setMiniMap(GUIMiniMap *value)
     miniMap = value;
 }
 
-GUIMain::GUIMain() : GUIElement () {
-}
+GUIMain::GUIMain() : GUIElement () {}
 
-GUIMain::GUIMain(Controller *player) : GUIElement (player) {
-}
+GUIMain::GUIMain(Controller *player) : GUIElement (player) {}
 
-std::string GUIMain::getTitle() {
-    return "";
-}
-
-void GUIMain::update() {
-    if(menu) menu->update();
-    if(centralMessage) centralMessage->update();
-    if(miniMap) miniMap->update();
-}
-
-void GUIMain::render(Renderer *renderer, Event *event) {
-    if(menu) menu->render(renderer, event);
-    if(centralMessage) centralMessage->render(renderer, event);
-
-    if(floatingMessage) floatingMessage->render(renderer, event);
+void GUIMain::tick(Context *context, Event *event) {
     if(floatingMessageLifeTimer.count()) {
         floatingMessage = nullptr;
     }
-    if(miniMap) miniMap->render(renderer, event);
+
+    if(menu) menu->tick(context, event);
+    if(centralMessage) centralMessage->tick(context, event);
+    if(floatingMessage) floatingMessage->tick(context, event);
+    if(miniMap) miniMap->tick(context, event);
+}
+
+void GUIMain::render(Renderer *renderer) {
+    if(menu) menu->render(renderer);
+    if(centralMessage) centralMessage->render(renderer);
+    if(floatingMessage) floatingMessage->render(renderer);
+    if(miniMap) miniMap->render(renderer);
 }

@@ -4,7 +4,7 @@
 #include "additional/stringformer.h"
 #include "units/projectile.h"
 
-const double Weapon::DEFAULT_PROJECTILE_SPEED = 4.0;
+const double Weapon::DEFAULT_PROJECTILE_SPEED = 200.0;
 double Weapon::getProjectileSpead() {
     Json::Value projectileSpeed = root["projectile-speed"];
     if(projectileSpeed.isNumeric()) {
@@ -32,14 +32,16 @@ std::string Weapon::getInfo() {
             + ((timer.ready() > 1) ? "ready" : "");
 }
 
-void Weapon::loop(Context *context, Event *event) {
-    this->Module::loop(context, event);
+void Weapon::tick(Context *context, Event *event) {
+    this->Module::tick(context, event);
     if(timer.count(firing)) {
         Json::Value projectile = root["projectile"];
         if(projectile.isString()) {
             Projectile *object = static_cast<Projectile*>(context->getAssets()->copyAsset(projectile.asString()));
             object->setMother(parent);
-            object->place(parent->getPosition(), Vector::createByAngle(getProjectileSpead(), this->parent->getAngle()), Vector(), this->parent->getAngle());
+
+            object->place(parent->getPosition(), parent->getVelocity() + Vector::createByAngle(getProjectileSpead(), this->parent->getAngle()), Vector(), this->parent->getAngle());
+
             context->getUnits()->push_back(object);
 
             audioPlayer.play();

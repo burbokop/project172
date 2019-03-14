@@ -1,0 +1,123 @@
+#include "environment.h"
+
+
+#include "context.h"
+#include "worlds/defaultworld.h"
+#include "worlds/arenaworld.h"
+#include "worlds/heapworld.h"
+#include "debug.h"
+#include "units/camera.h"
+#include "time/time.h"
+#include "filesystem.h"
+
+
+
+Environment::Environment() {
+    this->state = new State();
+    this->units = new std::vector<Worker*>();
+    this->assetManager = new AssetManager();
+    this->context = new Context(units, assetManager);
+    this->event = new Event();
+    this->fps = new FPSMonitor("FPS:");
+    this->tps = new FPSMonitor("TPS:");
+    this->netListener = new NetListener(context);
+    this->worldManager = new WorldManager({ new DefaultWorld(), new ArenaWorld(), new HeapWorld() });
+    this->background = new Background();
+}
+
+void Environment::init(std::vector<std::string> args) {
+    Debug::out("INIT GAME");
+    this->renderer = Renderer::create("project172", 600, 600, FileSystem::cutPath(args[0], 2) + "/assets/fonts/ZCOOL.ttf");
+    Audio::init();
+    assetManager->search(FileSystem::cutPath(args[0], 2) + "/assets");
+    if(args.size() > 1) this->background->init(this->renderer->getResolution(), 128, std::stod(args[1]));
+    else this->background->init(this->renderer->getResolution(), 128);
+    worldManager->checkState(context, assetManager, units, renderer, fps, tps);
+    context->setBackground(background);
+}
+
+void Environment::start() {
+    Debug::out("GAME STARTED");
+    netListener->start();
+    gameLogicThread = new std::thread(&Environment::gameLogicLoop, this);
+    ioLoop();
+
+    if(gameLogicThread != nullptr) {
+        gameLogicThread->join();
+    }
+    quit();
+}
+
+void Environment::quit() {
+    Debug::out("DESTRUCTING GAME");
+    netListener->quit();
+    renderer->quit();
+    event->quit();
+    Debug::out("GAME STOPED");
+}
+
+
+
+
+void Environment::gameLogicLoop() {
+    while(1) {
+        mutex.lock();
+        Time::update();
+        mutex.unlock();
+
+        mutex.lock();
+        background->tick(this->context, event);
+        background->setSpeed(worldManager->getCamera()->getVelocity());
+        mutex.unlock();
+
+
+        for(Worker *unit : *units) {
+            mutex.lock();
+            unit->tick(this->context, event);
+            mutex.unlock();
+        }
+
+        mutex.lock();
+        context->handleEvents();
+        mutex.unlock();
+        mutex.lock();
+        worldManager->checkState(context, assetManager, units, renderer, fps, tps);
+        mutex.unlock();
+
+        tps->count();
+        if(event->getExitFlag()) break;
+    }
+}
+
+void Environment::ioLoop() {
+    while(1) {
+        mutex.lock();
+        event->loop();
+        mutex.unlock();
+
+        mutex.lock();
+        background->render(renderer);
+        mutex.unlock();
+
+
+        for(Worker *unit : *units) {
+            mutex.lock();
+            unit->render(this->renderer);
+            mutex.unlock();
+        }
+
+        if(GUIElement *gui = worldManager->getGui()) {
+            mutex.lock();
+            gui->render(renderer, event);
+            mutex.unlock();
+        }
+
+        mutex.lock();
+        renderer->update();
+        mutex.unlock();
+
+
+        fps->count();
+        if(event->getExitFlag()) break;
+    }
+}

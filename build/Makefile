@@ -54,7 +54,6 @@ SOURCES       = ../src/main.cpp \
 		../src/object.cpp \
 		../src/worker.cpp \
 		../src/renderer.cpp \
-		../src/environment.cpp \
 		../src/worlds/world.cpp \
 		../src/assetmanager.cpp \
 		../src/filesystem.cpp \
@@ -70,7 +69,7 @@ SOURCES       = ../src/main.cpp \
 		../src/capabilities/modules/module.cpp \
 		../src/additional/rotozoom.cpp \
 		../src/additional/spm.cpp \
-		../src/additional/timer.cpp \
+		../src/time/timer.cpp \
 		../src/additional/event.cpp \
 		../src/additional/vector.cpp \
 		../src/additional/stringformer.cpp \
@@ -84,8 +83,6 @@ SOURCES       = ../src/main.cpp \
 		../src/units/ship.cpp \
 		../src/gui/guielement.cpp \
 		../src/gui/guicontainer.cpp \
-		../src/gui/guilabel.cpp \
-		../src/gui/guibutton.cpp \
 		../src/iinformative.cpp \
 		../src/gui/guistack.cpp \
 		../src/capabilities/ai.cpp \
@@ -127,12 +124,18 @@ SOURCES       = ../src/main.cpp \
 		../src/audio/audiohardwarebank.cpp \
 		../src/audio/audioplayer.cpp \
 		../src/additional/variant.cpp \
-		../src/gui/guiminimap.cpp 
+		../src/gui/guiminimap.cpp \
+		../src/gui/guiradar.cpp \
+		../src/capabilities/modules/thruster.cpp \
+		../src/time/time.cpp \
+		../src/gui/guimenuelement.cpp \
+		../src/additional/mutex.cpp \
+		../src/additional/informative/unitsamountinfo.cpp \
+		../src/environment.cpp 
 OBJECTS       = main.o \
 		object.o \
 		worker.o \
 		renderer.o \
-		environment.o \
 		world.o \
 		assetmanager.o \
 		filesystem.o \
@@ -162,8 +165,6 @@ OBJECTS       = main.o \
 		ship.o \
 		guielement.o \
 		guicontainer.o \
-		guilabel.o \
-		guibutton.o \
 		iinformative.o \
 		guistack.o \
 		ai.o \
@@ -205,7 +206,14 @@ OBJECTS       = main.o \
 		audiohardwarebank.o \
 		audioplayer.o \
 		variant.o \
-		guiminimap.o
+		guiminimap.o \
+		guiradar.o \
+		thruster.o \
+		time.o \
+		guimenuelement.o \
+		mutex.o \
+		unitsamountinfo.o \
+		environment.o
 DIST          = /home/boris/Installed/Qt/5.11.1/gcc_64/mkspecs/features/spec_pre.prf \
 		/home/boris/Installed/Qt/5.11.1/gcc_64/mkspecs/common/unix.conf \
 		/home/boris/Installed/Qt/5.11.1/gcc_64/mkspecs/common/linux.conf \
@@ -394,7 +402,6 @@ DIST          = /home/boris/Installed/Qt/5.11.1/gcc_64/mkspecs/features/spec_pre
 		../../project172.pro src/object.h \
 		src/worker.h \
 		src/renderer.h \
-		src/environment.h \
 		src/worlds/world.h \
 		src/assetmanager.h \
 		src/filesystem.h \
@@ -410,7 +417,7 @@ DIST          = /home/boris/Installed/Qt/5.11.1/gcc_64/mkspecs/features/spec_pre
 		src/capabilities/modules/module.h \
 		src/additional/rotozoom.h \
 		src/additional/spm.h \
-		src/additional/timer.h \
+		src/time/timer.h \
 		src/additional/event.h \
 		src/additional/vector.h \
 		src/additional/stringformer.h \
@@ -424,8 +431,6 @@ DIST          = /home/boris/Installed/Qt/5.11.1/gcc_64/mkspecs/features/spec_pre
 		src/units/ship.h \
 		src/gui/guielement.h \
 		src/gui/guicontainer.h \
-		src/gui/guilabel.h \
-		src/gui/guibutton.h \
 		src/iinformative.h \
 		src/gui/guistack.h \
 		src/capabilities/ai.h \
@@ -477,11 +482,17 @@ DIST          = /home/boris/Installed/Qt/5.11.1/gcc_64/mkspecs/features/spec_pre
 		src/audio/audiohardwarebank.h \
 		src/audio/audioplayer.h \
 		src/additional/variant.h \
-		src/gui/guiminimap.h ../src/main.cpp \
+		src/gui/guiminimap.h \
+		src/gui/guiradar.h \
+		src/capabilities/modules/thruster.h \
+		src/time/time.h \
+		src/gui/guimenuelement.h \
+		src/additional/mutex.h \
+		src/additional/informative/unitsamountinfo.h \
+		src/environment.h ../src/main.cpp \
 		../src/object.cpp \
 		../src/worker.cpp \
 		../src/renderer.cpp \
-		../src/environment.cpp \
 		../src/worlds/world.cpp \
 		../src/assetmanager.cpp \
 		../src/filesystem.cpp \
@@ -497,7 +508,7 @@ DIST          = /home/boris/Installed/Qt/5.11.1/gcc_64/mkspecs/features/spec_pre
 		../src/capabilities/modules/module.cpp \
 		../src/additional/rotozoom.cpp \
 		../src/additional/spm.cpp \
-		../src/additional/timer.cpp \
+		../src/time/timer.cpp \
 		../src/additional/event.cpp \
 		../src/additional/vector.cpp \
 		../src/additional/stringformer.cpp \
@@ -511,8 +522,6 @@ DIST          = /home/boris/Installed/Qt/5.11.1/gcc_64/mkspecs/features/spec_pre
 		../src/units/ship.cpp \
 		../src/gui/guielement.cpp \
 		../src/gui/guicontainer.cpp \
-		../src/gui/guilabel.cpp \
-		../src/gui/guibutton.cpp \
 		../src/iinformative.cpp \
 		../src/gui/guistack.cpp \
 		../src/capabilities/ai.cpp \
@@ -554,7 +563,14 @@ DIST          = /home/boris/Installed/Qt/5.11.1/gcc_64/mkspecs/features/spec_pre
 		../src/audio/audiohardwarebank.cpp \
 		../src/audio/audioplayer.cpp \
 		../src/additional/variant.cpp \
-		../src/gui/guiminimap.cpp
+		../src/gui/guiminimap.cpp \
+		../src/gui/guiradar.cpp \
+		../src/capabilities/modules/thruster.cpp \
+		../src/time/time.cpp \
+		../src/gui/guimenuelement.cpp \
+		../src/additional/mutex.cpp \
+		../src/additional/informative/unitsamountinfo.cpp \
+		../src/environment.cpp
 QMAKE_TARGET  = project172
 DESTDIR       = 
 TARGET        = project172
@@ -1011,7 +1027,7 @@ main.o: ../src/main.cpp ../src/environment.h \
 		../src/json/writer.h \
 		../src/loadable.h \
 		../src/animator.h \
-		../src/additional/timer.h \
+		../src/time/timer.h \
 		../src/audio/audioplayer.h \
 		../src/audio/audiochannel.h \
 		../src/audio/audio.h \
@@ -1032,16 +1048,17 @@ main.o: ../src/main.cpp ../src/environment.h \
 		../src/units/unit.h \
 		../src/capabilities/modulehandler.h \
 		../src/capabilities/modules/module.h \
+		../src/capabilities/docker.h \
 		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h \
 		../src/gui/guicentralmessage.h \
-		../src/gui/guilabel.h \
+		../src/gui/guimenuelement.h \
 		../src/gui/guifloatingmessage.h \
 		../src/gui/guiminimap.h \
 		../src/near.h \
 		../src/worldmanager.h \
 		../src/worlds/world.h \
-		../src/debug.h
+		../src/additional/mutex.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../src/main.cpp
 
 object.o: ../src/object.cpp ../src/object.h
@@ -1082,11 +1099,12 @@ renderer.o: ../src/renderer.cpp ../src/renderer.h \
 		../src/json/value.h \
 		../src/json/writer.h \
 		../src/animator.h \
-		../src/additional/timer.h \
+		../src/time/timer.h \
 		../src/audio/audioplayer.h \
 		../src/audio/audiochannel.h \
 		../src/audio/audio.h \
 		../src/iinformative.h \
+		../src/capabilities/docker.h \
 		../src/capabilities/controller.h \
 		../src/units/ship.h \
 		../src/capabilities/modules/warpdrive.h \
@@ -1094,65 +1112,6 @@ renderer.o: ../src/renderer.cpp ../src/renderer.h \
 		../src/additional/spm.h \
 		../src/debug.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o renderer.o ../src/renderer.cpp
-
-environment.o: ../src/environment.cpp ../src/environment.h \
-		../src/object.h \
-		../src/state.h \
-		../src/additional/variant.h \
-		../src/additional/vector.h \
-		../src/renderer.h \
-		../src/additional/effects/visualeffect.h \
-		../src/worker.h \
-		../src/additional/event.h \
-		../src/assetmanager.h \
-		../src/json/json.h \
-		../src/json/autolink.h \
-		../src/json/config.h \
-		../src/json/allocator.h \
-		../src/json/version.h \
-		../src/json/features.h \
-		../src/json/forwards.h \
-		../src/json/reader.h \
-		../src/json/value.h \
-		../src/json/writer.h \
-		../src/loadable.h \
-		../src/animator.h \
-		../src/additional/timer.h \
-		../src/audio/audioplayer.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audio.h \
-		../src/background.h \
-		../src/additional/informative/fpsmonitor.h \
-		../src/iinformative.h \
-		../src/netlistener.h \
-		../src/additional/net/socket.h \
-		../src/additional/net/framebuilder.h \
-		../src/context.h \
-		../src/gui/guimain.h \
-		../src/gui/guistack.h \
-		../src/gui/guielement.h \
-		../src/capabilities/controller.h \
-		../src/capabilities/capability.h \
-		../src/units/ship.h \
-		../src/units/movable.h \
-		../src/units/unit.h \
-		../src/capabilities/modulehandler.h \
-		../src/capabilities/modules/module.h \
-		../src/capabilities/modules/warpdrive.h \
-		../src/additional/trigger.h \
-		../src/gui/guicentralmessage.h \
-		../src/gui/guilabel.h \
-		../src/gui/guifloatingmessage.h \
-		../src/gui/guiminimap.h \
-		../src/near.h \
-		../src/worldmanager.h \
-		../src/worlds/world.h \
-		../src/worlds/defaultworld.h \
-		../src/worlds/arenaworld.h \
-		../src/worlds/heapworld.h \
-		../src/debug.h \
-		../src/units/camera.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o environment.o ../src/environment.cpp
 
 world.o: ../src/worlds/world.cpp ../src/worlds/world.h \
 		../src/object.h \
@@ -1164,7 +1123,7 @@ world.o: ../src/worlds/world.cpp ../src/worlds/world.h \
 		../src/renderer.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/variant.h \
-		../src/additional/timer.h \
+		../src/time/timer.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
 		../src/units/unit.h \
@@ -1186,6 +1145,7 @@ world.o: ../src/worlds/world.cpp ../src/worlds/world.h \
 		../src/audio/audiochannel.h \
 		../src/audio/audio.h \
 		../src/iinformative.h \
+		../src/capabilities/docker.h \
 		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h \
 		../src/assetmanager.h
@@ -1204,7 +1164,7 @@ assetmanager.o: ../src/assetmanager.cpp ../src/assetmanager.h \
 		../src/json/writer.h \
 		../src/loadable.h \
 		../src/animator.h \
-		../src/additional/timer.h \
+		../src/time/timer.h \
 		../src/worker.h \
 		../src/additional/event.h \
 		../src/additional/vector.h \
@@ -1226,10 +1186,12 @@ assetmanager.o: ../src/assetmanager.cpp ../src/assetmanager.h \
 		../src/capabilities/modulehandler.h \
 		../src/capabilities/modules/module.h \
 		../src/iinformative.h \
+		../src/capabilities/docker.h \
 		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h \
 		../src/capabilities/modules/weapon.h \
 		../src/capabilities/modules/engine.h \
+		../src/capabilities/modules/thruster.h \
 		../src/units/projectile.h \
 		../src/units/station.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o assetmanager.o ../src/assetmanager.cpp
@@ -1238,7 +1200,7 @@ filesystem.o: ../src/filesystem.cpp ../src/filesystem.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o filesystem.o ../src/filesystem.cpp
 
 animator.o: ../src/animator.cpp ../src/animator.h \
-		../src/additional/timer.h \
+		../src/time/timer.h \
 		../src/worker.h \
 		../src/additional/event.h \
 		../src/additional/vector.h \
@@ -1257,7 +1219,7 @@ background.o: ../src/background.cpp ../src/background.h \
 		../src/renderer.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/variant.h \
-		../src/additional/timer.h \
+		../src/time/timer.h \
 		../src/context.h \
 		../src/assetmanager.h \
 		../src/json/json.h \
@@ -1286,10 +1248,11 @@ background.o: ../src/background.cpp ../src/background.h \
 		../src/capabilities/modulehandler.h \
 		../src/capabilities/modules/module.h \
 		../src/iinformative.h \
+		../src/capabilities/docker.h \
 		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h \
 		../src/gui/guicentralmessage.h \
-		../src/gui/guilabel.h \
+		../src/gui/guimenuelement.h \
 		../src/gui/guifloatingmessage.h \
 		../src/gui/guiminimap.h \
 		../src/near.h
@@ -1318,11 +1281,12 @@ unit.o: ../src/units/unit.cpp ../src/units/unit.h \
 		../src/json/value.h \
 		../src/json/writer.h \
 		../src/animator.h \
-		../src/additional/timer.h \
+		../src/time/timer.h \
 		../src/audio/audioplayer.h \
 		../src/audio/audiochannel.h \
 		../src/audio/audio.h \
 		../src/iinformative.h \
+		../src/capabilities/docker.h \
 		../src/context.h \
 		../src/assetmanager.h \
 		../src/gui/guimain.h \
@@ -1334,12 +1298,15 @@ unit.o: ../src/units/unit.cpp ../src/units/unit.h \
 		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h \
 		../src/gui/guicentralmessage.h \
-		../src/gui/guilabel.h \
+		../src/gui/guimenuelement.h \
 		../src/gui/guifloatingmessage.h \
 		../src/gui/guiminimap.h \
 		../src/near.h \
 		../src/background.h \
-		../src/units/projectile.h
+		../src/units/projectile.h \
+		../src/units/station.h \
+		../src/time/time.h \
+		../src/additional/math.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o unit.o ../src/units/unit.cpp
 
 movable.o: ../src/units/movable.cpp ../src/units/movable.h \
@@ -1366,12 +1333,30 @@ movable.o: ../src/units/movable.cpp ../src/units/movable.h \
 		../src/json/value.h \
 		../src/json/writer.h \
 		../src/animator.h \
-		../src/additional/timer.h \
+		../src/time/timer.h \
 		../src/audio/audioplayer.h \
 		../src/audio/audiochannel.h \
 		../src/audio/audio.h \
 		../src/iinformative.h \
-		../src/capabilities/modules/engine.h
+		../src/capabilities/docker.h \
+		../src/capabilities/modules/engine.h \
+		../src/context.h \
+		../src/assetmanager.h \
+		../src/gui/guimain.h \
+		../src/gui/guistack.h \
+		../src/gui/guielement.h \
+		../src/capabilities/controller.h \
+		../src/units/ship.h \
+		../src/capabilities/modules/warpdrive.h \
+		../src/additional/trigger.h \
+		../src/gui/guicentralmessage.h \
+		../src/gui/guimenuelement.h \
+		../src/gui/guifloatingmessage.h \
+		../src/gui/guiminimap.h \
+		../src/near.h \
+		../src/background.h \
+		../src/time/time.h \
+		../src/additional/math.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o movable.o ../src/units/movable.cpp
 
 camera.o: ../src/units/camera.cpp ../src/units/camera.h \
@@ -1399,15 +1384,18 @@ camera.o: ../src/units/camera.cpp ../src/units/camera.h \
 		../src/json/value.h \
 		../src/json/writer.h \
 		../src/animator.h \
-		../src/additional/timer.h \
+		../src/time/timer.h \
 		../src/audio/audioplayer.h \
 		../src/audio/audiochannel.h \
 		../src/audio/audio.h \
 		../src/iinformative.h \
+		../src/capabilities/docker.h \
 		../src/capabilities/controller.h \
 		../src/units/ship.h \
 		../src/capabilities/modules/warpdrive.h \
-		../src/additional/trigger.h
+		../src/additional/trigger.h \
+		../src/time/time.h \
+		../src/additional/math.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o camera.o ../src/units/camera.cpp
 
 capability.o: ../src/capabilities/capability.cpp ../src/capabilities/capability.h \
@@ -1429,7 +1417,7 @@ controller.o: ../src/capabilities/controller.cpp ../src/capabilities/controller.
 		../src/renderer.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/variant.h \
-		../src/additional/timer.h \
+		../src/time/timer.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
 		../src/units/unit.h \
@@ -1451,6 +1439,7 @@ controller.o: ../src/capabilities/controller.cpp ../src/capabilities/controller.
 		../src/audio/audiochannel.h \
 		../src/audio/audio.h \
 		../src/iinformative.h \
+		../src/capabilities/docker.h \
 		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h \
 		../src/context.h \
@@ -1459,7 +1448,7 @@ controller.o: ../src/capabilities/controller.cpp ../src/capabilities/controller.
 		../src/gui/guistack.h \
 		../src/gui/guielement.h \
 		../src/gui/guicentralmessage.h \
-		../src/gui/guilabel.h \
+		../src/gui/guimenuelement.h \
 		../src/gui/guifloatingmessage.h \
 		../src/gui/guiminimap.h \
 		../src/near.h \
@@ -1476,7 +1465,7 @@ player.o: ../src/capabilities/player.cpp ../src/capabilities/player.h \
 		../src/renderer.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/variant.h \
-		../src/additional/timer.h \
+		../src/time/timer.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
 		../src/units/unit.h \
@@ -1498,6 +1487,7 @@ player.o: ../src/capabilities/player.cpp ../src/capabilities/player.h \
 		../src/audio/audiochannel.h \
 		../src/audio/audio.h \
 		../src/iinformative.h \
+		../src/capabilities/docker.h \
 		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h \
 		../src/context.h \
@@ -1506,7 +1496,7 @@ player.o: ../src/capabilities/player.cpp ../src/capabilities/player.h \
 		../src/gui/guistack.h \
 		../src/gui/guielement.h \
 		../src/gui/guicentralmessage.h \
-		../src/gui/guilabel.h \
+		../src/gui/guimenuelement.h \
 		../src/gui/guifloatingmessage.h \
 		../src/gui/guiminimap.h \
 		../src/near.h \
@@ -1537,7 +1527,7 @@ modulehandler.o: ../src/capabilities/modulehandler.cpp ../src/capabilities/modul
 		../src/json/value.h \
 		../src/json/writer.h \
 		../src/animator.h \
-		../src/additional/timer.h \
+		../src/time/timer.h \
 		../src/audio/audioplayer.h \
 		../src/audio/audiochannel.h \
 		../src/audio/audio.h \
@@ -1565,13 +1555,14 @@ module.o: ../src/capabilities/modules/module.cpp ../src/capabilities/modules/mod
 		../src/json/value.h \
 		../src/json/writer.h \
 		../src/animator.h \
-		../src/additional/timer.h \
+		../src/time/timer.h \
 		../src/audio/audioplayer.h \
 		../src/audio/audiochannel.h \
 		../src/audio/audio.h \
 		../src/iinformative.h \
 		../src/units/unit.h \
 		../src/capabilities/modulehandler.h \
+		../src/capabilities/docker.h \
 		../src/units/camera.h \
 		../src/units/movable.h \
 		../src/capabilities/controller.h \
@@ -1590,8 +1581,8 @@ spm.o: ../src/additional/spm.cpp ../src/additional/spm.h \
 		../src/additional/rotozoom.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o spm.o ../src/additional/spm.cpp
 
-timer.o: ../src/additional/timer.cpp ../src/additional/timer.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o timer.o ../src/additional/timer.cpp
+timer.o: ../src/time/timer.cpp ../src/time/timer.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o timer.o ../src/time/timer.cpp
 
 event.o: ../src/additional/event.cpp ../src/additional/event.h \
 		../src/additional/vector.h
@@ -1622,7 +1613,7 @@ loadable.o: ../src/loadable.cpp ../src/loadable.h \
 		../src/json/value.h \
 		../src/json/writer.h \
 		../src/animator.h \
-		../src/additional/timer.h \
+		../src/time/timer.h \
 		../src/worker.h \
 		../src/additional/event.h \
 		../src/additional/vector.h \
@@ -1657,7 +1648,7 @@ weapon.o: ../src/capabilities/modules/weapon.cpp ../src/capabilities/modules/wea
 		../src/json/value.h \
 		../src/json/writer.h \
 		../src/animator.h \
-		../src/additional/timer.h \
+		../src/time/timer.h \
 		../src/audio/audioplayer.h \
 		../src/audio/audiochannel.h \
 		../src/audio/audio.h \
@@ -1672,10 +1663,11 @@ weapon.o: ../src/capabilities/modules/weapon.cpp ../src/capabilities/modules/wea
 		../src/units/movable.h \
 		../src/units/unit.h \
 		../src/capabilities/modulehandler.h \
+		../src/capabilities/docker.h \
 		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h \
 		../src/gui/guicentralmessage.h \
-		../src/gui/guilabel.h \
+		../src/gui/guimenuelement.h \
 		../src/gui/guifloatingmessage.h \
 		../src/gui/guiminimap.h \
 		../src/near.h \
@@ -1709,11 +1701,12 @@ projectile.o: ../src/units/projectile.cpp ../src/units/projectile.h \
 		../src/json/value.h \
 		../src/json/writer.h \
 		../src/animator.h \
-		../src/additional/timer.h \
+		../src/time/timer.h \
 		../src/audio/audioplayer.h \
 		../src/audio/audiochannel.h \
 		../src/audio/audio.h \
 		../src/iinformative.h \
+		../src/capabilities/docker.h \
 		../src/context.h \
 		../src/assetmanager.h \
 		../src/gui/guimain.h \
@@ -1724,7 +1717,7 @@ projectile.o: ../src/units/projectile.cpp ../src/units/projectile.h \
 		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h \
 		../src/gui/guicentralmessage.h \
-		../src/gui/guilabel.h \
+		../src/gui/guimenuelement.h \
 		../src/gui/guifloatingmessage.h \
 		../src/gui/guiminimap.h \
 		../src/near.h \
@@ -1750,7 +1743,7 @@ context.o: ../src/context.cpp ../src/context.h \
 		../src/json/writer.h \
 		../src/loadable.h \
 		../src/animator.h \
-		../src/additional/timer.h \
+		../src/time/timer.h \
 		../src/worker.h \
 		../src/additional/event.h \
 		../src/additional/vector.h \
@@ -1772,10 +1765,11 @@ context.o: ../src/context.cpp ../src/context.h \
 		../src/capabilities/modulehandler.h \
 		../src/capabilities/modules/module.h \
 		../src/iinformative.h \
+		../src/capabilities/docker.h \
 		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h \
 		../src/gui/guicentralmessage.h \
-		../src/gui/guilabel.h \
+		../src/gui/guimenuelement.h \
 		../src/gui/guifloatingmessage.h \
 		../src/gui/guiminimap.h \
 		../src/near.h \
@@ -1808,7 +1802,7 @@ engine.o: ../src/capabilities/modules/engine.cpp ../src/capabilities/modules/eng
 		../src/json/value.h \
 		../src/json/writer.h \
 		../src/animator.h \
-		../src/additional/timer.h \
+		../src/time/timer.h \
 		../src/audio/audioplayer.h \
 		../src/audio/audiochannel.h \
 		../src/audio/audio.h \
@@ -1837,7 +1831,7 @@ warpdrive.o: ../src/capabilities/modules/warpdrive.cpp ../src/capabilities/modul
 		../src/json/value.h \
 		../src/json/writer.h \
 		../src/animator.h \
-		../src/additional/timer.h \
+		../src/time/timer.h \
 		../src/audio/audioplayer.h \
 		../src/audio/audiochannel.h \
 		../src/audio/audio.h \
@@ -1852,9 +1846,10 @@ warpdrive.o: ../src/capabilities/modules/warpdrive.cpp ../src/capabilities/modul
 		../src/units/movable.h \
 		../src/units/unit.h \
 		../src/capabilities/modulehandler.h \
+		../src/capabilities/docker.h \
 		../src/additional/trigger.h \
 		../src/gui/guicentralmessage.h \
-		../src/gui/guilabel.h \
+		../src/gui/guimenuelement.h \
 		../src/gui/guifloatingmessage.h \
 		../src/gui/guiminimap.h \
 		../src/near.h \
@@ -1887,11 +1882,12 @@ ship.o: ../src/units/ship.cpp ../src/units/ship.h \
 		../src/json/value.h \
 		../src/json/writer.h \
 		../src/animator.h \
-		../src/additional/timer.h \
+		../src/time/timer.h \
 		../src/audio/audioplayer.h \
 		../src/audio/audiochannel.h \
 		../src/audio/audio.h \
 		../src/iinformative.h \
+		../src/capabilities/docker.h \
 		../src/capabilities/modules/warpdrive.h \
 		../src/context.h \
 		../src/assetmanager.h \
@@ -1901,7 +1897,7 @@ ship.o: ../src/units/ship.cpp ../src/units/ship.h \
 		../src/capabilities/controller.h \
 		../src/additional/trigger.h \
 		../src/gui/guicentralmessage.h \
-		../src/gui/guilabel.h \
+		../src/gui/guimenuelement.h \
 		../src/gui/guifloatingmessage.h \
 		../src/gui/guiminimap.h \
 		../src/near.h \
@@ -1918,7 +1914,7 @@ guielement.o: ../src/gui/guielement.cpp ../src/gui/guielement.h \
 		../src/renderer.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/variant.h \
-		../src/additional/timer.h \
+		../src/time/timer.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
 		../src/units/unit.h \
@@ -1940,13 +1936,13 @@ guielement.o: ../src/gui/guielement.cpp ../src/gui/guielement.h \
 		../src/audio/audiochannel.h \
 		../src/audio/audio.h \
 		../src/iinformative.h \
+		../src/capabilities/docker.h \
 		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o guielement.o ../src/gui/guielement.cpp
 
 guicontainer.o: ../src/gui/guicontainer.cpp ../src/gui/guicontainer.h \
-		../src/gui/guibutton.h \
-		../src/gui/guilabel.h \
+		../src/gui/guimenuelement.h \
 		../src/gui/guielement.h \
 		../src/capabilities/controller.h \
 		../src/capabilities/capability.h \
@@ -1957,7 +1953,7 @@ guicontainer.o: ../src/gui/guicontainer.cpp ../src/gui/guicontainer.h \
 		../src/renderer.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/variant.h \
-		../src/additional/timer.h \
+		../src/time/timer.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
 		../src/units/unit.h \
@@ -1979,86 +1975,12 @@ guicontainer.o: ../src/gui/guicontainer.cpp ../src/gui/guicontainer.h \
 		../src/audio/audiochannel.h \
 		../src/audio/audio.h \
 		../src/iinformative.h \
+		../src/capabilities/docker.h \
 		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h \
 		../src/gui/guistack.h \
 		../src/additional/effects/anaglyph.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o guicontainer.o ../src/gui/guicontainer.cpp
-
-guilabel.o: ../src/gui/guilabel.cpp ../src/gui/guilabel.h \
-		../src/gui/guielement.h \
-		../src/capabilities/controller.h \
-		../src/capabilities/capability.h \
-		../src/worker.h \
-		../src/additional/event.h \
-		../src/additional/vector.h \
-		../src/object.h \
-		../src/renderer.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/variant.h \
-		../src/additional/timer.h \
-		../src/units/ship.h \
-		../src/units/movable.h \
-		../src/units/unit.h \
-		../src/capabilities/modulehandler.h \
-		../src/capabilities/modules/module.h \
-		../src/loadable.h \
-		../src/json/json.h \
-		../src/json/autolink.h \
-		../src/json/config.h \
-		../src/json/allocator.h \
-		../src/json/version.h \
-		../src/json/features.h \
-		../src/json/forwards.h \
-		../src/json/reader.h \
-		../src/json/value.h \
-		../src/json/writer.h \
-		../src/animator.h \
-		../src/audio/audioplayer.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audio.h \
-		../src/iinformative.h \
-		../src/capabilities/modules/warpdrive.h \
-		../src/additional/trigger.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o guilabel.o ../src/gui/guilabel.cpp
-
-guibutton.o: ../src/gui/guibutton.cpp ../src/gui/guibutton.h \
-		../src/gui/guilabel.h \
-		../src/gui/guielement.h \
-		../src/capabilities/controller.h \
-		../src/capabilities/capability.h \
-		../src/worker.h \
-		../src/additional/event.h \
-		../src/additional/vector.h \
-		../src/object.h \
-		../src/renderer.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/variant.h \
-		../src/additional/timer.h \
-		../src/units/ship.h \
-		../src/units/movable.h \
-		../src/units/unit.h \
-		../src/capabilities/modulehandler.h \
-		../src/capabilities/modules/module.h \
-		../src/loadable.h \
-		../src/json/json.h \
-		../src/json/autolink.h \
-		../src/json/config.h \
-		../src/json/allocator.h \
-		../src/json/version.h \
-		../src/json/features.h \
-		../src/json/forwards.h \
-		../src/json/reader.h \
-		../src/json/value.h \
-		../src/json/writer.h \
-		../src/animator.h \
-		../src/audio/audioplayer.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audio.h \
-		../src/iinformative.h \
-		../src/capabilities/modules/warpdrive.h \
-		../src/additional/trigger.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o guibutton.o ../src/gui/guibutton.cpp
 
 iinformative.o: ../src/iinformative.cpp ../src/iinformative.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o iinformative.o ../src/iinformative.cpp
@@ -2074,7 +1996,7 @@ guistack.o: ../src/gui/guistack.cpp ../src/gui/guistack.h \
 		../src/renderer.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/variant.h \
-		../src/additional/timer.h \
+		../src/time/timer.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
 		../src/units/unit.h \
@@ -2096,11 +2018,11 @@ guistack.o: ../src/gui/guistack.cpp ../src/gui/guistack.h \
 		../src/audio/audiochannel.h \
 		../src/audio/audio.h \
 		../src/iinformative.h \
+		../src/capabilities/docker.h \
 		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h \
 		../src/gui/guicontainer.h \
-		../src/gui/guibutton.h \
-		../src/gui/guilabel.h
+		../src/gui/guimenuelement.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o guistack.o ../src/gui/guistack.cpp
 
 ai.o: ../src/capabilities/ai.cpp ../src/capabilities/ai.h \
@@ -2113,7 +2035,7 @@ ai.o: ../src/capabilities/ai.cpp ../src/capabilities/ai.h \
 		../src/renderer.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/variant.h \
-		../src/additional/timer.h \
+		../src/time/timer.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
 		../src/units/unit.h \
@@ -2135,6 +2057,7 @@ ai.o: ../src/capabilities/ai.cpp ../src/capabilities/ai.h \
 		../src/audio/audiochannel.h \
 		../src/audio/audio.h \
 		../src/iinformative.h \
+		../src/capabilities/docker.h \
 		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ai.o ../src/capabilities/ai.cpp
@@ -2163,11 +2086,12 @@ station.o: ../src/units/station.cpp ../src/units/station.h \
 		../src/json/value.h \
 		../src/json/writer.h \
 		../src/animator.h \
-		../src/additional/timer.h \
+		../src/time/timer.h \
 		../src/audio/audioplayer.h \
 		../src/audio/audiochannel.h \
 		../src/audio/audio.h \
-		../src/iinformative.h
+		../src/iinformative.h \
+		../src/capabilities/docker.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o station.o ../src/units/station.cpp
 
 json_reader.o: ../src/json/json_reader.cpp ../src/json/json_tool.h \
@@ -2211,7 +2135,7 @@ debug.o: ../src/debug.cpp ../src/debug.h \
 		../src/renderer.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/variant.h \
-		../src/additional/timer.h \
+		../src/time/timer.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
 		../src/units/unit.h \
@@ -2233,13 +2157,13 @@ debug.o: ../src/debug.cpp ../src/debug.h \
 		../src/audio/audiochannel.h \
 		../src/audio/audio.h \
 		../src/iinformative.h \
+		../src/capabilities/docker.h \
 		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug.o ../src/debug.cpp
 
 guiswitch.o: ../src/gui/guiswitch.cpp ../src/gui/guiswitch.h \
-		../src/gui/guibutton.h \
-		../src/gui/guilabel.h \
+		../src/gui/guimenuelement.h \
 		../src/gui/guielement.h \
 		../src/capabilities/controller.h \
 		../src/capabilities/capability.h \
@@ -2250,7 +2174,7 @@ guiswitch.o: ../src/gui/guiswitch.cpp ../src/gui/guiswitch.h \
 		../src/renderer.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/variant.h \
-		../src/additional/timer.h \
+		../src/time/timer.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
 		../src/units/unit.h \
@@ -2272,6 +2196,7 @@ guiswitch.o: ../src/gui/guiswitch.cpp ../src/gui/guiswitch.h \
 		../src/audio/audiochannel.h \
 		../src/audio/audio.h \
 		../src/iinformative.h \
+		../src/capabilities/docker.h \
 		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o guiswitch.o ../src/gui/guiswitch.cpp
@@ -2281,8 +2206,7 @@ visualeffect.o: ../src/additional/effects/visualeffect.cpp ../src/additional/eff
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o visualeffect.o ../src/additional/effects/visualeffect.cpp
 
 guichoice.o: ../src/gui/guichoice.cpp ../src/gui/guichoice.h \
-		../src/gui/guibutton.h \
-		../src/gui/guilabel.h \
+		../src/gui/guimenuelement.h \
 		../src/gui/guielement.h \
 		../src/capabilities/controller.h \
 		../src/capabilities/capability.h \
@@ -2293,7 +2217,7 @@ guichoice.o: ../src/gui/guichoice.cpp ../src/gui/guichoice.h \
 		../src/renderer.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/variant.h \
-		../src/additional/timer.h \
+		../src/time/timer.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
 		../src/units/unit.h \
@@ -2315,6 +2239,7 @@ guichoice.o: ../src/gui/guichoice.cpp ../src/gui/guichoice.h \
 		../src/audio/audiochannel.h \
 		../src/audio/audio.h \
 		../src/iinformative.h \
+		../src/capabilities/docker.h \
 		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o guichoice.o ../src/gui/guichoice.cpp
@@ -2325,7 +2250,7 @@ application.o: ../src/application.cpp ../src/application.h \
 
 fpsmonitor.o: ../src/additional/informative/fpsmonitor.cpp ../src/additional/informative/fpsmonitor.h \
 		../src/iinformative.h \
-		../src/additional/timer.h
+		../src/time/timer.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o fpsmonitor.o ../src/additional/informative/fpsmonitor.cpp
 
 particle.o: ../src/units/particle.cpp ../src/units/particle.h \
@@ -2353,11 +2278,12 @@ particle.o: ../src/units/particle.cpp ../src/units/particle.h \
 		../src/json/value.h \
 		../src/json/writer.h \
 		../src/animator.h \
-		../src/additional/timer.h \
+		../src/time/timer.h \
 		../src/audio/audioplayer.h \
 		../src/audio/audiochannel.h \
 		../src/audio/audio.h \
 		../src/iinformative.h \
+		../src/capabilities/docker.h \
 		../src/context.h \
 		../src/assetmanager.h \
 		../src/gui/guimain.h \
@@ -2368,7 +2294,7 @@ particle.o: ../src/units/particle.cpp ../src/units/particle.h \
 		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h \
 		../src/gui/guicentralmessage.h \
-		../src/gui/guilabel.h \
+		../src/gui/guimenuelement.h \
 		../src/gui/guifloatingmessage.h \
 		../src/gui/guiminimap.h \
 		../src/near.h \
@@ -2399,7 +2325,7 @@ netlistener.o: ../src/netlistener.cpp ../src/netlistener.h \
 		../src/json/writer.h \
 		../src/loadable.h \
 		../src/animator.h \
-		../src/additional/timer.h \
+		../src/time/timer.h \
 		../src/worker.h \
 		../src/additional/event.h \
 		../src/additional/vector.h \
@@ -2421,10 +2347,11 @@ netlistener.o: ../src/netlistener.cpp ../src/netlistener.h \
 		../src/capabilities/modulehandler.h \
 		../src/capabilities/modules/module.h \
 		../src/iinformative.h \
+		../src/capabilities/docker.h \
 		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h \
 		../src/gui/guicentralmessage.h \
-		../src/gui/guilabel.h \
+		../src/gui/guimenuelement.h \
 		../src/gui/guifloatingmessage.h \
 		../src/gui/guiminimap.h \
 		../src/near.h \
@@ -2452,7 +2379,7 @@ guimain.o: ../src/gui/guimain.cpp ../src/gui/guimain.h \
 		../src/renderer.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/variant.h \
-		../src/additional/timer.h \
+		../src/time/timer.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
 		../src/units/unit.h \
@@ -2474,17 +2401,18 @@ guimain.o: ../src/gui/guimain.cpp ../src/gui/guimain.h \
 		../src/audio/audiochannel.h \
 		../src/audio/audio.h \
 		../src/iinformative.h \
+		../src/capabilities/docker.h \
 		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h \
 		../src/gui/guicentralmessage.h \
-		../src/gui/guilabel.h \
+		../src/gui/guimenuelement.h \
 		../src/gui/guifloatingmessage.h \
 		../src/gui/guiminimap.h \
 		../src/gui/guiblushingfloatingmessage.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o guimain.o ../src/gui/guimain.cpp
 
 guicentralmessage.o: ../src/gui/guicentralmessage.cpp ../src/gui/guicentralmessage.h \
-		../src/gui/guilabel.h \
+		../src/gui/guimenuelement.h \
 		../src/gui/guielement.h \
 		../src/capabilities/controller.h \
 		../src/capabilities/capability.h \
@@ -2495,7 +2423,7 @@ guicentralmessage.o: ../src/gui/guicentralmessage.cpp ../src/gui/guicentralmessa
 		../src/renderer.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/variant.h \
-		../src/additional/timer.h \
+		../src/time/timer.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
 		../src/units/unit.h \
@@ -2517,6 +2445,7 @@ guicentralmessage.o: ../src/gui/guicentralmessage.cpp ../src/gui/guicentralmessa
 		../src/audio/audiochannel.h \
 		../src/audio/audio.h \
 		../src/iinformative.h \
+		../src/capabilities/docker.h \
 		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o guicentralmessage.o ../src/gui/guicentralmessage.cpp
@@ -2532,7 +2461,7 @@ controllerfinder.o: ../src/additional/informative/controllerfinder.cpp ../src/ad
 		../src/renderer.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/variant.h \
-		../src/additional/timer.h \
+		../src/time/timer.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
 		../src/units/unit.h \
@@ -2553,12 +2482,13 @@ controllerfinder.o: ../src/additional/informative/controllerfinder.cpp ../src/ad
 		../src/audio/audioplayer.h \
 		../src/audio/audiochannel.h \
 		../src/audio/audio.h \
+		../src/capabilities/docker.h \
 		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o controllerfinder.o ../src/additional/informative/controllerfinder.cpp
 
 guifloatingmessage.o: ../src/gui/guifloatingmessage.cpp ../src/gui/guifloatingmessage.h \
-		../src/gui/guilabel.h \
+		../src/gui/guimenuelement.h \
 		../src/gui/guielement.h \
 		../src/capabilities/controller.h \
 		../src/capabilities/capability.h \
@@ -2569,7 +2499,7 @@ guifloatingmessage.o: ../src/gui/guifloatingmessage.cpp ../src/gui/guifloatingme
 		../src/renderer.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/variant.h \
-		../src/additional/timer.h \
+		../src/time/timer.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
 		../src/units/unit.h \
@@ -2591,13 +2521,15 @@ guifloatingmessage.o: ../src/gui/guifloatingmessage.cpp ../src/gui/guifloatingme
 		../src/audio/audiochannel.h \
 		../src/audio/audio.h \
 		../src/iinformative.h \
+		../src/capabilities/docker.h \
 		../src/capabilities/modules/warpdrive.h \
-		../src/additional/trigger.h
+		../src/additional/trigger.h \
+		../src/time/time.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o guifloatingmessage.o ../src/gui/guifloatingmessage.cpp
 
 guiblushingfloatingmessage.o: ../src/gui/guiblushingfloatingmessage.cpp ../src/gui/guiblushingfloatingmessage.h \
 		../src/gui/guifloatingmessage.h \
-		../src/gui/guilabel.h \
+		../src/gui/guimenuelement.h \
 		../src/gui/guielement.h \
 		../src/capabilities/controller.h \
 		../src/capabilities/capability.h \
@@ -2608,7 +2540,7 @@ guiblushingfloatingmessage.o: ../src/gui/guiblushingfloatingmessage.cpp ../src/g
 		../src/renderer.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/variant.h \
-		../src/additional/timer.h \
+		../src/time/timer.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
 		../src/units/unit.h \
@@ -2630,9 +2562,11 @@ guiblushingfloatingmessage.o: ../src/gui/guiblushingfloatingmessage.cpp ../src/g
 		../src/audio/audiochannel.h \
 		../src/audio/audio.h \
 		../src/iinformative.h \
+		../src/capabilities/docker.h \
 		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h \
-		../src/additional/math.h
+		../src/additional/math.h \
+		../src/time/time.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o guiblushingfloatingmessage.o ../src/gui/guiblushingfloatingmessage.cpp
 
 math.o: ../src/additional/math.cpp ../src/additional/math.h
@@ -2646,7 +2580,7 @@ lightparticle.o: ../src/additional/lightparticle.cpp ../src/additional/lightpart
 		../src/renderer.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/variant.h \
-		../src/additional/timer.h \
+		../src/time/timer.h \
 		../src/context.h \
 		../src/assetmanager.h \
 		../src/json/json.h \
@@ -2675,14 +2609,16 @@ lightparticle.o: ../src/additional/lightparticle.cpp ../src/additional/lightpart
 		../src/capabilities/modulehandler.h \
 		../src/capabilities/modules/module.h \
 		../src/iinformative.h \
+		../src/capabilities/docker.h \
 		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h \
 		../src/gui/guicentralmessage.h \
-		../src/gui/guilabel.h \
+		../src/gui/guimenuelement.h \
 		../src/gui/guifloatingmessage.h \
 		../src/gui/guiminimap.h \
 		../src/near.h \
-		../src/background.h
+		../src/background.h \
+		../src/time/time.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o lightparticle.o ../src/additional/lightparticle.cpp
 
 worldmanager.o: ../src/worldmanager.cpp ../src/worldmanager.h \
@@ -2698,7 +2634,7 @@ worldmanager.o: ../src/worldmanager.cpp ../src/worldmanager.h \
 		../src/renderer.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/variant.h \
-		../src/additional/timer.h \
+		../src/time/timer.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
 		../src/units/unit.h \
@@ -2720,10 +2656,11 @@ worldmanager.o: ../src/worldmanager.cpp ../src/worldmanager.h \
 		../src/audio/audiochannel.h \
 		../src/audio/audio.h \
 		../src/iinformative.h \
+		../src/capabilities/docker.h \
 		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h \
 		../src/gui/guicentralmessage.h \
-		../src/gui/guilabel.h \
+		../src/gui/guimenuelement.h \
 		../src/gui/guifloatingmessage.h \
 		../src/gui/guiminimap.h \
 		../src/near.h \
@@ -2734,12 +2671,13 @@ worldmanager.o: ../src/worldmanager.cpp ../src/worldmanager.h \
 		../src/background.h \
 		../src/units/camera.h \
 		../src/gui/guicontainer.h \
-		../src/gui/guibutton.h \
+		../src/gui/guiradar.h \
 		../src/gui/guilist.h \
 		../src/gui/guichoice.h \
 		../src/gui/guiswitch.h \
 		../src/additional/informative/registryinfo.h \
 		../src/additional/informative/controllerfinder.h \
+		../src/additional/informative/unitsamountinfo.h \
 		../src/state.h \
 		../src/additional/spm.h \
 		../src/additional/effects/anaglyph.h
@@ -2756,7 +2694,7 @@ defaultworld.o: ../src/worlds/defaultworld.cpp ../src/worlds/defaultworld.h \
 		../src/renderer.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/variant.h \
-		../src/additional/timer.h \
+		../src/time/timer.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
 		../src/units/unit.h \
@@ -2778,6 +2716,7 @@ defaultworld.o: ../src/worlds/defaultworld.cpp ../src/worlds/defaultworld.h \
 		../src/audio/audiochannel.h \
 		../src/audio/audio.h \
 		../src/iinformative.h \
+		../src/capabilities/docker.h \
 		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h \
 		../src/assetmanager.h \
@@ -2797,7 +2736,7 @@ arenaworld.o: ../src/worlds/arenaworld.cpp ../src/worlds/arenaworld.h \
 		../src/renderer.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/variant.h \
-		../src/additional/timer.h \
+		../src/time/timer.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
 		../src/units/unit.h \
@@ -2819,6 +2758,7 @@ arenaworld.o: ../src/worlds/arenaworld.cpp ../src/worlds/arenaworld.h \
 		../src/audio/audiochannel.h \
 		../src/audio/audio.h \
 		../src/iinformative.h \
+		../src/capabilities/docker.h \
 		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h \
 		../src/assetmanager.h \
@@ -2834,7 +2774,29 @@ docker.o: ../src/capabilities/docker.cpp ../src/capabilities/docker.h \
 		../src/object.h \
 		../src/renderer.h \
 		../src/additional/effects/visualeffect.h \
-		../src/additional/variant.h
+		../src/additional/variant.h \
+		../src/units/unit.h \
+		../src/capabilities/modulehandler.h \
+		../src/capabilities/modules/module.h \
+		../src/loadable.h \
+		../src/json/json.h \
+		../src/json/autolink.h \
+		../src/json/config.h \
+		../src/json/allocator.h \
+		../src/json/version.h \
+		../src/json/features.h \
+		../src/json/forwards.h \
+		../src/json/reader.h \
+		../src/json/value.h \
+		../src/json/writer.h \
+		../src/animator.h \
+		../src/time/timer.h \
+		../src/audio/audioplayer.h \
+		../src/audio/audiochannel.h \
+		../src/audio/audio.h \
+		../src/iinformative.h \
+		../src/additional/math.h \
+		../src/units/movable.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o docker.o ../src/capabilities/docker.cpp
 
 near.o: ../src/near.cpp ../src/near.h \
@@ -2847,7 +2809,7 @@ near.o: ../src/near.cpp ../src/near.h \
 		../src/renderer.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/variant.h \
-		../src/additional/timer.h \
+		../src/time/timer.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
 		../src/units/unit.h \
@@ -2869,6 +2831,7 @@ near.o: ../src/near.cpp ../src/near.h \
 		../src/audio/audiochannel.h \
 		../src/audio/audio.h \
 		../src/iinformative.h \
+		../src/capabilities/docker.h \
 		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h \
 		../src/objectregistry.h
@@ -2876,8 +2839,7 @@ near.o: ../src/near.cpp ../src/near.h \
 
 guilist.o: ../src/gui/guilist.cpp ../src/gui/guilist.h \
 		../src/gui/guicontainer.h \
-		../src/gui/guibutton.h \
-		../src/gui/guilabel.h \
+		../src/gui/guimenuelement.h \
 		../src/gui/guielement.h \
 		../src/capabilities/controller.h \
 		../src/capabilities/capability.h \
@@ -2888,7 +2850,7 @@ guilist.o: ../src/gui/guilist.cpp ../src/gui/guilist.h \
 		../src/renderer.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/variant.h \
-		../src/additional/timer.h \
+		../src/time/timer.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
 		../src/units/unit.h \
@@ -2910,11 +2872,15 @@ guilist.o: ../src/gui/guilist.cpp ../src/gui/guilist.h \
 		../src/audio/audiochannel.h \
 		../src/audio/audio.h \
 		../src/iinformative.h \
+		../src/capabilities/docker.h \
 		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h \
 		../src/gui/guistack.h \
 		../src/units/projectile.h \
-		../src/gui/guichoice.h
+		../src/gui/guichoice.h \
+		../src/units/camera.h \
+		../src/objectregistry.h \
+		../src/debug.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o guilist.o ../src/gui/guilist.cpp
 
 aggressive.o: ../src/capabilities/aggressive.cpp ../src/capabilities/aggressive.h \
@@ -2927,7 +2893,7 @@ aggressive.o: ../src/capabilities/aggressive.cpp ../src/capabilities/aggressive.
 		../src/renderer.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/variant.h \
-		../src/additional/timer.h \
+		../src/time/timer.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
 		../src/units/unit.h \
@@ -2949,6 +2915,7 @@ aggressive.o: ../src/capabilities/aggressive.cpp ../src/capabilities/aggressive.
 		../src/audio/audiochannel.h \
 		../src/audio/audio.h \
 		../src/iinformative.h \
+		../src/capabilities/docker.h \
 		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h \
 		../src/objectregistry.h \
@@ -2971,7 +2938,7 @@ heapworld.o: ../src/worlds/heapworld.cpp ../src/worlds/heapworld.h \
 		../src/renderer.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/variant.h \
-		../src/additional/timer.h \
+		../src/time/timer.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
 		../src/units/unit.h \
@@ -2993,6 +2960,7 @@ heapworld.o: ../src/worlds/heapworld.cpp ../src/worlds/heapworld.h \
 		../src/audio/audiochannel.h \
 		../src/audio/audio.h \
 		../src/iinformative.h \
+		../src/capabilities/docker.h \
 		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h \
 		../src/assetmanager.h \
@@ -3048,8 +3016,9 @@ audioplayer.o: ../src/audio/audioplayer.cpp ../src/audio/audioplayer.h \
 		../src/json/value.h \
 		../src/json/writer.h \
 		../src/animator.h \
-		../src/additional/timer.h \
+		../src/time/timer.h \
 		../src/iinformative.h \
+		../src/capabilities/docker.h \
 		../src/capabilities/controller.h \
 		../src/units/ship.h \
 		../src/capabilities/modules/warpdrive.h \
@@ -3073,7 +3042,7 @@ guiminimap.o: ../src/gui/guiminimap.cpp ../src/gui/guiminimap.h \
 		../src/renderer.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/variant.h \
-		../src/additional/timer.h \
+		../src/time/timer.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
 		../src/units/unit.h \
@@ -3095,12 +3064,203 @@ guiminimap.o: ../src/gui/guiminimap.cpp ../src/gui/guiminimap.h \
 		../src/audio/audiochannel.h \
 		../src/audio/audio.h \
 		../src/iinformative.h \
+		../src/capabilities/docker.h \
 		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h \
 		../src/units/camera.h \
 		../src/units/projectile.h \
 		../src/additional/lightparticle.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o guiminimap.o ../src/gui/guiminimap.cpp
+
+guiradar.o: ../src/gui/guiradar.cpp ../src/gui/guiradar.h \
+		../src/gui/guilist.h \
+		../src/gui/guicontainer.h \
+		../src/gui/guimenuelement.h \
+		../src/gui/guielement.h \
+		../src/capabilities/controller.h \
+		../src/capabilities/capability.h \
+		../src/worker.h \
+		../src/additional/event.h \
+		../src/additional/vector.h \
+		../src/object.h \
+		../src/renderer.h \
+		../src/additional/effects/visualeffect.h \
+		../src/additional/variant.h \
+		../src/time/timer.h \
+		../src/units/ship.h \
+		../src/units/movable.h \
+		../src/units/unit.h \
+		../src/capabilities/modulehandler.h \
+		../src/capabilities/modules/module.h \
+		../src/loadable.h \
+		../src/json/json.h \
+		../src/json/autolink.h \
+		../src/json/config.h \
+		../src/json/allocator.h \
+		../src/json/version.h \
+		../src/json/features.h \
+		../src/json/forwards.h \
+		../src/json/reader.h \
+		../src/json/value.h \
+		../src/json/writer.h \
+		../src/animator.h \
+		../src/audio/audioplayer.h \
+		../src/audio/audiochannel.h \
+		../src/audio/audio.h \
+		../src/iinformative.h \
+		../src/capabilities/docker.h \
+		../src/capabilities/modules/warpdrive.h \
+		../src/additional/trigger.h \
+		../src/gui/guistack.h \
+		../src/gui/guichoice.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o guiradar.o ../src/gui/guiradar.cpp
+
+thruster.o: ../src/capabilities/modules/thruster.cpp ../src/capabilities/modules/thruster.h \
+		../src/capabilities/modules/module.h \
+		../src/capabilities/capability.h \
+		../src/worker.h \
+		../src/additional/event.h \
+		../src/additional/vector.h \
+		../src/object.h \
+		../src/renderer.h \
+		../src/additional/effects/visualeffect.h \
+		../src/additional/variant.h \
+		../src/loadable.h \
+		../src/json/json.h \
+		../src/json/autolink.h \
+		../src/json/config.h \
+		../src/json/allocator.h \
+		../src/json/version.h \
+		../src/json/features.h \
+		../src/json/forwards.h \
+		../src/json/reader.h \
+		../src/json/value.h \
+		../src/json/writer.h \
+		../src/animator.h \
+		../src/time/timer.h \
+		../src/audio/audioplayer.h \
+		../src/audio/audiochannel.h \
+		../src/audio/audio.h \
+		../src/iinformative.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o thruster.o ../src/capabilities/modules/thruster.cpp
+
+time.o: ../src/time/time.cpp ../src/time/time.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o time.o ../src/time/time.cpp
+
+guimenuelement.o: ../src/gui/guimenuelement.cpp ../src/gui/guimenuelement.h \
+		../src/gui/guielement.h \
+		../src/capabilities/controller.h \
+		../src/capabilities/capability.h \
+		../src/worker.h \
+		../src/additional/event.h \
+		../src/additional/vector.h \
+		../src/object.h \
+		../src/renderer.h \
+		../src/additional/effects/visualeffect.h \
+		../src/additional/variant.h \
+		../src/time/timer.h \
+		../src/units/ship.h \
+		../src/units/movable.h \
+		../src/units/unit.h \
+		../src/capabilities/modulehandler.h \
+		../src/capabilities/modules/module.h \
+		../src/loadable.h \
+		../src/json/json.h \
+		../src/json/autolink.h \
+		../src/json/config.h \
+		../src/json/allocator.h \
+		../src/json/version.h \
+		../src/json/features.h \
+		../src/json/forwards.h \
+		../src/json/reader.h \
+		../src/json/value.h \
+		../src/json/writer.h \
+		../src/animator.h \
+		../src/audio/audioplayer.h \
+		../src/audio/audiochannel.h \
+		../src/audio/audio.h \
+		../src/iinformative.h \
+		../src/capabilities/docker.h \
+		../src/capabilities/modules/warpdrive.h \
+		../src/additional/trigger.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o guimenuelement.o ../src/gui/guimenuelement.cpp
+
+mutex.o: ../src/additional/mutex.cpp ../src/additional/mutex.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mutex.o ../src/additional/mutex.cpp
+
+unitsamountinfo.o: ../src/additional/informative/unitsamountinfo.cpp ../src/additional/informative/unitsamountinfo.h \
+		../src/worker.h \
+		../src/additional/event.h \
+		../src/additional/vector.h \
+		../src/object.h \
+		../src/renderer.h \
+		../src/additional/effects/visualeffect.h \
+		../src/additional/variant.h \
+		../src/iinformative.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o unitsamountinfo.o ../src/additional/informative/unitsamountinfo.cpp
+
+environment.o: ../src/environment.cpp ../src/environment.h \
+		../src/object.h \
+		../src/state.h \
+		../src/additional/variant.h \
+		../src/additional/vector.h \
+		../src/renderer.h \
+		../src/additional/effects/visualeffect.h \
+		../src/worker.h \
+		../src/additional/event.h \
+		../src/assetmanager.h \
+		../src/json/json.h \
+		../src/json/autolink.h \
+		../src/json/config.h \
+		../src/json/allocator.h \
+		../src/json/version.h \
+		../src/json/features.h \
+		../src/json/forwards.h \
+		../src/json/reader.h \
+		../src/json/value.h \
+		../src/json/writer.h \
+		../src/loadable.h \
+		../src/animator.h \
+		../src/time/timer.h \
+		../src/audio/audioplayer.h \
+		../src/audio/audiochannel.h \
+		../src/audio/audio.h \
+		../src/background.h \
+		../src/additional/informative/fpsmonitor.h \
+		../src/iinformative.h \
+		../src/netlistener.h \
+		../src/additional/net/socket.h \
+		../src/additional/net/framebuilder.h \
+		../src/context.h \
+		../src/gui/guimain.h \
+		../src/gui/guistack.h \
+		../src/gui/guielement.h \
+		../src/capabilities/controller.h \
+		../src/capabilities/capability.h \
+		../src/units/ship.h \
+		../src/units/movable.h \
+		../src/units/unit.h \
+		../src/capabilities/modulehandler.h \
+		../src/capabilities/modules/module.h \
+		../src/capabilities/docker.h \
+		../src/capabilities/modules/warpdrive.h \
+		../src/additional/trigger.h \
+		../src/gui/guicentralmessage.h \
+		../src/gui/guimenuelement.h \
+		../src/gui/guifloatingmessage.h \
+		../src/gui/guiminimap.h \
+		../src/near.h \
+		../src/worldmanager.h \
+		../src/worlds/world.h \
+		../src/additional/mutex.h \
+		../src/worlds/defaultworld.h \
+		../src/worlds/arenaworld.h \
+		../src/worlds/heapworld.h \
+		../src/debug.h \
+		../src/units/camera.h \
+		../src/time/time.h \
+		../src/filesystem.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o environment.o ../src/environment.cpp
 
 ####### Install
 

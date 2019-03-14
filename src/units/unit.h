@@ -6,7 +6,7 @@
 
 
 #include "capabilities/modulehandler.h"
-
+#include "capabilities/docker.h"
 
 class Unit : public Worker, public Loadable, public IInformative {
 private:
@@ -16,6 +16,7 @@ private:
 
 protected:
     static const double DEFAULT_ROTATION_SPEED;
+    static const double ANGLE_DELTA_MULTIPLIER;
     double getRotationSpeed();
 
     std::vector<Capability*> capabilities;
@@ -35,20 +36,26 @@ public:
     void removeCapability(Capability *capability);
 
     ModuleHandler *getModuleHandler();
+    Docker *getDocker();
+
 
     void rotateLeft();
     void rotateRight();
     void lockAngle(double angle);
+    void rotateToAngle(double angle);
+    bool isOnAngle(double angle);
     void unlockAngle();
 
+
     Vector getPosition();
+    virtual Vector getVelocity();
     double getAngle();
 
     virtual void hit(Context *context, int value);
 
     // Worker interface
 public:
-    void loop(Context *context, Event *event);
+    void tick(Context *context, Event *event);
     void render(Renderer *renderer);
 
     ~Unit();
