@@ -15,7 +15,7 @@ private:
 
     std::map<std::string, Loadable*> assets;
 
-    void processFile(std::string file, std::string location, e172::AbstractGraphicsProvider *renderEngine);
+    void processFile(std::string file, std::string location, e172::AbstractGraphicsProvider *graphicsProvider);
 public:
     AssetManager();
     void search(std::string path, e172::AbstractGraphicsProvider *renderEngine);

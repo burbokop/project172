@@ -12,6 +12,8 @@
 
 #include <engine/abstractrenderengine.h>
 
+#include <src/memcontrol/kabstractfactory.h>
+
 
 AssetManager::AssetManager() {}
 
@@ -72,7 +74,7 @@ std::vector<std::string> AssetManager::getKeys() {
     return result;
 }
 
-void AssetManager::processFile(std::string file, std::string location, e172::AbstractGraphicsProvider *renderEngine) {
+void AssetManager::processFile(std::string file, std::string location, e172::AbstractGraphicsProvider *graphicsProvider) {
     std::string sufix = FileSystem::getSufix(file);
     if(sufix == ".json") {
         std::string content = FileSystem::readFile(file);
@@ -92,7 +94,7 @@ void AssetManager::processFile(std::string file, std::string location, e172::Abs
                  Json::Value tracks = animation["tracks"];
                  Json::Value play = animation["play"];
                  if(!spritesheet.isNull()) {
-                     anim = Animator(renderEngine->loadImage(FileSystem::addPrefix(spritesheet.asString(), location)), frames.isNull() ? 1 : frames.asInt(), tracks.isNull() ? 1 : tracks.asInt());
+                     anim = Animator(graphicsProvider->loadImage(FileSystem::addPrefix(spritesheet.asString(), location)), frames.isNull() ? 1 : frames.asInt(), tracks.isNull() ? 1 : tracks.asInt());
                      if(play.isString()) {
                          if(play == "loop") {
                              anim.play(Animator::LOOP);
@@ -104,7 +106,7 @@ void AssetManager::processFile(std::string file, std::string location, e172::Abs
                      }
                  }
             } else if (!sprite.isNull()) {
-                anim = Animator(renderEngine->loadImage(FileSystem::addPrefix(sprite.asString(), location)));
+                anim = Animator(graphicsProvider->loadImage(FileSystem::addPrefix(sprite.asString(), location)));
                 anim.play(Animator::LOOP);
             }
 
