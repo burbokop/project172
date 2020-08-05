@@ -1,18 +1,20 @@
 QT -= gui core
 
-CONFIG += c++11 console
+CONFIG += c++17 console
 CONFIG -= app_bundle
 
 DEFINES += QT_DEPRECATED_WARNINGS
 
-QMAKE_CXXFLAGS += -rdynamic -O2
 
 win32 {
-    INCLUDEPATH += C:\Qt\Tools\mingw730_64\include
-    LIBS += -lws2_32 -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer -mwindows -Wl,--no-undefined -lm -ldinput8 -ldxguid -ldxerr8 -luser32 -lgdi32 -lwinmm -limm32 -lole32 -loleaut32 -lshell32 -lsetupapi -lversion -luuid -static-libgcc
+#    INCLUDEPATH += C:\Qt\Tools\mingw730_64\include
+    INCLUDEPATH += ./src
+    INCLUDEPATH += C:\qt\5.15.0\mingw81_64\include
+    LIBS += -LC:\qt\5.15.0\mingw81_64\lib -lws2_32 -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer -mwindows -Wl,--no-undefined -lm -ldinput8 -ldxguid -ldxerr8 -luser32 -lgdi32 -lwinmm -limm32 -lole32 -loleaut32 -lshell32 -lsetupapi -lversion -luuid -static-libgcc
 }
 
 unix {
+    QMAKE_CXXFLAGS += -rdynamic -O2
     INCLUDEPATH += ./src
     LIBS += -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer -ldl
 }

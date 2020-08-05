@@ -5,6 +5,7 @@
 #include "debug.h"
 #include "units/particle.h"
 #include "additional/lightparticle.h"
+#include <math.h>
 
 const unsigned Context::DELETE_UNIT = 0;
 const unsigned Context::SPAWN_EXPLOSIVE = 1;
@@ -28,7 +29,7 @@ void Context::setBackground(Background *value) {
 }
 
 void Context::setNear(Near *value) {
-    near = value;
+    _near = value;
 }
 
 

@@ -6,8 +6,10 @@ bool Debug::outEnbled = false;
 unsigned Debug::lastError = 0;
 std::string Debug::lastSite = "";
 
+#ifdef __unix__
 #include <execinfo.h>  // for backtrace
 #include <dlfcn.h>     // for dladdr
+#endif
 #include <cxxabi.h>    // for __cxa_demangle
 
 #include <string>
@@ -15,15 +17,19 @@ std::string Debug::lastSite = "";
 
 
 int get_sym_name(void *addr) {
+#ifdef __unix__
     Dl_info info;
     int res = dladdr(addr, &info);
     std::cout << info.dli_fname << ": " << info.dli_sname << "\n\n";
     return res;
+#endif
+    (void)addr;
+    return -100;
 }
 
 
-#include <near.h>
 void Debug::onSegSignal(int signum) {
+#ifdef __unix__
     err(SEGMENTATION_FAULT, STATIC_DEBUG_IMPRINT, std::to_string(signum));
 
 
@@ -40,6 +46,7 @@ void Debug::onSegSignal(int signum) {
 
     free(symbollist);
 
+#endif
     exit(1);
 }
 
@@ -91,6 +98,7 @@ void Debug::init(bool out, bool err) {
 
 
 void process_mem_usage(double& vm_usage, double& resident_set) {
+#ifdef __unix__
     vm_usage = 0.0;
     resident_set = 0.0;
     unsigned long vsize;
@@ -106,6 +114,9 @@ void process_mem_usage(double& vm_usage, double& resident_set) {
     long page_size_kb = sysconf(_SC_PAGE_SIZE) / 1024; // in case x86-64 is configured to use 2MB pages
     vm_usage = vsize / 1024.0;
     resident_set = rss * page_size_kb;
+#endif
+    (void)vm_usage;
+    (void)resident_set;
 }
 
 double Debug::getRuntimeVM() {

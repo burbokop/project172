@@ -4,9 +4,9 @@
 #include <functional>
 
 
-#include "object.h"
-#include "capabilities/controller.h"
-#include "assetmanager.h"
+#include "../object.h"
+#include "../capabilities/controller.h"
+#include "../assetmanager.h"
 
 
 class World : public Object {

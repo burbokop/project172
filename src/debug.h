@@ -7,7 +7,6 @@
 #include <iostream>
 #include <stdarg.h>
 #include <stdio.h>
-#include <execinfo.h>
 #include <stdlib.h>
 #include <unistd.h>
 

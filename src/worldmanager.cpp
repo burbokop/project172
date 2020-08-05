@@ -37,7 +37,7 @@ void WorldManager::init(AssetManager *assets, std::vector<Worker*> *units, Rende
         worldIsChanged = false;
         std::vector<Controller*> players = activeWorld->generate(assets, units);
         if(players.size() > 0) {
-            near = new Near(units, players[0]);
+            _near = new Near(units, players[0]);
             camera = new Camera();
             camera->setTarget(players[0]);
             units->push_back(camera);
@@ -69,7 +69,7 @@ void WorldManager::init(AssetManager *assets, std::vector<Worker*> *units, Rende
                             }
                         } mainMenu->addElement(modulesMenu);
                         GUIRadar *radarMenu = new GUIRadar(players[0], "radar"); {
-                            radarMenu->addArray(near->getFocus());
+                            radarMenu->addArray(_near->getFocus());
                         } mainMenu->addElement(radarMenu);
 
                         GUIContainer *testMenu = new GUIContainer(players[0], "for developers"); {
@@ -127,12 +127,12 @@ void WorldManager::checkState(Context *context, AssetManager *assets, std::vecto
         context->setNear(getNear());
         renderer->setCamera(getCamera());
     }
-    near->update();
+    _near->update();
 }
 
 
 Near *WorldManager::getNear() const {
-    return near;
+    return _near;
 }
 
 void WorldManager::onChangeReset(Variant caseValue) {

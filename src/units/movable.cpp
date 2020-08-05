@@ -3,6 +3,7 @@
 #include "context.h"
 #include "time/time.h"
 #include "additional/math.h"
+#include <math.h>
 
 const double Movable::STOP_MOVING_VELOCITY = 1;
 const double Movable::DEFAULT_ACCELERATION_VALUE = 120;

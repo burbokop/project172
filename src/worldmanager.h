@@ -12,7 +12,7 @@ class WorldManager : public Object {
 private:
     Camera *camera = nullptr;
     GUIMain *gui = nullptr;
-    Near *near = nullptr;
+    Near *_near = nullptr;
 
     std::vector<World*> worlds;
     World *activeWorld = nullptr;

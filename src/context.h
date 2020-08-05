@@ -39,7 +39,7 @@ private:
 
     GUIMain *gui = nullptr;
     Background *background = nullptr;
-    Near *near = nullptr;
+    Near *_near = nullptr;
 
     void handleRequest(Request request);
 public:
