@@ -4,6 +4,7 @@
 
 #include "time/timer.h"
 #include "worker.h"
+#include <vector>
 
 class Animator : public Worker {
 public:
@@ -17,7 +18,7 @@ public:
 
 
 private:
-    Vector pos;
+    e172::Vector pos;
     double angle;
     double zoom;
 
@@ -26,8 +27,8 @@ private:
     unsigned defaultMode = DEFAULT_INACTIVE;
 
     Timer timer = Timer(100);
-    SDL_Surface *origin;
-    std::vector<SDL_Surface*> frames;
+    e172::Image origin;
+    std::vector<e172::Image> frames;
     int maxFrame;
     int maxTrack;
     int currentFrame;
@@ -35,17 +36,17 @@ private:
 
 public:
     Animator();
-    Animator(SDL_Surface *origin, int frames = 1, int tracks = 1);
+    Animator(const e172::Image &origin, int frames = 1, int tracks = 1);
     void play(unsigned mode);
     void setDefaultMode(unsigned value);
-    void setPosition(Vector pos);
+    void setPosition(e172::Vector pos);
     void setAngle(double angle);
     void setZoom(double zoom);
 
     // Worker interface
 public:
     void tick(Context *context, Event *event);
-    void render(Renderer *renderer);
+    void render(e172::AbstractRenderer *renderer);
 };
 
 #endif // ANIMATOR_H

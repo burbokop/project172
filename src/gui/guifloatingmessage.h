@@ -23,7 +23,7 @@ public:
 
     // GUIElement interface
 public:
-    void render(Renderer *renderer);
+    void render(e172::AbstractRenderer *renderer);
 };
 
 #endif // GUIFLOATINGMESSAGE_H

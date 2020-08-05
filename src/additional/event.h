@@ -5,14 +5,13 @@
 #include <SDL2/SDL.h>
 
 
-#include "additional/vector.h"
-
+#include <src/engine/math/vector.h>
 
 class Event {
 private:
     bool exitFlag = false;
     bool pauseFlag = false;
-    Vector mouse;
+    e172::Vector mouse;
     const int bufferSize = 512;
     bool *scancode = new bool[bufferSize];
     bool *pressed = new bool[bufferSize];

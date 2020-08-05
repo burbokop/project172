@@ -37,7 +37,7 @@ std::vector<Controller *> DefaultWorld::generate(AssetManager *assets, std::vect
 
 
     Unit *playerShip = static_cast<Unit*>(assets->copyAsset("sh1"));
-    playerShip->place(Vector(100, 100), -0.7);
+    playerShip->place(e172::Vector(100, 100), -0.7);
 
     playerShip->addCapability(new Docker());
     playerShip->addCapability(player1);
@@ -53,7 +53,7 @@ std::vector<Controller *> DefaultWorld::generate(AssetManager *assets, std::vect
 
     /*empty ship*/{
         Unit *someShip = static_cast<Unit*>(assets->copyAsset("sh1"));
-        dynamic_cast<Movable*>(someShip)->place(Vector(-200, -100), Vector(-2, -1), Vector(), -0.7);
+        dynamic_cast<Movable*>(someShip)->place(e172::Vector(-200, -100), e172::Vector(-2, -1), e172::Vector(), -0.7);
         units->push_back(someShip);
     }
 
@@ -72,7 +72,7 @@ std::vector<Controller *> DefaultWorld::generate(AssetManager *assets, std::vect
                     break;
             }
 
-            s->place(Vector(-50 + i * 50, 100), -0.7);
+            s->place(e172::Vector(-50 + i * 50, 100), -0.7);
 
             s->addCapability(new AI());
             ModuleHandler *mx = new ModuleHandler();
@@ -102,7 +102,7 @@ std::vector<Controller *> DefaultWorld::generate(AssetManager *assets, std::vect
             Debug::out("DefaultWorld::generate(assets, units): loading key ( key" + key + " )");
             Movable *unit = dynamic_cast<Movable*>(assets->copyAsset(key));
             if(unit) {
-                unit->place(Vector(static_cast<int>((i + 4) * 64), -200), Vector(), Vector(), 0);
+                unit->place(e172::Vector(static_cast<int>((i + 4) * 64), -200), e172::Vector(), e172::Vector(), 0);
 
                 unit->addCapability(new AI());
                 ModuleHandler *mhx = new ModuleHandler();
@@ -121,13 +121,13 @@ std::vector<Controller *> DefaultWorld::generate(AssetManager *assets, std::vect
 
     /* station 1 */{
         Unit *s = static_cast<Unit*>(assets->copyAsset("st1"));
-        s->place(Vector(50, -150), 0);
+        s->place(e172::Vector(50, -150), 0);
         units->push_back(s);
     }
 
     /* station 1 */{
         Unit *s = static_cast<Unit*>(assets->copyAsset("st2"));
-        s->place(Vector(50, 150), 0);
+        s->place(e172::Vector(50, 150), 0);
         units->push_back(s);
     }
     return result;

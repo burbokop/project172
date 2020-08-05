@@ -57,12 +57,12 @@ void Context::handleRequest(Request request) {
                 Movable *requesterAsMovable = dynamic_cast<Movable*>(request.requester);
                 if(requesterAsMovable) {
                     if(request.command == SPAWN_ENGINE_EXPLOSIVE) {
-                        particle->place(requester->getPosition(), Vector::createRandom(v0) + requesterAsMovable->getVelocity() * 0.5);
+                        particle->place(requester->getPosition(), e172::Vector::createRandom(v0) + requesterAsMovable->getVelocity() * 0.5);
                     } else {
-                        particle->place(requester->getPosition(), Vector::createRandom(v0) + requesterAsMovable->getVelocity());
+                        particle->place(requester->getPosition(), e172::Vector::createRandom(v0) + requesterAsMovable->getVelocity());
                     }
                 } else {
-                    particle->place(requester->getPosition(), Vector::createRandom(v0));
+                    particle->place(requester->getPosition(), e172::Vector::createRandom(v0));
                 }
                 units->push_back(particle);
             }
@@ -77,7 +77,7 @@ void Context::handleRequest(Request request) {
             for(int i = 0; i < radius * 4; i++) {
                 unsigned types[] = { Particle::PIXEL, Particle::CIRCLE, Particle::SQUARE };
                 LightParticle *particle = new LightParticle(types[rand() % 3], radius * 600, radius * 400);
-                particle->place(requester->getPosition(), Vector::createRandom(v0) / 2 + Vector::createByAngle(requester->getVelocity().module() / 2, requester->getAngle()));
+                particle->place(requester->getPosition(), e172::Vector::createRandom(v0) / 2 + e172::Vector::createByAngle(requester->getVelocity().module() / 2, requester->getAngle()));
                 units->push_back(particle);
             }
         }
@@ -91,7 +91,7 @@ void Context::handleRequest(Request request) {
 
             if(parent) {
                 if(shipToSpawn) {
-                    shipToSpawn->place(parent->getPosition(), Vector::createByAngle(parent->getReleaseSpead(), parent->getAngle()), Vector(), parent->getAngle());
+                    shipToSpawn->place(parent->getPosition(), e172::Vector::createByAngle(parent->getReleaseSpead(), parent->getAngle()), e172::Vector(), parent->getAngle());
                 } else if(unitToSpawn) {
                     unitToSpawn->place(parent->getPosition(), 0.785);
                 }
@@ -99,6 +99,12 @@ void Context::handleRequest(Request request) {
             }
         }
     } else if (request.command == SPAWN_SURFACE) {
+        /**
+         * SPAWN_SURFACE event is deprecated
+         */
+
+
+        /*
         Debug::out("SPAWN_SURFACE: " + std::to_string(reinterpret_cast<uintptr_t>(request.requester)));
 
         if(request.argument.isObject()) {
@@ -117,10 +123,11 @@ void Context::handleRequest(Request request) {
             Unit *unit = new Ship(tmp);
 
             if(unit) {
-                unit->place(Vector(), 0.0);
+                unit->place(e172::Vector(), 0.0);
                 units->push_back(unit);
             }
         }
+        */
     } else if (request.command == ADD_CAPABILITY) {
         Debug::out("ADD_CAPABILITY: " + std::to_string(reinterpret_cast<uintptr_t>(request.requester)));
         if(request.argument.isObject()) {

@@ -32,7 +32,7 @@ WorldManager::WorldManager(std::vector<World *> worlds) {
     this->activeWorld = worlds[0];
 }
 
-void WorldManager::init(AssetManager *assets, std::vector<Worker*> *units, Renderer *renderer, FPSMonitor *fps, FPSMonitor *tps) {
+void WorldManager::init(AssetManager *assets, std::vector<Worker*> *units, e172::AbstractRenderer *renderer, FPSMonitor *fps, FPSMonitor *tps) {
     if(activeWorld) {
         worldIsChanged = false;
         std::vector<Controller*> players = activeWorld->generate(assets, units);
@@ -97,14 +97,14 @@ void WorldManager::init(AssetManager *assets, std::vector<Worker*> *units, Rende
 
                         GUIContainer *optionsMenu = new GUIContainer(players[0], "options"); {
                             GUIContainer *effectsMenu = new GUIContainer(players[0], "effects"); {
-                                effectsMenu->addElement(new GUISwitch(players[0], std::string("anaglyph"), std::bind(&SPM::LockEffect, new Anaglyph(Vector(10, 10))), SPM::UnlockEffect));
+                                effectsMenu->addElement(new GUISwitch(players[0], std::string("anaglyph"), std::bind(&SPM::LockEffect, new Anaglyph(e172::Vector(10, 10))), SPM::UnlockEffect));
                             } optionsMenu->addElement(effectsMenu);
                             GUIContainer *resolutionMenu = new GUIContainer(players[0], std::string("resolution")); {
-                                resolutionMenu->addElement(new GUIChoice(players[0], std::string("600x600"), Vector(600, 600), std::bind(&Renderer::setResolutionCallback, renderer, std::placeholders::_1)));
-                                resolutionMenu->addElement(new GUIChoice(players[0], std::string("1360x768"), Vector(1360, 768), std::bind(&Renderer::setResolutionCallback, renderer, std::placeholders::_1)));
-                                resolutionMenu->addElement(new GUIChoice(players[0], std::string("1920x1080"), Vector(1920, 1080), std::bind(&Renderer::setResolutionCallback, renderer, std::placeholders::_1)));
+                                resolutionMenu->addElement(new GUIChoice(players[0], std::string("600x600"), e172::Vector(600, 600), std::bind(&e172::AbstractRenderer::setResolutionCallback, renderer, std::placeholders::_1)));
+                                resolutionMenu->addElement(new GUIChoice(players[0], std::string("1360x768"), e172::Vector(1360, 768), std::bind(&e172::AbstractRenderer::setResolutionCallback, renderer, std::placeholders::_1)));
+                                resolutionMenu->addElement(new GUIChoice(players[0], std::string("1920x1080"), e172::Vector(1920, 1080), std::bind(&e172::AbstractRenderer::setResolutionCallback, renderer, std::placeholders::_1)));
                             } optionsMenu->addElement(resolutionMenu);
-                            optionsMenu->addElement(new GUISwitch(players[0], std::string("fullscreen"), std::bind(&Renderer::setFullscreen, renderer)));
+                            optionsMenu->addElement(new GUISwitch(players[0], std::string("fullscreen"), std::bind(&e172::AbstractRenderer::setFullscreen, renderer)));
                         } mainMenu->addElement(optionsMenu);
 
                         GUIContainer *stationMenu = new GUIContainer(players[0], "station"); {
@@ -119,7 +119,7 @@ void WorldManager::init(AssetManager *assets, std::vector<Worker*> *units, Rende
     }
 }
 
-void WorldManager::checkState(Context *context, AssetManager *assets, std::vector<Worker *> *units, Renderer *renderer, FPSMonitor *fps, FPSMonitor *tps) {
+void WorldManager::checkState(Context *context, AssetManager *assets, std::vector<Worker *> *units, e172::AbstractRenderer *renderer, FPSMonitor *fps, FPSMonitor *tps) {
     if(worldIsChanged) {
         clear(units);
         init(assets, units, renderer, fps, tps);

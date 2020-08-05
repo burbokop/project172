@@ -29,7 +29,7 @@ public:
 
     // Worker interface
 public:
-    void render(Renderer *renderer);
+    void render(e172::AbstractRenderer *renderer);
 
     // Unit interface
 public:

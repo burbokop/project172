@@ -11,7 +11,7 @@ const long Background::DEFAULT_FLASHING_INTERVAL = 32;
 
 
 
-void Background::setSpeed(const Vector &value) {
+void Background::setSpeed(const e172::Vector &value) {
     speed = value;
 }
 
@@ -21,13 +21,13 @@ void Background::flashing(int repeats) {
     flashesRemains = repeats;
 }
 
-Background::Background(Vector resolution, unsigned int amount, double slidingStart) {
+Background::Background(e172::Vector resolution, unsigned int amount, double slidingStart) {
     this->slidingStart = slidingStart;
     this->amount = amount;
     onResolutionChange(resolution);
 }
 
-void Background::onResolutionChange(Vector resolution) {
+void Background::onResolutionChange(e172::Vector resolution) {
     this->resolution = resolution;
     Uint32 colors[] = { 0xdeff17, 0xfe4600, 0xf9990f, 0x8a27ff };
 
@@ -35,7 +35,7 @@ void Background::onResolutionChange(Vector resolution) {
     for(unsigned int i = 0; i < amount; i++) {
         Star star;
         star.color = colors[std::rand() % 4];
-        star.pos = Vector(std::rand() % resolution.getIntX(), std::rand() % resolution.getIntY());
+        star.pos = e172::Vector(std::rand() % resolution.intX(), std::rand() % resolution.intY());
         stars.push_back(star);
     }
 }
@@ -45,10 +45,10 @@ void Background::tick(Context *context, Event *event) {
     UNUSED(event);
 }
 
-void Background::render(Renderer *renderer) {
+void Background::render(e172::AbstractRenderer *renderer) {
     if(observer.count(true)) {
-        if(resolution != renderer->getResolution()) {
-            onResolutionChange(renderer->getResolution());
+        if(resolution != renderer->resolution()) {
+            onResolutionChange(renderer->resolution());
         }
     }
 
@@ -69,21 +69,21 @@ void Background::render(Renderer *renderer) {
 
     if(renderer) {
         renderer->fill(mainColor);
-        Vector localOffset = renderer->getOffset() * -0.4;
+        e172::Vector localOffset = renderer->offset() * -0.4;
 
         for(Star star : stars) {
-            int x = star.pos.getIntX() - localOffset.getIntX();
-            if(x >= 0) x = x % renderer->getResolution().getIntX();
-            else x = x % renderer->getResolution().getIntX() + renderer->getResolution().getIntX();
+            int x = star.pos.intX() - localOffset.intX();
+            if(x >= 0) x = x % renderer->resolution().intX();
+            else x = x % renderer->resolution().intX() + renderer->resolution().intX();
 
-            int y = star.pos.getIntY() - localOffset.getIntY();
-            if(y >= 0) y = y % renderer->getResolution().getIntY();
-            else y = y % renderer->getResolution().getIntY() + renderer->getResolution().getIntY();
+            int y = star.pos.intY() - localOffset.intY();
+            if(y >= 0) y = y % renderer->resolution().intY();
+            else y = y % renderer->resolution().intY() + renderer->resolution().intY();
 
             if(speed.module() < slidingStart) {
-                renderer->pixel(Vector(x, y), star.color);
+                renderer->drawPixel(e172::Vector(x, y), star.color);
             } else {
-                renderer->line(Vector(x, y), Vector(x, y) - (speed - slidingStart) * SLIDING_LEGHTH, star.color);
+                renderer->drawLine(e172::Vector(x, y), e172::Vector(x, y) - (speed - slidingStart) * SLIDING_LEGHTH, star.color);
             }
         }
     }

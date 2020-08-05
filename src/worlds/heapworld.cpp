@@ -25,7 +25,7 @@ std::vector<Controller *> HeapWorld::generate(AssetManager *assets, std::vector<
 
 
     Unit *playerShip = static_cast<Unit*>(assets->copyAsset("sh1"));
-    playerShip->place(Vector(), -0.7);
+    playerShip->place(e172::Vector(), -0.7);
     playerShip->addCapability(player1);
     ModuleHandler *playerModuleHandler = new ModuleHandler();
     playerModuleHandler->addModule(static_cast<Module*>(assets->copyAsset("pistol")));
@@ -41,7 +41,7 @@ std::vector<Controller *> HeapWorld::generate(AssetManager *assets, std::vector<
         for(int j = 0; j < 32; j++) {
             Movable *unit = dynamic_cast<Movable*>(assets->copyAsset(key));
             if(unit) {
-                unit->place(Vector::createByAngle(10000, rand()), Vector(), Vector(), 0);
+                unit->place(e172::Vector::createByAngle(10000, rand()), e172::Vector(), e172::Vector(), 0);
 
                 unit->addCapability(new Aggressive(units));
                 ModuleHandler *playerModuleHandler = new ModuleHandler();

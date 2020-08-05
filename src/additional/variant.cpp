@@ -60,9 +60,9 @@ Variant::Variant(Unit *value) {
     type = UNIT;
 }
 
-Variant::Variant(Vector value) : Object() {
+Variant::Variant(e172::Vector value) : Object() {
     data.vector = value;
-    type = VECTOR;
+    type = Vector;
 }
 
 signed int Variant::toInt32() {
@@ -98,7 +98,7 @@ Unit *Variant::toUnit() {
     return data.unit;
 }
 
-Vector Variant::toVector() {
+e172::Vector Variant::toVector() {
     return data.vector;
 }
 
@@ -143,5 +143,5 @@ bool Variant::isUnit() {
 }
 
 bool Variant::isVector() {
-    return type == VECTOR;
+    return type == Vector;
 }

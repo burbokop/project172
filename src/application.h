@@ -8,7 +8,7 @@
 class Application : public Object {
 private:
 //    Application();
-//    Vector resolution;
+//    e172::Vector resolution;
 //    bool fullscreen;
 
 //    static Application *instance;

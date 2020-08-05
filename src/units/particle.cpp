@@ -36,13 +36,13 @@ Particle::Particle(Loadable *tmp) : Movable (tmp) {
     destroyTimer->reset();
 }
 
-void Particle::render(Renderer *renderer) {
+void Particle::render(e172::AbstractRenderer *renderer) {
     if(shape == PIXEL) {
-        renderer->pixel(renderer->getOffset() + pos, color);
+        renderer->drawPixel(renderer->offset() + pos, color);
     } else if(shape == SQUARE) {
-        renderer->square(renderer->getOffset() + pos, radius, color);
+        renderer->drawSquare(renderer->offset() + pos, radius, color);
     } else if(shape == CIRCLE) {
-        renderer->circle(renderer->getOffset() + pos, radius, color);
+        renderer->drawCircle(renderer->offset() + pos, radius, color);
     }
 }
 

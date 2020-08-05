@@ -1,7 +1,6 @@
 #include "audioplayer.h"
 #include "units/camera.h"
-#include "additional/math.h"
-
+#include <engine/math/math.h>
 
 const unsigned AudioPlayer::NONE = 0;
 const unsigned AudioPlayer::START_PLAYING = 1;
@@ -48,7 +47,7 @@ void AudioPlayer::tick(Context *context, Event *event) {
     if(state == NONE) channel.free();
 }
 
-void AudioPlayer::render(Renderer *renderer) {
+void AudioPlayer::render(e172::AbstractRenderer *renderer) {
     UNUSED(renderer);
 }
 
@@ -60,5 +59,5 @@ void AudioPlayer::setVolumeByDistance(double distance) {
     int intDistance = static_cast<int>(distance);
     if(intDistance < FULL_VOLUME_DISTANCE) intDistance = FULL_VOLUME_DISTANCE;
     if(intDistance > CUT_VOLUME_DISTANCE) intDistance = CUT_VOLUME_DISTANCE;
-    setVolume(Math::map(intDistance, FULL_VOLUME_DISTANCE, CUT_VOLUME_DISTANCE, Audio::MAX_VOLUME, 0));
+    setVolume(e172::Math::map(intDistance, FULL_VOLUME_DISTANCE, CUT_VOLUME_DISTANCE, Audio::MAX_VOLUME, 0));
 }

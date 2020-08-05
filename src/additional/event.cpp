@@ -14,7 +14,7 @@ void Event::handleEvent(SDL_Event event) {
         if(event.key.keysym.scancode == SDL_SCANCODE_F2) pauseFlag = true;
         this->setKey(event.key.keysym.scancode, false);
     } else if(event.type == SDL_MOUSEMOTION) {
-        this->mouse = Vector(event.motion.x, event.motion.y);
+        this->mouse = e172::Vector(event.motion.x, event.motion.y);
     }
 }
 

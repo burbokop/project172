@@ -7,8 +7,8 @@
 
 class Movable : public Unit {
 private:
-    Vector vel;
-    Vector acc;
+    e172::Vector vel;
+    e172::Vector acc;
 
     bool alTmpFlag = false;
     bool accelerationLocked = false;
@@ -46,15 +46,15 @@ public:
     Movable();
     Movable(Loadable *tmp);
 
-    void place(Vector pos, Vector vel = Vector(), Vector acc = Vector(), double angle = 0);
+    void place(e172::Vector pos, e172::Vector vel = e172::Vector(), e172::Vector acc = e172::Vector(), double angle = 0);
 
-    void accelerate(Vector acc);
+    void accelerate(e172::Vector acc);
     bool accelerateForward();
     bool accelerateLeft();
     bool accelerateRight();
 
 
-    Vector getVelocity();
+    e172::Vector getVelocity();
     double getReleaseSpead();
 
     void pursuit(Unit *target);

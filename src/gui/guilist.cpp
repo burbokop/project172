@@ -52,7 +52,7 @@ void GUIList::addArray(std::vector<Worker *> *array) {
     this->array = array;
 }
 
-void GUIList::render(Renderer *renderer) {
+void GUIList::render(e172::AbstractRenderer *renderer) {
     delete elements;
     elements = informativeToElement(array);
     this->GUIContainer::render(renderer);

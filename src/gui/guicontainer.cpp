@@ -2,6 +2,13 @@
 
 #include "additional/effects/anaglyph.h"
 
+#include <iostream>
+
+#include <sdlimplementation/sdlrenderer.h>
+
+#include <engine/abstractrenderengine.h>
+
+
 GUIContainer::GUIContainer(Controller *player) : GUIMenuElement (player) {
 }
 
@@ -100,7 +107,6 @@ bool GUIContainer::hasSubElements() {
     return true;
 }
 
-#include <iostream>
 void GUIContainer::tick(Context *context, Event *event) {
     UNUSED(context);
     if(event->getPressed(SDL_SCANCODE_DOWN)) {
@@ -126,21 +132,21 @@ void GUIContainer::tick(Context *context, Event *event) {
 }
 
 
-void GUIContainer::render(Renderer *renderer) {
+void GUIContainer::render(e172::AbstractRenderer *renderer) {
     if(elements) {
-        Vector pointer = Vector(margin, margin);
+        e172::Vector pointer = e172::Vector(margin, margin);
         std::string title = getTitle();
-        renderer->string(title, pointer, DEFAULT_COLOR);
-        pointer += Vector(0, Renderer::DEFAULT_FONT_SIZE * 2);
-        renderer->line(pointer, pointer + Vector(title.size() * static_cast<Uint32>(Renderer::DEFAULT_FONT_SIZE), 0.0), DEFAULT_COLOR);
-        pointer += Vector(0, Renderer::DEFAULT_FONT_SIZE);
+        renderer->drawString(title, pointer, DEFAULT_COLOR);
+        pointer += e172::Vector(0, SDLRenderer::DEFAULT_FONT_SIZE * 2);
+        renderer->drawLine(pointer, pointer + e172::Vector(title.size() * static_cast<Uint32>(SDLRenderer::DEFAULT_FONT_SIZE), 0.0), DEFAULT_COLOR);
+        pointer += e172::Vector(0, SDLRenderer::DEFAULT_FONT_SIZE);
 
         int i = 0;
         for(GUIMenuElement *element : *elements) {
             if(element) {
-                if(i == selected) renderer->effect(new Anaglyph(Vector(2, 1)));
-                renderer->string(element->getTitle(), pointer, (i == selected) ? SELECTED_COLOR : DEFAULT_COLOR);
-                pointer += Vector(4, interval);
+                if(i == selected) renderer->effect(new Anaglyph(e172::Vector(2, 1)));
+                renderer->drawString(element->getTitle(), pointer, (i == selected) ? SELECTED_COLOR : DEFAULT_COLOR);
+                pointer += e172::Vector(4, interval);
                 i++;
             }
         }

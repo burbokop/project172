@@ -58,10 +58,15 @@ SOURCES       = ..\klibcore\src\experimental\universalqueue\kuniversalqueue.cpp 
 		..\klibcore\src\memcontrol\kabstractfactory.cpp \
 		..\klibcore\src\memcontrol\kpull.cpp \
 		..\klibcore\src\memcontrol\kmoduleswitch.cpp \
+		..\src\engine\abstractrenderengine.cpp \
+		..\src\engine\abstractrenderer.cpp \
+		..\src\engine\image.cpp \
+		..\src\engine\textformat.cpp \
 		..\src\main.cpp \
 		..\src\object.cpp \
+		..\src\sdlimplementation\sdlgraphicsprovider.cpp \
+		..\src\sdlimplementation\sdlrenderer.cpp \
 		..\src\worker.cpp \
-		..\src\renderer.cpp \
 		..\src\worlds\world.cpp \
 		..\src\assetmanager.cpp \
 		..\src\filesystem.cpp \
@@ -79,7 +84,7 @@ SOURCES       = ..\klibcore\src\experimental\universalqueue\kuniversalqueue.cpp 
 		..\src\additional\spm.cpp \
 		..\src\time\timer.cpp \
 		..\src\additional\event.cpp \
-		..\src\additional\vector.cpp \
+		..\src\engine\math\vector.cpp \
 		..\src\additional\stringformer.cpp \
 		..\src\additional\effects\anaglyph.cpp \
 		..\src\loadable.cpp \
@@ -115,7 +120,7 @@ SOURCES       = ..\klibcore\src\experimental\universalqueue\kuniversalqueue.cpp 
 		..\src\additional\informative\controllerfinder.cpp \
 		..\src\gui\guifloatingmessage.cpp \
 		..\src\gui\guiblushingfloatingmessage.cpp \
-		..\src\additional\math.cpp \
+		..\src\engine\math\math.cpp \
 		..\src\additional\lightparticle.cpp \
 		..\src\worldmanager.cpp \
 		..\src\worlds\defaultworld.cpp \
@@ -148,10 +153,15 @@ OBJECTS       = debug/kuniversalqueue.o \
 		debug/kabstractfactory.o \
 		debug/kpull.o \
 		debug/kmoduleswitch.o \
+		debug/abstractrenderengine.o \
+		debug/abstractrenderer.o \
+		debug/image.o \
+		debug/textformat.o \
 		debug/main.o \
 		debug/object.o \
+		debug/sdlgraphicsprovider.o \
+		debug/sdlrenderer.o \
 		debug/worker.o \
-		debug/renderer.o \
 		debug/world.o \
 		debug/assetmanager.o \
 		debug/filesystem.o \
@@ -241,9 +251,14 @@ DIST          =  C:/Users/Panasonic-PC/Documents/project172/klibcore/src/kmacro.
 		C:/Users/Panasonic-PC/Documents/project172/klibcore/src/memcontrol/kabstractfactory.h \
 		C:/Users/Panasonic-PC/Documents/project172/klibcore/src/memcontrol/kpull.h \
 		C:/Users/Panasonic-PC/Documents/project172/klibcore/src/memcontrol/kmoduleswitch.h \
+		src/engine/abstractrenderengine.h \
+		src/engine/abstractrenderer.h \
+		src/engine/image.h \
+		src/engine/textformat.h \
 		src/object.h \
+		src/sdlimplementation/sdlgraphicsprovider.h \
+		src/sdlimplementation/sdlrenderer.h \
 		src/worker.h \
-		src/renderer.h \
 		src/worlds/world.h \
 		src/assetmanager.h \
 		src/filesystem.h \
@@ -261,7 +276,7 @@ DIST          =  C:/Users/Panasonic-PC/Documents/project172/klibcore/src/kmacro.
 		src/additional/spm.h \
 		src/time/timer.h \
 		src/additional/event.h \
-		src/additional/vector.h \
+		src/engine/math/vector.h \
 		src/additional/stringformer.h \
 		src/additional/effects/anaglyph.h \
 		src/loadable.h \
@@ -307,7 +322,7 @@ DIST          =  C:/Users/Panasonic-PC/Documents/project172/klibcore/src/kmacro.
 		src/additional/informative/controllerfinder.h \
 		src/gui/guifloatingmessage.h \
 		src/gui/guiblushingfloatingmessage.h \
-		src/additional/math.h \
+		src/engine/math/math.h \
 		src/additional/lightparticle.h \
 		src/worldmanager.h \
 		src/worlds/defaultworld.h \
@@ -339,10 +354,15 @@ DIST          =  C:/Users/Panasonic-PC/Documents/project172/klibcore/src/kmacro.
 		..\klibcore\src\memcontrol\kabstractfactory.cpp \
 		..\klibcore\src\memcontrol\kpull.cpp \
 		..\klibcore\src\memcontrol\kmoduleswitch.cpp \
+		..\src\engine\abstractrenderengine.cpp \
+		..\src\engine\abstractrenderer.cpp \
+		..\src\engine\image.cpp \
+		..\src\engine\textformat.cpp \
 		..\src\main.cpp \
 		..\src\object.cpp \
+		..\src\sdlimplementation\sdlgraphicsprovider.cpp \
+		..\src\sdlimplementation\sdlrenderer.cpp \
 		..\src\worker.cpp \
-		..\src\renderer.cpp \
 		..\src\worlds\world.cpp \
 		..\src\assetmanager.cpp \
 		..\src\filesystem.cpp \
@@ -360,7 +380,7 @@ DIST          =  C:/Users/Panasonic-PC/Documents/project172/klibcore/src/kmacro.
 		..\src\additional\spm.cpp \
 		..\src\time\timer.cpp \
 		..\src\additional\event.cpp \
-		..\src\additional\vector.cpp \
+		..\src\engine\math\vector.cpp \
 		..\src\additional\stringformer.cpp \
 		..\src\additional\effects\anaglyph.cpp \
 		..\src\loadable.cpp \
@@ -396,7 +416,7 @@ DIST          =  C:/Users/Panasonic-PC/Documents/project172/klibcore/src/kmacro.
 		..\src\additional\informative\controllerfinder.cpp \
 		..\src\gui\guifloatingmessage.cpp \
 		..\src\gui\guiblushingfloatingmessage.cpp \
-		..\src\additional\math.cpp \
+		..\src\engine\math\math.cpp \
 		..\src\additional\lightparticle.cpp \
 		..\src\worldmanager.cpp \
 		..\src\worlds\defaultworld.cpp \
@@ -443,7 +463,7 @@ dist:
 	$(ZIP) project172.zip $(SOURCES) $(DIST) ..\..\project172.pro C:\qt\5.15.0\mingw81_64\mkspecs\features\spec_pre.prf C:\qt\5.15.0\mingw81_64\mkspecs\qdevice.pri C:\qt\5.15.0\mingw81_64\mkspecs\features\device_config.prf C:\qt\5.15.0\mingw81_64\mkspecs\common\sanitize.conf C:\qt\5.15.0\mingw81_64\mkspecs\common\gcc-base.conf C:\qt\5.15.0\mingw81_64\mkspecs\common\g++-base.conf C:\qt\5.15.0\mingw81_64\mkspecs\common\angle.conf C:\qt\5.15.0\mingw81_64\mkspecs\features\win32\windows_vulkan_sdk.prf C:\qt\5.15.0\mingw81_64\mkspecs\common\windows-vulkan.conf C:\qt\5.15.0\mingw81_64\mkspecs\common\g++-win32.conf C:\qt\5.15.0\mingw81_64\mkspecs\common\windows-desktop.conf C:\qt\5.15.0\mingw81_64\mkspecs\qconfig.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3danimation.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3danimation_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dcore.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dcore_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dextras.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dextras_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dinput.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dinput_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dlogic.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dlogic_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dquick.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dquick_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dquickanimation.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dquickanimation_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dquickextras.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dquickextras_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dquickinput.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dquickinput_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dquickrender.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dquickrender_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dquickscene2d.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dquickscene2d_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3drender.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3drender_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_accessibility_support_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_axbase.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_axbase_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_axcontainer.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_axcontainer_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_axserver.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_axserver_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_bluetooth.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_bluetooth_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_bodymovin_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_bootstrap_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_charts.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_charts_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_concurrent.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_concurrent_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_core.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_core_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_datavisualization.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_datavisualization_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_dbus.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_dbus_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_designer.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_designer_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_designercomponents_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_devicediscovery_support_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_edid_support_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_egl_support_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_eventdispatcher_support_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_fb_support_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_fontdatabase_support_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_gamepad.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_gamepad_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_gui.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_gui_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_help.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_help_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_location.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_location_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_multimedia.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_multimedia_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_multimediawidgets.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_multimediawidgets_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_network.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_network_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_networkauth.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_networkauth_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_nfc.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_nfc_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_opengl.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_opengl_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_openglextensions.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_openglextensions_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_packetprotocol_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_platformcompositor_support_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_positioning.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_positioning_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_positioningquick.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_positioningquick_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_printsupport.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_printsupport_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_purchasing.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_purchasing_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_qml.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_qml_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_qmldebug_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_qmldevtools_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_qmlmodels.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_qmlmodels_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_qmltest.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_qmltest_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_qmlworkerscript.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_qmlworkerscript_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_qtmultimediaquicktools_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quick.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quick3d.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quick3d_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quick3dassetimport.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quick3dassetimport_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quick3drender.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quick3drender_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quick3druntimerender.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quick3druntimerender_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quick3dutils.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quick3dutils_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quick_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quickcontrols2.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quickcontrols2_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quickparticles_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quickshapes_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quicktemplates2.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quicktemplates2_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quickwidgets.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quickwidgets_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_remoteobjects.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_remoteobjects_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_repparser.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_repparser_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_script.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_script_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_scripttools.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_scripttools_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_scxml.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_scxml_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_sensors.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_sensors_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_serialbus.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_serialbus_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_serialport.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_serialport_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_sql.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_sql_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_svg.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_svg_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_testlib.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_testlib_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_texttospeech.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_texttospeech_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_theme_support_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_uiplugin.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_uitools.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_uitools_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_virtualkeyboard.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_virtualkeyboard_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_vulkan_support_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_webchannel.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_webchannel_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_websockets.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_websockets_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_widgets.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_widgets_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_windowsuiautomation_support_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_winextras.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_winextras_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_xml.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_xml_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_xmlpatterns.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_xmlpatterns_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_zlib_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\features\qt_functions.prf C:\qt\5.15.0\mingw81_64\mkspecs\features\qt_config.prf C:\qt\5.15.0\mingw81_64\mkspecs\win32-g++\qmake.conf C:\qt\5.15.0\mingw81_64\mkspecs\features\spec_post.prf .qmake.stash C:\qt\5.15.0\mingw81_64\mkspecs\features\exclusive_builds.prf C:\qt\5.15.0\mingw81_64\mkspecs\features\toolchain.prf C:\qt\5.15.0\mingw81_64\mkspecs\features\default_pre.prf C:\qt\5.15.0\mingw81_64\mkspecs\features\win32\default_pre.prf ..\klibcore\klibcore.pro C:\qt\5.15.0\mingw81_64\mkspecs\features\resolve_config.prf C:\qt\5.15.0\mingw81_64\mkspecs\features\exclusive_builds_post.prf C:\qt\5.15.0\mingw81_64\mkspecs\features\default_post.prf C:\qt\5.15.0\mingw81_64\mkspecs\features\build_pass.prf C:\qt\5.15.0\mingw81_64\mkspecs\features\win32\console.prf C:\qt\5.15.0\mingw81_64\mkspecs\features\qml_debug.prf C:\qt\5.15.0\mingw81_64\mkspecs\features\precompile_header.prf C:\qt\5.15.0\mingw81_64\mkspecs\features\warn_on.prf C:\qt\5.15.0\mingw81_64\mkspecs\features\qt.prf C:\qt\5.15.0\mingw81_64\mkspecs\features\qmake_use.prf C:\qt\5.15.0\mingw81_64\mkspecs\features\file_copies.prf C:\qt\5.15.0\mingw81_64\mkspecs\features\testcase_targets.prf C:\qt\5.15.0\mingw81_64\mkspecs\features\exceptions.prf C:\qt\5.15.0\mingw81_64\mkspecs\features\yacc.prf C:\qt\5.15.0\mingw81_64\mkspecs\features\lex.prf ..\project172.pro      
 
 clean: compiler_clean 
-	-$(DEL_FILE) debug\kuniversalqueue.o debug\ktype.o debug\kcirclebuffer.o debug\kvoidhandle.o debug\kmetafunction.o debug\kabstractfactory.o debug\kpull.o debug\kmoduleswitch.o debug\main.o debug\object.o debug\worker.o debug\renderer.o debug\world.o debug\assetmanager.o debug\filesystem.o debug\animator.o debug\background.o debug\unit.o debug\movable.o debug\camera.o debug\capability.o debug\controller.o debug\player.o debug\modulehandler.o debug\module.o debug\rotozoom.o debug\spm.o debug\timer.o debug\event.o debug\vector.o debug\stringformer.o debug\anaglyph.o debug\loadable.o debug\weapon.o debug\projectile.o debug\context.o debug\engine.o debug\warpdrive.o debug\ship.o debug\guielement.o debug\guicontainer.o debug\iinformative.o debug\guistack.o debug\ai.o debug\station.o debug\json_reader.o debug\json_value.o debug\json_writer.o debug\debug.o debug\guiswitch.o debug\visualeffect.o debug\guichoice.o debug\application.o debug\fpsmonitor.o debug\particle.o debug\framebuilder.o debug\socket.o debug\netlistener.o debug\state.o debug\trigger.o debug\guimain.o debug\guicentralmessage.o debug\controllerfinder.o debug\guifloatingmessage.o debug\guiblushingfloatingmessage.o debug\math.o debug\lightparticle.o debug\worldmanager.o debug\defaultworld.o debug\arenaworld.o debug\docker.o debug\near.o debug\guilist.o debug\aggressive.o debug\heapworld.o debug\objectregistry.o debug\registryinfo.o debug\audio.o debug\audiochannel.o debug\audiohardwarebank.o debug\audioplayer.o debug\variant.o debug\guiminimap.o debug\guiradar.o debug\thruster.o debug\time.o debug\guimenuelement.o debug\mutex.o debug\unitsamountinfo.o debug\environment.o
+	-$(DEL_FILE) debug\kuniversalqueue.o debug\ktype.o debug\kcirclebuffer.o debug\kvoidhandle.o debug\kmetafunction.o debug\kabstractfactory.o debug\kpull.o debug\kmoduleswitch.o debug\abstractrenderengine.o debug\abstractrenderer.o debug\image.o debug\textformat.o debug\main.o debug\object.o debug\sdlgraphicsprovider.o debug\sdlrenderer.o debug\worker.o debug\world.o debug\assetmanager.o debug\filesystem.o debug\animator.o debug\background.o debug\unit.o debug\movable.o debug\camera.o debug\capability.o debug\controller.o debug\player.o debug\modulehandler.o debug\module.o debug\rotozoom.o debug\spm.o debug\timer.o debug\event.o debug\vector.o debug\stringformer.o debug\anaglyph.o debug\loadable.o debug\weapon.o debug\projectile.o debug\context.o debug\engine.o debug\warpdrive.o debug\ship.o debug\guielement.o debug\guicontainer.o debug\iinformative.o debug\guistack.o debug\ai.o debug\station.o debug\json_reader.o debug\json_value.o debug\json_writer.o debug\debug.o debug\guiswitch.o debug\visualeffect.o debug\guichoice.o debug\application.o debug\fpsmonitor.o debug\particle.o debug\framebuilder.o debug\socket.o debug\netlistener.o debug\state.o debug\trigger.o debug\guimain.o debug\guicentralmessage.o debug\controllerfinder.o debug\guifloatingmessage.o debug\guiblushingfloatingmessage.o debug\math.o debug\lightparticle.o debug\worldmanager.o debug\defaultworld.o debug\arenaworld.o debug\docker.o debug\near.o debug\guilist.o debug\aggressive.o debug\heapworld.o debug\objectregistry.o debug\registryinfo.o debug\audio.o debug\audiochannel.o debug\audiohardwarebank.o debug\audioplayer.o debug\variant.o debug\guiminimap.o debug\guiradar.o debug\thruster.o debug\time.o debug\guimenuelement.o debug\mutex.o debug\unitsamountinfo.o debug\environment.o
 
 distclean: clean 
 	-$(DEL_FILE) .qmake.stash
@@ -502,6 +522,123 @@ debug/kmoduleswitch.o: ../klibcore/src/memcontrol/kmoduleswitch.cpp ../klibcore/
 		../klibcore/src/kmacro.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\kmoduleswitch.o ..\klibcore\src\memcontrol\kmoduleswitch.cpp
 
+debug/abstractrenderengine.o: ../src/engine/abstractrenderengine.cpp ../src/engine/abstractrenderengine.h \
+		../src/engine/abstractrenderer.h \
+		../src/engine/image.h \
+		../src/engine/textformat.h \
+		../src/engine/math/vector.h \
+		../src/additional/effects/visualeffect.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_main.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_stdinc.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_config.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_platform.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/begin_code.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/close_code.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_assert.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_atomic.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_audio.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_error.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_endian.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mutex.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_thread.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_rwops.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_clipboard.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_cpuinfo.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_events.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_video.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_pixels.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_rect.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_surface.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_blendmode.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_keyboard.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_keycode.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_scancode.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mouse.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_joystick.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_gamecontroller.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_quit.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_gesture.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_touch.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_filesystem.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_haptic.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_hints.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_loadso.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_log.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_messagebox.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_metal.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_power.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_render.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_sensor.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_shape.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_system.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
+		../src/additional/variant.h \
+		../src/object.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\abstractrenderengine.o ..\src\engine\abstractrenderengine.cpp
+
+debug/abstractrenderer.o: ../src/engine/abstractrenderer.cpp ../src/engine/abstractrenderer.h \
+		../src/engine/image.h \
+		../src/engine/textformat.h \
+		../src/engine/math/vector.h \
+		../src/additional/effects/visualeffect.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_main.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_stdinc.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_config.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_platform.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/begin_code.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/close_code.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_assert.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_atomic.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_audio.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_error.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_endian.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mutex.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_thread.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_rwops.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_clipboard.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_cpuinfo.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_events.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_video.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_pixels.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_rect.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_surface.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_blendmode.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_keyboard.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_keycode.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_scancode.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mouse.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_joystick.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_gamecontroller.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_quit.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_gesture.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_touch.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_filesystem.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_haptic.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_hints.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_loadso.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_log.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_messagebox.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_metal.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_power.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_render.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_sensor.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_shape.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_system.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
+		../src/additional/variant.h \
+		../src/object.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\abstractrenderer.o ..\src\engine\abstractrenderer.cpp
+
+debug/image.o: ../src/engine/image.cpp ../src/engine/image.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\image.o ..\src\engine\image.cpp
+
+debug/textformat.o: ../src/engine/textformat.cpp ../src/engine/textformat.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\textformat.o ..\src\engine\textformat.cpp
+
 debug/main.o: ../src/main.cpp ../src/environment.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_main.h \
@@ -549,13 +686,15 @@ debug/main.o: ../src/main.cpp ../src/environment.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_system.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
+		../src/engine/abstractrenderengine.h \
+		../src/engine/abstractrenderer.h \
+		../src/engine/image.h \
+		../src/engine/textformat.h \
+		../src/engine/math/vector.h \
+		../src/additional/effects/visualeffect.h \
+		../src/additional/variant.h \
 		../src/object.h \
 		../src/state.h \
-		../src/additional/variant.h \
-		../src/additional/vector.h \
-		../src/renderer.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_ttf.h \
-		../src/additional/effects/visualeffect.h \
 		../src/worker.h \
 		../src/additional/event.h \
 		../src/assetmanager.h \
@@ -610,6 +749,157 @@ debug/main.o: ../src/main.cpp ../src/environment.h \
 debug/object.o: ../src/object.cpp ../src/object.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\object.o ..\src\object.cpp
 
+debug/sdlgraphicsprovider.o: ../src/sdlimplementation/sdlgraphicsprovider.cpp ../src/sdlimplementation/sdlgraphicsprovider.h \
+		../src/sdlimplementation/sdlrenderer.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_main.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_stdinc.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_config.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_platform.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/begin_code.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/close_code.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_assert.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_atomic.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_audio.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_error.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_endian.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mutex.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_thread.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_rwops.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_clipboard.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_cpuinfo.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_events.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_video.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_pixels.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_rect.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_surface.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_blendmode.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_keyboard.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_keycode.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_scancode.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mouse.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_joystick.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_gamecontroller.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_quit.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_gesture.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_touch.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_filesystem.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_haptic.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_hints.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_loadso.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_log.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_messagebox.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_metal.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_power.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_render.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_sensor.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_shape.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_system.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_ttf.h \
+		../src/engine/abstractrenderer.h \
+		../src/engine/image.h \
+		../src/engine/textformat.h \
+		../src/engine/math/vector.h \
+		../src/additional/effects/visualeffect.h \
+		../src/additional/variant.h \
+		../src/object.h \
+		../src/engine/abstractrenderengine.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_image.h \
+		../src/additional/spm.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\sdlgraphicsprovider.o ..\src\sdlimplementation\sdlgraphicsprovider.cpp
+
+debug/sdlrenderer.o: ../src/sdlimplementation/sdlrenderer.cpp ../src/sdlimplementation/sdlrenderer.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_main.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_stdinc.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_config.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_platform.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/begin_code.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/close_code.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_assert.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_atomic.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_audio.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_error.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_endian.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mutex.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_thread.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_rwops.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_clipboard.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_cpuinfo.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_events.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_video.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_pixels.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_rect.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_surface.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_blendmode.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_keyboard.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_keycode.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_scancode.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mouse.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_joystick.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_gamecontroller.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_quit.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_gesture.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_touch.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_filesystem.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_haptic.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_hints.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_loadso.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_log.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_messagebox.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_metal.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_power.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_render.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_sensor.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_shape.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_system.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_ttf.h \
+		../src/engine/abstractrenderer.h \
+		../src/engine/image.h \
+		../src/engine/textformat.h \
+		../src/engine/math/vector.h \
+		../src/additional/effects/visualeffect.h \
+		../src/additional/variant.h \
+		../src/object.h \
+		../src/units/camera.h \
+		../src/units/movable.h \
+		../src/units/unit.h \
+		../src/capabilities/modulehandler.h \
+		../src/capabilities/modules/module.h \
+		../src/capabilities/capability.h \
+		../src/worker.h \
+		../src/additional/event.h \
+		../src/loadable.h \
+		../src/json/json.h \
+		../src/json/autolink.h \
+		../src/json/config.h \
+		../src/json/allocator.h \
+		../src/json/version.h \
+		../src/json/features.h \
+		../src/json/forwards.h \
+		../src/json/reader.h \
+		../src/json/value.h \
+		../src/json/writer.h \
+		../src/animator.h \
+		../src/time/timer.h \
+		../src/audio/audioplayer.h \
+		../src/audio/audiochannel.h \
+		../src/audio/audio.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mixer.h \
+		../src/iinformative.h \
+		../src/capabilities/docker.h \
+		../src/capabilities/controller.h \
+		../src/units/ship.h \
+		../src/capabilities/modules/warpdrive.h \
+		../src/additional/trigger.h \
+		../src/additional/spm.h \
+		../src/debug.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\sdlrenderer.o ..\src\sdlimplementation\sdlrenderer.cpp
+
 debug/worker.o: ../src/worker.cpp ../src/worker.h \
 		../src/additional/event.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL.h \
@@ -658,101 +948,15 @@ debug/worker.o: ../src/worker.cpp ../src/worker.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_system.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
-		../src/additional/vector.h \
+		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/renderer.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_ttf.h \
+		../src/engine/abstractrenderer.h \
+		../src/engine/image.h \
+		../src/engine/textformat.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/variant.h \
 		../src/objectregistry.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\worker.o ..\src\worker.cpp
-
-debug/renderer.o: ../src/renderer.cpp ../src/renderer.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_main.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_stdinc.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_config.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_platform.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/begin_code.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/close_code.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_assert.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_atomic.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_audio.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_error.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_endian.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mutex.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_thread.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_rwops.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_clipboard.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_cpuinfo.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_events.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_video.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_pixels.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_rect.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_surface.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_blendmode.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_keyboard.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_keycode.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_scancode.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mouse.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_joystick.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_gamecontroller.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_quit.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_gesture.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_touch.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_filesystem.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_haptic.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_hints.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_loadso.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_log.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_messagebox.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_metal.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_power.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_render.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_sensor.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_shape.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_system.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_ttf.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/vector.h \
-		../src/additional/variant.h \
-		../src/object.h \
-		../src/units/camera.h \
-		../src/units/movable.h \
-		../src/units/unit.h \
-		../src/capabilities/modulehandler.h \
-		../src/capabilities/modules/module.h \
-		../src/capabilities/capability.h \
-		../src/worker.h \
-		../src/additional/event.h \
-		../src/loadable.h \
-		../src/json/json.h \
-		../src/json/autolink.h \
-		../src/json/config.h \
-		../src/json/allocator.h \
-		../src/json/version.h \
-		../src/json/features.h \
-		../src/json/forwards.h \
-		../src/json/reader.h \
-		../src/json/value.h \
-		../src/json/writer.h \
-		../src/animator.h \
-		../src/time/timer.h \
-		../src/audio/audioplayer.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audio.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mixer.h \
-		../src/iinformative.h \
-		../src/capabilities/docker.h \
-		../src/capabilities/controller.h \
-		../src/units/ship.h \
-		../src/capabilities/modules/warpdrive.h \
-		../src/additional/trigger.h \
-		../src/additional/spm.h \
-		../src/debug.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\renderer.o ..\src\renderer.cpp
 
 debug/world.o: ../src/worlds/world.cpp ../src/worlds/world.h \
 		../src/object.h \
@@ -806,9 +1010,10 @@ debug/world.o: ../src/worlds/world.cpp ../src/worlds/world.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_system.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
-		../src/additional/vector.h \
-		../src/renderer.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_ttf.h \
+		../src/engine/math/vector.h \
+		../src/engine/abstractrenderer.h \
+		../src/engine/image.h \
+		../src/engine/textformat.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/variant.h \
 		../src/time/timer.h \
@@ -904,10 +1109,11 @@ debug/assetmanager.o: ../src/assetmanager.cpp ../src/assetmanager.h \
 		../src/time/timer.h \
 		../src/worker.h \
 		../src/additional/event.h \
-		../src/additional/vector.h \
+		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/renderer.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_ttf.h \
+		../src/engine/abstractrenderer.h \
+		../src/engine/image.h \
+		../src/engine/textformat.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/variant.h \
 		../src/audio/audioplayer.h \
@@ -932,7 +1138,8 @@ debug/assetmanager.o: ../src/assetmanager.cpp ../src/assetmanager.h \
 		../src/capabilities/modules/engine.h \
 		../src/capabilities/modules/thruster.h \
 		../src/units/projectile.h \
-		../src/units/station.h
+		../src/units/station.h \
+		../src/engine/abstractrenderengine.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\assetmanager.o ..\src\assetmanager.cpp
 
 debug/filesystem.o: ../src/filesystem.cpp ../src/filesystem.h
@@ -988,13 +1195,15 @@ debug/animator.o: ../src/animator.cpp ../src/animator.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_system.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
-		../src/additional/vector.h \
+		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/renderer.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_ttf.h \
+		../src/engine/abstractrenderer.h \
+		../src/engine/image.h \
+		../src/engine/textformat.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/variant.h \
-		../src/additional/spm.h
+		../src/additional/spm.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_ttf.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\animator.o ..\src\animator.cpp
 
 debug/background.o: ../src/background.cpp ../src/background.h \
@@ -1044,12 +1253,13 @@ debug/background.o: ../src/background.cpp ../src/background.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_system.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
-		../src/additional/vector.h \
+		../src/engine/math/vector.h \
 		../src/worker.h \
 		../src/additional/event.h \
 		../src/object.h \
-		../src/renderer.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_ttf.h \
+		../src/engine/abstractrenderer.h \
+		../src/engine/image.h \
+		../src/engine/textformat.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/variant.h \
 		../src/time/timer.h \
@@ -1145,10 +1355,11 @@ debug/unit.o: ../src/units/unit.cpp ../src/units/unit.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_system.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
-		../src/additional/vector.h \
+		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/renderer.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_ttf.h \
+		../src/engine/abstractrenderer.h \
+		../src/engine/image.h \
+		../src/engine/textformat.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/variant.h \
 		../src/loadable.h \
@@ -1190,7 +1401,7 @@ debug/unit.o: ../src/units/unit.cpp ../src/units/unit.h \
 		../src/units/projectile.h \
 		../src/units/station.h \
 		../src/time/time.h \
-		../src/additional/math.h
+		../src/engine/math/math.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\unit.o ..\src\units\unit.cpp
 
 debug/movable.o: ../src/units/movable.cpp ../src/units/movable.h \
@@ -1246,10 +1457,11 @@ debug/movable.o: ../src/units/movable.cpp ../src/units/movable.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_system.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
-		../src/additional/vector.h \
+		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/renderer.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_ttf.h \
+		../src/engine/abstractrenderer.h \
+		../src/engine/image.h \
+		../src/engine/textformat.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/variant.h \
 		../src/loadable.h \
@@ -1289,7 +1501,7 @@ debug/movable.o: ../src/units/movable.cpp ../src/units/movable.h \
 		../src/near.h \
 		../src/background.h \
 		../src/time/time.h \
-		../src/additional/math.h
+		../src/engine/math/math.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\movable.o ..\src\units\movable.cpp
 
 debug/camera.o: ../src/units/camera.cpp ../src/units/camera.h \
@@ -1346,10 +1558,11 @@ debug/camera.o: ../src/units/camera.cpp ../src/units/camera.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_system.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
-		../src/additional/vector.h \
+		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/renderer.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_ttf.h \
+		../src/engine/abstractrenderer.h \
+		../src/engine/image.h \
+		../src/engine/textformat.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/variant.h \
 		../src/loadable.h \
@@ -1375,8 +1588,7 @@ debug/camera.o: ../src/units/camera.cpp ../src/units/camera.h \
 		../src/units/ship.h \
 		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h \
-		../src/time/time.h \
-		../src/additional/math.h
+		../src/time/time.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\camera.o ..\src\units\camera.cpp
 
 debug/capability.o: ../src/capabilities/capability.cpp ../src/capabilities/capability.h \
@@ -1428,10 +1640,11 @@ debug/capability.o: ../src/capabilities/capability.cpp ../src/capabilities/capab
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_system.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
-		../src/additional/vector.h \
+		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/renderer.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_ttf.h \
+		../src/engine/abstractrenderer.h \
+		../src/engine/image.h \
+		../src/engine/textformat.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/variant.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\capability.o ..\src\capabilities\capability.cpp
@@ -1486,10 +1699,11 @@ debug/controller.o: ../src/capabilities/controller.cpp ../src/capabilities/contr
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_system.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
-		../src/additional/vector.h \
+		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/renderer.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_ttf.h \
+		../src/engine/abstractrenderer.h \
+		../src/engine/image.h \
+		../src/engine/textformat.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/variant.h \
 		../src/time/timer.h \
@@ -1583,10 +1797,11 @@ debug/player.o: ../src/capabilities/player.cpp ../src/capabilities/player.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_system.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
-		../src/additional/vector.h \
+		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/renderer.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_ttf.h \
+		../src/engine/abstractrenderer.h \
+		../src/engine/image.h \
+		../src/engine/textformat.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/variant.h \
 		../src/time/timer.h \
@@ -1682,10 +1897,11 @@ debug/modulehandler.o: ../src/capabilities/modulehandler.cpp ../src/capabilities
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_system.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
-		../src/additional/vector.h \
+		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/renderer.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_ttf.h \
+		../src/engine/abstractrenderer.h \
+		../src/engine/image.h \
+		../src/engine/textformat.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/variant.h \
 		../src/loadable.h \
@@ -1758,10 +1974,11 @@ debug/module.o: ../src/capabilities/modules/module.cpp ../src/capabilities/modul
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_system.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
-		../src/additional/vector.h \
+		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/renderer.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_ttf.h \
+		../src/engine/abstractrenderer.h \
+		../src/engine/image.h \
+		../src/engine/textformat.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/variant.h \
 		../src/loadable.h \
@@ -1790,8 +2007,7 @@ debug/module.o: ../src/capabilities/modules/module.cpp ../src/capabilities/modul
 		../src/capabilities/controller.h \
 		../src/units/ship.h \
 		../src/capabilities/modules/warpdrive.h \
-		../src/additional/trigger.h \
-		../src/additional/math.h
+		../src/additional/trigger.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\module.o ..\src\capabilities\modules\module.cpp
 
 debug/rotozoom.o: ../src/additional/rotozoom.cpp ../src/additional/rotozoom.h \
@@ -1892,7 +2108,7 @@ debug/spm.o: ../src/additional/spm.cpp ../src/additional/spm.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_ttf.h \
 		../src/additional/effects/visualeffect.h \
-		../src/additional/vector.h \
+		../src/engine/math/vector.h \
 		../src/additional/rotozoom.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\spm.o ..\src\additional\spm.cpp
 
@@ -1992,12 +2208,12 @@ debug/event.o: ../src/additional/event.cpp ../src/additional/event.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_system.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
-		../src/additional/vector.h
+		../src/engine/math/vector.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\event.o ..\src\additional\event.cpp
 
-debug/vector.o: ../src/additional/vector.cpp ../src/additional/vector.h \
-		../src/additional/math.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\vector.o ..\src\additional\vector.cpp
+debug/vector.o: ../src/engine/math/vector.cpp ../src/engine/math/vector.h \
+		../src/engine/math/math.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\vector.o ..\src\engine\math\vector.cpp
 
 debug/stringformer.o: ../src/additional/stringformer.cpp ../src/additional/stringformer.h \
 		../src/object.h
@@ -2051,7 +2267,7 @@ debug/anaglyph.o: ../src/additional/effects/anaglyph.cpp ../src/additional/effec
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_system.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
-		../src/additional/vector.h
+		../src/engine/math/vector.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\anaglyph.o ..\src\additional\effects\anaglyph.cpp
 
 debug/loadable.o: ../src/loadable.cpp ../src/loadable.h \
@@ -2115,10 +2331,11 @@ debug/loadable.o: ../src/loadable.cpp ../src/loadable.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_system.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
-		../src/additional/vector.h \
+		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/renderer.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_ttf.h \
+		../src/engine/abstractrenderer.h \
+		../src/engine/image.h \
+		../src/engine/textformat.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/variant.h \
 		../src/audio/audioplayer.h \
@@ -2178,10 +2395,11 @@ debug/weapon.o: ../src/capabilities/modules/weapon.cpp ../src/capabilities/modul
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_system.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
-		../src/additional/vector.h \
+		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/renderer.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_ttf.h \
+		../src/engine/abstractrenderer.h \
+		../src/engine/image.h \
+		../src/engine/textformat.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/variant.h \
 		../src/loadable.h \
@@ -2280,10 +2498,11 @@ debug/projectile.o: ../src/units/projectile.cpp ../src/units/projectile.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_system.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
-		../src/additional/vector.h \
+		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/renderer.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_ttf.h \
+		../src/engine/abstractrenderer.h \
+		../src/engine/image.h \
+		../src/engine/textformat.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/variant.h \
 		../src/loadable.h \
@@ -2392,10 +2611,11 @@ debug/context.o: ../src/context.cpp ../src/context.h \
 		../src/time/timer.h \
 		../src/worker.h \
 		../src/additional/event.h \
-		../src/additional/vector.h \
+		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/renderer.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_ttf.h \
+		../src/engine/abstractrenderer.h \
+		../src/engine/image.h \
+		../src/engine/textformat.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/variant.h \
 		../src/audio/audioplayer.h \
@@ -2479,10 +2699,11 @@ debug/engine.o: ../src/capabilities/modules/engine.cpp ../src/capabilities/modul
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_system.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
-		../src/additional/vector.h \
+		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/renderer.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_ttf.h \
+		../src/engine/abstractrenderer.h \
+		../src/engine/image.h \
+		../src/engine/textformat.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/variant.h \
 		../src/loadable.h \
@@ -2556,10 +2777,11 @@ debug/warpdrive.o: ../src/capabilities/modules/warpdrive.cpp ../src/capabilities
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_system.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
-		../src/additional/vector.h \
+		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/renderer.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_ttf.h \
+		../src/engine/abstractrenderer.h \
+		../src/engine/image.h \
+		../src/engine/textformat.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/variant.h \
 		../src/loadable.h \
@@ -2656,10 +2878,11 @@ debug/ship.o: ../src/units/ship.cpp ../src/units/ship.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_system.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
-		../src/additional/vector.h \
+		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/renderer.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_ttf.h \
+		../src/engine/abstractrenderer.h \
+		../src/engine/image.h \
+		../src/engine/textformat.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/variant.h \
 		../src/loadable.h \
@@ -2749,10 +2972,11 @@ debug/guielement.o: ../src/gui/guielement.cpp ../src/gui/guielement.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_system.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
-		../src/additional/vector.h \
+		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/renderer.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_ttf.h \
+		../src/engine/abstractrenderer.h \
+		../src/engine/image.h \
+		../src/engine/textformat.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/variant.h \
 		../src/time/timer.h \
@@ -2836,10 +3060,11 @@ debug/guicontainer.o: ../src/gui/guicontainer.cpp ../src/gui/guicontainer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_system.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
-		../src/additional/vector.h \
+		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/renderer.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_ttf.h \
+		../src/engine/abstractrenderer.h \
+		../src/engine/image.h \
+		../src/engine/textformat.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/variant.h \
 		../src/time/timer.h \
@@ -2869,7 +3094,10 @@ debug/guicontainer.o: ../src/gui/guicontainer.cpp ../src/gui/guicontainer.h \
 		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h \
 		../src/gui/guistack.h \
-		../src/additional/effects/anaglyph.h
+		../src/additional/effects/anaglyph.h \
+		../src/sdlimplementation/sdlrenderer.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_ttf.h \
+		../src/engine/abstractrenderengine.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\guicontainer.o ..\src\gui\guicontainer.cpp
 
 debug/iinformative.o: ../src/iinformative.cpp ../src/iinformative.h
@@ -2927,10 +3155,11 @@ debug/guistack.o: ../src/gui/guistack.cpp ../src/gui/guistack.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_system.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
-		../src/additional/vector.h \
+		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/renderer.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_ttf.h \
+		../src/engine/abstractrenderer.h \
+		../src/engine/image.h \
+		../src/engine/textformat.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/variant.h \
 		../src/time/timer.h \
@@ -3014,10 +3243,11 @@ debug/ai.o: ../src/capabilities/ai.cpp ../src/capabilities/ai.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_system.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
-		../src/additional/vector.h \
+		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/renderer.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_ttf.h \
+		../src/engine/abstractrenderer.h \
+		../src/engine/image.h \
+		../src/engine/textformat.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/variant.h \
 		../src/time/timer.h \
@@ -3101,10 +3331,11 @@ debug/station.o: ../src/units/station.cpp ../src/units/station.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_system.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
-		../src/additional/vector.h \
+		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/renderer.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_ttf.h \
+		../src/engine/abstractrenderer.h \
+		../src/engine/image.h \
+		../src/engine/textformat.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/variant.h \
 		../src/loadable.h \
@@ -3214,10 +3445,11 @@ debug/guiswitch.o: ../src/gui/guiswitch.cpp ../src/gui/guiswitch.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_system.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
-		../src/additional/vector.h \
+		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/renderer.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_ttf.h \
+		../src/engine/abstractrenderer.h \
+		../src/engine/image.h \
+		../src/engine/textformat.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/variant.h \
 		../src/time/timer.h \
@@ -3295,7 +3527,7 @@ debug/visualeffect.o: ../src/additional/effects/visualeffect.cpp ../src/addition
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_system.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
-		../src/additional/vector.h
+		../src/engine/math/vector.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\visualeffect.o ..\src\additional\effects\visualeffect.cpp
 
 debug/guichoice.o: ../src/gui/guichoice.cpp ../src/gui/guichoice.h \
@@ -3351,10 +3583,11 @@ debug/guichoice.o: ../src/gui/guichoice.cpp ../src/gui/guichoice.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_system.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
-		../src/additional/vector.h \
+		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/renderer.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_ttf.h \
+		../src/engine/abstractrenderer.h \
+		../src/engine/image.h \
+		../src/engine/textformat.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/variant.h \
 		../src/time/timer.h \
@@ -3494,10 +3727,11 @@ debug/particle.o: ../src/units/particle.cpp ../src/units/particle.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_system.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
-		../src/additional/vector.h \
+		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/renderer.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_ttf.h \
+		../src/engine/abstractrenderer.h \
+		../src/engine/image.h \
+		../src/engine/textformat.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/variant.h \
 		../src/loadable.h \
@@ -3657,10 +3891,11 @@ debug/netlistener.o: ../src/netlistener.cpp ../src/netlistener.h \
 		../src/time/timer.h \
 		../src/worker.h \
 		../src/additional/event.h \
-		../src/additional/vector.h \
+		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/renderer.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_ttf.h \
+		../src/engine/abstractrenderer.h \
+		../src/engine/image.h \
+		../src/engine/textformat.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/variant.h \
 		../src/audio/audioplayer.h \
@@ -3691,7 +3926,7 @@ debug/netlistener.o: ../src/netlistener.cpp ../src/netlistener.h \
 
 debug/state.o: ../src/state.cpp ../src/state.h \
 		../src/additional/variant.h \
-		../src/additional/vector.h \
+		../src/engine/math/vector.h \
 		../src/object.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\state.o ..\src\state.cpp
 
@@ -3751,10 +3986,11 @@ debug/guimain.o: ../src/gui/guimain.cpp ../src/gui/guimain.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_system.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
-		../src/additional/vector.h \
+		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/renderer.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_ttf.h \
+		../src/engine/abstractrenderer.h \
+		../src/engine/image.h \
+		../src/engine/textformat.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/variant.h \
 		../src/time/timer.h \
@@ -3843,10 +4079,11 @@ debug/guicentralmessage.o: ../src/gui/guicentralmessage.cpp ../src/gui/guicentra
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_system.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
-		../src/additional/vector.h \
+		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/renderer.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_ttf.h \
+		../src/engine/abstractrenderer.h \
+		../src/engine/image.h \
+		../src/engine/textformat.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/variant.h \
 		../src/time/timer.h \
@@ -3929,10 +4166,11 @@ debug/controllerfinder.o: ../src/additional/informative/controllerfinder.cpp ../
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_system.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
-		../src/additional/vector.h \
+		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/renderer.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_ttf.h \
+		../src/engine/abstractrenderer.h \
+		../src/engine/image.h \
+		../src/engine/textformat.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/variant.h \
 		../src/time/timer.h \
@@ -4015,10 +4253,11 @@ debug/guifloatingmessage.o: ../src/gui/guifloatingmessage.cpp ../src/gui/guifloa
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_system.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
-		../src/additional/vector.h \
+		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/renderer.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_ttf.h \
+		../src/engine/abstractrenderer.h \
+		../src/engine/image.h \
+		../src/engine/textformat.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/variant.h \
 		../src/time/timer.h \
@@ -4104,10 +4343,11 @@ debug/guiblushingfloatingmessage.o: ../src/gui/guiblushingfloatingmessage.cpp ..
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_system.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
-		../src/additional/vector.h \
+		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/renderer.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_ttf.h \
+		../src/engine/abstractrenderer.h \
+		../src/engine/image.h \
+		../src/engine/textformat.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/variant.h \
 		../src/time/timer.h \
@@ -4136,12 +4376,12 @@ debug/guiblushingfloatingmessage.o: ../src/gui/guiblushingfloatingmessage.cpp ..
 		../src/capabilities/docker.h \
 		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h \
-		../src/additional/math.h \
-		../src/time/time.h
+		../src/time/time.h \
+		../src/engine/math/math.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\guiblushingfloatingmessage.o ..\src\gui\guiblushingfloatingmessage.cpp
 
-debug/math.o: ../src/additional/math.cpp ../src/additional/math.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\math.o ..\src\additional\math.cpp
+debug/math.o: ../src/engine/math/math.cpp ../src/engine/math/math.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\math.o ..\src\engine\math\math.cpp
 
 debug/lightparticle.o: ../src/additional/lightparticle.cpp ../src/additional/lightparticle.h \
 		../src/worker.h \
@@ -4192,10 +4432,11 @@ debug/lightparticle.o: ../src/additional/lightparticle.cpp ../src/additional/lig
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_system.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
-		../src/additional/vector.h \
+		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/renderer.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_ttf.h \
+		../src/engine/abstractrenderer.h \
+		../src/engine/image.h \
+		../src/engine/textformat.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/variant.h \
 		../src/time/timer.h \
@@ -4295,10 +4536,11 @@ debug/worldmanager.o: ../src/worldmanager.cpp ../src/worldmanager.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_system.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
-		../src/additional/vector.h \
+		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/renderer.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_ttf.h \
+		../src/engine/abstractrenderer.h \
+		../src/engine/image.h \
+		../src/engine/textformat.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/variant.h \
 		../src/time/timer.h \
@@ -4349,6 +4591,7 @@ debug/worldmanager.o: ../src/worldmanager.cpp ../src/worldmanager.h \
 		../src/additional/informative/unitsamountinfo.h \
 		../src/state.h \
 		../src/additional/spm.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_ttf.h \
 		../src/additional/effects/anaglyph.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\worldmanager.o ..\src\worldmanager.cpp
 
@@ -4405,9 +4648,10 @@ debug/defaultworld.o: ../src/worlds/defaultworld.cpp ../src/worlds/defaultworld.
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_system.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
-		../src/additional/vector.h \
-		../src/renderer.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_ttf.h \
+		../src/engine/math/vector.h \
+		../src/engine/abstractrenderer.h \
+		../src/engine/image.h \
+		../src/engine/textformat.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/variant.h \
 		../src/time/timer.h \
@@ -4496,9 +4740,10 @@ debug/arenaworld.o: ../src/worlds/arenaworld.cpp ../src/worlds/arenaworld.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_system.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
-		../src/additional/vector.h \
-		../src/renderer.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_ttf.h \
+		../src/engine/math/vector.h \
+		../src/engine/abstractrenderer.h \
+		../src/engine/image.h \
+		../src/engine/textformat.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/variant.h \
 		../src/time/timer.h \
@@ -4583,10 +4828,11 @@ debug/docker.o: ../src/capabilities/docker.cpp ../src/capabilities/docker.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_system.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
-		../src/additional/vector.h \
+		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/renderer.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_ttf.h \
+		../src/engine/abstractrenderer.h \
+		../src/engine/image.h \
+		../src/engine/textformat.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/variant.h \
 		../src/units/unit.h \
@@ -4610,7 +4856,6 @@ debug/docker.o: ../src/capabilities/docker.cpp ../src/capabilities/docker.h \
 		../src/audio/audio.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mixer.h \
 		../src/iinformative.h \
-		../src/additional/math.h \
 		../src/units/movable.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\docker.o ..\src\capabilities\docker.cpp
 
@@ -4665,10 +4910,11 @@ debug/near.o: ../src/near.cpp ../src/near.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_system.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
-		../src/additional/vector.h \
+		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/renderer.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_ttf.h \
+		../src/engine/abstractrenderer.h \
+		../src/engine/image.h \
+		../src/engine/textformat.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/variant.h \
 		../src/time/timer.h \
@@ -4754,10 +5000,11 @@ debug/guilist.o: ../src/gui/guilist.cpp ../src/gui/guilist.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_system.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
-		../src/additional/vector.h \
+		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/renderer.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_ttf.h \
+		../src/engine/abstractrenderer.h \
+		../src/engine/image.h \
+		../src/engine/textformat.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/variant.h \
 		../src/time/timer.h \
@@ -4845,10 +5092,11 @@ debug/aggressive.o: ../src/capabilities/aggressive.cpp ../src/capabilities/aggre
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_system.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
-		../src/additional/vector.h \
+		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/renderer.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_ttf.h \
+		../src/engine/abstractrenderer.h \
+		../src/engine/image.h \
+		../src/engine/textformat.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/variant.h \
 		../src/time/timer.h \
@@ -4939,9 +5187,10 @@ debug/heapworld.o: ../src/worlds/heapworld.cpp ../src/worlds/heapworld.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_system.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
-		../src/additional/vector.h \
-		../src/renderer.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_ttf.h \
+		../src/engine/math/vector.h \
+		../src/engine/abstractrenderer.h \
+		../src/engine/image.h \
+		../src/engine/textformat.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/variant.h \
 		../src/time/timer.h \
@@ -5076,10 +5325,11 @@ debug/audioplayer.o: ../src/audio/audioplayer.cpp ../src/audio/audioplayer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_shape.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_system.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
-		../src/additional/vector.h \
+		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/renderer.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_ttf.h \
+		../src/engine/abstractrenderer.h \
+		../src/engine/image.h \
+		../src/engine/textformat.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/variant.h \
 		../src/units/camera.h \
@@ -5107,11 +5357,11 @@ debug/audioplayer.o: ../src/audio/audioplayer.cpp ../src/audio/audioplayer.h \
 		../src/units/ship.h \
 		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h \
-		../src/additional/math.h
+		../src/engine/math/math.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\audioplayer.o ..\src\audio\audioplayer.cpp
 
 debug/variant.o: ../src/additional/variant.cpp ../src/additional/variant.h \
-		../src/additional/vector.h \
+		../src/engine/math/vector.h \
 		../src/object.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\variant.o ..\src\additional\variant.cpp
 
@@ -5167,10 +5417,11 @@ debug/guiminimap.o: ../src/gui/guiminimap.cpp ../src/gui/guiminimap.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_system.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
-		../src/additional/vector.h \
+		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/renderer.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_ttf.h \
+		../src/engine/abstractrenderer.h \
+		../src/engine/image.h \
+		../src/engine/textformat.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/variant.h \
 		../src/time/timer.h \
@@ -5259,10 +5510,11 @@ debug/guiradar.o: ../src/gui/guiradar.cpp ../src/gui/guiradar.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_system.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
-		../src/additional/vector.h \
+		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/renderer.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_ttf.h \
+		../src/engine/abstractrenderer.h \
+		../src/engine/image.h \
+		../src/engine/textformat.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/variant.h \
 		../src/time/timer.h \
@@ -5346,10 +5598,11 @@ debug/thruster.o: ../src/capabilities/modules/thruster.cpp ../src/capabilities/m
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_system.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
-		../src/additional/vector.h \
+		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/renderer.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_ttf.h \
+		../src/engine/abstractrenderer.h \
+		../src/engine/image.h \
+		../src/engine/textformat.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/variant.h \
 		../src/loadable.h \
@@ -5427,10 +5680,11 @@ debug/guimenuelement.o: ../src/gui/guimenuelement.cpp ../src/gui/guimenuelement.
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_system.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
-		../src/additional/vector.h \
+		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/renderer.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_ttf.h \
+		../src/engine/abstractrenderer.h \
+		../src/engine/image.h \
+		../src/engine/textformat.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/variant.h \
 		../src/time/timer.h \
@@ -5513,10 +5767,11 @@ debug/unitsamountinfo.o: ../src/additional/informative/unitsamountinfo.cpp ../sr
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_system.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
-		../src/additional/vector.h \
+		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/renderer.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_ttf.h \
+		../src/engine/abstractrenderer.h \
+		../src/engine/image.h \
+		../src/engine/textformat.h \
 		../src/additional/effects/visualeffect.h \
 		../src/additional/variant.h \
 		../src/iinformative.h
@@ -5569,13 +5824,15 @@ debug/environment.o: ../src/environment.cpp ../src/environment.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_system.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
+		../src/engine/abstractrenderengine.h \
+		../src/engine/abstractrenderer.h \
+		../src/engine/image.h \
+		../src/engine/textformat.h \
+		../src/engine/math/vector.h \
+		../src/additional/effects/visualeffect.h \
+		../src/additional/variant.h \
 		../src/object.h \
 		../src/state.h \
-		../src/additional/variant.h \
-		../src/additional/vector.h \
-		../src/renderer.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_ttf.h \
-		../src/additional/effects/visualeffect.h \
 		../src/worker.h \
 		../src/additional/event.h \
 		../src/assetmanager.h \
@@ -5631,7 +5888,10 @@ debug/environment.o: ../src/environment.cpp ../src/environment.h \
 		../src/debug.h \
 		../src/units/camera.h \
 		../src/time/time.h \
-		../src/filesystem.h
+		../src/filesystem.h \
+		../src/sdlimplementation/sdlgraphicsprovider.h \
+		../src/sdlimplementation/sdlrenderer.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_ttf.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\environment.o ..\src\environment.cpp
 
 ####### Install

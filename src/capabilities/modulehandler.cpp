@@ -79,7 +79,7 @@ void ModuleHandler::tick(Context *context, Event *event) {
     }
 }
 
-void ModuleHandler::render(Renderer *renderer) {
+void ModuleHandler::render(e172::AbstractRenderer *renderer) {
     for(Module *module : modules) {
         module->render(renderer);
     }

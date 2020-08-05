@@ -35,7 +35,7 @@ std::vector<Controller *> ArenaWorld::generate(AssetManager *assets, std::vector
 
     //player1 ship
     Unit *playerShip = static_cast<Unit*>(assets->copyAsset("sh1"));
-    playerShip->place(Vector(100, 100), -0.7);
+    playerShip->place(e172::Vector(100, 100), -0.7);
     playerShip->addCapability(player1);
     ModuleHandler *playerModuleHandler = new ModuleHandler();
     playerModuleHandler->addModule(static_cast<Module*>(assets->copyAsset("pistol")));
@@ -46,7 +46,7 @@ std::vector<Controller *> ArenaWorld::generate(AssetManager *assets, std::vector
 
     //player2 ship
     Unit *player2ship = static_cast<Unit*>(assets->copyAsset("sh2"));
-    player2ship->place(Vector(0, 100), -0.7);
+    player2ship->place(e172::Vector(0, 100), -0.7);
     ModuleHandler *player2ModuleHandler = new ModuleHandler();
     player2ModuleHandler->addModule(static_cast<Module*>(assets->copyAsset("plasma-launcher")));
     player2ModuleHandler->addModule(static_cast<Module*>(assets->copyAsset("engine1")));
@@ -58,7 +58,7 @@ std::vector<Controller *> ArenaWorld::generate(AssetManager *assets, std::vector
 
 
     Movable *unit = dynamic_cast<Movable*>(assets->copyAsset("sh1"));
-    unit->place(Vector(), Vector(), Vector(), 0);
+    unit->place(e172::Vector(), e172::Vector(), e172::Vector(), 0);
     unit->addCapability(new Aggressive(units));
     ModuleHandler *mh = new ModuleHandler();
     mh->addModule(static_cast<Module*>(assets->copyAsset("pistol")));

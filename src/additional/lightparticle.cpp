@@ -21,7 +21,7 @@ LightParticle::LightParticle(unsigned shape, int averageLifeTime, int lifeTimeDe
     velocityMultiplier = static_cast<double>((std::rand() % 4 + 3)) / 5;
 }
 
-void LightParticle::place(Vector pos, Vector vel) {
+void LightParticle::place(e172::Vector pos, e172::Vector vel) {
     this->pos = pos;
     this->vel = vel;
 }
@@ -39,10 +39,10 @@ void LightParticle::tick(Context *context, Event *event) {
     pos += vel * Time::getDeltaTime() * 0.1;
 }
 
-void LightParticle::render(Renderer *renderer) {
+void LightParticle::render(e172::AbstractRenderer *renderer) {
     switch (shape) {
-        case PIXEL: renderer->pixel(renderer->getOffset() + pos, color); break;
-        case SQUARE: renderer->square(renderer->getOffset() + pos, radius, color); break;
-        case CIRCLE: renderer->circle(renderer->getOffset() + pos, radius, color); break;
+        case PIXEL: renderer->drawPixel(renderer->offset() + pos, color); break;
+        case SQUARE: renderer->drawSquare(renderer->offset() + pos, radius, color); break;
+        case CIRCLE: renderer->drawCircle(renderer->offset() + pos, radius, color); break;
     }
 }

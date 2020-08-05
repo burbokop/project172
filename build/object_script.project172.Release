@@ -6,10 +6,15 @@ release/kmetafunction.o
 release/kabstractfactory.o
 release/kpull.o
 release/kmoduleswitch.o
+release/abstractrenderengine.o
+release/abstractrenderer.o
+release/image.o
+release/textformat.o
 release/main.o
 release/object.o
+release/sdlgraphicsprovider.o
+release/sdlrenderer.o
 release/worker.o
-release/renderer.o
 release/world.o
 release/assetmanager.o
 release/filesystem.o

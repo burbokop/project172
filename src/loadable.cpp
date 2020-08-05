@@ -9,7 +9,7 @@ Loadable::Loadable(Loadable *tmp) {
     tmp->clone(this);
 }
 
-Loadable::Loadable(Json::Value root, Animator animator, AudioPlayer audioPlayer, Timer timer, Vector offset) {
+Loadable::Loadable(Json::Value root, Animator animator, AudioPlayer audioPlayer, Timer timer, e172::Vector offset) {
     this->root = root;
     this->animator = animator;
     this->audioPlayer = audioPlayer;

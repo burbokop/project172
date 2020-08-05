@@ -22,10 +22,15 @@ unix {
 
 
 SOURCES += \
+    src/engine/abstractrenderengine.cpp \
+    src/engine/abstractrenderer.cpp \
+    src/engine/image.cpp \
+    src/engine/textformat.cpp \
     src/main.cpp \
     src/object.cpp \
+    src/sdlimplementation/sdlgraphicsprovider.cpp \
+    src/sdlimplementation/sdlrenderer.cpp \
     src/worker.cpp \
-    src/renderer.cpp \
     src/worlds/world.cpp \
     src/assetmanager.cpp \
     src/filesystem.cpp \
@@ -43,7 +48,7 @@ SOURCES += \
     src/additional/spm.cpp \
     src/time/timer.cpp \
     src/additional/event.cpp \
-    src/additional/vector.cpp \
+    src/engine/math/vector.cpp \
     src/additional/stringformer.cpp \
     src/additional/effects/anaglyph.cpp \
     src/loadable.cpp \
@@ -79,7 +84,7 @@ SOURCES += \
     src/additional/informative/controllerfinder.cpp \
     src/gui/guifloatingmessage.cpp \
     src/gui/guiblushingfloatingmessage.cpp \
-    src/additional/math.cpp \
+    src/engine/math/math.cpp \
     src/additional/lightparticle.cpp \
     src/worldmanager.cpp \
     src/worlds/defaultworld.cpp \
@@ -107,9 +112,14 @@ SOURCES += \
 
 
 HEADERS += \
+    src/engine/abstractrenderengine.h \
+    src/engine/abstractrenderer.h \
+    src/engine/image.h \
+    src/engine/textformat.h \
     src/object.h \
+    src/sdlimplementation/sdlgraphicsprovider.h \
+    src/sdlimplementation/sdlrenderer.h \
     src/worker.h \
-    src/renderer.h \
     src/worlds/world.h \
     src/assetmanager.h \
     src/filesystem.h \
@@ -127,7 +137,7 @@ HEADERS += \
     src/additional/spm.h \
     src/time/timer.h \
     src/additional/event.h \
-    src/additional/vector.h \
+    src/engine/math/vector.h \
     src/additional/stringformer.h \
     src/additional/effects/anaglyph.h \
     src/loadable.h \
@@ -173,7 +183,7 @@ HEADERS += \
     src/additional/informative/controllerfinder.h \
     src/gui/guifloatingmessage.h \
     src/gui/guiblushingfloatingmessage.h \
-    src/additional/math.h \
+    src/engine/math/math.h \
     src/additional/lightparticle.h \
     src/worldmanager.h \
     src/worlds/defaultworld.h \

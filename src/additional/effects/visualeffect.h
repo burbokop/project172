@@ -4,17 +4,17 @@
 #include <SDL2/SDL.h>
 
 
-#include "additional/vector.h"
+#include "engine/math/vector.h"
 
 
 class VisualEffect {
 protected:
-    Vector offset;
+    e172::Vector offset;
 public:
     VisualEffect();
-    VisualEffect(Vector offset);
+    VisualEffect(e172::Vector offset);
     virtual SDL_Surface *operator()(SDL_Surface *input);
-    void setOffset(const Vector &value);
+    void setOffset(const e172::Vector &value);
     virtual ~VisualEffect();
 };
 

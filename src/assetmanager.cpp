@@ -10,11 +10,13 @@
 #include "units/projectile.h"
 #include "units/station.h"
 
+#include <engine/abstractrenderengine.h>
+
 
 AssetManager::AssetManager() {}
 
 
-void AssetManager::search(std::string path) {
+void AssetManager::search(std::string path, e172::AbstractGraphicsProvider *renderEngine) {
     Debug::out("AssetManager: assets path: " + path);
 
     if(path[path.length() - 1] == '/') path.pop_back();
@@ -23,9 +25,9 @@ void AssetManager::search(std::string path) {
         std::string item = items[i];
         std::string file = path + '/' + item;
         if(FileSystem::isDir(file)) {
-            search(file);
+            search(file, renderEngine);
         } else {
-            processFile(file, path);
+            processFile(file, path, renderEngine);
         }
     }
 }
@@ -70,7 +72,7 @@ std::vector<std::string> AssetManager::getKeys() {
     return result;
 }
 
-void AssetManager::processFile(std::string file, std::string location) {
+void AssetManager::processFile(std::string file, std::string location, e172::AbstractGraphicsProvider *renderEngine) {
     std::string sufix = FileSystem::getSufix(file);
     if(sufix == ".json") {
         std::string content = FileSystem::readFile(file);
@@ -90,7 +92,7 @@ void AssetManager::processFile(std::string file, std::string location) {
                  Json::Value tracks = animation["tracks"];
                  Json::Value play = animation["play"];
                  if(!spritesheet.isNull()) {
-                     anim = Animator(IMG_Load(FileSystem::addPrefix(spritesheet.asString(), location).c_str()), frames.isNull() ? 1 : frames.asInt(), tracks.isNull() ? 1 : tracks.asInt());
+                     anim = Animator(renderEngine->loadImage(FileSystem::addPrefix(spritesheet.asString(), location)), frames.isNull() ? 1 : frames.asInt(), tracks.isNull() ? 1 : tracks.asInt());
                      if(play.isString()) {
                          if(play == "loop") {
                              anim.play(Animator::LOOP);
@@ -102,7 +104,7 @@ void AssetManager::processFile(std::string file, std::string location) {
                      }
                  }
             } else if (!sprite.isNull()) {
-                anim = Animator(IMG_Load(FileSystem::addPrefix(sprite.asString(), location).c_str()));
+                anim = Animator(renderEngine->loadImage(FileSystem::addPrefix(sprite.asString(), location)));
                 anim.play(Animator::LOOP);
             }
 
@@ -150,7 +152,7 @@ void AssetManager::processFile(std::string file, std::string location) {
                 offsetX = offset.get("x", 0.0).asDouble();
                 offsetY = offset.get("y", 0.0).asDouble();
             }
-            Vector offsetVector(offsetX, offsetY);
+            e172::Vector offsetVector(offsetX, offsetY);
 
             assets[key.asString()] = new Loadable(root, anim, audioPlayer, timer, offsetVector);
         }

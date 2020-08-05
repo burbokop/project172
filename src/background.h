@@ -4,13 +4,14 @@
 #include <SDL2/SDL.h>
 
 
-#include "additional/vector.h"
+#include <src/engine/math/vector.h>
 #include "worker.h"
 #include "time/timer.h"
+#include <vector>
 
 
 struct Star {
-    Vector pos;
+    e172::Vector pos;
     Uint32 color;
 };
 
@@ -25,11 +26,11 @@ private:
 
     Uint32 mainColor = DEFAULT_MAIN_COLOR;
     std::vector<Star> stars;
-    Vector speed;
+    e172::Vector speed;
     unsigned int amount;
     double slidingStart;
 
-    Vector resolution;
+    e172::Vector resolution;
     Timer observer = Timer(4000);
 
 
@@ -38,16 +39,16 @@ private:
     Uint32 colorBuffer = DEFAULT_MAIN_COLOR;
     int flashesRemains = 0;
 
-    void onResolutionChange(Vector resolution);
+    void onResolutionChange(e172::Vector resolution);
 public:
-    Background(Vector resolution, unsigned int amount, double slidingStart = STARS_SLIDING_SPEED);
+    Background(e172::Vector resolution, unsigned int amount, double slidingStart = STARS_SLIDING_SPEED);
 
 
     // Worker interface
 public:
     void tick(Context *context, Event *event);
-    void render(Renderer *renderer);
-    void setSpeed(const Vector &value);
+    void render(e172::AbstractRenderer *renderer);
+    void setSpeed(const e172::Vector &value);
 
     void flashing(int repeats);
 };

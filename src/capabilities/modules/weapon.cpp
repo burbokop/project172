@@ -40,7 +40,7 @@ void Weapon::tick(Context *context, Event *event) {
             Projectile *object = static_cast<Projectile*>(context->getAssets()->copyAsset(projectile.asString()));
             object->setMother(parent);
 
-            object->place(parent->getPosition(), parent->getVelocity() + Vector::createByAngle(getProjectileSpead(), this->parent->getAngle()), Vector(), this->parent->getAngle());
+            object->place(parent->getPosition(), parent->getVelocity() + e172::Vector::createByAngle(getProjectileSpead(), this->parent->getAngle()), e172::Vector(), this->parent->getAngle());
 
             context->getUnits()->push_back(object);
 

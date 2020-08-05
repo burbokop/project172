@@ -1,7 +1,6 @@
 #include "module.h"
 #include "units/unit.h"
 #include "units/camera.h"
-#include "additional/math.h"
 
 Module::Module() {
 }
@@ -20,14 +19,14 @@ void Module::tick(Context *context, Event *event) {
     this->audioPlayer.tick(context, event);
 }
 
-void Module::render(Renderer *renderer) {
+void Module::render(e172::AbstractRenderer *renderer) {
     Camera* cam = renderer->getCamera();
     if(cam) {
         audioPlayer.setVolumeByDistance((parent->getPosition() - cam->getPosition()).module());
     }
 
     this->animator.setAngle(parent->getAngle());
-    Vector local = parent->getPosition() + Vector::createByAngle(-this->attachOffset.module(), parent->getAngle());
+    e172::Vector local = parent->getPosition() + e172::Vector::createByAngle(-this->attachOffset.module(), parent->getAngle());
     this->animator.setPosition(local);
     this->animator.render(renderer);
 }

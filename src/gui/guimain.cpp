@@ -45,7 +45,7 @@ void GUIMain::tick(Context *context, Event *event) {
     if(miniMap) miniMap->tick(context, event);
 }
 
-void GUIMain::render(Renderer *renderer) {
+void GUIMain::render(e172::AbstractRenderer *renderer) {
     if(menu) menu->render(renderer);
     if(centralMessage) centralMessage->render(renderer);
     if(floatingMessage) floatingMessage->render(renderer);

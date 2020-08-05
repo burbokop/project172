@@ -32,6 +32,6 @@ void GUIMenuElement::tick(Context *context, Event *event) {
     UNUSED(event);
 }
 
-void GUIMenuElement::render(Renderer *renderer) {
+void GUIMenuElement::render(e172::AbstractRenderer *renderer) {
     UNUSED(renderer);
 }

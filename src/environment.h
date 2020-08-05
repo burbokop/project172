@@ -3,10 +3,12 @@
 
 #include <SDL2/SDL.h>
 
+#include <engine/abstractrenderengine.h>
+
+
 
 #include "object.h"
 #include "state.h"
-#include "renderer.h"
 #include "worker.h"
 #include "assetmanager.h"
 #include "additional/event.h"
@@ -20,7 +22,6 @@
 class Environment : public Object {
 private:
     State *state = nullptr;
-    Renderer *renderer = nullptr;
     std::vector<Worker*> *units = nullptr;
     AssetManager *assetManager = nullptr;
     Context *context = nullptr;
@@ -30,6 +31,8 @@ private:
     FPSMonitor *tps = nullptr;
     NetListener *netListener = nullptr;
     WorldManager *worldManager = nullptr;
+    e172::AbstractGraphicsProvider *renderEngine = nullptr;
+    e172::AbstractRenderer *renderer = nullptr;
 
 public:
     Environment(std::vector<std::string> args);

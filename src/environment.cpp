@@ -10,6 +10,8 @@
 #include "time/time.h"
 #include "filesystem.h"
 
+#include <sdlimplementation/sdlgraphicsprovider.h>
+
 
 
 Environment::Environment(std::vector<std::string> args) {
@@ -25,10 +27,10 @@ Environment::Environment(std::vector<std::string> args) {
     event = new Event(); // io {no}
     netListener = new NetListener(context);
 
-    //renderer = new Renderer("project172", 600, 600, FileSystem::cutPath(args[0], 2) + "/assets/fonts/ZCOOL.ttf"); //render [no]
-    renderer = new Renderer("project172", 600, 600, "../assets/fonts/ZCOOL.ttf"); //render [no]
+    renderEngine = new SDLGraphicsProvider("project172", 600, 600, "../assets/fonts/ZCOOL.ttf");
+    renderer = renderEngine->renderer();
 
-    background = new Background(renderer->getResolution(), 128);
+    background = new Background(renderer->resolution(), 128);
 
     worldManager = new WorldManager({ new DefaultWorld(), new ArenaWorld(), new HeapWorld() });
 
@@ -38,7 +40,7 @@ Environment::Environment(std::vector<std::string> args) {
     std::cout << "lll: " << args[0] << "\n";
 
     //assetManager->search(FileSystem::cutPath(args[0], 2) + "/assets");
-    assetManager->search("../assets");
+    assetManager->search("../assets", renderEngine);
 
     worldManager->checkState(context, assetManager, units, renderer, fps, tps);
     context->setBackground(background);

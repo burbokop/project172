@@ -6,10 +6,15 @@ debug/kmetafunction.o
 debug/kabstractfactory.o
 debug/kpull.o
 debug/kmoduleswitch.o
+debug/abstractrenderengine.o
+debug/abstractrenderer.o
+debug/image.o
+debug/textformat.o
 debug/main.o
 debug/object.o
+debug/sdlgraphicsprovider.o
+debug/sdlrenderer.o
 debug/worker.o
-debug/renderer.o
 debug/world.o
 debug/assetmanager.o
 debug/filesystem.o

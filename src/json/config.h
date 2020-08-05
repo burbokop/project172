@@ -19,7 +19,7 @@
 
 /// If defined, indicates that json may leverage CppTL library
 //#  define JSON_USE_CPPTL 1
-/// If defined, indicates that cpptl vector based map should be used instead of
+/// If defined, indicates that cpptl e172::Vector based map should be used instead of
 /// std::map
 /// as Value container.
 //#  define JSON_USE_CPPTL_SMALLMAP 1

@@ -17,32 +17,32 @@ void GUIMiniMap::tick(Context *context, Event *event) {
     }
 }
 
-void GUIMiniMap::render(Renderer *renderer) {
-    Vector size = renderer->getResolution() / sizeRelation;
+void GUIMiniMap::render(e172::AbstractRenderer *renderer) {
+    e172::Vector size = renderer->resolution() / sizeRelation;
 
-    Vector point2 = renderer->getResolution() - Vector(margin, margin);
-    Vector point1 = point2 - size;
-    if(point1.quarter() == Vector::QUARTER_RIGHT_DOWN) {
-        renderer->rect(point1, point2, DEFAULT_COLOR);
+    e172::Vector point2 = renderer->resolution() - e172::Vector(margin, margin);
+    e172::Vector point1 = point2 - size;
+    if(point1.quarter() == e172::Vector::QUARTER_RIGHT_DOWN) {
+        renderer->drawRect(point1, point2, DEFAULT_COLOR);
 
-        Vector playerShipPosOnMap;
+        e172::Vector playerShipPosOnMap;
         for(Worker *worker : *units) {
             Unit *unit = dynamic_cast<Unit*>(worker);
             if(unit) {
-                Vector posOnMap = ((unit->getPosition() - renderer->getCamera()->getPosition()) / range * size.module()) + (size / 2);
+                e172::Vector posOnMap = ((unit->getPosition() - renderer->getCamera()->getPosition()) / range * size.module()) + (size / 2);
 
-                if(posOnMap.quarter() == Vector::QUARTER_RIGHT_DOWN && (size - posOnMap).quarter() == Vector::QUARTER_RIGHT_DOWN) {
+                if(posOnMap.quarter() == e172::Vector::QUARTER_RIGHT_DOWN && (size - posOnMap).quarter() == e172::Vector::QUARTER_RIGHT_DOWN) {
                     if(unit->is<Projectile*>()) {
-                        renderer->square(point1 + posOnMap, 1, SELECTED_COLOR);
+                        renderer->drawSquare(point1 + posOnMap, 1, SELECTED_COLOR);
                     } else if (unit->isNot<LightParticle*>()) {
                         if(unit->is<Camera*>()) {
-                            renderer->line(point1 + posOnMap, point1 + playerShipPosOnMap, SELECTED_COLOR);
-                            renderer->circle(point1 + posOnMap, 4, SELECTED_COLOR >> 8);
+                            renderer->drawLine(point1 + posOnMap, point1 + playerShipPosOnMap, SELECTED_COLOR);
+                            renderer->drawCircle(point1 + posOnMap, 4, SELECTED_COLOR >> 8);
                         } else if(player && unit == player->getParent()) {
                             playerShipPosOnMap = posOnMap;
-                            renderer->circle(point1 + posOnMap, 2, SELECTED_COLOR << 8);
+                            renderer->drawCircle(point1 + posOnMap, 2, SELECTED_COLOR << 8);
                         } else {
-                            renderer->circle(point1 + posOnMap, 2, SELECTED_COLOR << 8);
+                            renderer->drawCircle(point1 + posOnMap, 2, SELECTED_COLOR << 8);
                         }
                     }
                 }

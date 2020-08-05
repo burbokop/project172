@@ -19,8 +19,8 @@ GUIFloatingMessage::GUIFloatingMessage(Unit *parent, IInformative *informative) 
     this->parent = parent;
 }
 
-void GUIFloatingMessage::render(Renderer *renderer) {
-    renderer->stringCentered(getTitle(), parent->getPosition() + renderer->getOffset() + Vector(0.0, horisontalOffset), DEFAULT_COLOR, DEFAULT_FONT_SIZE);
+void GUIFloatingMessage::render(e172::AbstractRenderer *renderer) {
+    renderer->drawString(getTitle(), parent->getPosition() + renderer->offset() + e172::Vector(0.0, horisontalOffset), DEFAULT_COLOR, e172::TextFormat(DEFAULT_FONT_SIZE));
 
     //tttt
     horisontalOffset -= Time::getDeltaTime() * DEFAULT_FLOATING_SPEED;

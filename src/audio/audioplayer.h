@@ -32,7 +32,7 @@ public:
 
 
     void tick(Context *context, Event *event);
-    void render(Renderer *renderer);
+    void render(e172::AbstractRenderer *renderer);
 
     void setVolume(int volume);
     void setVolumeByDistance(double distance);

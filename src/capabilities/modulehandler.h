@@ -29,7 +29,7 @@ public:
     // Worker interface
 public:
     void tick(Context *context, Event *event) override;
-    void render(Renderer *renderer) override;
+    void render(e172::AbstractRenderer *renderer) override;
 };
 
 #endif // MODULEHANDLER_H

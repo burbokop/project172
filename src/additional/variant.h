@@ -3,7 +3,7 @@
 
 #include <cstdint>
 
-#include "additional/vector.h"
+#include <src/engine/math/vector.h>
 #include "object.h"
 
 class Unit;
@@ -22,7 +22,7 @@ private:
 
         OBJECT,
         UNIT,
-        VECTOR,
+        Vector,
     } type = UNDEFINED;
 
 
@@ -31,7 +31,7 @@ private:
         double number;
         void *ptr;
         Unit *unit;
-        Vector vector;
+        e172::Vector vector;
     } data;
 
 public:
@@ -47,7 +47,7 @@ public:
 
     Variant(void *value);
     Variant(Unit *value);
-    Variant(Vector value);
+    Variant(e172::Vector value);
 
     signed int toInt32();
     signed long long toInt64();
@@ -58,7 +58,7 @@ public:
 
     void *toObject();
     Unit *toUnit();
-    Vector toVector();
+    e172::Vector toVector();
 
 
     bool isInt32();

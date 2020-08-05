@@ -20,21 +20,22 @@ Animator::Animator() {
 
 }
 
-Animator::Animator(SDL_Surface *origin, int frames, int tracks) {
+Animator::Animator(const e172::Image &origin, int frames, int tracks) {
     this->angle = 0;
     this->zoom = 1;
 
     this->origin = origin;
     maxFrame = frames;
     maxTrack = tracks;
-    const int frameWidth = origin->w / frames;
-    const int frameHeigth = origin->h / tracks;
+    const int frameWidth = origin.width() / frames;
+    const int frameHeigth = origin.height() / tracks;
 
     currentFrame = 0;
     currentTrack = 0;
 
     for(int i = 0; i < maxFrame; i++) {
-        this->frames.push_back(SPM::CutOutSurface(origin, i * frameWidth, 0, frameWidth, frameHeigth));
+        // OLD VERSION (DO NOT DELETE): this->frames.push_back(SPM::CutOutSurface(origin, i * frameWidth, 0, frameWidth, frameHeigth));
+        this->frames.push_back(origin.nub(i * frameWidth, 0, frameWidth, frameHeigth));
     }
 }
 
@@ -48,7 +49,7 @@ void Animator::tick(Context *context, Event *event) {
     UNUSED(event);
 }
 
-void Animator::setPosition(Vector pos) {
+void Animator::setPosition(e172::Vector pos) {
     this->pos = pos;
 }
 
@@ -60,10 +61,10 @@ void Animator::setZoom(double zoom) {
     this->zoom = zoom;
 }
 
-void Animator::render(Renderer *renderer) {
+void Animator::render(e172::AbstractRenderer *renderer) {
     if (renderer != nullptr && this->mode != NOTRENDER) {
-        Vector local = pos + renderer->getOffset();
-        renderer->image(frames[static_cast<unsigned long>(currentFrame)], local, angle, zoom);
+        e172::Vector local = pos + renderer->offset();
+        renderer->drawImage(frames[static_cast<unsigned long>(currentFrame)], local, angle, zoom);
     }
     if(this->timer.count()) {
         if(this->mode == LOOP) {

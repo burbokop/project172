@@ -48,6 +48,6 @@ void Controller::tick(Context *context, Event *event) {
     }
 }
 
-void Controller::render(Renderer *renderer) {
+void Controller::render(e172::AbstractRenderer *renderer) {
     UNUSED(renderer);
 }

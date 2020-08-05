@@ -22,7 +22,7 @@ protected:
     std::vector<Capability*> capabilities;
 
 
-    Vector pos;
+    e172::Vector pos;
 
 
 public:
@@ -30,7 +30,7 @@ public:
     Unit(Loadable *tmp);
 
 
-    void place(Vector pos, double angle);
+    void place(e172::Vector pos, double angle);
 
     void addCapability(Capability *capability);
     void removeCapability(Capability *capability);
@@ -47,8 +47,8 @@ public:
     void unlockAngle();
 
 
-    Vector getPosition();
-    virtual Vector getVelocity();
+    e172::Vector getPosition();
+    virtual e172::Vector getVelocity();
     double getAngle();
 
     virtual void hit(Context *context, int value);
@@ -56,7 +56,7 @@ public:
     // Worker interface
 public:
     void tick(Context *context, Event *event);
-    void render(Renderer *renderer);
+    void render(e172::AbstractRenderer *renderer);
 
     ~Unit();
 

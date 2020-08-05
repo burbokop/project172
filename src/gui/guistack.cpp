@@ -36,7 +36,7 @@ void GUIStack::tick(Context *context, Event *event) {
     }
 }
 
-void GUIStack::render(Renderer *renderer) {
+void GUIStack::render(e172::AbstractRenderer *renderer) {
     if(current) {
         current->render(renderer);
     }

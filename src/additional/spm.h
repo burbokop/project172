@@ -51,7 +51,7 @@ public:
     static void BlendedText(SDL_Surface *surface, std::string text_line, TTF_Font *text_font, int text_x, int text_y, SDL_Color text_color);
     static void BlendedText(SDL_Surface *surface, std::string text_line, TTF_Font *text_font, int text_x, int text_y, Uint32 color, Uint32 wrap = 1024);
 
-    static SDL_Surface *CutOutSurface(SDL_Surface *surface, int x, int y, int w, int h);
+    static SDL_Surface *CutOutSurface(const SDL_Surface *surface, int x, int y, int w, int h);
     static SDL_Surface *Flip(SDL_Surface *surface, bool xFlip, bool yFlip);
 };
 

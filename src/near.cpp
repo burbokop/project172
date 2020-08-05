@@ -9,7 +9,7 @@ const double Near::DEFAULT_RADIUS = 512;
 const double Near::WARP_RADIUS_MILTIPLIER = 8;
 
 
-Near::Near(std::vector<Worker*> *origin, Controller *center, double radius) {
+Near::Near(std::vector<Worker *> *origin, Controller *center, double radius) {
     this->origin = origin;
     this->focus = new std::vector<Worker*>();
     this->center = center;

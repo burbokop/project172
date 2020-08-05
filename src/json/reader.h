@@ -125,8 +125,8 @@ public:
    */
   String getFormattedErrorMessages() const;
 
-  /** \brief Returns a vector of structured erros encounted while parsing.
-   * \return A (possibly empty) vector of StructuredError objects. Currently
+  /** \brief Returns a e172::Vector of structured erros encounted while parsing.
+   * \return A (possibly empty) e172::Vector of StructuredError objects. Currently
    *         only one error can be returned, but the caller should tolerate
    * multiple
    *         errors.  This can occur if the parser recovers from a non-fatal

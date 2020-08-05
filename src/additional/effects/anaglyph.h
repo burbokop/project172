@@ -9,7 +9,7 @@
 class Anaglyph : public VisualEffect {
 public:
     Anaglyph();
-    Anaglyph(Vector offset);
+    Anaglyph(e172::Vector offset);
 
 // VisualEffect interface
 public:

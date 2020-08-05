@@ -19,8 +19,8 @@ public:
 
 
 private:
-    Vector pos;
-    Vector vel;
+    e172::Vector pos;
+    e172::Vector vel;
 
     unsigned shape = PIXEL;
     int radius = 2;
@@ -31,12 +31,12 @@ private:
 
 public:
     LightParticle(unsigned shape = PIXEL, int averageLifeTime = DEFAULT_AVERAGE_LIFE_TIME, int lifeTimeDelta = DEFAULT_LIFE_TIME_DELTA);
-    void place(Vector pos, Vector vel);
+    void place(e172::Vector pos, e172::Vector vel);
 
     // Worker interface
 public:
     void tick(Context *context, Event *event);
-    void render(Renderer *renderer);
+    void render(e172::AbstractRenderer *renderer);
 };
 
 #endif // LIGHTPARTICLE_H

@@ -120,7 +120,7 @@ void Player::tick(Context *context, Event *event) {
     this->Controller::tick(context, event);
 }
 
-void Player::render(Renderer *renderer) {
+void Player::render(e172::AbstractRenderer *renderer) {
     UNUSED(renderer);
 }
 

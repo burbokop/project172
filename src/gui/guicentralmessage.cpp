@@ -19,17 +19,17 @@ void GUICentralMessage::start(int flashesRemains, unsigned interval) {
     this->visible = true;
 }
 
-void GUICentralMessage::render(Renderer *renderer) {
+void GUICentralMessage::render(e172::AbstractRenderer *renderer) {
     if(visible) {
-        Vector center = renderer->getResolution() / 2.0;
+        e172::Vector center = renderer->resolution() / 2.0;
         std::string string = getTitle();
-        int fontSize = renderer->getResolution().getIntY() / 16;
-        Vector offset = renderer->getStringSize(string, fontSize) / 2;
-        Vector pos1 = center - offset;
-        Vector pos2 = center + offset;
+        int fontSize = renderer->resolution().intY() / 16;
+        e172::Vector offset = renderer->getStringSize(string, fontSize) / 2;
+        e172::Vector pos1 = center - offset;
+        e172::Vector pos2 = center + offset;
 
-        renderer->string(string, pos1, 0xFFBA73, fontSize);
-        renderer->rect(pos1 - Vector(16, 16), pos2 + Vector(16, 24), 0xFFBA73);
+        renderer->drawString(string, pos1, 0xFFBA73, fontSize);
+        renderer->drawRect(pos1 - e172::Vector(16, 16), pos2 + e172::Vector(16, 24), 0xFFBA73);
     }
 
     if(flashingTimer && flashingTimer->count()) {

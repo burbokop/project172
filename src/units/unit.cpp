@@ -3,7 +3,8 @@
 #include "projectile.h"
 #include "units/station.h"
 #include "time/time.h"
-#include "additional/math.h"
+
+#include <engine/math/math.h>
 
 const double Unit::DEFAULT_ROTATION_SPEED = 0.0014 * 1000;
 const double Unit::ANGLE_DELTA_MULTIPLIER = 2;
@@ -19,7 +20,7 @@ Unit::Unit(Loadable *tmp) {
     tmp->clone(this);
 }
 
-void Unit::place(Vector pos, double angle) {
+void Unit::place(e172::Vector pos, double angle) {
     this->pos = pos;
     this->angle = angle;
 }
@@ -60,21 +61,21 @@ Docker *Unit::getDocker() {
 }
 
 void Unit::rotateLeft() {
-    angle = Math::constrainAngle(angle - (getRotationSpeed() * Time::getDeltaTime()));
+    angle = e172::Math::constrainAngle(angle - (getRotationSpeed() * Time::getDeltaTime()));
 }
 
 void Unit::rotateRight() {
-    angle = Math::constrainAngle(angle + (getRotationSpeed() * Time::getDeltaTime()));
+    angle = e172::Math::constrainAngle(angle + (getRotationSpeed() * Time::getDeltaTime()));
 }
 
 void Unit::lockAngle(double angle) {
     angleLocked = true;
-    dstAngle = Math::constrainAngle(angle);
+    dstAngle = e172::Math::constrainAngle(angle);
 }
 
 
 void Unit::rotateToAngle(double angle) {
-    angle = Math::constrainAngle(angle);
+    angle = e172::Math::constrainAngle(angle);
     const double delta = getRotationSpeed() * Time::getDeltaTime() * ANGLE_DELTA_MULTIPLIER;
     if(angle + delta - getAngle() < 0) {
         if(std::abs(angle - getAngle()) < M_PI) {
@@ -92,7 +93,7 @@ void Unit::rotateToAngle(double angle) {
 }
 
 bool Unit::isOnAngle(double angle) {
-    angle = Math::constrainAngle(angle);
+    angle = e172::Math::constrainAngle(angle);
     const double doubleDelta = getRotationSpeed() * Time::getDeltaTime() * ANGLE_DELTA_MULTIPLIER * 2;
     return !(getAngle() > angle + doubleDelta || getAngle() < angle - doubleDelta);
 }
@@ -101,12 +102,12 @@ void Unit::unlockAngle() {
     angleLocked = false;
 }
 
-Vector Unit::getPosition() {
+e172::Vector Unit::getPosition() {
     return pos;
 }
 
-Vector Unit::getVelocity() {
-    return Vector();
+e172::Vector Unit::getVelocity() {
+    return e172::Vector();
 }
 
 double Unit::getAngle() {
@@ -169,7 +170,10 @@ void Unit::tick(Context *context, Event *event) {
     }
 }
 
-void Unit::render(Renderer *renderer) {
+void Unit::render(e172::AbstractRenderer *renderer) {
+
+    renderer->resolution();
+
     animator.setAngle(angle);
     animator.setPosition(pos);
     animator.render(renderer);

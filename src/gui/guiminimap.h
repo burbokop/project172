@@ -17,7 +17,7 @@ public:
     // Worker interface
 public:
     void tick(Context *context, Event *event);
-    void render(Renderer *renderer);
+    void render(e172::AbstractRenderer *renderer);
 };
 
 #endif // GUIMINIMAP_H

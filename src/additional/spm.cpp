@@ -342,7 +342,9 @@ void SPM::BlendedText(SDL_Surface *surface, std::string text_line, TTF_Font *tex
     SDL_FreeSurface(text_surface);
 }
 
-SDL_Surface *SPM::CutOutSurface(SDL_Surface *surface, int x, int y, int w, int h) {
+SDL_Surface *SPM::CutOutSurface(const SDL_Surface *surface, int x, int y, int w, int h) {
+    auto non_const_surface = const_cast<SDL_Surface*>(surface);
+
     SDL_Rect surfaceRect;
     surfaceRect.x = x;
     surfaceRect.y = y;
@@ -350,7 +352,7 @@ SDL_Surface *SPM::CutOutSurface(SDL_Surface *surface, int x, int y, int w, int h
     surfaceRect.h = h;
     SDL_Surface *tmp;
     tmp = SDL_CreateRGBSurface(0, surfaceRect.w, surfaceRect.h, 32, 0x000000ff, 0x0000ff00, 0x00ff0000, 0xff000000);
-    SDL_BlitSurface(surface, &surfaceRect, tmp, nullptr);
+    SDL_BlitSurface(non_const_surface, &surfaceRect, tmp, nullptr);
     return tmp;
 }
 

@@ -1,6 +1,5 @@
 #include "docker.h"
 #include "units/unit.h"
-#include "additional/math.h"
 #include "units/movable.h"
 
 Docker::Docker() {
@@ -46,13 +45,13 @@ void Docker::tick(Context *context, Event *event) {
         parent->rotateToAngle(dstAngle);
         Movable *movableParent = dynamic_cast<Movable*>(parent);
         if(movableParent) {
-            movableParent->place(parent->getPosition(), (target->getPosition() - parent->getPosition()) / 100, Vector(), parent->getAngle());
+            movableParent->place(parent->getPosition(), (target->getPosition() - parent->getPosition()) / 100, e172::Vector(), parent->getAngle());
         }
     } else if(state == DOCKED) {
         parent->place(target->getPosition(), target->getAngle());
     }
 }
 
-void Docker::render(Renderer *renderer) {
+void Docker::render(e172::AbstractRenderer *renderer) {
     UNUSED(renderer);
 }

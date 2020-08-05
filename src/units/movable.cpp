@@ -2,8 +2,8 @@
 #include "capabilities/modules/engine.h"
 #include "context.h"
 #include "time/time.h"
-#include "additional/math.h"
 #include <math.h>
+#include <engine/math/math.h>
 
 const double Movable::STOP_MOVING_VELOCITY = 1;
 const double Movable::DEFAULT_ACCELERATION_VALUE = 120;
@@ -81,7 +81,7 @@ Movable::Movable(Loadable *tmp) : Unit (tmp) {
 }
 
 
-void Movable::place(Vector pos, Vector vel, Vector acc, double angle) {
+void Movable::place(e172::Vector pos, e172::Vector vel, e172::Vector acc, double angle) {
     Unit::place(pos, angle);
     this->vel = vel;
     this->acc = acc;
@@ -91,7 +91,7 @@ bool Movable::accelerateForward() {
     if(!accelerationLocked) {
         ModuleHandler *modules = getModuleHandler();
         if(modules && modules->hasModuleOfClass("engine")) {
-            acc = Vector::createByAngle(getAccelerationValue(), getAngle());
+            acc = e172::Vector::createByAngle(getAccelerationValue(), getAngle());
             accelerationLocked = true;
             return true;
         }
@@ -103,7 +103,7 @@ bool Movable::accelerateLeft() {
     if(!accelerationLocked) {
         ModuleHandler *modules = getModuleHandler();
         if(modules && modules->hasModuleOfClass("thruster")) {
-            acc = Vector::createByAngle(getAccelerationValue(), getAngle() - M_PI / 2);
+            acc = e172::Vector::createByAngle(getAccelerationValue(), getAngle() - M_PI / 2);
             accelerationLocked = true;
             return true;
         }
@@ -115,7 +115,7 @@ bool Movable::accelerateRight() {
     if(!accelerationLocked) {
         ModuleHandler *modules = getModuleHandler();
         if(modules && modules->hasModuleOfClass("thruster")) {
-            acc = Vector::createByAngle(getAccelerationValue(), getAngle() + M_PI / 2);
+            acc = e172::Vector::createByAngle(getAccelerationValue(), getAngle() + M_PI / 2);
             accelerationLocked = true;
             return true;
         }
@@ -127,19 +127,19 @@ bool Movable::accelerateRight() {
 void Movable::accelerateIdle() {
     if(!accelerationLocked && idleEnabled) {
     acc = vel.module() > STOP_MOVING_VELOCITY ?
-        Vector::createByAngle(DEFAULT_IDLE_SPEAD, vel.angle()) :
-        Vector();
+        e172::Vector::createByAngle(DEFAULT_IDLE_SPEAD, vel.angle()) :
+        e172::Vector();
     }
 }
 
-void Movable::accelerate(Vector acc) {
+void Movable::accelerate(e172::Vector acc) {
     if(!accelerationLocked) {
         this->acc = acc;
         accelerationLocked = true;
     }
 }
 
-Vector Movable::getVelocity() {
+e172::Vector Movable::getVelocity() {
     return vel;
 }
 
@@ -163,16 +163,16 @@ void Movable::pursuit(Unit *target) {
 }
 
 void Movable::relativisticPursuit(Unit *target) {
-    if(!Math::cmpd(Time::getDeltaTime(), 0.0)) {
+    if(!e172::Math::cmpd(Time::getDeltaTime(), 0.0)) {
         double velocity = target->getVelocity().module();
 
-        if(Math::cmpd(velocity, 0)) {
+        if(e172::Math::cmpd(velocity, 0)) {
             velocity = 1.0;
         } else {
             velocity = std::pow(velocity, 2);
         }
 
-        Vector direction = target->getPosition() - getPosition();
+        e172::Vector direction = target->getPosition() - getPosition();
         accelerate(direction * velocity * RELATIVISTIC_PURSUIT_COEFFICIENT / Time::getDeltaTime());
         root["max-speed"] = direction.module();
     }
