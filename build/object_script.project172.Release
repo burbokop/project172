@@ -1,3 +1,11 @@
+release/kuniversalqueue.o
+release/ktype.o
+release/kcirclebuffer.o
+release/kvoidhandle.o
+release/kmetafunction.o
+release/kabstractfactory.o
+release/kpull.o
+release/kmoduleswitch.o
 release/main.o
 release/object.o
 release/worker.o

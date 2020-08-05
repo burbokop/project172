@@ -5,6 +5,7 @@ CONFIG -= app_bundle
 
 DEFINES += QT_DEPRECATED_WARNINGS
 
+include(klibcore/klibcore.pro)
 
 win32 {
 #    INCLUDEPATH += C:\Qt\Tools\mingw730_64\include

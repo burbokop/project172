@@ -1,3 +1,11 @@
+debug/kuniversalqueue.o
+debug/ktype.o
+debug/kcirclebuffer.o
+debug/kvoidhandle.o
+debug/kmetafunction.o
+debug/kabstractfactory.o
+debug/kpull.o
+debug/kmoduleswitch.o
 debug/main.o
 debug/object.o
 debug/worker.o

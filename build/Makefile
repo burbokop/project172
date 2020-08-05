@@ -248,10 +248,12 @@ Makefile: ../project172.pro C:/qt/5.15.0/mingw81_64/mkspecs/win32-g++/qmake.conf
 		C:/qt/5.15.0/mingw81_64/mkspecs/features/qt_config.prf \
 		C:/qt/5.15.0/mingw81_64/mkspecs/win32-g++/qmake.conf \
 		C:/qt/5.15.0/mingw81_64/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		C:/qt/5.15.0/mingw81_64/mkspecs/features/exclusive_builds.prf \
 		C:/qt/5.15.0/mingw81_64/mkspecs/features/toolchain.prf \
 		C:/qt/5.15.0/mingw81_64/mkspecs/features/default_pre.prf \
 		C:/qt/5.15.0/mingw81_64/mkspecs/features/win32/default_pre.prf \
+		../klibcore/klibcore.pro \
 		C:/qt/5.15.0/mingw81_64/mkspecs/features/resolve_config.prf \
 		C:/qt/5.15.0/mingw81_64/mkspecs/features/exclusive_builds_post.prf \
 		C:/qt/5.15.0/mingw81_64/mkspecs/features/default_post.prf \
@@ -267,7 +269,6 @@ Makefile: ../project172.pro C:/qt/5.15.0/mingw81_64/mkspecs/win32-g++/qmake.conf
 		C:/qt/5.15.0/mingw81_64/mkspecs/features/yacc.prf \
 		C:/qt/5.15.0/mingw81_64/mkspecs/features/lex.prf \
 		../project172.pro \
-		.qmake.stash \
 		C:/qt/5.15.0/mingw81_64/mkspecs/features/build_pass.prf
 	$(QMAKE) -o Makefile ..\project172.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
 C:/qt/5.15.0/mingw81_64/mkspecs/features/spec_pre.prf:
@@ -448,10 +449,12 @@ C:/qt/5.15.0/mingw81_64/mkspecs/features/qt_functions.prf:
 C:/qt/5.15.0/mingw81_64/mkspecs/features/qt_config.prf:
 C:/qt/5.15.0/mingw81_64/mkspecs/win32-g++/qmake.conf:
 C:/qt/5.15.0/mingw81_64/mkspecs/features/spec_post.prf:
+.qmake.stash:
 C:/qt/5.15.0/mingw81_64/mkspecs/features/exclusive_builds.prf:
 C:/qt/5.15.0/mingw81_64/mkspecs/features/toolchain.prf:
 C:/qt/5.15.0/mingw81_64/mkspecs/features/default_pre.prf:
 C:/qt/5.15.0/mingw81_64/mkspecs/features/win32/default_pre.prf:
+../klibcore/klibcore.pro:
 C:/qt/5.15.0/mingw81_64/mkspecs/features/resolve_config.prf:
 C:/qt/5.15.0/mingw81_64/mkspecs/features/exclusive_builds_post.prf:
 C:/qt/5.15.0/mingw81_64/mkspecs/features/default_post.prf:
@@ -467,7 +470,6 @@ C:/qt/5.15.0/mingw81_64/mkspecs/features/exceptions.prf:
 C:/qt/5.15.0/mingw81_64/mkspecs/features/yacc.prf:
 C:/qt/5.15.0/mingw81_64/mkspecs/features/lex.prf:
 ../project172.pro:
-.qmake.stash:
 C:/qt/5.15.0/mingw81_64/mkspecs/features/build_pass.prf:
 qmake: FORCE
 	@$(QMAKE) -o Makefile ..\project172.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
