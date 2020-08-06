@@ -40,7 +40,7 @@ Environment::Environment(std::vector<std::string> args) {
     std::cout << "lll: " << args[0] << "\n";
 
     //assetManager->search(FileSystem::cutPath(args[0], 2) + "/assets");
-    assetManager->search("../assets", renderEngine);
+    assetManager->searchInFolder("../assets", renderEngine);
 
     worldManager->checkState(context, assetManager, units, renderer, fps, tps);
     context->setBackground(background);

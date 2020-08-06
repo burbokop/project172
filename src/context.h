@@ -3,8 +3,9 @@
 
 #include <queue>
 
+#include <assettools/assetmanager.h>
 
-#include "assetmanager.h"
+
 #include "gui/guimain.h"
 #include "near.h"
 #include "background.h"

@@ -172,6 +172,7 @@ void Unit::tick(Context *context, Event *event) {
 
 void Unit::render(e172::AbstractRenderer *renderer) {
     e172::Image i = asset<e172::Image>("sprite");
+    asset<int>("health");
 
     renderer->resolution();
 

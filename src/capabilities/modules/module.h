@@ -3,8 +3,9 @@
 
 
 #include "capabilities/capability.h"
-#include "loadable.h"
 #include "iinformative.h"
+
+#include <assettools/loadable.h>
 
 
 

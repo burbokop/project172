@@ -3,10 +3,11 @@
 
 #include <functional>
 
+#include <assettools/assetmanager.h>
+
 
 #include "../object.h"
 #include "../capabilities/controller.h"
-#include "../assetmanager.h"
 
 
 class World : public Object {

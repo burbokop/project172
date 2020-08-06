@@ -9,7 +9,6 @@
 #include "object.h"
 #include "state.h"
 #include "worker.h"
-#include "assetmanager.h"
 #include "additional/event.h"
 #include "background.h"
 #include "additional/informative/fpsmonitor.h"

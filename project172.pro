@@ -5,7 +5,7 @@ CONFIG -= app_bundle
 
 DEFINES += QT_DEPRECATED_WARNINGS
 
-include(klibcore/klibcore.pro)
+include(klibcore/klibcore.pri)
 
 win32 {
 #    INCLUDEPATH += C:\Qt\Tools\mingw730_64\include
@@ -23,7 +23,7 @@ unix {
 
 SOURCES += \
     src/additional/e_variant.cpp \
-    src/assetexecutors/assetexecutor.cpp \
+    src/assettools/assetexecutors/assetexecutor.cpp \
     src/engine/type.cpp \
     src/engine/variant.cpp \
     src/engine/assettools/assetprovider.cpp \
@@ -37,7 +37,7 @@ SOURCES += \
     src/sdlimplementation/sdlrenderer.cpp \
     src/worker.cpp \
     src/worlds/world.cpp \
-    src/assetmanager.cpp \
+    src/assettools/assetmanager.cpp \
     src/filesystem.cpp \
     src/animator.cpp \
     src/background.cpp \
@@ -56,7 +56,7 @@ SOURCES += \
     src/engine/math/vector.cpp \
     src/additional/stringformer.cpp \
     src/sdlimplementation/effects/anaglyph.cpp \
-    src/loadable.cpp \
+    src/assettools/loadable.cpp \
     src/capabilities/modules/weapon.cpp \
     src/units/projectile.cpp \
     src/context.cpp \
@@ -117,7 +117,7 @@ SOURCES += \
 
 HEADERS += \
     src/additional/e_variant.h \
-    src/assetexecutors/assetexecutor.h \
+    src/assettools/assetexecutors/assetexecutor.h \
     src/engine/type.h \
     src/engine/variant.h \
     src/engine/assettools/assetprovider.h \
@@ -130,7 +130,7 @@ HEADERS += \
     src/sdlimplementation/sdlrenderer.h \
     src/worker.h \
     src/worlds/world.h \
-    src/assetmanager.h \
+    src/assettools/assetmanager.h \
     src/filesystem.h \
     src/animator.h \
     src/background.h \
@@ -149,7 +149,7 @@ HEADERS += \
     src/engine/math/vector.h \
     src/additional/stringformer.h \
     src/sdlimplementation/effects/anaglyph.h \
-    src/loadable.h \
+    src/assettools/loadable.h \
     src/capabilities/modules/weapon.h \
     src/units/projectile.h \
     src/context.h \

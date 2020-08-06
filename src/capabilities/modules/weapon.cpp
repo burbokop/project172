@@ -37,7 +37,7 @@ void Weapon::tick(Context *context, Event *event) {
     if(timer.count(firing)) {
         Json::Value projectile = root["projectile"];
         if(projectile.isString()) {
-            Projectile *object = static_cast<Projectile*>(context->getAssets()->copyAsset(projectile.asString()));
+            Projectile *object = static_cast<Projectile*>(context->getAssets()->createLoadable(projectile.asString()));
             object->setMother(parent);
 
             object->place(parent->getPosition(), parent->getVelocity() + e172::Vector::createByAngle(getProjectileSpead(), this->parent->getAngle()), e172::Vector(), this->parent->getAngle());

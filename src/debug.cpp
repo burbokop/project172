@@ -22,17 +22,16 @@ int get_sym_name(void *addr) {
     int res = dladdr(addr, &info);
     std::cout << info.dli_fname << ": " << info.dli_sname << "\n\n";
     return res;
-#endif
+#else
     (void)addr;
     return -100;
+#endif
 }
 
 
 void Debug::onSegSignal(int signum) {
 #ifdef __unix__
-    err(SEGMENTATION_FAULT, STATIC_DEBUG_IMPRINT, std::to_string(signum));
-
-
+    err(Code::SEGMENTATION_FAULT, STATIC_DEBUG_IMPRINT, std::to_string(signum));
 
     void *addrlist[10];
     int addrlen = backtrace(addrlist, sizeof(addrlist) / sizeof(void*));
@@ -50,23 +49,11 @@ void Debug::onSegSignal(int signum) {
     exit(1);
 }
 
-std::string Debug::codeToString(unsigned code) {
-    switch (code) {
-        case 0: return  "NO_ERROR";
-        case APPEAL_TO_REMOVED: return "APPEAL_TO_REMOVED";
-        case ASSET_KEY_NOT_FOUND : return "ASSET_KEY_NOT_FOUND";
-        case UNKNOWN_ASSET_CLASS : return "UNKNOWN_ASSET_CLASS";
-        case SEGMENTATION_FAULT : return "SEGMENTATION_FAULT";
-        default: return "UNKNOWN_ERROR";
-    }
-}
-
 void Debug::log(std::string message) {
     std::ofstream log("debug.log", std::ios::app);
     log << message << "\n";
     log.close();
 }
-
 
 void Debug::out(std::string message) {
     if(outEnbled) {
@@ -74,13 +61,13 @@ void Debug::out(std::string message) {
     }
 }
 
-void Debug::err(unsigned code, std::string site, std::string comment) {
-    if(errEnbled && code != 0) {
+void Debug::err(Code::Enum code, std::string site, std::string comment) {
+    if(errEnbled && code != Code::NO_ERROR) {
         if(code != lastError || site != lastSite) {
             if(comment == "") {
-                std::cerr << "ERROR: <code: " << codeToString(code) << " appearance: " << site << ">\n";
+                std::cerr << "ERROR: <code: " << Code::__map.at(code) << " appearance: " << site << ">\n";
             } else {
-                std::cerr << "ERROR: <code: " << codeToString(code) << " ( " << comment << " ) appearance: " << site << ">\n";
+                std::cerr << "ERROR: <code: " << Code::__map.at(code) << " ( " << comment << " ) appearance: " << site << ">\n";
             }
         }
         lastError = code;

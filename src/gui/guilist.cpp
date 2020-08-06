@@ -19,7 +19,7 @@ std::vector<GUIMenuElement *> *GUIList::informativeToElement(std::vector<Worker 
                     }
                 }
             } else {
-                Debug::err(Debug::APPEAL_TO_REMOVED, __func__);
+                Debug::err(Debug::Code::APPEAL_TO_REMOVED, __func__);
             }
         }
     }
