@@ -23,6 +23,7 @@ unix {
 
 SOURCES += \
     src/additional/e_variant.cpp \
+    src/assetexecutors/assetexecutor.cpp \
     src/engine/type.cpp \
     src/engine/variant.cpp \
     src/engine/assettools/assetprovider.cpp \
@@ -116,6 +117,7 @@ SOURCES += \
 
 HEADERS += \
     src/additional/e_variant.h \
+    src/assetexecutors/assetexecutor.h \
     src/engine/type.h \
     src/engine/variant.h \
     src/engine/assettools/assetprovider.h \

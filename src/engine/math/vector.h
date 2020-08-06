@@ -25,7 +25,7 @@ public:
     Vector(long x, long y);
     Vector(int x, int y);
     static Vector createByAngle(double module, double angle); //checkpoint
-    static Vector createRandom(int max);
+    static Vector createRandom(double max);
 
     Vector operator+(Vector term) const;
     void operator+=(Vector term);

@@ -6,13 +6,8 @@
 #include <engine/graphics/abstractrenderer.h>
 #include <map>
 
-
-#include "additional/effects/visualeffect.h"
 #include <src/engine/math/vector.h>
 #include "additional/e_variant.h"
-
-
-
 
 
 class SDLRenderer : public e172::AbstractRenderer {

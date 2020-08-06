@@ -20,7 +20,7 @@ public:
 void aaa() {
     AssetProvider ap;
 
-    ap.asset("goga").value<std::string>();
+    ap.asset("image").value<std::string>();
 
 }
 

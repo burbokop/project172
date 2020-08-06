@@ -1,5 +1,5 @@
 {
-    "key": "repair-shard",
+    "id": "repair-shard",
     "class": "projectile",
     "sprite": "./repair-shard.png",
     "zoom": 1,

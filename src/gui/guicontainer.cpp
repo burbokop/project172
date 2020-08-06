@@ -1,10 +1,7 @@
 #include "guicontainer.h"
 
-#include "additional/effects/anaglyph.h"
-
-#include <iostream>
-
 #include <sdlimplementation/sdlrenderer.h>
+
 
 
 GUIContainer::GUIContainer(Controller *player) : GUIMenuElement (player) {

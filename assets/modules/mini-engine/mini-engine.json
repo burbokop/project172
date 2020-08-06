@@ -1,5 +1,5 @@
 {
-    "key":"mini-engine",
+    "id":"mini-engine",
     "class": "engine",
     
     "animation": { 

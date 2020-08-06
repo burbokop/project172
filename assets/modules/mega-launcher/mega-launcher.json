@@ -1,5 +1,5 @@
 {
-    "key": "mega-launcher",
+    "id": "mega-launcher",
     "class": "weapon",
     "audio": { "start": "./mega-shoot.ogg" },
     "rate": 100,

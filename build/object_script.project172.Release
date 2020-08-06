@@ -7,6 +7,7 @@ release/kabstractfactory.o
 release/kpull.o
 release/kmoduleswitch.o
 release/e_variant.o
+release/assetexecutor.o
 release/type.o
 release/variant.o
 release/assetprovider.o

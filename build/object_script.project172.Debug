@@ -7,6 +7,7 @@ debug/kabstractfactory.o
 debug/kpull.o
 debug/kmoduleswitch.o
 debug/e_variant.o
+debug/assetexecutor.o
 debug/type.o
 debug/variant.o
 debug/assetprovider.o

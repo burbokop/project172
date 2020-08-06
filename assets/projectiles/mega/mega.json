@@ -1,5 +1,5 @@
 {
-    "key": "mega",
+    "id": "mega",
     "class": "projectile",
     "sprite": "./mega.png",
 	"health":2,

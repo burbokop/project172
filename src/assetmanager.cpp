@@ -31,6 +31,7 @@ void AssetManager::search(std::string path, e172::AbstractGraphicsProvider *rend
             search(file, renderEngine);
         } else {
             processFile(file, path, renderEngine);
+            processFileAlternative(file, path, renderEngine);
         }
     }
 }
@@ -82,7 +83,7 @@ void AssetManager::processFile(std::string file, std::string location, e172::Abs
         Json::Reader reader;
         Json::Value root;
         reader.parse(content, root);
-        Json::Value key = root["key"];
+        Json::Value key = root["id"];
         if(!key.isNull()) {
             Animator anim;
             Json::Value animation = root["animation"];
@@ -159,5 +160,25 @@ void AssetManager::processFile(std::string file, std::string location, e172::Abs
 
             assets[key.asString()] = new Loadable(root, anim, audioPlayer, timer, offsetVector);
         }
+    }
+}
+
+void AssetManager::processFileAlternative(std::string file, std::string location, e172::AbstractGraphicsProvider *graphicsProvider) {
+    std::string sufix = FileSystem::getSufix(file);
+    if(sufix == ".json") {
+        const std::string content = FileSystem::readFile(file);
+        Json::Reader reader;
+        Json::Value root;
+        reader.parse(content, root);
+        const auto id = root["id"];
+        std::cout << "\nstart proceed asset: " << id << "\n";
+        for(auto item : root) {
+            if(item.isObject()) {
+                //item.
+            }
+
+            //std::cout << "\t" <<  << "\n";
+        }
+        std::cout << "end proceed asset: " << id << "\n\n";
     }
 };

@@ -1,5 +1,5 @@
 {
-    "key": "st1",
+    "id": "st1",
     "class": "station",
     "sprite": "./st1.png",
     "health": 400,

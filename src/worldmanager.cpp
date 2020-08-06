@@ -11,7 +11,6 @@
 #include "additional/informative/controllerfinder.h"
 #include "additional/informative/unitsamountinfo.h"
 #include "state.h"
-#include "additional/effects/anaglyph.h"
 
 
 Camera *WorldManager::getCamera() const {

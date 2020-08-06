@@ -1,5 +1,5 @@
 {
-    "key": "sh2",
+    "id": "sh2",
     "class": "ship",
     "sprite": "./sh2.png",
 	"health": 80,

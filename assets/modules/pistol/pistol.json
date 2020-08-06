@@ -1,5 +1,5 @@
 {
-    "key": "pistol",
+    "id": "pistol",
     "class": "weapon",
     "audio": { "start": "./shoot.wav" },
     "rate":160,

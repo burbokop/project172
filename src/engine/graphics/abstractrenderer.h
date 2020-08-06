@@ -6,8 +6,6 @@
 
 #include <inttypes.h>
 
-#include <additional/effects/visualeffect.h>
-
 #include <additional/e_variant.h>
 
 #include <engine/textformat.h>

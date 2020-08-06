@@ -1,5 +1,5 @@
 {
-    "key": "proj-plasma",
+    "id": "proj-plasma",
     "class": "projectile",
     "sprite": "./plasma.png",
 	"health":40

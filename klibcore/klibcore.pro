@@ -6,7 +6,6 @@ INCLUDEPATH += klibcore
 
 HEADERS += \
     $$PWD/src/kmacro.h \
-    $$PWD/src/klibinfo.h \
     $$PWD/src/experimental/universalqueue/kuniversalqueue.h \
     $$PWD/src/utility/ktype.h \
     $$PWD/src/experimental/universalqueue/kcirclebuffer.h \

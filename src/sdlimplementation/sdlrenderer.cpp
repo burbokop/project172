@@ -4,7 +4,8 @@
 #include "units/camera.h"
 #include "debug.h"
 
-#include <additional/effects/anaglyph.h>
+#include <sdlimplementation/effects/anaglyph.h>
+
 
 const int SDLRenderer::DEFAULT_FONT_SIZE = 20;
 

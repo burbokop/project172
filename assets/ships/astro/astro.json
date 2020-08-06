@@ -1,5 +1,5 @@
 {
-    "key": "astro",
+    "id": "astro",
     "class": "ship",
     "sprite": "./astro.png",
 	"health": 4,

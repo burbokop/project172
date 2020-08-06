@@ -1,26 +1,21 @@
 {
-	"key": "warp-drive1",
+	"id": "warp-drive1",
 	"class": "warp-drive",
 	"interval": 2000,
-	"warp-speed": 1,
-	
-    "animation": { 
-        "spritesheet": "./warp3.png",
-        "frames": 4,
-        "tracks": 1,
-        "play": "not-render"
-    },
-    
-    "offset": {
-        "x": -46,
-        "y": 0
-    },
- 
-	
-    "audio": {
-        "start": "./warp-s.ogg",
-        "loop": "./warp-l.ogg",
-        "stop": "./warp-st.ogg"
-    }
-
+	"warp-speed": 1,	
+   	"animation": { 
+        	"spritesheet": "./warp3.png",
+        	"frames": 4,
+        	"tracks": 1,
+        	"play": "not-render"
+    	},
+    	"offset": {
+        	"x": -46,
+        	"y": 0
+    	}, 
+    	"audio": {
+        	"start": "./warp-s.ogg",
+        	"loop": "./warp-l.ogg",
+        	"stop": "./warp-st.ogg"
+    	}
 }

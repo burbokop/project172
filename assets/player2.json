@@ -1,5 +1,5 @@
 {
-	"key":"player2",
+	"id":"player2",
 	"class":"player",
 	"keymap": {
 		"forward":"i",

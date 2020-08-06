@@ -1,5 +1,5 @@
 {
-    "key":"thruster1",
+    "id":"thruster1",
     "class": "thruster",
 	
 	"left-thrust":true,

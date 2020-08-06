@@ -3,9 +3,10 @@
 
 #include "vector.h"
 #include "math.h"
+#include <ostream>
 
 
-using namespace e172;
+namespace e172 {
 
 Vector::Vector() {
     this->m_x = 0;
@@ -31,8 +32,8 @@ Vector Vector::createByAngle(double module, double angle) {
     return Vector(module * e172::Math::cos(angle), module * e172::Math::sin(angle));
 }
 
-Vector Vector::createRandom(int max) {
-    return Vector::createByAngle(static_cast<double>(rand() % (max * max)) / max, rand());
+Vector Vector::createRandom(double max) {
+    return Vector::createByAngle(std::fmod(rand(), max), rand());
 }
 
 Vector Vector::operator+(Vector term) const {
@@ -193,8 +194,9 @@ double Vector::y() const {
     return this->m_y;
 }
 
-#include <ostream>
 std::ostream &operator<<(std::ostream &os, const e172::Vector &dt) {
     os << "Vector(" << std::to_string(dt.x()).c_str() << ", " << std::to_string(dt.y()).c_str() << ")";
     return os;
+}
+
 }

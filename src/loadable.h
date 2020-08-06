@@ -7,9 +7,15 @@
 #include "time/timer.h"
 #include "audio/audioplayer.h"
 
+#include <engine/variant.h>
+
 
 class Loadable {
+    friend class AssetManager;
+    std::map<std::string, e172::Variant> m_assets;
 protected:
+
+
     Json::Value root;
     Animator animator;
     AudioPlayer audioPlayer;
@@ -25,6 +31,15 @@ public:
     std::string getAssetClass();
 
     void clone(Loadable *dst);
+
+    template<typename T>
+    T asset(const std::string &name) const {
+        const auto it = m_assets.find(name);
+        if(it != m_assets.end() && it->second.containsType<T>()) {
+            return it->second.value<T>();
+        }
+        return T();
+    }
 
     virtual ~Loadable();
 };
