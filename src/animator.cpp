@@ -1,6 +1,5 @@
 #include "animator.h"
 
-#include "additional/spm.h"
 
 const unsigned Animator::PING_PONG = 0;
 const unsigned Animator::LOOP = 1;

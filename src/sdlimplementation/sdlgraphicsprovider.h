@@ -3,7 +3,8 @@
 
 #include "sdlrenderer.h"
 
-#include <engine/abstractrenderengine.h>
+#include <engine/graphics/abstractgraphicsprovider.h>
+
 
 
 

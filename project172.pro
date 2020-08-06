@@ -22,9 +22,13 @@ unix {
 
 
 SOURCES += \
-    src/engine/abstractrenderengine.cpp \
-    src/engine/abstractrenderer.cpp \
-    src/engine/image.cpp \
+    src/additional/e_variant.cpp \
+    src/engine/type.cpp \
+    src/engine/variant.cpp \
+    src/engine/assettools/assetprovider.cpp \
+    src/engine/graphics/abstractgraphicsprovider.cpp \
+    src/engine/graphics/abstractrenderer.cpp \
+    src/engine/graphics/image.cpp \
     src/engine/textformat.cpp \
     src/main.cpp \
     src/object.cpp \
@@ -44,13 +48,13 @@ SOURCES += \
     src/capabilities/player.cpp \
     src/capabilities/modulehandler.cpp \
     src/capabilities/modules/module.cpp \
-    src/additional/rotozoom.cpp \
-    src/additional/spm.cpp \
+    src/sdlimplementation/rotozoom.cpp \
+    src/sdlimplementation/spm.cpp \
     src/time/timer.cpp \
     src/additional/event.cpp \
     src/engine/math/vector.cpp \
     src/additional/stringformer.cpp \
-    src/additional/effects/anaglyph.cpp \
+    src/sdlimplementation/effects/anaglyph.cpp \
     src/loadable.cpp \
     src/capabilities/modules/weapon.cpp \
     src/units/projectile.cpp \
@@ -69,7 +73,7 @@ SOURCES += \
     src/json/json_writer.cpp \
     src/debug.cpp \
     src/gui/guiswitch.cpp \
-    src/additional/effects/visualeffect.cpp \
+    src/sdlimplementation/effects/visualeffect.cpp \
     src/gui/guichoice.cpp \
     src/application.cpp \
     src/additional/informative/fpsmonitor.cpp \
@@ -100,7 +104,6 @@ SOURCES += \
     src/audio/audiochannel.cpp \
     src/audio/audiohardwarebank.cpp \
     src/audio/audioplayer.cpp \
-    src/additional/variant.cpp \
     src/gui/guiminimap.cpp \
     src/gui/guiradar.cpp \
     src/capabilities/modules/thruster.cpp \
@@ -112,9 +115,13 @@ SOURCES += \
 
 
 HEADERS += \
-    src/engine/abstractrenderengine.h \
-    src/engine/abstractrenderer.h \
-    src/engine/image.h \
+    src/additional/e_variant.h \
+    src/engine/type.h \
+    src/engine/variant.h \
+    src/engine/assettools/assetprovider.h \
+    src/engine/graphics/abstractgraphicsprovider.h \
+    src/engine/graphics/abstractrenderer.h \
+    src/engine/graphics/image.h \
     src/engine/textformat.h \
     src/object.h \
     src/sdlimplementation/sdlgraphicsprovider.h \
@@ -133,13 +140,13 @@ HEADERS += \
     src/capabilities/player.h \
     src/capabilities/modulehandler.h \
     src/capabilities/modules/module.h \
-    src/additional/rotozoom.h \
-    src/additional/spm.h \
+    src/sdlimplementation/rotozoom.h \
+    src/sdlimplementation/spm.h \
     src/time/timer.h \
     src/additional/event.h \
     src/engine/math/vector.h \
     src/additional/stringformer.h \
-    src/additional/effects/anaglyph.h \
+    src/sdlimplementation/effects/anaglyph.h \
     src/loadable.h \
     src/capabilities/modules/weapon.h \
     src/units/projectile.h \
@@ -168,7 +175,7 @@ HEADERS += \
     src/json_valueiterator.inl \
     src/debug.h \
     src/gui/guiswitch.h \
-    src/additional/effects/visualeffect.h \
+    src/sdlimplementation/effects/visualeffect.h \
     src/gui/guichoice.h \
     src/application.h \
     src/additional/informative/fpsmonitor.h \
@@ -199,7 +206,6 @@ HEADERS += \
     src/audio/audiochannel.h \
     src/audio/audiohardwarebank.h \
     src/audio/audioplayer.h \
-    src/additional/variant.h \
     src/gui/guiminimap.h \
     src/gui/guiradar.h \
     src/capabilities/modules/thruster.h \

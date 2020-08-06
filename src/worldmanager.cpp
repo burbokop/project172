@@ -11,7 +11,6 @@
 #include "additional/informative/controllerfinder.h"
 #include "additional/informative/unitsamountinfo.h"
 #include "state.h"
-#include "additional/spm.h"
 #include "additional/effects/anaglyph.h"
 
 
@@ -97,7 +96,11 @@ void WorldManager::init(AssetManager *assets, std::vector<Worker*> *units, e172:
 
                         GUIContainer *optionsMenu = new GUIContainer(players[0], "options"); {
                             GUIContainer *effectsMenu = new GUIContainer(players[0], "effects"); {
-                                effectsMenu->addElement(new GUISwitch(players[0], std::string("anaglyph"), std::bind(&SPM::LockEffect, new Anaglyph(e172::Vector(10, 10))), SPM::UnlockEffect));
+                                effectsMenu->addElement(new GUISwitch(players[0], std::string("anaglyph"), [renderer](){
+                                    renderer->enableEffect(1);
+                                }, [renderer](){
+                                    renderer->disableEffect(1);
+                                }));
                             } optionsMenu->addElement(effectsMenu);
                             GUIContainer *resolutionMenu = new GUIContainer(players[0], std::string("resolution")); {
                                 resolutionMenu->addElement(new GUIChoice(players[0], std::string("600x600"), e172::Vector(600, 600), std::bind(&e172::AbstractRenderer::setResolutionCallback, renderer, std::placeholders::_1)));

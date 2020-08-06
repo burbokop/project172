@@ -6,7 +6,11 @@ release/kmetafunction.o
 release/kabstractfactory.o
 release/kpull.o
 release/kmoduleswitch.o
-release/abstractrenderengine.o
+release/e_variant.o
+release/type.o
+release/variant.o
+release/assetprovider.o
+release/abstractgraphicsprovider.o
 release/abstractrenderer.o
 release/image.o
 release/textformat.o
@@ -84,7 +88,6 @@ release/audio.o
 release/audiochannel.o
 release/audiohardwarebank.o
 release/audioplayer.o
-release/variant.o
 release/guiminimap.o
 release/guiradar.o
 release/thruster.o

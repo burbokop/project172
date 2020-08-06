@@ -6,8 +6,6 @@
 
 #include <sdlimplementation/sdlrenderer.h>
 
-#include <engine/abstractrenderengine.h>
-
 
 GUIContainer::GUIContainer(Controller *player) : GUIMenuElement (player) {
 }
@@ -110,16 +108,10 @@ bool GUIContainer::hasSubElements() {
 void GUIContainer::tick(Context *context, Event *event) {
     UNUSED(context);
     if(event->getPressed(SDL_SCANCODE_DOWN)) {
-        std::cout << "gogdoda: " << "3" << "\n";
-
         selectedElement = selectDown();
     } else if(event->getPressed(SDL_SCANCODE_UP)) {
         selectedElement = selectUp();
-        std::cout << "gogdoda: " << "2" << "\n";
     } else if(event->getPressed(SDL_SCANCODE_RETURN)) {
-
-        std::cout << "gogdoda: " << "1" << "\n";
-
         if(selectedElement != nullptr) {
             selectedElement->onEnter();
             if(selectedElement->hasSubElements()) {
@@ -144,8 +136,11 @@ void GUIContainer::render(e172::AbstractRenderer *renderer) {
         int i = 0;
         for(GUIMenuElement *element : *elements) {
             if(element) {
-                if(i == selected) renderer->effect(new Anaglyph(e172::Vector(2, 1)));
+                if(i == selected)
+                    renderer->enableEffect(0);
+
                 renderer->drawString(element->getTitle(), pointer, (i == selected) ? SELECTED_COLOR : DEFAULT_COLOR);
+                renderer->disableEffect(0);
                 pointer += e172::Vector(4, interval);
                 i++;
             }

@@ -5,7 +5,8 @@
 
 #include "additional/event.h"
 #include "object.h"
-#include "engine/abstractrenderer.h"
+
+#include <engine/graphics/abstractrenderer.h>
 
 
 class Context;

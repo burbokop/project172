@@ -1,0 +1,3 @@
+"C:\Program Files\CMake\bin\cmake.exe" -E rm -f CMakeFiles\project172.dir/objects.a
+C:\qt\Tools\mingw810_64\bin\ar.exe cr CMakeFiles\project172.dir/objects.a @CMakeFiles\project172.dir\objects1.rsp
+C:\qt\Tools\mingw810_64\bin\g++.exe -g -Wl,--whole-archive CMakeFiles\project172.dir/objects.a -Wl,--no-whole-archive -o project172.exe -Wl,--out-implib,libproject172.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\project172.dir\linklibs.rsp

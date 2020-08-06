@@ -22,7 +22,12 @@ void GUIBlushingFloatingMessage::render(e172::AbstractRenderer *renderer) {
         ? 0xff0000
         : 0xff0000 | static_cast<Uint32>(e172::Math::map(value, 0, 80, 0, 0xff) << 8);
 
-    renderer->drawString(getTitle(), parent->getPosition() + renderer->offset() + e172::Vector(0.0, horisontalOffset), color, DEFAULT_FONT_SIZE);
+    renderer->drawString(
+                getTitle(),
+                parent->getPosition() + renderer->offset() + e172::Vector(0.0, horisontalOffset),
+                color,
+                e172::TextFormat(e172::TextFormat::AlignDefault, DEFAULT_FONT_SIZE)
+                );
 
     //tick/-/-/-/-/
     horisontalOffset -= Time::getDeltaTime() * DEFAULT_FLOATING_SPEED;

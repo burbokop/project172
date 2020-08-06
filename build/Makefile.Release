@@ -58,9 +58,13 @@ SOURCES       = ..\klibcore\src\experimental\universalqueue\kuniversalqueue.cpp 
 		..\klibcore\src\memcontrol\kabstractfactory.cpp \
 		..\klibcore\src\memcontrol\kpull.cpp \
 		..\klibcore\src\memcontrol\kmoduleswitch.cpp \
-		..\src\engine\abstractrenderengine.cpp \
-		..\src\engine\abstractrenderer.cpp \
-		..\src\engine\image.cpp \
+		..\src\additional\e_variant.cpp \
+		..\src\engine\type.cpp \
+		..\src\engine\variant.cpp \
+		..\src\engine\assettools\assetprovider.cpp \
+		..\src\engine\graphics\abstractgraphicsprovider.cpp \
+		..\src\engine\graphics\abstractrenderer.cpp \
+		..\src\engine\graphics\image.cpp \
 		..\src\engine\textformat.cpp \
 		..\src\main.cpp \
 		..\src\object.cpp \
@@ -80,13 +84,13 @@ SOURCES       = ..\klibcore\src\experimental\universalqueue\kuniversalqueue.cpp 
 		..\src\capabilities\player.cpp \
 		..\src\capabilities\modulehandler.cpp \
 		..\src\capabilities\modules\module.cpp \
-		..\src\additional\rotozoom.cpp \
-		..\src\additional\spm.cpp \
+		..\src\sdlimplementation\rotozoom.cpp \
+		..\src\sdlimplementation\spm.cpp \
 		..\src\time\timer.cpp \
 		..\src\additional\event.cpp \
 		..\src\engine\math\vector.cpp \
 		..\src\additional\stringformer.cpp \
-		..\src\additional\effects\anaglyph.cpp \
+		..\src\sdlimplementation\effects\anaglyph.cpp \
 		..\src\loadable.cpp \
 		..\src\capabilities\modules\weapon.cpp \
 		..\src\units\projectile.cpp \
@@ -105,7 +109,7 @@ SOURCES       = ..\klibcore\src\experimental\universalqueue\kuniversalqueue.cpp 
 		..\src\json\json_writer.cpp \
 		..\src\debug.cpp \
 		..\src\gui\guiswitch.cpp \
-		..\src\additional\effects\visualeffect.cpp \
+		..\src\sdlimplementation\effects\visualeffect.cpp \
 		..\src\gui\guichoice.cpp \
 		..\src\application.cpp \
 		..\src\additional\informative\fpsmonitor.cpp \
@@ -136,7 +140,6 @@ SOURCES       = ..\klibcore\src\experimental\universalqueue\kuniversalqueue.cpp 
 		..\src\audio\audiochannel.cpp \
 		..\src\audio\audiohardwarebank.cpp \
 		..\src\audio\audioplayer.cpp \
-		..\src\additional\variant.cpp \
 		..\src\gui\guiminimap.cpp \
 		..\src\gui\guiradar.cpp \
 		..\src\capabilities\modules\thruster.cpp \
@@ -153,7 +156,11 @@ OBJECTS       = release/kuniversalqueue.o \
 		release/kabstractfactory.o \
 		release/kpull.o \
 		release/kmoduleswitch.o \
-		release/abstractrenderengine.o \
+		release/e_variant.o \
+		release/type.o \
+		release/variant.o \
+		release/assetprovider.o \
+		release/abstractgraphicsprovider.o \
 		release/abstractrenderer.o \
 		release/image.o \
 		release/textformat.o \
@@ -231,7 +238,6 @@ OBJECTS       = release/kuniversalqueue.o \
 		release/audiochannel.o \
 		release/audiohardwarebank.o \
 		release/audioplayer.o \
-		release/variant.o \
 		release/guiminimap.o \
 		release/guiradar.o \
 		release/thruster.o \
@@ -251,9 +257,13 @@ DIST          =  C:/Users/Panasonic-PC/Documents/project172/klibcore/src/kmacro.
 		C:/Users/Panasonic-PC/Documents/project172/klibcore/src/memcontrol/kabstractfactory.h \
 		C:/Users/Panasonic-PC/Documents/project172/klibcore/src/memcontrol/kpull.h \
 		C:/Users/Panasonic-PC/Documents/project172/klibcore/src/memcontrol/kmoduleswitch.h \
-		src/engine/abstractrenderengine.h \
-		src/engine/abstractrenderer.h \
-		src/engine/image.h \
+		src/additional/e_variant.h \
+		src/engine/type.h \
+		src/engine/variant.h \
+		src/engine/assettools/assetprovider.h \
+		src/engine/graphics/abstractgraphicsprovider.h \
+		src/engine/graphics/abstractrenderer.h \
+		src/engine/graphics/image.h \
 		src/engine/textformat.h \
 		src/object.h \
 		src/sdlimplementation/sdlgraphicsprovider.h \
@@ -272,13 +282,13 @@ DIST          =  C:/Users/Panasonic-PC/Documents/project172/klibcore/src/kmacro.
 		src/capabilities/player.h \
 		src/capabilities/modulehandler.h \
 		src/capabilities/modules/module.h \
-		src/additional/rotozoom.h \
-		src/additional/spm.h \
+		src/sdlimplementation/rotozoom.h \
+		src/sdlimplementation/spm.h \
 		src/time/timer.h \
 		src/additional/event.h \
 		src/engine/math/vector.h \
 		src/additional/stringformer.h \
-		src/additional/effects/anaglyph.h \
+		src/sdlimplementation/effects/anaglyph.h \
 		src/loadable.h \
 		src/capabilities/modules/weapon.h \
 		src/units/projectile.h \
@@ -307,7 +317,7 @@ DIST          =  C:/Users/Panasonic-PC/Documents/project172/klibcore/src/kmacro.
 		src/json_valueiterator.inl \
 		src/debug.h \
 		src/gui/guiswitch.h \
-		src/additional/effects/visualeffect.h \
+		src/sdlimplementation/effects/visualeffect.h \
 		src/gui/guichoice.h \
 		src/application.h \
 		src/additional/informative/fpsmonitor.h \
@@ -338,7 +348,6 @@ DIST          =  C:/Users/Panasonic-PC/Documents/project172/klibcore/src/kmacro.
 		src/audio/audiochannel.h \
 		src/audio/audiohardwarebank.h \
 		src/audio/audioplayer.h \
-		src/additional/variant.h \
 		src/gui/guiminimap.h \
 		src/gui/guiradar.h \
 		src/capabilities/modules/thruster.h \
@@ -354,9 +363,13 @@ DIST          =  C:/Users/Panasonic-PC/Documents/project172/klibcore/src/kmacro.
 		..\klibcore\src\memcontrol\kabstractfactory.cpp \
 		..\klibcore\src\memcontrol\kpull.cpp \
 		..\klibcore\src\memcontrol\kmoduleswitch.cpp \
-		..\src\engine\abstractrenderengine.cpp \
-		..\src\engine\abstractrenderer.cpp \
-		..\src\engine\image.cpp \
+		..\src\additional\e_variant.cpp \
+		..\src\engine\type.cpp \
+		..\src\engine\variant.cpp \
+		..\src\engine\assettools\assetprovider.cpp \
+		..\src\engine\graphics\abstractgraphicsprovider.cpp \
+		..\src\engine\graphics\abstractrenderer.cpp \
+		..\src\engine\graphics\image.cpp \
 		..\src\engine\textformat.cpp \
 		..\src\main.cpp \
 		..\src\object.cpp \
@@ -376,13 +389,13 @@ DIST          =  C:/Users/Panasonic-PC/Documents/project172/klibcore/src/kmacro.
 		..\src\capabilities\player.cpp \
 		..\src\capabilities\modulehandler.cpp \
 		..\src\capabilities\modules\module.cpp \
-		..\src\additional\rotozoom.cpp \
-		..\src\additional\spm.cpp \
+		..\src\sdlimplementation\rotozoom.cpp \
+		..\src\sdlimplementation\spm.cpp \
 		..\src\time\timer.cpp \
 		..\src\additional\event.cpp \
 		..\src\engine\math\vector.cpp \
 		..\src\additional\stringformer.cpp \
-		..\src\additional\effects\anaglyph.cpp \
+		..\src\sdlimplementation\effects\anaglyph.cpp \
 		..\src\loadable.cpp \
 		..\src\capabilities\modules\weapon.cpp \
 		..\src\units\projectile.cpp \
@@ -401,7 +414,7 @@ DIST          =  C:/Users/Panasonic-PC/Documents/project172/klibcore/src/kmacro.
 		..\src\json\json_writer.cpp \
 		..\src\debug.cpp \
 		..\src\gui\guiswitch.cpp \
-		..\src\additional\effects\visualeffect.cpp \
+		..\src\sdlimplementation\effects\visualeffect.cpp \
 		..\src\gui\guichoice.cpp \
 		..\src\application.cpp \
 		..\src\additional\informative\fpsmonitor.cpp \
@@ -432,7 +445,6 @@ DIST          =  C:/Users/Panasonic-PC/Documents/project172/klibcore/src/kmacro.
 		..\src\audio\audiochannel.cpp \
 		..\src\audio\audiohardwarebank.cpp \
 		..\src\audio\audioplayer.cpp \
-		..\src\additional\variant.cpp \
 		..\src\gui\guiminimap.cpp \
 		..\src\gui\guiradar.cpp \
 		..\src\capabilities\modules\thruster.cpp \
@@ -463,7 +475,7 @@ dist:
 	$(ZIP) project172.zip $(SOURCES) $(DIST) ..\..\project172.pro C:\qt\5.15.0\mingw81_64\mkspecs\features\spec_pre.prf C:\qt\5.15.0\mingw81_64\mkspecs\qdevice.pri C:\qt\5.15.0\mingw81_64\mkspecs\features\device_config.prf C:\qt\5.15.0\mingw81_64\mkspecs\common\sanitize.conf C:\qt\5.15.0\mingw81_64\mkspecs\common\gcc-base.conf C:\qt\5.15.0\mingw81_64\mkspecs\common\g++-base.conf C:\qt\5.15.0\mingw81_64\mkspecs\common\angle.conf C:\qt\5.15.0\mingw81_64\mkspecs\features\win32\windows_vulkan_sdk.prf C:\qt\5.15.0\mingw81_64\mkspecs\common\windows-vulkan.conf C:\qt\5.15.0\mingw81_64\mkspecs\common\g++-win32.conf C:\qt\5.15.0\mingw81_64\mkspecs\common\windows-desktop.conf C:\qt\5.15.0\mingw81_64\mkspecs\qconfig.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3danimation.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3danimation_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dcore.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dcore_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dextras.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dextras_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dinput.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dinput_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dlogic.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dlogic_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dquick.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dquick_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dquickanimation.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dquickanimation_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dquickextras.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dquickextras_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dquickinput.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dquickinput_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dquickrender.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dquickrender_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dquickscene2d.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dquickscene2d_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3drender.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3drender_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_accessibility_support_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_axbase.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_axbase_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_axcontainer.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_axcontainer_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_axserver.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_axserver_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_bluetooth.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_bluetooth_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_bodymovin_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_bootstrap_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_charts.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_charts_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_concurrent.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_concurrent_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_core.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_core_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_datavisualization.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_datavisualization_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_dbus.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_dbus_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_designer.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_designer_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_designercomponents_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_devicediscovery_support_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_edid_support_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_egl_support_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_eventdispatcher_support_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_fb_support_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_fontdatabase_support_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_gamepad.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_gamepad_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_gui.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_gui_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_help.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_help_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_location.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_location_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_multimedia.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_multimedia_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_multimediawidgets.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_multimediawidgets_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_network.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_network_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_networkauth.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_networkauth_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_nfc.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_nfc_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_opengl.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_opengl_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_openglextensions.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_openglextensions_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_packetprotocol_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_platformcompositor_support_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_positioning.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_positioning_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_positioningquick.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_positioningquick_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_printsupport.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_printsupport_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_purchasing.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_purchasing_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_qml.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_qml_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_qmldebug_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_qmldevtools_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_qmlmodels.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_qmlmodels_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_qmltest.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_qmltest_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_qmlworkerscript.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_qmlworkerscript_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_qtmultimediaquicktools_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quick.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quick3d.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quick3d_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quick3dassetimport.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quick3dassetimport_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quick3drender.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quick3drender_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quick3druntimerender.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quick3druntimerender_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quick3dutils.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quick3dutils_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quick_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quickcontrols2.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quickcontrols2_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quickparticles_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quickshapes_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quicktemplates2.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quicktemplates2_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quickwidgets.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quickwidgets_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_remoteobjects.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_remoteobjects_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_repparser.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_repparser_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_script.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_script_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_scripttools.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_scripttools_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_scxml.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_scxml_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_sensors.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_sensors_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_serialbus.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_serialbus_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_serialport.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_serialport_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_sql.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_sql_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_svg.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_svg_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_testlib.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_testlib_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_texttospeech.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_texttospeech_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_theme_support_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_uiplugin.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_uitools.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_uitools_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_virtualkeyboard.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_virtualkeyboard_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_vulkan_support_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_webchannel.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_webchannel_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_websockets.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_websockets_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_widgets.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_widgets_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_windowsuiautomation_support_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_winextras.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_winextras_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_xml.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_xml_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_xmlpatterns.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_xmlpatterns_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_zlib_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\features\qt_functions.prf C:\qt\5.15.0\mingw81_64\mkspecs\features\qt_config.prf C:\qt\5.15.0\mingw81_64\mkspecs\win32-g++\qmake.conf C:\qt\5.15.0\mingw81_64\mkspecs\features\spec_post.prf .qmake.stash C:\qt\5.15.0\mingw81_64\mkspecs\features\exclusive_builds.prf C:\qt\5.15.0\mingw81_64\mkspecs\features\toolchain.prf C:\qt\5.15.0\mingw81_64\mkspecs\features\default_pre.prf C:\qt\5.15.0\mingw81_64\mkspecs\features\win32\default_pre.prf ..\klibcore\klibcore.pro C:\qt\5.15.0\mingw81_64\mkspecs\features\resolve_config.prf C:\qt\5.15.0\mingw81_64\mkspecs\features\exclusive_builds_post.prf C:\qt\5.15.0\mingw81_64\mkspecs\features\default_post.prf C:\qt\5.15.0\mingw81_64\mkspecs\features\build_pass.prf C:\qt\5.15.0\mingw81_64\mkspecs\features\win32\console.prf C:\qt\5.15.0\mingw81_64\mkspecs\features\qml_debug.prf C:\qt\5.15.0\mingw81_64\mkspecs\features\precompile_header.prf C:\qt\5.15.0\mingw81_64\mkspecs\features\warn_on.prf C:\qt\5.15.0\mingw81_64\mkspecs\features\qt.prf C:\qt\5.15.0\mingw81_64\mkspecs\features\qmake_use.prf C:\qt\5.15.0\mingw81_64\mkspecs\features\file_copies.prf C:\qt\5.15.0\mingw81_64\mkspecs\features\testcase_targets.prf C:\qt\5.15.0\mingw81_64\mkspecs\features\exceptions.prf C:\qt\5.15.0\mingw81_64\mkspecs\features\yacc.prf C:\qt\5.15.0\mingw81_64\mkspecs\features\lex.prf ..\project172.pro      
 
 clean: compiler_clean 
-	-$(DEL_FILE) release\kuniversalqueue.o release\ktype.o release\kcirclebuffer.o release\kvoidhandle.o release\kmetafunction.o release\kabstractfactory.o release\kpull.o release\kmoduleswitch.o release\abstractrenderengine.o release\abstractrenderer.o release\image.o release\textformat.o release\main.o release\object.o release\sdlgraphicsprovider.o release\sdlrenderer.o release\worker.o release\world.o release\assetmanager.o release\filesystem.o release\animator.o release\background.o release\unit.o release\movable.o release\camera.o release\capability.o release\controller.o release\player.o release\modulehandler.o release\module.o release\rotozoom.o release\spm.o release\timer.o release\event.o release\vector.o release\stringformer.o release\anaglyph.o release\loadable.o release\weapon.o release\projectile.o release\context.o release\engine.o release\warpdrive.o release\ship.o release\guielement.o release\guicontainer.o release\iinformative.o release\guistack.o release\ai.o release\station.o release\json_reader.o release\json_value.o release\json_writer.o release\debug.o release\guiswitch.o release\visualeffect.o release\guichoice.o release\application.o release\fpsmonitor.o release\particle.o release\framebuilder.o release\socket.o release\netlistener.o release\state.o release\trigger.o release\guimain.o release\guicentralmessage.o release\controllerfinder.o release\guifloatingmessage.o release\guiblushingfloatingmessage.o release\math.o release\lightparticle.o release\worldmanager.o release\defaultworld.o release\arenaworld.o release\docker.o release\near.o release\guilist.o release\aggressive.o release\heapworld.o release\objectregistry.o release\registryinfo.o release\audio.o release\audiochannel.o release\audiohardwarebank.o release\audioplayer.o release\variant.o release\guiminimap.o release\guiradar.o release\thruster.o release\time.o release\guimenuelement.o release\mutex.o release\unitsamountinfo.o release\environment.o
+	-$(DEL_FILE) release\kuniversalqueue.o release\ktype.o release\kcirclebuffer.o release\kvoidhandle.o release\kmetafunction.o release\kabstractfactory.o release\kpull.o release\kmoduleswitch.o release\e_variant.o release\type.o release\variant.o release\assetprovider.o release\abstractgraphicsprovider.o release\abstractrenderer.o release\image.o release\textformat.o release\main.o release\object.o release\sdlgraphicsprovider.o release\sdlrenderer.o release\worker.o release\world.o release\assetmanager.o release\filesystem.o release\animator.o release\background.o release\unit.o release\movable.o release\camera.o release\capability.o release\controller.o release\player.o release\modulehandler.o release\module.o release\rotozoom.o release\spm.o release\timer.o release\event.o release\vector.o release\stringformer.o release\anaglyph.o release\loadable.o release\weapon.o release\projectile.o release\context.o release\engine.o release\warpdrive.o release\ship.o release\guielement.o release\guicontainer.o release\iinformative.o release\guistack.o release\ai.o release\station.o release\json_reader.o release\json_value.o release\json_writer.o release\debug.o release\guiswitch.o release\visualeffect.o release\guichoice.o release\application.o release\fpsmonitor.o release\particle.o release\framebuilder.o release\socket.o release\netlistener.o release\state.o release\trigger.o release\guimain.o release\guicentralmessage.o release\controllerfinder.o release\guifloatingmessage.o release\guiblushingfloatingmessage.o release\math.o release\lightparticle.o release\worldmanager.o release\defaultworld.o release\arenaworld.o release\docker.o release\near.o release\guilist.o release\aggressive.o release\heapworld.o release\objectregistry.o release\registryinfo.o release\audio.o release\audiochannel.o release\audiohardwarebank.o release\audioplayer.o release\guiminimap.o release\guiradar.o release\thruster.o release\time.o release\guimenuelement.o release\mutex.o release\unitsamountinfo.o release\environment.o
 
 distclean: clean 
 	-$(DEL_FILE) .qmake.stash
@@ -522,119 +534,42 @@ release/kmoduleswitch.o: ../klibcore/src/memcontrol/kmoduleswitch.cpp ../klibcor
 		../klibcore/src/kmacro.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\kmoduleswitch.o ..\klibcore\src\memcontrol\kmoduleswitch.cpp
 
-release/abstractrenderengine.o: ../src/engine/abstractrenderengine.cpp ../src/engine/abstractrenderengine.h \
-		../src/engine/abstractrenderer.h \
-		../src/engine/image.h \
-		../src/engine/textformat.h \
+release/e_variant.o: ../src/additional/e_variant.cpp ../src/additional/e_variant.h \
 		../src/engine/math/vector.h \
-		../src/additional/effects/visualeffect.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_main.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_stdinc.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_config.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_platform.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/begin_code.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/close_code.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_assert.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_atomic.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_audio.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_error.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_endian.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mutex.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_thread.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_rwops.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_clipboard.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_cpuinfo.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_events.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_video.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_pixels.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_rect.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_surface.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_blendmode.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_keyboard.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_keycode.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_scancode.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mouse.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_joystick.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_gamecontroller.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_quit.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_gesture.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_touch.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_filesystem.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_haptic.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_hints.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_loadso.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_log.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_messagebox.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_metal.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_power.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_render.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_sensor.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_shape.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_system.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
-		../src/additional/variant.h \
 		../src/object.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\abstractrenderengine.o ..\src\engine\abstractrenderengine.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\e_variant.o ..\src\additional\e_variant.cpp
 
-release/abstractrenderer.o: ../src/engine/abstractrenderer.cpp ../src/engine/abstractrenderer.h \
-		../src/engine/image.h \
-		../src/engine/textformat.h \
+release/type.o: ../src/engine/type.cpp ../src/engine/type.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\type.o ..\src\engine\type.cpp
+
+release/variant.o: ../src/engine/variant.cpp ../src/engine/variant.h \
+		../src/engine/type.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\variant.o ..\src\engine\variant.cpp
+
+release/assetprovider.o: ../src/engine/assettools/assetprovider.cpp ../src/engine/assettools/assetprovider.h \
+		../src/engine/variant.h \
+		../src/engine/type.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\assetprovider.o ..\src\engine\assettools\assetprovider.cpp
+
+release/abstractgraphicsprovider.o: ../src/engine/graphics/abstractgraphicsprovider.cpp ../src/engine/graphics/abstractgraphicsprovider.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/engine/graphics/image.h \
 		../src/engine/math/vector.h \
-		../src/additional/effects/visualeffect.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_main.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_stdinc.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_config.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_platform.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/begin_code.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/close_code.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_assert.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_atomic.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_audio.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_error.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_endian.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mutex.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_thread.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_rwops.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_clipboard.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_cpuinfo.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_events.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_video.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_pixels.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_rect.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_surface.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_blendmode.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_keyboard.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_keycode.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_scancode.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mouse.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_joystick.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_gamecontroller.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_quit.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_gesture.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_touch.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_filesystem.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_haptic.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_hints.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_loadso.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_log.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_messagebox.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_metal.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_power.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_render.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_sensor.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_shape.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_system.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
-		../src/additional/variant.h \
-		../src/object.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\abstractrenderer.o ..\src\engine\abstractrenderer.cpp
+		../src/additional/e_variant.h \
+		../src/object.h \
+		../src/engine/textformat.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\abstractgraphicsprovider.o ..\src\engine\graphics\abstractgraphicsprovider.cpp
 
-release/image.o: ../src/engine/image.cpp ../src/engine/image.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\image.o ..\src\engine\image.cpp
+release/abstractrenderer.o: ../src/engine/graphics/abstractrenderer.cpp ../src/engine/graphics/abstractrenderer.h \
+		../src/engine/graphics/image.h \
+		../src/engine/math/vector.h \
+		../src/additional/e_variant.h \
+		../src/object.h \
+		../src/engine/textformat.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\abstractrenderer.o ..\src\engine\graphics\abstractrenderer.cpp
+
+release/image.o: ../src/engine/graphics/image.cpp ../src/engine/graphics/image.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\image.o ..\src\engine\graphics\image.cpp
 
 release/textformat.o: ../src/engine/textformat.cpp ../src/engine/textformat.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\textformat.o ..\src\engine\textformat.cpp
@@ -686,17 +621,15 @@ release/main.o: ../src/main.cpp ../src/environment.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_system.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
-		../src/engine/abstractrenderengine.h \
-		../src/engine/abstractrenderer.h \
-		../src/engine/image.h \
-		../src/engine/textformat.h \
-		../src/engine/math/vector.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/variant.h \
 		../src/object.h \
 		../src/state.h \
+		../src/additional/e_variant.h \
+		../src/engine/math/vector.h \
 		../src/worker.h \
 		../src/additional/event.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/engine/graphics/image.h \
+		../src/engine/textformat.h \
 		../src/assetmanager.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
@@ -798,16 +731,15 @@ release/sdlgraphicsprovider.o: ../src/sdlimplementation/sdlgraphicsprovider.cpp 
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_ttf.h \
-		../src/engine/abstractrenderer.h \
-		../src/engine/image.h \
-		../src/engine/textformat.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/engine/graphics/image.h \
 		../src/engine/math/vector.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/variant.h \
+		../src/additional/e_variant.h \
 		../src/object.h \
-		../src/engine/abstractrenderengine.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_image.h \
-		../src/additional/spm.h
+		../src/engine/textformat.h \
+		../src/engine/graphics/abstractgraphicsprovider.h \
+		../src/sdlimplementation/spm.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_image.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\sdlgraphicsprovider.o ..\src\sdlimplementation\sdlgraphicsprovider.cpp
 
 release/sdlrenderer.o: ../src/sdlimplementation/sdlrenderer.cpp ../src/sdlimplementation/sdlrenderer.h \
@@ -858,13 +790,13 @@ release/sdlrenderer.o: ../src/sdlimplementation/sdlrenderer.cpp ../src/sdlimplem
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_ttf.h \
-		../src/engine/abstractrenderer.h \
-		../src/engine/image.h \
-		../src/engine/textformat.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/engine/graphics/image.h \
 		../src/engine/math/vector.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/variant.h \
+		../src/additional/e_variant.h \
 		../src/object.h \
+		../src/engine/textformat.h \
+		../src/sdlimplementation/spm.h \
 		../src/units/camera.h \
 		../src/units/movable.h \
 		../src/units/unit.h \
@@ -896,7 +828,6 @@ release/sdlrenderer.o: ../src/sdlimplementation/sdlrenderer.cpp ../src/sdlimplem
 		../src/units/ship.h \
 		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h \
-		../src/additional/spm.h \
 		../src/debug.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\sdlrenderer.o ..\src\sdlimplementation\sdlrenderer.cpp
 
@@ -950,11 +881,10 @@ release/worker.o: ../src/worker.cpp ../src/worker.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
 		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/engine/abstractrenderer.h \
-		../src/engine/image.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/engine/graphics/image.h \
+		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/variant.h \
 		../src/objectregistry.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\worker.o ..\src\worker.cpp
 
@@ -1011,11 +941,10 @@ release/world.o: ../src/worlds/world.cpp ../src/worlds/world.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
 		../src/engine/math/vector.h \
-		../src/engine/abstractrenderer.h \
-		../src/engine/image.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/engine/graphics/image.h \
+		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/variant.h \
 		../src/time/timer.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
@@ -1111,11 +1040,10 @@ release/assetmanager.o: ../src/assetmanager.cpp ../src/assetmanager.h \
 		../src/additional/event.h \
 		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/engine/abstractrenderer.h \
-		../src/engine/image.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/engine/graphics/image.h \
+		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/variant.h \
 		../src/audio/audioplayer.h \
 		../src/audio/audiochannel.h \
 		../src/audio/audio.h \
@@ -1139,7 +1067,9 @@ release/assetmanager.o: ../src/assetmanager.cpp ../src/assetmanager.h \
 		../src/capabilities/modules/thruster.h \
 		../src/units/projectile.h \
 		../src/units/station.h \
-		../src/engine/abstractrenderengine.h
+		../klibcore/src/memcontrol/kabstractfactory.h \
+		../klibcore/src/utility/ktype.h \
+		../src/engine/graphics/abstractgraphicsprovider.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\assetmanager.o ..\src\assetmanager.cpp
 
 release/filesystem.o: ../src/filesystem.cpp ../src/filesystem.h
@@ -1197,13 +1127,10 @@ release/animator.o: ../src/animator.cpp ../src/animator.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
 		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/engine/abstractrenderer.h \
-		../src/engine/image.h \
-		../src/engine/textformat.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/variant.h \
-		../src/additional/spm.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_ttf.h
+		../src/engine/graphics/abstractrenderer.h \
+		../src/engine/graphics/image.h \
+		../src/additional/e_variant.h \
+		../src/engine/textformat.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\animator.o ..\src\animator.cpp
 
 release/background.o: ../src/background.cpp ../src/background.h \
@@ -1257,11 +1184,10 @@ release/background.o: ../src/background.cpp ../src/background.h \
 		../src/worker.h \
 		../src/additional/event.h \
 		../src/object.h \
-		../src/engine/abstractrenderer.h \
-		../src/engine/image.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/engine/graphics/image.h \
+		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/variant.h \
 		../src/time/timer.h \
 		../src/context.h \
 		../src/assetmanager.h \
@@ -1357,11 +1283,10 @@ release/unit.o: ../src/units/unit.cpp ../src/units/unit.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
 		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/engine/abstractrenderer.h \
-		../src/engine/image.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/engine/graphics/image.h \
+		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/variant.h \
 		../src/loadable.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
@@ -1459,11 +1384,10 @@ release/movable.o: ../src/units/movable.cpp ../src/units/movable.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
 		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/engine/abstractrenderer.h \
-		../src/engine/image.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/engine/graphics/image.h \
+		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/variant.h \
 		../src/loadable.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
@@ -1560,11 +1484,10 @@ release/camera.o: ../src/units/camera.cpp ../src/units/camera.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
 		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/engine/abstractrenderer.h \
-		../src/engine/image.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/engine/graphics/image.h \
+		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/variant.h \
 		../src/loadable.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
@@ -1642,11 +1565,10 @@ release/capability.o: ../src/capabilities/capability.cpp ../src/capabilities/cap
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
 		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/engine/abstractrenderer.h \
-		../src/engine/image.h \
-		../src/engine/textformat.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/variant.h
+		../src/engine/graphics/abstractrenderer.h \
+		../src/engine/graphics/image.h \
+		../src/additional/e_variant.h \
+		../src/engine/textformat.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\capability.o ..\src\capabilities\capability.cpp
 
 release/controller.o: ../src/capabilities/controller.cpp ../src/capabilities/controller.h \
@@ -1701,11 +1623,10 @@ release/controller.o: ../src/capabilities/controller.cpp ../src/capabilities/con
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
 		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/engine/abstractrenderer.h \
-		../src/engine/image.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/engine/graphics/image.h \
+		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/variant.h \
 		../src/time/timer.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
@@ -1799,11 +1720,10 @@ release/player.o: ../src/capabilities/player.cpp ../src/capabilities/player.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
 		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/engine/abstractrenderer.h \
-		../src/engine/image.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/engine/graphics/image.h \
+		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/variant.h \
 		../src/time/timer.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
@@ -1899,11 +1819,10 @@ release/modulehandler.o: ../src/capabilities/modulehandler.cpp ../src/capabiliti
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
 		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/engine/abstractrenderer.h \
-		../src/engine/image.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/engine/graphics/image.h \
+		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/variant.h \
 		../src/loadable.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
@@ -1976,11 +1895,10 @@ release/module.o: ../src/capabilities/modules/module.cpp ../src/capabilities/mod
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
 		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/engine/abstractrenderer.h \
-		../src/engine/image.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/engine/graphics/image.h \
+		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/variant.h \
 		../src/loadable.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
@@ -2010,7 +1928,7 @@ release/module.o: ../src/capabilities/modules/module.cpp ../src/capabilities/mod
 		../src/additional/trigger.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\module.o ..\src\capabilities\modules\module.cpp
 
-release/rotozoom.o: ../src/additional/rotozoom.cpp ../src/additional/rotozoom.h \
+release/rotozoom.o: ../src/sdlimplementation/rotozoom.cpp ../src/sdlimplementation/rotozoom.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_main.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_stdinc.h \
@@ -2057,9 +1975,9 @@ release/rotozoom.o: ../src/additional/rotozoom.cpp ../src/additional/rotozoom.h 
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_system.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\rotozoom.o ..\src\additional\rotozoom.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\rotozoom.o ..\src\sdlimplementation\rotozoom.cpp
 
-release/spm.o: ../src/additional/spm.cpp ../src/additional/spm.h \
+release/spm.o: ../src/sdlimplementation/spm.cpp ../src/sdlimplementation/spm.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_main.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_stdinc.h \
@@ -2107,10 +2025,8 @@ release/spm.o: ../src/additional/spm.cpp ../src/additional/spm.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_ttf.h \
-		../src/additional/effects/visualeffect.h \
-		../src/engine/math/vector.h \
-		../src/additional/rotozoom.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\spm.o ..\src\additional\spm.cpp
+		../src/sdlimplementation/rotozoom.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\spm.o ..\src\sdlimplementation\spm.cpp
 
 release/timer.o: ../src/time/timer.cpp ../src/time/timer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL.h \
@@ -2219,56 +2135,8 @@ release/stringformer.o: ../src/additional/stringformer.cpp ../src/additional/str
 		../src/object.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\stringformer.o ..\src\additional\stringformer.cpp
 
-release/anaglyph.o: ../src/additional/effects/anaglyph.cpp ../src/additional/effects/anaglyph.h \
-		../src/additional/effects/visualeffect.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_main.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_stdinc.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_config.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_platform.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/begin_code.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/close_code.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_assert.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_atomic.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_audio.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_error.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_endian.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mutex.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_thread.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_rwops.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_clipboard.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_cpuinfo.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_events.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_video.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_pixels.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_rect.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_surface.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_blendmode.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_keyboard.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_keycode.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_scancode.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mouse.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_joystick.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_gamecontroller.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_quit.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_gesture.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_touch.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_filesystem.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_haptic.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_hints.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_loadso.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_log.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_messagebox.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_metal.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_power.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_render.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_sensor.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_shape.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_system.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
-		../src/engine/math/vector.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\anaglyph.o ..\src\additional\effects\anaglyph.cpp
+release/anaglyph.o: ../src/sdlimplementation/effects/anaglyph.cpp ../src/sdlimplementation/effects/anaglyph.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\anaglyph.o ..\src\sdlimplementation\effects\anaglyph.cpp
 
 release/loadable.o: ../src/loadable.cpp ../src/loadable.h \
 		../src/json/json.h \
@@ -2333,11 +2201,10 @@ release/loadable.o: ../src/loadable.cpp ../src/loadable.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
 		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/engine/abstractrenderer.h \
-		../src/engine/image.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/engine/graphics/image.h \
+		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/variant.h \
 		../src/audio/audioplayer.h \
 		../src/audio/audiochannel.h \
 		../src/audio/audio.h \
@@ -2397,11 +2264,10 @@ release/weapon.o: ../src/capabilities/modules/weapon.cpp ../src/capabilities/mod
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
 		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/engine/abstractrenderer.h \
-		../src/engine/image.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/engine/graphics/image.h \
+		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/variant.h \
 		../src/loadable.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
@@ -2500,11 +2366,10 @@ release/projectile.o: ../src/units/projectile.cpp ../src/units/projectile.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
 		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/engine/abstractrenderer.h \
-		../src/engine/image.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/engine/graphics/image.h \
+		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/variant.h \
 		../src/loadable.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
@@ -2613,11 +2478,10 @@ release/context.o: ../src/context.cpp ../src/context.h \
 		../src/additional/event.h \
 		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/engine/abstractrenderer.h \
-		../src/engine/image.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/engine/graphics/image.h \
+		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/variant.h \
 		../src/audio/audioplayer.h \
 		../src/audio/audiochannel.h \
 		../src/audio/audio.h \
@@ -2701,11 +2565,10 @@ release/engine.o: ../src/capabilities/modules/engine.cpp ../src/capabilities/mod
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
 		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/engine/abstractrenderer.h \
-		../src/engine/image.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/engine/graphics/image.h \
+		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/variant.h \
 		../src/loadable.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
@@ -2779,11 +2642,10 @@ release/warpdrive.o: ../src/capabilities/modules/warpdrive.cpp ../src/capabiliti
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
 		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/engine/abstractrenderer.h \
-		../src/engine/image.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/engine/graphics/image.h \
+		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/variant.h \
 		../src/loadable.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
@@ -2880,11 +2742,10 @@ release/ship.o: ../src/units/ship.cpp ../src/units/ship.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
 		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/engine/abstractrenderer.h \
-		../src/engine/image.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/engine/graphics/image.h \
+		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/variant.h \
 		../src/loadable.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
@@ -2974,11 +2835,10 @@ release/guielement.o: ../src/gui/guielement.cpp ../src/gui/guielement.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
 		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/engine/abstractrenderer.h \
-		../src/engine/image.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/engine/graphics/image.h \
+		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/variant.h \
 		../src/time/timer.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
@@ -3062,11 +2922,10 @@ release/guicontainer.o: ../src/gui/guicontainer.cpp ../src/gui/guicontainer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
 		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/engine/abstractrenderer.h \
-		../src/engine/image.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/engine/graphics/image.h \
+		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/variant.h \
 		../src/time/timer.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
@@ -3094,10 +2953,8 @@ release/guicontainer.o: ../src/gui/guicontainer.cpp ../src/gui/guicontainer.h \
 		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h \
 		../src/gui/guistack.h \
-		../src/additional/effects/anaglyph.h \
 		../src/sdlimplementation/sdlrenderer.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_ttf.h \
-		../src/engine/abstractrenderengine.h
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_ttf.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\guicontainer.o ..\src\gui\guicontainer.cpp
 
 release/iinformative.o: ../src/iinformative.cpp ../src/iinformative.h
@@ -3157,11 +3014,10 @@ release/guistack.o: ../src/gui/guistack.cpp ../src/gui/guistack.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
 		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/engine/abstractrenderer.h \
-		../src/engine/image.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/engine/graphics/image.h \
+		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/variant.h \
 		../src/time/timer.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
@@ -3245,11 +3101,10 @@ release/ai.o: ../src/capabilities/ai.cpp ../src/capabilities/ai.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
 		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/engine/abstractrenderer.h \
-		../src/engine/image.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/engine/graphics/image.h \
+		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/variant.h \
 		../src/time/timer.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
@@ -3333,11 +3188,10 @@ release/station.o: ../src/units/station.cpp ../src/units/station.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
 		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/engine/abstractrenderer.h \
-		../src/engine/image.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/engine/graphics/image.h \
+		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/variant.h \
 		../src/loadable.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
@@ -3447,11 +3301,10 @@ release/guiswitch.o: ../src/gui/guiswitch.cpp ../src/gui/guiswitch.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
 		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/engine/abstractrenderer.h \
-		../src/engine/image.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/engine/graphics/image.h \
+		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/variant.h \
 		../src/time/timer.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
@@ -3480,7 +3333,7 @@ release/guiswitch.o: ../src/gui/guiswitch.cpp ../src/gui/guiswitch.h \
 		../src/additional/trigger.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\guiswitch.o ..\src\gui\guiswitch.cpp
 
-release/visualeffect.o: ../src/additional/effects/visualeffect.cpp ../src/additional/effects/visualeffect.h \
+release/visualeffect.o: ../src/sdlimplementation/effects/visualeffect.cpp ../src/sdlimplementation/effects/visualeffect.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_main.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_stdinc.h \
@@ -3528,7 +3381,7 @@ release/visualeffect.o: ../src/additional/effects/visualeffect.cpp ../src/additi
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
 		../src/engine/math/vector.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\visualeffect.o ..\src\additional\effects\visualeffect.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\visualeffect.o ..\src\sdlimplementation\effects\visualeffect.cpp
 
 release/guichoice.o: ../src/gui/guichoice.cpp ../src/gui/guichoice.h \
 		../src/gui/guimenuelement.h \
@@ -3585,11 +3438,10 @@ release/guichoice.o: ../src/gui/guichoice.cpp ../src/gui/guichoice.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
 		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/engine/abstractrenderer.h \
-		../src/engine/image.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/engine/graphics/image.h \
+		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/variant.h \
 		../src/time/timer.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
@@ -3729,11 +3581,10 @@ release/particle.o: ../src/units/particle.cpp ../src/units/particle.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
 		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/engine/abstractrenderer.h \
-		../src/engine/image.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/engine/graphics/image.h \
+		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/variant.h \
 		../src/loadable.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
@@ -3893,11 +3744,10 @@ release/netlistener.o: ../src/netlistener.cpp ../src/netlistener.h \
 		../src/additional/event.h \
 		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/engine/abstractrenderer.h \
-		../src/engine/image.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/engine/graphics/image.h \
+		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/variant.h \
 		../src/audio/audioplayer.h \
 		../src/audio/audiochannel.h \
 		../src/audio/audio.h \
@@ -3925,7 +3775,7 @@ release/netlistener.o: ../src/netlistener.cpp ../src/netlistener.h \
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\netlistener.o ..\src\netlistener.cpp
 
 release/state.o: ../src/state.cpp ../src/state.h \
-		../src/additional/variant.h \
+		../src/additional/e_variant.h \
 		../src/engine/math/vector.h \
 		../src/object.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\state.o ..\src\state.cpp
@@ -3988,11 +3838,10 @@ release/guimain.o: ../src/gui/guimain.cpp ../src/gui/guimain.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
 		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/engine/abstractrenderer.h \
-		../src/engine/image.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/engine/graphics/image.h \
+		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/variant.h \
 		../src/time/timer.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
@@ -4081,11 +3930,10 @@ release/guicentralmessage.o: ../src/gui/guicentralmessage.cpp ../src/gui/guicent
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
 		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/engine/abstractrenderer.h \
-		../src/engine/image.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/engine/graphics/image.h \
+		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/variant.h \
 		../src/time/timer.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
@@ -4168,11 +4016,10 @@ release/controllerfinder.o: ../src/additional/informative/controllerfinder.cpp .
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
 		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/engine/abstractrenderer.h \
-		../src/engine/image.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/engine/graphics/image.h \
+		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/variant.h \
 		../src/time/timer.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
@@ -4255,11 +4102,10 @@ release/guifloatingmessage.o: ../src/gui/guifloatingmessage.cpp ../src/gui/guifl
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
 		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/engine/abstractrenderer.h \
-		../src/engine/image.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/engine/graphics/image.h \
+		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/variant.h \
 		../src/time/timer.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
@@ -4345,11 +4191,10 @@ release/guiblushingfloatingmessage.o: ../src/gui/guiblushingfloatingmessage.cpp 
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
 		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/engine/abstractrenderer.h \
-		../src/engine/image.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/engine/graphics/image.h \
+		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/variant.h \
 		../src/time/timer.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
@@ -4434,11 +4279,10 @@ release/lightparticle.o: ../src/additional/lightparticle.cpp ../src/additional/l
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
 		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/engine/abstractrenderer.h \
-		../src/engine/image.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/engine/graphics/image.h \
+		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/variant.h \
 		../src/time/timer.h \
 		../src/context.h \
 		../src/assetmanager.h \
@@ -4538,11 +4382,10 @@ release/worldmanager.o: ../src/worldmanager.cpp ../src/worldmanager.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
 		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/engine/abstractrenderer.h \
-		../src/engine/image.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/engine/graphics/image.h \
+		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/variant.h \
 		../src/time/timer.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
@@ -4589,10 +4432,7 @@ release/worldmanager.o: ../src/worldmanager.cpp ../src/worldmanager.h \
 		../src/additional/informative/registryinfo.h \
 		../src/additional/informative/controllerfinder.h \
 		../src/additional/informative/unitsamountinfo.h \
-		../src/state.h \
-		../src/additional/spm.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_ttf.h \
-		../src/additional/effects/anaglyph.h
+		../src/state.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\worldmanager.o ..\src\worldmanager.cpp
 
 release/defaultworld.o: ../src/worlds/defaultworld.cpp ../src/worlds/defaultworld.h \
@@ -4649,11 +4489,10 @@ release/defaultworld.o: ../src/worlds/defaultworld.cpp ../src/worlds/defaultworl
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
 		../src/engine/math/vector.h \
-		../src/engine/abstractrenderer.h \
-		../src/engine/image.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/engine/graphics/image.h \
+		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/variant.h \
 		../src/time/timer.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
@@ -4741,11 +4580,10 @@ release/arenaworld.o: ../src/worlds/arenaworld.cpp ../src/worlds/arenaworld.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
 		../src/engine/math/vector.h \
-		../src/engine/abstractrenderer.h \
-		../src/engine/image.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/engine/graphics/image.h \
+		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/variant.h \
 		../src/time/timer.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
@@ -4830,11 +4668,10 @@ release/docker.o: ../src/capabilities/docker.cpp ../src/capabilities/docker.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
 		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/engine/abstractrenderer.h \
-		../src/engine/image.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/engine/graphics/image.h \
+		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/variant.h \
 		../src/units/unit.h \
 		../src/capabilities/modulehandler.h \
 		../src/capabilities/modules/module.h \
@@ -4912,11 +4749,10 @@ release/near.o: ../src/near.cpp ../src/near.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
 		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/engine/abstractrenderer.h \
-		../src/engine/image.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/engine/graphics/image.h \
+		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/variant.h \
 		../src/time/timer.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
@@ -5002,11 +4838,10 @@ release/guilist.o: ../src/gui/guilist.cpp ../src/gui/guilist.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
 		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/engine/abstractrenderer.h \
-		../src/engine/image.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/engine/graphics/image.h \
+		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/variant.h \
 		../src/time/timer.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
@@ -5094,11 +4929,10 @@ release/aggressive.o: ../src/capabilities/aggressive.cpp ../src/capabilities/agg
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
 		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/engine/abstractrenderer.h \
-		../src/engine/image.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/engine/graphics/image.h \
+		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/variant.h \
 		../src/time/timer.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
@@ -5188,11 +5022,10 @@ release/heapworld.o: ../src/worlds/heapworld.cpp ../src/worlds/heapworld.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
 		../src/engine/math/vector.h \
-		../src/engine/abstractrenderer.h \
-		../src/engine/image.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/engine/graphics/image.h \
+		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/variant.h \
 		../src/time/timer.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
@@ -5327,11 +5160,10 @@ release/audioplayer.o: ../src/audio/audioplayer.cpp ../src/audio/audioplayer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
 		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/engine/abstractrenderer.h \
-		../src/engine/image.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/engine/graphics/image.h \
+		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/variant.h \
 		../src/units/camera.h \
 		../src/units/movable.h \
 		../src/units/unit.h \
@@ -5359,11 +5191,6 @@ release/audioplayer.o: ../src/audio/audioplayer.cpp ../src/audio/audioplayer.h \
 		../src/additional/trigger.h \
 		../src/engine/math/math.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\audioplayer.o ..\src\audio\audioplayer.cpp
-
-release/variant.o: ../src/additional/variant.cpp ../src/additional/variant.h \
-		../src/engine/math/vector.h \
-		../src/object.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\variant.o ..\src\additional\variant.cpp
 
 release/guiminimap.o: ../src/gui/guiminimap.cpp ../src/gui/guiminimap.h \
 		../src/gui/guielement.h \
@@ -5419,11 +5246,10 @@ release/guiminimap.o: ../src/gui/guiminimap.cpp ../src/gui/guiminimap.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
 		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/engine/abstractrenderer.h \
-		../src/engine/image.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/engine/graphics/image.h \
+		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/variant.h \
 		../src/time/timer.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
@@ -5512,11 +5338,10 @@ release/guiradar.o: ../src/gui/guiradar.cpp ../src/gui/guiradar.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
 		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/engine/abstractrenderer.h \
-		../src/engine/image.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/engine/graphics/image.h \
+		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/variant.h \
 		../src/time/timer.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
@@ -5600,11 +5425,10 @@ release/thruster.o: ../src/capabilities/modules/thruster.cpp ../src/capabilities
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
 		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/engine/abstractrenderer.h \
-		../src/engine/image.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/engine/graphics/image.h \
+		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/variant.h \
 		../src/loadable.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
@@ -5682,11 +5506,10 @@ release/guimenuelement.o: ../src/gui/guimenuelement.cpp ../src/gui/guimenuelemen
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
 		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/engine/abstractrenderer.h \
-		../src/engine/image.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/engine/graphics/image.h \
+		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/variant.h \
 		../src/time/timer.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
@@ -5769,11 +5592,10 @@ release/unitsamountinfo.o: ../src/additional/informative/unitsamountinfo.cpp ../
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
 		../src/engine/math/vector.h \
 		../src/object.h \
-		../src/engine/abstractrenderer.h \
-		../src/engine/image.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/engine/graphics/image.h \
+		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/variant.h \
 		../src/iinformative.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\unitsamountinfo.o ..\src\additional\informative\unitsamountinfo.cpp
 
@@ -5824,17 +5646,15 @@ release/environment.o: ../src/environment.cpp ../src/environment.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_system.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
-		../src/engine/abstractrenderengine.h \
-		../src/engine/abstractrenderer.h \
-		../src/engine/image.h \
-		../src/engine/textformat.h \
-		../src/engine/math/vector.h \
-		../src/additional/effects/visualeffect.h \
-		../src/additional/variant.h \
 		../src/object.h \
 		../src/state.h \
+		../src/additional/e_variant.h \
+		../src/engine/math/vector.h \
 		../src/worker.h \
 		../src/additional/event.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/engine/graphics/image.h \
+		../src/engine/textformat.h \
 		../src/assetmanager.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
@@ -5891,7 +5711,8 @@ release/environment.o: ../src/environment.cpp ../src/environment.h \
 		../src/filesystem.h \
 		../src/sdlimplementation/sdlgraphicsprovider.h \
 		../src/sdlimplementation/sdlrenderer.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_ttf.h
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_ttf.h \
+		../src/engine/graphics/abstractgraphicsprovider.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\environment.o ..\src\environment.cpp
 
 ####### Install

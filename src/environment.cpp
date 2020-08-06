@@ -92,7 +92,7 @@ void Environment::start() {
 void Environment::quit() {
     Debug::out("DESTRUCTING GAME");
     netListener->quit();
-    renderer->quit();
+    delete renderer;
     event->quit();
     Debug::out("GAME STOPED");
 }

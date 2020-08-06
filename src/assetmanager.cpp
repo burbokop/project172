@@ -10,9 +10,10 @@
 #include "units/projectile.h"
 #include "units/station.h"
 
-#include <engine/abstractrenderengine.h>
 
 #include <src/memcontrol/kabstractfactory.h>
+
+#include <engine/graphics/abstractgraphicsprovider.h>
 
 
 AssetManager::AssetManager() {}

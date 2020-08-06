@@ -6,7 +6,11 @@ debug/kmetafunction.o
 debug/kabstractfactory.o
 debug/kpull.o
 debug/kmoduleswitch.o
-debug/abstractrenderengine.o
+debug/e_variant.o
+debug/type.o
+debug/variant.o
+debug/assetprovider.o
+debug/abstractgraphicsprovider.o
 debug/abstractrenderer.o
 debug/image.o
 debug/textformat.o
@@ -84,7 +88,6 @@ debug/audio.o
 debug/audiochannel.o
 debug/audiohardwarebank.o
 debug/audioplayer.o
-debug/variant.o
 debug/guiminimap.o
 debug/guiradar.o
 debug/thruster.o
