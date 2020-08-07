@@ -17,7 +17,7 @@ private:
     Uint8 warpState = WARP_DISABLED;
     int currentChargindIteration = 0;
     int chargindIterations = DEFAULT_CYCLES_NUMBER;
-
+    double warpVelocity = 0.1;
 
     double getCharging();
     std::string getStateAsString();
@@ -28,9 +28,9 @@ public:
 
     int getState();
 
-    std::string getInfo();
+    std::string getInfo() override;
 
-    double getSpeadUnit();
+    double getSpeadUnit() const;
 
     bool prepareWarp();
     bool warp();
@@ -38,7 +38,7 @@ public:
 
     // Worker interface
 public:
-    void tick(Context *context, Event *event);
+    void tick(Context *context, Event *event) override;
 };
 
 #endif // WARPDRIVE_H

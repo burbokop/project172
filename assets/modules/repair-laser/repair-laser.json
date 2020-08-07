@@ -1,15 +1,7 @@
 {
     "id": "repair-laser",
-    "class": "weapon",
+    "class": "Weapon",
     "audio": { "start": "./shoot.wav" },
     "rate":160,
-    "projectile":"repair-shard",
-    "props": {},
-    "commands": [
-        "follow",
-        { 
-            "title": "fight",
-            "work": "/Function(() => { console.log('gogadoda fight'); })/"
-        }
-    ]
+    "projectile":"repair-shard"
 }

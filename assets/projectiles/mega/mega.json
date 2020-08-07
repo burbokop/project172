@@ -1,6 +1,6 @@
 {
     "id": "mega",
-    "class": "projectile",
+    "class": "Projectile",
     "sprite": "./mega.png",
 	"health":2,
 	"damage":24,

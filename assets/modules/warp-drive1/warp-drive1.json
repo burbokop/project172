@@ -1,6 +1,6 @@
 {
 	"id": "warp-drive1",
-	"class": "warp-drive",
+	"class": "WarpDrive",
 	"interval": 2000,
 	"warp-speed": 1,	
    	"animation": { 

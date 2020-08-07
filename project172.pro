@@ -26,12 +26,15 @@ SOURCES += \
     src/assettools/assetexecutors/animatorassetexecutor.cpp \
     src/assettools/assetexecutors/assetexecutor.cpp \
     src/assettools/assetexecutors/audioassetexecutor.cpp \
+    src/assettools/assetexecutors/mapassetexecutor.cpp \
     src/assettools/assetexecutors/numberassetexecutor.cpp \
     src/assettools/assetexecutors/spriteassetexecutor.cpp \
+    src/assettools/assetexecutors/stringassetexecutor.cpp \
     src/assettools/assetexecutors/vectorassetexecutor.cpp \
+    src/assettools/assetprovider.cpp \
+    src/engine/abstractfactory.cpp \
     src/engine/type.cpp \
     src/engine/variant.cpp \
-    src/engine/assettools/assetprovider.cpp \
     src/engine/graphics/abstractgraphicsprovider.cpp \
     src/engine/graphics/abstractrenderer.cpp \
     src/engine/graphics/image.cpp \
@@ -42,7 +45,6 @@ SOURCES += \
     src/sdlimplementation/sdlrenderer.cpp \
     src/worker.cpp \
     src/worlds/world.cpp \
-    src/assettools/assetmanager.cpp \
     src/filesystem.cpp \
     src/animator.cpp \
     src/background.cpp \
@@ -125,12 +127,15 @@ HEADERS += \
     src/assettools/assetexecutors/animatorassetexecutor.h \
     src/assettools/assetexecutors/assetexecutor.h \
     src/assettools/assetexecutors/audioassetexecutor.h \
+    src/assettools/assetexecutors/mapassetexecutor.h \
     src/assettools/assetexecutors/numberassetexecutor.h \
     src/assettools/assetexecutors/spriteassetexecutor.h \
+    src/assettools/assetexecutors/stringassetexecutor.h \
     src/assettools/assetexecutors/vectorassetexecutor.h \
+    src/assettools/assetprovider.h \
+    src/engine/abstractfactory.h \
     src/engine/type.h \
     src/engine/variant.h \
-    src/engine/assettools/assetprovider.h \
     src/engine/graphics/abstractgraphicsprovider.h \
     src/engine/graphics/abstractrenderer.h \
     src/engine/graphics/image.h \
@@ -140,7 +145,6 @@ HEADERS += \
     src/sdlimplementation/sdlrenderer.h \
     src/worker.h \
     src/worlds/world.h \
-    src/assettools/assetmanager.h \
     src/filesystem.h \
     src/animator.h \
     src/background.h \

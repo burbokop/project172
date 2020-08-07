@@ -30,7 +30,7 @@ void Movable::disableForcedMaxSpeed() {
 bool Movable::onAcceleration(bool start) {
     ModuleHandler *modules = getModuleHandler();
     if(modules) {
-        std::vector<Module*> *engines = modules->getModulesByClass("engine");
+        std::vector<Module*> *engines = modules->getModulesByClass("Engine");
         if(engines) {
             for(Module *module : *engines) {
                 Engine *engine = dynamic_cast<Engine*>(module);
@@ -66,7 +66,13 @@ void Movable::setRelativisticVelocity(bool value) {
 
 
 
-Movable::Movable() : Unit () {}
+Movable::Movable() : Unit () {
+    registerInitFunction([this]() {
+        loadedValues.acceleration = asset<double>("acceleration", DEFAULT_ACCELERATION_VALUE);
+        loadedValues.maxVelocity = asset<double>("max-speed", DEFAULT_MAX_SPEED);
+        loadedValues.releaseVelocity = asset<double>("releaseVelocity", DEFAULT_RELEASE_SPEAD);
+    });
+}
 
 void Movable::place(e172::Vector pos, e172::Vector vel, e172::Vector acc, double angle) {
     Unit::place(pos, angle);
@@ -77,7 +83,8 @@ void Movable::place(e172::Vector pos, e172::Vector vel, e172::Vector acc, double
 bool Movable::accelerateForward() {
     if(!accelerationLocked) {
         ModuleHandler *modules = getModuleHandler();
-        if(modules && modules->hasModuleOfClass("engine")) {
+        if(modules && modules->hasModuleOfClass("Engine")) {
+            std::cout << "forward\n";
             acc = e172::Vector::createByAngle(getAccelerationValue(), getAngle());
             accelerationLocked = true;
             return true;
@@ -89,7 +96,7 @@ bool Movable::accelerateForward() {
 bool Movable::accelerateLeft() {
     if(!accelerationLocked) {
         ModuleHandler *modules = getModuleHandler();
-        if(modules && modules->hasModuleOfClass("thruster")) {
+        if(modules && modules->hasModuleOfClass("Thruster")) {
             acc = e172::Vector::createByAngle(getAccelerationValue(), getAngle() - M_PI / 2);
             accelerationLocked = true;
             return true;
@@ -101,7 +108,7 @@ bool Movable::accelerateLeft() {
 bool Movable::accelerateRight() {
     if(!accelerationLocked) {
         ModuleHandler *modules = getModuleHandler();
-        if(modules && modules->hasModuleOfClass("thruster")) {
+        if(modules && modules->hasModuleOfClass("Thruster")) {
             acc = e172::Vector::createByAngle(getAccelerationValue(), getAngle() + M_PI / 2);
             accelerationLocked = true;
             return true;
@@ -176,8 +183,3 @@ void Movable::tick(Context *context, Event *event) {
     this->Unit::tick(context, event);
 }
 
-void Movable::initialized() {
-    loadedValues.acceleration = asset<double>("acceleration", DEFAULT_ACCELERATION_VALUE);
-    loadedValues.maxVelocity = asset<double>("max-speed", DEFAULT_MAX_SPEED);
-    loadedValues.releaseVelocity = asset<double>("releaseVelocity", DEFAULT_RELEASE_SPEAD);
-}

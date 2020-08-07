@@ -20,7 +20,8 @@ class AbstractRenderer {
 
     AbstractGraphicsProvider *m_provider = nullptr;
 protected:
-    static Image::ptr imageData(const Image &image);
+    template<typename T>
+    static T imageData(const Image &image) { return Image::handle_cast<T>(image.m_data)->c; }
     static Image::ptr imageId(const Image &image);
     AbstractGraphicsProvider *provider() const;
 public:

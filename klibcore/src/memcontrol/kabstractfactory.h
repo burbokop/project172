@@ -6,7 +6,10 @@
 #include <map>
 #include <functional>
 
-#include "../utility/ktype.h"
+#include <klibcore/src/utility/ktype.h>
+
+template<typename T>
+class KType;
 
 /**
  * @brief The KAbstractFactory class provides standart abstract factory
@@ -17,9 +20,6 @@
  *
  * @note KAbstractFactory is available whithout Qt.
  */
-
-template<typename T>
-class KType;
 
 template<typename KeyType, typename BaseClass>
 class KAbstractFactory {

@@ -171,7 +171,7 @@ void Context::handleRequest(Request request) {
     }
 }
 
-Context::Context(std::vector<Worker *> *units, AssetManager *assets, GUIMain *gui) {
+Context::Context(std::vector<Worker *> *units, AssetProvider *assets, GUIMain *gui) {
     this->units = units;
     this->assets = assets;
     this->gui = gui;
@@ -181,7 +181,7 @@ std::vector<Worker *> *Context::getUnits() const {
     return units;
 }
 
-AssetManager *Context::getAssets() const {
+AssetProvider *Context::getAssets() const {
     return assets;
 }
 

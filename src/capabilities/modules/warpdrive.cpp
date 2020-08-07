@@ -12,9 +12,9 @@ const Uint8 WarpDrive::WARP_RECHARGING = 4;
 
 
 WarpDrive::WarpDrive() {
-}
-
-WarpDrive::WarpDrive(Loadable *tmp) : Module (tmp) {
+    registerInitFunction([this](){
+        warpVelocity = asset<double>("warp-speed", 0.1);
+    });
 }
 
 int WarpDrive::getState() {
@@ -75,8 +75,8 @@ std::string WarpDrive::getInfo() {
     return "WD   |" + chargingBar + "|   " + getStateAsIcon();
 }
 
-double WarpDrive::getSpeadUnit() {
-    return  root.get("warp-speed", 0.1).asDouble();
+double WarpDrive::getSpeadUnit() const {
+    return warpVelocity;
 }
 
 
@@ -128,3 +128,4 @@ void WarpDrive::tick(Context *context, Event *event) {
 
     this->Module::tick(context, event);
 }
+

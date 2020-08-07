@@ -47,7 +47,7 @@ void Aggressive::tick(Context *context, Event *event) {
 
             ModuleHandler *modules = parent->getModuleHandler();
             if(modules) {
-                std::vector<Module*> *weapons = modules->getModulesByClass("weapon");
+                std::vector<Module*> *weapons = modules->getModulesByClass("Weapon");
 
                 if(weapons) {
                     for(Module *module : *weapons) {

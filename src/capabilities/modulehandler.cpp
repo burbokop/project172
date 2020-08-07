@@ -48,7 +48,7 @@ std::vector<Module *> *ModuleHandler::getModulesByClass(std::string moduleClass)
     } else {
         std::vector<Module *> *result = new std::vector<Module *>();
         for(Module *module : modules) {
-            if(module->getAssetClass() == moduleClass) {
+            if(module->className() == moduleClass) {
                 result->push_back(module);
             }
         }
@@ -65,7 +65,7 @@ std::vector<Module *> *ModuleHandler::getModulesByClass(std::string moduleClass)
 
 bool ModuleHandler::hasModuleOfClass(std::string moduleClass) {
     for(Module *module : modules) {
-        if(module->getAssetClass() == moduleClass) {
+        if(module->className() == moduleClass) {
             return true;
         }
     }

@@ -1,8 +1,7 @@
 {
     "id": "plasma-launcher",
-    "class": "weapon",
+    "class": "Weapon",
     "audio": { "start": "./shoot.wav" },
     "rate": 30,
-    "projectile":"proj-plasma",
-    "props": {}
+    "projectile":"proj-plasma"
 }

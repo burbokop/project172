@@ -8,7 +8,6 @@
 class Station : public Unit {
 public:
     Station();
-    Station(Loadable *tmp);
 };
 
 #endif // STATION_H

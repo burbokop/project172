@@ -3,9 +3,6 @@
 Engine::Engine() {
 }
 
-Engine::Engine(Loadable *tmp) : Module (tmp) {
-}
-
 bool Engine::forward() {
     animate(Animator::LOOP);
     return true;

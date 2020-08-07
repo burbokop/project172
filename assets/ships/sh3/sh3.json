@@ -1,6 +1,6 @@
 {
     "id": "sh3",
-    "class": "ship",
+    "class": "Ship",
     "sprite": "./sh3.png",
 	"health": 80,
 	"explosive": 10

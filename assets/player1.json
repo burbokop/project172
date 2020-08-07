@@ -1,6 +1,6 @@
 {
 	"id":"player1",
-	"class":"player",
+	"class":"Player",
 	"keymap": {
 		"forward":"w",
 		"left":"a",

@@ -42,6 +42,14 @@ bool Player::getPersonalKey(Event *event, std::string id) {
 }
 
 Player::Player() : Controller(), Loadable() {
+    registerInitFunction([this]() {
+        auto keymap = asset<e172::VariantMap>("keymap");
+        for(auto it = keymap.begin(); it != keymap.end(); ++it) {
+            if(Player::scancode.find(it->second.toString()) != Player::scancode.end()) {
+                personalScancode[it->first] = Player::scancode.at(it->second.toString());
+            }
+        }
+    });
 }
 
 void Player::setArmor(Ship *armor) {
@@ -72,7 +80,7 @@ void Player::tick(Context *context, Event *event) {
 
     ModuleHandler *modules = parent->getModuleHandler();
     if(modules) {
-        std::vector<Module*> *weapons = modules->getModulesByClass("weapon");
+        std::vector<Module*> *weapons = modules->getModulesByClass("Weapon");
 
         if(weapons) {
             for(Module *module : *weapons) {
@@ -116,15 +124,4 @@ void Player::render(e172::AbstractRenderer *renderer) {
 void Player::onHit(Context *context, int health) {
     UNUSED(health);
     context->addEvent(parent, Context::BACKGROUND_FLASHING, 8);
-}
-
-void Player::initialized() {
-    Json::Value keymap = root["keymap"];
-    for(Json::Value::const_iterator itr = keymap.begin() ; itr != keymap.end() ; itr++ ) {
-        std::string key = itr.key().asString();
-        std::string value = keymap[key].asString();
-        if(Player::scancode.find(value) != Player::scancode.end()) {
-            personalScancode[key] = Player::scancode.at(value);
-        }
-    }
 }

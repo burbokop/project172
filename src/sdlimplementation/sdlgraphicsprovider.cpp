@@ -22,19 +22,21 @@ e172::AbstractRenderer *SDLGraphicsProvider::renderer() const {
 }
 
 e172::Image SDLGraphicsProvider::loadImage(const std::string &path) const {
-    const SDL_Surface *surface = IMG_Load(path.c_str());
-    const void* s_ptr = reinterpret_cast<const void*>(surface);
+    SDL_Surface *surface = IMG_Load(path.c_str());
+
     if(surface) {
-        return __createImage(s_ptr, this , surface->w, surface->h, [](const void* d) {
-            delete reinterpret_cast<const SDL_Surface*>(d);
-        }, [](e172::Image::ptr ptr) -> e172::Image::ptr {
-            return reinterpret_cast<const SDL_Surface*>(ptr)->pixels;
-        }, [](const void* d, int x, int y, int &w, int &h) -> const void* {
-            auto surface = reinterpret_cast<const SDL_Surface*>(d);
-            surface = SPM::CutOutSurface(surface, x, y, w, h);
-            w = surface->w;
-            h = surface->h;
-            return surface;
+        return __createImage(new e172::Image::handle<SDL_Surface*>(surface), this , surface->w, surface->h, [](e172::Image::data_ptr d) {
+            const auto handle = e172::Image::handle_cast<SDL_Surface*>(d);
+            SDL_FreeSurface(handle->c);
+            delete handle;
+        }, [](e172::Image::data_ptr ptr) -> e172::Image::ptr {
+            return e172::Image::handle_cast<SDL_Surface*>(ptr)->c->pixels;
+        }, [](e172::Image::data_ptr d, int x, int y, int &w, int &h) -> e172::Image::data_ptr {
+            const auto handle = e172::Image::handle_cast<SDL_Surface*>(d);
+            const auto newHandle = new e172::Image::handle<SDL_Surface*>(SPM::CutOutSurface(handle->c, x, y, w, h));
+            w = newHandle->c->w;
+            h = newHandle->c->h;
+            return newHandle;
         });
     }
     return e172::Image();

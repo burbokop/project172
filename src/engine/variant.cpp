@@ -1,5 +1,7 @@
 #include "variant.h"
 
+
+
 namespace e172 {
 
 
@@ -43,6 +45,12 @@ std::ostream &operator<<(std::ostream &stream, const std::list<Variant> &list) {
     stream << "]";
     return stream;
 }
+
+
+Variant::Variant(const Variant &obj) {
+    operator=(obj);
+}
+
 
 VariantVector Variant::constrained() {
     VariantVector result;
@@ -127,6 +135,13 @@ double Variant::toDouble(bool *ok) {
     if(ok)
         *ok = false;
     return 0;
+}
+
+VariantMap Variant::toMap() {
+    if(containsType<VariantMap>()) {
+        return value<VariantMap>();
+    }
+    return VariantMap();
 }
 
 bool Variant::isNumber() {

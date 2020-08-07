@@ -3,7 +3,7 @@
 
 #include <queue>
 
-#include <assettools/assetmanager.h>
+#include <assettools/assetprovider.h>
 
 
 #include "gui/guimain.h"
@@ -36,7 +36,7 @@ private:
     std::queue<Request> eventQueue;
     std::vector<Worker*> *units;
 
-    AssetManager *assets;
+    AssetProvider *assets;
 
     GUIMain *gui = nullptr;
     Background *background = nullptr;
@@ -44,10 +44,10 @@ private:
 
     void handleRequest(Request request);
 public:
-    Context(std::vector<Worker*> *units = nullptr, AssetManager *assets = nullptr, GUIMain *gui = nullptr);
+    Context(std::vector<Worker*> *units = nullptr, AssetProvider *assets = nullptr, GUIMain *gui = nullptr);
 
     std::vector<Worker*> *getUnits() const;
-    AssetManager *getAssets() const;
+    AssetProvider *getAssets() const;
 
     void addEvent(Worker *requester, unsigned command, Variant argument = Variant());
 

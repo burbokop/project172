@@ -23,7 +23,7 @@ bool Projectile::collision(Context* context, Unit *collider) {
         collider->isNot<Projectile*>() &&
         collider != mother
     ) {
-        collider->hit(context, root.get("damage", DEFAULT_DAMAGE).asInt());
+        collider->hit(context, damage);
         this->hit(context, DEFAULT_DAMAGE);
         return true;
     }
@@ -31,15 +31,14 @@ bool Projectile::collision(Context* context, Unit *collider) {
 }
 
 Projectile::Projectile() {
-    setIdleEnabled(false);
-    destroyTimer = new Timer((rand() % (2 * DEFAULT_LIFE_TIME_DELTA)) + (DEFAULT_AVERAGE_LIFE_TIME - DEFAULT_LIFE_TIME_DELTA));
-    destroyTimer->reset();
-}
-
-Projectile::Projectile(Loadable *tmp) : Movable (tmp) {
-    setIdleEnabled(false);
-    destroyTimer = new Timer((rand() % (2 * root.get("lifetime-delta", DEFAULT_LIFE_TIME_DELTA).asInt()) + (root.get("lifetime", DEFAULT_AVERAGE_LIFE_TIME).asInt() - root.get("lifetime-delta", DEFAULT_LIFE_TIME_DELTA).asInt())));
-    destroyTimer->reset();
+    registerInitFunction([this]() {
+        damage = asset<double>("damage", DEFAULT_DAMAGE);
+        lifetimeDelta = asset<double>("lifetime-delta", DEFAULT_LIFE_TIME_DELTA);
+        averageLifetime = asset<double>("lifetime", DEFAULT_AVERAGE_LIFE_TIME);
+        setIdleEnabled(false);
+        destroyTimer = new Timer((rand() % (2 * lifetimeDelta) + (averageLifetime - lifetimeDelta)));
+        destroyTimer->reset();
+    });
 }
 
 void Projectile::setMother(Unit *value) {
@@ -65,3 +64,4 @@ void Projectile::tick(Context *context, Event *event) {
     }
     this->Movable::tick(context, event);
 }
+

@@ -14,9 +14,21 @@
 
 #include <assettools/assetexecutors/animatorassetexecutor.h>
 #include <assettools/assetexecutors/audioassetexecutor.h>
+#include <assettools/assetexecutors/mapassetexecutor.h>
 #include <assettools/assetexecutors/numberassetexecutor.h>
 #include <assettools/assetexecutors/spriteassetexecutor.h>
+#include <assettools/assetexecutors/stringassetexecutor.h>
 #include <assettools/assetexecutors/vectorassetexecutor.h>
+
+#include <units/particle.h>
+#include <units/projectile.h>
+#include <units/station.h>
+
+#include <capabilities/player.h>
+
+#include <capabilities/modules/engine.h>
+#include <capabilities/modules/thruster.h>
+#include <capabilities/modules/weapon.h>
 
 
 
@@ -26,7 +38,7 @@ Environment::Environment(std::vector<std::string> args) {
     Audio::init();
 
     units = new std::vector<Worker*>();
-    assetManager = new AssetManager();
+    assetManager = new AssetProvider();
 
     assetManager->installExecutor("animation", std::make_shared<AnimatorAssetExecutor>());
     assetManager->installExecutor("sprite", std::make_shared<SpriteAssetExecutor>());
@@ -34,14 +46,33 @@ Environment::Environment(std::vector<std::string> args) {
     assetManager->installExecutor("offset", std::make_shared<VectorAssetExecutor>());
 
     assetManager->installExecutor("rate", std::make_shared<NumberAssetExecutor>());
+    assetManager->installExecutor("interval", std::make_shared<NumberAssetExecutor>());
     assetManager->installExecutor("health", std::make_shared<NumberAssetExecutor>());
     assetManager->installExecutor("explosive", std::make_shared<NumberAssetExecutor>());
     assetManager->installExecutor("max-speed", std::make_shared<NumberAssetExecutor>());
     assetManager->installExecutor("acceleration", std::make_shared<NumberAssetExecutor>());
     assetManager->installExecutor("release-spead", std::make_shared<NumberAssetExecutor>());
 
+    assetManager->installExecutor("projectile", std::make_shared<StringAssetExecutor>());
 
+    assetManager->installExecutor("left-thrust", std::make_shared<NumberAssetExecutor>());
+    assetManager->installExecutor("right-thrust", std::make_shared<NumberAssetExecutor>());
+    assetManager->installExecutor("warp-speed", std::make_shared<NumberAssetExecutor>());
+    assetManager->installExecutor("keymap", std::make_shared<MapAssetExecutor>());
+    assetManager->installExecutor("damage", std::make_shared<NumberAssetExecutor>());
+    assetManager->installExecutor("zoom", std::make_shared<NumberAssetExecutor>());
 
+    assetManager->registerType<Unit>();
+    assetManager->registerType<Movable>();
+    assetManager->registerType<Ship>();
+    assetManager->registerType<Station>();
+    assetManager->registerType<Projectile>();
+    assetManager->registerType<Particle>();
+    assetManager->registerType<Player>();
+    assetManager->registerType<Engine>();
+    assetManager->registerType<Weapon>();
+    assetManager->registerType<WarpDrive>();
+    assetManager->registerType<Thruster>();
 
 
     context = new Context(units, assetManager); //tick {no}

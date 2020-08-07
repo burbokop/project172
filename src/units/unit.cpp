@@ -14,6 +14,15 @@ double Unit::getRotationSpeed() {
 }
 
 Unit::Unit() : Loadable () {
+    registerInitFunction([this](){
+        health = asset<double>("health");
+        explosiveRadius = asset<double>("explosive");
+
+        animator = asset<Animator>("sprite");
+        if(!animator.isValid()) {
+            animator = asset<Animator>("animator");
+        }
+    });
 }
 
 void Unit::place(e172::Vector pos, double angle) {
@@ -183,8 +192,3 @@ std::string Unit::getType() const {
     return typeid (this).name();
 }
 
-void Unit::initialized() {
-    health = asset<double>("health");
-    explosiveRadius = asset<double>("explosive");
-    animator = asset<Animator>("animator");
-}

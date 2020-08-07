@@ -11,7 +11,7 @@ DefaultWorld::DefaultWorld() {
 
 }
 
-std::vector<Controller *> DefaultWorld::generate(AssetManager *assets, std::vector<Worker *> *units) {
+std::vector<Controller *> DefaultWorld::generate(AssetProvider *assets, std::vector<Worker *> *units) {
     std::vector<Controller*> result;
 
     //player1

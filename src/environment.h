@@ -21,7 +21,7 @@ class Environment : public Object {
 private:
     State *state = nullptr;
     std::vector<Worker*> *units = nullptr;
-    AssetManager *assetManager = nullptr;
+    AssetProvider *assetManager = nullptr;
     Context *context = nullptr;
     Event *event = nullptr;
     Background *background = nullptr;

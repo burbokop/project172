@@ -1,0 +1,6 @@
+{
+    	"id": "follow",
+	"class": "Command",
+    	"title": "follow",
+    	"work": "/Function(() => { console.log('gogadoda'); })/"
+}

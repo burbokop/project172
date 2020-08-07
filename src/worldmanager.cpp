@@ -30,7 +30,7 @@ WorldManager::WorldManager(std::vector<World *> worlds) {
     this->activeWorld = worlds[0];
 }
 
-void WorldManager::init(AssetManager *assets, std::vector<Worker*> *units, e172::AbstractRenderer *renderer, FPSMonitor *fps, FPSMonitor *tps) {
+void WorldManager::init(AssetProvider *assets, std::vector<Worker*> *units, e172::AbstractRenderer *renderer, FPSMonitor *fps, FPSMonitor *tps) {
     if(activeWorld) {
         worldIsChanged = false;
         std::vector<Controller*> players = activeWorld->generate(assets, units);
@@ -121,7 +121,7 @@ void WorldManager::init(AssetManager *assets, std::vector<Worker*> *units, e172:
     }
 }
 
-void WorldManager::checkState(Context *context, AssetManager *assets, std::vector<Worker *> *units, e172::AbstractRenderer *renderer, FPSMonitor *fps, FPSMonitor *tps) {
+void WorldManager::checkState(Context *context, AssetProvider *assets, std::vector<Worker *> *units, e172::AbstractRenderer *renderer, FPSMonitor *fps, FPSMonitor *tps) {
     if(worldIsChanged) {
         clear(units);
         init(assets, units, renderer, fps, tps);

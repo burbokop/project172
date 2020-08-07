@@ -1,6 +1,6 @@
 {
     "id": "astro",
-    "class": "ship",
+    "class": "Ship",
     "sprite": "./astro.png",
 	"health": 4,
 	"explosive": 4

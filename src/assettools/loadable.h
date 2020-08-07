@@ -9,17 +9,22 @@
 
 #include <engine/variant.h>
 
-
+class AssetProvider;
 class Loadable {
-    friend class AssetManager;
+    friend AssetProvider;
     std::map<std::string, e172::Variant> m_assets;
     std::string m_className;
     std::string m_loadableId;
+    AssetProvider *m_assetProvider = nullptr;
+
+    std::vector<std::function<void(void)>> initialize_functions;
+    bool released = false;
 protected:
-    virtual void initialized() {};
+    void registerInitFunction(const std::function<void(void)> &function);
+    template<typename C>
+    void registerInitFunction(C *obj, void(C::*f)()) { registerInitFunction(obj->*f); }
 public:
     Loadable();
-
 
     template<typename T>
     T asset(const std::string &name, const T &defaultValue = T(), bool *ok = nullptr) const {
@@ -37,6 +42,7 @@ public:
     virtual ~Loadable();
     std::string className() const;
     std::string loadableId() const;
+    AssetProvider *assetProvider() const;
 };
 
 #endif // LOADABLE_H

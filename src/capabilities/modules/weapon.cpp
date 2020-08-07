@@ -5,21 +5,18 @@
 #include "units/projectile.h"
 
 const double Weapon::DEFAULT_PROJECTILE_SPEED = 200.0;
-double Weapon::getProjectileSpead() {
-    Json::Value projectileSpeed = root["projectile-speed"];
-    if(projectileSpeed.isNumeric()) {
-        return projectileSpeed.asDouble();
-    }
-    return DEFAULT_PROJECTILE_SPEED;
+double Weapon::getProjectileSpead() const {
+    return projectileVelocity;
 }
 
 Weapon::Weapon() {
     timer.reset();
+    registerInitFunction([this](){
+        projectileName = asset<std::string>("projectile");
+        projectileVelocity = asset<double>("projectile-speed", DEFAULT_PROJECTILE_SPEED);
+    });
 }
 
-Weapon::Weapon(Loadable *tmp) : Module (tmp) {
-    timer.reset();
-}
 
 void Weapon::setFiring(bool condition) {
     firing = condition;
@@ -35,9 +32,8 @@ std::string Weapon::getInfo() {
 void Weapon::tick(Context *context, Event *event) {
     this->Module::tick(context, event);
     if(timer.count(firing)) {
-        Json::Value projectile = root["projectile"];
-        if(projectile.isString()) {
-            Projectile *object = static_cast<Projectile*>(context->getAssets()->createLoadable(projectile.asString()));
+        if(projectileName.size() > 0) {
+            Projectile *object = static_cast<Projectile*>(context->getAssets()->createLoadable(projectileName));
             object->setMother(parent);
 
             object->place(parent->getPosition(), parent->getVelocity() + e172::Vector::createByAngle(getProjectileSpead(), this->parent->getAngle()), e172::Vector(), this->parent->getAngle());
@@ -49,3 +45,4 @@ void Weapon::tick(Context *context, Event *event) {
         }
     }
 }
+

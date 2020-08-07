@@ -58,13 +58,21 @@ public:
 #ifndef E172_DISABLE_VARIANT_ABSTRACT_CONSTRUCTOR
     template<typename T>
     Variant(T value) { assign(value); }
-    Variant(const char *value) : Variant(std::string(value)) {}
 #endif
 
     template<typename T>
     static Variant fromValue(const T &value) { Variant v; v.assign(value); return v; }
 
-    Variant(const Variant &obj) { operator=(obj); }
+    Variant(const std::string &value) { assign(value); }
+    Variant(const int &value) { assign(value); }
+    Variant(const unsigned int &value) { assign(value); }
+    Variant(const double &value) { assign(value); }
+    Variant(const char *value) : Variant(std::string(value)) {}
+    Variant(const VariantMap &value) { assign(value); }
+    Variant(const VariantList &value) { assign(value); }
+    Variant(const VariantVector &value) { assign(value); }
+
+    Variant(const Variant &obj);
     template<typename T>
     void operator=(T value) { assign(value); }
     void operator=(const Variant &obj) {
@@ -96,6 +104,8 @@ public:
     bool isNumber();
     static bool __str_is_number(const std::string& string);
     double toDouble(bool *ok = nullptr);
+
+    VariantMap toMap();
 
     template<typename T>
     void assign(T value) {

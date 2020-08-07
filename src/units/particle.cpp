@@ -30,11 +30,6 @@ Particle::Particle(Uint8 shape, int averageLifeTime, int lifeTimeDelta) {
     destroyTimer->reset();
 }
 
-Particle::Particle(Loadable *tmp) : Movable (tmp) {
-    color = generateColor();
-    setRelativisticVelocity(false);
-    destroyTimer->reset();
-}
 
 void Particle::render(e172::AbstractRenderer *renderer) {
     if(shape == PIXEL) {

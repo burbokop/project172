@@ -1,7 +1,7 @@
 #include "vectorassetexecutor.h"
 
 #include <engine/math/vector.h>
-
+#include <iostream>
 VectorAssetExecutor::VectorAssetExecutor()
 {
 

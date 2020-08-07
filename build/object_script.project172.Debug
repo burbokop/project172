@@ -11,12 +11,15 @@ debug/e_variant.o
 debug/animatorassetexecutor.o
 debug/assetexecutor.o
 debug/audioassetexecutor.o
+debug/mapassetexecutor.o
 debug/numberassetexecutor.o
 debug/spriteassetexecutor.o
+debug/stringassetexecutor.o
 debug/vectorassetexecutor.o
+debug/assetprovider.o
+debug/abstractfactory.o
 debug/type.o
 debug/variant.o
-debug/assetprovider.o
 debug/abstractgraphicsprovider.o
 debug/abstractrenderer.o
 debug/image.o
@@ -27,7 +30,6 @@ debug/sdlgraphicsprovider.o
 debug/sdlrenderer.o
 debug/worker.o
 debug/world.o
-debug/assetmanager.o
 debug/filesystem.o
 debug/animator.o
 debug/background.o

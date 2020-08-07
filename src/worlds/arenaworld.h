@@ -11,7 +11,7 @@ public:
 
     // World interface
 public:
-    std::vector<Controller *> generate(AssetManager *assets, std::vector<Worker*> *units);
+    std::vector<Controller *> generate(AssetProvider *assets, std::vector<Worker*> *units);
     std::string getName();
 };
 

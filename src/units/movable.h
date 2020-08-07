@@ -68,10 +68,6 @@ public:
     void relativisticPursuit(Unit *target);
 
     void tick(Context *context, Event *event);
-
-    // Loadable interface
-protected:
-    void initialized() override;
 };
 
 #endif // MOVABLE_H

@@ -10,7 +10,7 @@ HeapWorld::HeapWorld()
 
 }
 
-std::vector<Controller *> HeapWorld::generate(AssetManager *assets, std::vector<Worker *> *units) {
+std::vector<Controller *> HeapWorld::generate(AssetProvider *assets, std::vector<Worker *> *units) {
     std::vector<Controller*> result;
 
     //player1

@@ -1,5 +1,7 @@
 #include "numberassetexecutor.h"
 
+#include <iostream>
+
 NumberAssetExecutor::NumberAssetExecutor()
 {
 

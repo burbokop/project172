@@ -1,6 +1,6 @@
 {
     "id":"mini-engine",
-    "class": "engine",
+    "class": "Engine",
     
     "animation": { 
         "spritesheet": "./anim.png",

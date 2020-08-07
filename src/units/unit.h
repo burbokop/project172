@@ -70,10 +70,6 @@ public:
     // Object interface
 public:
     std::string getType() const;
-
-    // Loadable interface
-public:
-    void initialized() override;
 };
 
 #endif // UNIT_H

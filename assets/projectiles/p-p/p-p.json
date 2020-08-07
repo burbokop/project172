@@ -1,6 +1,6 @@
 {
     "id": "p-p",
-    "class": "projectile",
+    "class": "Projectile",
     "sprite": "./projectile2.png",
     "zoom": 1,
 	"health":10

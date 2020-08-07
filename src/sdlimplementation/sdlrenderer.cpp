@@ -130,7 +130,7 @@ void SDLRenderer::drawImage(const e172::Image &image, const e172::Vector &pos, d
         if(anaglyphEnabled || anaglyphEnabled2)
              effect = new Anaglyph(e172::Vector(2, 1));
 
-        auto image_surface = const_cast<SDL_Surface*>(reinterpret_cast<const SDL_Surface*>(imageData(image)));
+        auto image_surface = imageData<SDL_Surface*>(image);
         SPM::BlitRotatedSurface(image_surface, surface, pos.intX(), pos.intY(), angle, zoom, 1, effect);
         delete effect;
     }

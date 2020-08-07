@@ -25,7 +25,6 @@ private:
 public:
     Particle();
     Particle(Uint8 shape, int averageLifeTime = DEFAULT_AVERAGE_LIFE_TIME, int lifeTimeDelta = DEFAULT_LIFE_TIME_DELTA);
-    Particle(Loadable *tmp);
 
     // Worker interface
 public:

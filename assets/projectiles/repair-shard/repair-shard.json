@@ -1,6 +1,6 @@
 {
     "id": "repair-shard",
-    "class": "projectile",
+    "class": "Projectile",
     "sprite": "./repair-shard.png",
     "zoom": 1,
 	"health":9,

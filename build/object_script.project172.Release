@@ -11,12 +11,15 @@ release/e_variant.o
 release/animatorassetexecutor.o
 release/assetexecutor.o
 release/audioassetexecutor.o
+release/mapassetexecutor.o
 release/numberassetexecutor.o
 release/spriteassetexecutor.o
+release/stringassetexecutor.o
 release/vectorassetexecutor.o
+release/assetprovider.o
+release/abstractfactory.o
 release/type.o
 release/variant.o
-release/assetprovider.o
 release/abstractgraphicsprovider.o
 release/abstractrenderer.o
 release/image.o
@@ -27,7 +30,6 @@ release/sdlgraphicsprovider.o
 release/sdlrenderer.o
 release/worker.o
 release/world.o
-release/assetmanager.o
 release/filesystem.o
 release/animator.o
 release/background.o

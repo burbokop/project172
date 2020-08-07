@@ -1,11 +1,14 @@
 #include "thruster.h"
 
-Thruster::Thruster() : Module () {}
-
-Thruster::Thruster(Loadable *tmp) : Module (tmp) {}
+Thruster::Thruster() : Module () {
+    registerInitFunction([this](){
+        leftThrust = asset<double>("left-thrust", false);
+        leftThrust = asset<double>("right-thrust", false);
+    });
+}
 
 bool Thruster::accelerateLeft() {
-    if(state == READY && !root["left-thrust"].isNull()) {
+    if(state == READY && leftThrust) {
 
     }
 
@@ -13,7 +16,7 @@ bool Thruster::accelerateLeft() {
 }
 
 bool Thruster::accelerateRight() {
-    if(state == READY && !root["right-thrust"].isNull()) {
+    if(state == READY && rightThrust) {
 
     }
 
@@ -21,11 +24,11 @@ bool Thruster::accelerateRight() {
 }
 
 bool Thruster::isAcceleratingLeft() {
-    return state == EXECUTING && !root["left-thrust"].isNull();
+    return state == EXECUTING && leftThrust;
 }
 
 bool Thruster::isAcceleratingRight() {
-    return state == EXECUTING && !root["left-thrust"].isNull();
+    return state == EXECUTING && rightThrust;
 }
 
 

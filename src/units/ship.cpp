@@ -4,16 +4,13 @@
 
 const double Ship::ONE_WARP_POINT = 9513.98639961;
 
-
-Ship::Ship() {
-}
-
-Ship::Ship(Loadable *tmp) : Movable (tmp) {
-}
+Ship::Ship() {}
 
 bool Ship::prepareWarp() {
     WarpDrive *driveUnit = getFirstWarp();
+    std::cout << "warp" << getModuleHandler()->getAllModules() << "\n";
     if(driveUnit) {
+
         bool success = driveUnit->prepareWarp();
         return success;
     }

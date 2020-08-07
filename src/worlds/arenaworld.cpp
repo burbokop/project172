@@ -9,7 +9,7 @@ ArenaWorld::ArenaWorld() {
 
 }
 
-std::vector<Controller *> ArenaWorld::generate(AssetManager *assets, std::vector<Worker *> *units) {
+std::vector<Controller *> ArenaWorld::generate(AssetProvider *assets, std::vector<Worker *> *units) {
     std::vector<Controller*> result;
 
     //player1

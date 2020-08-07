@@ -1,15 +1,7 @@
 {
     "id": "pistol",
-    "class": "weapon",
+    "class": "Weapon",
     "audio": { "start": "./shoot.wav" },
     "rate":160,
-    "projectile":"p-p",
-    "props": {},
-    "commands": [
-        "follow",
-        { 
-            "title": "fight",
-            "work": "/Function(() => { console.log('gogadoda fight'); })/"
-        }
-    ]
+    "projectile":"p-p"
 }

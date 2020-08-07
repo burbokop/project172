@@ -1,6 +1,6 @@
 {
     "id":"engine2",
-    "class": "engine",
+    "class": "Engine",
     
     "animation": { 
         "spritesheet": "./engine2.png",

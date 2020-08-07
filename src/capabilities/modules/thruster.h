@@ -4,6 +4,8 @@
 #include "capabilities/modules/module.h"
 
 class Thruster : public Module {
+    bool leftThrust = false;
+    bool rightThrust = false;
 private:
     enum State {
         DISABLED,
@@ -21,6 +23,7 @@ public:
 
     bool isAcceleratingLeft();
     bool isAcceleratingRight();
+
 };
 
 #endif // THRUSTER_H

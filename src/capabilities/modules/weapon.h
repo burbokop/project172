@@ -8,21 +8,22 @@
 class Weapon : public Module {
 private:
     static const double DEFAULT_PROJECTILE_SPEED;
-    double getProjectileSpead();
+    double getProjectileSpead() const;
 
+    std::string projectileName;
+    double projectileVelocity;
 protected:
     bool firing = false;
 
 public:
     Weapon();
-    Weapon(Loadable *tmp);
 
     void setFiring(bool condition);
-    std::string getInfo();
+    std::string getInfo() override;
 
     // Worker interface
 public:
-    void tick(Context *context, Event *event);
+    void tick(Context *context, Event *event) override;
 };
 
 #endif // WEAPON_H

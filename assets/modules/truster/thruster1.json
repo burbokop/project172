@@ -1,7 +1,6 @@
 {
-    "id":"thruster1",
-    "class": "thruster",
-	
-	"left-thrust":true,
-	"right-thrust":true	
+	"id": "thruster1",
+	"class": "Thruster",
+	"left-thrust": true,
+	"right-thrust": true	
 }

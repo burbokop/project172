@@ -1,6 +1,6 @@
 {
     "id": "st2",
-    "class": "station",
+    "class": "Station",
     "sprite": "./st2.png",
     "health": 340,
     "explosive": 114

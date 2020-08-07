@@ -12,7 +12,7 @@ int Image::height() const
     return m_height;
 }
 
-Image Image::newImage(ptr data, ptr id, int width, int height, destructor_t destructor, bitmap_getter_t bitmap_getter, nub_t nub, transformer_t transformer) {
+Image Image::newImage(data_ptr data, ptr id, int width, int height, destructor_t destructor, bitmap_getter_t bitmap_getter, fragment_t fragment, transformer_t transformer) {
     Image i;
     i.ref_count_ptr = new int(1);
     i.m_data = data;
@@ -24,7 +24,7 @@ Image Image::newImage(ptr data, ptr id, int width, int height, destructor_t dest
     i.m_destructor = destructor;
     i.m_bitmap_getter = bitmap_getter;
     i.m_transformer = transformer;
-    i.m_nub = nub;
+    i.m_fragment = fragment;
 
     return i;
 }
@@ -44,7 +44,7 @@ void Image::__detach() {
             delete ref_count_ptr;
         }
     } else if(m_data) {
-        throw std::runtime_error("[e172::Image]: detaching null object\n");
+        throw std::runtime_error("[e172::Image]: detaching broken object\n");
     }
 }
 
@@ -59,6 +59,18 @@ void Image::operator=(const Image &obj) {
     m_data = obj.m_data;
     ref_count_ptr = obj.ref_count_ptr;
     m_id = obj.m_id;
+    m_copyNumber = obj.m_copyNumber + 1;
+
+    m_width = obj.m_width;
+    m_height = obj.m_height;
+
+    m_bitmap_getter = obj.m_bitmap_getter;
+    m_transformer = obj.m_transformer;
+    m_fragment = obj.m_fragment;
+
+
+
+
 
     if(ref_count_ptr)
         ++(*ref_count_ptr);
@@ -76,10 +88,10 @@ Image Image::transformed(uint64_t transformation) const {
     return result;
 }
 
-Image Image::nub(int x, int y, int w, int h) const {
+Image Image::fragment(int x, int y, int w, int h) const {
     Image result = *this;
-    if(m_nub) {
-        result.m_data = m_nub(m_data, x, y, w, h);
+    if(m_fragment) {
+        result.m_data = m_fragment(m_data, x, y, w, h);
         result.m_width = w;
         result.m_height = h;
     }

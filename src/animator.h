@@ -8,15 +8,15 @@
 
 class Animator : public Worker {
 public:
-    static const unsigned PING_PONG;
-    static const unsigned LOOP;
-    static const unsigned ONEFRAME;
-    static const unsigned FROZE;
-    static const unsigned NOTRENDER;
-    static const unsigned TOTHEFRAME;
-    static const unsigned DEFAULT_INACTIVE;
-
-
+    enum {
+        PING_PONG,
+        LOOP,
+        ONEFRAME,
+        FROZE,
+        NOTRENDER,
+        TOTHEFRAME,
+        DEFAULT_INACTIVE
+    };
 private:
     e172::Vector pos;
     double angle;
@@ -28,10 +28,11 @@ private:
     Timer timer = Timer(100);
     e172::Image origin;
     std::vector<e172::Image> frames;
-    int maxFrame;
-    int maxTrack;
+    int m_frameCount;
+    int m_trackCount;
     int currentFrame;
     int currentTrack;
+    bool m_isValid = false;
 
     static inline int nextId = 0;
     int id = nextId++;
@@ -51,6 +52,9 @@ public:
 
 
     friend bool operator ==(const Animator& anim0, const Animator& anim1);
+    bool isValid() const;
+    int frameCount() const;
+    int trackCount() const;
 };
 
 

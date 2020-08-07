@@ -10,7 +10,7 @@ class AbstractGraphicsProvider;
 }
 
 class AssetExecutor {
-    friend class AssetManager;
+    friend class AssetProvider;
     std::string executor_path;
 public:
     std::string fullPath(const std::string &path);

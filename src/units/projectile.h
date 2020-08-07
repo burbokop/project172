@@ -6,7 +6,6 @@
 
 
 class Projectile : public Movable {
-private:
     static const double DEFAULT_HIT_RADIUS;
     static const int DEFAULT_DAMAGE;
 
@@ -16,16 +15,17 @@ private:
     Timer *destroyTimer = nullptr;
 
     bool collision(Context *context, Unit *collider);
-
+    double damage;
+    int lifetimeDelta;
+    int averageLifetime;
 public:
     Projectile();
-    Projectile(Loadable *tmp);
 
     Unit *mother = nullptr;
 
     // Worker interface
 public:
-    void tick(Context *context, Event *event);
+    void tick(Context *context, Event *event) override;
     void setMother(Unit *value);
 };
 
