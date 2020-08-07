@@ -24,7 +24,7 @@ Unit *Aggressive::chooseTarget() {
 
         return camera || particle || lightParticle || projectile ? nullptr : dynamic_cast<Unit*>(target);
     } else {
-        Debug::err(Debug::Code::APPEAL_TO_REMOVED, DEBUG_IMPRINT);
+        Debug::err(Debug::Code::APPEAL_TO_REMOVED, __PRETTY_FUNCTION__);
         return nullptr;
     }
 }
@@ -90,7 +90,7 @@ void Aggressive::tick(Context *context, Event *event) {
             target = chooseTarget();
         }
     } else {
-        Debug::err(Debug::Code::APPEAL_TO_REMOVED, DEBUG_IMPRINT);
+        Debug::err(Debug::Code::APPEAL_TO_REMOVED, __PRETTY_FUNCTION__);
         targeted = false;
         target = chooseTarget();
     }

@@ -49,20 +49,12 @@ bool Movable::onAcceleration(bool start) {
 }
 
 double Movable::getAccelerationValue() {
-    Json::Value value = root["acceleration"];
-    if(value.isNumeric()) {
-        return value.asDouble();
-    }
-    return DEFAULT_ACCELERATION_VALUE;
+    return loadedValues.acceleration;
 }
 
-double Movable::getMaxSpeed() {
+double Movable::getMaxSpeed() const {
     if(!forcedMaxSpeedEnabled) {
-        Json::Value value = root["max-speed"];
-        if(value.isNumeric()) {
-            return value.asDouble();
-        }
-        return DEFAULT_MAX_SPEED;
+        return loadedValues.maxVelocity;
     } else {
         return forcedMaxSpeedValue;
     }
@@ -74,12 +66,7 @@ void Movable::setRelativisticVelocity(bool value) {
 
 
 
-Movable::Movable() : Unit () {
-}
-
-Movable::Movable(Loadable *tmp) : Unit (tmp) {
-}
-
+Movable::Movable() : Unit () {}
 
 void Movable::place(e172::Vector pos, e172::Vector vel, e172::Vector acc, double angle) {
     Unit::place(pos, angle);
@@ -154,8 +141,8 @@ void Movable::updatePosition() {
     accelerationLocked = false;
 }
 
-double Movable::getReleaseSpead() {
-    return root.get("release-spead", DEFAULT_RELEASE_SPEAD).asDouble();
+double Movable::getReleaseSpead() const {
+    return loadedValues.releaseVelocity;
 }
 
 void Movable::pursuit(Unit *target) {
@@ -174,7 +161,7 @@ void Movable::relativisticPursuit(Unit *target) {
 
         e172::Vector direction = target->getPosition() - getPosition();
         accelerate(direction * velocity * RELATIVISTIC_PURSUIT_COEFFICIENT / Time::getDeltaTime());
-        root["max-speed"] = direction.module();
+        loadedValues.maxVelocity = direction.module();
     }
 }
 
@@ -187,4 +174,10 @@ void Movable::tick(Context *context, Event *event) {
 
     updatePosition();
     this->Unit::tick(context, event);
+}
+
+void Movable::initialized() {
+    loadedValues.acceleration = asset<double>("acceleration", DEFAULT_ACCELERATION_VALUE);
+    loadedValues.maxVelocity = asset<double>("max-speed", DEFAULT_MAX_SPEED);
+    loadedValues.releaseVelocity = asset<double>("releaseVelocity", DEFAULT_RELEASE_SPEAD);
 }

@@ -13,7 +13,9 @@ private:
     double angle = 0;
     double dstAngle = 0;
     bool angleLocked = false;
-
+    double health = 0;
+    double explosiveRadius = 0;
+    Animator animator;
 protected:
     static const double DEFAULT_ROTATION_SPEED;
     static const double ANGLE_DELTA_MULTIPLIER;
@@ -27,8 +29,6 @@ protected:
 
 public:
     Unit();
-    Unit(Loadable *tmp);
-
 
     void place(e172::Vector pos, double angle);
 
@@ -70,6 +70,10 @@ public:
     // Object interface
 public:
     std::string getType() const;
+
+    // Loadable interface
+public:
+    void initialized() override;
 };
 
 #endif // UNIT_H

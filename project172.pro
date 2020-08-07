@@ -23,7 +23,12 @@ unix {
 
 SOURCES += \
     src/additional/e_variant.cpp \
+    src/assettools/assetexecutors/animatorassetexecutor.cpp \
     src/assettools/assetexecutors/assetexecutor.cpp \
+    src/assettools/assetexecutors/audioassetexecutor.cpp \
+    src/assettools/assetexecutors/numberassetexecutor.cpp \
+    src/assettools/assetexecutors/spriteassetexecutor.cpp \
+    src/assettools/assetexecutors/vectorassetexecutor.cpp \
     src/engine/type.cpp \
     src/engine/variant.cpp \
     src/engine/assettools/assetprovider.cpp \
@@ -117,7 +122,12 @@ SOURCES += \
 
 HEADERS += \
     src/additional/e_variant.h \
+    src/assettools/assetexecutors/animatorassetexecutor.h \
     src/assettools/assetexecutors/assetexecutor.h \
+    src/assettools/assetexecutors/audioassetexecutor.h \
+    src/assettools/assetexecutors/numberassetexecutor.h \
+    src/assettools/assetexecutors/spriteassetexecutor.h \
+    src/assettools/assetexecutors/vectorassetexecutor.h \
     src/engine/type.h \
     src/engine/variant.h \
     src/engine/assettools/assetprovider.h \

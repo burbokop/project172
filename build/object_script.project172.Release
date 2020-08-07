@@ -6,8 +6,14 @@ release/kmetafunction.o
 release/kabstractfactory.o
 release/kpull.o
 release/kmoduleswitch.o
+release/ksmartenum.o
 release/e_variant.o
+release/animatorassetexecutor.o
 release/assetexecutor.o
+release/audioassetexecutor.o
+release/numberassetexecutor.o
+release/spriteassetexecutor.o
+release/vectorassetexecutor.o
 release/type.o
 release/variant.o
 release/assetprovider.o

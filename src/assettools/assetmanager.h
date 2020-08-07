@@ -18,11 +18,9 @@ class AssetManager : public Object {
     };
     KAbstractFactory<std::string, Loadable> m_factory;
     std::map<std::string, LoadableTemplate> templates;
-    std::map<std::string, AssetExecutor*> executors;
+    std::map<std::string, std::shared_ptr<AssetExecutor>> executors;
 
-    [[deprecated]] void processFile(std::string file, std::string location, e172::AbstractGraphicsProvider *graphicsProvider);
-
-    void processFileAlternative(std::string file, std::string location, e172::AbstractGraphicsProvider *graphicsProvider);
+    void processFileAlternative(std::string file, std::string path, e172::AbstractGraphicsProvider *graphicsProvider);
 public:
     Loadable *createLoadable(std::string key);
     AssetManager();
@@ -33,6 +31,8 @@ public:
     void registerType() {
         m_factory.registerType<T>();
     }
+
+    void installExecutor(const std::string &id, const std::shared_ptr<AssetExecutor> &executor);
 };
 
 #endif // ASSETMANAGER_H

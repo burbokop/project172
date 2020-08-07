@@ -12,6 +12,12 @@
 
 #include <sdlimplementation/sdlgraphicsprovider.h>
 
+#include <assettools/assetexecutors/animatorassetexecutor.h>
+#include <assettools/assetexecutors/audioassetexecutor.h>
+#include <assettools/assetexecutors/numberassetexecutor.h>
+#include <assettools/assetexecutors/spriteassetexecutor.h>
+#include <assettools/assetexecutors/vectorassetexecutor.h>
+
 
 
 Environment::Environment(std::vector<std::string> args) {
@@ -21,6 +27,23 @@ Environment::Environment(std::vector<std::string> args) {
 
     units = new std::vector<Worker*>();
     assetManager = new AssetManager();
+
+    assetManager->installExecutor("animation", std::make_shared<AnimatorAssetExecutor>());
+    assetManager->installExecutor("sprite", std::make_shared<SpriteAssetExecutor>());
+    assetManager->installExecutor("audio", std::make_shared<AudioAssetExecutor>());
+    assetManager->installExecutor("offset", std::make_shared<VectorAssetExecutor>());
+
+    assetManager->installExecutor("rate", std::make_shared<NumberAssetExecutor>());
+    assetManager->installExecutor("health", std::make_shared<NumberAssetExecutor>());
+    assetManager->installExecutor("explosive", std::make_shared<NumberAssetExecutor>());
+    assetManager->installExecutor("max-speed", std::make_shared<NumberAssetExecutor>());
+    assetManager->installExecutor("acceleration", std::make_shared<NumberAssetExecutor>());
+    assetManager->installExecutor("release-spead", std::make_shared<NumberAssetExecutor>());
+
+
+
+
+
     context = new Context(units, assetManager); //tick {no}
 
     state = new State();

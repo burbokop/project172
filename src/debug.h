@@ -12,21 +12,17 @@
 
 #include <klibcore/src/ksmartenum.h>
 
-#define DEBUG_IMPRINT std::string(typeid(*this).name()) + "::" + std::string(__func__)
-#define STATIC_DEBUG_IMPRINT "STATIC FUNCTION: " + std::string(__func__)
-
-
 
 class Debug {
 public:
     K_SMART_ENUM(Code,
-        NO_ERROR,
         APPEAL_TO_REMOVED,
         ASSET_ID_NOT_FOUND,
         ASSET_TYPE_NOT_REGISTERED,
         ASSET_NOT_CONTAINS_ID,
         ASSET_NOT_CONTAINS_CLASS_NAME,
-        UNKNOWN_ASSET_CLASS,
+        EXECUTOR_NOT_INSTALLED_FOR_ASSET,
+        ASSET_IS_NULL,
         SEGMENTATION_FAULT
     )
 

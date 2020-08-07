@@ -19,6 +19,13 @@ private:
     double forcedMaxSpeedValue = DEFAULT_MAX_SPEED;
 
     bool relativisticVelocity = true;
+
+
+    struct {
+        double acceleration;
+        double maxVelocity;
+        double releaseVelocity;
+    } loadedValues;
 protected:
     static const double STOP_MOVING_VELOCITY;
     static const double DEFAULT_ACCELERATION_VALUE;
@@ -29,7 +36,7 @@ protected:
 
     double getAccelerationValue();
     static const double DEFAULT_MAX_SPEED;
-    double getMaxSpeed();
+    double getMaxSpeed() const;
 
 
     void setRelativisticVelocity(bool value);
@@ -55,12 +62,16 @@ public:
 
 
     e172::Vector getVelocity();
-    double getReleaseSpead();
+    double getReleaseSpead() const;
 
     void pursuit(Unit *target);
     void relativisticPursuit(Unit *target);
 
     void tick(Context *context, Event *event);
+
+    // Loadable interface
+protected:
+    void initialized() override;
 };
 
 #endif // MOVABLE_H

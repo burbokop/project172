@@ -37,6 +37,10 @@ struct kgram_variant_handle_t : kgram_variant_handle_base_t { T value; };
 
 class Variant;
 std::ostream &operator<<(std::ostream &stream, const Variant &arg);
+typedef std::vector<Variant> VariantVector;
+typedef std::list<Variant> VariantList;
+typedef std::map<std::string, Variant> VariantMap;
+
 class Variant {
     kgram_variant_handle_base_t *m_data = nullptr;
     std::string m_type;
@@ -88,6 +92,11 @@ public:
     std::string toString() const { if(m_data && m_to_string) return m_to_string(m_data); return std::string(); }
     bool single_print() const { return m_single_print; };
 
+    VariantVector constrained();
+    bool isNumber();
+    static bool __str_is_number(const std::string& string);
+    double toDouble(bool *ok = nullptr);
+
     template<typename T>
     void assign(T value) {
         auto t = Type<T>::name;
@@ -111,7 +120,7 @@ public:
                 == dynamic_cast<kgram_variant_handle_t<T>*>(obj2)->value;
             };
 
-            if (kgram_stream_operator__::exists<std::ostream, T>::value) {
+            if constexpr(kgram_stream_operator__::exists<std::ostream, T>::value) {
                 m_to_string = [](kgram_variant_handle_base_t* obj) {
                     kgram_variant_handle_t<T>* casted_obj = dynamic_cast<kgram_variant_handle_t<T>*>(obj);
                     std::stringstream ss;
@@ -136,12 +145,8 @@ public:
 
 
 
-typedef std::vector<Variant> kgram_variant_vector;
-typedef std::list<Variant> kgram_variant_list;
-typedef std::map<std::string, Variant> kgram_variant_map;
 
 
-kgram_variant_vector kgram_variant_constrain(const Variant &variant);
 
 
 std::ostream &operator<<(std::ostream &stream, const std::vector<Variant> &vector);
@@ -149,12 +154,6 @@ std::ostream &operator<<(std::ostream &stream, const std::list<Variant> &vector)
 
 
 
-
-bool kgram_is_number(const Variant &variant);
-bool kgram_is_number(const std::string& string);
-
-
-double kgram_to_double(const Variant &variant, bool *ok = nullptr);
 
 }
 

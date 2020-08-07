@@ -23,7 +23,7 @@ public:
 };
 
 #define EXISTS(OBJECT) if(ObjectRegistry::getInstance()->exists(OBJECT))
-#define PROTECT_OBJECT(OBJECT) if(ObjectRegistry::getInstance()->isDeleted(OBJECT)) { Debug::err(Debug::Code::APPEAL_TO_REMOVED, DEBUG_IMPRINT); return; }
+#define PROTECT_OBJECT(OBJECT) if(ObjectRegistry::getInstance()->isDeleted(OBJECT)) { Debug::err(Debug::Code::APPEAL_TO_REMOVED, __PRETTY_FUNCTION__); return; }
 
 
 #endif // OBJECTREGISTER_H

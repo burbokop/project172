@@ -253,7 +253,7 @@ Makefile: ../project172.pro C:/qt/5.15.0/mingw81_64/mkspecs/win32-g++/qmake.conf
 		C:/qt/5.15.0/mingw81_64/mkspecs/features/toolchain.prf \
 		C:/qt/5.15.0/mingw81_64/mkspecs/features/default_pre.prf \
 		C:/qt/5.15.0/mingw81_64/mkspecs/features/win32/default_pre.prf \
-		../klibcore/klibcore.pro \
+		../klibcore/klibcore.pri \
 		C:/qt/5.15.0/mingw81_64/mkspecs/features/resolve_config.prf \
 		C:/qt/5.15.0/mingw81_64/mkspecs/features/exclusive_builds_post.prf \
 		C:/qt/5.15.0/mingw81_64/mkspecs/features/default_post.prf \
@@ -454,7 +454,7 @@ C:/qt/5.15.0/mingw81_64/mkspecs/features/exclusive_builds.prf:
 C:/qt/5.15.0/mingw81_64/mkspecs/features/toolchain.prf:
 C:/qt/5.15.0/mingw81_64/mkspecs/features/default_pre.prf:
 C:/qt/5.15.0/mingw81_64/mkspecs/features/win32/default_pre.prf:
-../klibcore/klibcore.pro:
+../klibcore/klibcore.pri:
 C:/qt/5.15.0/mingw81_64/mkspecs/features/resolve_config.prf:
 C:/qt/5.15.0/mingw81_64/mkspecs/features/exclusive_builds_post.prf:
 C:/qt/5.15.0/mingw81_64/mkspecs/features/default_post.prf:

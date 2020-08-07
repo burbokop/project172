@@ -33,7 +33,6 @@ Animator::Animator(const e172::Image &origin, int frames, int tracks) {
     currentTrack = 0;
 
     for(int i = 0; i < maxFrame; i++) {
-        // OLD VERSION (DO NOT DELETE): this->frames.push_back(SPM::CutOutSurface(origin, i * frameWidth, 0, frameWidth, frameHeigth));
         this->frames.push_back(origin.nub(i * frameWidth, 0, frameWidth, frameHeigth));
     }
 }
@@ -72,4 +71,8 @@ void Animator::render(e172::AbstractRenderer *renderer) {
         }
     }
     if(defaultMode != DEFAULT_INACTIVE) mode = defaultMode;
+}
+
+bool operator ==(const Animator &anim0, const Animator &anim1) {
+    return anim0.id == anim1.id;
 }

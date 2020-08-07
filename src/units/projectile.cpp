@@ -60,7 +60,7 @@ void Projectile::tick(Context *context, Event *event) {
                 }
             }
         } else {
-            Debug::err(Debug::Code::APPEAL_TO_REMOVED, DEBUG_IMPRINT);
+            Debug::err(Debug::Code::APPEAL_TO_REMOVED, __PRETTY_FUNCTION__);
         }
     }
     this->Movable::tick(context, event);

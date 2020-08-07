@@ -58,8 +58,14 @@ SOURCES       = ..\klibcore\src\experimental\universalqueue\kuniversalqueue.cpp 
 		..\klibcore\src\memcontrol\kabstractfactory.cpp \
 		..\klibcore\src\memcontrol\kpull.cpp \
 		..\klibcore\src\memcontrol\kmoduleswitch.cpp \
+		..\klibcore\src\ksmartenum.cpp \
 		..\src\additional\e_variant.cpp \
-		..\src\assetexecutors\assetexecutor.cpp \
+		..\src\assettools\assetexecutors\animatorassetexecutor.cpp \
+		..\src\assettools\assetexecutors\assetexecutor.cpp \
+		..\src\assettools\assetexecutors\audioassetexecutor.cpp \
+		..\src\assettools\assetexecutors\numberassetexecutor.cpp \
+		..\src\assettools\assetexecutors\spriteassetexecutor.cpp \
+		..\src\assettools\assetexecutors\vectorassetexecutor.cpp \
 		..\src\engine\type.cpp \
 		..\src\engine\variant.cpp \
 		..\src\engine\assettools\assetprovider.cpp \
@@ -73,7 +79,7 @@ SOURCES       = ..\klibcore\src\experimental\universalqueue\kuniversalqueue.cpp 
 		..\src\sdlimplementation\sdlrenderer.cpp \
 		..\src\worker.cpp \
 		..\src\worlds\world.cpp \
-		..\src\assetmanager.cpp \
+		..\src\assettools\assetmanager.cpp \
 		..\src\filesystem.cpp \
 		..\src\animator.cpp \
 		..\src\background.cpp \
@@ -92,7 +98,7 @@ SOURCES       = ..\klibcore\src\experimental\universalqueue\kuniversalqueue.cpp 
 		..\src\engine\math\vector.cpp \
 		..\src\additional\stringformer.cpp \
 		..\src\sdlimplementation\effects\anaglyph.cpp \
-		..\src\loadable.cpp \
+		..\src\assettools\loadable.cpp \
 		..\src\capabilities\modules\weapon.cpp \
 		..\src\units\projectile.cpp \
 		..\src\context.cpp \
@@ -157,8 +163,14 @@ OBJECTS       = release/kuniversalqueue.o \
 		release/kabstractfactory.o \
 		release/kpull.o \
 		release/kmoduleswitch.o \
+		release/ksmartenum.o \
 		release/e_variant.o \
+		release/animatorassetexecutor.o \
 		release/assetexecutor.o \
+		release/audioassetexecutor.o \
+		release/numberassetexecutor.o \
+		release/spriteassetexecutor.o \
+		release/vectorassetexecutor.o \
 		release/type.o \
 		release/variant.o \
 		release/assetprovider.o \
@@ -258,8 +270,14 @@ DIST          =  C:/Users/Panasonic-PC/Documents/project172/klibcore/src/kmacro.
 		C:/Users/Panasonic-PC/Documents/project172/klibcore/src/memcontrol/kabstractfactory.h \
 		C:/Users/Panasonic-PC/Documents/project172/klibcore/src/memcontrol/kpull.h \
 		C:/Users/Panasonic-PC/Documents/project172/klibcore/src/memcontrol/kmoduleswitch.h \
+		C:/Users/Panasonic-PC/Documents/project172/klibcore/src/ksmartenum.h \
 		src/additional/e_variant.h \
-		src/assetexecutors/assetexecutor.h \
+		src/assettools/assetexecutors/animatorassetexecutor.h \
+		src/assettools/assetexecutors/assetexecutor.h \
+		src/assettools/assetexecutors/audioassetexecutor.h \
+		src/assettools/assetexecutors/numberassetexecutor.h \
+		src/assettools/assetexecutors/spriteassetexecutor.h \
+		src/assettools/assetexecutors/vectorassetexecutor.h \
 		src/engine/type.h \
 		src/engine/variant.h \
 		src/engine/assettools/assetprovider.h \
@@ -272,7 +290,7 @@ DIST          =  C:/Users/Panasonic-PC/Documents/project172/klibcore/src/kmacro.
 		src/sdlimplementation/sdlrenderer.h \
 		src/worker.h \
 		src/worlds/world.h \
-		src/assetmanager.h \
+		src/assettools/assetmanager.h \
 		src/filesystem.h \
 		src/animator.h \
 		src/background.h \
@@ -291,7 +309,7 @@ DIST          =  C:/Users/Panasonic-PC/Documents/project172/klibcore/src/kmacro.
 		src/engine/math/vector.h \
 		src/additional/stringformer.h \
 		src/sdlimplementation/effects/anaglyph.h \
-		src/loadable.h \
+		src/assettools/loadable.h \
 		src/capabilities/modules/weapon.h \
 		src/units/projectile.h \
 		src/context.h \
@@ -365,8 +383,14 @@ DIST          =  C:/Users/Panasonic-PC/Documents/project172/klibcore/src/kmacro.
 		..\klibcore\src\memcontrol\kabstractfactory.cpp \
 		..\klibcore\src\memcontrol\kpull.cpp \
 		..\klibcore\src\memcontrol\kmoduleswitch.cpp \
+		..\klibcore\src\ksmartenum.cpp \
 		..\src\additional\e_variant.cpp \
-		..\src\assetexecutors\assetexecutor.cpp \
+		..\src\assettools\assetexecutors\animatorassetexecutor.cpp \
+		..\src\assettools\assetexecutors\assetexecutor.cpp \
+		..\src\assettools\assetexecutors\audioassetexecutor.cpp \
+		..\src\assettools\assetexecutors\numberassetexecutor.cpp \
+		..\src\assettools\assetexecutors\spriteassetexecutor.cpp \
+		..\src\assettools\assetexecutors\vectorassetexecutor.cpp \
 		..\src\engine\type.cpp \
 		..\src\engine\variant.cpp \
 		..\src\engine\assettools\assetprovider.cpp \
@@ -380,7 +404,7 @@ DIST          =  C:/Users/Panasonic-PC/Documents/project172/klibcore/src/kmacro.
 		..\src\sdlimplementation\sdlrenderer.cpp \
 		..\src\worker.cpp \
 		..\src\worlds\world.cpp \
-		..\src\assetmanager.cpp \
+		..\src\assettools\assetmanager.cpp \
 		..\src\filesystem.cpp \
 		..\src\animator.cpp \
 		..\src\background.cpp \
@@ -399,7 +423,7 @@ DIST          =  C:/Users/Panasonic-PC/Documents/project172/klibcore/src/kmacro.
 		..\src\engine\math\vector.cpp \
 		..\src\additional\stringformer.cpp \
 		..\src\sdlimplementation\effects\anaglyph.cpp \
-		..\src\loadable.cpp \
+		..\src\assettools\loadable.cpp \
 		..\src\capabilities\modules\weapon.cpp \
 		..\src\units\projectile.cpp \
 		..\src\context.cpp \
@@ -475,11 +499,11 @@ qmake: FORCE
 qmake_all: FORCE
 
 dist:
-	$(ZIP) project172.zip $(SOURCES) $(DIST) ..\..\project172.pro C:\qt\5.15.0\mingw81_64\mkspecs\features\spec_pre.prf C:\qt\5.15.0\mingw81_64\mkspecs\qdevice.pri C:\qt\5.15.0\mingw81_64\mkspecs\features\device_config.prf C:\qt\5.15.0\mingw81_64\mkspecs\common\sanitize.conf C:\qt\5.15.0\mingw81_64\mkspecs\common\gcc-base.conf C:\qt\5.15.0\mingw81_64\mkspecs\common\g++-base.conf C:\qt\5.15.0\mingw81_64\mkspecs\common\angle.conf C:\qt\5.15.0\mingw81_64\mkspecs\features\win32\windows_vulkan_sdk.prf C:\qt\5.15.0\mingw81_64\mkspecs\common\windows-vulkan.conf C:\qt\5.15.0\mingw81_64\mkspecs\common\g++-win32.conf C:\qt\5.15.0\mingw81_64\mkspecs\common\windows-desktop.conf C:\qt\5.15.0\mingw81_64\mkspecs\qconfig.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3danimation.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3danimation_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dcore.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dcore_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dextras.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dextras_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dinput.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dinput_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dlogic.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dlogic_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dquick.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dquick_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dquickanimation.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dquickanimation_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dquickextras.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dquickextras_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dquickinput.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dquickinput_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dquickrender.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dquickrender_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dquickscene2d.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dquickscene2d_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3drender.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3drender_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_accessibility_support_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_axbase.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_axbase_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_axcontainer.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_axcontainer_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_axserver.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_axserver_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_bluetooth.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_bluetooth_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_bodymovin_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_bootstrap_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_charts.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_charts_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_concurrent.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_concurrent_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_core.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_core_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_datavisualization.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_datavisualization_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_dbus.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_dbus_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_designer.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_designer_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_designercomponents_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_devicediscovery_support_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_edid_support_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_egl_support_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_eventdispatcher_support_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_fb_support_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_fontdatabase_support_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_gamepad.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_gamepad_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_gui.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_gui_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_help.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_help_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_location.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_location_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_multimedia.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_multimedia_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_multimediawidgets.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_multimediawidgets_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_network.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_network_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_networkauth.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_networkauth_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_nfc.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_nfc_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_opengl.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_opengl_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_openglextensions.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_openglextensions_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_packetprotocol_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_platformcompositor_support_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_positioning.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_positioning_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_positioningquick.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_positioningquick_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_printsupport.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_printsupport_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_purchasing.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_purchasing_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_qml.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_qml_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_qmldebug_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_qmldevtools_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_qmlmodels.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_qmlmodels_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_qmltest.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_qmltest_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_qmlworkerscript.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_qmlworkerscript_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_qtmultimediaquicktools_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quick.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quick3d.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quick3d_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quick3dassetimport.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quick3dassetimport_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quick3drender.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quick3drender_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quick3druntimerender.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quick3druntimerender_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quick3dutils.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quick3dutils_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quick_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quickcontrols2.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quickcontrols2_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quickparticles_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quickshapes_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quicktemplates2.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quicktemplates2_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quickwidgets.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quickwidgets_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_remoteobjects.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_remoteobjects_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_repparser.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_repparser_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_script.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_script_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_scripttools.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_scripttools_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_scxml.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_scxml_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_sensors.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_sensors_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_serialbus.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_serialbus_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_serialport.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_serialport_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_sql.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_sql_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_svg.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_svg_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_testlib.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_testlib_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_texttospeech.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_texttospeech_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_theme_support_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_uiplugin.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_uitools.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_uitools_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_virtualkeyboard.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_virtualkeyboard_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_vulkan_support_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_webchannel.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_webchannel_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_websockets.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_websockets_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_widgets.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_widgets_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_windowsuiautomation_support_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_winextras.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_winextras_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_xml.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_xml_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_xmlpatterns.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_xmlpatterns_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_zlib_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\features\qt_functions.prf C:\qt\5.15.0\mingw81_64\mkspecs\features\qt_config.prf C:\qt\5.15.0\mingw81_64\mkspecs\win32-g++\qmake.conf C:\qt\5.15.0\mingw81_64\mkspecs\features\spec_post.prf .qmake.stash C:\qt\5.15.0\mingw81_64\mkspecs\features\exclusive_builds.prf C:\qt\5.15.0\mingw81_64\mkspecs\features\toolchain.prf C:\qt\5.15.0\mingw81_64\mkspecs\features\default_pre.prf C:\qt\5.15.0\mingw81_64\mkspecs\features\win32\default_pre.prf ..\klibcore\klibcore.pro C:\qt\5.15.0\mingw81_64\mkspecs\features\resolve_config.prf C:\qt\5.15.0\mingw81_64\mkspecs\features\exclusive_builds_post.prf C:\qt\5.15.0\mingw81_64\mkspecs\features\default_post.prf C:\qt\5.15.0\mingw81_64\mkspecs\features\build_pass.prf C:\qt\5.15.0\mingw81_64\mkspecs\features\win32\console.prf C:\qt\5.15.0\mingw81_64\mkspecs\features\qml_debug.prf C:\qt\5.15.0\mingw81_64\mkspecs\features\precompile_header.prf C:\qt\5.15.0\mingw81_64\mkspecs\features\warn_on.prf C:\qt\5.15.0\mingw81_64\mkspecs\features\qt.prf C:\qt\5.15.0\mingw81_64\mkspecs\features\qmake_use.prf C:\qt\5.15.0\mingw81_64\mkspecs\features\file_copies.prf C:\qt\5.15.0\mingw81_64\mkspecs\features\testcase_targets.prf C:\qt\5.15.0\mingw81_64\mkspecs\features\exceptions.prf C:\qt\5.15.0\mingw81_64\mkspecs\features\yacc.prf C:\qt\5.15.0\mingw81_64\mkspecs\features\lex.prf ..\project172.pro      
+	$(ZIP) project172.zip $(SOURCES) $(DIST) ..\..\project172.pro C:\qt\5.15.0\mingw81_64\mkspecs\features\spec_pre.prf C:\qt\5.15.0\mingw81_64\mkspecs\qdevice.pri C:\qt\5.15.0\mingw81_64\mkspecs\features\device_config.prf C:\qt\5.15.0\mingw81_64\mkspecs\common\sanitize.conf C:\qt\5.15.0\mingw81_64\mkspecs\common\gcc-base.conf C:\qt\5.15.0\mingw81_64\mkspecs\common\g++-base.conf C:\qt\5.15.0\mingw81_64\mkspecs\common\angle.conf C:\qt\5.15.0\mingw81_64\mkspecs\features\win32\windows_vulkan_sdk.prf C:\qt\5.15.0\mingw81_64\mkspecs\common\windows-vulkan.conf C:\qt\5.15.0\mingw81_64\mkspecs\common\g++-win32.conf C:\qt\5.15.0\mingw81_64\mkspecs\common\windows-desktop.conf C:\qt\5.15.0\mingw81_64\mkspecs\qconfig.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3danimation.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3danimation_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dcore.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dcore_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dextras.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dextras_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dinput.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dinput_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dlogic.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dlogic_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dquick.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dquick_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dquickanimation.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dquickanimation_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dquickextras.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dquickextras_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dquickinput.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dquickinput_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dquickrender.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dquickrender_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dquickscene2d.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3dquickscene2d_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3drender.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_3drender_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_accessibility_support_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_axbase.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_axbase_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_axcontainer.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_axcontainer_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_axserver.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_axserver_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_bluetooth.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_bluetooth_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_bodymovin_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_bootstrap_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_charts.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_charts_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_concurrent.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_concurrent_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_core.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_core_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_datavisualization.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_datavisualization_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_dbus.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_dbus_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_designer.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_designer_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_designercomponents_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_devicediscovery_support_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_edid_support_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_egl_support_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_eventdispatcher_support_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_fb_support_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_fontdatabase_support_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_gamepad.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_gamepad_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_gui.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_gui_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_help.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_help_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_location.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_location_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_multimedia.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_multimedia_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_multimediawidgets.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_multimediawidgets_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_network.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_network_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_networkauth.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_networkauth_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_nfc.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_nfc_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_opengl.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_opengl_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_openglextensions.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_openglextensions_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_packetprotocol_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_platformcompositor_support_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_positioning.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_positioning_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_positioningquick.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_positioningquick_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_printsupport.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_printsupport_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_purchasing.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_purchasing_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_qml.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_qml_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_qmldebug_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_qmldevtools_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_qmlmodels.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_qmlmodels_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_qmltest.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_qmltest_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_qmlworkerscript.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_qmlworkerscript_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_qtmultimediaquicktools_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quick.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quick3d.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quick3d_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quick3dassetimport.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quick3dassetimport_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quick3drender.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quick3drender_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quick3druntimerender.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quick3druntimerender_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quick3dutils.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quick3dutils_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quick_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quickcontrols2.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quickcontrols2_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quickparticles_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quickshapes_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quicktemplates2.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quicktemplates2_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quickwidgets.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_quickwidgets_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_remoteobjects.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_remoteobjects_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_repparser.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_repparser_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_script.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_script_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_scripttools.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_scripttools_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_scxml.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_scxml_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_sensors.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_sensors_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_serialbus.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_serialbus_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_serialport.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_serialport_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_sql.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_sql_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_svg.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_svg_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_testlib.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_testlib_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_texttospeech.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_texttospeech_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_theme_support_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_uiplugin.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_uitools.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_uitools_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_virtualkeyboard.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_virtualkeyboard_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_vulkan_support_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_webchannel.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_webchannel_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_websockets.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_websockets_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_widgets.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_widgets_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_windowsuiautomation_support_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_winextras.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_winextras_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_xml.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_xml_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_xmlpatterns.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_xmlpatterns_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\modules\qt_lib_zlib_private.pri C:\qt\5.15.0\mingw81_64\mkspecs\features\qt_functions.prf C:\qt\5.15.0\mingw81_64\mkspecs\features\qt_config.prf C:\qt\5.15.0\mingw81_64\mkspecs\win32-g++\qmake.conf C:\qt\5.15.0\mingw81_64\mkspecs\features\spec_post.prf .qmake.stash C:\qt\5.15.0\mingw81_64\mkspecs\features\exclusive_builds.prf C:\qt\5.15.0\mingw81_64\mkspecs\features\toolchain.prf C:\qt\5.15.0\mingw81_64\mkspecs\features\default_pre.prf C:\qt\5.15.0\mingw81_64\mkspecs\features\win32\default_pre.prf ..\klibcore\klibcore.pri C:\qt\5.15.0\mingw81_64\mkspecs\features\resolve_config.prf C:\qt\5.15.0\mingw81_64\mkspecs\features\exclusive_builds_post.prf C:\qt\5.15.0\mingw81_64\mkspecs\features\default_post.prf C:\qt\5.15.0\mingw81_64\mkspecs\features\build_pass.prf C:\qt\5.15.0\mingw81_64\mkspecs\features\win32\console.prf C:\qt\5.15.0\mingw81_64\mkspecs\features\qml_debug.prf C:\qt\5.15.0\mingw81_64\mkspecs\features\precompile_header.prf C:\qt\5.15.0\mingw81_64\mkspecs\features\warn_on.prf C:\qt\5.15.0\mingw81_64\mkspecs\features\qt.prf C:\qt\5.15.0\mingw81_64\mkspecs\features\qmake_use.prf C:\qt\5.15.0\mingw81_64\mkspecs\features\file_copies.prf C:\qt\5.15.0\mingw81_64\mkspecs\features\testcase_targets.prf C:\qt\5.15.0\mingw81_64\mkspecs\features\exceptions.prf C:\qt\5.15.0\mingw81_64\mkspecs\features\yacc.prf C:\qt\5.15.0\mingw81_64\mkspecs\features\lex.prf ..\project172.pro      
 
 clean: compiler_clean 
-	-$(DEL_FILE) release\kuniversalqueue.o release\ktype.o release\kcirclebuffer.o release\kvoidhandle.o release\kmetafunction.o release\kabstractfactory.o release\kpull.o release\kmoduleswitch.o release\e_variant.o release\assetexecutor.o release\type.o release\variant.o release\assetprovider.o release\abstractgraphicsprovider.o release\abstractrenderer.o release\image.o release\textformat.o release\main.o release\object.o release\sdlgraphicsprovider.o release\sdlrenderer.o release\worker.o release\world.o release\assetmanager.o release\filesystem.o release\animator.o release\background.o release\unit.o release\movable.o release\camera.o release\capability.o release\controller.o release\player.o release\modulehandler.o release\module.o release\rotozoom.o release\spm.o release\timer.o release\event.o release\vector.o release\stringformer.o release\anaglyph.o release\loadable.o release\weapon.o release\projectile.o release\context.o release\engine.o release\warpdrive.o release\ship.o release\guielement.o release\guicontainer.o release\iinformative.o release\guistack.o release\ai.o release\station.o release\json_reader.o release\json_value.o release\json_writer.o release\debug.o release\guiswitch.o release\visualeffect.o release\guichoice.o release\application.o release\fpsmonitor.o release\particle.o release\framebuilder.o release\socket.o release\netlistener.o release\state.o release\trigger.o release\guimain.o release\guicentralmessage.o release\controllerfinder.o release\guifloatingmessage.o release\guiblushingfloatingmessage.o release\math.o release\lightparticle.o release\worldmanager.o release\defaultworld.o release\arenaworld.o release\docker.o release\near.o release\guilist.o release\aggressive.o release\heapworld.o release\objectregistry.o release\registryinfo.o release\audio.o release\audiochannel.o release\audiohardwarebank.o release\audioplayer.o release\guiminimap.o release\guiradar.o release\thruster.o release\time.o release\guimenuelement.o release\mutex.o release\unitsamountinfo.o
-	-$(DEL_FILE) release\environment.o
+	-$(DEL_FILE) release\kuniversalqueue.o release\ktype.o release\kcirclebuffer.o release\kvoidhandle.o release\kmetafunction.o release\kabstractfactory.o release\kpull.o release\kmoduleswitch.o release\ksmartenum.o release\e_variant.o release\animatorassetexecutor.o release\assetexecutor.o release\audioassetexecutor.o release\numberassetexecutor.o release\spriteassetexecutor.o release\vectorassetexecutor.o release\type.o release\variant.o release\assetprovider.o release\abstractgraphicsprovider.o release\abstractrenderer.o release\image.o release\textformat.o release\main.o release\object.o release\sdlgraphicsprovider.o release\sdlrenderer.o release\worker.o release\world.o release\assetmanager.o release\filesystem.o release\animator.o release\background.o release\unit.o release\movable.o release\camera.o release\capability.o release\controller.o release\player.o release\modulehandler.o release\module.o release\rotozoom.o release\spm.o release\timer.o release\event.o release\vector.o release\stringformer.o release\anaglyph.o release\loadable.o release\weapon.o release\projectile.o release\context.o release\engine.o release\warpdrive.o release\ship.o release\guielement.o release\guicontainer.o release\iinformative.o release\guistack.o release\ai.o release\station.o release\json_reader.o release\json_value.o release\json_writer.o release\debug.o release\guiswitch.o release\visualeffect.o release\guichoice.o release\application.o release\fpsmonitor.o release\particle.o release\framebuilder.o release\socket.o release\netlistener.o release\state.o release\trigger.o release\guimain.o release\guicentralmessage.o release\controllerfinder.o release\guifloatingmessage.o release\guiblushingfloatingmessage.o release\math.o release\lightparticle.o release\worldmanager.o release\defaultworld.o release\arenaworld.o release\docker.o release\near.o release\guilist.o release\aggressive.o release\heapworld.o release\objectregistry.o release\registryinfo.o release\audio.o release\audiochannel.o release\audiohardwarebank.o
+	-$(DEL_FILE) release\audioplayer.o release\guiminimap.o release\guiradar.o release\thruster.o release\time.o release\guimenuelement.o release\mutex.o release\unitsamountinfo.o release\environment.o
 
 distclean: clean 
 	-$(DEL_FILE) .qmake.stash
@@ -538,15 +562,282 @@ release/kmoduleswitch.o: ../klibcore/src/memcontrol/kmoduleswitch.cpp ../klibcor
 		../klibcore/src/kmacro.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\kmoduleswitch.o ..\klibcore\src\memcontrol\kmoduleswitch.cpp
 
+release/ksmartenum.o: ../klibcore/src/ksmartenum.cpp ../klibcore/src/ksmartenum.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\ksmartenum.o ..\klibcore\src\ksmartenum.cpp
+
 release/e_variant.o: ../src/additional/e_variant.cpp ../src/additional/e_variant.h \
 		../src/engine/math/vector.h \
 		../src/object.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\e_variant.o ..\src\additional\e_variant.cpp
 
-release/assetexecutor.o: ../src/assetexecutors/assetexecutor.cpp ../src/assetexecutors/assetexecutor.h \
+release/animatorassetexecutor.o: ../src/assettools/assetexecutors/animatorassetexecutor.cpp ../src/assettools/assetexecutors/animatorassetexecutor.h \
+		../src/assettools/assetexecutors/assetexecutor.h \
 		../src/engine/variant.h \
-		../src/engine/type.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\assetexecutor.o ..\src\assetexecutors\assetexecutor.cpp
+		../src/engine/type.h \
+		../src/json/json.h \
+		../src/json/autolink.h \
+		../src/json/config.h \
+		../src/json/allocator.h \
+		../src/json/version.h \
+		../src/json/features.h \
+		../src/json/forwards.h \
+		../src/json/reader.h \
+		../src/json/value.h \
+		../src/json/writer.h \
+		../src/engine/graphics/abstractgraphicsprovider.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/engine/graphics/image.h \
+		../src/engine/math/vector.h \
+		../src/additional/e_variant.h \
+		../src/object.h \
+		../src/engine/textformat.h \
+		../src/animator.h \
+		../src/time/timer.h \
+		../src/worker.h \
+		../src/additional/event.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_main.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_stdinc.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_config.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_platform.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/begin_code.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/close_code.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_assert.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_atomic.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_audio.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_error.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_endian.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mutex.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_thread.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_rwops.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_clipboard.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_cpuinfo.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_events.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_video.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_pixels.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_rect.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_surface.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_blendmode.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_keyboard.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_keycode.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_scancode.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mouse.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_joystick.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_gamecontroller.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_quit.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_gesture.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_touch.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_filesystem.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_haptic.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_hints.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_loadso.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_log.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_messagebox.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_metal.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_power.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_render.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_sensor.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_shape.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_system.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\animatorassetexecutor.o ..\src\assettools\assetexecutors\animatorassetexecutor.cpp
+
+release/assetexecutor.o: ../src/assettools/assetexecutors/assetexecutor.cpp ../src/assettools/assetexecutors/assetexecutor.h \
+		../src/engine/variant.h \
+		../src/engine/type.h \
+		../src/json/json.h \
+		../src/json/autolink.h \
+		../src/json/config.h \
+		../src/json/allocator.h \
+		../src/json/version.h \
+		../src/json/features.h \
+		../src/json/forwards.h \
+		../src/json/reader.h \
+		../src/json/value.h \
+		../src/json/writer.h \
+		../src/filesystem.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\assetexecutor.o ..\src\assettools\assetexecutors\assetexecutor.cpp
+
+release/audioassetexecutor.o: ../src/assettools/assetexecutors/audioassetexecutor.cpp ../src/assettools/assetexecutors/audioassetexecutor.h \
+		../src/assettools/assetexecutors/assetexecutor.h \
+		../src/engine/variant.h \
+		../src/engine/type.h \
+		../src/json/json.h \
+		../src/json/autolink.h \
+		../src/json/config.h \
+		../src/json/allocator.h \
+		../src/json/version.h \
+		../src/json/features.h \
+		../src/json/forwards.h \
+		../src/json/reader.h \
+		../src/json/value.h \
+		../src/json/writer.h \
+		../src/audio/audioplayer.h \
+		../src/audio/audiochannel.h \
+		../src/audio/audio.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mixer.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_stdinc.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_config.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_platform.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/begin_code.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/close_code.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_rwops.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_error.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_audio.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_endian.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mutex.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_thread.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_atomic.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
+		../src/worker.h \
+		../src/additional/event.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_main.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_assert.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_clipboard.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_cpuinfo.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_events.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_video.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_pixels.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_rect.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_surface.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_blendmode.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_keyboard.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_keycode.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_scancode.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mouse.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_joystick.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_gamecontroller.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_quit.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_gesture.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_touch.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_filesystem.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_haptic.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_hints.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_loadso.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_log.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_messagebox.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_metal.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_power.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_render.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_sensor.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_shape.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_system.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
+		../src/engine/math/vector.h \
+		../src/object.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/engine/graphics/image.h \
+		../src/additional/e_variant.h \
+		../src/engine/textformat.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\audioassetexecutor.o ..\src\assettools\assetexecutors\audioassetexecutor.cpp
+
+release/numberassetexecutor.o: ../src/assettools/assetexecutors/numberassetexecutor.cpp ../src/assettools/assetexecutors/numberassetexecutor.h \
+		../src/assettools/assetexecutors/assetexecutor.h \
+		../src/engine/variant.h \
+		../src/engine/type.h \
+		../src/json/json.h \
+		../src/json/autolink.h \
+		../src/json/config.h \
+		../src/json/allocator.h \
+		../src/json/version.h \
+		../src/json/features.h \
+		../src/json/forwards.h \
+		../src/json/reader.h \
+		../src/json/value.h \
+		../src/json/writer.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\numberassetexecutor.o ..\src\assettools\assetexecutors\numberassetexecutor.cpp
+
+release/spriteassetexecutor.o: ../src/assettools/assetexecutors/spriteassetexecutor.cpp ../src/assettools/assetexecutors/spriteassetexecutor.h \
+		../src/assettools/assetexecutors/assetexecutor.h \
+		../src/engine/variant.h \
+		../src/engine/type.h \
+		../src/json/json.h \
+		../src/json/autolink.h \
+		../src/json/config.h \
+		../src/json/allocator.h \
+		../src/json/version.h \
+		../src/json/features.h \
+		../src/json/forwards.h \
+		../src/json/reader.h \
+		../src/json/value.h \
+		../src/json/writer.h \
+		../src/engine/graphics/abstractgraphicsprovider.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/engine/graphics/image.h \
+		../src/engine/math/vector.h \
+		../src/additional/e_variant.h \
+		../src/object.h \
+		../src/engine/textformat.h \
+		../src/animator.h \
+		../src/time/timer.h \
+		../src/worker.h \
+		../src/additional/event.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_main.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_stdinc.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_config.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_platform.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/begin_code.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/close_code.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_assert.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_atomic.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_audio.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_error.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_endian.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mutex.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_thread.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_rwops.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_clipboard.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_cpuinfo.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_events.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_video.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_pixels.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_rect.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_surface.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_blendmode.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_keyboard.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_keycode.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_scancode.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mouse.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_joystick.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_gamecontroller.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_quit.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_gesture.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_touch.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_filesystem.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_haptic.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_hints.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_loadso.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_log.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_messagebox.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_metal.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_power.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_render.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_sensor.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_shape.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_system.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\spriteassetexecutor.o ..\src\assettools\assetexecutors\spriteassetexecutor.cpp
+
+release/vectorassetexecutor.o: ../src/assettools/assetexecutors/vectorassetexecutor.cpp ../src/assettools/assetexecutors/vectorassetexecutor.h \
+		../src/assettools/assetexecutors/assetexecutor.h \
+		../src/engine/variant.h \
+		../src/engine/type.h \
+		../src/json/json.h \
+		../src/json/autolink.h \
+		../src/json/config.h \
+		../src/json/allocator.h \
+		../src/json/version.h \
+		../src/json/features.h \
+		../src/json/forwards.h \
+		../src/json/reader.h \
+		../src/json/value.h \
+		../src/json/writer.h \
+		../src/engine/math/vector.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\vectorassetexecutor.o ..\src\assettools\assetexecutors\vectorassetexecutor.cpp
 
 release/type.o: ../src/engine/type.cpp ../src/engine/type.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\type.o ..\src\engine\type.cpp
@@ -639,7 +930,15 @@ release/main.o: ../src/main.cpp ../src/environment.h \
 		../src/engine/graphics/abstractrenderer.h \
 		../src/engine/graphics/image.h \
 		../src/engine/textformat.h \
-		../src/assetmanager.h \
+		../src/background.h \
+		../src/time/timer.h \
+		../src/additional/informative/fpsmonitor.h \
+		../src/iinformative.h \
+		../src/netlistener.h \
+		../src/additional/net/socket.h \
+		../src/additional/net/framebuilder.h \
+		../src/context.h \
+		../src/assettools/assetmanager.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -651,22 +950,17 @@ release/main.o: ../src/main.cpp ../src/environment.h \
 		../src/json/value.h \
 		../src/json/writer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_image.h \
-		../src/loadable.h \
+		../src/assettools/assetexecutors/assetexecutor.h \
+		../src/engine/variant.h \
+		../src/engine/type.h \
+		../src/assettools/loadable.h \
 		../src/animator.h \
-		../src/time/timer.h \
 		../src/audio/audioplayer.h \
 		../src/audio/audiochannel.h \
 		../src/audio/audio.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mixer.h \
-		../src/engine/variant.h \
-		../src/engine/type.h \
-		../src/background.h \
-		../src/additional/informative/fpsmonitor.h \
-		../src/iinformative.h \
-		../src/netlistener.h \
-		../src/additional/net/socket.h \
-		../src/additional/net/framebuilder.h \
-		../src/context.h \
+		../klibcore/src/memcontrol/kabstractfactory.h \
+		../klibcore/src/utility/ktype.h \
 		../src/gui/guimain.h \
 		../src/gui/guistack.h \
 		../src/gui/guielement.h \
@@ -818,7 +1112,8 @@ release/sdlrenderer.o: ../src/sdlimplementation/sdlrenderer.cpp ../src/sdlimplem
 		../src/capabilities/capability.h \
 		../src/worker.h \
 		../src/additional/event.h \
-		../src/loadable.h \
+		../src/iinformative.h \
+		../src/assettools/loadable.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -837,13 +1132,13 @@ release/sdlrenderer.o: ../src/sdlimplementation/sdlrenderer.cpp ../src/sdlimplem
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mixer.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
-		../src/iinformative.h \
 		../src/capabilities/docker.h \
 		../src/capabilities/controller.h \
 		../src/units/ship.h \
 		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h \
 		../src/debug.h \
+		../klibcore/src/ksmartenum.h \
 		../src/sdlimplementation/effects/anaglyph.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\sdlrenderer.o ..\src\sdlimplementation\sdlrenderer.cpp
 
@@ -905,95 +1200,7 @@ release/worker.o: ../src/worker.cpp ../src/worker.h \
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\worker.o ..\src\worker.cpp
 
 release/world.o: ../src/worlds/world.cpp ../src/worlds/world.h \
-		../src/object.h \
-		../src/capabilities/controller.h \
-		../src/capabilities/capability.h \
-		../src/worker.h \
-		../src/additional/event.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_main.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_stdinc.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_config.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_platform.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/begin_code.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/close_code.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_assert.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_atomic.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_audio.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_error.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_endian.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mutex.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_thread.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_rwops.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_clipboard.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_cpuinfo.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_events.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_video.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_pixels.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_rect.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_surface.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_blendmode.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_keyboard.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_keycode.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_scancode.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mouse.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_joystick.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_gamecontroller.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_quit.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_gesture.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_touch.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_filesystem.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_haptic.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_hints.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_loadso.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_log.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_messagebox.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_metal.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_power.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_render.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_sensor.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_shape.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_system.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
-		../src/engine/math/vector.h \
-		../src/engine/graphics/abstractrenderer.h \
-		../src/engine/graphics/image.h \
-		../src/additional/e_variant.h \
-		../src/engine/textformat.h \
-		../src/time/timer.h \
-		../src/units/ship.h \
-		../src/units/movable.h \
-		../src/units/unit.h \
-		../src/capabilities/modulehandler.h \
-		../src/capabilities/modules/module.h \
-		../src/loadable.h \
-		../src/json/json.h \
-		../src/json/autolink.h \
-		../src/json/config.h \
-		../src/json/allocator.h \
-		../src/json/version.h \
-		../src/json/features.h \
-		../src/json/forwards.h \
-		../src/json/reader.h \
-		../src/json/value.h \
-		../src/json/writer.h \
-		../src/animator.h \
-		../src/audio/audioplayer.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audio.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mixer.h \
-		../src/engine/variant.h \
-		../src/engine/type.h \
-		../src/iinformative.h \
-		../src/capabilities/docker.h \
-		../src/capabilities/modules/warpdrive.h \
-		../src/additional/trigger.h \
-		../src/assetmanager.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_image.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\world.o ..\src\worlds\world.cpp
-
-release/assetmanager.o: ../src/assetmanager.cpp ../src/assetmanager.h \
+		../src/assettools/assetmanager.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -1051,7 +1258,10 @@ release/assetmanager.o: ../src/assetmanager.cpp ../src/assetmanager.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_system.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
-		../src/loadable.h \
+		../src/assettools/assetexecutors/assetexecutor.h \
+		../src/engine/variant.h \
+		../src/engine/type.h \
+		../src/assettools/loadable.h \
 		../src/animator.h \
 		../src/time/timer.h \
 		../src/worker.h \
@@ -1066,10 +1276,102 @@ release/assetmanager.o: ../src/assetmanager.cpp ../src/assetmanager.h \
 		../src/audio/audiochannel.h \
 		../src/audio/audio.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mixer.h \
+		../klibcore/src/memcontrol/kabstractfactory.h \
+		../klibcore/src/utility/ktype.h \
+		../src/capabilities/controller.h \
+		../src/capabilities/capability.h \
+		../src/units/ship.h \
+		../src/units/movable.h \
+		../src/units/unit.h \
+		../src/capabilities/modulehandler.h \
+		../src/capabilities/modules/module.h \
+		../src/iinformative.h \
+		../src/capabilities/docker.h \
+		../src/capabilities/modules/warpdrive.h \
+		../src/additional/trigger.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\world.o ..\src\worlds\world.cpp
+
+release/assetmanager.o: ../src/assettools/assetmanager.cpp ../src/assettools/assetmanager.h \
+		../src/json/json.h \
+		../src/json/autolink.h \
+		../src/json/config.h \
+		../src/json/allocator.h \
+		../src/json/version.h \
+		../src/json/features.h \
+		../src/json/forwards.h \
+		../src/json/reader.h \
+		../src/json/value.h \
+		../src/json/writer.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_image.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_main.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_stdinc.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_config.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_platform.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/begin_code.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/close_code.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_assert.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_atomic.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_audio.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_error.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_endian.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mutex.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_thread.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_rwops.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_clipboard.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_cpuinfo.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_events.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_video.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_pixels.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_rect.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_surface.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_blendmode.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_keyboard.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_keycode.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_scancode.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mouse.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_joystick.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_gamecontroller.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_quit.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_gesture.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_touch.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_filesystem.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_haptic.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_hints.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_loadso.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_log.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_messagebox.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_metal.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_power.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_render.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_sensor.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_shape.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_system.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
+		../src/assettools/assetexecutors/assetexecutor.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
+		../src/assettools/loadable.h \
+		../src/animator.h \
+		../src/time/timer.h \
+		../src/worker.h \
+		../src/additional/event.h \
+		../src/engine/math/vector.h \
+		../src/object.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/engine/graphics/image.h \
+		../src/additional/e_variant.h \
+		../src/engine/textformat.h \
+		../src/audio/audioplayer.h \
+		../src/audio/audiochannel.h \
+		../src/audio/audio.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mixer.h \
+		../klibcore/src/memcontrol/kabstractfactory.h \
+		../klibcore/src/utility/ktype.h \
 		../src/filesystem.h \
 		../src/debug.h \
+		../klibcore/src/ksmartenum.h \
 		../src/capabilities/player.h \
 		../src/capabilities/controller.h \
 		../src/capabilities/capability.h \
@@ -1087,10 +1389,8 @@ release/assetmanager.o: ../src/assetmanager.cpp ../src/assetmanager.h \
 		../src/capabilities/modules/thruster.h \
 		../src/units/projectile.h \
 		../src/units/station.h \
-		../klibcore/src/memcontrol/kabstractfactory.h \
-		../klibcore/src/utility/ktype.h \
 		../src/engine/graphics/abstractgraphicsprovider.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\assetmanager.o ..\src\assetmanager.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\assetmanager.o ..\src\assettools\assetmanager.cpp
 
 release/filesystem.o: ../src/filesystem.cpp ../src/filesystem.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\filesystem.o ..\src\filesystem.cpp
@@ -1210,7 +1510,7 @@ release/background.o: ../src/background.cpp ../src/background.h \
 		../src/engine/textformat.h \
 		../src/time/timer.h \
 		../src/context.h \
-		../src/assetmanager.h \
+		../src/assettools/assetmanager.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -1222,14 +1522,17 @@ release/background.o: ../src/background.cpp ../src/background.h \
 		../src/json/value.h \
 		../src/json/writer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_image.h \
-		../src/loadable.h \
+		../src/assettools/assetexecutors/assetexecutor.h \
+		../src/engine/variant.h \
+		../src/engine/type.h \
+		../src/assettools/loadable.h \
 		../src/animator.h \
 		../src/audio/audioplayer.h \
 		../src/audio/audiochannel.h \
 		../src/audio/audio.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mixer.h \
-		../src/engine/variant.h \
-		../src/engine/type.h \
+		../klibcore/src/memcontrol/kabstractfactory.h \
+		../klibcore/src/utility/ktype.h \
 		../src/gui/guimain.h \
 		../src/gui/guistack.h \
 		../src/gui/guielement.h \
@@ -1309,7 +1612,8 @@ release/unit.o: ../src/units/unit.cpp ../src/units/unit.h \
 		../src/engine/graphics/image.h \
 		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
-		../src/loadable.h \
+		../src/iinformative.h \
+		../src/assettools/loadable.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -1328,11 +1632,13 @@ release/unit.o: ../src/units/unit.cpp ../src/units/unit.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mixer.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
-		../src/iinformative.h \
 		../src/capabilities/docker.h \
 		../src/context.h \
-		../src/assetmanager.h \
+		../src/assettools/assetmanager.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_image.h \
+		../src/assettools/assetexecutors/assetexecutor.h \
+		../klibcore/src/memcontrol/kabstractfactory.h \
+		../klibcore/src/utility/ktype.h \
 		../src/gui/guimain.h \
 		../src/gui/guistack.h \
 		../src/gui/guielement.h \
@@ -1412,7 +1718,8 @@ release/movable.o: ../src/units/movable.cpp ../src/units/movable.h \
 		../src/engine/graphics/image.h \
 		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
-		../src/loadable.h \
+		../src/iinformative.h \
+		../src/assettools/loadable.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -1431,12 +1738,14 @@ release/movable.o: ../src/units/movable.cpp ../src/units/movable.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mixer.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
-		../src/iinformative.h \
 		../src/capabilities/docker.h \
 		../src/capabilities/modules/engine.h \
 		../src/context.h \
-		../src/assetmanager.h \
+		../src/assettools/assetmanager.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_image.h \
+		../src/assettools/assetexecutors/assetexecutor.h \
+		../klibcore/src/memcontrol/kabstractfactory.h \
+		../klibcore/src/utility/ktype.h \
 		../src/gui/guimain.h \
 		../src/gui/guistack.h \
 		../src/gui/guielement.h \
@@ -1514,7 +1823,8 @@ release/camera.o: ../src/units/camera.cpp ../src/units/camera.h \
 		../src/engine/graphics/image.h \
 		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
-		../src/loadable.h \
+		../src/iinformative.h \
+		../src/assettools/loadable.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -1533,7 +1843,6 @@ release/camera.o: ../src/units/camera.cpp ../src/units/camera.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mixer.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
-		../src/iinformative.h \
 		../src/capabilities/docker.h \
 		../src/capabilities/controller.h \
 		../src/units/ship.h \
@@ -1661,7 +1970,8 @@ release/controller.o: ../src/capabilities/controller.cpp ../src/capabilities/con
 		../src/units/unit.h \
 		../src/capabilities/modulehandler.h \
 		../src/capabilities/modules/module.h \
-		../src/loadable.h \
+		../src/iinformative.h \
+		../src/assettools/loadable.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -1679,13 +1989,15 @@ release/controller.o: ../src/capabilities/controller.cpp ../src/capabilities/con
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mixer.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
-		../src/iinformative.h \
 		../src/capabilities/docker.h \
 		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h \
 		../src/context.h \
-		../src/assetmanager.h \
+		../src/assettools/assetmanager.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_image.h \
+		../src/assettools/assetexecutors/assetexecutor.h \
+		../klibcore/src/memcontrol/kabstractfactory.h \
+		../klibcore/src/utility/ktype.h \
 		../src/gui/guimain.h \
 		../src/gui/guistack.h \
 		../src/gui/guielement.h \
@@ -1760,7 +2072,8 @@ release/player.o: ../src/capabilities/player.cpp ../src/capabilities/player.h \
 		../src/units/unit.h \
 		../src/capabilities/modulehandler.h \
 		../src/capabilities/modules/module.h \
-		../src/loadable.h \
+		../src/iinformative.h \
+		../src/assettools/loadable.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -1778,13 +2091,15 @@ release/player.o: ../src/capabilities/player.cpp ../src/capabilities/player.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mixer.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
-		../src/iinformative.h \
 		../src/capabilities/docker.h \
 		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h \
 		../src/context.h \
-		../src/assetmanager.h \
+		../src/assettools/assetmanager.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_image.h \
+		../src/assettools/assetexecutors/assetexecutor.h \
+		../klibcore/src/memcontrol/kabstractfactory.h \
+		../klibcore/src/utility/ktype.h \
 		../src/gui/guimain.h \
 		../src/gui/guistack.h \
 		../src/gui/guielement.h \
@@ -1855,7 +2170,8 @@ release/modulehandler.o: ../src/capabilities/modulehandler.cpp ../src/capabiliti
 		../src/engine/graphics/image.h \
 		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
-		../src/loadable.h \
+		../src/iinformative.h \
+		../src/assettools/loadable.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -1873,8 +2189,7 @@ release/modulehandler.o: ../src/capabilities/modulehandler.cpp ../src/capabiliti
 		../src/audio/audio.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mixer.h \
 		../src/engine/variant.h \
-		../src/engine/type.h \
-		../src/iinformative.h
+		../src/engine/type.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\modulehandler.o ..\src\capabilities\modulehandler.cpp
 
 release/module.o: ../src/capabilities/modules/module.cpp ../src/capabilities/modules/module.h \
@@ -1933,7 +2248,8 @@ release/module.o: ../src/capabilities/modules/module.cpp ../src/capabilities/mod
 		../src/engine/graphics/image.h \
 		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
-		../src/loadable.h \
+		../src/iinformative.h \
+		../src/assettools/loadable.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -1952,7 +2268,6 @@ release/module.o: ../src/capabilities/modules/module.cpp ../src/capabilities/mod
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mixer.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
-		../src/iinformative.h \
 		../src/units/unit.h \
 		../src/capabilities/modulehandler.h \
 		../src/capabilities/docker.h \
@@ -2224,7 +2539,7 @@ release/anaglyph.o: ../src/sdlimplementation/effects/anaglyph.cpp ../src/sdlimpl
 		../src/engine/math/vector.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\anaglyph.o ..\src\sdlimplementation\effects\anaglyph.cpp
 
-release/loadable.o: ../src/loadable.cpp ../src/loadable.h \
+release/loadable.o: ../src/assettools/loadable.cpp ../src/assettools/loadable.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -2297,7 +2612,7 @@ release/loadable.o: ../src/loadable.cpp ../src/loadable.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mixer.h \
 		../src/engine/variant.h \
 		../src/engine/type.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\loadable.o ..\src\loadable.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\loadable.o ..\src\assettools\loadable.cpp
 
 release/weapon.o: ../src/capabilities/modules/weapon.cpp ../src/capabilities/modules/weapon.h \
 		../src/capabilities/modules/module.h \
@@ -2356,7 +2671,8 @@ release/weapon.o: ../src/capabilities/modules/weapon.cpp ../src/capabilities/mod
 		../src/engine/graphics/image.h \
 		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
-		../src/loadable.h \
+		../src/iinformative.h \
+		../src/assettools/loadable.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -2375,10 +2691,12 @@ release/weapon.o: ../src/capabilities/modules/weapon.cpp ../src/capabilities/mod
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mixer.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
-		../src/iinformative.h \
 		../src/context.h \
-		../src/assetmanager.h \
+		../src/assettools/assetmanager.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_image.h \
+		../src/assettools/assetexecutors/assetexecutor.h \
+		../klibcore/src/memcontrol/kabstractfactory.h \
+		../klibcore/src/utility/ktype.h \
 		../src/gui/guimain.h \
 		../src/gui/guistack.h \
 		../src/gui/guielement.h \
@@ -2460,7 +2778,8 @@ release/projectile.o: ../src/units/projectile.cpp ../src/units/projectile.h \
 		../src/engine/graphics/image.h \
 		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
-		../src/loadable.h \
+		../src/iinformative.h \
+		../src/assettools/loadable.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -2479,11 +2798,13 @@ release/projectile.o: ../src/units/projectile.cpp ../src/units/projectile.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mixer.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
-		../src/iinformative.h \
 		../src/capabilities/docker.h \
 		../src/context.h \
-		../src/assetmanager.h \
+		../src/assettools/assetmanager.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_image.h \
+		../src/assettools/assetexecutors/assetexecutor.h \
+		../klibcore/src/memcontrol/kabstractfactory.h \
+		../klibcore/src/utility/ktype.h \
 		../src/gui/guimain.h \
 		../src/gui/guistack.h \
 		../src/gui/guielement.h \
@@ -2501,11 +2822,12 @@ release/projectile.o: ../src/units/projectile.cpp ../src/units/projectile.h \
 		../src/units/camera.h \
 		../src/additional/lightparticle.h \
 		../src/objectregistry.h \
-		../src/debug.h
+		../src/debug.h \
+		../klibcore/src/ksmartenum.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\projectile.o ..\src\units\projectile.cpp
 
 release/context.o: ../src/context.cpp ../src/context.h \
-		../src/assetmanager.h \
+		../src/assettools/assetmanager.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -2563,7 +2885,10 @@ release/context.o: ../src/context.cpp ../src/context.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_system.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
-		../src/loadable.h \
+		../src/assettools/assetexecutors/assetexecutor.h \
+		../src/engine/variant.h \
+		../src/engine/type.h \
+		../src/assettools/loadable.h \
 		../src/animator.h \
 		../src/time/timer.h \
 		../src/worker.h \
@@ -2578,8 +2903,8 @@ release/context.o: ../src/context.cpp ../src/context.h \
 		../src/audio/audiochannel.h \
 		../src/audio/audio.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mixer.h \
-		../src/engine/variant.h \
-		../src/engine/type.h \
+		../klibcore/src/memcontrol/kabstractfactory.h \
+		../klibcore/src/utility/ktype.h \
 		../src/gui/guimain.h \
 		../src/gui/guistack.h \
 		../src/gui/guielement.h \
@@ -2602,6 +2927,7 @@ release/context.o: ../src/context.cpp ../src/context.h \
 		../src/background.h \
 		../src/objectregistry.h \
 		../src/debug.h \
+		../klibcore/src/ksmartenum.h \
 		../src/units/particle.h \
 		../src/additional/lightparticle.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\context.o ..\src\context.cpp
@@ -2663,7 +2989,8 @@ release/engine.o: ../src/capabilities/modules/engine.cpp ../src/capabilities/mod
 		../src/engine/graphics/image.h \
 		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
-		../src/loadable.h \
+		../src/iinformative.h \
+		../src/assettools/loadable.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -2681,8 +3008,7 @@ release/engine.o: ../src/capabilities/modules/engine.cpp ../src/capabilities/mod
 		../src/audio/audio.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mixer.h \
 		../src/engine/variant.h \
-		../src/engine/type.h \
-		../src/iinformative.h
+		../src/engine/type.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\engine.o ..\src\capabilities\modules\engine.cpp
 
 release/warpdrive.o: ../src/capabilities/modules/warpdrive.cpp ../src/capabilities/modules/warpdrive.h \
@@ -2742,7 +3068,8 @@ release/warpdrive.o: ../src/capabilities/modules/warpdrive.cpp ../src/capabiliti
 		../src/engine/graphics/image.h \
 		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
-		../src/loadable.h \
+		../src/iinformative.h \
+		../src/assettools/loadable.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -2761,10 +3088,12 @@ release/warpdrive.o: ../src/capabilities/modules/warpdrive.cpp ../src/capabiliti
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mixer.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
-		../src/iinformative.h \
 		../src/context.h \
-		../src/assetmanager.h \
+		../src/assettools/assetmanager.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_image.h \
+		../src/assettools/assetexecutors/assetexecutor.h \
+		../klibcore/src/memcontrol/kabstractfactory.h \
+		../klibcore/src/utility/ktype.h \
 		../src/gui/guimain.h \
 		../src/gui/guistack.h \
 		../src/gui/guielement.h \
@@ -2844,7 +3173,8 @@ release/ship.o: ../src/units/ship.cpp ../src/units/ship.h \
 		../src/engine/graphics/image.h \
 		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
-		../src/loadable.h \
+		../src/iinformative.h \
+		../src/assettools/loadable.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -2863,12 +3193,14 @@ release/ship.o: ../src/units/ship.cpp ../src/units/ship.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mixer.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
-		../src/iinformative.h \
 		../src/capabilities/docker.h \
 		../src/capabilities/modules/warpdrive.h \
 		../src/context.h \
-		../src/assetmanager.h \
+		../src/assettools/assetmanager.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_image.h \
+		../src/assettools/assetexecutors/assetexecutor.h \
+		../klibcore/src/memcontrol/kabstractfactory.h \
+		../klibcore/src/utility/ktype.h \
 		../src/gui/guimain.h \
 		../src/gui/guistack.h \
 		../src/gui/guielement.h \
@@ -2945,7 +3277,8 @@ release/guielement.o: ../src/gui/guielement.cpp ../src/gui/guielement.h \
 		../src/units/unit.h \
 		../src/capabilities/modulehandler.h \
 		../src/capabilities/modules/module.h \
-		../src/loadable.h \
+		../src/iinformative.h \
+		../src/assettools/loadable.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -2963,7 +3296,6 @@ release/guielement.o: ../src/gui/guielement.cpp ../src/gui/guielement.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mixer.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
-		../src/iinformative.h \
 		../src/capabilities/docker.h \
 		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h
@@ -3034,7 +3366,8 @@ release/guicontainer.o: ../src/gui/guicontainer.cpp ../src/gui/guicontainer.h \
 		../src/units/unit.h \
 		../src/capabilities/modulehandler.h \
 		../src/capabilities/modules/module.h \
-		../src/loadable.h \
+		../src/iinformative.h \
+		../src/assettools/loadable.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -3052,7 +3385,6 @@ release/guicontainer.o: ../src/gui/guicontainer.cpp ../src/gui/guicontainer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mixer.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
-		../src/iinformative.h \
 		../src/capabilities/docker.h \
 		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h \
@@ -3128,7 +3460,8 @@ release/guistack.o: ../src/gui/guistack.cpp ../src/gui/guistack.h \
 		../src/units/unit.h \
 		../src/capabilities/modulehandler.h \
 		../src/capabilities/modules/module.h \
-		../src/loadable.h \
+		../src/iinformative.h \
+		../src/assettools/loadable.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -3146,7 +3479,6 @@ release/guistack.o: ../src/gui/guistack.cpp ../src/gui/guistack.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mixer.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
-		../src/iinformative.h \
 		../src/capabilities/docker.h \
 		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h \
@@ -3217,7 +3549,8 @@ release/ai.o: ../src/capabilities/ai.cpp ../src/capabilities/ai.h \
 		../src/units/unit.h \
 		../src/capabilities/modulehandler.h \
 		../src/capabilities/modules/module.h \
-		../src/loadable.h \
+		../src/iinformative.h \
+		../src/assettools/loadable.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -3235,7 +3568,6 @@ release/ai.o: ../src/capabilities/ai.cpp ../src/capabilities/ai.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mixer.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
-		../src/iinformative.h \
 		../src/capabilities/docker.h \
 		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h
@@ -3300,7 +3632,8 @@ release/station.o: ../src/units/station.cpp ../src/units/station.h \
 		../src/engine/graphics/image.h \
 		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
-		../src/loadable.h \
+		../src/iinformative.h \
+		../src/assettools/loadable.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -3319,7 +3652,6 @@ release/station.o: ../src/units/station.cpp ../src/units/station.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mixer.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
-		../src/iinformative.h \
 		../src/capabilities/docker.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\station.o ..\src\units\station.cpp
 
@@ -3353,7 +3685,8 @@ release/json_writer.o: ../src/json/json_writer.cpp ../src/json/json_tool.h \
 		../src/json/forwards.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\json_writer.o ..\src\json\json_writer.cpp
 
-release/debug.o: ../src/debug.cpp ../src/debug.h
+release/debug.o: ../src/debug.cpp ../src/debug.h \
+		../klibcore/src/ksmartenum.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\debug.o ..\src\debug.cpp
 
 release/guiswitch.o: ../src/gui/guiswitch.cpp ../src/gui/guiswitch.h \
@@ -3421,7 +3754,8 @@ release/guiswitch.o: ../src/gui/guiswitch.cpp ../src/gui/guiswitch.h \
 		../src/units/unit.h \
 		../src/capabilities/modulehandler.h \
 		../src/capabilities/modules/module.h \
-		../src/loadable.h \
+		../src/iinformative.h \
+		../src/assettools/loadable.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -3439,7 +3773,6 @@ release/guiswitch.o: ../src/gui/guiswitch.cpp ../src/gui/guiswitch.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mixer.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
-		../src/iinformative.h \
 		../src/capabilities/docker.h \
 		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h
@@ -3560,7 +3893,8 @@ release/guichoice.o: ../src/gui/guichoice.cpp ../src/gui/guichoice.h \
 		../src/units/unit.h \
 		../src/capabilities/modulehandler.h \
 		../src/capabilities/modules/module.h \
-		../src/loadable.h \
+		../src/iinformative.h \
+		../src/assettools/loadable.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -3578,7 +3912,6 @@ release/guichoice.o: ../src/gui/guichoice.cpp ../src/gui/guichoice.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mixer.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
-		../src/iinformative.h \
 		../src/capabilities/docker.h \
 		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h
@@ -3699,7 +4032,8 @@ release/particle.o: ../src/units/particle.cpp ../src/units/particle.h \
 		../src/engine/graphics/image.h \
 		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
-		../src/loadable.h \
+		../src/iinformative.h \
+		../src/assettools/loadable.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -3718,11 +4052,13 @@ release/particle.o: ../src/units/particle.cpp ../src/units/particle.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mixer.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
-		../src/iinformative.h \
 		../src/capabilities/docker.h \
 		../src/context.h \
-		../src/assetmanager.h \
+		../src/assettools/assetmanager.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_image.h \
+		../src/assettools/assetexecutors/assetexecutor.h \
+		../klibcore/src/memcontrol/kabstractfactory.h \
+		../klibcore/src/utility/ktype.h \
 		../src/gui/guimain.h \
 		../src/gui/guistack.h \
 		../src/gui/guielement.h \
@@ -3841,7 +4177,7 @@ release/netlistener.o: ../src/netlistener.cpp ../src/netlistener.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
 		../src/additional/net/framebuilder.h \
 		../src/context.h \
-		../src/assetmanager.h \
+		../src/assettools/assetmanager.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -3853,7 +4189,10 @@ release/netlistener.o: ../src/netlistener.cpp ../src/netlistener.h \
 		../src/json/value.h \
 		../src/json/writer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_image.h \
-		../src/loadable.h \
+		../src/assettools/assetexecutors/assetexecutor.h \
+		../src/engine/variant.h \
+		../src/engine/type.h \
+		../src/assettools/loadable.h \
 		../src/animator.h \
 		../src/time/timer.h \
 		../src/worker.h \
@@ -3868,8 +4207,8 @@ release/netlistener.o: ../src/netlistener.cpp ../src/netlistener.h \
 		../src/audio/audiochannel.h \
 		../src/audio/audio.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mixer.h \
-		../src/engine/variant.h \
-		../src/engine/type.h \
+		../klibcore/src/memcontrol/kabstractfactory.h \
+		../klibcore/src/utility/ktype.h \
 		../src/gui/guimain.h \
 		../src/gui/guistack.h \
 		../src/gui/guielement.h \
@@ -3966,7 +4305,8 @@ release/guimain.o: ../src/gui/guimain.cpp ../src/gui/guimain.h \
 		../src/units/unit.h \
 		../src/capabilities/modulehandler.h \
 		../src/capabilities/modules/module.h \
-		../src/loadable.h \
+		../src/iinformative.h \
+		../src/assettools/loadable.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -3984,7 +4324,6 @@ release/guimain.o: ../src/gui/guimain.cpp ../src/gui/guimain.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mixer.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
-		../src/iinformative.h \
 		../src/capabilities/docker.h \
 		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h \
@@ -4060,7 +4399,8 @@ release/guicentralmessage.o: ../src/gui/guicentralmessage.cpp ../src/gui/guicent
 		../src/units/unit.h \
 		../src/capabilities/modulehandler.h \
 		../src/capabilities/modules/module.h \
-		../src/loadable.h \
+		../src/iinformative.h \
+		../src/assettools/loadable.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -4078,7 +4418,6 @@ release/guicentralmessage.o: ../src/gui/guicentralmessage.cpp ../src/gui/guicent
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mixer.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
-		../src/iinformative.h \
 		../src/capabilities/docker.h \
 		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h
@@ -4148,7 +4487,7 @@ release/controllerfinder.o: ../src/additional/informative/controllerfinder.cpp .
 		../src/units/unit.h \
 		../src/capabilities/modulehandler.h \
 		../src/capabilities/modules/module.h \
-		../src/loadable.h \
+		../src/assettools/loadable.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -4236,7 +4575,8 @@ release/guifloatingmessage.o: ../src/gui/guifloatingmessage.cpp ../src/gui/guifl
 		../src/units/unit.h \
 		../src/capabilities/modulehandler.h \
 		../src/capabilities/modules/module.h \
-		../src/loadable.h \
+		../src/iinformative.h \
+		../src/assettools/loadable.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -4254,7 +4594,6 @@ release/guifloatingmessage.o: ../src/gui/guifloatingmessage.cpp ../src/gui/guifl
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mixer.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
-		../src/iinformative.h \
 		../src/capabilities/docker.h \
 		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h \
@@ -4327,7 +4666,8 @@ release/guiblushingfloatingmessage.o: ../src/gui/guiblushingfloatingmessage.cpp 
 		../src/units/unit.h \
 		../src/capabilities/modulehandler.h \
 		../src/capabilities/modules/module.h \
-		../src/loadable.h \
+		../src/iinformative.h \
+		../src/assettools/loadable.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -4345,7 +4685,6 @@ release/guiblushingfloatingmessage.o: ../src/gui/guiblushingfloatingmessage.cpp 
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mixer.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
-		../src/iinformative.h \
 		../src/capabilities/docker.h \
 		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h \
@@ -4413,7 +4752,7 @@ release/lightparticle.o: ../src/additional/lightparticle.cpp ../src/additional/l
 		../src/engine/textformat.h \
 		../src/time/timer.h \
 		../src/context.h \
-		../src/assetmanager.h \
+		../src/assettools/assetmanager.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -4425,14 +4764,17 @@ release/lightparticle.o: ../src/additional/lightparticle.cpp ../src/additional/l
 		../src/json/value.h \
 		../src/json/writer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_image.h \
-		../src/loadable.h \
+		../src/assettools/assetexecutors/assetexecutor.h \
+		../src/engine/variant.h \
+		../src/engine/type.h \
+		../src/assettools/loadable.h \
 		../src/animator.h \
 		../src/audio/audioplayer.h \
 		../src/audio/audiochannel.h \
 		../src/audio/audio.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mixer.h \
-		../src/engine/variant.h \
-		../src/engine/type.h \
+		../klibcore/src/memcontrol/kabstractfactory.h \
+		../klibcore/src/utility/ktype.h \
 		../src/gui/guimain.h \
 		../src/gui/guistack.h \
 		../src/gui/guielement.h \
@@ -4522,7 +4864,8 @@ release/worldmanager.o: ../src/worldmanager.cpp ../src/worldmanager.h \
 		../src/units/unit.h \
 		../src/capabilities/modulehandler.h \
 		../src/capabilities/modules/module.h \
-		../src/loadable.h \
+		../src/iinformative.h \
+		../src/assettools/loadable.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -4540,7 +4883,6 @@ release/worldmanager.o: ../src/worldmanager.cpp ../src/worldmanager.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mixer.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
-		../src/iinformative.h \
 		../src/capabilities/docker.h \
 		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h \
@@ -4550,8 +4892,11 @@ release/worldmanager.o: ../src/worldmanager.cpp ../src/worldmanager.h \
 		../src/gui/guiminimap.h \
 		../src/near.h \
 		../src/worlds/world.h \
-		../src/assetmanager.h \
+		../src/assettools/assetmanager.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_image.h \
+		../src/assettools/assetexecutors/assetexecutor.h \
+		../klibcore/src/memcontrol/kabstractfactory.h \
+		../klibcore/src/utility/ktype.h \
 		../src/additional/informative/fpsmonitor.h \
 		../src/context.h \
 		../src/background.h \
@@ -4569,11 +4914,18 @@ release/worldmanager.o: ../src/worldmanager.cpp ../src/worldmanager.h \
 
 release/defaultworld.o: ../src/worlds/defaultworld.cpp ../src/worlds/defaultworld.h \
 		../src/worlds/world.h \
-		../src/object.h \
-		../src/capabilities/controller.h \
-		../src/capabilities/capability.h \
-		../src/worker.h \
-		../src/additional/event.h \
+		../src/assettools/assetmanager.h \
+		../src/json/json.h \
+		../src/json/autolink.h \
+		../src/json/config.h \
+		../src/json/allocator.h \
+		../src/json/version.h \
+		../src/json/features.h \
+		../src/json/forwards.h \
+		../src/json/reader.h \
+		../src/json/value.h \
+		../src/json/writer.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_image.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_main.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_stdinc.h \
@@ -4620,53 +4972,57 @@ release/defaultworld.o: ../src/worlds/defaultworld.cpp ../src/worlds/defaultworl
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_system.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
+		../src/assettools/assetexecutors/assetexecutor.h \
+		../src/engine/variant.h \
+		../src/engine/type.h \
+		../src/assettools/loadable.h \
+		../src/animator.h \
+		../src/time/timer.h \
+		../src/worker.h \
+		../src/additional/event.h \
 		../src/engine/math/vector.h \
+		../src/object.h \
 		../src/engine/graphics/abstractrenderer.h \
 		../src/engine/graphics/image.h \
 		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
-		../src/time/timer.h \
+		../src/audio/audioplayer.h \
+		../src/audio/audiochannel.h \
+		../src/audio/audio.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mixer.h \
+		../klibcore/src/memcontrol/kabstractfactory.h \
+		../klibcore/src/utility/ktype.h \
+		../src/capabilities/controller.h \
+		../src/capabilities/capability.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
 		../src/units/unit.h \
 		../src/capabilities/modulehandler.h \
 		../src/capabilities/modules/module.h \
-		../src/loadable.h \
-		../src/json/json.h \
-		../src/json/autolink.h \
-		../src/json/config.h \
-		../src/json/allocator.h \
-		../src/json/version.h \
-		../src/json/features.h \
-		../src/json/forwards.h \
-		../src/json/reader.h \
-		../src/json/value.h \
-		../src/json/writer.h \
-		../src/animator.h \
-		../src/audio/audioplayer.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audio.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mixer.h \
-		../src/engine/variant.h \
-		../src/engine/type.h \
 		../src/iinformative.h \
 		../src/capabilities/docker.h \
 		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h \
-		../src/assetmanager.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_image.h \
 		../src/capabilities/player.h \
 		../src/capabilities/ai.h \
-		../src/debug.h
+		../src/debug.h \
+		../klibcore/src/ksmartenum.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\defaultworld.o ..\src\worlds\defaultworld.cpp
 
 release/arenaworld.o: ../src/worlds/arenaworld.cpp ../src/worlds/arenaworld.h \
 		../src/worlds/world.h \
-		../src/object.h \
-		../src/capabilities/controller.h \
-		../src/capabilities/capability.h \
-		../src/worker.h \
-		../src/additional/event.h \
+		../src/assettools/assetmanager.h \
+		../src/json/json.h \
+		../src/json/autolink.h \
+		../src/json/config.h \
+		../src/json/allocator.h \
+		../src/json/version.h \
+		../src/json/features.h \
+		../src/json/forwards.h \
+		../src/json/reader.h \
+		../src/json/value.h \
+		../src/json/writer.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_image.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_main.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_stdinc.h \
@@ -4713,41 +5069,37 @@ release/arenaworld.o: ../src/worlds/arenaworld.cpp ../src/worlds/arenaworld.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_system.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
+		../src/assettools/assetexecutors/assetexecutor.h \
+		../src/engine/variant.h \
+		../src/engine/type.h \
+		../src/assettools/loadable.h \
+		../src/animator.h \
+		../src/time/timer.h \
+		../src/worker.h \
+		../src/additional/event.h \
 		../src/engine/math/vector.h \
+		../src/object.h \
 		../src/engine/graphics/abstractrenderer.h \
 		../src/engine/graphics/image.h \
 		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
-		../src/time/timer.h \
+		../src/audio/audioplayer.h \
+		../src/audio/audiochannel.h \
+		../src/audio/audio.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mixer.h \
+		../klibcore/src/memcontrol/kabstractfactory.h \
+		../klibcore/src/utility/ktype.h \
+		../src/capabilities/controller.h \
+		../src/capabilities/capability.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
 		../src/units/unit.h \
 		../src/capabilities/modulehandler.h \
 		../src/capabilities/modules/module.h \
-		../src/loadable.h \
-		../src/json/json.h \
-		../src/json/autolink.h \
-		../src/json/config.h \
-		../src/json/allocator.h \
-		../src/json/version.h \
-		../src/json/features.h \
-		../src/json/forwards.h \
-		../src/json/reader.h \
-		../src/json/value.h \
-		../src/json/writer.h \
-		../src/animator.h \
-		../src/audio/audioplayer.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audio.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mixer.h \
-		../src/engine/variant.h \
-		../src/engine/type.h \
 		../src/iinformative.h \
 		../src/capabilities/docker.h \
 		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h \
-		../src/assetmanager.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_image.h \
 		../src/capabilities/player.h \
 		../src/capabilities/aggressive.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\arenaworld.o ..\src\worlds\arenaworld.cpp
@@ -4811,7 +5163,8 @@ release/docker.o: ../src/capabilities/docker.cpp ../src/capabilities/docker.h \
 		../src/units/unit.h \
 		../src/capabilities/modulehandler.h \
 		../src/capabilities/modules/module.h \
-		../src/loadable.h \
+		../src/iinformative.h \
+		../src/assettools/loadable.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -4830,7 +5183,6 @@ release/docker.o: ../src/capabilities/docker.cpp ../src/capabilities/docker.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mixer.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
-		../src/iinformative.h \
 		../src/units/movable.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\docker.o ..\src\capabilities\docker.cpp
 
@@ -4897,7 +5249,8 @@ release/near.o: ../src/near.cpp ../src/near.h \
 		../src/units/unit.h \
 		../src/capabilities/modulehandler.h \
 		../src/capabilities/modules/module.h \
-		../src/loadable.h \
+		../src/iinformative.h \
+		../src/assettools/loadable.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -4915,7 +5268,6 @@ release/near.o: ../src/near.cpp ../src/near.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mixer.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
-		../src/iinformative.h \
 		../src/capabilities/docker.h \
 		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h \
@@ -4988,7 +5340,8 @@ release/guilist.o: ../src/gui/guilist.cpp ../src/gui/guilist.h \
 		../src/units/unit.h \
 		../src/capabilities/modulehandler.h \
 		../src/capabilities/modules/module.h \
-		../src/loadable.h \
+		../src/iinformative.h \
+		../src/assettools/loadable.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -5006,7 +5359,6 @@ release/guilist.o: ../src/gui/guilist.cpp ../src/gui/guilist.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mixer.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
-		../src/iinformative.h \
 		../src/capabilities/docker.h \
 		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h \
@@ -5015,7 +5367,8 @@ release/guilist.o: ../src/gui/guilist.cpp ../src/gui/guilist.h \
 		../src/gui/guichoice.h \
 		../src/units/camera.h \
 		../src/objectregistry.h \
-		../src/debug.h
+		../src/debug.h \
+		../klibcore/src/ksmartenum.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\guilist.o ..\src\gui\guilist.cpp
 
 release/aggressive.o: ../src/capabilities/aggressive.cpp ../src/capabilities/aggressive.h \
@@ -5081,7 +5434,8 @@ release/aggressive.o: ../src/capabilities/aggressive.cpp ../src/capabilities/agg
 		../src/units/unit.h \
 		../src/capabilities/modulehandler.h \
 		../src/capabilities/modules/module.h \
-		../src/loadable.h \
+		../src/iinformative.h \
+		../src/assettools/loadable.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -5099,7 +5453,6 @@ release/aggressive.o: ../src/capabilities/aggressive.cpp ../src/capabilities/agg
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mixer.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
-		../src/iinformative.h \
 		../src/capabilities/docker.h \
 		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h \
@@ -5109,16 +5462,24 @@ release/aggressive.o: ../src/capabilities/aggressive.cpp ../src/capabilities/agg
 		../src/units/camera.h \
 		../src/additional/lightparticle.h \
 		../src/debug.h \
+		../klibcore/src/ksmartenum.h \
 		../src/capabilities/modules/weapon.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\aggressive.o ..\src\capabilities\aggressive.cpp
 
 release/heapworld.o: ../src/worlds/heapworld.cpp ../src/worlds/heapworld.h \
 		../src/worlds/world.h \
-		../src/object.h \
-		../src/capabilities/controller.h \
-		../src/capabilities/capability.h \
-		../src/worker.h \
-		../src/additional/event.h \
+		../src/assettools/assetmanager.h \
+		../src/json/json.h \
+		../src/json/autolink.h \
+		../src/json/config.h \
+		../src/json/allocator.h \
+		../src/json/version.h \
+		../src/json/features.h \
+		../src/json/forwards.h \
+		../src/json/reader.h \
+		../src/json/value.h \
+		../src/json/writer.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_image.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_main.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_stdinc.h \
@@ -5165,41 +5526,37 @@ release/heapworld.o: ../src/worlds/heapworld.cpp ../src/worlds/heapworld.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_system.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_timer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_version.h \
+		../src/assettools/assetexecutors/assetexecutor.h \
+		../src/engine/variant.h \
+		../src/engine/type.h \
+		../src/assettools/loadable.h \
+		../src/animator.h \
+		../src/time/timer.h \
+		../src/worker.h \
+		../src/additional/event.h \
 		../src/engine/math/vector.h \
+		../src/object.h \
 		../src/engine/graphics/abstractrenderer.h \
 		../src/engine/graphics/image.h \
 		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
-		../src/time/timer.h \
+		../src/audio/audioplayer.h \
+		../src/audio/audiochannel.h \
+		../src/audio/audio.h \
+		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mixer.h \
+		../klibcore/src/memcontrol/kabstractfactory.h \
+		../klibcore/src/utility/ktype.h \
+		../src/capabilities/controller.h \
+		../src/capabilities/capability.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
 		../src/units/unit.h \
 		../src/capabilities/modulehandler.h \
 		../src/capabilities/modules/module.h \
-		../src/loadable.h \
-		../src/json/json.h \
-		../src/json/autolink.h \
-		../src/json/config.h \
-		../src/json/allocator.h \
-		../src/json/version.h \
-		../src/json/features.h \
-		../src/json/forwards.h \
-		../src/json/reader.h \
-		../src/json/value.h \
-		../src/json/writer.h \
-		../src/animator.h \
-		../src/audio/audioplayer.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audio.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mixer.h \
-		../src/engine/variant.h \
-		../src/engine/type.h \
 		../src/iinformative.h \
 		../src/capabilities/docker.h \
 		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h \
-		../src/assetmanager.h \
-		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_image.h \
 		../src/capabilities/player.h \
 		../src/capabilities/aggressive.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\heapworld.o ..\src\worlds\heapworld.cpp
@@ -5316,7 +5673,8 @@ release/audioplayer.o: ../src/audio/audioplayer.cpp ../src/audio/audioplayer.h \
 		../src/capabilities/modulehandler.h \
 		../src/capabilities/modules/module.h \
 		../src/capabilities/capability.h \
-		../src/loadable.h \
+		../src/iinformative.h \
+		../src/assettools/loadable.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -5331,7 +5689,6 @@ release/audioplayer.o: ../src/audio/audioplayer.cpp ../src/audio/audioplayer.h \
 		../src/time/timer.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
-		../src/iinformative.h \
 		../src/capabilities/docker.h \
 		../src/capabilities/controller.h \
 		../src/units/ship.h \
@@ -5404,7 +5761,8 @@ release/guiminimap.o: ../src/gui/guiminimap.cpp ../src/gui/guiminimap.h \
 		../src/units/unit.h \
 		../src/capabilities/modulehandler.h \
 		../src/capabilities/modules/module.h \
-		../src/loadable.h \
+		../src/iinformative.h \
+		../src/assettools/loadable.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -5422,7 +5780,6 @@ release/guiminimap.o: ../src/gui/guiminimap.cpp ../src/gui/guiminimap.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mixer.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
-		../src/iinformative.h \
 		../src/capabilities/docker.h \
 		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h \
@@ -5498,7 +5855,8 @@ release/guiradar.o: ../src/gui/guiradar.cpp ../src/gui/guiradar.h \
 		../src/units/unit.h \
 		../src/capabilities/modulehandler.h \
 		../src/capabilities/modules/module.h \
-		../src/loadable.h \
+		../src/iinformative.h \
+		../src/assettools/loadable.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -5516,7 +5874,6 @@ release/guiradar.o: ../src/gui/guiradar.cpp ../src/gui/guiradar.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mixer.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
-		../src/iinformative.h \
 		../src/capabilities/docker.h \
 		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h \
@@ -5581,7 +5938,8 @@ release/thruster.o: ../src/capabilities/modules/thruster.cpp ../src/capabilities
 		../src/engine/graphics/image.h \
 		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
-		../src/loadable.h \
+		../src/iinformative.h \
+		../src/assettools/loadable.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -5599,8 +5957,7 @@ release/thruster.o: ../src/capabilities/modules/thruster.cpp ../src/capabilities
 		../src/audio/audio.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mixer.h \
 		../src/engine/variant.h \
-		../src/engine/type.h \
-		../src/iinformative.h
+		../src/engine/type.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\thruster.o ..\src\capabilities\modules\thruster.cpp
 
 release/time.o: ../src/time/time.cpp ../src/time/time.h
@@ -5670,7 +6027,8 @@ release/guimenuelement.o: ../src/gui/guimenuelement.cpp ../src/gui/guimenuelemen
 		../src/units/unit.h \
 		../src/capabilities/modulehandler.h \
 		../src/capabilities/modules/module.h \
-		../src/loadable.h \
+		../src/iinformative.h \
+		../src/assettools/loadable.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -5688,7 +6046,6 @@ release/guimenuelement.o: ../src/gui/guimenuelement.cpp ../src/gui/guimenuelemen
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mixer.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
-		../src/iinformative.h \
 		../src/capabilities/docker.h \
 		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h
@@ -5811,7 +6168,15 @@ release/environment.o: ../src/environment.cpp ../src/environment.h \
 		../src/engine/graphics/abstractrenderer.h \
 		../src/engine/graphics/image.h \
 		../src/engine/textformat.h \
-		../src/assetmanager.h \
+		../src/background.h \
+		../src/time/timer.h \
+		../src/additional/informative/fpsmonitor.h \
+		../src/iinformative.h \
+		../src/netlistener.h \
+		../src/additional/net/socket.h \
+		../src/additional/net/framebuilder.h \
+		../src/context.h \
+		../src/assettools/assetmanager.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -5823,22 +6188,17 @@ release/environment.o: ../src/environment.cpp ../src/environment.h \
 		../src/json/value.h \
 		../src/json/writer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_image.h \
-		../src/loadable.h \
+		../src/assettools/assetexecutors/assetexecutor.h \
+		../src/engine/variant.h \
+		../src/engine/type.h \
+		../src/assettools/loadable.h \
 		../src/animator.h \
-		../src/time/timer.h \
 		../src/audio/audioplayer.h \
 		../src/audio/audiochannel.h \
 		../src/audio/audio.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_mixer.h \
-		../src/engine/variant.h \
-		../src/engine/type.h \
-		../src/background.h \
-		../src/additional/informative/fpsmonitor.h \
-		../src/iinformative.h \
-		../src/netlistener.h \
-		../src/additional/net/socket.h \
-		../src/additional/net/framebuilder.h \
-		../src/context.h \
+		../klibcore/src/memcontrol/kabstractfactory.h \
+		../klibcore/src/utility/ktype.h \
 		../src/gui/guimain.h \
 		../src/gui/guistack.h \
 		../src/gui/guielement.h \
@@ -5864,13 +6224,17 @@ release/environment.o: ../src/environment.cpp ../src/environment.h \
 		../src/worlds/arenaworld.h \
 		../src/worlds/heapworld.h \
 		../src/debug.h \
+		../klibcore/src/ksmartenum.h \
 		../src/units/camera.h \
 		../src/time/time.h \
 		../src/filesystem.h \
 		../src/sdlimplementation/sdlgraphicsprovider.h \
 		../src/sdlimplementation/sdlrenderer.h \
 		C:/qt/5.15.0/mingw81_64/include/SDL2/SDL_ttf.h \
-		../src/engine/graphics/abstractgraphicsprovider.h
+		../src/engine/graphics/abstractgraphicsprovider.h \
+		../src/assettools/assetexecutors/animatorassetexecutor.h \
+		../src/assettools/assetexecutors/audioassetexecutor.h \
+		../src/assettools/assetexecutors/spriteassetexecutor.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\environment.o ..\src\environment.cpp
 
 ####### Install

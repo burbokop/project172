@@ -20,6 +20,10 @@ AudioPlayer::AudioPlayer(AudioSample *start, AudioSample *loop, AudioSample *sto
     this->channel = AudioChannel::createChannel();
 }
 
+AudioPlayer::~AudioPlayer() {
+    stop();
+}
+
 void AudioPlayer::play() {
     if(state == NONE) {
         channel.play(startChunk, 1);
@@ -60,4 +64,8 @@ void AudioPlayer::setVolumeByDistance(double distance) {
     if(intDistance < FULL_VOLUME_DISTANCE) intDistance = FULL_VOLUME_DISTANCE;
     if(intDistance > CUT_VOLUME_DISTANCE) intDistance = CUT_VOLUME_DISTANCE;
     setVolume(e172::Math::map(intDistance, FULL_VOLUME_DISTANCE, CUT_VOLUME_DISTANCE, Audio::MAX_VOLUME, 0));
+}
+
+bool operator ==(const AudioPlayer &ap0, const AudioPlayer &ap1) {
+    return ap0.id == ap1.id;
 }

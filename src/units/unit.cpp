@@ -16,10 +16,6 @@ double Unit::getRotationSpeed() {
 Unit::Unit() : Loadable () {
 }
 
-Unit::Unit(Loadable *tmp) {
-    tmp->clone(this);
-}
-
 void Unit::place(e172::Vector pos, double angle) {
     this->pos = pos;
     this->angle = angle;
@@ -116,28 +112,21 @@ double Unit::getAngle() {
 
 void Unit::hit(Context* context, int value) {
     if(value != 0) {
-        Json::Value health = root["health"];
-        Json::Value maxHealth = root["health-max"];
-        if(maxHealth.isNull()) root["health-max"] = health.asInt();
-        root["health"] = health.asInt() - value;
+        health -= value;
 
         for(Capability *capability : capabilities) {
             Controller *controller = dynamic_cast<Controller*>(capability);
             if(controller) {
-                controller->onHit(context, root["health"].asInt());
+                controller->onHit(context, health);
             }
         }
 
         if(dynamic_cast<Projectile*>(this) == nullptr) {
-            context->addEvent(this, Context::FLOATING_MESSAGE, root["health"].asInt());
+            context->addEvent(this, Context::FLOATING_MESSAGE, health);
         }
 
-        if(root["health"].asInt() < 0) {
-            Json::Value explosive = root["explosive"];
-            if(explosive.isNumeric()) {
-                context->addEvent(this, Context::SPAWN_EXPLOSIVE, explosive.asDouble());
-            }
-            audioPlayer.stop();
+        if(health < 0) {
+            context->addEvent(this, Context::SPAWN_EXPLOSIVE, explosiveRadius);
             ModuleHandler *mh = getModuleHandler();
             if(mh) {
                 std::vector<Module*> *modules = mh->getAllModules();
@@ -171,11 +160,7 @@ void Unit::tick(Context *context, Event *event) {
 }
 
 void Unit::render(e172::AbstractRenderer *renderer) {
-    e172::Image i = asset<e172::Image>("sprite");
-    asset<int>("health");
-
     renderer->resolution();
-
     animator.setAngle(angle);
     animator.setPosition(pos);
     animator.render(renderer);
@@ -191,9 +176,15 @@ Unit::~Unit() {
 }
 
 std::string Unit::getInfo() {
-    return root.get("key", "nuknown").asString();
+    return loadableId();
 }
 
 std::string Unit::getType() const {
     return typeid (this).name();
+}
+
+void Unit::initialized() {
+    health = asset<double>("health");
+    explosiveRadius = asset<double>("explosive");
+    animator = asset<Animator>("animator");
 }

@@ -62,7 +62,7 @@ void Debug::out(std::string message) {
 }
 
 void Debug::err(Code::Enum code, std::string site, std::string comment) {
-    if(errEnbled && code != Code::NO_ERROR) {
+    if(errEnbled) {
         if(code != lastError || site != lastSite) {
             if(comment == "") {
                 std::cerr << "ERROR: <code: " << Code::__map.at(code) << " appearance: " << site << ">\n";

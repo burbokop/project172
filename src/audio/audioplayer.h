@@ -22,8 +22,12 @@ private:
     AudioSample *startChunk = nullptr;
     AudioSample *loopChunk = nullptr;
     AudioSample *stopChunk = nullptr;
+
+    static inline int nextId = 0;
+    int id = nextId++;
 public:
     AudioPlayer(AudioSample *start = nullptr, AudioSample *loop = nullptr, AudioSample *stop = nullptr);
+    ~AudioPlayer();
 
     // Worker interface
 public:
@@ -36,6 +40,8 @@ public:
 
     void setVolume(int volume);
     void setVolumeByDistance(double distance);
+
+    friend bool operator ==(const AudioPlayer& ap0, const AudioPlayer& ap1);
 };
 
 #endif // AUDIOPLAYER_H

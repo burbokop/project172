@@ -6,8 +6,14 @@ debug/kmetafunction.o
 debug/kabstractfactory.o
 debug/kpull.o
 debug/kmoduleswitch.o
+debug/ksmartenum.o
 debug/e_variant.o
+debug/animatorassetexecutor.o
 debug/assetexecutor.o
+debug/audioassetexecutor.o
+debug/numberassetexecutor.o
+debug/spriteassetexecutor.o
+debug/vectorassetexecutor.o
 debug/type.o
 debug/variant.o
 debug/assetprovider.o

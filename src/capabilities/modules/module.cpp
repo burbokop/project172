@@ -2,11 +2,7 @@
 #include "units/unit.h"
 #include "units/camera.h"
 
-Module::Module() {
-}
-
-Module::Module(Loadable *tmp) : Loadable (tmp) {
-}
+Module::Module() {}
 
 void Module::animate(unsigned mode, unsigned def) {
     animator.setDefaultMode(def);
@@ -29,4 +25,10 @@ void Module::render(e172::AbstractRenderer *renderer) {
     e172::Vector local = parent->getPosition() + e172::Vector::createByAngle(-this->attachOffset.module(), parent->getAngle());
     this->animator.setPosition(local);
     this->animator.render(renderer);
+}
+
+void Module::initialized() {
+    animator = asset<Animator>("animator");
+    audioPlayer = asset<AudioPlayer>("audio");
+    attachOffset = asset<e172::Vector>("offset");
 }

@@ -26,6 +26,10 @@ public:
     // Controller interface
 public:
     void onHit(Context* context, int health);
+
+    // Loadable interface
+protected:
+    void initialized() override;
 };
 
 #endif // PLAYER_H
