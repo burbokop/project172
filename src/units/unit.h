@@ -11,6 +11,7 @@
 class Unit : public Worker, public Loadable, public IInformative {
 private:
     double angle = 0;
+    double rotationSpeed = DEFAULT_ROTATION_SPEED;
     double dstAngle = 0;
     bool angleLocked = false;
     double health = 0;
@@ -54,22 +55,22 @@ public:
     virtual void hit(Context *context, int value);
 
     // Worker interface
-public:
     void tick(Context *context, Event *event);
     void render(e172::AbstractRenderer *renderer);
 
     ~Unit();
 
     // IInformative interface
-public:
+
     std::string getInfo();
 
 
 
 
     // Object interface
-public:
+
     std::string getType() const;
+    void setRotationSpeed(double value);
 };
 
 #endif // UNIT_H

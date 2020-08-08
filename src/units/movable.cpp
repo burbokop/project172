@@ -84,7 +84,7 @@ bool Movable::accelerateForward() {
     if(!accelerationLocked) {
         ModuleHandler *modules = getModuleHandler();
         if(modules && modules->hasModuleOfClass("Engine")) {
-            std::cout << "forward\n";
+            //std::cout << "forward\n";
             acc = e172::Vector::createByAngle(getAccelerationValue(), getAngle());
             accelerationLocked = true;
             return true;
@@ -144,6 +144,9 @@ void Movable::updatePosition() {
     } else {
         vel += (acc * Time::getDeltaTime());
     }
+
+
+    setRotationSpeed(std::pow(2, -vel.module() * 0.004) * DEFAULT_ROTATION_SPEED);
     pos += (vel * Time::getDeltaTime());
     accelerationLocked = false;
 }

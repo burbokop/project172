@@ -9,8 +9,18 @@
 const double Unit::DEFAULT_ROTATION_SPEED = 0.0014 * 1000;
 const double Unit::ANGLE_DELTA_MULTIPLIER = 2;
 
+void Unit::setRotationSpeed(double value)
+{
+    if(value > DEFAULT_ROTATION_SPEED ){
+        rotationSpeed = DEFAULT_ROTATION_SPEED ;
+
+    } else {
+        rotationSpeed = value;
+    }
+}
+
 double Unit::getRotationSpeed() {
-    return DEFAULT_ROTATION_SPEED;
+    return rotationSpeed;
 }
 
 Unit::Unit() : Loadable () {

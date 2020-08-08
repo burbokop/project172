@@ -31,7 +31,7 @@ int get_sym_name(void *addr) {
 
 void Debug::onSegSignal(int signum) {
 #ifdef __unix__
-    err(Code::SEGMENTATION_FAULT, STATIC_DEBUG_IMPRINT, std::to_string(signum));
+    err(Code::SEGMENTATION_FAULT, __PRETTY_FUNCTION__, std::to_string(signum));
 
     void *addrlist[10];
     int addrlen = backtrace(addrlist, sizeof(addrlist) / sizeof(void*));

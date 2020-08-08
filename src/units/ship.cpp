@@ -8,9 +8,13 @@ Ship::Ship() {}
 
 bool Ship::prepareWarp() {
     WarpDrive *driveUnit = getFirstWarp();
-    std::cout << "warp" << getModuleHandler()->getAllModules() << "\n";
+    //for (auto val: *getModuleHandler()->getAllModules()){
+    //    std::cout << "module " << val->className() << std::endl;
+    //
+    //}
+    //std::cout << "warp" << getModuleHandler()->getAllModules() << "\n";
     if(driveUnit) {
-
+    //    std::cout << "warp drive" << std::endl;
         bool success = driveUnit->prepareWarp();
         return success;
     }
@@ -44,7 +48,7 @@ Uint8 Ship::abortWarp(Context *context) {
 WarpDrive *Ship::getFirstWarp() {
     ModuleHandler *modules = getModuleHandler();
     if(modules) {
-        std::vector<Module*> *drives = modules->getModulesByClass("warp-drive");
+        std::vector<Module*> *drives = modules->getModulesByClass("WarpDrive");
         if(drives) {
             return dynamic_cast<WarpDrive*>(drives->at(0));
         }
@@ -55,11 +59,12 @@ WarpDrive *Ship::getFirstWarp() {
 void Ship::tick(Context *context, Event *event) {
     ModuleHandler *modules = getModuleHandler();
     if(modules) {
-        std::vector<Module*> *drives = modules->getModulesByClass("warp-drive");
+        std::vector<Module*> *drives = modules->getModulesByClass("WarpDrive");
         if(drives) {
             WarpDrive *driveUnit = dynamic_cast<WarpDrive*>(drives->at(0));
             if(driveUnit) {
                 if(driveUnit->getState() == WarpDrive::WARP_EXECUTING) {
+
                     accelerateForward();
                 }
             }
