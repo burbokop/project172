@@ -23,7 +23,7 @@ void Camera::setTarget(Controller *target) {
 
 void Camera::tick(Context *context, Event *event) {
     if(target) {
-        if(Unit *targetUnit = target->getParent()) {
+        if(Unit *targetUnit = target->parent()) {
             relativisticPursuit(targetUnit);
         }
     }

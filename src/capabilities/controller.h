@@ -25,8 +25,6 @@ public:
     Controller();
     Controller(Ship *armor);
 
-    Unit *getParent();
-
     virtual void onHit(Context* context, int health);
 
     // Worker interface

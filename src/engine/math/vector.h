@@ -22,8 +22,6 @@ private:
 public:
     Vector();
     Vector(double x, double y);
-    Vector(long x, long y);
-    Vector(int x, int y);
     static Vector createByAngle(double module, double angle); //checkpoint
     static Vector createRandom(double max);
 

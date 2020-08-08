@@ -22,7 +22,7 @@ void Near::add() {
             Worker *current = origin->at(addingIterator);
             if(ObjectRegistry::getInstance()->exists(current)) {
                 Unit *currentUnit = dynamic_cast<Unit*>(current);
-                Unit *centerUnit = center->getParent();
+                Unit *centerUnit = center->parent();
 
 
                 if(
@@ -57,7 +57,7 @@ void Near::remove() {
             Worker *current = focus->at(removingIterator);
             if(ObjectRegistry::getInstance()->exists(current)) {
                 Unit *currentUnit = dynamic_cast<Unit*>(current);
-                Unit *centerUnit = center->getParent();
+                Unit *centerUnit = center->parent();
 
                 if(currentUnit != nullptr && centerUnit != nullptr) {
                     std::vector<Worker*>::iterator focusIt = std::find(focus->begin(), focus->end(), current);

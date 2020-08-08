@@ -8,13 +8,7 @@ Ship::Ship() {}
 
 bool Ship::prepareWarp() {
     WarpDrive *driveUnit = getFirstWarp();
-    //for (auto val: *getModuleHandler()->getAllModules()){
-    //    std::cout << "module " << val->className() << std::endl;
-    //
-    //}
-    //std::cout << "warp" << getModuleHandler()->getAllModules() << "\n";
     if(driveUnit) {
-    //    std::cout << "warp drive" << std::endl;
         bool success = driveUnit->prepareWarp();
         return success;
     }

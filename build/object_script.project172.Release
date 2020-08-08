@@ -8,6 +8,7 @@ release/kpull.o
 release/kmoduleswitch.o
 release/ksmartenum.o
 release/e_variant.o
+release/speedindicator.o
 release/animatorassetexecutor.o
 release/assetexecutor.o
 release/audioassetexecutor.o
@@ -17,6 +18,7 @@ release/spriteassetexecutor.o
 release/stringassetexecutor.o
 release/vectorassetexecutor.o
 release/assetprovider.o
+release/audiochannel2.o
 release/abstractfactory.o
 release/type.o
 release/variant.o
@@ -24,6 +26,7 @@ release/abstractgraphicsprovider.o
 release/abstractrenderer.o
 release/image.o
 release/textformat.o
+release/guidebugvalueinfo.o
 release/main.o
 release/object.o
 release/sdlgraphicsprovider.o
@@ -95,7 +98,6 @@ release/objectregistry.o
 release/registryinfo.o
 release/audio.o
 release/audiochannel.o
-release/audiohardwarebank.o
 release/audioplayer.o
 release/guiminimap.o
 release/guiradar.o

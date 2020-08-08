@@ -9,18 +9,23 @@ e172::Variant AudioAssetExecutor::proceed(const Json::Value &value, e172::Abstra
         Json::Value audioStart = value["start"];
         Json::Value audioLoop = value["loop"];
         Json::Value audioStop = value["stop"];
+        const auto volume = value.get("volume", 1).asDouble();
 
         if(audioStart.isString()) {
             if(audioLoop.isString() && audioStop.isString()) {
-                return e172::Variant::fromValue(AudioPlayer(
-                                                    Mix_LoadWAV(fullPath(audioStart.asString()).c_str()),
-                                                    Mix_LoadWAV(fullPath(audioLoop.asString()).c_str()),
-                                                    Mix_LoadWAV(fullPath(audioStop.asString()).c_str())
-                                                    ));
+                AudioPlayer p(
+                            Mix_LoadWAV(fullPath(audioStart.asString()).c_str()),
+                            Mix_LoadWAV(fullPath(audioLoop.asString()).c_str()),
+                            Mix_LoadWAV(fullPath(audioStop.asString()).c_str())
+                            );
+                p.setVolume(volume);
+                return e172::Variant::fromValue(p);
             } else {
-                return e172::Variant::fromValue(AudioPlayer(
-                                                    Mix_LoadWAV(fullPath(audioStart.asString()).c_str())
-                                                    ));
+                AudioPlayer p(
+                            Mix_LoadWAV(fullPath(audioStart.asString()).c_str())
+                            );
+                p.setVolume(volume);
+                return e172::Variant::fromValue(p);
             }
         }
     } else if (value.isString()) {

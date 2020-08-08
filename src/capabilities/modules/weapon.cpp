@@ -34,9 +34,9 @@ void Weapon::tick(Context *context, Event *event) {
     if(timer.count(firing)) {
         if(projectileName.size() > 0) {
             Projectile *object = static_cast<Projectile*>(context->getAssets()->createLoadable(projectileName));
-            object->setMother(parent);
+            object->setMother(parent());
 
-            object->place(parent->getPosition(), parent->getVelocity() + e172::Vector::createByAngle(getProjectileSpead(), this->parent->getAngle()), e172::Vector(), this->parent->getAngle());
+            object->place(parent()->getPosition(), parent()->getVelocity() + e172::Vector::createByAngle(getProjectileSpead(), parent()->getAngle()), e172::Vector(), parent()->getAngle());
 
             context->getUnits()->push_back(object);
 

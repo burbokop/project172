@@ -23,7 +23,7 @@ void ModuleHandler::unsetParent() {
 }
 
 void ModuleHandler::addModule(Module *module) {
-    if(module->setParent(this->parent)) {
+    if(module->setParent(this->parent())) {
         modules.push_back(module);
         categories = nullptr;
     }

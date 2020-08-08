@@ -29,7 +29,7 @@ std::vector<GUIMenuElement *> *GUIList::informativeToElement(std::vector<Worker 
 
 void GUIList::onChoice(Variant value) {
     Unit *target = value.toUnit();
-    Unit *parent = player->getParent();
+    Unit *parent = player->parent();
     if(target && parent) {
         Docker *docker = parent->getDocker();
         if(docker) {

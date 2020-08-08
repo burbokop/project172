@@ -30,6 +30,11 @@ void GUIMain::setMiniMap(GUIMiniMap *value)
     miniMap = value;
 }
 
+void GUIMain::setDebugValueInfo(GUIDebugValueInfo *value)
+{
+    debugValueInfo = value;
+}
+
 GUIMain::GUIMain() : GUIElement () {}
 
 GUIMain::GUIMain(Controller *player) : GUIElement (player) {}
@@ -43,6 +48,7 @@ void GUIMain::tick(Context *context, Event *event) {
     if(centralMessage) centralMessage->tick(context, event);
     if(floatingMessage) floatingMessage->tick(context, event);
     if(miniMap) miniMap->tick(context, event);
+    if(debugValueInfo) debugValueInfo->tick(context, event);
 }
 
 void GUIMain::render(e172::AbstractRenderer *renderer) {
@@ -50,4 +56,5 @@ void GUIMain::render(e172::AbstractRenderer *renderer) {
     if(centralMessage) centralMessage->render(renderer);
     if(floatingMessage) floatingMessage->render(renderer);
     if(miniMap) miniMap->render(renderer);
+    if(debugValueInfo) debugValueInfo->render(renderer);
 }

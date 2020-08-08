@@ -1,65 +1,64 @@
 #include "audiochannel.h"
 
-const int AudioChannel::INFINITELY = -1;
+#include <iostream>
 
-int AudioChannel::channelsReserved = 0;
+#include <engine/math/math.h>
+
+const int AudioChannel::Infinitely = -1;
 
 
-void AudioChannel::allocate() {
-    Mix_AllocateChannels(200);
-    ptr = channelsReserved++;
+void AudioChannel::setMaxDistance(double maxDistance)
+{
+    m_maxDistance = maxDistance;
+}
+
+void AudioChannel::setMinDistance(double minDistance)
+{
+    m_minDistance = minDistance;
+}
+
+double AudioChannel::maxDistance() const
+{
+    return m_maxDistance;
+}
+
+double AudioChannel::minDistance() const
+{
+    return m_minDistance;
 }
 
 AudioChannel::AudioChannel() {
+    ptr = nextChannel++ % Audio::MAX_CHANNEL_COUNT;
 }
 
-AudioChannel AudioChannel::createChannel() {
-    return AudioChannel();
-}
-
-bool AudioChannel::isAvailable() {
-    return (ptr != -1);
-}
-
-void AudioChannel::volume(int volume) {
-    volumeValue = volume;
+void AudioChannel::setVolume(double volume) {
+    m_volume = volume;
 }
 
 void AudioChannel::play(AudioSample *sample, int loops) {
-    if(deadChannel) {
-        allocate();
-        deadChannel = false;
-    }
-    if(isAvailable()) {
-        Mix_Volume(ptr, volumeValue);
-        if(volumeValue > 0 && sample != nullptr) {
+    if(ptr >= 0) {
+        const auto v = m_volume * m_distance_volume * Audio::MAX_MAPPED_VOLUME;
+        Mix_Volume(ptr, v);
+        if(v > 0 && sample != nullptr) {
             if(loops > 0) {
                 Mix_PlayChannel(ptr, sample, loops - 1);
-            } else if (loops == INFINITELY) {
-                Mix_PlayChannel(ptr, sample, INFINITELY);
+            } else if (loops == Infinitely) {
+                Mix_PlayChannel(ptr, sample, Infinitely);
             }
         }
     }
 }
 
 bool AudioChannel::isPlaying() {
-    if(isAvailable()) {
-        return Mix_Playing(ptr);
-    } else {
-        return false;
-    }
+    return Mix_Playing(ptr);
 }
 
 void AudioChannel::stop() {
-    if(isAvailable()) {
-        Mix_Pause(ptr);
-    }
+    Mix_Pause(ptr);
 }
 
-void AudioChannel::free() {
-    //ptr = -1;
-}
-
-AudioChannel::~AudioChannel() {
-    //this->free();
+void AudioChannel::setDistance(double distance) {
+    if(distance < m_minDistance) distance = m_minDistance;
+    if(distance > m_maxDistance) distance = m_maxDistance;
+    m_distance_volume = e172::Math::map(distance, m_minDistance, m_maxDistance, 1, 0);
 }

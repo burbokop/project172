@@ -18,15 +18,6 @@ Vector::Vector(double x, double y) {
     this->m_y = y;
 }
 
-Vector::Vector(long x, long y) {
-    this->m_x = static_cast<double>(x);
-    this->m_y = static_cast<double>(y);
-}
-
-Vector::Vector(int x, int y) {
-    this->m_x = static_cast<double>(x);
-    this->m_y = static_cast<double>(y);
-}
 
 Vector Vector::createByAngle(double module, double angle) {
     return Vector(module * e172::Math::cos(angle), module * e172::Math::sin(angle));

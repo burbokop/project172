@@ -36,11 +36,11 @@ void Module::tick(Context *context, Event *event) {
 void Module::render(e172::AbstractRenderer *renderer) {
     Camera* cam = renderer->getCamera();
     if(cam) {
-        audioPlayer.setVolumeByDistance((parent->getPosition() - cam->getPosition()).module());
+        audioPlayer.setDistance((parent()->getPosition() - cam->getPosition()).module());
     }
 
-    this->animator.setAngle(parent->getAngle());
-    e172::Vector local = parent->getPosition() + e172::Vector::createByAngle(-this->attachOffset.module(), parent->getAngle());
+    this->animator.setAngle(parent()->getAngle());
+    e172::Vector local = parent()->getPosition() + e172::Vector::createByAngle(-this->attachOffset.module(), parent()->getAngle());
     this->animator.setPosition(local);
     this->animator.render(renderer);
 }

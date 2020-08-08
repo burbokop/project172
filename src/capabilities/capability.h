@@ -6,11 +6,11 @@
 class Unit;
 
 class Capability : public Worker {
-protected:
-    Unit *parent = nullptr;
+    Unit *m_parent = nullptr;
 public:
     virtual bool setParent(Unit *parent);
     virtual void unsetParent();
+    Unit *parent() const;
 };
 
 #endif // COMPONENTS_H

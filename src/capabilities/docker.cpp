@@ -32,23 +32,23 @@ void Docker::tick(Context *context, Event *event) {
     UNUSED(context);
     UNUSED(event);
     if(state == IN_INTERCEPTION) {
-        double dst = (parent->getPosition() - target->getPosition()).module();
+        double dst = (parent()->getPosition() - target->getPosition()).module();
         if(dst < 64) {
             state = ATTRACTED;
         }
     } else if(state == ATTRACTED) {
-        double dst = (parent->getPosition() - target->getPosition()).module();
+        double dst = (parent()->getPosition() - target->getPosition()).module();
         double dstAngle = target->getAngle();
-        if(dst < 4 && parent->isOnAngle(dstAngle)) {
+        if(dst < 4 && parent()->isOnAngle(dstAngle)) {
             attach(target);
         }
-        parent->rotateToAngle(dstAngle);
-        Movable *movableParent = dynamic_cast<Movable*>(parent);
+        parent()->rotateToAngle(dstAngle);
+        Movable *movableParent = dynamic_cast<Movable*>(parent());
         if(movableParent) {
-            movableParent->place(parent->getPosition(), (target->getPosition() - parent->getPosition()) / 100, e172::Vector(), parent->getAngle());
+            movableParent->place(parent()->getPosition(), (target->getPosition() - parent()->getPosition()) / 100, e172::Vector(), parent()->getAngle());
         }
     } else if(state == DOCKED) {
-        parent->place(target->getPosition(), target->getAngle());
+        parent()->place(target->getPosition(), target->getAngle());
     }
 }
 

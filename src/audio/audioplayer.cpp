@@ -2,68 +2,72 @@
 #include "units/camera.h"
 #include <engine/math/math.h>
 
-const unsigned AudioPlayer::NONE = 0;
-const unsigned AudioPlayer::START_PLAYING = 1;
-const unsigned AudioPlayer::LOOP_PLAYING = 2;
-const unsigned AudioPlayer::STOP_PLAYING = 3;
-
-const int AudioPlayer::CUT_VOLUME_DISTANCE = 1024;
-const int AudioPlayer::FULL_VOLUME_DISTANCE = 128;
 
 
+void AudioPlayer::setWaitStopPlaing(bool waitStopPlaing) {
+    m_waitStopPlaing = waitStopPlaing;
+}
 
 AudioPlayer::AudioPlayer(AudioSample *start, AudioSample *loop, AudioSample *stop) {
     this->startChunk = start;
     this->loopChunk = loop;
     this->stopChunk = stop;
-    this->channel.free();
-    this->channel = AudioChannel::createChannel();
 }
 
 AudioPlayer::~AudioPlayer() {
     stop();
 }
 
-void AudioPlayer::play() {
-    if(state == NONE) {
+bool AudioPlayer::play() {
+    if(state == Idle || !m_waitStopPlaing) {
         channel.play(startChunk, 1);
-        state = START_PLAYING;
+        state = Beginning;
+        return true;
     }
+    return false;
 }
 
-void AudioPlayer::stop() {
-    channel.play(stopChunk, 1);
-    state = NONE;
+bool AudioPlayer::stop() {
+    if(state == Beginning || state == Loop) {
+        channel.play(stopChunk, 1);
+        state = Ending;
+        return true;
+    }
+    return false;
 }
 
+#include <iostream>
 void AudioPlayer::tick(Context *context, Event *event) {
     UNUSED(context);
     UNUSED(event);
 
-    if(state == START_PLAYING && !channel.isPlaying()) {
-        if(loopChunk != nullptr) {
-            channel.play(loopChunk, AudioChannel::INFINITELY);
-            state = LOOP_PLAYING;
-        } else {
-            state = NONE;
+    if(state == Beginning) {
+        if(!channel.isPlaying()) {
+            std::cout << "LOOP STRT\n";
+            if(loopChunk != nullptr) {
+                channel.play(loopChunk, AudioChannel::Infinitely);
+                state = Loop;
+            } else {
+                state = Idle;
+            }
+        }
+    } else if(state == Ending) {
+        if(!channel.isPlaying()) {
+            state = Idle;
         }
     }
-    if(state == NONE) channel.free();
 }
 
 void AudioPlayer::render(e172::AbstractRenderer *renderer) {
     UNUSED(renderer);
 }
 
-void AudioPlayer::setVolume(int volume) {
-    channel.volume(volume);
+void AudioPlayer::setVolume(double volume) {
+    channel.setVolume(volume);
 }
 
-void AudioPlayer::setVolumeByDistance(double distance) {
-    int intDistance = static_cast<int>(distance);
-    if(intDistance < FULL_VOLUME_DISTANCE) intDistance = FULL_VOLUME_DISTANCE;
-    if(intDistance > CUT_VOLUME_DISTANCE) intDistance = CUT_VOLUME_DISTANCE;
-    setVolume(e172::Math::map(intDistance, FULL_VOLUME_DISTANCE, CUT_VOLUME_DISTANCE, Audio::MAX_VOLUME, 0));
+void AudioPlayer::setDistance(double distance) {
+    channel.setDistance(distance);
 }
 
 bool operator ==(const AudioPlayer &ap0, const AudioPlayer &ap1) {

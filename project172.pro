@@ -23,6 +23,7 @@ unix {
 
 SOURCES += \
     src/additional/e_variant.cpp \
+    src/additional/speedindicator.cpp \
     src/assettools/assetexecutors/animatorassetexecutor.cpp \
     src/assettools/assetexecutors/assetexecutor.cpp \
     src/assettools/assetexecutors/audioassetexecutor.cpp \
@@ -32,6 +33,7 @@ SOURCES += \
     src/assettools/assetexecutors/stringassetexecutor.cpp \
     src/assettools/assetexecutors/vectorassetexecutor.cpp \
     src/assettools/assetprovider.cpp \
+    src/audio/audiochannel2.cpp \
     src/engine/abstractfactory.cpp \
     src/engine/type.cpp \
     src/engine/variant.cpp \
@@ -39,6 +41,7 @@ SOURCES += \
     src/engine/graphics/abstractrenderer.cpp \
     src/engine/graphics/image.cpp \
     src/engine/textformat.cpp \
+    src/gui/guidebugvalueinfo.cpp \
     src/main.cpp \
     src/object.cpp \
     src/sdlimplementation/sdlgraphicsprovider.cpp \
@@ -110,7 +113,6 @@ SOURCES += \
     src/additional/informative/registryinfo.cpp \
     src/audio/audio.cpp \
     src/audio/audiochannel.cpp \
-    src/audio/audiohardwarebank.cpp \
     src/audio/audioplayer.cpp \
     src/gui/guiminimap.cpp \
     src/gui/guiradar.cpp \
@@ -124,6 +126,7 @@ SOURCES += \
 
 HEADERS += \
     src/additional/e_variant.h \
+    src/additional/speedindicator.h \
     src/assettools/assetexecutors/animatorassetexecutor.h \
     src/assettools/assetexecutors/assetexecutor.h \
     src/assettools/assetexecutors/audioassetexecutor.h \
@@ -133,6 +136,7 @@ HEADERS += \
     src/assettools/assetexecutors/stringassetexecutor.h \
     src/assettools/assetexecutors/vectorassetexecutor.h \
     src/assettools/assetprovider.h \
+    src/audio/audiochannel2.h \
     src/engine/abstractfactory.h \
     src/engine/type.h \
     src/engine/variant.h \
@@ -140,6 +144,7 @@ HEADERS += \
     src/engine/graphics/abstractrenderer.h \
     src/engine/graphics/image.h \
     src/engine/textformat.h \
+    src/gui/guidebugvalueinfo.h \
     src/object.h \
     src/sdlimplementation/sdlgraphicsprovider.h \
     src/sdlimplementation/sdlrenderer.h \
@@ -220,7 +225,6 @@ HEADERS += \
     src/additional/informative/registryinfo.h \
     src/audio/audio.h \
     src/audio/audiochannel.h \
-    src/audio/audiohardwarebank.h \
     src/audio/audioplayer.h \
     src/gui/guiminimap.h \
     src/gui/guiradar.h \

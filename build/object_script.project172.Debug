@@ -8,6 +8,7 @@ debug/kpull.o
 debug/kmoduleswitch.o
 debug/ksmartenum.o
 debug/e_variant.o
+debug/speedindicator.o
 debug/animatorassetexecutor.o
 debug/assetexecutor.o
 debug/audioassetexecutor.o
@@ -17,6 +18,7 @@ debug/spriteassetexecutor.o
 debug/stringassetexecutor.o
 debug/vectorassetexecutor.o
 debug/assetprovider.o
+debug/audiochannel2.o
 debug/abstractfactory.o
 debug/type.o
 debug/variant.o
@@ -24,6 +26,7 @@ debug/abstractgraphicsprovider.o
 debug/abstractrenderer.o
 debug/image.o
 debug/textformat.o
+debug/guidebugvalueinfo.o
 debug/main.o
 debug/object.o
 debug/sdlgraphicsprovider.o
@@ -95,7 +98,6 @@ debug/objectregistry.o
 debug/registryinfo.o
 debug/audio.o
 debug/audiochannel.o
-debug/audiohardwarebank.o
 debug/audioplayer.o
 debug/guiminimap.o
 debug/guiradar.o

@@ -19,7 +19,7 @@ GUIMenuElement *GUIRadar::forEach(Unit *unit) {
 void GUIRadar::onDock(Variant value) {
     if(value.isUnit()) {
         Unit *target = value.toUnit();
-        Unit *parent = player->getParent();
+        Unit *parent = player->parent();
         if(target && parent) {
             Docker *docker = parent->getDocker();
             if(docker) {

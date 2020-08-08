@@ -36,16 +36,16 @@ Aggressive::Aggressive(std::vector<Worker *> *units) {
 
 void Aggressive::tick(Context *context, Event *event) {
     EXISTS(target) {
-        if(target != nullptr && parent != nullptr && target->is<Ship*>() && target != parent) {
-            e172::Vector dst = target->getPosition() - parent->getPosition();
+        if(target != nullptr && parent() != nullptr && target->is<Ship*>() && target != parent()) {
+            e172::Vector dst = target->getPosition() - parent()->getPosition();
             const double dstAngle = dst.angle();
             const double dstModule = dst.module();
 
-            parent->rotateToAngle(dstAngle);
-            targeted = parent->isOnAngle(dstAngle) && !inWarp && dstModule < 400;
-            Ship *ship = dynamic_cast<Ship*>(parent);
+            parent()->rotateToAngle(dstAngle);
+            targeted = parent()->isOnAngle(dstAngle) && !inWarp && dstModule < 400;
+            Ship *ship = dynamic_cast<Ship*>(parent());
 
-            ModuleHandler *modules = parent->getModuleHandler();
+            ModuleHandler *modules = parent()->getModuleHandler();
             if(modules) {
                 std::vector<Module*> *weapons = modules->getModulesByClass("Weapon");
 

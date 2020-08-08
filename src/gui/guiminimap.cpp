@@ -38,7 +38,7 @@ void GUIMiniMap::render(e172::AbstractRenderer *renderer) {
                         if(unit->is<Camera*>()) {
                             renderer->drawLine(point1 + posOnMap, point1 + playerShipPosOnMap, SELECTED_COLOR);
                             renderer->drawCircle(point1 + posOnMap, 4, SELECTED_COLOR >> 8);
-                        } else if(player && unit == player->getParent()) {
+                        } else if(player && unit == player->parent()) {
                             playerShipPosOnMap = posOnMap;
                             renderer->drawCircle(point1 + posOnMap, 2, SELECTED_COLOR << 8);
                         } else {

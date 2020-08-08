@@ -62,7 +62,7 @@ void WorldManager::init(AssetProvider *assets, std::vector<Worker*> *units, e172
                             ")));
                         } mainMenu->addElement(infoMenu);
                         GUIContainer *modulesMenu = new GUIContainer(players[0], "modules"); {
-                            for(Module *module : *players[0]->getParent()->getModuleHandler()->getAllModules()) {
+                            for(Module *module : *players[0]->parent()->getModuleHandler()->getAllModules()) {
                                 modulesMenu->addElement(new GUIMenuElement(players[0], module));
                             }
                         } mainMenu->addElement(modulesMenu);
@@ -116,6 +116,7 @@ void WorldManager::init(AssetProvider *assets, std::vector<Worker*> *units, e172
                     } stack->push(mainMenu);
                 } gui->setMenu(stack);
                 gui->setMiniMap(new GUIMiniMap(players[0], units));
+                gui->setDebugValueInfo(new GUIDebugValueInfo(players[0], units));
             }
         }
     }

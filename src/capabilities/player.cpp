@@ -57,7 +57,7 @@ void Player::setArmor(Ship *armor) {
 }
 
 void Player::tick(Context *context, Event *event) {
-    EXISTS(parent) {
+    EXISTS(parent()) {
 
     } else {
         std::cout << "ERRROOOORR\n";
@@ -71,14 +71,14 @@ void Player::tick(Context *context, Event *event) {
 
 
     if(getPersonalKey(event, "left")) {
-        parent->rotateLeft() ;
+        parent()->rotateLeft() ;
     } else if(getPersonalKey(event, "right")) {
-        parent->rotateRight();
+        parent()->rotateRight();
     }
 
-    Ship *ship = dynamic_cast<Ship*>(parent);
+    Ship *ship = dynamic_cast<Ship*>(parent());
 
-    ModuleHandler *modules = parent->getModuleHandler();
+    ModuleHandler *modules = parent()->getModuleHandler();
     if(modules) {
         std::vector<Module*> *weapons = modules->getModulesByClass("Weapon");
 
@@ -123,5 +123,5 @@ void Player::render(e172::AbstractRenderer *renderer) {
 
 void Player::onHit(Context *context, int health) {
     UNUSED(health);
-    context->addEvent(parent, Context::BACKGROUND_FLASHING, 8);
+    context->addEvent(parent(), Context::BACKGROUND_FLASHING, 8);
 }
