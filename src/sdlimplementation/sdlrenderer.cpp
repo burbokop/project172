@@ -36,6 +36,15 @@ void SDLRenderer::disableEffect(uint64_t effect) {
     }
 }
 
+bool SDLRenderer::updateLensEffect(e172::AbstractRenderer::Lens lens, const e172::Vector &point1, const e172::Vector &point2, double coefficient) {
+    auto it = lenses.find(lens);
+    if(it != lenses.end()) {
+        it->second = std::make_tuple(point1, point2, coefficient);
+        return true;
+    }
+    return false;
+}
+
 SDLRenderer::~SDLRenderer() {
     SDL_FreeSurface(surface);
     TTF_Quit();
@@ -72,6 +81,64 @@ SDLRenderer::SDLRenderer(const char *title, int x, int y, std::string fontPath) 
     this->m_resolution = e172::Vector(x, y);
     this->surface = surface;
     this->fonts[DEFAULT_FONT_SIZE] = TTF_OpenFont(fontPath.c_str(), DEFAULT_FONT_SIZE);
+}
+
+void SDLRenderer::applyLensEffect(SDL_Surface *surface, const e172::Vector point0, const e172::Vector point1, double coef) {
+    auto pixels = reinterpret_cast<uint32_t*>(surface->pixels);
+
+    auto center = (point0 + point1) / 2;
+
+    uint32_t pix[point1.intY()-point0.intY()][point1.intX()-point0.intX()];
+    for(int y = point0.intY(); y < point1.intY(); ++y) {
+        for(int x = point0.intX(); x < point1.intX(); ++x) {
+            uint32_t p = pixels[(y * surface->w) + x];
+
+
+
+            auto rx = ( center.x()) ;
+            auto ry = ( center.y()) ;
+
+            //int newX = static_cast<int>(abs(x - rx) *1* (std::sin(coef * (x - rx))) + rx);
+            //int newY = static_cast<int>(abs(y - ry) *1* (std::sin(coef * (y - ry))) + ry);
+
+            double mx = (M_PI) / (point1.x() - point0.x());
+            double my = (M_PI) / (point1.y() - point0.y());
+
+
+            int newY = (y-center.y()) + coef * std::abs(cos((y-center.y()) * my)) + center.y();
+            int newX = (x-center.x()) + coef * std::abs(cos((x-center.x()) * mx)) + center.x();
+
+
+            //x0=(xlev-x[ra)/2
+
+            //if (((0<=newY-point0.intY())&&(newY-point0.intY()<point1.intY()-point0.intY()))&&((0<=newX-point0.intX())&&(newX-point0.intX()<point1.intX()-point0.intX()))){
+            //    pix[newY-point0.intY()][newX-point0.intX()]=p;
+            //}
+
+                if (((point0.intY() <= newY)&&(newY < point1.intY()))&&((point0.intX() <= newX)&&(newX < point1.intX()))){
+                    pix[newY-point0.intY()][newX-point0.intX()] = p;
+                }
+
+
+
+        }
+    }
+    for(int y = point0.intY(); y < point1.intY(); ++y) {
+        for(int x = point0.intX(); x < point1.intX(); ++x) {
+            uint32_t p = pixels[(y * surface->w) + x];
+
+            if(std::pow(x-center.x(), 2) + std::pow(y-center.y(), 2) < std::pow((point1.x() - point0.x()) / 2, 2.)) {
+                SPM::FillPixel(surface, x, y, pix[y-point0.intY()][x-point0.intX()]);
+            }
+
+
+            //SPM::FillPixel(surface, x, y, pix[y-point0.intY()][x-point0.intX()]);
+            //pixels[(newY * surface->w) + newX] = p;
+        }
+    }
+
+    SPM::Rect(surface, point0.x(), point0.y(), point1.x(), point1.y(), 0xff0000);
+    SPM::Square(surface, center.x(), center.y(), 3, 0xff0000);
 }
 
 void SDLRenderer::fill(uint32_t color) {
@@ -172,6 +239,24 @@ void SDLRenderer::update() {
     if(cameraUnit) {
         m_offset = m_resolution / 2 - cameraUnit->getPosition();
     }
+    for(auto l : lenses) {
+        applyLensEffect(surface, std::get<0>(l.second), std::get<1>(l.second), std::get<2>(l.second));
+    }
     SDL_UpdateWindowSurface(window);
 }
 
+
+
+e172::AbstractRenderer::Lens SDLRenderer::enableLensEffect(const e172::Vector &point1, const e172::Vector &point2, double coefficient) {
+    lenses[nextLens] = std::make_tuple(point1, point2, coefficient);
+    return nextLens++;
+}
+
+bool SDLRenderer::disableLensEffect(Lens lens) {
+    const auto it = lenses.find(lens);
+    if(it != lenses.end()) {
+        lenses.erase(it);
+        return true;
+    }
+    return false;
+}

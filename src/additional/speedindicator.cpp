@@ -11,6 +11,6 @@ void SpeedIndicator::render(e172::AbstractRenderer *renderer) {
         auto top = std::to_string(number);
         auto bottom = std::to_string(lastNumber);
 
-        renderer->drawString(top, );
+        //renderer->drawString(top, );
     }
 }

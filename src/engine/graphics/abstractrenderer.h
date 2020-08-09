@@ -25,6 +25,7 @@ protected:
     static Image::ptr imageId(const Image &image);
     AbstractGraphicsProvider *provider() const;
 public:
+    typedef int Lens;
     virtual ~AbstractRenderer();
 
     virtual void fill(uint32_t color) = 0;
@@ -38,6 +39,9 @@ public:
     virtual void drawImage(const Image &image, const Vector &pos, double angle, double zoom) = 0;
     virtual Vector drawString(const std::string &string, const Vector &pos, uint32_t color, const TextFormat &format = TextFormat()) = 0;
 
+    virtual Lens enableLensEffect(const Vector &point1, const Vector &point2, double coefficient) = 0;
+    virtual bool updateLensEffect(Lens lens, const Vector &point1, const Vector &point2, double coefficient) = 0;
+    virtual bool disableLensEffect(Lens lens) = 0;
 
     virtual Vector resolution() const = 0;
     virtual Vector offset() const = 0;

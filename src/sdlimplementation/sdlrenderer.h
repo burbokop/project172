@@ -23,11 +23,15 @@ private:
     std::map<int, TTF_Font *> fonts;
     std::string fontPath;
 
+    Lens nextLens = 0;
+    std::map<Lens, std::tuple<e172::Vector, e172::Vector, double>> lenses;
+
     bool fullscreen = false;
     e172::Vector m_resolution;
     bool anaglyphEnabled = false;
     bool anaglyphEnabled2 = false;
     SDLRenderer(const char *title, int x, int y, std::string fontPath);
+    static void applyLensEffect(SDL_Surface * surface, const e172::Vector point0, const e172::Vector point1, double coef);
 public:
 
     void fill(uint32_t color) override;
@@ -50,7 +54,7 @@ public:
     void disableEffect(uint64_t effect) override;
 
 
-    ~SDLRenderer();
+    ~SDLRenderer() override;
 
     /**
      * deprecated functionns;
@@ -68,6 +72,12 @@ public:
     [[deprecated]]
     Camera *getCamera() const override;    
 
+
+    // AbstractRenderer interface
+public:
+    virtual Lens enableLensEffect(const e172::Vector &point1, const e172::Vector &point2, double coefficient) override;
+    virtual bool disableLensEffect(Lens lens) override;
+    virtual bool updateLensEffect(Lens lens, const e172::Vector &point1, const e172::Vector &point2, double coefficient) override;
 };
 
 
