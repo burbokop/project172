@@ -4,6 +4,9 @@
 #include <map>
 
 #include "audio.h"
+#include "audiosample.h"
+
+namespace e172 {
 
 
 class AudioChannel {
@@ -23,7 +26,7 @@ public:
     void setVolume(double volume);
     void setDistance(double distance);
 
-    void play(AudioSample *sample, int loops = 1);
+    void play(const AudioSample &sample, int loops = 1);
     bool isPlaying();
     void stop();
 
@@ -33,5 +36,7 @@ public:
     double maxDistance() const;
     double minDistance() const;
 };
+
+}
 
 #endif // AUDIOCHANNEL_H

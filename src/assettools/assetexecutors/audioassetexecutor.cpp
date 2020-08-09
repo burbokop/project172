@@ -4,7 +4,7 @@
 
 AudioAssetExecutor::AudioAssetExecutor() {}
 
-e172::Variant AudioAssetExecutor::proceed(const Json::Value &value, e172::AbstractGraphicsProvider*) {
+e172::Variant AudioAssetExecutor::proceed(const Json::Value &value, e172::AbstractGraphicsProvider*, e172::AbstractAudioProvider *audioProvider) {
     if(value.isObject()) {
         Json::Value audioStart = value["start"];
         Json::Value audioLoop = value["loop"];
@@ -14,15 +14,15 @@ e172::Variant AudioAssetExecutor::proceed(const Json::Value &value, e172::Abstra
         if(audioStart.isString()) {
             if(audioLoop.isString() && audioStop.isString()) {
                 AudioPlayer p(
-                            Mix_LoadWAV(fullPath(audioStart.asString()).c_str()),
-                            Mix_LoadWAV(fullPath(audioLoop.asString()).c_str()),
-                            Mix_LoadWAV(fullPath(audioStop.asString()).c_str())
+                            audioProvider->loadAudioSample(fullPath(audioStart.asString()).c_str()),
+                            audioProvider->loadAudioSample(fullPath(audioLoop.asString()).c_str()),
+                            audioProvider->loadAudioSample(fullPath(audioStop.asString()).c_str())
                             );
                 p.setVolume(volume);
                 return e172::Variant::fromValue(p);
             } else {
                 AudioPlayer p(
-                            Mix_LoadWAV(fullPath(audioStart.asString()).c_str())
+                            audioProvider->loadAudioSample(fullPath(audioStart.asString()).c_str())
                             );
                 p.setVolume(volume);
                 return e172::Variant::fromValue(p);
@@ -30,7 +30,7 @@ e172::Variant AudioAssetExecutor::proceed(const Json::Value &value, e172::Abstra
         }
     } else if (value.isString()) {
         return e172::Variant::fromValue(AudioPlayer(
-                                            Mix_LoadWAV(fullPath(value.asString()).c_str())
+                                            audioProvider->loadAudioSample(fullPath(value.asString()).c_str())
                                             ));
     }
     return e172::Variant();

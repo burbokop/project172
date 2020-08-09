@@ -6,7 +6,7 @@ using namespace e172;
 
 
 Image::ptr AbstractRenderer::imageId(const Image &image) {
-    return image.m_id;
+    return image.id();
 }
 
 AbstractGraphicsProvider *AbstractRenderer::provider() const {

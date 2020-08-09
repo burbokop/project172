@@ -18,14 +18,17 @@ void GUIDebugValueInfo::tick(Context *context, Event *event) {
 void GUIDebugValueInfo::render(e172::AbstractRenderer *renderer) {
     auto res = renderer->resolution();
 
+    const double module = std::round(m_player->parent()->getVelocity().module());
+
     if(first) {
-        lens = renderer->enableLensEffect(e172::Vector(00, res.y() - 200), e172::Vector(200, res.y()), coef / M_PI);
+        lens = renderer->enableLensEffect(e172::Vector(20, res.y() - 70), e172::Vector(70, res.y()-20), module / 240.);
         first = false;
     } else {
-        renderer->updateLensEffect(lens, e172::Vector(00, res.y() - 200), e172::Vector(200, res.y()), coef / M_PI);
+        renderer->updateLensEffect(lens, e172::Vector(20, res.y() - 70), e172::Vector(70, res.y()-20), module / 240.);
     }
 
-    const int module = std::round(m_player->parent()->getVelocity().module());
+    //renderer->applySmooth(e172::Vector(00, res.y() - 200), e172::Vector(200, res.y()), coef);
 
-    renderer->drawString(std::to_string(coef), e172::Vector(300, res.y() - 30), 0xff8000);
+
+    renderer->drawString(std::to_string(int(module)), e172::Vector(30, res.y() - 55), 0xff8000);
 }

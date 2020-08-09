@@ -28,7 +28,7 @@ public:
     virtual AbstractRenderer *renderer() const = 0;
     virtual Image loadImage(const std::string &path) const = 0;
     virtual Image createImage(void* bitmap, int format) const = 0;
-
+    virtual ~AbstractGraphicsProvider();
 };
 
 }

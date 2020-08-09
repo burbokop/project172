@@ -21,7 +21,7 @@ class AbstractRenderer {
     AbstractGraphicsProvider *m_provider = nullptr;
 protected:
     template<typename T>
-    static T imageData(const Image &image) { return Image::handle_cast<T>(image.m_data)->c; }
+    static T imageData(const Image &image) { return image.casted_handle<T>()->c; }
     static Image::ptr imageId(const Image &image);
     AbstractGraphicsProvider *provider() const;
 public:
@@ -42,6 +42,8 @@ public:
     virtual Lens enableLensEffect(const Vector &point1, const Vector &point2, double coefficient) = 0;
     virtual bool updateLensEffect(Lens lens, const Vector &point1, const Vector &point2, double coefficient) = 0;
     virtual bool disableLensEffect(Lens lens) = 0;
+
+    virtual void applySmooth(const Vector &point0, const Vector &point1, double coefficient) = 0;
 
     virtual Vector resolution() const = 0;
     virtual Vector offset() const = 0;

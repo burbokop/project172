@@ -8,15 +8,12 @@ void AudioPlayer::setWaitStopPlaing(bool waitStopPlaing) {
     m_waitStopPlaing = waitStopPlaing;
 }
 
-AudioPlayer::AudioPlayer(AudioSample *start, AudioSample *loop, AudioSample *stop) {
+AudioPlayer::AudioPlayer(const e172::AudioSample &start, const e172::AudioSample &loop, const e172::AudioSample &stop) {
     this->startChunk = start;
     this->loopChunk = loop;
     this->stopChunk = stop;
 }
 
-AudioPlayer::~AudioPlayer() {
-    stop();
-}
 
 bool AudioPlayer::play() {
     if(state == Idle || !m_waitStopPlaing) {
@@ -44,8 +41,8 @@ void AudioPlayer::tick(Context *context, Event *event) {
     if(state == Beginning) {
         if(!channel.isPlaying()) {
             std::cout << "LOOP STRT\n";
-            if(loopChunk != nullptr) {
-                channel.play(loopChunk, AudioChannel::Infinitely);
+            if(loopChunk.isValid()) {
+                channel.play(loopChunk, e172::AudioChannel::Infinitely);
                 state = Loop;
             } else {
                 state = Idle;

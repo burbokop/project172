@@ -4,6 +4,9 @@
 
 #include <engine/math/math.h>
 
+namespace e172 {
+
+
 const int AudioChannel::Infinitely = -1;
 
 
@@ -35,11 +38,11 @@ void AudioChannel::setVolume(double volume) {
     m_volume = volume;
 }
 
-void AudioChannel::play(AudioSample *sample, int loops) {
+void AudioChannel::play(const AudioSample &sample, int loops) {
     if(ptr >= 0) {
         const auto v = m_volume * m_distance_volume * Audio::MAX_MAPPED_VOLUME;
         Mix_Volume(ptr, v);
-        if(v > 0 && sample != nullptr) {
+        if(v > 0 && sample.isValid()) {
             if(loops > 0) {
                 Mix_PlayChannel(ptr, sample, loops - 1);
             } else if (loops == Infinitely) {
@@ -61,4 +64,6 @@ void AudioChannel::setDistance(double distance) {
     if(distance < m_minDistance) distance = m_minDistance;
     if(distance > m_maxDistance) distance = m_maxDistance;
     m_distance_volume = e172::Math::map(distance, m_minDistance, m_maxDistance, 1, 0);
+}
+
 }

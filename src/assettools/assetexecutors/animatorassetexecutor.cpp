@@ -8,7 +8,7 @@
 
 AnimatorAssetExecutor::AnimatorAssetExecutor() {}
 
-e172::Variant AnimatorAssetExecutor::proceed(const Json::Value &value, e172::AbstractGraphicsProvider *graphicsProvider) {
+e172::Variant AnimatorAssetExecutor::proceed(const Json::Value &value, e172::AbstractGraphicsProvider *graphicsProvider, e172::AbstractAudioProvider *) {
     Json::Value spritesheet = value["spritesheet"];
     Json::Value frames = value["frames"];
     Json::Value tracks = value["tracks"];

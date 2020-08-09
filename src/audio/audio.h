@@ -7,7 +7,7 @@
 
 
 
-typedef Mix_Chunk AudioSample;
+//typedef Mix_Chunk AudioSample;
 
 class Audio {
 public:
@@ -15,7 +15,7 @@ public:
     static const int MAX_CHANNEL_COUNT = 512;
 
     static void init();
-    static AudioSample *loadSample(std::string path);
+    static Mix_Chunk *loadSample(std::string path);
 };
 
 #endif // AUDIO_H

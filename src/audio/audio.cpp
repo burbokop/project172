@@ -8,6 +8,6 @@ void Audio::init() {
     Mix_AllocateChannels(MAX_CHANNEL_COUNT);
 }
 
-AudioSample *Audio::loadSample(std::string path) {
+Mix_Chunk *Audio::loadSample(std::string path) {
     return Mix_LoadWAV(path.c_str());
 }

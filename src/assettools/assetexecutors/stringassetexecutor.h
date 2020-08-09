@@ -11,7 +11,7 @@ public:
 
     // AssetExecutor interface
 public:
-    virtual e172::Variant proceed(const Json::Value &value, e172::AbstractGraphicsProvider *) override;
+    virtual e172::Variant proceed(const Json::Value &value, e172::AbstractGraphicsProvider *, e172::AbstractAudioProvider *) override;
 };
 
 #endif // STRINGASSETEXECUTOR_H

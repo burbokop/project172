@@ -5,7 +5,7 @@ MapAssetExecutor::MapAssetExecutor() {
 }
 
 
-e172::Variant MapAssetExecutor::proceed(const Json::Value &value, e172::AbstractGraphicsProvider *) {
+e172::Variant MapAssetExecutor::proceed(const Json::Value &value, e172::AbstractGraphicsProvider *, e172::AbstractAudioProvider *) {
     e172::VariantMap map;
     for(auto it = value.begin(); it != value.end(); it++) {
         std::string key = it.key().asString();

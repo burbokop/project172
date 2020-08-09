@@ -3,7 +3,6 @@
 
 
 #include "audio/audiochannel.h"
-#include "audiochannel2.h"
 #include "worker.h"
 
 
@@ -17,26 +16,28 @@ public:
     };
 
 private:
-    AudioChannel channel;
+    e172::AudioChannel channel;
     unsigned state = Idle;
     bool m_waitStopPlaing = false;
 
-    AudioSample *startChunk = nullptr;
-    AudioSample *loopChunk = nullptr;
-    AudioSample *stopChunk = nullptr;
+    e172::AudioSample startChunk;
+    e172::AudioSample loopChunk;
+    e172::AudioSample stopChunk;
 
 
     static inline int nextId = 0;
     int id = nextId++;
 public:
-    AudioPlayer(AudioSample *start = nullptr, AudioSample *loop = nullptr, AudioSample *stop = nullptr);
-    ~AudioPlayer();
+    AudioPlayer(
+            const e172::AudioSample &start = e172::AudioSample(),
+            const e172::AudioSample &loop = e172::AudioSample(),
+            const e172::AudioSample &stop = e172::AudioSample()
+            );
 
     // Worker interface
 public:
     bool play();
     bool stop();
-
 
     void tick(Context *context, Event *event);
     void render(e172::AbstractRenderer *renderer);

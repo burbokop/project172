@@ -25,8 +25,9 @@ e172::Image SDLGraphicsProvider::loadImage(const std::string &path) const {
     SDL_Surface *surface = IMG_Load(path.c_str());
 
     if(surface) {
-        return __createImage(new e172::Image::handle<SDL_Surface*>(surface), this , surface->w, surface->h, [](e172::Image::data_ptr d) {
+        return __createImage(new e172::Image::handle<SDL_Surface*>(surface), this, surface->w, surface->h, [](e172::Image::data_ptr d) {
             const auto handle = e172::Image::handle_cast<SDL_Surface*>(d);
+
             SDL_FreeSurface(handle->c);
             delete handle;
         }, [](e172::Image::data_ptr ptr) -> e172::Image::ptr {

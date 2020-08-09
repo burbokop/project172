@@ -11,6 +11,7 @@
 #include "time/time.h"
 #include "filesystem.h"
 
+#include <sdlimplementation/sdlaudioprovider.h>
 #include <sdlimplementation/sdlgraphicsprovider.h>
 
 #include <assettools/assetexecutors/animatorassetexecutor.h>
@@ -83,6 +84,9 @@ Environment::Environment(std::vector<std::string> args) {
     netListener = new NetListener(context);
 
     renderEngine = new SDLGraphicsProvider("project172", 600, 600, "../assets/fonts/ZCOOL.ttf");
+
+    auto audioProvider = new SDLAudioProvider();
+
     renderer = renderEngine->renderer();
 
     background = new Background(renderer->resolution(), 128);
@@ -95,7 +99,7 @@ Environment::Environment(std::vector<std::string> args) {
     std::cout << "lll: " << args[0] << "\n";
 
     //assetManager->search(FileSystem::cutPath(args[0], 2) + "/assets");
-    assetManager->searchInFolder("../assets", renderEngine);
+    assetManager->searchInFolder("../assets", renderEngine, audioProvider);
 
     worldManager->checkState(context, assetManager, units, renderer, fps, tps);
     context->setBackground(background);

@@ -1,4 +1,4 @@
-#ifndef ASSETPROVIDER_H
+    #ifndef ASSETPROVIDER_H
 #define ASSETPROVIDER_H
 
 #include <iostream>
@@ -22,11 +22,11 @@ class AssetProvider : public Object {
     std::map<std::string, LoadableTemplate> templates;
     std::map<std::string, std::shared_ptr<AssetExecutor>> executors;
 
-    void processFile(std::string file, std::string path, e172::AbstractGraphicsProvider *graphicsProvider);
+    void processFile(std::string file, std::string path, e172::AbstractGraphicsProvider *graphicsProvider, e172::AbstractAudioProvider *audioProvider);
 public:
     Loadable *createLoadable(std::string key);
     AssetProvider();
-    void searchInFolder(std::string path, e172::AbstractGraphicsProvider *renderEngine);
+    void searchInFolder(std::string path, e172::AbstractGraphicsProvider *graphicsProvider, e172::AbstractAudioProvider *audioProvider);
     std::vector<std::string> loadableNames();
 
     template<typename T>

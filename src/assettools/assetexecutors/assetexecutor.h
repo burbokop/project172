@@ -5,6 +5,8 @@
 
 #include <json/json.h>
 
+#include <audio/abstractaudioprovider.h>
+
 namespace e172 {
 class AbstractGraphicsProvider;
 }
@@ -16,7 +18,7 @@ public:
     std::string fullPath(const std::string &path);
     AssetExecutor();
     virtual ~AssetExecutor();
-    virtual e172::Variant proceed(const Json::Value &value, e172::AbstractGraphicsProvider *graphicsProvider) = 0;
+    virtual e172::Variant proceed(const Json::Value &value, e172::AbstractGraphicsProvider *graphicsProvider, e172::AbstractAudioProvider *audioProvider) = 0;
 };
 
 #endif // ASSETEXECUTOR_H

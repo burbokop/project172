@@ -33,8 +33,10 @@ SOURCES += \
     src/assettools/assetexecutors/stringassetexecutor.cpp \
     src/assettools/assetexecutors/vectorassetexecutor.cpp \
     src/assettools/assetprovider.cpp \
-    src/audio/audiochannel2.cpp \
+    src/audio/abstractaudioprovider.cpp \
+    src/audio/audiosample.cpp \
     src/engine/abstractfactory.cpp \
+    src/engine/sharedcontainer.cpp \
     src/engine/type.cpp \
     src/engine/variant.cpp \
     src/engine/graphics/abstractgraphicsprovider.cpp \
@@ -44,6 +46,7 @@ SOURCES += \
     src/gui/guidebugvalueinfo.cpp \
     src/main.cpp \
     src/object.cpp \
+    src/sdlimplementation/sdlaudioprovider.cpp \
     src/sdlimplementation/sdlgraphicsprovider.cpp \
     src/sdlimplementation/sdlrenderer.cpp \
     src/worker.cpp \
@@ -136,8 +139,10 @@ HEADERS += \
     src/assettools/assetexecutors/stringassetexecutor.h \
     src/assettools/assetexecutors/vectorassetexecutor.h \
     src/assettools/assetprovider.h \
-    src/audio/audiochannel2.h \
+    src/audio/abstractaudioprovider.h \
+    src/audio/audiosample.h \
     src/engine/abstractfactory.h \
+    src/engine/sharedcontainer.h \
     src/engine/type.h \
     src/engine/variant.h \
     src/engine/graphics/abstractgraphicsprovider.h \
@@ -146,6 +151,7 @@ HEADERS += \
     src/engine/textformat.h \
     src/gui/guidebugvalueinfo.h \
     src/object.h \
+    src/sdlimplementation/sdlaudioprovider.h \
     src/sdlimplementation/sdlgraphicsprovider.h \
     src/sdlimplementation/sdlrenderer.h \
     src/worker.h \

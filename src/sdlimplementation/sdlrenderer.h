@@ -78,6 +78,7 @@ public:
     virtual Lens enableLensEffect(const e172::Vector &point1, const e172::Vector &point2, double coefficient) override;
     virtual bool disableLensEffect(Lens lens) override;
     virtual bool updateLensEffect(Lens lens, const e172::Vector &point1, const e172::Vector &point2, double coefficient) override;
+    virtual void applySmooth(const e172::Vector &point0, const e172::Vector &point1, double coefficient) override;
 };
 
 

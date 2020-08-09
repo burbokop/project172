@@ -14,7 +14,10 @@ void SPM::FillPixel(SDL_Surface *surface, int x, int y, Uint32 color) {
 }
 
 Uint32 SPM::GetPixel(SDL_Surface *surface, int x, int y) {
-    return (static_cast<Uint32*>(surface->pixels))[x + surface->w * y];
+    if (x >= 0 && y >= 0 && x < surface->w && y < surface->h) {
+        return (static_cast<Uint32*>(surface->pixels))[x + surface->w * y];
+    }
+    return 0;
 }
 
 void SPM::Line(SDL_Surface *surface, int point1_x, int point1_y, int point2_x, int point2_y, Uint32 color) {
