@@ -14,6 +14,7 @@ e172::Variant AudioAssetExecutor::proceed(const Json::Value &value, e172::Abstra
         if(audioStart.isString()) {
             if(audioLoop.isString() && audioStop.isString()) {
                 AudioPlayer p(
+                            audioProvider->reserveChannel(),
                             audioProvider->loadAudioSample(fullPath(audioStart.asString()).c_str()),
                             audioProvider->loadAudioSample(fullPath(audioLoop.asString()).c_str()),
                             audioProvider->loadAudioSample(fullPath(audioStop.asString()).c_str())
@@ -22,6 +23,7 @@ e172::Variant AudioAssetExecutor::proceed(const Json::Value &value, e172::Abstra
                 return e172::Variant::fromValue(p);
             } else {
                 AudioPlayer p(
+                            audioProvider->reserveChannel(),
                             audioProvider->loadAudioSample(fullPath(audioStart.asString()).c_str())
                             );
                 p.setVolume(volume);
@@ -30,6 +32,7 @@ e172::Variant AudioAssetExecutor::proceed(const Json::Value &value, e172::Abstra
         }
     } else if (value.isString()) {
         return e172::Variant::fromValue(AudioPlayer(
+                                            audioProvider->reserveChannel(),
                                             audioProvider->loadAudioSample(fullPath(value.asString()).c_str())
                                             ));
     }

@@ -8,16 +8,17 @@ void AudioPlayer::setWaitStopPlaing(bool waitStopPlaing) {
     m_waitStopPlaing = waitStopPlaing;
 }
 
-AudioPlayer::AudioPlayer(const e172::AudioSample &start, const e172::AudioSample &loop, const e172::AudioSample &stop) {
-    this->startChunk = start;
-    this->loopChunk = loop;
-    this->stopChunk = stop;
+AudioPlayer::AudioPlayer(const e172::AudioChannel channel, const e172::AudioSample &start, const e172::AudioSample &loop, const e172::AudioSample &stop) {
+    m_channel = channel;
+    beginningSample = start;
+    loopSample = loop;
+    endingSample = stop;
 }
 
 
 bool AudioPlayer::play() {
     if(state == Idle || !m_waitStopPlaing) {
-        channel.play(startChunk, 1);
+        m_channel.play(beginningSample, 1);
         state = Beginning;
         return true;
     }
@@ -26,7 +27,7 @@ bool AudioPlayer::play() {
 
 bool AudioPlayer::stop() {
     if(state == Beginning || state == Loop) {
-        channel.play(stopChunk, 1);
+        m_channel.play(endingSample, 1);
         state = Ending;
         return true;
     }
@@ -39,17 +40,17 @@ void AudioPlayer::tick(Context *context, Event *event) {
     UNUSED(event);
 
     if(state == Beginning) {
-        if(!channel.isPlaying()) {
+        if(!m_channel.isPlaying()) {
             std::cout << "LOOP STRT\n";
-            if(loopChunk.isValid()) {
-                channel.play(loopChunk, e172::AudioChannel::Infinitely);
+            if(loopSample.isValid()) {
+                m_channel.play(loopSample, e172::AudioChannel::Infinitely);
                 state = Loop;
             } else {
                 state = Idle;
             }
         }
     } else if(state == Ending) {
-        if(!channel.isPlaying()) {
+        if(!m_channel.isPlaying()) {
             state = Idle;
         }
     }
@@ -60,11 +61,11 @@ void AudioPlayer::render(e172::AbstractRenderer *renderer) {
 }
 
 void AudioPlayer::setVolume(double volume) {
-    channel.setVolume(volume);
+    m_channel.setVolume(volume);
 }
 
 void AudioPlayer::setDistance(double distance) {
-    channel.setDistance(distance);
+    m_channel.setDistance(distance);
 }
 
 bool operator ==(const AudioPlayer &ap0, const AudioPlayer &ap1) {

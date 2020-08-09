@@ -20,6 +20,10 @@ bool Timer::count(bool condition) {
     return true;
 }
 
+unsigned Timer::elapsed() {
+    return Timer::getMilliseconds() - duration;
+}
+
 void Timer::reset() {
     this->duration = Timer::getMilliseconds();
 }

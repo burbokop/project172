@@ -16,19 +16,20 @@ public:
     };
 
 private:
-    e172::AudioChannel channel;
+    e172::AudioChannel m_channel;
     unsigned state = Idle;
     bool m_waitStopPlaing = false;
 
-    e172::AudioSample startChunk;
-    e172::AudioSample loopChunk;
-    e172::AudioSample stopChunk;
+    e172::AudioSample beginningSample;
+    e172::AudioSample loopSample;
+    e172::AudioSample endingSample;
 
 
     static inline int nextId = 0;
     int id = nextId++;
 public:
     AudioPlayer(
+            const e172::AudioChannel channel = e172::AudioChannel(),
             const e172::AudioSample &start = e172::AudioSample(),
             const e172::AudioSample &loop = e172::AudioSample(),
             const e172::AudioSample &stop = e172::AudioSample()

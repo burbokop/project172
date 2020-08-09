@@ -32,7 +32,7 @@
 #include <capabilities/modules/thruster.h>
 #include <capabilities/modules/weapon.h>
 
-
+#include "audio/audio.h"
 
 Environment::Environment(std::vector<std::string> args) {
     Debug::init(false, true);

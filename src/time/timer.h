@@ -11,6 +11,7 @@ private:
 public:
     Timer(unsigned interval = 0);
     bool count(bool condition = true);
+    unsigned elapsed();
     void reset();
     double ready();
 

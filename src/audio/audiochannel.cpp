@@ -30,34 +30,43 @@ double AudioChannel::minDistance() const
     return m_minDistance;
 }
 
-AudioChannel::AudioChannel() {
-    ptr = nextChannel++ % Audio::MAX_CHANNEL_COUNT;
+AudioChannel AudioChannel::newAudioChannel(SharedContainer::data_ptr data, SharedContainer::ptr id, SharedContainer::destructor_t destructor, AudioChannel::volume_setter_t volume_setter, AudioChannel::play_t play, is_playing_t is_palying, pause_t pause) {
+    auto result = newSharedContainer<AudioChannel>(data, id, destructor);
+    result.m_play = play;
+    result.m_volume_setter = volume_setter;
+    result.m_is_palying = is_palying;
+    result.m_pause = pause;
+    return result;
 }
+
+AudioChannel::AudioChannel() {}
 
 void AudioChannel::setVolume(double volume) {
     m_volume = volume;
 }
 
 void AudioChannel::play(const AudioSample &sample, int loops) {
-    if(ptr >= 0) {
-        const auto v = m_volume * m_distance_volume * Audio::MAX_MAPPED_VOLUME;
-        Mix_Volume(ptr, v);
+    if(isValid()) {
+        const auto v = m_volume * m_distance_volume;
+        if(m_volume_setter)
+            m_volume_setter(data(), v);
+
         if(v > 0 && sample.isValid()) {
-            if(loops > 0) {
-                Mix_PlayChannel(ptr, sample, loops - 1);
-            } else if (loops == Infinitely) {
-                Mix_PlayChannel(ptr, sample, Infinitely);
-            }
+            m_play(data(), sample, loops);
         }
     }
 }
 
 bool AudioChannel::isPlaying() {
-    return Mix_Playing(ptr);
+    if(m_is_palying)
+        return m_is_palying(data());
+
+    return false;
 }
 
 void AudioChannel::stop() {
-    Mix_Pause(ptr);
+    if(m_pause)
+        m_pause(data());
 }
 
 void AudioChannel::setDistance(double distance) {
