@@ -7,6 +7,7 @@
 #include <sdlimplementation/effects/anaglyph.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
+#include <engine/math/math.h>
 
 
 const int SDLRenderer::DEFAULT_FONT_SIZE = 20;
@@ -51,10 +52,11 @@ void SDLRenderer::setResolutionCallback(Variant value) {
 }
 
 void SDLRenderer::applyLensEffect(const e172::Vector &point0, const e172::Vector &point1, double coefficient) {
-    m_applyLensEffectNexUpdate = true;
-    m_lensEffectNexUpdatePoint0 = point0;
-    m_lensEffectNexUpdatePoint1 = point1;
-    m_lensEffectNexUpdateCoef = coefficient;
+    const auto delta = point1 - point0;
+    if(delta.x() == 0 || delta.y() == 0 || e172::Math::cmpf(coefficient, 0))
+        return;
+
+    m_lensQueue.push({ point0, point1, coefficient });
 }
 
 
@@ -227,9 +229,10 @@ e172::Vector SDLRenderer::drawString(const std::string &string, const e172::Vect
 }
 
 void SDLRenderer::update() {
-    if(m_applyLensEffectNexUpdate) {
-        __applyLensEffect(surface, m_lensEffectNexUpdatePoint0, m_lensEffectNexUpdatePoint1, m_lensEffectNexUpdateCoef);
-        m_applyLensEffectNexUpdate = false;
+    while (m_lensQueue.size() > 0) {
+        const auto l = m_lensQueue.front();
+        __applyLensEffect(surface, l.point0, l.point1, l.coeficient);
+        m_lensQueue.pop();
     }
 
     SDL_UpdateWindowSurface(window);

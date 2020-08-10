@@ -13,7 +13,7 @@ Module::Module() {
         bool ok;
         double rate = asset<double>("rate", 1, &ok);
         if(ok) {
-            if(!e172::Math::cmpd(rate, 0)) {
+            if(!e172::Math::cmpf(rate, 0)) {
                 timer = Timer(60000 / rate);
             }
         } else {

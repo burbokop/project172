@@ -64,11 +64,11 @@ void Vector::operator/=(double divider) {
 }
 
 bool Vector::operator==(Vector vector) const {
-    return e172::Math::cmpd(this->m_x, vector.m_x) && e172::Math::cmpd(this->m_y, vector.m_y);
+    return e172::Math::cmpf(this->m_x, vector.m_x) && e172::Math::cmpf(this->m_y, vector.m_y);
 }
 
 bool Vector::operator!=(Vector vector) const {
-    return !e172::Math::cmpd(this->m_x, vector.m_x) || !e172::Math::cmpd(this->m_y, vector.m_y);
+    return !e172::Math::cmpf(this->m_x, vector.m_x) || !e172::Math::cmpf(this->m_y, vector.m_y);
 }
 
 double Vector::operator*(Vector multiplier) const {
@@ -81,7 +81,7 @@ double Vector::module() const {
 
 Vector Vector::normalized() const {
     const auto module = this->module();
-    if(!e172::Math::cmpd(module, 0)) {
+    if(!e172::Math::cmpf(module, 0)) {
         return Vector(this->m_x / module, this->m_y / module);
     } else {
         return Vector();
@@ -98,7 +98,7 @@ double Vector::angle() const {
 
 Vector Vector::relativisticAddition(Vector term, double c) const {
     double termModule = term.module();
-    if(!e172::Math::cmpd(termModule, 0)) {
+    if(!e172::Math::cmpf(termModule, 0)) {
         c *= RELATIVISTIC_ADDITION_CONSTANT;
         const Vector classicSum = *this + term;
 
@@ -114,7 +114,7 @@ Vector Vector::relativisticAddition(Vector term, double c) const {
 }
 
 double Vector::tg() const {
-    if(!e172::Math::cmpd(this->m_y, 0))
+    if(!e172::Math::cmpf(this->m_y, 0))
         return -(this->m_x / this->m_y);
     return 0.0;
 }
@@ -143,7 +143,7 @@ double Vector::map(Vector *destination, double value) const {
     double kd = destination->m_y - destination->m_x;
     double kt = this->m_y - this->m_x;
 
-    if(e172::Math::cmpd(kt, 0)) result = value * kd;
+    if(e172::Math::cmpf(kt, 0)) result = value * kd;
     else result = value * kd / kt;
 
     result += destination->m_x;

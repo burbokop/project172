@@ -26,7 +26,7 @@ bool e172::Math::cmpf(float a, float b, float epsilon) {
     return (fabsf(a - b) < epsilon);
 }
 
-bool e172::Math::cmpd(double a, double b, double epsilon) {
+bool e172::Math::cmpf(double a, double b, double epsilon) {
     return (fabs(a - b) < epsilon);
 }
 

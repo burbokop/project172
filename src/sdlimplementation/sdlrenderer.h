@@ -6,6 +6,7 @@
 
 #include <src/engine/math/vector.h>
 #include "additional/e_variant.h"
+#include <queue>
 
 struct SDL_Window;
 struct SDL_Surface;
@@ -29,10 +30,13 @@ private:
     bool anaglyphEnabled2 = false;
     SDLRenderer(const char *title, int x, int y, std::string fontPath);
 
-    bool m_applyLensEffectNexUpdate = false;
-    e172::Vector m_lensEffectNexUpdatePoint0;
-    e172::Vector m_lensEffectNexUpdatePoint1;
-    double m_lensEffectNexUpdateCoef;
+
+    struct LensReciept {
+        e172::Vector point0;
+        e172::Vector point1;
+        double coeficient;
+    };
+    std::queue<LensReciept> m_lensQueue;
     static void __applyLensEffect(SDL_Surface * surface, const e172::Vector point0, const e172::Vector point1, double coef);
 public:
 

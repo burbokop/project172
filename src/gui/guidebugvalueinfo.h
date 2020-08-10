@@ -6,6 +6,7 @@
 class GUIDebugValueInfo : public GUIElement {
     Controller *m_player = nullptr;
     double coef = 6;
+    Timer timer;
 public:
     GUIDebugValueInfo(Controller *player, std::vector<Worker*> *units);
 

@@ -20,7 +20,6 @@ private:
 
     bool relativisticVelocity = true;
 
-
     struct {
         double acceleration;
         double maxVelocity;

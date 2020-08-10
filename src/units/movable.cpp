@@ -160,10 +160,10 @@ void Movable::pursuit(Unit *target) {
 }
 
 void Movable::relativisticPursuit(Unit *target) {
-    if(!e172::Math::cmpd(Time::getDeltaTime(), 0.0)) {
+    if(!e172::Math::cmpf(Time::getDeltaTime(), 0.0)) {
         double velocity = target->getVelocity().module();
 
-        if(e172::Math::cmpd(velocity, 0)) {
+        if(e172::Math::cmpf(velocity, 0)) {
             velocity = 1.0;
         } else {
             velocity = std::pow(velocity, 2);
