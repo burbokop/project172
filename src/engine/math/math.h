@@ -28,7 +28,7 @@ public:
     }
 
     static bool cmpf(float a, float b, float epsilon = 0.00005f);
-    static bool cmpd(double a, double b, double epsilon = 0.00005);
+    static bool cmpf(double a, double b, double epsilon = 0.00005);
 
     static double sin(double angle);
     static double cos(double angle);

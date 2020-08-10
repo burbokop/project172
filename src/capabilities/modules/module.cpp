@@ -13,7 +13,7 @@ Module::Module() {
         bool ok;
         double rate = asset<double>("rate", 1, &ok);
         if(ok) {
-            if(!e172::Math::cmpd(rate, 0)) {
+            if(!e172::Math::cmpf(rate, 0)) {
                 timer = Timer(60000 / rate);
             }
         } else {
@@ -34,10 +34,7 @@ void Module::tick(Context *context, Event *event) {
 }
 
 void Module::render(e172::AbstractRenderer *renderer) {
-    Camera* cam = renderer->getCamera();
-    if(cam) {
-        audioPlayer.setDistance((parent()->getPosition() - cam->getPosition()).module());
-    }
+    audioPlayer.setDistance((parent()->getPosition() - renderer->cameraPosition()).module());
 
     this->animator.setAngle(parent()->getAngle());
     e172::Vector local = parent()->getPosition() + e172::Vector::createByAngle(-this->attachOffset.module(), parent()->getAngle());

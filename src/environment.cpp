@@ -34,6 +34,8 @@
 
 #include "audio/audio.h"
 
+#include <engine/additional.h>
+
 Environment::Environment(std::vector<std::string> args) {
     Debug::init(false, true);
     Debug::out("INIT GAME");
@@ -83,7 +85,9 @@ Environment::Environment(std::vector<std::string> args) {
     event = new Event(); // io {no}
     netListener = new NetListener(context);
 
-    renderEngine = new SDLGraphicsProvider("project172", 600, 600, "../assets/fonts/ZCOOL.ttf");
+    renderEngine = new SDLGraphicsProvider("project172", 600, 600);
+
+    renderEngine->loadFont(std::string(), e172::Additional::absolutePath("../assets/fonts/ZCOOL.ttf", args[0]));
 
     auto audioProvider = new SDLAudioProvider();
 

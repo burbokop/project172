@@ -1,10 +1,14 @@
 #ifndef TEXTFORMAT_H
 #define TEXTFORMAT_H
 
+#include <string>
+
 namespace e172 {
+
 
 class TextFormat {
     int m_fontSize = 0;
+    std::string m_font;
 public:
     enum Alignment {
         AlignHCenter = 1,
@@ -28,6 +32,8 @@ public:
     Alignment alignment() const;
     void setAlignment(const Alignment &alignment);
     void setFontSize(int fontSize);
+    std::string font() const;
+    void setFont(const std::string &font);
 };
 
 }

@@ -128,6 +128,10 @@ void SPM::HorizontalLine(SDL_Surface *surface, int point_x, int point_y, int l, 
 }
 
 void SPM::Square(SDL_Surface *surface, int point_x, int point_y, int l, Uint32 color) {
+    point_x -= l;
+    point_y -= l;
+    l *= 2;
+
     for(int i = 0; i < l; i++)
     {
         SPM::FillPixel(surface, point_x + i, point_y, color);

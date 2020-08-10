@@ -5,6 +5,9 @@
 #include "debug.h"
 
 #include <sdlimplementation/effects/anaglyph.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
+#include <engine/math/math.h>
 
 
 const int SDLRenderer::DEFAULT_FONT_SIZE = 20;
@@ -12,10 +15,6 @@ const int SDLRenderer::DEFAULT_FONT_SIZE = 20;
 
 e172::Vector SDLRenderer::resolution() const {
     return m_resolution;
-}
-
-e172::Vector SDLRenderer::offset() const {
-    return m_offset;
 }
 
 void SDLRenderer::enableEffect(uint64_t effect) {
@@ -36,15 +35,6 @@ void SDLRenderer::disableEffect(uint64_t effect) {
     }
 }
 
-bool SDLRenderer::updateLensEffect(e172::AbstractRenderer::Lens lens, const e172::Vector &point1, const e172::Vector &point2, double coefficient) {
-    auto it = lenses.find(lens);
-    if(it != lenses.end()) {
-        it->second = std::make_tuple(point1, point2, coefficient);
-        return true;
-    }
-    return false;
-}
-
 SDLRenderer::~SDLRenderer() {
     SDL_FreeSurface(surface);
     TTF_Quit();
@@ -61,29 +51,27 @@ void SDLRenderer::setResolutionCallback(Variant value) {
     setResolution(value.toVector());
 }
 
+void SDLRenderer::applyLensEffect(const e172::Vector &point0, const e172::Vector &point1, double coefficient) {
+    const auto delta = point1 - point0;
+    if(delta.x() == 0 || delta.y() == 0 || e172::Math::cmpf(coefficient, 0))
+        return;
 
-void SDLRenderer::setCamera(Camera *value) {
-    camera = value;
+    m_lensQueue.push({ point0, point1, coefficient });
 }
 
-Camera *SDLRenderer::getCamera() const {
-    return camera;
-}
 
-SDLRenderer::SDLRenderer(const char *title, int x, int y, std::string fontPath) {
+SDLRenderer::SDLRenderer(const char *title, int x, int y) {
     SDL_Init(SDL_INIT_EVERYTHING);
     TTF_Init();
     SDL_Window *window = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, x, y, 0);
     SDL_Surface *surface = SDL_GetWindowSurface(window);
 
-    this->fontPath = fontPath;
     this->window = window;
     this->m_resolution = e172::Vector(x, y);
     this->surface = surface;
-    this->fonts[DEFAULT_FONT_SIZE] = TTF_OpenFont(fontPath.c_str(), DEFAULT_FONT_SIZE);
 }
 
-void SDLRenderer::applyLensEffect(SDL_Surface *surface, const e172::Vector point0, const e172::Vector point1, double coef) {
+void SDLRenderer::__applyLensEffect(SDL_Surface *surface, const e172::Vector point0, const e172::Vector point1, double coef) {
     auto pixels = reinterpret_cast<uint32_t*>(surface->pixels);
 
     auto center = (point0 + point1) / 2;
@@ -208,22 +196,29 @@ void SDLRenderer::drawImage(const e172::Image &image, const e172::Vector &pos, d
 }
 
 e172::Vector SDLRenderer::drawString(const std::string &string, const e172::Vector &pos, uint32_t color, const e172::TextFormat &format) {
-    int size = DEFAULT_FONT_SIZE;
+    int expectedSize = DEFAULT_FONT_SIZE;
     if(format.fontSize() > 0) {
-        size = format.fontSize();
+        expectedSize = format.fontSize();
     }
 
-    if(!fonts[size]) {
-        fonts[size] = TTF_OpenFont(fontPath.c_str(), size);
-    }
+    const auto font = m_fonts.find(format.font());
+    if(font != m_fonts.end()) {
+        TTF_Font *f = nullptr;
+        const auto s = font->second.sizes.find(expectedSize);
+        if(s != font->second.sizes.end()) {
+            f = s->second;
+        } else {
+            f = TTF_OpenFont(font->second.path.c_str(), expectedSize);
+            font->second.sizes[expectedSize] = f;
+        }
 
-    if(fonts[size]) {
+
         VisualEffect *effect = nullptr;
         if(anaglyphEnabled || anaglyphEnabled2)
              effect = new Anaglyph(e172::Vector(2, 1));
 
         int w = 0, h = 0;
-        TTF_SizeText(fonts[size], string.c_str(), &w, &h);
+        TTF_SizeText(f, string.c_str(), &w, &h);
         int offsetX = 0, offsetY = 0;
         if(format.alignment() & e172::TextFormat::AlignHCenter) {
             offsetX = -w / 2;
@@ -231,38 +226,22 @@ e172::Vector SDLRenderer::drawString(const std::string &string, const e172::Vect
         if(format.alignment() & e172::TextFormat::AlignVCenter) {
             offsetY = -h / 2;
         }
-        SPM::BlendedText(surface, string, fonts[size], pos.intX() + offsetX, pos.intY() + offsetY, color, 1024, effect);
+        SPM::BlendedText(surface, string, f, pos.intX() + offsetX, pos.intY() + offsetY, color, 1024, effect);
         delete effect;
         return e172::Vector(w, h);
     }
+
     return e172::Vector();
 }
 
 void SDLRenderer::update() {
-    Unit *cameraUnit = dynamic_cast<Unit*>(camera);
-    if(cameraUnit) {
-        m_offset = m_resolution / 2 - cameraUnit->getPosition();
+    while (m_lensQueue.size() > 0) {
+        const auto l = m_lensQueue.front();
+        __applyLensEffect(surface, l.point0, l.point1, l.coeficient);
+        m_lensQueue.pop();
     }
-    for(auto l : lenses) {
-        applyLensEffect(surface, std::get<0>(l.second), std::get<1>(l.second), std::get<2>(l.second));
-    }
+
     SDL_UpdateWindowSurface(window);
-}
-
-
-
-e172::AbstractRenderer::Lens SDLRenderer::enableLensEffect(const e172::Vector &point1, const e172::Vector &point2, double coefficient) {
-    lenses[nextLens] = std::make_tuple(point1, point2, coefficient);
-    return nextLens++;
-}
-
-bool SDLRenderer::disableLensEffect(Lens lens) {
-    const auto it = lenses.find(lens);
-    if(it != lenses.end()) {
-        lenses.erase(it);
-        return true;
-    }
-    return false;
 }
 
 

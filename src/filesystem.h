@@ -20,4 +20,9 @@ public:
     static std::string cutPath(std::string string, unsigned level = 1);
 };
 
+
+
+
+
+
 #endif // FILESYSTEM_H

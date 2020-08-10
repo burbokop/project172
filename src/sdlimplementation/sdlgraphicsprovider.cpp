@@ -3,13 +3,9 @@
 
 #include "SDL2/SDL_image.h"
 
-SDLGraphicsProvider::SDLGraphicsProvider(const char *title, int x, int y, std::string fontPath) {
-    m_title = title;
-    m_x = x;
-    m_y = y;
-    m_fontPath = fontPath;
+SDLGraphicsProvider::SDLGraphicsProvider(const char *title, int x, int y) {
 
-    m_renderer = new SDLRenderer(title, x, y, fontPath);
+    m_renderer = new SDLRenderer(title, x, y);
     installParentToRenderer(m_renderer);
 }
 
@@ -43,6 +39,12 @@ e172::Image SDLGraphicsProvider::loadImage(const std::string &path) const {
     return e172::Image();
 }
 
-e172::Image SDLGraphicsProvider::createImage(void *bitmap, int format) const {
+e172::Image SDLGraphicsProvider::createImage(int width, int height) const {
+    (void)width;
+    (void)height;
     return e172::Image();
+}
+
+void SDLGraphicsProvider::loadFont(const std::string &name, const std::string &path) {
+    m_renderer->m_fonts[name] = SDLRenderer::Font { path, std::map<int, TTF_Font*>() };
 }

@@ -27,6 +27,16 @@ void TextFormat::setFontSize(int fontSize)
     m_fontSize = fontSize;
 }
 
+std::string TextFormat::font() const
+{
+    return m_font;
+}
+
+void TextFormat::setFont(const std::string &font)
+{
+    m_font = font;
+}
+
 TextFormat::TextFormat() {
     
 }

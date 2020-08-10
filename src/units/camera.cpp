@@ -31,8 +31,23 @@ void Camera::tick(Context *context, Event *event) {
 }
 
 void Camera::render(e172::AbstractRenderer *renderer) {
+    if(r_cam.isNull()) {
+        r_cam = renderer->detachCamera();
+    }
+
+    uint32_t color = 0x5fcf81;
+    if(r_cam.isNull()) {
+        color = 0xff0000;
+    } else {
+        r_cam.setPosition(pos);
+    }
+
     e172::Vector offset = renderer->offset();
-    renderer->drawRect(this->pos - e172::Vector(2, 2) + offset, this->pos + e172::Vector(2, 2) + offset, 0x5fcf81);
+    if(m_i++ % 100 > 50 && r_cam.isNull()) {
+        renderer->drawCircle(pos + offset, 2, color);
+    } else {
+        renderer->drawSquare(pos + offset, 2, color);
+    }
 }
 
 void Camera::hit(Context *context, int value) {

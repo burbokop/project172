@@ -75,6 +75,7 @@ SOURCES       = ../klibcore/src/experimental/universalqueue/kuniversalqueue.cpp 
 		../src/audio/abstractaudioprovider.cpp \
 		../src/audio/audiosample.cpp \
 		../src/engine/abstractfactory.cpp \
+		../src/engine/additional.cpp \
 		../src/engine/sharedcontainer.cpp \
 		../src/engine/type.cpp \
 		../src/engine/variant.cpp \
@@ -85,6 +86,8 @@ SOURCES       = ../klibcore/src/experimental/universalqueue/kuniversalqueue.cpp 
 		../src/gui/guidebugvalueinfo.cpp \
 		../src/main.cpp \
 		../src/object.cpp \
+		../src/openglimplementation/openglgraphicsprovider.cpp \
+		../src/openglimplementation/openglrenderer.cpp \
 		../src/sdlimplementation/sdlaudioprovider.cpp \
 		../src/sdlimplementation/sdlgraphicsprovider.cpp \
 		../src/sdlimplementation/sdlrenderer.cpp \
@@ -187,6 +190,7 @@ OBJECTS       = kuniversalqueue.o \
 		abstractaudioprovider.o \
 		audiosample.o \
 		abstractfactory.o \
+		additional.o \
 		sharedcontainer.o \
 		type.o \
 		variant.o \
@@ -197,6 +201,8 @@ OBJECTS       = kuniversalqueue.o \
 		guidebugvalueinfo.o \
 		main.o \
 		object.o \
+		openglgraphicsprovider.o \
+		openglrenderer.o \
 		sdlaudioprovider.o \
 		sdlgraphicsprovider.o \
 		sdlrenderer.o \
@@ -513,6 +519,7 @@ DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		src/audio/abstractaudioprovider.h \
 		src/audio/audiosample.h \
 		src/engine/abstractfactory.h \
+		src/engine/additional.h \
 		src/engine/sharedcontainer.h \
 		src/engine/type.h \
 		src/engine/variant.h \
@@ -522,6 +529,8 @@ DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		src/engine/textformat.h \
 		src/gui/guidebugvalueinfo.h \
 		src/object.h \
+		src/openglimplementation/openglgraphicsprovider.h \
+		src/openglimplementation/openglrenderer.h \
 		src/sdlimplementation/sdlaudioprovider.h \
 		src/sdlimplementation/sdlgraphicsprovider.h \
 		src/sdlimplementation/sdlrenderer.h \
@@ -633,6 +642,7 @@ DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		../src/audio/abstractaudioprovider.cpp \
 		../src/audio/audiosample.cpp \
 		../src/engine/abstractfactory.cpp \
+		../src/engine/additional.cpp \
 		../src/engine/sharedcontainer.cpp \
 		../src/engine/type.cpp \
 		../src/engine/variant.cpp \
@@ -643,6 +653,8 @@ DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		../src/gui/guidebugvalueinfo.cpp \
 		../src/main.cpp \
 		../src/object.cpp \
+		../src/openglimplementation/openglgraphicsprovider.cpp \
+		../src/openglimplementation/openglrenderer.cpp \
 		../src/sdlimplementation/sdlaudioprovider.cpp \
 		../src/sdlimplementation/sdlgraphicsprovider.cpp \
 		../src/sdlimplementation/sdlrenderer.cpp \
@@ -1271,10 +1283,13 @@ animatorassetexecutor.o: ../src/assettools/assetexecutors/animatorassetexecutor.
 		../src/json/reader.h \
 		../src/json/value.h \
 		../src/json/writer.h \
+		../src/audio/abstractaudioprovider.h \
+		../src/audio/audiochannel.h \
+		../src/audio/audiosample.h \
+		../src/engine/sharedcontainer.h \
 		../src/engine/graphics/abstractgraphicsprovider.h \
 		../src/engine/graphics/abstractrenderer.h \
 		../src/engine/graphics/image.h \
-		../src/engine/sharedcontainer.h \
 		../src/engine/math/vector.h \
 		../src/additional/e_variant.h \
 		../src/object.h \
@@ -1298,6 +1313,10 @@ assetexecutor.o: ../src/assettools/assetexecutors/assetexecutor.cpp ../src/asset
 		../src/json/reader.h \
 		../src/json/value.h \
 		../src/json/writer.h \
+		../src/audio/abstractaudioprovider.h \
+		../src/audio/audiochannel.h \
+		../src/audio/audiosample.h \
+		../src/engine/sharedcontainer.h \
 		../src/filesystem.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o assetexecutor.o ../src/assettools/assetexecutors/assetexecutor.cpp
 
@@ -1315,11 +1334,11 @@ audioassetexecutor.o: ../src/assettools/assetexecutors/audioassetexecutor.cpp ..
 		../src/json/reader.h \
 		../src/json/value.h \
 		../src/json/writer.h \
-		../src/audio/audioplayer.h \
+		../src/audio/abstractaudioprovider.h \
 		../src/audio/audiochannel.h \
-		../src/audio/audio.h \
 		../src/audio/audiosample.h \
 		../src/engine/sharedcontainer.h \
+		../src/audio/audioplayer.h \
 		../src/worker.h \
 		../src/additional/event.h \
 		../src/engine/math/vector.h \
@@ -1343,7 +1362,11 @@ mapassetexecutor.o: ../src/assettools/assetexecutors/mapassetexecutor.cpp ../src
 		../src/json/forwards.h \
 		../src/json/reader.h \
 		../src/json/value.h \
-		../src/json/writer.h
+		../src/json/writer.h \
+		../src/audio/abstractaudioprovider.h \
+		../src/audio/audiochannel.h \
+		../src/audio/audiosample.h \
+		../src/engine/sharedcontainer.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mapassetexecutor.o ../src/assettools/assetexecutors/mapassetexecutor.cpp
 
 numberassetexecutor.o: ../src/assettools/assetexecutors/numberassetexecutor.cpp ../src/assettools/assetexecutors/numberassetexecutor.h \
@@ -1359,7 +1382,11 @@ numberassetexecutor.o: ../src/assettools/assetexecutors/numberassetexecutor.cpp 
 		../src/json/forwards.h \
 		../src/json/reader.h \
 		../src/json/value.h \
-		../src/json/writer.h
+		../src/json/writer.h \
+		../src/audio/abstractaudioprovider.h \
+		../src/audio/audiochannel.h \
+		../src/audio/audiosample.h \
+		../src/engine/sharedcontainer.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o numberassetexecutor.o ../src/assettools/assetexecutors/numberassetexecutor.cpp
 
 spriteassetexecutor.o: ../src/assettools/assetexecutors/spriteassetexecutor.cpp ../src/assettools/assetexecutors/spriteassetexecutor.h \
@@ -1376,10 +1403,13 @@ spriteassetexecutor.o: ../src/assettools/assetexecutors/spriteassetexecutor.cpp 
 		../src/json/reader.h \
 		../src/json/value.h \
 		../src/json/writer.h \
+		../src/audio/abstractaudioprovider.h \
+		../src/audio/audiochannel.h \
+		../src/audio/audiosample.h \
+		../src/engine/sharedcontainer.h \
 		../src/engine/graphics/abstractgraphicsprovider.h \
 		../src/engine/graphics/abstractrenderer.h \
 		../src/engine/graphics/image.h \
-		../src/engine/sharedcontainer.h \
 		../src/engine/math/vector.h \
 		../src/additional/e_variant.h \
 		../src/object.h \
@@ -1403,7 +1433,11 @@ stringassetexecutor.o: ../src/assettools/assetexecutors/stringassetexecutor.cpp 
 		../src/json/forwards.h \
 		../src/json/reader.h \
 		../src/json/value.h \
-		../src/json/writer.h
+		../src/json/writer.h \
+		../src/audio/abstractaudioprovider.h \
+		../src/audio/audiochannel.h \
+		../src/audio/audiosample.h \
+		../src/engine/sharedcontainer.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o stringassetexecutor.o ../src/assettools/assetexecutors/stringassetexecutor.cpp
 
 vectorassetexecutor.o: ../src/assettools/assetexecutors/vectorassetexecutor.cpp ../src/assettools/assetexecutors/vectorassetexecutor.h \
@@ -1420,6 +1454,10 @@ vectorassetexecutor.o: ../src/assettools/assetexecutors/vectorassetexecutor.cpp 
 		../src/json/reader.h \
 		../src/json/value.h \
 		../src/json/writer.h \
+		../src/audio/abstractaudioprovider.h \
+		../src/audio/audiochannel.h \
+		../src/audio/audiosample.h \
+		../src/engine/sharedcontainer.h \
 		../src/engine/math/vector.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o vectorassetexecutor.o ../src/assettools/assetexecutors/vectorassetexecutor.cpp
 
@@ -1437,6 +1475,10 @@ assetprovider.o: ../src/assettools/assetprovider.cpp ../src/assettools/assetprov
 		../src/assettools/assetexecutors/assetexecutor.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
+		../src/audio/abstractaudioprovider.h \
+		../src/audio/audiochannel.h \
+		../src/audio/audiosample.h \
+		../src/engine/sharedcontainer.h \
 		../src/engine/abstractfactory.h \
 		../src/assettools/loadable.h \
 		../src/animator.h \
@@ -1447,13 +1489,9 @@ assetprovider.o: ../src/assettools/assetprovider.cpp ../src/assettools/assetprov
 		../src/object.h \
 		../src/engine/graphics/abstractrenderer.h \
 		../src/engine/graphics/image.h \
-		../src/engine/sharedcontainer.h \
 		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
 		../src/audio/audioplayer.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audio.h \
-		../src/audio/audiosample.h \
 		../klibcore/src/memcontrol/kabstractfactory.h \
 		../klibcore/src/utility/ktype.h \
 		../src/filesystem.h \
@@ -1481,7 +1519,6 @@ assetprovider.o: ../src/assettools/assetprovider.cpp ../src/assettools/assetprov
 
 abstractaudioprovider.o: ../src/audio/abstractaudioprovider.cpp ../src/audio/abstractaudioprovider.h \
 		../src/audio/audiochannel.h \
-		../src/audio/audio.h \
 		../src/audio/audiosample.h \
 		../src/engine/sharedcontainer.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o abstractaudioprovider.o ../src/audio/abstractaudioprovider.cpp
@@ -1493,6 +1530,9 @@ audiosample.o: ../src/audio/audiosample.cpp ../src/audio/audiosample.h \
 abstractfactory.o: ../src/engine/abstractfactory.cpp ../src/engine/abstractfactory.h \
 		../src/engine/type.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o abstractfactory.o ../src/engine/abstractfactory.cpp
+
+additional.o: ../src/engine/additional.cpp ../src/engine/additional.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o additional.o ../src/engine/additional.cpp
 
 sharedcontainer.o: ../src/engine/sharedcontainer.cpp ../src/engine/sharedcontainer.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o sharedcontainer.o ../src/engine/sharedcontainer.cpp
@@ -1564,7 +1604,6 @@ guidebugvalueinfo.o: ../src/gui/guidebugvalueinfo.cpp ../src/gui/guidebugvaluein
 		../src/animator.h \
 		../src/audio/audioplayer.h \
 		../src/audio/audiochannel.h \
-		../src/audio/audio.h \
 		../src/audio/audiosample.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
@@ -1606,13 +1645,13 @@ main.o: ../src/main.cpp ../src/environment.h \
 		../src/assettools/assetexecutors/assetexecutor.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
+		../src/audio/abstractaudioprovider.h \
+		../src/audio/audiochannel.h \
+		../src/audio/audiosample.h \
 		../src/engine/abstractfactory.h \
 		../src/assettools/loadable.h \
 		../src/animator.h \
 		../src/audio/audioplayer.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audio.h \
-		../src/audio/audiosample.h \
 		../klibcore/src/memcontrol/kabstractfactory.h \
 		../klibcore/src/utility/ktype.h \
 		../src/gui/guimain.h \
@@ -1636,16 +1675,37 @@ main.o: ../src/main.cpp ../src/environment.h \
 		../src/near.h \
 		../src/worldmanager.h \
 		../src/worlds/world.h \
+		../src/units/camera.h \
 		../src/additional/mutex.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../src/main.cpp
 
 object.o: ../src/object.cpp ../src/object.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o object.o ../src/object.cpp
 
+openglgraphicsprovider.o: ../src/openglimplementation/openglgraphicsprovider.cpp ../src/openglimplementation/openglgraphicsprovider.h \
+		../src/engine/graphics/abstractgraphicsprovider.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/engine/graphics/image.h \
+		../src/engine/sharedcontainer.h \
+		../src/engine/math/vector.h \
+		../src/additional/e_variant.h \
+		../src/object.h \
+		../src/engine/textformat.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o openglgraphicsprovider.o ../src/openglimplementation/openglgraphicsprovider.cpp
+
+openglrenderer.o: ../src/openglimplementation/openglrenderer.cpp ../src/openglimplementation/openglrenderer.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/engine/graphics/image.h \
+		../src/engine/sharedcontainer.h \
+		../src/engine/math/vector.h \
+		../src/additional/e_variant.h \
+		../src/object.h \
+		../src/engine/textformat.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o openglrenderer.o ../src/openglimplementation/openglrenderer.cpp
+
 sdlaudioprovider.o: ../src/sdlimplementation/sdlaudioprovider.cpp ../src/sdlimplementation/sdlaudioprovider.h \
 		../src/audio/abstractaudioprovider.h \
 		../src/audio/audiochannel.h \
-		../src/audio/audio.h \
 		../src/audio/audiosample.h \
 		../src/engine/sharedcontainer.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o sdlaudioprovider.o ../src/sdlimplementation/sdlaudioprovider.cpp
@@ -1698,7 +1758,6 @@ sdlrenderer.o: ../src/sdlimplementation/sdlrenderer.cpp ../src/sdlimplementation
 		../src/time/timer.h \
 		../src/audio/audioplayer.h \
 		../src/audio/audiochannel.h \
-		../src/audio/audio.h \
 		../src/audio/audiosample.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
@@ -1709,7 +1768,8 @@ sdlrenderer.o: ../src/sdlimplementation/sdlrenderer.cpp ../src/sdlimplementation
 		../src/additional/trigger.h \
 		../src/debug.h \
 		../klibcore/src/ksmartenum.h \
-		../src/sdlimplementation/effects/anaglyph.h
+		../src/sdlimplementation/effects/anaglyph.h \
+		../src/engine/math/math.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o sdlrenderer.o ../src/sdlimplementation/sdlrenderer.cpp
 
 worker.o: ../src/worker.cpp ../src/worker.h \
@@ -1739,6 +1799,10 @@ world.o: ../src/worlds/world.cpp ../src/worlds/world.h \
 		../src/assettools/assetexecutors/assetexecutor.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
+		../src/audio/abstractaudioprovider.h \
+		../src/audio/audiochannel.h \
+		../src/audio/audiosample.h \
+		../src/engine/sharedcontainer.h \
 		../src/engine/abstractfactory.h \
 		../src/assettools/loadable.h \
 		../src/animator.h \
@@ -1749,13 +1813,9 @@ world.o: ../src/worlds/world.cpp ../src/worlds/world.h \
 		../src/object.h \
 		../src/engine/graphics/abstractrenderer.h \
 		../src/engine/graphics/image.h \
-		../src/engine/sharedcontainer.h \
 		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
 		../src/audio/audioplayer.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audio.h \
-		../src/audio/audiosample.h \
 		../klibcore/src/memcontrol/kabstractfactory.h \
 		../klibcore/src/utility/ktype.h \
 		../src/capabilities/controller.h \
@@ -1813,13 +1873,13 @@ background.o: ../src/background.cpp ../src/background.h \
 		../src/assettools/assetexecutors/assetexecutor.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
+		../src/audio/abstractaudioprovider.h \
+		../src/audio/audiochannel.h \
+		../src/audio/audiosample.h \
 		../src/engine/abstractfactory.h \
 		../src/assettools/loadable.h \
 		../src/animator.h \
 		../src/audio/audioplayer.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audio.h \
-		../src/audio/audiosample.h \
 		../klibcore/src/memcontrol/kabstractfactory.h \
 		../klibcore/src/utility/ktype.h \
 		../src/gui/guimain.h \
@@ -1873,7 +1933,6 @@ unit.o: ../src/units/unit.cpp ../src/units/unit.h \
 		../src/time/timer.h \
 		../src/audio/audioplayer.h \
 		../src/audio/audiochannel.h \
-		../src/audio/audio.h \
 		../src/audio/audiosample.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
@@ -1881,6 +1940,7 @@ unit.o: ../src/units/unit.cpp ../src/units/unit.h \
 		../src/context.h \
 		../src/assettools/assetprovider.h \
 		../src/assettools/assetexecutors/assetexecutor.h \
+		../src/audio/abstractaudioprovider.h \
 		../src/engine/abstractfactory.h \
 		../klibcore/src/memcontrol/kabstractfactory.h \
 		../klibcore/src/utility/ktype.h \
@@ -1935,7 +1995,6 @@ movable.o: ../src/units/movable.cpp ../src/units/movable.h \
 		../src/time/timer.h \
 		../src/audio/audioplayer.h \
 		../src/audio/audiochannel.h \
-		../src/audio/audio.h \
 		../src/audio/audiosample.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
@@ -1944,6 +2003,7 @@ movable.o: ../src/units/movable.cpp ../src/units/movable.h \
 		../src/context.h \
 		../src/assettools/assetprovider.h \
 		../src/assettools/assetexecutors/assetexecutor.h \
+		../src/audio/abstractaudioprovider.h \
 		../src/engine/abstractfactory.h \
 		../klibcore/src/memcontrol/kabstractfactory.h \
 		../klibcore/src/utility/ktype.h \
@@ -1996,7 +2056,6 @@ camera.o: ../src/units/camera.cpp ../src/units/camera.h \
 		../src/time/timer.h \
 		../src/audio/audioplayer.h \
 		../src/audio/audiochannel.h \
-		../src/audio/audio.h \
 		../src/audio/audiosample.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
@@ -2052,7 +2111,6 @@ controller.o: ../src/capabilities/controller.cpp ../src/capabilities/controller.
 		../src/animator.h \
 		../src/audio/audioplayer.h \
 		../src/audio/audiochannel.h \
-		../src/audio/audio.h \
 		../src/audio/audiosample.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
@@ -2062,6 +2120,7 @@ controller.o: ../src/capabilities/controller.cpp ../src/capabilities/controller.
 		../src/context.h \
 		../src/assettools/assetprovider.h \
 		../src/assettools/assetexecutors/assetexecutor.h \
+		../src/audio/abstractaudioprovider.h \
 		../src/engine/abstractfactory.h \
 		../klibcore/src/memcontrol/kabstractfactory.h \
 		../klibcore/src/utility/ktype.h \
@@ -2110,7 +2169,6 @@ player.o: ../src/capabilities/player.cpp ../src/capabilities/player.h \
 		../src/animator.h \
 		../src/audio/audioplayer.h \
 		../src/audio/audiochannel.h \
-		../src/audio/audio.h \
 		../src/audio/audiosample.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
@@ -2120,6 +2178,7 @@ player.o: ../src/capabilities/player.cpp ../src/capabilities/player.h \
 		../src/context.h \
 		../src/assettools/assetprovider.h \
 		../src/assettools/assetexecutors/assetexecutor.h \
+		../src/audio/abstractaudioprovider.h \
 		../src/engine/abstractfactory.h \
 		../klibcore/src/memcontrol/kabstractfactory.h \
 		../klibcore/src/utility/ktype.h \
@@ -2165,7 +2224,6 @@ modulehandler.o: ../src/capabilities/modulehandler.cpp ../src/capabilities/modul
 		../src/time/timer.h \
 		../src/audio/audioplayer.h \
 		../src/audio/audiochannel.h \
-		../src/audio/audio.h \
 		../src/audio/audiosample.h \
 		../src/engine/variant.h \
 		../src/engine/type.h
@@ -2198,7 +2256,6 @@ module.o: ../src/capabilities/modules/module.cpp ../src/capabilities/modules/mod
 		../src/time/timer.h \
 		../src/audio/audioplayer.h \
 		../src/audio/audiochannel.h \
-		../src/audio/audio.h \
 		../src/audio/audiosample.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
@@ -2267,7 +2324,6 @@ loadable.o: ../src/assettools/loadable.cpp ../src/assettools/loadable.h \
 		../src/engine/textformat.h \
 		../src/audio/audioplayer.h \
 		../src/audio/audiochannel.h \
-		../src/audio/audio.h \
 		../src/audio/audiosample.h \
 		../src/engine/variant.h \
 		../src/engine/type.h
@@ -2301,13 +2357,13 @@ weapon.o: ../src/capabilities/modules/weapon.cpp ../src/capabilities/modules/wea
 		../src/time/timer.h \
 		../src/audio/audioplayer.h \
 		../src/audio/audiochannel.h \
-		../src/audio/audio.h \
 		../src/audio/audiosample.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
 		../src/context.h \
 		../src/assettools/assetprovider.h \
 		../src/assettools/assetexecutors/assetexecutor.h \
+		../src/audio/abstractaudioprovider.h \
 		../src/engine/abstractfactory.h \
 		../klibcore/src/memcontrol/kabstractfactory.h \
 		../klibcore/src/utility/ktype.h \
@@ -2364,7 +2420,6 @@ projectile.o: ../src/units/projectile.cpp ../src/units/projectile.h \
 		../src/time/timer.h \
 		../src/audio/audioplayer.h \
 		../src/audio/audiochannel.h \
-		../src/audio/audio.h \
 		../src/audio/audiosample.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
@@ -2372,6 +2427,7 @@ projectile.o: ../src/units/projectile.cpp ../src/units/projectile.h \
 		../src/context.h \
 		../src/assettools/assetprovider.h \
 		../src/assettools/assetexecutors/assetexecutor.h \
+		../src/audio/abstractaudioprovider.h \
 		../src/engine/abstractfactory.h \
 		../klibcore/src/memcontrol/kabstractfactory.h \
 		../klibcore/src/utility/ktype.h \
@@ -2412,6 +2468,10 @@ context.o: ../src/context.cpp ../src/context.h \
 		../src/assettools/assetexecutors/assetexecutor.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
+		../src/audio/abstractaudioprovider.h \
+		../src/audio/audiochannel.h \
+		../src/audio/audiosample.h \
+		../src/engine/sharedcontainer.h \
 		../src/engine/abstractfactory.h \
 		../src/assettools/loadable.h \
 		../src/animator.h \
@@ -2422,13 +2482,9 @@ context.o: ../src/context.cpp ../src/context.h \
 		../src/object.h \
 		../src/engine/graphics/abstractrenderer.h \
 		../src/engine/graphics/image.h \
-		../src/engine/sharedcontainer.h \
 		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
 		../src/audio/audioplayer.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audio.h \
-		../src/audio/audiosample.h \
 		../klibcore/src/memcontrol/kabstractfactory.h \
 		../klibcore/src/utility/ktype.h \
 		../src/gui/guimain.h \
@@ -2487,7 +2543,6 @@ engine.o: ../src/capabilities/modules/engine.cpp ../src/capabilities/modules/eng
 		../src/time/timer.h \
 		../src/audio/audioplayer.h \
 		../src/audio/audiochannel.h \
-		../src/audio/audio.h \
 		../src/audio/audiosample.h \
 		../src/engine/variant.h \
 		../src/engine/type.h
@@ -2521,13 +2576,13 @@ warpdrive.o: ../src/capabilities/modules/warpdrive.cpp ../src/capabilities/modul
 		../src/time/timer.h \
 		../src/audio/audioplayer.h \
 		../src/audio/audiochannel.h \
-		../src/audio/audio.h \
 		../src/audio/audiosample.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
 		../src/context.h \
 		../src/assettools/assetprovider.h \
 		../src/assettools/assetexecutors/assetexecutor.h \
+		../src/audio/abstractaudioprovider.h \
 		../src/engine/abstractfactory.h \
 		../klibcore/src/memcontrol/kabstractfactory.h \
 		../klibcore/src/utility/ktype.h \
@@ -2582,7 +2637,6 @@ ship.o: ../src/units/ship.cpp ../src/units/ship.h \
 		../src/time/timer.h \
 		../src/audio/audioplayer.h \
 		../src/audio/audiochannel.h \
-		../src/audio/audio.h \
 		../src/audio/audiosample.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
@@ -2591,6 +2645,7 @@ ship.o: ../src/units/ship.cpp ../src/units/ship.h \
 		../src/context.h \
 		../src/assettools/assetprovider.h \
 		../src/assettools/assetexecutors/assetexecutor.h \
+		../src/audio/abstractaudioprovider.h \
 		../src/engine/abstractfactory.h \
 		../klibcore/src/memcontrol/kabstractfactory.h \
 		../klibcore/src/utility/ktype.h \
@@ -2641,7 +2696,6 @@ guielement.o: ../src/gui/guielement.cpp ../src/gui/guielement.h \
 		../src/animator.h \
 		../src/audio/audioplayer.h \
 		../src/audio/audiochannel.h \
-		../src/audio/audio.h \
 		../src/audio/audiosample.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
@@ -2685,7 +2739,6 @@ guicontainer.o: ../src/gui/guicontainer.cpp ../src/gui/guicontainer.h \
 		../src/animator.h \
 		../src/audio/audioplayer.h \
 		../src/audio/audiochannel.h \
-		../src/audio/audio.h \
 		../src/audio/audiosample.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
@@ -2733,7 +2786,6 @@ guistack.o: ../src/gui/guistack.cpp ../src/gui/guistack.h \
 		../src/animator.h \
 		../src/audio/audioplayer.h \
 		../src/audio/audiochannel.h \
-		../src/audio/audio.h \
 		../src/audio/audiosample.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
@@ -2777,7 +2829,6 @@ ai.o: ../src/capabilities/ai.cpp ../src/capabilities/ai.h \
 		../src/animator.h \
 		../src/audio/audioplayer.h \
 		../src/audio/audiochannel.h \
-		../src/audio/audio.h \
 		../src/audio/audiosample.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
@@ -2816,7 +2867,6 @@ station.o: ../src/units/station.cpp ../src/units/station.h \
 		../src/time/timer.h \
 		../src/audio/audioplayer.h \
 		../src/audio/audiochannel.h \
-		../src/audio/audio.h \
 		../src/audio/audiosample.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
@@ -2892,7 +2942,6 @@ guiswitch.o: ../src/gui/guiswitch.cpp ../src/gui/guiswitch.h \
 		../src/animator.h \
 		../src/audio/audioplayer.h \
 		../src/audio/audiochannel.h \
-		../src/audio/audio.h \
 		../src/audio/audiosample.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
@@ -2940,7 +2989,6 @@ guichoice.o: ../src/gui/guichoice.cpp ../src/gui/guichoice.h \
 		../src/animator.h \
 		../src/audio/audioplayer.h \
 		../src/audio/audiochannel.h \
-		../src/audio/audio.h \
 		../src/audio/audiosample.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
@@ -2989,7 +3037,6 @@ particle.o: ../src/units/particle.cpp ../src/units/particle.h \
 		../src/time/timer.h \
 		../src/audio/audioplayer.h \
 		../src/audio/audiochannel.h \
-		../src/audio/audio.h \
 		../src/audio/audiosample.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
@@ -2997,6 +3044,7 @@ particle.o: ../src/units/particle.cpp ../src/units/particle.h \
 		../src/context.h \
 		../src/assettools/assetprovider.h \
 		../src/assettools/assetexecutors/assetexecutor.h \
+		../src/audio/abstractaudioprovider.h \
 		../src/engine/abstractfactory.h \
 		../klibcore/src/memcontrol/kabstractfactory.h \
 		../klibcore/src/utility/ktype.h \
@@ -3041,6 +3089,10 @@ netlistener.o: ../src/netlistener.cpp ../src/netlistener.h \
 		../src/assettools/assetexecutors/assetexecutor.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
+		../src/audio/abstractaudioprovider.h \
+		../src/audio/audiochannel.h \
+		../src/audio/audiosample.h \
+		../src/engine/sharedcontainer.h \
 		../src/engine/abstractfactory.h \
 		../src/assettools/loadable.h \
 		../src/animator.h \
@@ -3051,13 +3103,9 @@ netlistener.o: ../src/netlistener.cpp ../src/netlistener.h \
 		../src/object.h \
 		../src/engine/graphics/abstractrenderer.h \
 		../src/engine/graphics/image.h \
-		../src/engine/sharedcontainer.h \
 		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
 		../src/audio/audioplayer.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audio.h \
-		../src/audio/audiosample.h \
 		../klibcore/src/memcontrol/kabstractfactory.h \
 		../klibcore/src/utility/ktype.h \
 		../src/gui/guimain.h \
@@ -3127,7 +3175,6 @@ guimain.o: ../src/gui/guimain.cpp ../src/gui/guimain.h \
 		../src/animator.h \
 		../src/audio/audioplayer.h \
 		../src/audio/audiochannel.h \
-		../src/audio/audio.h \
 		../src/audio/audiosample.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
@@ -3177,7 +3224,6 @@ guicentralmessage.o: ../src/gui/guicentralmessage.cpp ../src/gui/guicentralmessa
 		../src/animator.h \
 		../src/audio/audioplayer.h \
 		../src/audio/audiochannel.h \
-		../src/audio/audio.h \
 		../src/audio/audiosample.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
@@ -3219,7 +3265,6 @@ controllerfinder.o: ../src/additional/informative/controllerfinder.cpp ../src/ad
 		../src/animator.h \
 		../src/audio/audioplayer.h \
 		../src/audio/audiochannel.h \
-		../src/audio/audio.h \
 		../src/audio/audiosample.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
@@ -3263,7 +3308,6 @@ guifloatingmessage.o: ../src/gui/guifloatingmessage.cpp ../src/gui/guifloatingme
 		../src/animator.h \
 		../src/audio/audioplayer.h \
 		../src/audio/audiochannel.h \
-		../src/audio/audio.h \
 		../src/audio/audiosample.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
@@ -3309,7 +3353,6 @@ guiblushingfloatingmessage.o: ../src/gui/guiblushingfloatingmessage.cpp ../src/g
 		../src/animator.h \
 		../src/audio/audioplayer.h \
 		../src/audio/audiochannel.h \
-		../src/audio/audio.h \
 		../src/audio/audiosample.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
@@ -3349,13 +3392,13 @@ lightparticle.o: ../src/additional/lightparticle.cpp ../src/additional/lightpart
 		../src/assettools/assetexecutors/assetexecutor.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
+		../src/audio/abstractaudioprovider.h \
+		../src/audio/audiochannel.h \
+		../src/audio/audiosample.h \
 		../src/engine/abstractfactory.h \
 		../src/assettools/loadable.h \
 		../src/animator.h \
 		../src/audio/audioplayer.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audio.h \
-		../src/audio/audiosample.h \
 		../klibcore/src/memcontrol/kabstractfactory.h \
 		../klibcore/src/utility/ktype.h \
 		../src/gui/guimain.h \
@@ -3418,7 +3461,6 @@ worldmanager.o: ../src/worldmanager.cpp ../src/worldmanager.h \
 		../src/animator.h \
 		../src/audio/audioplayer.h \
 		../src/audio/audiochannel.h \
-		../src/audio/audio.h \
 		../src/audio/audiosample.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
@@ -3434,13 +3476,14 @@ worldmanager.o: ../src/worldmanager.cpp ../src/worldmanager.h \
 		../src/worlds/world.h \
 		../src/assettools/assetprovider.h \
 		../src/assettools/assetexecutors/assetexecutor.h \
+		../src/audio/abstractaudioprovider.h \
 		../src/engine/abstractfactory.h \
 		../klibcore/src/memcontrol/kabstractfactory.h \
 		../klibcore/src/utility/ktype.h \
 		../src/additional/informative/fpsmonitor.h \
+		../src/units/camera.h \
 		../src/context.h \
 		../src/background.h \
-		../src/units/camera.h \
 		../src/gui/guicontainer.h \
 		../src/gui/guiradar.h \
 		../src/gui/guilist.h \
@@ -3468,6 +3511,10 @@ defaultworld.o: ../src/worlds/defaultworld.cpp ../src/worlds/defaultworld.h \
 		../src/assettools/assetexecutors/assetexecutor.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
+		../src/audio/abstractaudioprovider.h \
+		../src/audio/audiochannel.h \
+		../src/audio/audiosample.h \
+		../src/engine/sharedcontainer.h \
 		../src/engine/abstractfactory.h \
 		../src/assettools/loadable.h \
 		../src/animator.h \
@@ -3478,13 +3525,9 @@ defaultworld.o: ../src/worlds/defaultworld.cpp ../src/worlds/defaultworld.h \
 		../src/object.h \
 		../src/engine/graphics/abstractrenderer.h \
 		../src/engine/graphics/image.h \
-		../src/engine/sharedcontainer.h \
 		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
 		../src/audio/audioplayer.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audio.h \
-		../src/audio/audiosample.h \
 		../klibcore/src/memcontrol/kabstractfactory.h \
 		../klibcore/src/utility/ktype.h \
 		../src/capabilities/controller.h \
@@ -3520,6 +3563,10 @@ arenaworld.o: ../src/worlds/arenaworld.cpp ../src/worlds/arenaworld.h \
 		../src/assettools/assetexecutors/assetexecutor.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
+		../src/audio/abstractaudioprovider.h \
+		../src/audio/audiochannel.h \
+		../src/audio/audiosample.h \
+		../src/engine/sharedcontainer.h \
 		../src/engine/abstractfactory.h \
 		../src/assettools/loadable.h \
 		../src/animator.h \
@@ -3530,13 +3577,9 @@ arenaworld.o: ../src/worlds/arenaworld.cpp ../src/worlds/arenaworld.h \
 		../src/object.h \
 		../src/engine/graphics/abstractrenderer.h \
 		../src/engine/graphics/image.h \
-		../src/engine/sharedcontainer.h \
 		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
 		../src/audio/audioplayer.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audio.h \
-		../src/audio/audiosample.h \
 		../klibcore/src/memcontrol/kabstractfactory.h \
 		../klibcore/src/utility/ktype.h \
 		../src/capabilities/controller.h \
@@ -3584,7 +3627,6 @@ docker.o: ../src/capabilities/docker.cpp ../src/capabilities/docker.h \
 		../src/time/timer.h \
 		../src/audio/audioplayer.h \
 		../src/audio/audiochannel.h \
-		../src/audio/audio.h \
 		../src/audio/audiosample.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
@@ -3624,7 +3666,6 @@ near.o: ../src/near.cpp ../src/near.h \
 		../src/animator.h \
 		../src/audio/audioplayer.h \
 		../src/audio/audiochannel.h \
-		../src/audio/audio.h \
 		../src/audio/audiosample.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
@@ -3670,7 +3711,6 @@ guilist.o: ../src/gui/guilist.cpp ../src/gui/guilist.h \
 		../src/animator.h \
 		../src/audio/audioplayer.h \
 		../src/audio/audiochannel.h \
-		../src/audio/audio.h \
 		../src/audio/audiosample.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
@@ -3719,7 +3759,6 @@ aggressive.o: ../src/capabilities/aggressive.cpp ../src/capabilities/aggressive.
 		../src/animator.h \
 		../src/audio/audioplayer.h \
 		../src/audio/audiochannel.h \
-		../src/audio/audio.h \
 		../src/audio/audiosample.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
@@ -3752,6 +3791,10 @@ heapworld.o: ../src/worlds/heapworld.cpp ../src/worlds/heapworld.h \
 		../src/assettools/assetexecutors/assetexecutor.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
+		../src/audio/abstractaudioprovider.h \
+		../src/audio/audiochannel.h \
+		../src/audio/audiosample.h \
+		../src/engine/sharedcontainer.h \
 		../src/engine/abstractfactory.h \
 		../src/assettools/loadable.h \
 		../src/animator.h \
@@ -3762,13 +3805,9 @@ heapworld.o: ../src/worlds/heapworld.cpp ../src/worlds/heapworld.h \
 		../src/object.h \
 		../src/engine/graphics/abstractrenderer.h \
 		../src/engine/graphics/image.h \
-		../src/engine/sharedcontainer.h \
 		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
 		../src/audio/audioplayer.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audio.h \
-		../src/audio/audiosample.h \
 		../klibcore/src/memcontrol/kabstractfactory.h \
 		../klibcore/src/utility/ktype.h \
 		../src/capabilities/controller.h \
@@ -3800,7 +3839,6 @@ audio.o: ../src/audio/audio.cpp ../src/audio/audio.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o audio.o ../src/audio/audio.cpp
 
 audiochannel.o: ../src/audio/audiochannel.cpp ../src/audio/audiochannel.h \
-		../src/audio/audio.h \
 		../src/audio/audiosample.h \
 		../src/engine/sharedcontainer.h \
 		../src/engine/math/math.h
@@ -3808,7 +3846,6 @@ audiochannel.o: ../src/audio/audiochannel.cpp ../src/audio/audiochannel.h \
 
 audioplayer.o: ../src/audio/audioplayer.cpp ../src/audio/audioplayer.h \
 		../src/audio/audiochannel.h \
-		../src/audio/audio.h \
 		../src/audio/audiosample.h \
 		../src/engine/sharedcontainer.h \
 		../src/worker.h \
@@ -3883,7 +3920,6 @@ guiminimap.o: ../src/gui/guiminimap.cpp ../src/gui/guiminimap.h \
 		../src/animator.h \
 		../src/audio/audioplayer.h \
 		../src/audio/audiochannel.h \
-		../src/audio/audio.h \
 		../src/audio/audiosample.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
@@ -3932,7 +3968,6 @@ guiradar.o: ../src/gui/guiradar.cpp ../src/gui/guiradar.h \
 		../src/animator.h \
 		../src/audio/audioplayer.h \
 		../src/audio/audiochannel.h \
-		../src/audio/audio.h \
 		../src/audio/audiosample.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
@@ -3971,7 +4006,6 @@ thruster.o: ../src/capabilities/modules/thruster.cpp ../src/capabilities/modules
 		../src/time/timer.h \
 		../src/audio/audioplayer.h \
 		../src/audio/audiochannel.h \
-		../src/audio/audio.h \
 		../src/audio/audiosample.h \
 		../src/engine/variant.h \
 		../src/engine/type.h
@@ -4014,7 +4048,6 @@ guimenuelement.o: ../src/gui/guimenuelement.cpp ../src/gui/guimenuelement.h \
 		../src/animator.h \
 		../src/audio/audioplayer.h \
 		../src/audio/audiochannel.h \
-		../src/audio/audio.h \
 		../src/audio/audiosample.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
@@ -4072,13 +4105,13 @@ environment.o: ../src/environment.cpp ../src/environment.h \
 		../src/assettools/assetexecutors/assetexecutor.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
+		../src/audio/abstractaudioprovider.h \
+		../src/audio/audiochannel.h \
+		../src/audio/audiosample.h \
 		../src/engine/abstractfactory.h \
 		../src/assettools/loadable.h \
 		../src/animator.h \
 		../src/audio/audioplayer.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audio.h \
-		../src/audio/audiosample.h \
 		../klibcore/src/memcontrol/kabstractfactory.h \
 		../klibcore/src/utility/ktype.h \
 		../src/gui/guimain.h \
@@ -4102,15 +4135,16 @@ environment.o: ../src/environment.cpp ../src/environment.h \
 		../src/near.h \
 		../src/worldmanager.h \
 		../src/worlds/world.h \
+		../src/units/camera.h \
 		../src/additional/mutex.h \
 		../src/worlds/defaultworld.h \
 		../src/worlds/arenaworld.h \
 		../src/worlds/heapworld.h \
 		../src/debug.h \
 		../klibcore/src/ksmartenum.h \
-		../src/units/camera.h \
 		../src/time/time.h \
 		../src/filesystem.h \
+		../src/sdlimplementation/sdlaudioprovider.h \
 		../src/sdlimplementation/sdlgraphicsprovider.h \
 		../src/sdlimplementation/sdlrenderer.h \
 		../src/engine/graphics/abstractgraphicsprovider.h \
@@ -4127,7 +4161,8 @@ environment.o: ../src/environment.cpp ../src/environment.h \
 		../src/capabilities/player.h \
 		../src/capabilities/modules/engine.h \
 		../src/capabilities/modules/thruster.h \
-		../src/capabilities/modules/weapon.h
+		../src/capabilities/modules/weapon.h \
+		../src/audio/audio.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o environment.o ../src/environment.cpp
 
 ####### Install

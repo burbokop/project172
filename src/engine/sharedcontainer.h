@@ -11,10 +11,12 @@ class SharedContainer {
 public:
     typedef const void* ptr;
     struct base_handle { virtual ~base_handle(); };
-    template<typename T> struct handle : public base_handle { T c; handle(const T &v) { c = v; } };
+    template<typename T> struct handle : public base_handle { T c; handle(const T &v) { c = v; } handle() {} };
     typedef const base_handle* data_ptr;
     template<typename T>
     static handle<T> *handle_cast(const base_handle *ptr) { return const_cast<handle<T>*>(dynamic_cast<const handle<T>*>(ptr)); }
+
+    typedef handle<void*> void_handle;
 protected:
     template<typename T>
     handle<T> *casted_handle() const { return handle_cast<T>(m_data); }

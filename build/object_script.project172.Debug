@@ -18,8 +18,10 @@ debug/spriteassetexecutor.o
 debug/stringassetexecutor.o
 debug/vectorassetexecutor.o
 debug/assetprovider.o
-debug/audiochannel2.o
+debug/abstractaudioprovider.o
+debug/audiosample.o
 debug/abstractfactory.o
+debug/sharedcontainer.o
 debug/type.o
 debug/variant.o
 debug/abstractgraphicsprovider.o
@@ -29,6 +31,9 @@ debug/textformat.o
 debug/guidebugvalueinfo.o
 debug/main.o
 debug/object.o
+debug/openglgraphicsprovider.o
+debug/openglrenderer.o
+debug/sdlaudioprovider.o
 debug/sdlgraphicsprovider.o
 debug/sdlrenderer.o
 debug/worker.o
