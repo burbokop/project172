@@ -46,3 +46,8 @@ e172::Image SDLGraphicsProvider::loadImage(const std::string &path) const {
 e172::Image SDLGraphicsProvider::createImage(void *bitmap, int format) const {
     return e172::Image();
 }
+
+
+e172::Font SDLGraphicsProvider::loadFont(const std::string &font)
+{
+}

@@ -128,7 +128,6 @@ void WorldManager::checkState(Context *context, AssetProvider *assets, std::vect
         init(assets, units, renderer, fps, tps);
         context->setGui(getGui());
         context->setNear(getNear());
-        renderer->setCamera(getCamera());
     }
     _near->update();
 }

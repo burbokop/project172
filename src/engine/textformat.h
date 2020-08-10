@@ -3,8 +3,11 @@
 
 namespace e172 {
 
+typedef int Font;
+
 class TextFormat {
     int m_fontSize = 0;
+    Font m_font = -1;
 public:
     enum Alignment {
         AlignHCenter = 1,
@@ -28,6 +31,8 @@ public:
     Alignment alignment() const;
     void setAlignment(const Alignment &alignment);
     void setFontSize(int fontSize);
+    Font font() const;
+    void setFont(const Font &font);
 };
 
 }

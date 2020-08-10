@@ -14,15 +14,17 @@ class SDLGraphicsProvider : public e172::AbstractGraphicsProvider {
     int m_y;
     std::string m_fontPath;
     SDLRenderer *m_renderer = nullptr;
+    std::map<int, TTF_Font*> m_fonts;
 public:
     SDLGraphicsProvider(const char *title, int x, int y, std::string fontPath);
     ~SDLGraphicsProvider();
 
     // AbstractGraphicsProvider interface
 public:
-    e172::AbstractRenderer *renderer() const override;
-    e172::Image loadImage(const std::string &path) const override;
-    e172::Image createImage(void *bitmap, int format) const override;
+    virtual e172::AbstractRenderer *renderer() const override;
+    virtual e172::Image loadImage(const std::string &path) const override;
+    virtual e172::Image createImage(void *bitmap, int format) const override;
+    virtual e172::Font loadFont(const std::string &font) override;
 };
 
 

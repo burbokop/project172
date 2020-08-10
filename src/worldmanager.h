@@ -7,6 +7,8 @@
 #include "worlds/world.h"
 #include "additional/informative/fpsmonitor.h"
 
+#include <units/camera.h>
+
 
 class WorldManager : public Object {
 private:

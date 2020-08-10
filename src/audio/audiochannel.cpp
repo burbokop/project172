@@ -44,9 +44,9 @@ void AudioChannel::play(const AudioSample &sample, int loops) {
         Mix_Volume(ptr, v);
         if(v > 0 && sample.isValid()) {
             if(loops > 0) {
-                Mix_PlayChannel(ptr, sample, loops - 1);
+                //Mix_PlayChannel(ptr, sample, loops - 1);
             } else if (loops == Infinitely) {
-                Mix_PlayChannel(ptr, sample, Infinitely);
+                //Mix_PlayChannel(ptr, sample, Infinitely);
             }
         }
     }

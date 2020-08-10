@@ -17,3 +17,7 @@ void AbstractGraphicsProvider::installParentToRenderer(AbstractRenderer *rendere
     renderer->m_provider = this;
     renderer->m_isActive = true;
 }
+
+AbstractGraphicsProvider::~AbstractGraphicsProvider() {
+
+}

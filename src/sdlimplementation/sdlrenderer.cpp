@@ -5,6 +5,8 @@
 #include "debug.h"
 
 #include <sdlimplementation/effects/anaglyph.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
 
 
 const int SDLRenderer::DEFAULT_FONT_SIZE = 20;
@@ -12,10 +14,6 @@ const int SDLRenderer::DEFAULT_FONT_SIZE = 20;
 
 e172::Vector SDLRenderer::resolution() const {
     return m_resolution;
-}
-
-e172::Vector SDLRenderer::offset() const {
-    return m_offset;
 }
 
 void SDLRenderer::enableEffect(uint64_t effect) {
@@ -36,15 +34,6 @@ void SDLRenderer::disableEffect(uint64_t effect) {
     }
 }
 
-bool SDLRenderer::updateLensEffect(e172::AbstractRenderer::Lens lens, const e172::Vector &point1, const e172::Vector &point2, double coefficient) {
-    auto it = lenses.find(lens);
-    if(it != lenses.end()) {
-        it->second = std::make_tuple(point1, point2, coefficient);
-        return true;
-    }
-    return false;
-}
-
 SDLRenderer::~SDLRenderer() {
     SDL_FreeSurface(surface);
     TTF_Quit();
@@ -61,14 +50,13 @@ void SDLRenderer::setResolutionCallback(Variant value) {
     setResolution(value.toVector());
 }
 
-
-void SDLRenderer::setCamera(Camera *value) {
-    camera = value;
+void SDLRenderer::applyLensEffect(const e172::Vector &point0, const e172::Vector &point1, double coefficient) {
+    m_applyLensEffectNexUpdate = true;
+    m_lensEffectNexUpdatePoint0 = point0;
+    m_lensEffectNexUpdatePoint1 = point1;
+    m_lensEffectNexUpdateCoef = coefficient;
 }
 
-Camera *SDLRenderer::getCamera() const {
-    return camera;
-}
 
 SDLRenderer::SDLRenderer(const char *title, int x, int y, std::string fontPath) {
     SDL_Init(SDL_INIT_EVERYTHING);
@@ -83,7 +71,7 @@ SDLRenderer::SDLRenderer(const char *title, int x, int y, std::string fontPath) 
     this->fonts[DEFAULT_FONT_SIZE] = TTF_OpenFont(fontPath.c_str(), DEFAULT_FONT_SIZE);
 }
 
-void SDLRenderer::applyLensEffect(SDL_Surface *surface, const e172::Vector point0, const e172::Vector point1, double coef) {
+void SDLRenderer::__applyLensEffect(SDL_Surface *surface, const e172::Vector point0, const e172::Vector point1, double coef) {
     auto pixels = reinterpret_cast<uint32_t*>(surface->pixels);
 
     auto center = (point0 + point1) / 2;
@@ -239,30 +227,12 @@ e172::Vector SDLRenderer::drawString(const std::string &string, const e172::Vect
 }
 
 void SDLRenderer::update() {
-    Unit *cameraUnit = dynamic_cast<Unit*>(camera);
-    if(cameraUnit) {
-        m_offset = m_resolution / 2 - cameraUnit->getPosition();
+    if(m_applyLensEffectNexUpdate) {
+        __applyLensEffect(surface, m_lensEffectNexUpdatePoint0, m_lensEffectNexUpdatePoint1, m_lensEffectNexUpdateCoef);
+        m_applyLensEffectNexUpdate = false;
     }
-    for(auto l : lenses) {
-        applyLensEffect(surface, std::get<0>(l.second), std::get<1>(l.second), std::get<2>(l.second));
-    }
+
     SDL_UpdateWindowSurface(window);
-}
-
-
-
-e172::AbstractRenderer::Lens SDLRenderer::enableLensEffect(const e172::Vector &point1, const e172::Vector &point2, double coefficient) {
-    lenses[nextLens] = std::make_tuple(point1, point2, coefficient);
-    return nextLens++;
-}
-
-bool SDLRenderer::disableLensEffect(Lens lens) {
-    const auto it = lenses.find(lens);
-    if(it != lenses.end()) {
-        lenses.erase(it);
-        return true;
-    }
-    return false;
 }
 
 

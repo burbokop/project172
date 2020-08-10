@@ -7,6 +7,9 @@
 
 
 class Camera : public Movable {
+
+    e172::AbstractRenderer::Camera r_cam;
+    int m_i = 0;
 protected:
     static const double STOP_DISTANCE;
     static const double MAX_SPEED_MULTIPLIER;

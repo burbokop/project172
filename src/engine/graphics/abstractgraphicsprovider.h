@@ -6,7 +6,6 @@
 #include <string>
 
 
-
 namespace e172 {
 
 
@@ -28,6 +27,7 @@ public:
     virtual AbstractRenderer *renderer() const = 0;
     virtual Image loadImage(const std::string &path) const = 0;
     virtual Image createImage(void* bitmap, int format) const = 0;
+    virtual Font loadFont(const std::string &font) = 0;
     virtual ~AbstractGraphicsProvider();
 };
 

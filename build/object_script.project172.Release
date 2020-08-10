@@ -18,8 +18,10 @@ release/spriteassetexecutor.o
 release/stringassetexecutor.o
 release/vectorassetexecutor.o
 release/assetprovider.o
-release/audiochannel2.o
+release/abstractaudioprovider.o
+release/audiosample.o
 release/abstractfactory.o
+release/sharedcontainer.o
 release/type.o
 release/variant.o
 release/abstractgraphicsprovider.o
@@ -29,6 +31,9 @@ release/textformat.o
 release/guidebugvalueinfo.o
 release/main.o
 release/object.o
+release/openglgraphicsprovider.o
+release/openglrenderer.o
+release/sdlaudioprovider.o
 release/sdlgraphicsprovider.o
 release/sdlrenderer.o
 release/worker.o

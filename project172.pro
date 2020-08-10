@@ -46,6 +46,8 @@ SOURCES += \
     src/gui/guidebugvalueinfo.cpp \
     src/main.cpp \
     src/object.cpp \
+    src/openglimplementation/openglgraphicsprovider.cpp \
+    src/openglimplementation/openglrenderer.cpp \
     src/sdlimplementation/sdlaudioprovider.cpp \
     src/sdlimplementation/sdlgraphicsprovider.cpp \
     src/sdlimplementation/sdlrenderer.cpp \
@@ -151,6 +153,8 @@ HEADERS += \
     src/engine/textformat.h \
     src/gui/guidebugvalueinfo.h \
     src/object.h \
+    src/openglimplementation/openglgraphicsprovider.h \
+    src/openglimplementation/openglrenderer.h \
     src/sdlimplementation/sdlaudioprovider.h \
     src/sdlimplementation/sdlgraphicsprovider.h \
     src/sdlimplementation/sdlrenderer.h \
