@@ -2,7 +2,7 @@
 
 #include "time/time.h"
 
-const Uint32 GUIFloatingMessage::DEFAULT_COLOR = 0xFFEF40;
+const uint32_t GUIFloatingMessage::DEFAULT_COLOR = 0xFFEF40;
 const int GUIFloatingMessage::DEFAULT_FONT_SIZE = 14;
 const double GUIFloatingMessage::DEFAULT_FLOATING_SPEED = 30.0;
 

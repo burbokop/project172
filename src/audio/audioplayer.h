@@ -40,7 +40,7 @@ public:
     bool play();
     bool stop();
 
-    void tick(Context *context, Event *event);
+    void tick(Context *context, e172::AbstractEventHandler *eventHandler);
     void render(e172::AbstractRenderer *renderer);
 
     /**

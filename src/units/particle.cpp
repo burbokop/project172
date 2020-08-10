@@ -46,9 +46,9 @@ void Particle::hit(Context *context, int value) {
     UNUSED(value);
 }
 
-void Particle::tick(Context *context, Event *event) {
+void Particle::tick(Context *context, e172::AbstractEventHandler *eventHandler) {
     if(destroyTimer && destroyTimer->count()) {
         context->addEvent(this, Context::DELETE_UNIT);
     }
-    this->Movable::tick(context, event);
+    this->Movable::tick(context, eventHandler);
 }

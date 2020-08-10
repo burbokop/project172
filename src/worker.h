@@ -3,10 +3,12 @@
 
 
 
-#include "additional/event.h"
+
 #include "object.h"
 
 #include <engine/graphics/abstractrenderer.h>
+#include <engine/abstracteventhandler.h>
+
 
 
 class Context;
@@ -14,7 +16,7 @@ class Context;
 class Worker : public Object {
 public:
     Worker();
-    void virtual tick(Context *context, Event *event) = 0;
+    void virtual tick(Context *context, e172::AbstractEventHandler *eventHandler) = 0;
     void virtual render(e172::AbstractRenderer *renderer) = 0;
     virtual ~Worker();
 };

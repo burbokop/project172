@@ -15,12 +15,12 @@ public:
 
     bool prepareWarp();
     bool warp();
-    Uint8 abortWarp(Context *context);
+    uint8_t abortWarp(Context *context);
     WarpDrive *getFirstWarp();
 
     // Worker interface
 public:
-    void tick(Context *context, Event *event);
+    void tick(Context *context, e172::AbstractEventHandler *eventHandler);
 
     // Movable interface
 protected:

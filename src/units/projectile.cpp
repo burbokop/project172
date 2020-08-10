@@ -45,7 +45,7 @@ void Projectile::setMother(Unit *value) {
     mother = value;
 }
 
-void Projectile::tick(Context *context, Event *event) {
+void Projectile::tick(Context *context, e172::AbstractEventHandler *eventHandler) {
     if(destroyTimer && destroyTimer->count()) {
         context->addEvent(this, Context::DELETE_UNIT);
     }
@@ -62,6 +62,6 @@ void Projectile::tick(Context *context, Event *event) {
             Debug::err(Debug::Code::APPEAL_TO_REMOVED, __PRETTY_FUNCTION__);
         }
     }
-    this->Movable::tick(context, event);
+    this->Movable::tick(context, eventHandler);
 }
 

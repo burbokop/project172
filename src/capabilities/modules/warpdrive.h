@@ -5,16 +5,16 @@
 
 class WarpDrive : public Module {
 public:
-    static const Uint8 WARP_DISABLED;
-    static const Uint8 WARP_LOADING;
-    static const Uint8 WARP_READY;
-    static const Uint8 WARP_EXECUTING;
-    static const Uint8 WARP_RECHARGING;
+    static const uint8_t WARP_DISABLED;
+    static const uint8_t WARP_LOADING;
+    static const uint8_t WARP_READY;
+    static const uint8_t WARP_EXECUTING;
+    static const uint8_t WARP_RECHARGING;
 private:
 
     static const int DEFAULT_CYCLES_NUMBER = 12;
 
-    Uint8 warpState = WARP_DISABLED;
+    uint8_t warpState = WARP_DISABLED;
     int currentChargindIteration = 0;
     int chargindIterations = DEFAULT_CYCLES_NUMBER;
     double warpVelocity = 0.1;
@@ -34,11 +34,11 @@ public:
 
     bool prepareWarp();
     bool warp();
-    Uint8 abortWarp(Context *context);
+    uint8_t abortWarp(Context *context);
 
     // Worker interface
 public:
-    void tick(Context *context, Event *event) override;
+    void tick(Context *context, e172::AbstractEventHandler *eventHandler) override;
 };
 
 #endif // WARPDRIVE_H

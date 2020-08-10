@@ -24,7 +24,7 @@ private:
 
     unsigned shape = PIXEL;
     int radius = 2;
-    Uint32 color = 0xff00ff;
+    uint32_t color = 0xff00ff;
     Timer *destroyTimer = nullptr;
     double velocityMultiplier = 0;
 
@@ -35,7 +35,7 @@ public:
 
     // Worker interface
 public:
-    void tick(Context *context, Event *event);
+    void tick(Context *context, e172::AbstractEventHandler *eventHandler);
     void render(e172::AbstractRenderer *renderer);
 };
 

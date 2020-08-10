@@ -29,8 +29,8 @@ void Module::animate(unsigned mode, unsigned def) {
     else audioPlayer.stop();
 }
 
-void Module::tick(Context *context, Event *event) {
-    this->audioPlayer.tick(context, event);
+void Module::tick(Context *context, e172::AbstractEventHandler *eventHandler) {
+    this->audioPlayer.tick(context, eventHandler);
 }
 
 void Module::render(e172::AbstractRenderer *renderer) {

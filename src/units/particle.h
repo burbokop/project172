@@ -7,24 +7,24 @@
 
 class Particle : public Movable {
 public:
-    static const Uint8 PIXEL;
-    static const Uint8 SQUARE;
-    static const Uint8 CIRCLE;
+    static const uint8_t PIXEL;
+    static const uint8_t SQUARE;
+    static const uint8_t CIRCLE;
 
     static const int DEFAULT_AVERAGE_LIFE_TIME;
     static const int DEFAULT_LIFE_TIME_DELTA;
 
 
 private:
-    Uint8 shape = PIXEL;
+    uint8_t shape = PIXEL;
     int radius = 2;
-    Uint32 color = 0xff00ff;
-    Uint32 generateColor();
+    uint32_t color = 0xff00ff;
+    uint32_t generateColor();
     Timer *destroyTimer = nullptr;
 
 public:
     Particle();
-    Particle(Uint8 shape, int averageLifeTime = DEFAULT_AVERAGE_LIFE_TIME, int lifeTimeDelta = DEFAULT_LIFE_TIME_DELTA);
+    Particle(uint8_t shape, int averageLifeTime = DEFAULT_AVERAGE_LIFE_TIME, int lifeTimeDelta = DEFAULT_LIFE_TIME_DELTA);
 
     // Worker interface
 public:
@@ -36,7 +36,7 @@ public:
 
     // Worker interface
 public:
-    void tick(Context *context, Event *event);
+    void tick(Context *context, e172::AbstractEventHandler *eventHandler);
 };
 
 #endif // PARTICLE_H

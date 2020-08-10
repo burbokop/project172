@@ -5,38 +5,39 @@
 #include "capabilities/modules/weapon.h"
 
 
-const std::map<std::string, int> Player::scancode = {
-    { "q", SDL_SCANCODE_Q },
-    { "w", SDL_SCANCODE_W },
-    { "e", SDL_SCANCODE_E },
-    { "r", SDL_SCANCODE_R },
-    { "t", SDL_SCANCODE_T },
-    { "y", SDL_SCANCODE_Y },
-    { "u", SDL_SCANCODE_U },
-    { "i", SDL_SCANCODE_I },
-    { "o", SDL_SCANCODE_O },
-    { "p", SDL_SCANCODE_P },
-    { "[", SDL_SCANCODE_KP_LEFTBRACE },
-    { "]", SDL_SCANCODE_KP_RIGHTBRACE },
-    { "a", SDL_SCANCODE_A },
-    { "s", SDL_SCANCODE_S },
-    { "d", SDL_SCANCODE_D },
-    { "f", SDL_SCANCODE_F },
-    { "g", SDL_SCANCODE_G },
-    { "h", SDL_SCANCODE_H },
-    { "j", SDL_SCANCODE_J },
-    { "k", SDL_SCANCODE_K },
-    { "l", SDL_SCANCODE_L },
+const std::map<std::string, e172::Scancode> Player::scancode = {
+    { "q", e172::ScancodeQ },
+    { "w", e172::ScancodeW },
+    { "e", e172::ScancodeE },
+    { "r", e172::ScancodeR },
+    { "t", e172::ScancodeT },
+    { "y", e172::ScancodeY },
+    { "u", e172::ScancodeU },
+    { "i", e172::ScancodeI },
+    { "o", e172::ScancodeO },
+    { "p", e172::ScancodeP },
+    { "[", e172::ScancodeKP_LEFTBRACE },
+    { "]", e172::ScancodeKP_RIGHTBRACE },
+    { "a", e172::ScancodeA },
+    { "s", e172::ScancodeS },
+    { "d", e172::ScancodeD },
+    { "f", e172::ScancodeF },
+    { "g", e172::ScancodeG },
+    { "h", e172::ScancodeH },
+    { "j", e172::ScancodeJ },
+    { "k", e172::ScancodeK },
+    { "l", e172::ScancodeL },
 
 
-    { "space", SDL_SCANCODE_SPACE },
+
+    { "space", e172::ScancodeSPACE },
 };
 
 
 
-bool Player::getPersonalKey(Event *event, std::string id) {
+bool Player::getPersonalKey(e172::AbstractEventHandler *eventHandler, std::string id) {
     if(personalScancode.find(id) != personalScancode.end()) {
-        return event->getKey(personalScancode[id]);
+        return eventHandler->keyHolded(personalScancode[id]);
     }
     return false;
 }
@@ -56,7 +57,7 @@ void Player::setArmor(Ship *armor) {
     this->armor = armor;
 }
 
-void Player::tick(Context *context, Event *event) {
+void Player::tick(Context *context, e172::AbstractEventHandler *eventHandler) {
     EXISTS(parent()) {
 
     } else {
@@ -70,9 +71,9 @@ void Player::tick(Context *context, Event *event) {
     }
 
 
-    if(getPersonalKey(event, "left")) {
+    if(getPersonalKey(eventHandler, "left")) {
         parent()->rotateLeft() ;
-    } else if(getPersonalKey(event, "right")) {
+    } else if(getPersonalKey(eventHandler, "right")) {
         parent()->rotateRight();
     }
 
@@ -86,12 +87,12 @@ void Player::tick(Context *context, Event *event) {
             for(Module *module : *weapons) {
                 Weapon *weapon = dynamic_cast<Weapon*>(module);
                 if(weapon) {
-                    weapon->setFiring(getPersonalKey(event, "action"));
+                    weapon->setFiring(getPersonalKey(eventHandler, "action"));
                 }
             }
         }
 
-        if(ship && getPersonalKey(event, "warp")) {
+        if(ship && getPersonalKey(eventHandler, "warp")) {
             if(!warpKeyPressed) {
                 warpKeyPressed = true;
                 if(!ship->warp()) {
@@ -106,15 +107,15 @@ void Player::tick(Context *context, Event *event) {
         }
     }
 
-    if(ship && getPersonalKey(event, "forward")) {
+    if(ship && getPersonalKey(eventHandler, "forward")) {
         ship->accelerateForward();
     }
 
-    if(getPersonalKey(event, "armor")) {
+    if(getPersonalKey(eventHandler, "armor")) {
         releaseArmor();
     }
 
-    this->Controller::tick(context, event);
+    this->Controller::tick(context, eventHandler);
 }
 
 void Player::render(e172::AbstractRenderer *renderer) {

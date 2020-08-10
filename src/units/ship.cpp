@@ -50,7 +50,7 @@ WarpDrive *Ship::getFirstWarp() {
     return nullptr;
 }
 
-void Ship::tick(Context *context, Event *event) {
+void Ship::tick(Context *context, e172::AbstractEventHandler *eventHandler) {
     ModuleHandler *modules = getModuleHandler();
     if(modules) {
         std::vector<Module*> *drives = modules->getModulesByClass("WarpDrive");
@@ -64,7 +64,7 @@ void Ship::tick(Context *context, Event *event) {
             }
         }
     }
-    this->Movable::tick(context, event);
+    this->Movable::tick(context, eventHandler);
 }
 
 bool Ship::onAcceleration(bool start) {

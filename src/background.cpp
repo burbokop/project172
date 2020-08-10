@@ -40,9 +40,9 @@ void Background::onResolutionChange(e172::Vector resolution) {
     }
 }
 
-void Background::tick(Context *context, Event *event) {
+void Background::tick(Context *context, e172::AbstractEventHandler *eventHandler) {
     UNUSED(context);
-    UNUSED(event);
+    UNUSED(eventHandler);
 }
 
 void Background::render(e172::AbstractRenderer *renderer) {

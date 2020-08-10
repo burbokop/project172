@@ -35,6 +35,7 @@ SOURCES += \
     src/assettools/assetprovider.cpp \
     src/audio/abstractaudioprovider.cpp \
     src/audio/audiosample.cpp \
+    src/engine/abstracteventhandler.cpp \
     src/engine/abstractfactory.cpp \
     src/engine/additional.cpp \
     src/engine/sharedcontainer.cpp \
@@ -50,6 +51,7 @@ SOURCES += \
     src/openglimplementation/openglgraphicsprovider.cpp \
     src/openglimplementation/openglrenderer.cpp \
     src/sdlimplementation/sdlaudioprovider.cpp \
+    src/sdlimplementation/sdleventhandler.cpp \
     src/sdlimplementation/sdlgraphicsprovider.cpp \
     src/sdlimplementation/sdlrenderer.cpp \
     src/worker.cpp \
@@ -68,7 +70,6 @@ SOURCES += \
     src/sdlimplementation/rotozoom.cpp \
     src/sdlimplementation/spm.cpp \
     src/time/timer.cpp \
-    src/additional/event.cpp \
     src/engine/math/vector.cpp \
     src/additional/stringformer.cpp \
     src/sdlimplementation/effects/anaglyph.cpp \
@@ -144,6 +145,7 @@ HEADERS += \
     src/assettools/assetprovider.h \
     src/audio/abstractaudioprovider.h \
     src/audio/audiosample.h \
+    src/engine/abstracteventhandler.h \
     src/engine/abstractfactory.h \
     src/engine/additional.h \
     src/engine/sharedcontainer.h \
@@ -158,6 +160,7 @@ HEADERS += \
     src/openglimplementation/openglgraphicsprovider.h \
     src/openglimplementation/openglrenderer.h \
     src/sdlimplementation/sdlaudioprovider.h \
+    src/sdlimplementation/sdleventhandler.h \
     src/sdlimplementation/sdlgraphicsprovider.h \
     src/sdlimplementation/sdlrenderer.h \
     src/worker.h \
@@ -176,7 +179,6 @@ HEADERS += \
     src/sdlimplementation/rotozoom.h \
     src/sdlimplementation/spm.h \
     src/time/timer.h \
-    src/additional/event.h \
     src/engine/math/vector.h \
     src/additional/stringformer.h \
     src/sdlimplementation/effects/anaglyph.h \

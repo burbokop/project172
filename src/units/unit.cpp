@@ -166,7 +166,7 @@ void Unit::hit(Context* context, int value) {
     }
 }
 
-void Unit::tick(Context *context, Event *event) {
+void Unit::tick(Context *context, e172::AbstractEventHandler *eventHandler) {
     const double rotationSpeed = getRotationSpeed();
     if(angleLocked && std::abs(angle - dstAngle) > rotationSpeed * 5) {
         if(angle > dstAngle) angle -= rotationSpeed;
@@ -174,7 +174,7 @@ void Unit::tick(Context *context, Event *event) {
     }
 
     for(Capability *cap : capabilities) {
-        cap->tick(context, event);
+        cap->tick(context, eventHandler);
     }
 }
 

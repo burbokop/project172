@@ -28,8 +28,8 @@ void Controller::onHit(Context *context, int health) {
     UNUSED(health);
 }
 
-void Controller::tick(Context *context, Event *event) {
-    UNUSED(event);
+void Controller::tick(Context *context, e172::AbstractEventHandler *eventHandler) {
+    UNUSED(eventHandler);
     if(armorReleaseMessageTrigger.check()) {
         context->addEvent(parent(), Context::EMERGENCY_MESSAGE, const_cast<char*>(ARMOR_RELEASE_MESSAGE));
     }

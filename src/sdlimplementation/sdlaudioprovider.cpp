@@ -60,7 +60,7 @@ e172::AudioChannel SDLAudioProvider::reserveChannel() {
 [](e172::AudioChannel::data_ptr data, const e172::AudioSample& sample, int loops){
     auto c = e172::AudioChannel::handle_cast<int>(data);
     auto s = audioSampleData<Mix_Chunk*>(sample);
-    Mix_PlayChannelTimed(c->c,s,loops,-1);
+    Mix_PlayChannelTimed(c->c,s,loops-1,-1);
 },
 [](e172::AudioChannel::data_ptr data){
     auto c = e172::AudioChannel::handle_cast<int>(data);

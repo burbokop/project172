@@ -15,7 +15,7 @@ public:
     void stop();
 
 
-    void tick(Context *context, Event *event);
+    void tick(Context *context, e172::AbstractEventHandler *eventHandler);
 
     // IInformative interface
 public:

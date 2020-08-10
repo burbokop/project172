@@ -28,9 +28,9 @@ Docker::State Docker::getState() {
     return state;
 }
 
-void Docker::tick(Context *context, Event *event) {
+void Docker::tick(Context *context, e172::AbstractEventHandler *eventHandler) {
     UNUSED(context);
-    UNUSED(event);
+    UNUSED(eventHandler);
     if(state == IN_INTERCEPTION) {
         double dst = (parent()->getPosition() - target->getPosition()).module();
         if(dst < 64) {

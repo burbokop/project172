@@ -35,9 +35,9 @@ bool AudioPlayer::stop() {
 }
 
 #include <iostream>
-void AudioPlayer::tick(Context *context, Event *event) {
+void AudioPlayer::tick(Context *context, e172::AbstractEventHandler *eventHandler) {
     UNUSED(context);
-    UNUSED(event);
+    UNUSED(eventHandler);
 
     if(state == Beginning) {
         if(!m_channel.isPlaying()) {

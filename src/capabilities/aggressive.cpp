@@ -34,7 +34,7 @@ Aggressive::Aggressive(std::vector<Worker *> *units) {
     target = chooseTarget();
 }
 
-void Aggressive::tick(Context *context, Event *event) {
+void Aggressive::tick(Context *context, e172::AbstractEventHandler *eventHandler) {
     EXISTS(target) {
         if(target != nullptr && parent() != nullptr && target->is<Ship*>() && target != parent()) {
             e172::Vector dst = target->getPosition() - parent()->getPosition();
@@ -94,7 +94,7 @@ void Aggressive::tick(Context *context, Event *event) {
         targeted = false;
         target = chooseTarget();
     }
-    this->Controller::tick(context, event);
+    this->Controller::tick(context, eventHandler);
 }
 
 void Aggressive::render(e172::AbstractRenderer *renderer) {

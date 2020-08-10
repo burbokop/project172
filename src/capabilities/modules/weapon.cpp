@@ -29,8 +29,8 @@ std::string Weapon::getInfo() {
             + ((timer.ready() > 1) ? "ready" : "");
 }
 
-void Weapon::tick(Context *context, Event *event) {
-    this->Module::tick(context, event);
+void Weapon::tick(Context *context, e172::AbstractEventHandler *eventHandler) {
+    this->Module::tick(context, eventHandler);
     if(timer.count(firing)) {
         if(projectileName.size() > 0) {
             Projectile *object = static_cast<Projectile*>(context->getAssets()->createLoadable(projectileName));

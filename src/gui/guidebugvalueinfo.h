@@ -12,7 +12,7 @@ public:
 
     // Worker interface
 public:
-    virtual void tick(Context *context, Event *event) override;
+    virtual void tick(Context *context, e172::AbstractEventHandler *eventHandler) override;
     virtual void render(e172::AbstractRenderer *renderer) override;
 };
 

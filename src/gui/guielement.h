@@ -7,8 +7,8 @@
 
 class GUIElement : public Worker {
 protected:
-    static const Uint32 DEFAULT_COLOR = 0xC97878;
-    static const Uint32 SELECTED_COLOR = 0xD2BB5F;
+    static const uint32_t DEFAULT_COLOR = 0xC97878;
+    static const uint32_t SELECTED_COLOR = 0xD2BB5F;
 
     Controller *player = nullptr;
     int margin = 24;

@@ -102,20 +102,20 @@ bool GUIContainer::hasSubElements() {
     return true;
 }
 
-void GUIContainer::tick(Context *context, Event *event) {
+void GUIContainer::tick(Context *context, e172::AbstractEventHandler *eventHandler) {
     UNUSED(context);
-    if(event->getPressed(SDL_SCANCODE_DOWN)) {
+    if(eventHandler->keySinglePressed(e172::ScancodeDOWN)) {
         selectedElement = selectDown();
-    } else if(event->getPressed(SDL_SCANCODE_UP)) {
+    } else if(eventHandler->keySinglePressed(e172::ScancodeUP)) {
         selectedElement = selectUp();
-    } else if(event->getPressed(SDL_SCANCODE_RETURN)) {
+    } else if(eventHandler->keySinglePressed(e172::ScancodeRETURN)) {
         if(selectedElement != nullptr) {
             selectedElement->onEnter();
             if(selectedElement->hasSubElements()) {
                 stack->push(selectedElement);
             }
         }
-    } else if(event->getPressed(SDL_SCANCODE_BACKSPACE)) {
+    } else if(eventHandler->keySinglePressed(e172::ScancodeBACKSPACE)) {
         stack->pop();
     }
 }
@@ -127,7 +127,7 @@ void GUIContainer::render(e172::AbstractRenderer *renderer) {
         std::string title = getTitle();
         renderer->drawString(title, pointer, DEFAULT_COLOR);
         pointer += e172::Vector(0, SDLRenderer::DEFAULT_FONT_SIZE * 2);
-        renderer->drawLine(pointer, pointer + e172::Vector(title.size() * static_cast<Uint32>(SDLRenderer::DEFAULT_FONT_SIZE), 0.0), DEFAULT_COLOR);
+        renderer->drawLine(pointer, pointer + e172::Vector(title.size() * static_cast<uint32_t>(SDLRenderer::DEFAULT_FONT_SIZE), 0.0), DEFAULT_COLOR);
         pointer += e172::Vector(0, SDLRenderer::DEFAULT_FONT_SIZE);
 
         int i = 0;

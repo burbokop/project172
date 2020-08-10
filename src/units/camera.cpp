@@ -21,13 +21,13 @@ void Camera::setTarget(Controller *target) {
     this->target = target;
 }
 
-void Camera::tick(Context *context, Event *event) {
+void Camera::tick(Context *context, e172::AbstractEventHandler *eventHandler) {
     if(target) {
         if(Unit *targetUnit = target->parent()) {
             relativisticPursuit(targetUnit);
         }
     }
-    this->Movable::tick(context, event);
+    this->Movable::tick(context, eventHandler);
 }
 
 void Camera::render(e172::AbstractRenderer *renderer) {

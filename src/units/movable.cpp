@@ -175,7 +175,7 @@ void Movable::relativisticPursuit(Unit *target) {
     }
 }
 
-void Movable::tick(Context *context, Event *event) {
+void Movable::tick(Context *context, e172::AbstractEventHandler *eventHandler) {
     if(alTmpFlag != accelerationLocked) {
         if(onAcceleration(accelerationLocked)) {
             alTmpFlag = accelerationLocked;
@@ -183,6 +183,6 @@ void Movable::tick(Context *context, Event *event) {
     }
 
     updatePosition();
-    this->Unit::tick(context, event);
+    this->Unit::tick(context, eventHandler);
 }
 

@@ -7,11 +7,11 @@
 
 class Player : public Controller, public Loadable {
 private:
-    static const std::map<std::string, int> scancode;
+    static const std::map<std::string, e172::Scancode> scancode;
 
     bool warpKeyPressed = false;
-    std::map<std::string, int> personalScancode;
-    bool getPersonalKey(Event *event, std::string id);
+    std::map<std::string, e172::Scancode> personalScancode;
+    bool getPersonalKey(e172::AbstractEventHandler *eventHandler, std::string id);
 
 public:
     Player();
@@ -20,7 +20,7 @@ public:
 
     // Worker interface
 public:
-    void tick(Context *context, Event *event);
+    void tick(Context *context, e172::AbstractEventHandler *eventHandler);
     void render(e172::AbstractRenderer *renderer);
 
     // Controller interface

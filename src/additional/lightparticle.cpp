@@ -2,6 +2,8 @@
 #include "context.h"
 #include "time/time.h"
 
+//#include <vulkan/vulkan_intel.h>
+
 const unsigned LightParticle::PIXEL = 0;
 const unsigned LightParticle::SQUARE = 1;
 const unsigned LightParticle::CIRCLE = 2;
@@ -27,8 +29,8 @@ void LightParticle::place(e172::Vector pos, e172::Vector vel) {
 }
 
 
-void LightParticle::tick(Context *context, Event *event) {
-    UNUSED(event);
+void LightParticle::tick(Context *context, e172::AbstractEventHandler *eventHandler) {
+    UNUSED(eventHandler);
     if(destroyTimer && destroyTimer->count()) {
         context->addEvent(this, Context::DELETE_UNIT);
     }
@@ -42,7 +44,7 @@ void LightParticle::tick(Context *context, Event *event) {
 void LightParticle::render(e172::AbstractRenderer *renderer) {
     switch (shape) {
         case PIXEL: renderer->drawPixel(renderer->offset() + pos, color); break;
-        case SQUARE: renderer->drawSquare(renderer->offset() + pos, radius, color); break;
+        case SQUARE: renderer->drawSquare(renderer->offset() + pos, radius / 2, color); break;
         case CIRCLE: renderer->drawCircle(renderer->offset() + pos, radius, color); break;
     }
 }

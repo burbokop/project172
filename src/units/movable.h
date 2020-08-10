@@ -66,7 +66,7 @@ public:
     void pursuit(Unit *target);
     void relativisticPursuit(Unit *target);
 
-    void tick(Context *context, Event *event);
+    void tick(Context *context, e172::AbstractEventHandler *eventHandler);
 };
 
 #endif // MOVABLE_H

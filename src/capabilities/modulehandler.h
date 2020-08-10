@@ -28,7 +28,7 @@ public:
 
     // Worker interface
 public:
-    void tick(Context *context, Event *event) override;
+    void tick(Context *context, e172::AbstractEventHandler *eventHandler) override;
     void render(e172::AbstractRenderer *renderer) override;
 };
 

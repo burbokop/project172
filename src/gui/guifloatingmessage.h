@@ -7,7 +7,7 @@
 
 class GUIFloatingMessage : public GUIMenuElement {
 protected:
-    static const Uint32 DEFAULT_COLOR;
+    static const uint32_t DEFAULT_COLOR;
     static const int DEFAULT_FONT_SIZE;
     static const double DEFAULT_FLOATING_SPEED;
 

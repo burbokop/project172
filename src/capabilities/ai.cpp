@@ -3,7 +3,7 @@
 AI::AI() : Controller () {
 }
 
-void AI::tick(Context *context, Event *event) {
+void AI::tick(Context *context, e172::AbstractEventHandler *eventHandler) {
     UNUSED(context);
-    UNUSED(event);
+    UNUSED(eventHandler);
 }

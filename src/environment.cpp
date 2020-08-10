@@ -12,6 +12,7 @@
 #include "filesystem.h"
 
 #include <sdlimplementation/sdlaudioprovider.h>
+#include <sdlimplementation/sdleventhandler.h>
 #include <sdlimplementation/sdlgraphicsprovider.h>
 
 #include <assettools/assetexecutors/animatorassetexecutor.h>
@@ -82,7 +83,7 @@ Environment::Environment(std::vector<std::string> args) {
     context = new Context(units, assetManager); //tick {no}
 
     state = new State();
-    event = new Event(); // io {no}
+    eventHandler = new SDLEventHandler(); // io {no}
     netListener = new NetListener(context);
 
     renderEngine = new SDLGraphicsProvider("project172", 600, 600);
@@ -116,11 +117,11 @@ void Environment::start() {
 
     while (1) {
         Time::update();
-        background->tick(this->context, event);
+        background->tick(this->context, eventHandler);
         background->setSpeed(worldManager->getCamera()->getVelocity());
 
         for(size_t i = 0, L = units->size(); i < L; i++) {
-            this->units->at(i)->tick(this->context, event);
+            this->units->at(i)->tick(this->context, eventHandler);
         }
 
         context->handleEvents();
@@ -129,7 +130,7 @@ void Environment::start() {
         tps->count();
 
         //IO
-        event->loop();
+        eventHandler->update();
         background->render(renderer);
 
         for(size_t i = 0, L = units->size(); i < L; i++) {
@@ -137,16 +138,14 @@ void Environment::start() {
         }
 
         if(GUIElement *gui = worldManager->getGui()) {
-            gui->tick(context, event);
+            gui->tick(context, eventHandler);
             gui->render(renderer);
         }
 
         renderer->update();
 
-        event->unpressAll();
-
         fps->count();
-        if(event->getExitFlag()) break;
+        if(eventHandler->exitFlag()) break;
     }
 
     quit();
@@ -156,7 +155,6 @@ void Environment::quit() {
     Debug::out("DESTRUCTING GAME");
     netListener->quit();
     delete renderer;
-    event->quit();
     Debug::out("GAME STOPED");
 }
 

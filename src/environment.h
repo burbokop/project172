@@ -9,7 +9,7 @@
 #include "object.h"
 #include "state.h"
 #include "worker.h"
-#include "additional/event.h"
+
 #include "background.h"
 #include "additional/informative/fpsmonitor.h"
 #include "netlistener.h"
@@ -23,7 +23,7 @@ private:
     std::vector<Worker*> *units = nullptr;
     AssetProvider *assetManager = nullptr;
     Context *context = nullptr;
-    Event *event = nullptr;
+    e172::AbstractEventHandler *eventHandler = nullptr;
     Background *background = nullptr;
     FPSMonitor *fps = nullptr;
     FPSMonitor *tps = nullptr;

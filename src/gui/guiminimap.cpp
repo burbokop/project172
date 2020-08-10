@@ -7,12 +7,12 @@ GUIMiniMap::GUIMiniMap(Controller *player, std::vector<Worker *> *units) : GUIEl
     this->units = units;
 }
 
-void GUIMiniMap::tick(Context *context, Event *event) {
+void GUIMiniMap::tick(Context *context, e172::AbstractEventHandler *eventHandler) {
     UNUSED(context);
-    if(event->getPressed(SDL_SCANCODE_EQUALS) || event->getPressed(SDL_SCANCODE_KP_PLUS)) {
+    if(eventHandler->keySinglePressed(e172::ScancodeEQUALS) || eventHandler->keySinglePressed(e172::ScancodeKP_PLUS)) {
         range /= 2;
     }
-    else if(event->getPressed(SDL_SCANCODE_MINUS) || event->getPressed(SDL_SCANCODE_KP_MINUS)) {
+    else if(eventHandler->keySinglePressed(e172::ScancodeMINUS) || eventHandler->keySinglePressed(e172::ScancodeKP_MINUS)) {
         range *= 2;
     }
 }

@@ -49,9 +49,9 @@ void Animator::play(unsigned mode) {
 }
 
 
-void Animator::tick(Context *context, Event *event) {
+void Animator::tick(Context *context, e172::AbstractEventHandler *eventHandler) {
     UNUSED(context);
-    UNUSED(event);
+    UNUSED(eventHandler);
 }
 
 void Animator::setPosition(e172::Vector pos) {

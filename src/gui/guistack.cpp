@@ -20,19 +20,19 @@ void GUIStack::pop() {
     }
 }
 
-void GUIStack::tick(Context *context, Event *event) {
+void GUIStack::tick(Context *context, e172::AbstractEventHandler *eventHandler) {
     UNUSED(context);
     if(elements.size() > 0) {
         current = elements[elements.size() - 1];
     } else {
         current = nullptr;
-        if(event->getPressed(SDL_SCANCODE_RETURN) && reserved) {
+        if(eventHandler->keySinglePressed(e172::ScancodeRETURN) && reserved) {
             push(reserved);
         }
     }
 
     if(current) {
-        current->tick(context, event);
+        current->tick(context, eventHandler);
     }
 }
 
