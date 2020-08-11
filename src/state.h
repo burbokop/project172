@@ -21,7 +21,7 @@ public:
     static unsigned getMaxFPS();
     //static void setMaxFPS(int value);
     static unsigned getLoopBehaviour();
-    static void setLoopBehaviour(Variant value);
+    static void setLoopBehaviour(old::Variant value);
 
     static void incMaxFps();
     static void decMaxFps();

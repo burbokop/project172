@@ -1,11 +1,11 @@
 #ifndef STRINGASSETEXECUTOR_H
 #define STRINGASSETEXECUTOR_H
 
-#include "assetexecutor.h"
+#include <engine/assettools/abstractassetexecutor.h>
 
 
 
-class StringAssetExecutor : public AssetExecutor {
+class StringAssetExecutor : public e172::AbstractAssetExecutor {
 public:
     StringAssetExecutor();
 

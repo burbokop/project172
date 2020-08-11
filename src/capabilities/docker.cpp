@@ -28,7 +28,7 @@ Docker::State Docker::getState() {
     return state;
 }
 
-void Docker::tick(Context *context, e172::AbstractEventHandler *eventHandler) {
+void Docker::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
     UNUSED(context);
     UNUSED(eventHandler);
     if(state == IN_INTERCEPTION) {
@@ -39,10 +39,10 @@ void Docker::tick(Context *context, e172::AbstractEventHandler *eventHandler) {
     } else if(state == ATTRACTED) {
         double dst = (parent()->getPosition() - target->getPosition()).module();
         double dstAngle = target->getAngle();
-        if(dst < 4 && parent()->isOnAngle(dstAngle)) {
+        if(dst < 4 && parent()->isOnAngle(context, dstAngle)) {
             attach(target);
         }
-        parent()->rotateToAngle(dstAngle);
+        parent()->rotateToAngle(context, dstAngle);
         Movable *movableParent = dynamic_cast<Movable*>(parent());
         if(movableParent) {
             movableParent->place(parent()->getPosition(), (target->getPosition() - parent()->getPosition()) / 100, e172::Vector(), parent()->getAngle());

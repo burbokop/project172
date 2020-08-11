@@ -1,6 +1,10 @@
 #include "lightparticle.h"
-#include "context.h"
-#include "time/time.h"
+
+#include <inttypes.h>
+
+#include <engine/context.h>
+
+#include <engine/graphics/abstractrenderer.h>
 
 //#include <vulkan/vulkan_intel.h>
 
@@ -14,11 +18,11 @@ const int LightParticle::DEFAULT_LIFE_TIME_DELTA = 4000;
 const double LightParticle::STOP_MOVING_VELOCITY = 0.015;
 
 
-LightParticle::LightParticle(unsigned shape, int averageLifeTime, int lifeTimeDelta) : Worker () {
-    Uint32 colors[] = { 0xdeff17, 0xfe4600, 0xf9990f, 0x8a27ff };
+LightParticle::LightParticle(unsigned shape, int averageLifeTime, int lifeTimeDelta) : e172::Entity () {
+    uint32_t colors[] = { 0xdeff17, 0xfe4600, 0xf9990f, 0x8a27ff };
     color = colors[std::rand() % 4];
     this->shape = shape;
-    destroyTimer = new Timer(static_cast<unsigned>((rand() % (2 * lifeTimeDelta)) + (averageLifeTime - lifeTimeDelta)));
+    destroyTimer = new e172::ElapsedTimer(static_cast<unsigned>((rand() % (2 * lifeTimeDelta)) + (averageLifeTime - lifeTimeDelta)));
     destroyTimer->reset();
     velocityMultiplier = static_cast<double>((std::rand() % 4 + 3)) / 5;
 }
@@ -29,16 +33,16 @@ void LightParticle::place(e172::Vector pos, e172::Vector vel) {
 }
 
 
-void LightParticle::tick(Context *context, e172::AbstractEventHandler *eventHandler) {
+void LightParticle::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
     UNUSED(eventHandler);
-    if(destroyTimer && destroyTimer->count()) {
-        context->addEvent(this, Context::DELETE_UNIT);
+    if(destroyTimer && destroyTimer->check()) {
+        context->addEvent(this, e172::Context::DELETE_UNIT);
     }
-    vel = vel * (1 - Time::getDeltaTime() * velocityMultiplier);
+    vel = vel * (1 - context->deltaTime() * velocityMultiplier);
 
-    //vel -= (vel * 1 * Time::getDeltaTime());
+    //vel -= (vel * 1 * context->deltaTime());
 
-    pos += vel * Time::getDeltaTime() * 0.1;
+    pos += vel * context->deltaTime() * 0.1;
 }
 
 void LightParticle::render(e172::AbstractRenderer *renderer) {

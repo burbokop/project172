@@ -3,7 +3,7 @@
 
 #include <functional>
 
-#include <assettools/assetprovider.h>
+#include <engine/assettools/assetprovider.h>
 
 
 #include "../object.h"
@@ -13,7 +13,7 @@
 class World : public Object {
 public:
     World();
-    virtual std::vector<Controller*> generate(AssetProvider *assets, std::vector<Worker*> *units) = 0;
+    virtual std::vector<Controller*> generate(e172::AssetProvider *assets, std::list<e172::Entity*> *units) = 0;
     virtual std::string getName() = 0;
 
     virtual ~World();

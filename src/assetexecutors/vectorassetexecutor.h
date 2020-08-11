@@ -1,11 +1,12 @@
 #ifndef VECTORASSETEXECUTOR_H
 #define VECTORASSETEXECUTOR_H
 
-#include "assetexecutor.h"
+#include <engine/assettools/abstractassetexecutor.h>
 
 
 
-class VectorAssetExecutor : public AssetExecutor {
+
+class VectorAssetExecutor : public e172::AbstractAssetExecutor {
 public:
     VectorAssetExecutor();
 

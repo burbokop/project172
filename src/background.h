@@ -4,9 +4,9 @@
 #include <SDL2/SDL.h>
 
 
+#include <engine/entity.h>
+#include <engine/time/elapsedtimer.h>
 #include <src/engine/math/vector.h>
-#include "worker.h"
-#include "time/timer.h"
 #include <vector>
 
 
@@ -15,7 +15,7 @@ struct Star {
     Uint32 color;
 };
 
-class Background : public Worker {
+class Background : public e172::Entity {
 private:
     static const double STARS_SLIDING_SPEED;
     static const double SLIDING_LEGHTH;
@@ -31,10 +31,10 @@ private:
     double slidingStart;
 
     e172::Vector resolution;
-    Timer observer = Timer(4000);
+    e172::ElapsedTimer observer = e172::ElapsedTimer(4000);
 
 
-    Timer *flashingTimer = nullptr;
+    e172::ElapsedTimer *flashingTimer = nullptr;
     Uint32 flashingColor = DEFAULT_FLASHING_COLOR;
     Uint32 colorBuffer = DEFAULT_MAIN_COLOR;
     int flashesRemains = 0;
@@ -44,9 +44,9 @@ public:
     Background(e172::Vector resolution, unsigned int amount, double slidingStart = STARS_SLIDING_SPEED);
 
 
-    // Worker interface
+    // Entity interface
 public:
-    void tick(Context *context, e172::AbstractEventHandler *eventHandler);
+    void proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler);
     void render(e172::AbstractRenderer *renderer);
     void setSpeed(const e172::Vector &value);
 

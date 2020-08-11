@@ -19,7 +19,7 @@ private:
     GUIFloatingMessage *floatingMessage = nullptr;
     GUIDebugValueInfo *debugValueInfo = nullptr;
     GUIMiniMap *miniMap = nullptr;
-    Timer floatingMessageLifeTimer = Timer(FLOATING_LIFE_TIME);
+    e172::ElapsedTimer floatingMessageLifeTimer = e172::ElapsedTimer(FLOATING_LIFE_TIME);
 
 public:
     GUIMain();
@@ -34,9 +34,9 @@ public:
     void setMiniMap(GUIMiniMap *value);
     void setDebugValueInfo(GUIDebugValueInfo *value);
 
-    // Worker interface
+    // Entity interface
 public:
-    void tick(Context *context, e172::AbstractEventHandler *eventHandler);
+    void proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler);
     void render(e172::AbstractRenderer *renderer);
 };
 

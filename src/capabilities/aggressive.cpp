@@ -14,7 +14,8 @@
 
 Unit *Aggressive::chooseTarget() {
     if(targets == nullptr) return nullptr;
-    Worker *target = targets->at(static_cast<unsigned long>(rand()) % targets->size());
+
+    Entity *target = targets->front();
 
     EXISTS(target) {
         Camera *camera = dynamic_cast<Camera*>(target);
@@ -29,20 +30,20 @@ Unit *Aggressive::chooseTarget() {
     }
 }
 
-Aggressive::Aggressive(std::vector<Worker *> *units) {
+Aggressive::Aggressive(std::list<Entity*> *units) {
     targets = units;
     target = chooseTarget();
 }
 
-void Aggressive::tick(Context *context, e172::AbstractEventHandler *eventHandler) {
+void Aggressive::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
     EXISTS(target) {
         if(target != nullptr && parent() != nullptr && target->is<Ship*>() && target != parent()) {
             e172::Vector dst = target->getPosition() - parent()->getPosition();
             const double dstAngle = dst.angle();
             const double dstModule = dst.module();
 
-            parent()->rotateToAngle(dstAngle);
-            targeted = parent()->isOnAngle(dstAngle) && !inWarp && dstModule < 400;
+            parent()->rotateToAngle(context, dstAngle);
+            targeted = parent()->isOnAngle(context, dstAngle) && !inWarp && dstModule < 400;
             Ship *ship = dynamic_cast<Ship*>(parent());
 
             ModuleHandler *modules = parent()->getModuleHandler();
@@ -67,7 +68,7 @@ void Aggressive::tick(Context *context, e172::AbstractEventHandler *eventHandler
                         } else {
                             inWarp = true;
                         }
-                    } else if((dstModule < 1000 || warpFatigueTimer.count()) && stopWarpTrigger.check()) {
+                    } else if((dstModule < 1000 || warpFatigueTimer.check()) && stopWarpTrigger.check()) {
                         if(!ship->abortWarp(context)) {
                             stopWarpTrigger.disanable();
                         } else {
@@ -94,14 +95,14 @@ void Aggressive::tick(Context *context, e172::AbstractEventHandler *eventHandler
         targeted = false;
         target = chooseTarget();
     }
-    this->Controller::tick(context, eventHandler);
+    this->Controller::proceed(context, eventHandler);
 }
 
 void Aggressive::render(e172::AbstractRenderer *renderer) {
     UNUSED(renderer);
 }
 
-void Aggressive::onHit(Context *context, int health) {
+void Aggressive::onHit(e172::Context *context, int health) {
     UNUSED(context);
     UNUSED(health);
 }

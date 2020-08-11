@@ -3,9 +3,10 @@
 
 
 #include "capabilities/capability.h"
-#include "time/timer.h"
 #include "units/ship.h"
 #include "additional/trigger.h"
+
+#include <engine/time/elapsedtimer.h>
 
 
 class Controller : public Capability {    
@@ -15,7 +16,7 @@ protected:
 
 
     Ship *armor = nullptr;
-    Timer *armorReleaseTimer = nullptr;
+    e172::ElapsedTimer *armorReleaseTimer = nullptr;
     Trigger armorReleaseMessageTrigger;
 
     Unit *selected = nullptr;
@@ -25,11 +26,11 @@ public:
     Controller();
     Controller(Ship *armor);
 
-    virtual void onHit(Context* context, int health);
+    virtual void onHit(e172::Context* context, int health);
 
-    // Worker interface
+    // Entity interface
 public:
-    void tick(Context *context, e172::AbstractEventHandler *eventHandler);
+    void proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler);
     void render(e172::AbstractRenderer *renderer);
     void setSelected(Unit *value);
 };

@@ -69,7 +69,6 @@ void OpenGLRenderer::setResolution(e172::Vector value)
 {
 }
 
-void OpenGLRenderer::setResolutionCallback(Variant value)
-{
+void OpenGLRenderer::setResolutionCallback(old::Variant value) {
 }
 

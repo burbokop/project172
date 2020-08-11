@@ -3,14 +3,13 @@
 
 
 #include "gui/guimenuelement.h"
-#include "time/timer.h"
 
 
 class GUICentralMessage : public GUIMenuElement {
 private:
     static const unsigned DEFAULT_FLASHING_INTERVAL;
 
-    Timer *flashingTimer = nullptr;
+    e172::ElapsedTimer *flashingTimer = nullptr;
     bool visible;
     int flashesRemains;
 

@@ -20,23 +20,23 @@ private:
     int radius = 2;
     uint32_t color = 0xff00ff;
     uint32_t generateColor();
-    Timer *destroyTimer = nullptr;
+    e172::ElapsedTimer *destroyTimer = nullptr;
 
 public:
     Particle();
     Particle(uint8_t shape, int averageLifeTime = DEFAULT_AVERAGE_LIFE_TIME, int lifeTimeDelta = DEFAULT_LIFE_TIME_DELTA);
 
-    // Worker interface
+    // Entity interface
 public:
     void render(e172::AbstractRenderer *renderer);
 
     // Unit interface
 public:
-    void hit(Context *context, int value);
+    void hit(e172::Context *context, int value);
 
-    // Worker interface
+    // Entity interface
 public:
-    void tick(Context *context, e172::AbstractEventHandler *eventHandler);
+    void proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler);
 };
 
 #endif // PARTICLE_H

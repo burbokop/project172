@@ -34,14 +34,9 @@ bool AudioPlayer::stop() {
     return false;
 }
 
-#include <iostream>
-void AudioPlayer::tick(Context *context, e172::AbstractEventHandler *eventHandler) {
-    UNUSED(context);
-    UNUSED(eventHandler);
-
+void AudioPlayer::proceed() {
     if(state == Beginning) {
         if(!m_channel.isPlaying()) {
-            std::cout << "LOOP STRT\n";
             if(loopSample.isValid()) {
                 m_channel.play(loopSample, e172::AudioChannel::Infinitely);
                 state = Loop;
@@ -54,10 +49,6 @@ void AudioPlayer::tick(Context *context, e172::AbstractEventHandler *eventHandle
             state = Idle;
         }
     }
-}
-
-void AudioPlayer::render(e172::AbstractRenderer *renderer) {
-    UNUSED(renderer);
 }
 
 void AudioPlayer::setVolume(double volume) {

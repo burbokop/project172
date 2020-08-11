@@ -1,11 +1,15 @@
-#include "worker.h"
+#include "entity.h"
 
 #include "objectregistry.h"
 
-Worker::Worker() {
+namespace e172 {
+
+Entity::Entity() {
     ObjectRegistry::getInstance()->registerObject(this);
 }
 
-Worker::~Worker() {
+Entity::~Entity() {
     ObjectRegistry::getInstance()->markAsDeleted(this);
+}
+
 }

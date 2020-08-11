@@ -40,7 +40,7 @@ protected:
 
     void setRelativisticVelocity(bool value);
 
-    void updatePosition();
+    void updatePosition(e172::Context *context);
 
     void accelerateIdle();
     void setIdleEnabled(bool value);
@@ -63,10 +63,10 @@ public:
     e172::Vector getVelocity();
     double getReleaseSpead() const;
 
-    void pursuit(Unit *target);
-    void relativisticPursuit(Unit *target);
+    void pursuit(e172::Context *context, Unit *target);
+    void relativisticPursuit(e172::Context *context, Unit *target);
 
-    void tick(Context *context, e172::AbstractEventHandler *eventHandler);
+    void proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler);
 };
 
 #endif // MOVABLE_H

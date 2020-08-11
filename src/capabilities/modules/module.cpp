@@ -14,10 +14,10 @@ Module::Module() {
         double rate = asset<double>("rate", 1, &ok);
         if(ok) {
             if(!e172::Math::cmpf(rate, 0)) {
-                timer = Timer(60000 / rate);
+                timer = e172::ElapsedTimer(60000 / rate);
             }
         } else {
-            timer = Timer(asset<double>("interval", 100));
+            timer = e172::ElapsedTimer(asset<double>("interval", 100));
         }
     });
 }
@@ -25,12 +25,12 @@ Module::Module() {
 void Module::animate(unsigned mode, unsigned def) {
     animator.setDefaultMode(def);
     animator.play(mode);
-    if(mode == Animator::LOOP) audioPlayer.play();
+    if(mode == Animator::Loop) audioPlayer.play();
     else audioPlayer.stop();
 }
 
-void Module::tick(Context *context, e172::AbstractEventHandler *eventHandler) {
-    this->audioPlayer.tick(context, eventHandler);
+void Module::proceed(e172::Context *, e172::AbstractEventHandler *) {
+    this->audioPlayer.proceed();
 }
 
 void Module::render(e172::AbstractRenderer *renderer) {

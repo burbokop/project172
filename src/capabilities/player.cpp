@@ -1,9 +1,9 @@
 #include "player.h"
 #include "units/ship.h"
-#include "context.h"
 #include "objectregistry.h"
 #include "capabilities/modules/weapon.h"
 
+#include <engine/context.h>
 
 const std::map<std::string, e172::Scancode> Player::scancode = {
     { "q", e172::ScancodeQ },
@@ -16,8 +16,8 @@ const std::map<std::string, e172::Scancode> Player::scancode = {
     { "i", e172::ScancodeI },
     { "o", e172::ScancodeO },
     { "p", e172::ScancodeP },
-    { "[", e172::ScancodeKP_LEFTBRACE },
-    { "]", e172::ScancodeKP_RIGHTBRACE },
+    { "[", e172::ScancodeKpLeftBrace },
+    { "]", e172::ScancodeKpRightBrace },
     { "a", e172::ScancodeA },
     { "s", e172::ScancodeS },
     { "d", e172::ScancodeD },
@@ -28,9 +28,7 @@ const std::map<std::string, e172::Scancode> Player::scancode = {
     { "k", e172::ScancodeK },
     { "l", e172::ScancodeL },
 
-
-
-    { "space", e172::ScancodeSPACE },
+    { "space", e172::ScancodeSpace },
 };
 
 
@@ -57,24 +55,24 @@ void Player::setArmor(Ship *armor) {
     this->armor = armor;
 }
 
-void Player::tick(Context *context, e172::AbstractEventHandler *eventHandler) {
+void Player::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
     EXISTS(parent()) {
 
     } else {
-        std::cout << "ERRROOOORR\n";
+        //std::cout << "ERRROOOORR\n";
     }
 
     EXISTS(armor) {
 
     } else {
-        std::cout << "ERRROOOORR\n";
+        //std::cout << "ERRROOOORR\n";
     }
 
 
     if(getPersonalKey(eventHandler, "left")) {
-        parent()->rotateLeft() ;
+        parent()->rotateLeft(context);
     } else if(getPersonalKey(eventHandler, "right")) {
-        parent()->rotateRight();
+        parent()->rotateRight(context);
     }
 
     Ship *ship = dynamic_cast<Ship*>(parent());
@@ -115,14 +113,14 @@ void Player::tick(Context *context, e172::AbstractEventHandler *eventHandler) {
         releaseArmor();
     }
 
-    this->Controller::tick(context, eventHandler);
+    this->Controller::proceed(context, eventHandler);
 }
 
 void Player::render(e172::AbstractRenderer *renderer) {
     UNUSED(renderer);
 }
 
-void Player::onHit(Context *context, int health) {
+void Player::onHit(e172::Context *context, int health) {
     UNUSED(health);
-    context->addEvent(parent(), Context::BACKGROUND_FLASHING, 8);
+    context->addEvent(parent(), e172::Context::BACKGROUND_FLASHING, 8);
 }

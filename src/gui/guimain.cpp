@@ -39,16 +39,16 @@ GUIMain::GUIMain() : GUIElement () {}
 
 GUIMain::GUIMain(Controller *player) : GUIElement (player) {}
 
-void GUIMain::tick(Context *context, e172::AbstractEventHandler *eventHandler) {
-    if(floatingMessageLifeTimer.count()) {
+void GUIMain::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
+    if(floatingMessageLifeTimer.check()) {
         floatingMessage = nullptr;
     }
 
-    if(menu) menu->tick(context, eventHandler);
-    if(centralMessage) centralMessage->tick(context, eventHandler);
-    if(floatingMessage) floatingMessage->tick(context, eventHandler);
-    if(miniMap) miniMap->tick(context, eventHandler);
-    if(debugValueInfo) debugValueInfo->tick(context, eventHandler);
+    if(menu) menu->proceed(context, eventHandler);
+    if(centralMessage) centralMessage->proceed(context, eventHandler);
+    if(floatingMessage) floatingMessage->proceed(context, eventHandler);
+    if(miniMap) miniMap->proceed(context, eventHandler);
+    if(debugValueInfo) debugValueInfo->proceed(context, eventHandler);
 }
 
 void GUIMain::render(e172::AbstractRenderer *renderer) {

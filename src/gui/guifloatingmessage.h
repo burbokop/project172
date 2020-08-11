@@ -6,6 +6,7 @@
 
 
 class GUIFloatingMessage : public GUIMenuElement {
+    double m_horisontalOffset = 0;
 protected:
     static const uint32_t DEFAULT_COLOR;
     static const int DEFAULT_FONT_SIZE;
@@ -13,7 +14,6 @@ protected:
 
 
     Unit *parent = nullptr;
-    double horisontalOffset = 0;
 
 public:
     GUIFloatingMessage(Unit *parent);
@@ -23,7 +23,9 @@ public:
 
     // GUIElement interface
 public:
-    void render(e172::AbstractRenderer *renderer);
+    virtual void render(e172::AbstractRenderer *renderer) override;
+    virtual void proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) override;
+    double horisontalOffset() const;
 };
 
 #endif // GUIFLOATINGMESSAGE_H

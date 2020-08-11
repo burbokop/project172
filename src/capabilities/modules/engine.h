@@ -9,13 +9,13 @@ public:
     Engine(Loadable *tmp);
 
 
-    // Worker interface
+    // Entity interface
 public:
     bool forward();
     void stop();
 
 
-    void tick(Context *context, e172::AbstractEventHandler *eventHandler);
+    void proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler);
 
     // IInformative interface
 public:

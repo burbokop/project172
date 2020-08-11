@@ -1,11 +1,12 @@
 #ifndef MAPASSETEXECUTOR_H
 #define MAPASSETEXECUTOR_H
 
-#include "assetexecutor.h"
+#include <engine/assettools/abstractassetexecutor.h>
 
 
 
-class MapAssetExecutor : public AssetExecutor {
+
+class MapAssetExecutor : public e172::AbstractAssetExecutor {
 public:
     MapAssetExecutor();
 

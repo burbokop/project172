@@ -69,13 +69,8 @@ public:
     virtual void disableEffect(uint64_t effect) = 0;
     virtual Vector resolution() const = 0;
 
-
-    /**
-     * deprecated functionns;
-     */
-
-    [[deprecated]]
     virtual void update() = 0;
+
 
 
     [[deprecated]]
@@ -83,7 +78,7 @@ public:
     [[deprecated]]
     virtual void setResolution(Vector value) = 0;
     [[deprecated]]
-    virtual void setResolutionCallback(Variant value) = 0;
+    virtual void setResolutionCallback(old::Variant value) = 0;
 
 
     Vector offset() const;

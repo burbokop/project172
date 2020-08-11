@@ -1,6 +1,7 @@
 #include "e_variant.h"
 
 
+namespace old {
 
 
 
@@ -144,4 +145,5 @@ bool Variant::isUnit() {
 
 bool Variant::isVector() {
     return type == Vector;
+}
 }

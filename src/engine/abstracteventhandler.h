@@ -8,18 +8,12 @@
 namespace e172 {
 
 /**
- *  \brief The SDL keyboard scancode representation.
+ *  \brief These values are taken from SDL library
  *
- *  Values of this type are used to represent keyboard keys, among other places
- *  in the \link Keysym::scancode key.keysym.scancode \endlink field of the
- *  Event structure.
- *
- *  The values in this enumeration are based on the USB usage page standard:
- *  https://www.usb.org/sites/default/files/documents/hut1_12v2.pdf
  */
 typedef enum
 {
-    ScancodeUNKNOWN = 0,
+    ScancodeUnknown = 0,
 
     /**
      *  \name Usage page 0x07
@@ -66,17 +60,17 @@ typedef enum
     Scancode9 = 38,
     Scancode0 = 39,
 
-    ScancodeRETURN = 40,
-    ScancodeESCAPE = 41,
-    ScancodeBACKSPACE = 42,
-    ScancodeTAB = 43,
-    ScancodeSPACE = 44,
+    ScancodeReturn = 40,
+    ScancodeEscape = 41,
+    ScancodeBackSpace = 42,
+    ScancodeTab = 43,
+    ScancodeSpace = 44,
 
-    ScancodeMINUS = 45,
-    ScancodeEQUALS = 46,
-    ScancodeLEFTBRACKET = 47,
-    ScancodeRIGHTBRACKET = 48,
-    ScancodeBACKSLASH = 49, /**< Located at the lower left of the return
+    ScancodeMinus = 45,
+    ScancodeEquals = 46,
+    ScancodeLeftBracket = 47,
+    ScancodeRightBracket = 48,
+    ScancodeBackslash = 49, /**< Located at the lower left of the return
                                   *   key on ISO keyboards and at the right end
                                   *   of the QWERTY row on ANSI keyboards.
                                   *   Produces REVERSE SOLIDUS (backslash) and
@@ -90,7 +84,7 @@ typedef enum
                                   *   layout, and ASTERISK and MICRO SIGN in a
                                   *   French Windows layout.
                                   */
-    ScancodeNONUSHASH = 50, /**< ISO USB keyboards actually use this code
+    ScancodeNonushash = 50, /**< ISO USB keyboards actually use this code
                                   *   instead of 49 for the same key, but all
                                   *   OSes I've seen treat the two codes
                                   *   identically. So, as an implementor, unless
@@ -102,9 +96,9 @@ typedef enum
                                   *   will never generate it with most (all?)
                                   *   keyboards.
                                   */
-    ScancodeSEMICOLON = 51,
-    ScancodeAPOSTROPHE = 52,
-    ScancodeGRAVE = 53, /**< Located in the top left corner (on both ANSI
+    ScancodeSemicolon = 51,
+    ScancodeApostrophe = 52,
+    ScancodeGrave = 53, /**< Located in the top left corner (on both ANSI
                               *   and ISO keyboards). Produces GRAVE ACCENT and
                               *   TILDE in a US Windows layout and in US and UK
                               *   Mac layouts on ANSI keyboards, GRAVE ACCENT
@@ -121,11 +115,11 @@ typedef enum
                               *   SIGN in a Swiss German, German, or French Mac
                               *   layout on ANSI keyboards.
                               */
-    ScancodeCOMMA = 54,
-    ScancodePERIOD = 55,
-    ScancodeSLASH = 56,
+    ScancodeComma = 54,
+    ScancodePeriod = 55,
+    ScancodeSlash = 56,
 
-    ScancodeCAPSLOCK = 57,
+    ScancodeCapsLock = 57,
 
     ScancodeF1 = 58,
     ScancodeF2 = 59,
@@ -140,41 +134,41 @@ typedef enum
     ScancodeF11 = 68,
     ScancodeF12 = 69,
 
-    ScancodePRINTSCREEN = 70,
-    ScancodeSCROLLLOCK = 71,
-    ScancodePAUSE = 72,
-    ScancodeINSERT = 73, /**< insert on PC, help on some Mac keyboards (but
+    ScancodePrintScreen = 70,
+    ScancodeScrollLock = 71,
+    ScancodePause = 72,
+    ScancodeInsert = 73, /**< insert on PC, help on some Mac keyboards (but
                                    does send code 73, not 117) */
-    ScancodeHOME = 74,
-    ScancodePAGEUP = 75,
-    ScancodeDELETE = 76,
-    ScancodeEND = 77,
-    ScancodePAGEDOWN = 78,
-    ScancodeRIGHT = 79,
-    ScancodeLEFT = 80,
-    ScancodeDOWN = 81,
-    ScancodeUP = 82,
+    ScancodeHome = 74,
+    ScancodePageUp = 75,
+    ScancodeDelete = 76,
+    ScancodeEnd = 77,
+    ScancodePageDown = 78,
+    ScancodeRight = 79,
+    ScancodeLeft = 80,
+    ScancodeDown = 81,
+    ScancodeUp = 82,
 
-    ScancodeNUMLOCKCLEAR = 83, /**< num lock on PC, clear on Mac keyboards
+    ScancodeNumLockClear = 83, /**< num lock on PC, clear on Mac keyboards
                                      */
-    ScancodeKP_DIVIDE = 84,
-    ScancodeKP_MULTIPLY = 85,
-    ScancodeKP_MINUS = 86,
-    ScancodeKP_PLUS = 87,
-    ScancodeKP_ENTER = 88,
-    ScancodeKP_1 = 89,
-    ScancodeKP_2 = 90,
-    ScancodeKP_3 = 91,
-    ScancodeKP_4 = 92,
-    ScancodeKP_5 = 93,
-    ScancodeKP_6 = 94,
-    ScancodeKP_7 = 95,
-    ScancodeKP_8 = 96,
-    ScancodeKP_9 = 97,
-    ScancodeKP_0 = 98,
-    ScancodeKP_PERIOD = 99,
+    ScancodeKpDivide = 84,
+    ScancodeKpMultiply = 85,
+    ScancodeKpMinus = 86,
+    ScancodeKpPlus = 87,
+    ScancodeKpEnter = 88,
+    ScancodeKp1 = 89,
+    ScancodeKp2 = 90,
+    ScancodeKp3 = 91,
+    ScancodeKp4 = 92,
+    ScancodeKp5 = 93,
+    ScancodeKp6 = 94,
+    ScancodeKp7 = 95,
+    ScancodeKp8 = 96,
+    ScancodeKp9 = 97,
+    ScancodeKp0 = 98,
+    ScancodeKpPeriod = 99,
 
-    ScancodeNONUSBACKSLASH = 100, /**< This is the additional key that ISO
+    ScancodeNonUsBackSlash = 100, /**< This is the additional key that ISO
                                         *   keyboards have over ANSI ones,
                                         *   located between left shift and Y.
                                         *   Produces GRAVE ACCENT and TILDE in a
@@ -184,11 +178,11 @@ typedef enum
                                         *   LESS-THAN SIGN and GREATER-THAN SIGN
                                         *   in a Swiss German, German, or French
                                         *   layout. */
-    ScancodeAPPLICATION = 101, /**< windows contextual menu, compose */
-    ScancodePOWER = 102, /**< The USB document says this is a status flag,
+    ScancodeApplication = 101, /**< windows contextual menu, compose */
+    ScancodePower = 102, /**< The USB document says this is a status flag,
                                *   not a physical key - but some Mac keyboards
                                *   do have a power key. */
-    ScancodeKP_EQUALS = 103,
+    ScancodeKPEquals = 103,
     ScancodeF13 = 104,
     ScancodeF14 = 105,
     ScancodeF15 = 106,
@@ -201,117 +195,117 @@ typedef enum
     ScancodeF22 = 113,
     ScancodeF23 = 114,
     ScancodeF24 = 115,
-    ScancodeEXECUTE = 116,
-    ScancodeHELP = 117,
-    ScancodeMENU = 118,
-    ScancodeSELECT = 119,
-    ScancodeSTOP = 120,
-    ScancodeAGAIN = 121,   /**< redo */
-    ScancodeUNDO = 122,
-    ScancodeCUT = 123,
-    ScancodeCOPY = 124,
-    ScancodePASTE = 125,
-    ScancodeFIND = 126,
-    ScancodeMUTE = 127,
-    ScancodeVOLUMEUP = 128,
-    ScancodeVOLUMEDOWN = 129,
+    ScancodeExecute = 116,
+    ScancodeHelp = 117,
+    ScancodeMenu = 118,
+    ScancodeSelect = 119,
+    ScancodeStop = 120,
+    ScancodeAgain = 121,   /**< redo */
+    ScancodeUndo = 122,
+    ScancodeCut = 123,
+    ScancodeCopy = 124,
+    ScancodePaste = 125,
+    ScancodeFind = 126,
+    ScancodeMute = 127,
+    ScancodeVolumeUp = 128,
+    ScancodeVolumeDown = 129,
 /* not sure whether there's a reason to enable these */
 /*     ScancodeLOCKINGCAPSLOCK = 130,  */
 /*     ScancodeLOCKINGNUMLOCK = 131, */
 /*     ScancodeLOCKINGSCROLLLOCK = 132, */
-    ScancodeKP_COMMA = 133,
-    ScancodeKP_EQUALSAS400 = 134,
+    ScancodeKPComma = 133,
+    ScancodeKPEqualSas400 = 134,
 
-    ScancodeINTERNATIONAL1 = 135, /**< used on Asian keyboards, see
+    ScancodeInternational1 = 135, /**< used on Asian keyboards, see
                                             footnotes in USB doc */
-    ScancodeINTERNATIONAL2 = 136,
-    ScancodeINTERNATIONAL3 = 137, /**< Yen */
-    ScancodeINTERNATIONAL4 = 138,
-    ScancodeINTERNATIONAL5 = 139,
-    ScancodeINTERNATIONAL6 = 140,
-    ScancodeINTERNATIONAL7 = 141,
-    ScancodeINTERNATIONAL8 = 142,
-    ScancodeINTERNATIONAL9 = 143,
-    ScancodeLANG1 = 144, /**< Hangul/English toggle */
-    ScancodeLANG2 = 145, /**< Hanja conversion */
-    ScancodeLANG3 = 146, /**< Katakana */
-    ScancodeLANG4 = 147, /**< Hiragana */
-    ScancodeLANG5 = 148, /**< Zenkaku/Hankaku */
-    ScancodeLANG6 = 149, /**< reserved */
-    ScancodeLANG7 = 150, /**< reserved */
-    ScancodeLANG8 = 151, /**< reserved */
-    ScancodeLANG9 = 152, /**< reserved */
+    ScancodeInternational2 = 136,
+    ScancodeInternational3 = 137, /**< Yen */
+    ScancodeInternational4 = 138,
+    ScancodeInternational5 = 139,
+    ScancodeInternational6 = 140,
+    ScancodeInternational7 = 141,
+    ScancodeInternational8 = 142,
+    ScancodeInternational9 = 143,
+    ScancodeLang1 = 144, /**< Hangul/English toggle */
+    ScancodeLang2 = 145, /**< Hanja conversion */
+    ScancodeLang3 = 146, /**< Katakana */
+    ScancodeLang4 = 147, /**< Hiragana */
+    ScancodeLang5 = 148, /**< Zenkaku/Hankaku */
+    ScancodeLang6 = 149, /**< reserved */
+    ScancodeLang7 = 150, /**< reserved */
+    ScancodeLang8 = 151, /**< reserved */
+    ScancodeLang9 = 152, /**< reserved */
 
-    ScancodeALTERASE = 153, /**< Erase-Eaze */
-    ScancodeSYSREQ = 154,
-    ScancodeCANCEL = 155,
-    ScancodeCLEAR = 156,
-    ScancodePRIOR = 157,
-    ScancodeRETURN2 = 158,
-    ScancodeSEPARATOR = 159,
-    ScancodeOUT = 160,
-    ScancodeOPER = 161,
-    ScancodeCLEARAGAIN = 162,
-    ScancodeCRSEL = 163,
-    ScancodeEXSEL = 164,
+    ScancodeAlterase = 153, /**< Erase-Eaze */
+    ScancodeSysREQ = 154,
+    ScancodeCancel = 155,
+    ScancodeClear = 156,
+    ScancodePrior = 157,
+    ScancodeReturn2 = 158,
+    ScancodeSeparator = 159,
+    ScancodeOut = 160,
+    ScancodeOper = 161,
+    ScancodeClearAgain = 162,
+    ScancodeCrsel = 163,
+    ScancodeExsel = 164,
 
-    ScancodeKP_00 = 176,
-    ScancodeKP_000 = 177,
-    ScancodeTHOUSANDSSEPARATOR = 178,
-    ScancodeDECIMALSEPARATOR = 179,
-    ScancodeCURRENCYUNIT = 180,
-    ScancodeCURRENCYSUBUNIT = 181,
-    ScancodeKP_LEFTPAREN = 182,
-    ScancodeKP_RIGHTPAREN = 183,
-    ScancodeKP_LEFTBRACE = 184,
-    ScancodeKP_RIGHTBRACE = 185,
-    ScancodeKP_TAB = 186,
-    ScancodeKP_BACKSPACE = 187,
-    ScancodeKP_A = 188,
-    ScancodeKP_B = 189,
-    ScancodeKP_C = 190,
-    ScancodeKP_D = 191,
-    ScancodeKP_E = 192,
-    ScancodeKP_F = 193,
-    ScancodeKP_XOR = 194,
-    ScancodeKP_POWER = 195,
-    ScancodeKP_PERCENT = 196,
-    ScancodeKP_LESS = 197,
-    ScancodeKP_GREATER = 198,
-    ScancodeKP_AMPERSAND = 199,
-    ScancodeKP_DBLAMPERSAND = 200,
-    ScancodeKP_VERTICALBAR = 201,
-    ScancodeKP_DBLVERTICALBAR = 202,
-    ScancodeKP_COLON = 203,
-    ScancodeKP_HASH = 204,
-    ScancodeKP_SPACE = 205,
-    ScancodeKP_AT = 206,
-    ScancodeKP_EXCLAM = 207,
-    ScancodeKP_MEMSTORE = 208,
-    ScancodeKP_MEMRECALL = 209,
-    ScancodeKP_MEMCLEAR = 210,
-    ScancodeKP_MEMADD = 211,
-    ScancodeKP_MEMSUBTRACT = 212,
-    ScancodeKP_MEMMULTIPLY = 213,
-    ScancodeKP_MEMDIVIDE = 214,
-    ScancodeKP_PLUSMINUS = 215,
-    ScancodeKP_CLEAR = 216,
-    ScancodeKP_CLEARENTRY = 217,
-    ScancodeKP_BINARY = 218,
-    ScancodeKP_OCTAL = 219,
-    ScancodeKP_DECIMAL = 220,
-    ScancodeKP_HEXADECIMAL = 221,
+    ScancodeKP00 = 176,
+    ScancodeKP000 = 177,
+    ScancodeThousandsSeparator = 178,
+    ScancodeDecimalSeparator = 179,
+    ScancodeCurrencyUnit = 180,
+    ScancodeCurrencySubunit = 181,
+    ScancodeKpLeftParen = 182,
+    ScancodeKpRightParen = 183,
+    ScancodeKpLeftBrace = 184,
+    ScancodeKpRightBrace = 185,
+    ScancodeKpTab = 186,
+    ScancodeKpBackspace = 187,
+    ScancodeKpA = 188,
+    ScancodeKpB = 189,
+    ScancodeKpC = 190,
+    ScancodeKpD = 191,
+    ScancodeKpE = 192,
+    ScancodeKpF = 193,
+    ScancodeKpXor = 194,
+    ScancodeKpPower = 195,
+    ScancodeKpPercent = 196,
+    ScancodeKpLess = 197,
+    ScancodeKpGreater = 198,
+    ScancodeKpAmpersand = 199,
+    ScancodeKpDblAmpersand = 200,
+    ScancodeKpVerticalBar = 201,
+    ScancodeKpDblVerticalBar = 202,
+    ScancodeKpColon = 203,
+    ScancodeKpHash = 204,
+    ScancodeKpSpace = 205,
+    ScancodeKpAt = 206,
+    ScancodeKpExclam = 207,
+    ScancodeKpMemStore = 208,
+    ScancodeKpMemRecall = 209,
+    ScancodeKpMemClear = 210,
+    ScancodeKpMemAdd = 211,
+    ScancodeKpMemSubtract = 212,
+    ScancodeKpMemMultiply = 213,
+    ScancodeKpMemDivide = 214,
+    ScancodeKpPlusMinus = 215,
+    ScancodeKpClear = 216,
+    ScancodeKpClearEntry = 217,
+    ScancodeKpBinary = 218,
+    ScancodeKpOctal = 219,
+    ScancodeKpDecimal = 220,
+    ScancodeKpHexadecimal = 221,
 
-    ScancodeLCTRL = 224,
-    ScancodeLSHIFT = 225,
-    ScancodeLALT = 226, /**< alt, option */
-    ScancodeLGUI = 227, /**< windows, command (apple), meta */
-    ScancodeRCTRL = 228,
-    ScancodeRSHIFT = 229,
-    ScancodeRALT = 230, /**< alt gr, option */
-    ScancodeRGUI = 231, /**< windows, command (apple), meta */
+    ScancodeLCtrl = 224,
+    ScancodeLShift = 225,
+    ScancodeLAlt = 226, /**< alt, option */
+    ScancodeLGui = 227, /**< windows, command (apple), meta */
+    ScancodeRCtrl = 228,
+    ScancodeRShift = 229,
+    ScancodeRAlt = 230, /**< alt gr, option */
+    ScancodeRGui = 231, /**< windows, command (apple), meta */
 
-    ScancodeMODE = 257,    /**< I'm not sure if this is really not covered
+    ScancodeMode = 257,    /**< I'm not sure if this is really not covered
                                  *   by any of the above, but since there's a
                                  *   special KMOD_MODE for it I'm adding it here
                                  */
@@ -325,23 +319,23 @@ typedef enum
      */
     /* @{ */
 
-    ScancodeAUDIONEXT = 258,
-    ScancodeAUDIOPREV = 259,
-    ScancodeAUDIOSTOP = 260,
-    ScancodeAUDIOPLAY = 261,
-    ScancodeAUDIOMUTE = 262,
-    ScancodeMEDIASELECT = 263,
+    ScancodeAudioNext = 258,
+    ScancodeAudioPrev = 259,
+    ScancodeAudioStop = 260,
+    ScancodeAudioPlay = 261,
+    ScancodeAudioMute = 262,
+    ScancodeMediaSelect = 263,
     ScancodeWWW = 264,
-    ScancodeMAIL = 265,
-    ScancodeCALCULATOR = 266,
-    ScancodeCOMPUTER = 267,
-    ScancodeAC_SEARCH = 268,
-    ScancodeAC_HOME = 269,
-    ScancodeAC_BACK = 270,
-    ScancodeAC_FORWARD = 271,
-    ScancodeAC_STOP = 272,
-    ScancodeAC_REFRESH = 273,
-    ScancodeAC_BOOKMARKS = 274,
+    ScancodeMail = 265,
+    ScancodeCalculator = 266,
+    ScancodeComputer = 267,
+    ScancodeAcSearch = 268,
+    ScancodeAcHome = 269,
+    ScancodeAcBack = 270,
+    ScancodeAcForward = 271,
+    ScancodeAcStop = 272,
+    ScancodeAcRefresh = 273,
+    ScancodeAcBookmarks = 274,
 
     /* @} *//* Usage page 0x0C */
 
@@ -352,18 +346,18 @@ typedef enum
      */
     /* @{ */
 
-    ScancodeBRIGHTNESSDOWN = 275,
-    ScancodeBRIGHTNESSUP = 276,
-    ScancodeDISPLAYSWITCH = 277, /**< display mirroring/dual display
+    ScancodeBrightnessDown = 275,
+    ScancodeBrightnessUp = 276,
+    ScancodeDisplaySwitch = 277, /**< display mirroring/dual display
                                            switch, video mode switch */
-    ScancodeKBDILLUMTOGGLE = 278,
-    ScancodeKBDILLUMDOWN = 279,
-    ScancodeKBDILLUMUP = 280,
-    ScancodeEJECT = 281,
-    ScancodeSLEEP = 282,
+    ScancodeKbDillumToggle = 278,
+    ScancodeKbDillumDown = 279,
+    ScancodeKbDillumUp = 280,
+    ScancodeEject = 281,
+    ScancodeSleep = 282,
 
-    ScancodeAPP1 = 283,
-    ScancodeAPP2 = 284,
+    ScancodeApp1 = 283,
+    ScancodeApp2 = 284,
 
     /* @} *//* Walther keys */
 
@@ -374,14 +368,14 @@ typedef enum
      */
     /* @{ */
 
-    ScancodeAUDIOREWIND = 285,
-    ScancodeAUDIOFASTFORWARD = 286,
+    ScancodeAudioRewind = 285,
+    ScancodeAudioFastForward = 286,
 
     /* @} *//* Usage page 0x0C (additional media keys) */
 
     /* Add any other keys here. */
 
-    NUM_SCANCODES = 512 /**< not a key, just marks the number of scancodes
+    ScancodesCount = 512 /**< not a key, just marks the number of scancodes
                                  for array bounds */
 } Scancode;
 

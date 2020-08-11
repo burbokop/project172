@@ -8,7 +8,6 @@
 
 #include "object.h"
 #include "state.h"
-#include "worker.h"
 
 #include "background.h"
 #include "additional/informative/fpsmonitor.h"
@@ -20,9 +19,9 @@
 class Environment : public Object {
 private:
     State *state = nullptr;
-    std::vector<Worker*> *units = nullptr;
-    AssetProvider *assetManager = nullptr;
-    Context *context = nullptr;
+    std::list<e172::Entity*> m_entities;
+    e172::AssetProvider *assetManager = nullptr;
+    e172::Context *context = nullptr;
     e172::AbstractEventHandler *eventHandler = nullptr;
     Background *background = nullptr;
     FPSMonitor *fps = nullptr;

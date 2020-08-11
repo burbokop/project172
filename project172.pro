@@ -21,181 +21,92 @@ unix {
 }
 
 
-SOURCES += \
-    src/additional/e_variant.cpp \
-    src/additional/speedindicator.cpp \
-    src/assettools/assetexecutors/animatorassetexecutor.cpp \
-    src/assettools/assetexecutors/assetexecutor.cpp \
-    src/assettools/assetexecutors/audioassetexecutor.cpp \
-    src/assettools/assetexecutors/mapassetexecutor.cpp \
-    src/assettools/assetexecutors/numberassetexecutor.cpp \
-    src/assettools/assetexecutors/spriteassetexecutor.cpp \
-    src/assettools/assetexecutors/stringassetexecutor.cpp \
-    src/assettools/assetexecutors/vectorassetexecutor.cpp \
-    src/assettools/assetprovider.cpp \
-    src/audio/abstractaudioprovider.cpp \
-    src/audio/audiosample.cpp \
-    src/engine/abstracteventhandler.cpp \
-    src/engine/abstractfactory.cpp \
-    src/engine/additional.cpp \
-    src/engine/sharedcontainer.cpp \
-    src/engine/type.cpp \
-    src/engine/variant.cpp \
-    src/engine/graphics/abstractgraphicsprovider.cpp \
-    src/engine/graphics/abstractrenderer.cpp \
-    src/engine/graphics/image.cpp \
-    src/engine/textformat.cpp \
-    src/gui/guidebugvalueinfo.cpp \
-    src/main.cpp \
-    src/object.cpp \
-    src/openglimplementation/openglgraphicsprovider.cpp \
-    src/openglimplementation/openglrenderer.cpp \
-    src/sdlimplementation/sdlaudioprovider.cpp \
-    src/sdlimplementation/sdleventhandler.cpp \
-    src/sdlimplementation/sdlgraphicsprovider.cpp \
-    src/sdlimplementation/sdlrenderer.cpp \
-    src/worker.cpp \
-    src/worlds/world.cpp \
-    src/filesystem.cpp \
-    src/animator.cpp \
-    src/background.cpp \
-    src/units/unit.cpp \
-    src/units/movable.cpp \
-    src/units/camera.cpp \
-    src/capabilities/capability.cpp \
-    src/capabilities/controller.cpp \
-    src/capabilities/player.cpp \
-    src/capabilities/modulehandler.cpp \
-    src/capabilities/modules/module.cpp \
-    src/sdlimplementation/rotozoom.cpp \
-    src/sdlimplementation/spm.cpp \
-    src/time/timer.cpp \
-    src/engine/math/vector.cpp \
-    src/additional/stringformer.cpp \
-    src/sdlimplementation/effects/anaglyph.cpp \
-    src/assettools/loadable.cpp \
-    src/capabilities/modules/weapon.cpp \
-    src/units/projectile.cpp \
-    src/context.cpp \
-    src/capabilities/modules/engine.cpp \
-    src/capabilities/modules/warpdrive.cpp \
-    src/units/ship.cpp \
-    src/gui/guielement.cpp \
-    src/gui/guicontainer.cpp \
-    src/iinformative.cpp \
-    src/gui/guistack.cpp \
-    src/capabilities/ai.cpp \
-    src/units/station.cpp \
-    src/json/json_reader.cpp \
-    src/json/json_value.cpp \
-    src/json/json_writer.cpp \
-    src/debug.cpp \
-    src/gui/guiswitch.cpp \
-    src/sdlimplementation/effects/visualeffect.cpp \
-    src/gui/guichoice.cpp \
-    src/application.cpp \
-    src/additional/informative/fpsmonitor.cpp \
-    src/units/particle.cpp \
-    src/additional/net/framebuilder.cpp \
-    src/additional/net/socket.cpp \
-    src/netlistener.cpp \
-    src/state.cpp \
-    src/additional/trigger.cpp \
-    src/gui/guimain.cpp \
-    src/gui/guicentralmessage.cpp \
-    src/additional/informative/controllerfinder.cpp \
-    src/gui/guifloatingmessage.cpp \
-    src/gui/guiblushingfloatingmessage.cpp \
-    src/engine/math/math.cpp \
-    src/additional/lightparticle.cpp \
-    src/worldmanager.cpp \
-    src/worlds/defaultworld.cpp \
-    src/worlds/arenaworld.cpp \
-    src/capabilities/docker.cpp \
-    src/near.cpp \
-    src/gui/guilist.cpp \
-    src/capabilities/aggressive.cpp \
-    src/worlds/heapworld.cpp \
-    src/objectregistry.cpp \
-    src/additional/informative/registryinfo.cpp \
-    src/audio/audio.cpp \
-    src/audio/audiochannel.cpp \
-    src/audio/audioplayer.cpp \
-    src/gui/guiminimap.cpp \
-    src/gui/guiradar.cpp \
-    src/capabilities/modules/thruster.cpp \
-    src/time/time.cpp \
-    src/gui/guimenuelement.cpp \
-    src/additional/mutex.cpp \
-    src/additional/informative/unitsamountinfo.cpp \
-    src/environment.cpp
 
+# Default rules for deployment.
+qnx: target.path = /tmp/$${TARGET}/bin
+else: unix:!android: target.path = /opt/$${TARGET}/bin
+!isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
     src/additional/e_variant.h \
+    src/additional/informative/controllerfinder.h \
+    src/additional/informative/fpsmonitor.h \
+    src/additional/informative/registryinfo.h \
+    src/additional/informative/unitsamountinfo.h \
+    src/additional/lightparticle.h \
+    src/additional/mutex.h \
+    src/additional/net/framebuilder.h \
+    src/additional/net/socket.h \
     src/additional/speedindicator.h \
-    src/assettools/assetexecutors/animatorassetexecutor.h \
-    src/assettools/assetexecutors/assetexecutor.h \
-    src/assettools/assetexecutors/audioassetexecutor.h \
-    src/assettools/assetexecutors/mapassetexecutor.h \
-    src/assettools/assetexecutors/numberassetexecutor.h \
-    src/assettools/assetexecutors/spriteassetexecutor.h \
-    src/assettools/assetexecutors/stringassetexecutor.h \
-    src/assettools/assetexecutors/vectorassetexecutor.h \
-    src/assettools/assetprovider.h \
-    src/audio/abstractaudioprovider.h \
-    src/audio/audiosample.h \
+    src/additional/stringformer.h \
+    src/additional/trigger.h \
+    src/additional/variant.cpp.new \
+    src/additional/variant.h.new \
+    src/animator.h \
+    src/application.h \
+    src/assetexecutors/animatorassetexecutor.h \
+    src/assetexecutors/audioassetexecutor.h \
+    src/assetexecutors/mapassetexecutor.h \
+    src/assetexecutors/numberassetexecutor.h \
+    src/assetexecutors/spriteassetexecutor.h \
+    src/assetexecutors/stringassetexecutor.h \
+    src/assetexecutors/vectorassetexecutor.h \
+    src/audio/audio.h \
+    src/audio/audioplayer.h \
+    src/background.h \
+    src/capabilities/aggressive.h \
+    src/capabilities/ai.h \
+    src/capabilities/capability.h \
+    src/capabilities/controller.h \
+    src/capabilities/docker.h \
+    src/capabilities/modulehandler.h \
+    src/capabilities/modules/engine.h \
+    src/capabilities/modules/module.h \
+    src/capabilities/modules/thruster.h \
+    src/capabilities/modules/warpdrive.h \
+    src/capabilities/modules/weapon.h \
+    src/capabilities/player.h \
+    src/debug.h \
     src/engine/abstracteventhandler.h \
     src/engine/abstractfactory.h \
     src/engine/additional.h \
-    src/engine/sharedcontainer.h \
-    src/engine/type.h \
-    src/engine/variant.h \
+    src/engine/assettools/abstractassetexecutor.h \
+    src/engine/assettools/assetprovider.h \
+    src/engine/assettools/loadable.h \
+    src/engine/audio/abstractaudioprovider.h \
+    src/engine/audio/audiochannel.h \
+    src/engine/audio/audiosample.h \
+    src/engine/context.h \
+    src/engine/entity.h \
+    src/engine/gameapplication.h \
     src/engine/graphics/abstractgraphicsprovider.h \
     src/engine/graphics/abstractrenderer.h \
     src/engine/graphics/image.h \
-    src/engine/textformat.h \
-    src/gui/guidebugvalueinfo.h \
-    src/object.h \
-    src/openglimplementation/openglgraphicsprovider.h \
-    src/openglimplementation/openglrenderer.h \
-    src/sdlimplementation/sdlaudioprovider.h \
-    src/sdlimplementation/sdleventhandler.h \
-    src/sdlimplementation/sdlgraphicsprovider.h \
-    src/sdlimplementation/sdlrenderer.h \
-    src/worker.h \
-    src/worlds/world.h \
-    src/filesystem.h \
-    src/animator.h \
-    src/background.h \
-    src/units/unit.h \
-    src/units/movable.h \
-    src/units/camera.h \
-    src/capabilities/capability.h \
-    src/capabilities/controller.h \
-    src/capabilities/player.h \
-    src/capabilities/modulehandler.h \
-    src/capabilities/modules/module.h \
-    src/sdlimplementation/rotozoom.h \
-    src/sdlimplementation/spm.h \
-    src/time/timer.h \
+    src/engine/math/math.h \
     src/engine/math/vector.h \
-    src/additional/stringformer.h \
-    src/sdlimplementation/effects/anaglyph.h \
-    src/assettools/loadable.h \
-    src/capabilities/modules/weapon.h \
-    src/units/projectile.h \
-    src/context.h \
-    src/capabilities/modules/engine.h \
-    src/capabilities/modules/warpdrive.h \
-    src/units/ship.h \
-    src/gui/guielement.h \
+    src/engine/sharedcontainer.h \
+    src/engine/textformat.h \
+    src/engine/time/deltatimecalculator.h \
+    src/engine/time/elapsedtimer.h \
+    src/engine/type.h \
+    src/engine/variant.h \
+    src/environment.h \
+    src/filesystem.h \
+    src/gui/guiblushingfloatingmessage.h \
+    src/gui/guicentralmessage.h \
+    src/gui/guichoice.h \
     src/gui/guicontainer.h \
-    src/iinformative.h \
+    src/gui/guidebugvalueinfo.h \
+    src/gui/guielement.h \
+    src/gui/guifloatingmessage.h \
+    src/gui/guilist.h \
+    src/gui/guimain.h \
+    src/gui/guimenuelement.h \
+    src/gui/guiminimap.h \
+    src/gui/guiradar.h \
     src/gui/guistack.h \
-    src/capabilities/ai.h \
-    src/units/station.h \
-    src/json/writer.h \
+    src/gui/guiswitch.h \
+    src/iinformative.h \
     src/json/allocator.h \
     src/json/assertions.h \
     src/json/autolink.h \
@@ -203,55 +114,146 @@ HEADERS += \
     src/json/features.h \
     src/json/forwards.h \
     src/json/json.h \
+    src/json/json_tool.h \
+    src/json/json_valueiterator.inl \
     src/json/reader.h \
     src/json/value.h \
     src/json/version.h \
-    src/json_tool.h \
-    src/json_valueiterator.inl \
-    src/debug.h \
-    src/gui/guiswitch.h \
-    src/sdlimplementation/effects/visualeffect.h \
-    src/gui/guichoice.h \
-    src/application.h \
-    src/additional/informative/fpsmonitor.h \
-    src/units/particle.h \
-    src/additional/net/framebuilder.h \
-    src/additional/net/socket.h \
-    src/netlistener.h \
-    src/state.h \
-    src/additional/trigger.h \
-    src/gui/guimain.h \
-    src/gui/guicentralmessage.h \
-    src/additional/informative/controllerfinder.h \
-    src/gui/guifloatingmessage.h \
-    src/gui/guiblushingfloatingmessage.h \
-    src/engine/math/math.h \
-    src/additional/lightparticle.h \
-    src/worldmanager.h \
-    src/worlds/defaultworld.h \
-    src/worlds/arenaworld.h \
-    src/capabilities/docker.h \
+    src/json/writer.h \
     src/near.h \
-    src/gui/guilist.h \
-    src/capabilities/aggressive.h \
-    src/worlds/heapworld.h \
+    src/netlistener.h \
+    src/object.h \
     src/objectregistry.h \
-    src/additional/informative/registryinfo.h \
-    src/audio/audio.h \
-    src/audio/audiochannel.h \
-    src/audio/audioplayer.h \
-    src/gui/guiminimap.h \
-    src/gui/guiradar.h \
-    src/capabilities/modules/thruster.h \
-    src/time/time.h \
-    src/gui/guimenuelement.h \
-    src/additional/mutex.h \
-    src/additional/informative/unitsamountinfo.h \
-    src/environment.h
+    src/openglimplementation/openglgraphicsprovider.h \
+    src/openglimplementation/openglrenderer.h \
+    src/sdlimplementation/effects/anaglyph.h \
+    src/sdlimplementation/effects/visualeffect.h \
+    src/sdlimplementation/rotozoom.h \
+    src/sdlimplementation/sdlaudioprovider.h \
+    src/sdlimplementation/sdleventhandler.h \
+    src/sdlimplementation/sdlgraphicsprovider.h \
+    src/sdlimplementation/sdlrenderer.h \
+    src/sdlimplementation/spm.h \
+    src/state.h \
+    src/units/camera.h \
+    src/units/movable.h \
+    src/units/particle.h \
+    src/units/projectile.h \
+    src/units/ship.h \
+    src/units/station.h \
+    src/units/unit.h \
+    src/worldmanager.h \
+    src/worlds/arenaworld.h \
+    src/worlds/defaultworld.h \
+    src/worlds/heapworld.h \
+    src/worlds/world.h
 
-
-
-# Default rules for deployment.
-qnx: target.path = /tmp/$${TARGET}/bin
-else: unix:!android: target.path = /opt/$${TARGET}/bin
-!isEmpty(target.path): INSTALLS += target
+SOURCES += \
+    src/additional/e_variant.cpp \
+    src/additional/informative/controllerfinder.cpp \
+    src/additional/informative/fpsmonitor.cpp \
+    src/additional/informative/registryinfo.cpp \
+    src/additional/informative/unitsamountinfo.cpp \
+    src/additional/lightparticle.cpp \
+    src/additional/mutex.cpp \
+    src/additional/net/framebuilder.cpp \
+    src/additional/net/socket.cpp \
+    src/additional/speedindicator.cpp \
+    src/additional/stringformer.cpp \
+    src/additional/trigger.cpp \
+    src/animator.cpp \
+    src/application.cpp \
+    src/assetexecutors/animatorassetexecutor.cpp \
+    src/assetexecutors/audioassetexecutor.cpp \
+    src/assetexecutors/mapassetexecutor.cpp \
+    src/assetexecutors/numberassetexecutor.cpp \
+    src/assetexecutors/spriteassetexecutor.cpp \
+    src/assetexecutors/stringassetexecutor.cpp \
+    src/assetexecutors/vectorassetexecutor.cpp \
+    src/audio/audio.cpp \
+    src/audio/audioplayer.cpp \
+    src/background.cpp \
+    src/capabilities/aggressive.cpp \
+    src/capabilities/ai.cpp \
+    src/capabilities/capability.cpp \
+    src/capabilities/controller.cpp \
+    src/capabilities/docker.cpp \
+    src/capabilities/modulehandler.cpp \
+    src/capabilities/modules/engine.cpp \
+    src/capabilities/modules/module.cpp \
+    src/capabilities/modules/thruster.cpp \
+    src/capabilities/modules/warpdrive.cpp \
+    src/capabilities/modules/weapon.cpp \
+    src/capabilities/player.cpp \
+    src/debug.cpp \
+    src/engine/abstracteventhandler.cpp \
+    src/engine/abstractfactory.cpp \
+    src/engine/additional.cpp \
+    src/engine/assettools/abstractassetexecutor.cpp \
+    src/engine/assettools/assetprovider.cpp \
+    src/engine/assettools/loadable.cpp \
+    src/engine/audio/abstractaudioprovider.cpp \
+    src/engine/audio/audiochannel.cpp \
+    src/engine/audio/audiosample.cpp \
+    src/engine/context.cpp \
+    src/engine/entity.cpp \
+    src/engine/gameapplication.cpp \
+    src/engine/graphics/abstractgraphicsprovider.cpp \
+    src/engine/graphics/abstractrenderer.cpp \
+    src/engine/graphics/image.cpp \
+    src/engine/math/math.cpp \
+    src/engine/math/vector.cpp \
+    src/engine/sharedcontainer.cpp \
+    src/engine/textformat.cpp \
+    src/engine/time/deltatimecalculator.cpp \
+    src/engine/time/elapsedtimer.cpp \
+    src/engine/type.cpp \
+    src/engine/variant.cpp \
+    src/environment.cpp \
+    src/filesystem.cpp \
+    src/gui/guiblushingfloatingmessage.cpp \
+    src/gui/guicentralmessage.cpp \
+    src/gui/guichoice.cpp \
+    src/gui/guicontainer.cpp \
+    src/gui/guidebugvalueinfo.cpp \
+    src/gui/guielement.cpp \
+    src/gui/guifloatingmessage.cpp \
+    src/gui/guilist.cpp \
+    src/gui/guimain.cpp \
+    src/gui/guimenuelement.cpp \
+    src/gui/guiminimap.cpp \
+    src/gui/guiradar.cpp \
+    src/gui/guistack.cpp \
+    src/gui/guiswitch.cpp \
+    src/iinformative.cpp \
+    src/json/json_reader.cpp \
+    src/json/json_value.cpp \
+    src/json/json_writer.cpp \
+    src/main.cpp \
+    src/near.cpp \
+    src/netlistener.cpp \
+    src/object.cpp \
+    src/objectregistry.cpp \
+    src/openglimplementation/openglgraphicsprovider.cpp \
+    src/openglimplementation/openglrenderer.cpp \
+    src/sdlimplementation/effects/anaglyph.cpp \
+    src/sdlimplementation/effects/visualeffect.cpp \
+    src/sdlimplementation/rotozoom.cpp \
+    src/sdlimplementation/sdlaudioprovider.cpp \
+    src/sdlimplementation/sdleventhandler.cpp \
+    src/sdlimplementation/sdlgraphicsprovider.cpp \
+    src/sdlimplementation/sdlrenderer.cpp \
+    src/sdlimplementation/spm.cpp \
+    src/state.cpp \
+    src/units/camera.cpp \
+    src/units/movable.cpp \
+    src/units/particle.cpp \
+    src/units/projectile.cpp \
+    src/units/ship.cpp \
+    src/units/station.cpp \
+    src/units/unit.cpp \
+    src/worldmanager.cpp \
+    src/worlds/arenaworld.cpp \
+    src/worlds/defaultworld.cpp \
+    src/worlds/heapworld.cpp \
+    src/worlds/world.cpp

@@ -2,11 +2,10 @@
 #define FPSMONITOR_H
 
 #include <SDL2/SDL.h>
+#include <engine/time/elapsedtimer.h>
 #include <vector>
 
 #include "iinformative.h"
-#include "time/timer.h"
-
 
 class FPSMonitor : public IInformative {
 private:
@@ -16,7 +15,7 @@ private:
     Uint32 averageFPS = 0;
 
     std::vector<Uint32> fpsArray;
-    Timer outputTimer = Timer(500);
+    e172::ElapsedTimer outputTimer = e172::ElapsedTimer(500);
 
     std::string title;
 

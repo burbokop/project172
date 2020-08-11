@@ -1,10 +1,11 @@
 #ifndef ANIMATORASSETEXECUTOR_H
 #define ANIMATORASSETEXECUTOR_H
 
-#include "assetexecutor.h"
+#include <engine/assettools/abstractassetexecutor.h>
 
 
-class AnimatorAssetExecutor : public AssetExecutor {
+
+class AnimatorAssetExecutor : public e172::AbstractAssetExecutor {
 public:
     AnimatorAssetExecutor();
 

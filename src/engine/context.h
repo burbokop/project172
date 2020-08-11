@@ -3,21 +3,31 @@
 
 #include <queue>
 
-#include <assettools/assetprovider.h>
+#include <additional/e_variant.h>
+
 
 
 #include "gui/guimain.h"
 #include "near.h"
 #include "background.h"
+#include "entity.h"
 
 
-struct Request {
-    Worker *requester;
-    unsigned command;
-    Variant argument;
-};
 
+namespace e172 {
+
+class AssetProvider;
+class GameApplication;
 class Context : public Object {
+    friend GameApplication;
+    double m_deltaTime = 0;
+    GameApplication *m_appliation = nullptr;
+
+    struct Request {
+        Entity *requester;
+        unsigned command;
+        old::Variant argument;
+    };
 public:
     static const unsigned DELETE_UNIT;
     static const unsigned SPAWN_EXPLOSIVE;
@@ -34,28 +44,26 @@ public:
 
 private:
     std::queue<Request> eventQueue;
-    std::vector<Worker*> *units;
+    std::list<Entity*> *m_entities;
 
-    AssetProvider *assets;
-
-    GUIMain *gui = nullptr;
-    Background *background = nullptr;
-    Near *_near = nullptr;
+    AssetProvider *m_assetProvider= nullptr;
 
     void handleRequest(Request request);
 public:
-    Context(std::vector<Worker*> *units = nullptr, AssetProvider *assets = nullptr, GUIMain *gui = nullptr);
+    Context(std::list<Entity*> *entities = nullptr, AssetProvider *assetProvider = nullptr);
+    std::string absolutePath(const std::string &path) const;
 
-    std::vector<Worker*> *getUnits() const;
-    AssetProvider *getAssets() const;
+    [[deprecated]]
+    std::list<Entity*> *entities() const;
+    AssetProvider *assetProvider() const;
 
-    void addEvent(Worker *requester, unsigned command, Variant argument = Variant());
+    void addEvent(Entity *requester, unsigned command, old::Variant argument = old::Variant());
 
     void handleEvents();
 
-    void setGui(GUIMain *value);
-    void setBackground(Background *value);
-    void setNear(Near *value);
+    double deltaTime() const;
 };
+
+}
 
 #endif // CONTEXT_H

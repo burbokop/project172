@@ -21,9 +21,9 @@ public:
     void setFiring(bool condition);
     std::string getInfo() override;
 
-    // Worker interface
+    // Entity interface
 public:
-    void tick(Context *context, e172::AbstractEventHandler *eventHandler) override;
+    void proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) override;
 };
 
 #endif // WEAPON_H

@@ -62,112 +62,113 @@ SOURCES       = ../klibcore/src/experimental/universalqueue/kuniversalqueue.cpp 
 		../klibcore/src/memcontrol/kmoduleswitch.cpp \
 		../klibcore/src/ksmartenum.cpp \
 		../src/additional/e_variant.cpp \
+		../src/additional/informative/controllerfinder.cpp \
+		../src/additional/informative/fpsmonitor.cpp \
+		../src/additional/informative/registryinfo.cpp \
+		../src/additional/informative/unitsamountinfo.cpp \
+		../src/additional/lightparticle.cpp \
+		../src/additional/mutex.cpp \
+		../src/additional/net/framebuilder.cpp \
+		../src/additional/net/socket.cpp \
 		../src/additional/speedindicator.cpp \
-		../src/assettools/assetexecutors/animatorassetexecutor.cpp \
-		../src/assettools/assetexecutors/assetexecutor.cpp \
-		../src/assettools/assetexecutors/audioassetexecutor.cpp \
-		../src/assettools/assetexecutors/mapassetexecutor.cpp \
-		../src/assettools/assetexecutors/numberassetexecutor.cpp \
-		../src/assettools/assetexecutors/spriteassetexecutor.cpp \
-		../src/assettools/assetexecutors/stringassetexecutor.cpp \
-		../src/assettools/assetexecutors/vectorassetexecutor.cpp \
-		../src/assettools/assetprovider.cpp \
-		../src/audio/abstractaudioprovider.cpp \
-		../src/audio/audiosample.cpp \
+		../src/additional/stringformer.cpp \
+		../src/additional/trigger.cpp \
+		../src/animator.cpp \
+		../src/application.cpp \
+		../src/assetexecutors/animatorassetexecutor.cpp \
+		../src/assetexecutors/audioassetexecutor.cpp \
+		../src/assetexecutors/mapassetexecutor.cpp \
+		../src/assetexecutors/numberassetexecutor.cpp \
+		../src/assetexecutors/spriteassetexecutor.cpp \
+		../src/assetexecutors/stringassetexecutor.cpp \
+		../src/assetexecutors/vectorassetexecutor.cpp \
+		../src/audio/audio.cpp \
+		../src/audio/audioplayer.cpp \
+		../src/background.cpp \
+		../src/capabilities/aggressive.cpp \
+		../src/capabilities/ai.cpp \
+		../src/capabilities/capability.cpp \
+		../src/capabilities/controller.cpp \
+		../src/capabilities/docker.cpp \
+		../src/capabilities/modulehandler.cpp \
+		../src/capabilities/modules/engine.cpp \
+		../src/capabilities/modules/module.cpp \
+		../src/capabilities/modules/thruster.cpp \
+		../src/capabilities/modules/warpdrive.cpp \
+		../src/capabilities/modules/weapon.cpp \
+		../src/capabilities/player.cpp \
+		../src/debug.cpp \
 		../src/engine/abstracteventhandler.cpp \
 		../src/engine/abstractfactory.cpp \
 		../src/engine/additional.cpp \
-		../src/engine/sharedcontainer.cpp \
-		../src/engine/type.cpp \
-		../src/engine/variant.cpp \
+		../src/engine/assettools/abstractassetexecutor.cpp \
+		../src/engine/assettools/assetprovider.cpp \
+		../src/engine/assettools/loadable.cpp \
+		../src/engine/audio/abstractaudioprovider.cpp \
+		../src/engine/audio/audiochannel.cpp \
+		../src/engine/audio/audiosample.cpp \
+		../src/engine/context.cpp \
+		../src/engine/entity.cpp \
+		../src/engine/gameapplication.cpp \
 		../src/engine/graphics/abstractgraphicsprovider.cpp \
 		../src/engine/graphics/abstractrenderer.cpp \
 		../src/engine/graphics/image.cpp \
+		../src/engine/math/math.cpp \
+		../src/engine/math/vector.cpp \
+		../src/engine/sharedcontainer.cpp \
 		../src/engine/textformat.cpp \
+		../src/engine/time/deltatimecalculator.cpp \
+		../src/engine/time/elapsedtimer.cpp \
+		../src/engine/type.cpp \
+		../src/engine/variant.cpp \
+		../src/environment.cpp \
+		../src/filesystem.cpp \
+		../src/gui/guiblushingfloatingmessage.cpp \
+		../src/gui/guicentralmessage.cpp \
+		../src/gui/guichoice.cpp \
+		../src/gui/guicontainer.cpp \
 		../src/gui/guidebugvalueinfo.cpp \
+		../src/gui/guielement.cpp \
+		../src/gui/guifloatingmessage.cpp \
+		../src/gui/guilist.cpp \
+		../src/gui/guimain.cpp \
+		../src/gui/guimenuelement.cpp \
+		../src/gui/guiminimap.cpp \
+		../src/gui/guiradar.cpp \
+		../src/gui/guistack.cpp \
+		../src/gui/guiswitch.cpp \
+		../src/iinformative.cpp \
+		../src/json/json_reader.cpp \
+		../src/json/json_value.cpp \
+		../src/json/json_writer.cpp \
 		../src/main.cpp \
+		../src/near.cpp \
+		../src/netlistener.cpp \
 		../src/object.cpp \
+		../src/objectregistry.cpp \
 		../src/openglimplementation/openglgraphicsprovider.cpp \
 		../src/openglimplementation/openglrenderer.cpp \
+		../src/sdlimplementation/effects/anaglyph.cpp \
+		../src/sdlimplementation/effects/visualeffect.cpp \
+		../src/sdlimplementation/rotozoom.cpp \
 		../src/sdlimplementation/sdlaudioprovider.cpp \
 		../src/sdlimplementation/sdleventhandler.cpp \
 		../src/sdlimplementation/sdlgraphicsprovider.cpp \
 		../src/sdlimplementation/sdlrenderer.cpp \
-		../src/worker.cpp \
-		../src/worlds/world.cpp \
-		../src/filesystem.cpp \
-		../src/animator.cpp \
-		../src/background.cpp \
-		../src/units/unit.cpp \
-		../src/units/movable.cpp \
-		../src/units/camera.cpp \
-		../src/capabilities/capability.cpp \
-		../src/capabilities/controller.cpp \
-		../src/capabilities/player.cpp \
-		../src/capabilities/modulehandler.cpp \
-		../src/capabilities/modules/module.cpp \
-		../src/sdlimplementation/rotozoom.cpp \
 		../src/sdlimplementation/spm.cpp \
-		../src/time/timer.cpp \
-		../src/engine/math/vector.cpp \
-		../src/additional/stringformer.cpp \
-		../src/sdlimplementation/effects/anaglyph.cpp \
-		../src/assettools/loadable.cpp \
-		../src/capabilities/modules/weapon.cpp \
-		../src/units/projectile.cpp \
-		../src/context.cpp \
-		../src/capabilities/modules/engine.cpp \
-		../src/capabilities/modules/warpdrive.cpp \
-		../src/units/ship.cpp \
-		../src/gui/guielement.cpp \
-		../src/gui/guicontainer.cpp \
-		../src/iinformative.cpp \
-		../src/gui/guistack.cpp \
-		../src/capabilities/ai.cpp \
-		../src/units/station.cpp \
-		../src/json/json_reader.cpp \
-		../src/json/json_value.cpp \
-		../src/json/json_writer.cpp \
-		../src/debug.cpp \
-		../src/gui/guiswitch.cpp \
-		../src/sdlimplementation/effects/visualeffect.cpp \
-		../src/gui/guichoice.cpp \
-		../src/application.cpp \
-		../src/additional/informative/fpsmonitor.cpp \
-		../src/units/particle.cpp \
-		../src/additional/net/framebuilder.cpp \
-		../src/additional/net/socket.cpp \
-		../src/netlistener.cpp \
 		../src/state.cpp \
-		../src/additional/trigger.cpp \
-		../src/gui/guimain.cpp \
-		../src/gui/guicentralmessage.cpp \
-		../src/additional/informative/controllerfinder.cpp \
-		../src/gui/guifloatingmessage.cpp \
-		../src/gui/guiblushingfloatingmessage.cpp \
-		../src/engine/math/math.cpp \
-		../src/additional/lightparticle.cpp \
+		../src/units/camera.cpp \
+		../src/units/movable.cpp \
+		../src/units/particle.cpp \
+		../src/units/projectile.cpp \
+		../src/units/ship.cpp \
+		../src/units/station.cpp \
+		../src/units/unit.cpp \
 		../src/worldmanager.cpp \
-		../src/worlds/defaultworld.cpp \
 		../src/worlds/arenaworld.cpp \
-		../src/capabilities/docker.cpp \
-		../src/near.cpp \
-		../src/gui/guilist.cpp \
-		../src/capabilities/aggressive.cpp \
+		../src/worlds/defaultworld.cpp \
 		../src/worlds/heapworld.cpp \
-		../src/objectregistry.cpp \
-		../src/additional/informative/registryinfo.cpp \
-		../src/audio/audio.cpp \
-		../src/audio/audiochannel.cpp \
-		../src/audio/audioplayer.cpp \
-		../src/gui/guiminimap.cpp \
-		../src/gui/guiradar.cpp \
-		../src/capabilities/modules/thruster.cpp \
-		../src/time/time.cpp \
-		../src/gui/guimenuelement.cpp \
-		../src/additional/mutex.cpp \
-		../src/additional/informative/unitsamountinfo.cpp \
-		../src/environment.cpp 
+		../src/worlds/world.cpp 
 OBJECTS       = kuniversalqueue.o \
 		ktype.o \
 		kcirclebuffer.o \
@@ -178,112 +179,113 @@ OBJECTS       = kuniversalqueue.o \
 		kmoduleswitch.o \
 		ksmartenum.o \
 		e_variant.o \
+		controllerfinder.o \
+		fpsmonitor.o \
+		registryinfo.o \
+		unitsamountinfo.o \
+		lightparticle.o \
+		mutex.o \
+		framebuilder.o \
+		socket.o \
 		speedindicator.o \
+		stringformer.o \
+		trigger.o \
+		animator.o \
+		application.o \
 		animatorassetexecutor.o \
-		assetexecutor.o \
 		audioassetexecutor.o \
 		mapassetexecutor.o \
 		numberassetexecutor.o \
 		spriteassetexecutor.o \
 		stringassetexecutor.o \
 		vectorassetexecutor.o \
-		assetprovider.o \
-		abstractaudioprovider.o \
-		audiosample.o \
+		audio.o \
+		audioplayer.o \
+		background.o \
+		aggressive.o \
+		ai.o \
+		capability.o \
+		controller.o \
+		docker.o \
+		modulehandler.o \
+		engine.o \
+		module.o \
+		thruster.o \
+		warpdrive.o \
+		weapon.o \
+		player.o \
+		debug.o \
 		abstracteventhandler.o \
 		abstractfactory.o \
 		additional.o \
-		sharedcontainer.o \
-		type.o \
-		variant.o \
+		abstractassetexecutor.o \
+		assetprovider.o \
+		loadable.o \
+		abstractaudioprovider.o \
+		audiochannel.o \
+		audiosample.o \
+		context.o \
+		entity.o \
+		gameapplication.o \
 		abstractgraphicsprovider.o \
 		abstractrenderer.o \
 		image.o \
+		math.o \
+		vector.o \
+		sharedcontainer.o \
 		textformat.o \
+		deltatimecalculator.o \
+		elapsedtimer.o \
+		type.o \
+		variant.o \
+		environment.o \
+		filesystem.o \
+		guiblushingfloatingmessage.o \
+		guicentralmessage.o \
+		guichoice.o \
+		guicontainer.o \
 		guidebugvalueinfo.o \
+		guielement.o \
+		guifloatingmessage.o \
+		guilist.o \
+		guimain.o \
+		guimenuelement.o \
+		guiminimap.o \
+		guiradar.o \
+		guistack.o \
+		guiswitch.o \
+		iinformative.o \
+		json_reader.o \
+		json_value.o \
+		json_writer.o \
 		main.o \
+		near.o \
+		netlistener.o \
 		object.o \
+		objectregistry.o \
 		openglgraphicsprovider.o \
 		openglrenderer.o \
+		anaglyph.o \
+		visualeffect.o \
+		rotozoom.o \
 		sdlaudioprovider.o \
 		sdleventhandler.o \
 		sdlgraphicsprovider.o \
 		sdlrenderer.o \
-		worker.o \
-		world.o \
-		filesystem.o \
-		animator.o \
-		background.o \
-		unit.o \
-		movable.o \
-		camera.o \
-		capability.o \
-		controller.o \
-		player.o \
-		modulehandler.o \
-		module.o \
-		rotozoom.o \
 		spm.o \
-		timer.o \
-		vector.o \
-		stringformer.o \
-		anaglyph.o \
-		loadable.o \
-		weapon.o \
-		projectile.o \
-		context.o \
-		engine.o \
-		warpdrive.o \
-		ship.o \
-		guielement.o \
-		guicontainer.o \
-		iinformative.o \
-		guistack.o \
-		ai.o \
-		station.o \
-		json_reader.o \
-		json_value.o \
-		json_writer.o \
-		debug.o \
-		guiswitch.o \
-		visualeffect.o \
-		guichoice.o \
-		application.o \
-		fpsmonitor.o \
-		particle.o \
-		framebuilder.o \
-		socket.o \
-		netlistener.o \
 		state.o \
-		trigger.o \
-		guimain.o \
-		guicentralmessage.o \
-		controllerfinder.o \
-		guifloatingmessage.o \
-		guiblushingfloatingmessage.o \
-		math.o \
-		lightparticle.o \
+		camera.o \
+		movable.o \
+		particle.o \
+		projectile.o \
+		ship.o \
+		station.o \
+		unit.o \
 		worldmanager.o \
-		defaultworld.o \
 		arenaworld.o \
-		docker.o \
-		near.o \
-		guilist.o \
-		aggressive.o \
+		defaultworld.o \
 		heapworld.o \
-		objectregistry.o \
-		registryinfo.o \
-		audio.o \
-		audiochannel.o \
-		audioplayer.o \
-		guiminimap.o \
-		guiradar.o \
-		thruster.o \
-		time.o \
-		guimenuelement.o \
-		mutex.o \
-		unitsamountinfo.o \
-		environment.o
+		world.o
 DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		/usr/lib/qt/mkspecs/common/unix.conf \
 		/usr/lib/qt/mkspecs/common/linux.conf \
@@ -508,69 +510,84 @@ DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		/home/valergood/project172/klibcore/src/memcontrol/kmoduleswitch.h \
 		/home/valergood/project172/klibcore/src/ksmartenum.h \
 		src/additional/e_variant.h \
+		src/additional/informative/controllerfinder.h \
+		src/additional/informative/fpsmonitor.h \
+		src/additional/informative/registryinfo.h \
+		src/additional/informative/unitsamountinfo.h \
+		src/additional/lightparticle.h \
+		src/additional/mutex.h \
+		src/additional/net/framebuilder.h \
+		src/additional/net/socket.h \
 		src/additional/speedindicator.h \
-		src/assettools/assetexecutors/animatorassetexecutor.h \
-		src/assettools/assetexecutors/assetexecutor.h \
-		src/assettools/assetexecutors/audioassetexecutor.h \
-		src/assettools/assetexecutors/mapassetexecutor.h \
-		src/assettools/assetexecutors/numberassetexecutor.h \
-		src/assettools/assetexecutors/spriteassetexecutor.h \
-		src/assettools/assetexecutors/stringassetexecutor.h \
-		src/assettools/assetexecutors/vectorassetexecutor.h \
-		src/assettools/assetprovider.h \
-		src/audio/abstractaudioprovider.h \
-		src/audio/audiosample.h \
+		src/additional/stringformer.h \
+		src/additional/trigger.h \
+		src/additional/variant.cpp.new \
+		src/additional/variant.h.new \
+		src/animator.h \
+		src/application.h \
+		src/assetexecutors/animatorassetexecutor.h \
+		src/assetexecutors/audioassetexecutor.h \
+		src/assetexecutors/mapassetexecutor.h \
+		src/assetexecutors/numberassetexecutor.h \
+		src/assetexecutors/spriteassetexecutor.h \
+		src/assetexecutors/stringassetexecutor.h \
+		src/assetexecutors/vectorassetexecutor.h \
+		src/audio/audio.h \
+		src/audio/audioplayer.h \
+		src/background.h \
+		src/capabilities/aggressive.h \
+		src/capabilities/ai.h \
+		src/capabilities/capability.h \
+		src/capabilities/controller.h \
+		src/capabilities/docker.h \
+		src/capabilities/modulehandler.h \
+		src/capabilities/modules/engine.h \
+		src/capabilities/modules/module.h \
+		src/capabilities/modules/thruster.h \
+		src/capabilities/modules/warpdrive.h \
+		src/capabilities/modules/weapon.h \
+		src/capabilities/player.h \
+		src/debug.h \
 		src/engine/abstracteventhandler.h \
 		src/engine/abstractfactory.h \
 		src/engine/additional.h \
-		src/engine/sharedcontainer.h \
-		src/engine/type.h \
-		src/engine/variant.h \
+		src/engine/assettools/abstractassetexecutor.h \
+		src/engine/assettools/assetprovider.h \
+		src/engine/assettools/loadable.h \
+		src/engine/audio/abstractaudioprovider.h \
+		src/engine/audio/audiochannel.h \
+		src/engine/audio/audiosample.h \
+		src/engine/context.h \
+		src/engine/entity.h \
+		src/engine/gameapplication.h \
 		src/engine/graphics/abstractgraphicsprovider.h \
 		src/engine/graphics/abstractrenderer.h \
 		src/engine/graphics/image.h \
-		src/engine/textformat.h \
-		src/gui/guidebugvalueinfo.h \
-		src/object.h \
-		src/openglimplementation/openglgraphicsprovider.h \
-		src/openglimplementation/openglrenderer.h \
-		src/sdlimplementation/sdlaudioprovider.h \
-		src/sdlimplementation/sdleventhandler.h \
-		src/sdlimplementation/sdlgraphicsprovider.h \
-		src/sdlimplementation/sdlrenderer.h \
-		src/worker.h \
-		src/worlds/world.h \
-		src/filesystem.h \
-		src/animator.h \
-		src/background.h \
-		src/units/unit.h \
-		src/units/movable.h \
-		src/units/camera.h \
-		src/capabilities/capability.h \
-		src/capabilities/controller.h \
-		src/capabilities/player.h \
-		src/capabilities/modulehandler.h \
-		src/capabilities/modules/module.h \
-		src/sdlimplementation/rotozoom.h \
-		src/sdlimplementation/spm.h \
-		src/time/timer.h \
+		src/engine/math/math.h \
 		src/engine/math/vector.h \
-		src/additional/stringformer.h \
-		src/sdlimplementation/effects/anaglyph.h \
-		src/assettools/loadable.h \
-		src/capabilities/modules/weapon.h \
-		src/units/projectile.h \
-		src/context.h \
-		src/capabilities/modules/engine.h \
-		src/capabilities/modules/warpdrive.h \
-		src/units/ship.h \
-		src/gui/guielement.h \
+		src/engine/sharedcontainer.h \
+		src/engine/textformat.h \
+		src/engine/time/deltatimecalculator.h \
+		src/engine/time/elapsedtimer.h \
+		src/engine/type.h \
+		src/engine/variant.h \
+		src/environment.h \
+		src/filesystem.h \
+		src/gui/guiblushingfloatingmessage.h \
+		src/gui/guicentralmessage.h \
+		src/gui/guichoice.h \
 		src/gui/guicontainer.h \
-		src/iinformative.h \
+		src/gui/guidebugvalueinfo.h \
+		src/gui/guielement.h \
+		src/gui/guifloatingmessage.h \
+		src/gui/guilist.h \
+		src/gui/guimain.h \
+		src/gui/guimenuelement.h \
+		src/gui/guiminimap.h \
+		src/gui/guiradar.h \
 		src/gui/guistack.h \
-		src/capabilities/ai.h \
-		src/units/station.h \
-		src/json/writer.h \
+		src/gui/guiswitch.h \
+		src/iinformative.h \
 		src/json/allocator.h \
 		src/json/assertions.h \
 		src/json/autolink.h \
@@ -578,51 +595,39 @@ DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		src/json/features.h \
 		src/json/forwards.h \
 		src/json/json.h \
+		src/json/json_tool.h \
+		src/json/json_valueiterator.inl \
 		src/json/reader.h \
 		src/json/value.h \
 		src/json/version.h \
-		src/json_tool.h \
-		src/json_valueiterator.inl \
-		src/debug.h \
-		src/gui/guiswitch.h \
-		src/sdlimplementation/effects/visualeffect.h \
-		src/gui/guichoice.h \
-		src/application.h \
-		src/additional/informative/fpsmonitor.h \
-		src/units/particle.h \
-		src/additional/net/framebuilder.h \
-		src/additional/net/socket.h \
-		src/netlistener.h \
-		src/state.h \
-		src/additional/trigger.h \
-		src/gui/guimain.h \
-		src/gui/guicentralmessage.h \
-		src/additional/informative/controllerfinder.h \
-		src/gui/guifloatingmessage.h \
-		src/gui/guiblushingfloatingmessage.h \
-		src/engine/math/math.h \
-		src/additional/lightparticle.h \
-		src/worldmanager.h \
-		src/worlds/defaultworld.h \
-		src/worlds/arenaworld.h \
-		src/capabilities/docker.h \
+		src/json/writer.h \
 		src/near.h \
-		src/gui/guilist.h \
-		src/capabilities/aggressive.h \
-		src/worlds/heapworld.h \
+		src/netlistener.h \
+		src/object.h \
 		src/objectregistry.h \
-		src/additional/informative/registryinfo.h \
-		src/audio/audio.h \
-		src/audio/audiochannel.h \
-		src/audio/audioplayer.h \
-		src/gui/guiminimap.h \
-		src/gui/guiradar.h \
-		src/capabilities/modules/thruster.h \
-		src/time/time.h \
-		src/gui/guimenuelement.h \
-		src/additional/mutex.h \
-		src/additional/informative/unitsamountinfo.h \
-		src/environment.h ../klibcore/src/experimental/universalqueue/kuniversalqueue.cpp \
+		src/openglimplementation/openglgraphicsprovider.h \
+		src/openglimplementation/openglrenderer.h \
+		src/sdlimplementation/effects/anaglyph.h \
+		src/sdlimplementation/effects/visualeffect.h \
+		src/sdlimplementation/rotozoom.h \
+		src/sdlimplementation/sdlaudioprovider.h \
+		src/sdlimplementation/sdleventhandler.h \
+		src/sdlimplementation/sdlgraphicsprovider.h \
+		src/sdlimplementation/sdlrenderer.h \
+		src/sdlimplementation/spm.h \
+		src/state.h \
+		src/units/camera.h \
+		src/units/movable.h \
+		src/units/particle.h \
+		src/units/projectile.h \
+		src/units/ship.h \
+		src/units/station.h \
+		src/units/unit.h \
+		src/worldmanager.h \
+		src/worlds/arenaworld.h \
+		src/worlds/defaultworld.h \
+		src/worlds/heapworld.h \
+		src/worlds/world.h ../klibcore/src/experimental/universalqueue/kuniversalqueue.cpp \
 		../klibcore/src/utility/ktype.cpp \
 		../klibcore/src/experimental/universalqueue/kcirclebuffer.cpp \
 		../klibcore/src/experimental/universalqueue/kvoidhandle.cpp \
@@ -632,112 +637,113 @@ DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		../klibcore/src/memcontrol/kmoduleswitch.cpp \
 		../klibcore/src/ksmartenum.cpp \
 		../src/additional/e_variant.cpp \
+		../src/additional/informative/controllerfinder.cpp \
+		../src/additional/informative/fpsmonitor.cpp \
+		../src/additional/informative/registryinfo.cpp \
+		../src/additional/informative/unitsamountinfo.cpp \
+		../src/additional/lightparticle.cpp \
+		../src/additional/mutex.cpp \
+		../src/additional/net/framebuilder.cpp \
+		../src/additional/net/socket.cpp \
 		../src/additional/speedindicator.cpp \
-		../src/assettools/assetexecutors/animatorassetexecutor.cpp \
-		../src/assettools/assetexecutors/assetexecutor.cpp \
-		../src/assettools/assetexecutors/audioassetexecutor.cpp \
-		../src/assettools/assetexecutors/mapassetexecutor.cpp \
-		../src/assettools/assetexecutors/numberassetexecutor.cpp \
-		../src/assettools/assetexecutors/spriteassetexecutor.cpp \
-		../src/assettools/assetexecutors/stringassetexecutor.cpp \
-		../src/assettools/assetexecutors/vectorassetexecutor.cpp \
-		../src/assettools/assetprovider.cpp \
-		../src/audio/abstractaudioprovider.cpp \
-		../src/audio/audiosample.cpp \
+		../src/additional/stringformer.cpp \
+		../src/additional/trigger.cpp \
+		../src/animator.cpp \
+		../src/application.cpp \
+		../src/assetexecutors/animatorassetexecutor.cpp \
+		../src/assetexecutors/audioassetexecutor.cpp \
+		../src/assetexecutors/mapassetexecutor.cpp \
+		../src/assetexecutors/numberassetexecutor.cpp \
+		../src/assetexecutors/spriteassetexecutor.cpp \
+		../src/assetexecutors/stringassetexecutor.cpp \
+		../src/assetexecutors/vectorassetexecutor.cpp \
+		../src/audio/audio.cpp \
+		../src/audio/audioplayer.cpp \
+		../src/background.cpp \
+		../src/capabilities/aggressive.cpp \
+		../src/capabilities/ai.cpp \
+		../src/capabilities/capability.cpp \
+		../src/capabilities/controller.cpp \
+		../src/capabilities/docker.cpp \
+		../src/capabilities/modulehandler.cpp \
+		../src/capabilities/modules/engine.cpp \
+		../src/capabilities/modules/module.cpp \
+		../src/capabilities/modules/thruster.cpp \
+		../src/capabilities/modules/warpdrive.cpp \
+		../src/capabilities/modules/weapon.cpp \
+		../src/capabilities/player.cpp \
+		../src/debug.cpp \
 		../src/engine/abstracteventhandler.cpp \
 		../src/engine/abstractfactory.cpp \
 		../src/engine/additional.cpp \
-		../src/engine/sharedcontainer.cpp \
-		../src/engine/type.cpp \
-		../src/engine/variant.cpp \
+		../src/engine/assettools/abstractassetexecutor.cpp \
+		../src/engine/assettools/assetprovider.cpp \
+		../src/engine/assettools/loadable.cpp \
+		../src/engine/audio/abstractaudioprovider.cpp \
+		../src/engine/audio/audiochannel.cpp \
+		../src/engine/audio/audiosample.cpp \
+		../src/engine/context.cpp \
+		../src/engine/entity.cpp \
+		../src/engine/gameapplication.cpp \
 		../src/engine/graphics/abstractgraphicsprovider.cpp \
 		../src/engine/graphics/abstractrenderer.cpp \
 		../src/engine/graphics/image.cpp \
+		../src/engine/math/math.cpp \
+		../src/engine/math/vector.cpp \
+		../src/engine/sharedcontainer.cpp \
 		../src/engine/textformat.cpp \
+		../src/engine/time/deltatimecalculator.cpp \
+		../src/engine/time/elapsedtimer.cpp \
+		../src/engine/type.cpp \
+		../src/engine/variant.cpp \
+		../src/environment.cpp \
+		../src/filesystem.cpp \
+		../src/gui/guiblushingfloatingmessage.cpp \
+		../src/gui/guicentralmessage.cpp \
+		../src/gui/guichoice.cpp \
+		../src/gui/guicontainer.cpp \
 		../src/gui/guidebugvalueinfo.cpp \
+		../src/gui/guielement.cpp \
+		../src/gui/guifloatingmessage.cpp \
+		../src/gui/guilist.cpp \
+		../src/gui/guimain.cpp \
+		../src/gui/guimenuelement.cpp \
+		../src/gui/guiminimap.cpp \
+		../src/gui/guiradar.cpp \
+		../src/gui/guistack.cpp \
+		../src/gui/guiswitch.cpp \
+		../src/iinformative.cpp \
+		../src/json/json_reader.cpp \
+		../src/json/json_value.cpp \
+		../src/json/json_writer.cpp \
 		../src/main.cpp \
+		../src/near.cpp \
+		../src/netlistener.cpp \
 		../src/object.cpp \
+		../src/objectregistry.cpp \
 		../src/openglimplementation/openglgraphicsprovider.cpp \
 		../src/openglimplementation/openglrenderer.cpp \
+		../src/sdlimplementation/effects/anaglyph.cpp \
+		../src/sdlimplementation/effects/visualeffect.cpp \
+		../src/sdlimplementation/rotozoom.cpp \
 		../src/sdlimplementation/sdlaudioprovider.cpp \
 		../src/sdlimplementation/sdleventhandler.cpp \
 		../src/sdlimplementation/sdlgraphicsprovider.cpp \
 		../src/sdlimplementation/sdlrenderer.cpp \
-		../src/worker.cpp \
-		../src/worlds/world.cpp \
-		../src/filesystem.cpp \
-		../src/animator.cpp \
-		../src/background.cpp \
-		../src/units/unit.cpp \
-		../src/units/movable.cpp \
-		../src/units/camera.cpp \
-		../src/capabilities/capability.cpp \
-		../src/capabilities/controller.cpp \
-		../src/capabilities/player.cpp \
-		../src/capabilities/modulehandler.cpp \
-		../src/capabilities/modules/module.cpp \
-		../src/sdlimplementation/rotozoom.cpp \
 		../src/sdlimplementation/spm.cpp \
-		../src/time/timer.cpp \
-		../src/engine/math/vector.cpp \
-		../src/additional/stringformer.cpp \
-		../src/sdlimplementation/effects/anaglyph.cpp \
-		../src/assettools/loadable.cpp \
-		../src/capabilities/modules/weapon.cpp \
-		../src/units/projectile.cpp \
-		../src/context.cpp \
-		../src/capabilities/modules/engine.cpp \
-		../src/capabilities/modules/warpdrive.cpp \
-		../src/units/ship.cpp \
-		../src/gui/guielement.cpp \
-		../src/gui/guicontainer.cpp \
-		../src/iinformative.cpp \
-		../src/gui/guistack.cpp \
-		../src/capabilities/ai.cpp \
-		../src/units/station.cpp \
-		../src/json/json_reader.cpp \
-		../src/json/json_value.cpp \
-		../src/json/json_writer.cpp \
-		../src/debug.cpp \
-		../src/gui/guiswitch.cpp \
-		../src/sdlimplementation/effects/visualeffect.cpp \
-		../src/gui/guichoice.cpp \
-		../src/application.cpp \
-		../src/additional/informative/fpsmonitor.cpp \
-		../src/units/particle.cpp \
-		../src/additional/net/framebuilder.cpp \
-		../src/additional/net/socket.cpp \
-		../src/netlistener.cpp \
 		../src/state.cpp \
-		../src/additional/trigger.cpp \
-		../src/gui/guimain.cpp \
-		../src/gui/guicentralmessage.cpp \
-		../src/additional/informative/controllerfinder.cpp \
-		../src/gui/guifloatingmessage.cpp \
-		../src/gui/guiblushingfloatingmessage.cpp \
-		../src/engine/math/math.cpp \
-		../src/additional/lightparticle.cpp \
+		../src/units/camera.cpp \
+		../src/units/movable.cpp \
+		../src/units/particle.cpp \
+		../src/units/projectile.cpp \
+		../src/units/ship.cpp \
+		../src/units/station.cpp \
+		../src/units/unit.cpp \
 		../src/worldmanager.cpp \
-		../src/worlds/defaultworld.cpp \
 		../src/worlds/arenaworld.cpp \
-		../src/capabilities/docker.cpp \
-		../src/near.cpp \
-		../src/gui/guilist.cpp \
-		../src/capabilities/aggressive.cpp \
+		../src/worlds/defaultworld.cpp \
 		../src/worlds/heapworld.cpp \
-		../src/objectregistry.cpp \
-		../src/additional/informative/registryinfo.cpp \
-		../src/audio/audio.cpp \
-		../src/audio/audiochannel.cpp \
-		../src/audio/audioplayer.cpp \
-		../src/gui/guiminimap.cpp \
-		../src/gui/guiradar.cpp \
-		../src/capabilities/modules/thruster.cpp \
-		../src/time/time.cpp \
-		../src/gui/guimenuelement.cpp \
-		../src/additional/mutex.cpp \
-		../src/additional/informative/unitsamountinfo.cpp \
-		../src/environment.cpp
+		../src/worlds/world.cpp
 QMAKE_TARGET  = project172
 DESTDIR       = 
 TARGET        = project172
@@ -1263,6 +1269,101 @@ e_variant.o: ../src/additional/e_variant.cpp ../src/additional/e_variant.h \
 		../src/object.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o e_variant.o ../src/additional/e_variant.cpp
 
+controllerfinder.o: ../src/additional/informative/controllerfinder.cpp ../src/additional/informative/controllerfinder.h \
+		../src/iinformative.h \
+		../src/capabilities/controller.h \
+		../src/capabilities/capability.h \
+		../src/engine/entity.h \
+		../src/object.h \
+		../src/units/ship.h \
+		../src/units/movable.h \
+		../src/units/unit.h \
+		../src/capabilities/modulehandler.h \
+		../src/capabilities/modules/module.h \
+		../src/engine/assettools/loadable.h \
+		../src/engine/variant.h \
+		../src/engine/type.h \
+		../src/animator.h \
+		../src/engine/math/vector.h \
+		../src/engine/time/elapsedtimer.h \
+		../src/engine/graphics/image.h \
+		../src/engine/sharedcontainer.h \
+		../src/audio/audioplayer.h \
+		../src/engine/audio/audiochannel.h \
+		../src/engine/audio/audiosample.h \
+		../src/capabilities/docker.h \
+		../src/capabilities/modules/warpdrive.h \
+		../src/additional/trigger.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o controllerfinder.o ../src/additional/informative/controllerfinder.cpp
+
+fpsmonitor.o: ../src/additional/informative/fpsmonitor.cpp ../src/additional/informative/fpsmonitor.h \
+		../src/engine/time/elapsedtimer.h \
+		../src/iinformative.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o fpsmonitor.o ../src/additional/informative/fpsmonitor.cpp
+
+registryinfo.o: ../src/additional/informative/registryinfo.cpp ../src/additional/informative/registryinfo.h \
+		../src/iinformative.h \
+		../src/objectregistry.h \
+		../src/object.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o registryinfo.o ../src/additional/informative/registryinfo.cpp
+
+unitsamountinfo.o: ../src/additional/informative/unitsamountinfo.cpp ../src/additional/informative/unitsamountinfo.h \
+		../src/engine/entity.h \
+		../src/object.h \
+		../src/iinformative.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o unitsamountinfo.o ../src/additional/informative/unitsamountinfo.cpp
+
+lightparticle.o: ../src/additional/lightparticle.cpp ../src/additional/lightparticle.h \
+		../src/engine/entity.h \
+		../src/object.h \
+		../src/engine/math/vector.h \
+		../src/engine/time/elapsedtimer.h \
+		../src/engine/context.h \
+		../src/additional/e_variant.h \
+		../src/gui/guimain.h \
+		../src/gui/guistack.h \
+		../src/gui/guielement.h \
+		../src/capabilities/controller.h \
+		../src/capabilities/capability.h \
+		../src/units/ship.h \
+		../src/units/movable.h \
+		../src/units/unit.h \
+		../src/capabilities/modulehandler.h \
+		../src/capabilities/modules/module.h \
+		../src/iinformative.h \
+		../src/engine/assettools/loadable.h \
+		../src/engine/variant.h \
+		../src/engine/type.h \
+		../src/animator.h \
+		../src/engine/graphics/image.h \
+		../src/engine/sharedcontainer.h \
+		../src/audio/audioplayer.h \
+		../src/engine/audio/audiochannel.h \
+		../src/engine/audio/audiosample.h \
+		../src/capabilities/docker.h \
+		../src/capabilities/modules/warpdrive.h \
+		../src/additional/trigger.h \
+		../src/gui/guicentralmessage.h \
+		../src/gui/guimenuelement.h \
+		../src/gui/guifloatingmessage.h \
+		../src/gui/guiminimap.h \
+		../src/gui/guidebugvalueinfo.h \
+		../src/near.h \
+		../src/background.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/engine/textformat.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o lightparticle.o ../src/additional/lightparticle.cpp
+
+mutex.o: ../src/additional/mutex.cpp ../src/additional/mutex.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mutex.o ../src/additional/mutex.cpp
+
+framebuilder.o: ../src/additional/net/framebuilder.cpp ../src/additional/net/framebuilder.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o framebuilder.o ../src/additional/net/framebuilder.cpp
+
+socket.o: ../src/additional/net/socket.cpp ../src/additional/net/socket.h \
+		../src/additional/net/framebuilder.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o socket.o ../src/additional/net/socket.cpp
+
 speedindicator.o: ../src/additional/speedindicator.cpp ../src/additional/speedindicator.h \
 		../src/engine/graphics/abstractrenderer.h \
 		../src/engine/graphics/image.h \
@@ -1273,8 +1374,30 @@ speedindicator.o: ../src/additional/speedindicator.cpp ../src/additional/speedin
 		../src/engine/textformat.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o speedindicator.o ../src/additional/speedindicator.cpp
 
-animatorassetexecutor.o: ../src/assettools/assetexecutors/animatorassetexecutor.cpp ../src/assettools/assetexecutors/animatorassetexecutor.h \
-		../src/assettools/assetexecutors/assetexecutor.h \
+stringformer.o: ../src/additional/stringformer.cpp ../src/additional/stringformer.h \
+		../src/object.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o stringformer.o ../src/additional/stringformer.cpp
+
+trigger.o: ../src/additional/trigger.cpp ../src/additional/trigger.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o trigger.o ../src/additional/trigger.cpp
+
+animator.o: ../src/animator.cpp ../src/animator.h \
+		../src/engine/math/vector.h \
+		../src/engine/time/elapsedtimer.h \
+		../src/engine/graphics/image.h \
+		../src/engine/sharedcontainer.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/additional/e_variant.h \
+		../src/object.h \
+		../src/engine/textformat.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o animator.o ../src/animator.cpp
+
+application.o: ../src/application.cpp ../src/application.h \
+		../src/object.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o application.o ../src/application.cpp
+
+animatorassetexecutor.o: ../src/assetexecutors/animatorassetexecutor.cpp ../src/assetexecutors/animatorassetexecutor.h \
+		../src/engine/assettools/abstractassetexecutor.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
 		../src/json/json.h \
@@ -1287,23 +1410,20 @@ animatorassetexecutor.o: ../src/assettools/assetexecutors/animatorassetexecutor.
 		../src/json/reader.h \
 		../src/json/value.h \
 		../src/json/writer.h \
-		../src/audio/abstractaudioprovider.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audiosample.h \
-		../src/engine/sharedcontainer.h \
 		../src/engine/graphics/abstractgraphicsprovider.h \
 		../src/engine/graphics/abstractrenderer.h \
 		../src/engine/graphics/image.h \
+		../src/engine/sharedcontainer.h \
 		../src/engine/math/vector.h \
 		../src/additional/e_variant.h \
 		../src/object.h \
 		../src/engine/textformat.h \
 		../src/animator.h \
-		../src/time/timer.h \
-		../src/worker.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o animatorassetexecutor.o ../src/assettools/assetexecutors/animatorassetexecutor.cpp
+		../src/engine/time/elapsedtimer.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o animatorassetexecutor.o ../src/assetexecutors/animatorassetexecutor.cpp
 
-assetexecutor.o: ../src/assettools/assetexecutors/assetexecutor.cpp ../src/assettools/assetexecutors/assetexecutor.h \
+audioassetexecutor.o: ../src/assetexecutors/audioassetexecutor.cpp ../src/assetexecutors/audioassetexecutor.h \
+		../src/engine/assettools/abstractassetexecutor.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
 		../src/json/json.h \
@@ -1316,216 +1436,507 @@ assetexecutor.o: ../src/assettools/assetexecutors/assetexecutor.cpp ../src/asset
 		../src/json/reader.h \
 		../src/json/value.h \
 		../src/json/writer.h \
-		../src/audio/abstractaudioprovider.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audiosample.h \
-		../src/engine/sharedcontainer.h \
-		../src/filesystem.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o assetexecutor.o ../src/assettools/assetexecutors/assetexecutor.cpp
-
-audioassetexecutor.o: ../src/assettools/assetexecutors/audioassetexecutor.cpp ../src/assettools/assetexecutors/audioassetexecutor.h \
-		../src/assettools/assetexecutors/assetexecutor.h \
-		../src/engine/variant.h \
-		../src/engine/type.h \
-		../src/json/json.h \
-		../src/json/autolink.h \
-		../src/json/config.h \
-		../src/json/allocator.h \
-		../src/json/version.h \
-		../src/json/features.h \
-		../src/json/forwards.h \
-		../src/json/reader.h \
-		../src/json/value.h \
-		../src/json/writer.h \
-		../src/audio/abstractaudioprovider.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audiosample.h \
-		../src/engine/sharedcontainer.h \
 		../src/audio/audioplayer.h \
-		../src/worker.h \
-		../src/object.h \
+		../src/engine/audio/audiochannel.h \
+		../src/engine/audio/audiosample.h \
+		../src/engine/sharedcontainer.h \
+		../src/engine/audio/abstractaudioprovider.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o audioassetexecutor.o ../src/assetexecutors/audioassetexecutor.cpp
+
+mapassetexecutor.o: ../src/assetexecutors/mapassetexecutor.cpp ../src/assetexecutors/mapassetexecutor.h \
+		../src/engine/assettools/abstractassetexecutor.h \
+		../src/engine/variant.h \
+		../src/engine/type.h \
+		../src/json/json.h \
+		../src/json/autolink.h \
+		../src/json/config.h \
+		../src/json/allocator.h \
+		../src/json/version.h \
+		../src/json/features.h \
+		../src/json/forwards.h \
+		../src/json/reader.h \
+		../src/json/value.h \
+		../src/json/writer.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mapassetexecutor.o ../src/assetexecutors/mapassetexecutor.cpp
+
+numberassetexecutor.o: ../src/assetexecutors/numberassetexecutor.cpp ../src/assetexecutors/numberassetexecutor.h \
+		../src/engine/assettools/abstractassetexecutor.h \
+		../src/engine/variant.h \
+		../src/engine/type.h \
+		../src/json/json.h \
+		../src/json/autolink.h \
+		../src/json/config.h \
+		../src/json/allocator.h \
+		../src/json/version.h \
+		../src/json/features.h \
+		../src/json/forwards.h \
+		../src/json/reader.h \
+		../src/json/value.h \
+		../src/json/writer.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o numberassetexecutor.o ../src/assetexecutors/numberassetexecutor.cpp
+
+spriteassetexecutor.o: ../src/assetexecutors/spriteassetexecutor.cpp ../src/assetexecutors/spriteassetexecutor.h \
+		../src/engine/assettools/abstractassetexecutor.h \
+		../src/engine/variant.h \
+		../src/engine/type.h \
+		../src/json/json.h \
+		../src/json/autolink.h \
+		../src/json/config.h \
+		../src/json/allocator.h \
+		../src/json/version.h \
+		../src/json/features.h \
+		../src/json/forwards.h \
+		../src/json/reader.h \
+		../src/json/value.h \
+		../src/json/writer.h \
+		../src/engine/graphics/abstractgraphicsprovider.h \
 		../src/engine/graphics/abstractrenderer.h \
 		../src/engine/graphics/image.h \
+		../src/engine/sharedcontainer.h \
 		../src/engine/math/vector.h \
+		../src/additional/e_variant.h \
+		../src/object.h \
+		../src/engine/textformat.h \
+		../src/animator.h \
+		../src/engine/time/elapsedtimer.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o spriteassetexecutor.o ../src/assetexecutors/spriteassetexecutor.cpp
+
+stringassetexecutor.o: ../src/assetexecutors/stringassetexecutor.cpp ../src/assetexecutors/stringassetexecutor.h \
+		../src/engine/assettools/abstractassetexecutor.h \
+		../src/engine/variant.h \
+		../src/engine/type.h \
+		../src/json/json.h \
+		../src/json/autolink.h \
+		../src/json/config.h \
+		../src/json/allocator.h \
+		../src/json/version.h \
+		../src/json/features.h \
+		../src/json/forwards.h \
+		../src/json/reader.h \
+		../src/json/value.h \
+		../src/json/writer.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o stringassetexecutor.o ../src/assetexecutors/stringassetexecutor.cpp
+
+vectorassetexecutor.o: ../src/assetexecutors/vectorassetexecutor.cpp ../src/assetexecutors/vectorassetexecutor.h \
+		../src/engine/assettools/abstractassetexecutor.h \
+		../src/engine/variant.h \
+		../src/engine/type.h \
+		../src/json/json.h \
+		../src/json/autolink.h \
+		../src/json/config.h \
+		../src/json/allocator.h \
+		../src/json/version.h \
+		../src/json/features.h \
+		../src/json/forwards.h \
+		../src/json/reader.h \
+		../src/json/value.h \
+		../src/json/writer.h \
+		../src/engine/math/vector.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o vectorassetexecutor.o ../src/assetexecutors/vectorassetexecutor.cpp
+
+audio.o: ../src/audio/audio.cpp ../src/audio/audio.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o audio.o ../src/audio/audio.cpp
+
+audioplayer.o: ../src/audio/audioplayer.cpp ../src/audio/audioplayer.h \
+		../src/engine/audio/audiochannel.h \
+		../src/engine/audio/audiosample.h \
+		../src/engine/sharedcontainer.h \
+		../src/units/camera.h \
+		../src/units/movable.h \
+		../src/units/unit.h \
+		../src/capabilities/modulehandler.h \
+		../src/capabilities/modules/module.h \
+		../src/capabilities/capability.h \
+		../src/engine/entity.h \
+		../src/object.h \
+		../src/iinformative.h \
+		../src/engine/assettools/loadable.h \
+		../src/engine/variant.h \
+		../src/engine/type.h \
+		../src/animator.h \
+		../src/engine/math/vector.h \
+		../src/engine/time/elapsedtimer.h \
+		../src/engine/graphics/image.h \
+		../src/capabilities/docker.h \
+		../src/capabilities/controller.h \
+		../src/units/ship.h \
+		../src/capabilities/modules/warpdrive.h \
+		../src/additional/trigger.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/additional/e_variant.h \
+		../src/engine/textformat.h \
+		../src/engine/math/math.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o audioplayer.o ../src/audio/audioplayer.cpp
+
+background.o: ../src/background.cpp ../src/background.h \
+		../src/engine/entity.h \
+		../src/object.h \
+		../src/engine/time/elapsedtimer.h \
+		../src/engine/math/vector.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/engine/graphics/image.h \
+		../src/engine/sharedcontainer.h \
 		../src/additional/e_variant.h \
 		../src/engine/textformat.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o audioassetexecutor.o ../src/assettools/assetexecutors/audioassetexecutor.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o background.o ../src/background.cpp
 
-mapassetexecutor.o: ../src/assettools/assetexecutors/mapassetexecutor.cpp ../src/assettools/assetexecutors/mapassetexecutor.h \
-		../src/assettools/assetexecutors/assetexecutor.h \
-		../src/engine/variant.h \
-		../src/engine/type.h \
-		../src/json/json.h \
-		../src/json/autolink.h \
-		../src/json/config.h \
-		../src/json/allocator.h \
-		../src/json/version.h \
-		../src/json/features.h \
-		../src/json/forwards.h \
-		../src/json/reader.h \
-		../src/json/value.h \
-		../src/json/writer.h \
-		../src/audio/abstractaudioprovider.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audiosample.h \
-		../src/engine/sharedcontainer.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mapassetexecutor.o ../src/assettools/assetexecutors/mapassetexecutor.cpp
-
-numberassetexecutor.o: ../src/assettools/assetexecutors/numberassetexecutor.cpp ../src/assettools/assetexecutors/numberassetexecutor.h \
-		../src/assettools/assetexecutors/assetexecutor.h \
-		../src/engine/variant.h \
-		../src/engine/type.h \
-		../src/json/json.h \
-		../src/json/autolink.h \
-		../src/json/config.h \
-		../src/json/allocator.h \
-		../src/json/version.h \
-		../src/json/features.h \
-		../src/json/forwards.h \
-		../src/json/reader.h \
-		../src/json/value.h \
-		../src/json/writer.h \
-		../src/audio/abstractaudioprovider.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audiosample.h \
-		../src/engine/sharedcontainer.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o numberassetexecutor.o ../src/assettools/assetexecutors/numberassetexecutor.cpp
-
-spriteassetexecutor.o: ../src/assettools/assetexecutors/spriteassetexecutor.cpp ../src/assettools/assetexecutors/spriteassetexecutor.h \
-		../src/assettools/assetexecutors/assetexecutor.h \
-		../src/engine/variant.h \
-		../src/engine/type.h \
-		../src/json/json.h \
-		../src/json/autolink.h \
-		../src/json/config.h \
-		../src/json/allocator.h \
-		../src/json/version.h \
-		../src/json/features.h \
-		../src/json/forwards.h \
-		../src/json/reader.h \
-		../src/json/value.h \
-		../src/json/writer.h \
-		../src/audio/abstractaudioprovider.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audiosample.h \
-		../src/engine/sharedcontainer.h \
-		../src/engine/graphics/abstractgraphicsprovider.h \
-		../src/engine/graphics/abstractrenderer.h \
-		../src/engine/graphics/image.h \
-		../src/engine/math/vector.h \
-		../src/additional/e_variant.h \
-		../src/object.h \
-		../src/engine/textformat.h \
-		../src/animator.h \
-		../src/time/timer.h \
-		../src/worker.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o spriteassetexecutor.o ../src/assettools/assetexecutors/spriteassetexecutor.cpp
-
-stringassetexecutor.o: ../src/assettools/assetexecutors/stringassetexecutor.cpp ../src/assettools/assetexecutors/stringassetexecutor.h \
-		../src/assettools/assetexecutors/assetexecutor.h \
-		../src/engine/variant.h \
-		../src/engine/type.h \
-		../src/json/json.h \
-		../src/json/autolink.h \
-		../src/json/config.h \
-		../src/json/allocator.h \
-		../src/json/version.h \
-		../src/json/features.h \
-		../src/json/forwards.h \
-		../src/json/reader.h \
-		../src/json/value.h \
-		../src/json/writer.h \
-		../src/audio/abstractaudioprovider.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audiosample.h \
-		../src/engine/sharedcontainer.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o stringassetexecutor.o ../src/assettools/assetexecutors/stringassetexecutor.cpp
-
-vectorassetexecutor.o: ../src/assettools/assetexecutors/vectorassetexecutor.cpp ../src/assettools/assetexecutors/vectorassetexecutor.h \
-		../src/assettools/assetexecutors/assetexecutor.h \
-		../src/engine/variant.h \
-		../src/engine/type.h \
-		../src/json/json.h \
-		../src/json/autolink.h \
-		../src/json/config.h \
-		../src/json/allocator.h \
-		../src/json/version.h \
-		../src/json/features.h \
-		../src/json/forwards.h \
-		../src/json/reader.h \
-		../src/json/value.h \
-		../src/json/writer.h \
-		../src/audio/abstractaudioprovider.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audiosample.h \
-		../src/engine/sharedcontainer.h \
-		../src/engine/math/vector.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o vectorassetexecutor.o ../src/assettools/assetexecutors/vectorassetexecutor.cpp
-
-assetprovider.o: ../src/assettools/assetprovider.cpp ../src/assettools/assetprovider.h \
-		../src/json/json.h \
-		../src/json/autolink.h \
-		../src/json/config.h \
-		../src/json/allocator.h \
-		../src/json/version.h \
-		../src/json/features.h \
-		../src/json/forwards.h \
-		../src/json/reader.h \
-		../src/json/value.h \
-		../src/json/writer.h \
-		../src/assettools/assetexecutors/assetexecutor.h \
-		../src/engine/variant.h \
-		../src/engine/type.h \
-		../src/audio/abstractaudioprovider.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audiosample.h \
-		../src/engine/sharedcontainer.h \
-		../src/engine/abstractfactory.h \
-		../src/assettools/loadable.h \
-		../src/animator.h \
-		../src/time/timer.h \
-		../src/worker.h \
-		../src/object.h \
-		../src/engine/graphics/abstractrenderer.h \
-		../src/engine/graphics/image.h \
-		../src/engine/math/vector.h \
-		../src/additional/e_variant.h \
-		../src/engine/textformat.h \
-		../src/audio/audioplayer.h \
-		../klibcore/src/memcontrol/kabstractfactory.h \
-		../klibcore/src/utility/ktype.h \
-		../src/filesystem.h \
-		../src/debug.h \
-		../klibcore/src/ksmartenum.h \
-		../src/capabilities/player.h \
+aggressive.o: ../src/capabilities/aggressive.cpp ../src/capabilities/aggressive.h \
 		../src/capabilities/controller.h \
 		../src/capabilities/capability.h \
+		../src/engine/entity.h \
+		../src/object.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
 		../src/units/unit.h \
 		../src/capabilities/modulehandler.h \
 		../src/capabilities/modules/module.h \
 		../src/iinformative.h \
+		../src/engine/assettools/loadable.h \
+		../src/engine/variant.h \
+		../src/engine/type.h \
+		../src/animator.h \
+		../src/engine/math/vector.h \
+		../src/engine/time/elapsedtimer.h \
+		../src/engine/graphics/image.h \
+		../src/engine/sharedcontainer.h \
+		../src/audio/audioplayer.h \
+		../src/engine/audio/audiochannel.h \
+		../src/engine/audio/audiosample.h \
 		../src/capabilities/docker.h \
 		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h \
-		../src/capabilities/modules/weapon.h \
-		../src/capabilities/modules/engine.h \
-		../src/capabilities/modules/thruster.h \
+		../src/objectregistry.h \
+		../src/units/particle.h \
 		../src/units/projectile.h \
-		../src/units/station.h \
-		../src/engine/graphics/abstractgraphicsprovider.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o assetprovider.o ../src/assettools/assetprovider.cpp
+		../src/units/camera.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/additional/e_variant.h \
+		../src/engine/textformat.h \
+		../src/additional/lightparticle.h \
+		../src/debug.h \
+		../klibcore/src/ksmartenum.h \
+		../src/capabilities/modules/weapon.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o aggressive.o ../src/capabilities/aggressive.cpp
 
-abstractaudioprovider.o: ../src/audio/abstractaudioprovider.cpp ../src/audio/abstractaudioprovider.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audiosample.h \
-		../src/engine/sharedcontainer.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o abstractaudioprovider.o ../src/audio/abstractaudioprovider.cpp
+ai.o: ../src/capabilities/ai.cpp ../src/capabilities/ai.h \
+		../src/capabilities/controller.h \
+		../src/capabilities/capability.h \
+		../src/engine/entity.h \
+		../src/object.h \
+		../src/units/ship.h \
+		../src/units/movable.h \
+		../src/units/unit.h \
+		../src/capabilities/modulehandler.h \
+		../src/capabilities/modules/module.h \
+		../src/iinformative.h \
+		../src/engine/assettools/loadable.h \
+		../src/engine/variant.h \
+		../src/engine/type.h \
+		../src/animator.h \
+		../src/engine/math/vector.h \
+		../src/engine/time/elapsedtimer.h \
+		../src/engine/graphics/image.h \
+		../src/engine/sharedcontainer.h \
+		../src/audio/audioplayer.h \
+		../src/engine/audio/audiochannel.h \
+		../src/engine/audio/audiosample.h \
+		../src/capabilities/docker.h \
+		../src/capabilities/modules/warpdrive.h \
+		../src/additional/trigger.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ai.o ../src/capabilities/ai.cpp
 
-audiosample.o: ../src/audio/audiosample.cpp ../src/audio/audiosample.h \
-		../src/engine/sharedcontainer.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o audiosample.o ../src/audio/audiosample.cpp
+capability.o: ../src/capabilities/capability.cpp ../src/capabilities/capability.h \
+		../src/engine/entity.h \
+		../src/object.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o capability.o ../src/capabilities/capability.cpp
+
+controller.o: ../src/capabilities/controller.cpp ../src/capabilities/controller.h \
+		../src/capabilities/capability.h \
+		../src/engine/entity.h \
+		../src/object.h \
+		../src/units/ship.h \
+		../src/units/movable.h \
+		../src/units/unit.h \
+		../src/capabilities/modulehandler.h \
+		../src/capabilities/modules/module.h \
+		../src/iinformative.h \
+		../src/engine/assettools/loadable.h \
+		../src/engine/variant.h \
+		../src/engine/type.h \
+		../src/animator.h \
+		../src/engine/math/vector.h \
+		../src/engine/time/elapsedtimer.h \
+		../src/engine/graphics/image.h \
+		../src/engine/sharedcontainer.h \
+		../src/audio/audioplayer.h \
+		../src/engine/audio/audiochannel.h \
+		../src/engine/audio/audiosample.h \
+		../src/capabilities/docker.h \
+		../src/capabilities/modules/warpdrive.h \
+		../src/additional/trigger.h \
+		../src/engine/context.h \
+		../src/additional/e_variant.h \
+		../src/gui/guimain.h \
+		../src/gui/guistack.h \
+		../src/gui/guielement.h \
+		../src/gui/guicentralmessage.h \
+		../src/gui/guimenuelement.h \
+		../src/gui/guifloatingmessage.h \
+		../src/gui/guiminimap.h \
+		../src/gui/guidebugvalueinfo.h \
+		../src/near.h \
+		../src/background.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o controller.o ../src/capabilities/controller.cpp
+
+docker.o: ../src/capabilities/docker.cpp ../src/capabilities/docker.h \
+		../src/capabilities/capability.h \
+		../src/engine/entity.h \
+		../src/object.h \
+		../src/units/unit.h \
+		../src/capabilities/modulehandler.h \
+		../src/capabilities/modules/module.h \
+		../src/iinformative.h \
+		../src/engine/assettools/loadable.h \
+		../src/engine/variant.h \
+		../src/engine/type.h \
+		../src/animator.h \
+		../src/engine/math/vector.h \
+		../src/engine/time/elapsedtimer.h \
+		../src/engine/graphics/image.h \
+		../src/engine/sharedcontainer.h \
+		../src/audio/audioplayer.h \
+		../src/engine/audio/audiochannel.h \
+		../src/engine/audio/audiosample.h \
+		../src/units/movable.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o docker.o ../src/capabilities/docker.cpp
+
+modulehandler.o: ../src/capabilities/modulehandler.cpp ../src/capabilities/modulehandler.h \
+		../src/capabilities/modules/module.h \
+		../src/capabilities/capability.h \
+		../src/engine/entity.h \
+		../src/object.h \
+		../src/iinformative.h \
+		../src/engine/assettools/loadable.h \
+		../src/engine/variant.h \
+		../src/engine/type.h \
+		../src/animator.h \
+		../src/engine/math/vector.h \
+		../src/engine/time/elapsedtimer.h \
+		../src/engine/graphics/image.h \
+		../src/engine/sharedcontainer.h \
+		../src/audio/audioplayer.h \
+		../src/engine/audio/audiochannel.h \
+		../src/engine/audio/audiosample.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o modulehandler.o ../src/capabilities/modulehandler.cpp
+
+engine.o: ../src/capabilities/modules/engine.cpp ../src/capabilities/modules/engine.h \
+		../src/capabilities/modules/module.h \
+		../src/capabilities/capability.h \
+		../src/engine/entity.h \
+		../src/object.h \
+		../src/iinformative.h \
+		../src/engine/assettools/loadable.h \
+		../src/engine/variant.h \
+		../src/engine/type.h \
+		../src/animator.h \
+		../src/engine/math/vector.h \
+		../src/engine/time/elapsedtimer.h \
+		../src/engine/graphics/image.h \
+		../src/engine/sharedcontainer.h \
+		../src/audio/audioplayer.h \
+		../src/engine/audio/audiochannel.h \
+		../src/engine/audio/audiosample.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o engine.o ../src/capabilities/modules/engine.cpp
+
+module.o: ../src/capabilities/modules/module.cpp ../src/capabilities/modules/module.h \
+		../src/capabilities/capability.h \
+		../src/engine/entity.h \
+		../src/object.h \
+		../src/iinformative.h \
+		../src/engine/assettools/loadable.h \
+		../src/engine/variant.h \
+		../src/engine/type.h \
+		../src/animator.h \
+		../src/engine/math/vector.h \
+		../src/engine/time/elapsedtimer.h \
+		../src/engine/graphics/image.h \
+		../src/engine/sharedcontainer.h \
+		../src/audio/audioplayer.h \
+		../src/engine/audio/audiochannel.h \
+		../src/engine/audio/audiosample.h \
+		../src/units/unit.h \
+		../src/capabilities/modulehandler.h \
+		../src/capabilities/docker.h \
+		../src/units/camera.h \
+		../src/units/movable.h \
+		../src/capabilities/controller.h \
+		../src/units/ship.h \
+		../src/capabilities/modules/warpdrive.h \
+		../src/additional/trigger.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/additional/e_variant.h \
+		../src/engine/textformat.h \
+		../src/engine/math/math.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o module.o ../src/capabilities/modules/module.cpp
+
+thruster.o: ../src/capabilities/modules/thruster.cpp ../src/capabilities/modules/thruster.h \
+		../src/capabilities/modules/module.h \
+		../src/capabilities/capability.h \
+		../src/engine/entity.h \
+		../src/object.h \
+		../src/iinformative.h \
+		../src/engine/assettools/loadable.h \
+		../src/engine/variant.h \
+		../src/engine/type.h \
+		../src/animator.h \
+		../src/engine/math/vector.h \
+		../src/engine/time/elapsedtimer.h \
+		../src/engine/graphics/image.h \
+		../src/engine/sharedcontainer.h \
+		../src/audio/audioplayer.h \
+		../src/engine/audio/audiochannel.h \
+		../src/engine/audio/audiosample.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o thruster.o ../src/capabilities/modules/thruster.cpp
+
+warpdrive.o: ../src/capabilities/modules/warpdrive.cpp ../src/capabilities/modules/warpdrive.h \
+		../src/capabilities/modules/module.h \
+		../src/capabilities/capability.h \
+		../src/engine/entity.h \
+		../src/object.h \
+		../src/iinformative.h \
+		../src/engine/assettools/loadable.h \
+		../src/engine/variant.h \
+		../src/engine/type.h \
+		../src/animator.h \
+		../src/engine/math/vector.h \
+		../src/engine/time/elapsedtimer.h \
+		../src/engine/graphics/image.h \
+		../src/engine/sharedcontainer.h \
+		../src/audio/audioplayer.h \
+		../src/engine/audio/audiochannel.h \
+		../src/engine/audio/audiosample.h \
+		../src/additional/stringformer.h \
+		../src/engine/context.h \
+		../src/additional/e_variant.h \
+		../src/gui/guimain.h \
+		../src/gui/guistack.h \
+		../src/gui/guielement.h \
+		../src/capabilities/controller.h \
+		../src/units/ship.h \
+		../src/units/movable.h \
+		../src/units/unit.h \
+		../src/capabilities/modulehandler.h \
+		../src/capabilities/docker.h \
+		../src/additional/trigger.h \
+		../src/gui/guicentralmessage.h \
+		../src/gui/guimenuelement.h \
+		../src/gui/guifloatingmessage.h \
+		../src/gui/guiminimap.h \
+		../src/gui/guidebugvalueinfo.h \
+		../src/near.h \
+		../src/background.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o warpdrive.o ../src/capabilities/modules/warpdrive.cpp
+
+weapon.o: ../src/capabilities/modules/weapon.cpp ../src/capabilities/modules/weapon.h \
+		../src/capabilities/modules/module.h \
+		../src/capabilities/capability.h \
+		../src/engine/entity.h \
+		../src/object.h \
+		../src/iinformative.h \
+		../src/engine/assettools/loadable.h \
+		../src/engine/variant.h \
+		../src/engine/type.h \
+		../src/animator.h \
+		../src/engine/math/vector.h \
+		../src/engine/time/elapsedtimer.h \
+		../src/engine/graphics/image.h \
+		../src/engine/sharedcontainer.h \
+		../src/audio/audioplayer.h \
+		../src/engine/audio/audiochannel.h \
+		../src/engine/audio/audiosample.h \
+		../src/additional/stringformer.h \
+		../src/units/projectile.h \
+		../src/units/movable.h \
+		../src/units/unit.h \
+		../src/capabilities/modulehandler.h \
+		../src/capabilities/docker.h \
+		../src/engine/context.h \
+		../src/additional/e_variant.h \
+		../src/gui/guimain.h \
+		../src/gui/guistack.h \
+		../src/gui/guielement.h \
+		../src/capabilities/controller.h \
+		../src/units/ship.h \
+		../src/capabilities/modules/warpdrive.h \
+		../src/additional/trigger.h \
+		../src/gui/guicentralmessage.h \
+		../src/gui/guimenuelement.h \
+		../src/gui/guifloatingmessage.h \
+		../src/gui/guiminimap.h \
+		../src/gui/guidebugvalueinfo.h \
+		../src/near.h \
+		../src/background.h \
+		../src/engine/assettools/assetprovider.h \
+		../src/json/json.h \
+		../src/json/autolink.h \
+		../src/json/config.h \
+		../src/json/allocator.h \
+		../src/json/version.h \
+		../src/json/features.h \
+		../src/json/forwards.h \
+		../src/json/reader.h \
+		../src/json/value.h \
+		../src/json/writer.h \
+		../src/engine/abstractfactory.h \
+		../klibcore/src/memcontrol/kabstractfactory.h \
+		../klibcore/src/utility/ktype.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o weapon.o ../src/capabilities/modules/weapon.cpp
+
+player.o: ../src/capabilities/player.cpp ../src/capabilities/player.h \
+		../src/capabilities/controller.h \
+		../src/capabilities/capability.h \
+		../src/engine/entity.h \
+		../src/object.h \
+		../src/units/ship.h \
+		../src/units/movable.h \
+		../src/units/unit.h \
+		../src/capabilities/modulehandler.h \
+		../src/capabilities/modules/module.h \
+		../src/iinformative.h \
+		../src/engine/assettools/loadable.h \
+		../src/engine/variant.h \
+		../src/engine/type.h \
+		../src/animator.h \
+		../src/engine/math/vector.h \
+		../src/engine/time/elapsedtimer.h \
+		../src/engine/graphics/image.h \
+		../src/engine/sharedcontainer.h \
+		../src/audio/audioplayer.h \
+		../src/engine/audio/audiochannel.h \
+		../src/engine/audio/audiosample.h \
+		../src/capabilities/docker.h \
+		../src/capabilities/modules/warpdrive.h \
+		../src/additional/trigger.h \
+		../src/engine/abstracteventhandler.h \
+		../src/objectregistry.h \
+		../src/capabilities/modules/weapon.h \
+		../src/engine/context.h \
+		../src/additional/e_variant.h \
+		../src/gui/guimain.h \
+		../src/gui/guistack.h \
+		../src/gui/guielement.h \
+		../src/gui/guicentralmessage.h \
+		../src/gui/guimenuelement.h \
+		../src/gui/guifloatingmessage.h \
+		../src/gui/guiminimap.h \
+		../src/gui/guidebugvalueinfo.h \
+		../src/near.h \
+		../src/background.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o player.o ../src/capabilities/player.cpp
+
+debug.o: ../src/debug.cpp ../src/debug.h \
+		../klibcore/src/ksmartenum.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug.o ../src/debug.cpp
 
 abstracteventhandler.o: ../src/engine/abstracteventhandler.cpp ../src/engine/abstracteventhandler.h \
 		../src/engine/math/vector.h
@@ -1538,15 +1949,217 @@ abstractfactory.o: ../src/engine/abstractfactory.cpp ../src/engine/abstractfacto
 additional.o: ../src/engine/additional.cpp ../src/engine/additional.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o additional.o ../src/engine/additional.cpp
 
-sharedcontainer.o: ../src/engine/sharedcontainer.cpp ../src/engine/sharedcontainer.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o sharedcontainer.o ../src/engine/sharedcontainer.cpp
+abstractassetexecutor.o: ../src/engine/assettools/abstractassetexecutor.cpp ../src/engine/assettools/abstractassetexecutor.h \
+		../src/engine/variant.h \
+		../src/engine/type.h \
+		../src/json/json.h \
+		../src/json/autolink.h \
+		../src/json/config.h \
+		../src/json/allocator.h \
+		../src/json/version.h \
+		../src/json/features.h \
+		../src/json/forwards.h \
+		../src/json/reader.h \
+		../src/json/value.h \
+		../src/json/writer.h \
+		../src/filesystem.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o abstractassetexecutor.o ../src/engine/assettools/abstractassetexecutor.cpp
 
-type.o: ../src/engine/type.cpp ../src/engine/type.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o type.o ../src/engine/type.cpp
+assetprovider.o: ../src/engine/assettools/assetprovider.cpp ../src/engine/assettools/assetprovider.h \
+		../src/object.h \
+		../src/json/json.h \
+		../src/json/autolink.h \
+		../src/json/config.h \
+		../src/json/allocator.h \
+		../src/json/version.h \
+		../src/json/features.h \
+		../src/json/forwards.h \
+		../src/json/reader.h \
+		../src/json/value.h \
+		../src/json/writer.h \
+		../src/engine/abstractfactory.h \
+		../src/engine/type.h \
+		../src/engine/assettools/loadable.h \
+		../src/engine/variant.h \
+		../klibcore/src/memcontrol/kabstractfactory.h \
+		../klibcore/src/utility/ktype.h \
+		../src/filesystem.h \
+		../src/debug.h \
+		../klibcore/src/ksmartenum.h \
+		../src/capabilities/player.h \
+		../src/capabilities/controller.h \
+		../src/capabilities/capability.h \
+		../src/engine/entity.h \
+		../src/units/ship.h \
+		../src/units/movable.h \
+		../src/units/unit.h \
+		../src/capabilities/modulehandler.h \
+		../src/capabilities/modules/module.h \
+		../src/iinformative.h \
+		../src/animator.h \
+		../src/engine/math/vector.h \
+		../src/engine/time/elapsedtimer.h \
+		../src/engine/graphics/image.h \
+		../src/engine/sharedcontainer.h \
+		../src/audio/audioplayer.h \
+		../src/engine/audio/audiochannel.h \
+		../src/engine/audio/audiosample.h \
+		../src/capabilities/docker.h \
+		../src/capabilities/modules/warpdrive.h \
+		../src/additional/trigger.h \
+		../src/engine/abstracteventhandler.h \
+		../src/capabilities/modules/weapon.h \
+		../src/capabilities/modules/engine.h \
+		../src/capabilities/modules/thruster.h \
+		../src/units/projectile.h \
+		../src/units/station.h \
+		../src/engine/graphics/abstractgraphicsprovider.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/additional/e_variant.h \
+		../src/engine/textformat.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o assetprovider.o ../src/engine/assettools/assetprovider.cpp
 
-variant.o: ../src/engine/variant.cpp ../src/engine/variant.h \
+loadable.o: ../src/engine/assettools/loadable.cpp ../src/engine/assettools/loadable.h \
+		../src/engine/variant.h \
 		../src/engine/type.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o variant.o ../src/engine/variant.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o loadable.o ../src/engine/assettools/loadable.cpp
+
+abstractaudioprovider.o: ../src/engine/audio/abstractaudioprovider.cpp ../src/engine/audio/abstractaudioprovider.h \
+		../src/engine/audio/audiochannel.h \
+		../src/engine/audio/audiosample.h \
+		../src/engine/sharedcontainer.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o abstractaudioprovider.o ../src/engine/audio/abstractaudioprovider.cpp
+
+audiochannel.o: ../src/engine/audio/audiochannel.cpp ../src/engine/audio/audiochannel.h \
+		../src/engine/audio/audiosample.h \
+		../src/engine/sharedcontainer.h \
+		../src/engine/math/math.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o audiochannel.o ../src/engine/audio/audiochannel.cpp
+
+audiosample.o: ../src/engine/audio/audiosample.cpp ../src/engine/audio/audiosample.h \
+		../src/engine/sharedcontainer.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o audiosample.o ../src/engine/audio/audiosample.cpp
+
+context.o: ../src/engine/context.cpp ../src/engine/context.h \
+		../src/additional/e_variant.h \
+		../src/engine/math/vector.h \
+		../src/object.h \
+		../src/gui/guimain.h \
+		../src/gui/guistack.h \
+		../src/gui/guielement.h \
+		../src/capabilities/controller.h \
+		../src/capabilities/capability.h \
+		../src/engine/entity.h \
+		../src/units/ship.h \
+		../src/units/movable.h \
+		../src/units/unit.h \
+		../src/capabilities/modulehandler.h \
+		../src/capabilities/modules/module.h \
+		../src/iinformative.h \
+		../src/engine/assettools/loadable.h \
+		../src/engine/variant.h \
+		../src/engine/type.h \
+		../src/animator.h \
+		../src/engine/time/elapsedtimer.h \
+		../src/engine/graphics/image.h \
+		../src/engine/sharedcontainer.h \
+		../src/audio/audioplayer.h \
+		../src/engine/audio/audiochannel.h \
+		../src/engine/audio/audiosample.h \
+		../src/capabilities/docker.h \
+		../src/capabilities/modules/warpdrive.h \
+		../src/additional/trigger.h \
+		../src/gui/guicentralmessage.h \
+		../src/gui/guimenuelement.h \
+		../src/gui/guifloatingmessage.h \
+		../src/gui/guiminimap.h \
+		../src/gui/guidebugvalueinfo.h \
+		../src/near.h \
+		../src/background.h \
+		../src/objectregistry.h \
+		../src/debug.h \
+		../klibcore/src/ksmartenum.h \
+		../src/units/particle.h \
+		../src/additional/lightparticle.h \
+		../src/engine/assettools/assetprovider.h \
+		../src/json/json.h \
+		../src/json/autolink.h \
+		../src/json/config.h \
+		../src/json/allocator.h \
+		../src/json/version.h \
+		../src/json/features.h \
+		../src/json/forwards.h \
+		../src/json/reader.h \
+		../src/json/value.h \
+		../src/json/writer.h \
+		../src/engine/abstractfactory.h \
+		../klibcore/src/memcontrol/kabstractfactory.h \
+		../klibcore/src/utility/ktype.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o context.o ../src/engine/context.cpp
+
+entity.o: ../src/engine/entity.cpp ../src/engine/entity.h \
+		../src/object.h \
+		../src/objectregistry.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o entity.o ../src/engine/entity.cpp
+
+gameapplication.o: ../src/engine/gameapplication.cpp ../src/engine/gameapplication.h \
+		../src/engine/entity.h \
+		../src/object.h \
+		../src/engine/time/deltatimecalculator.h \
+		../src/engine/time/elapsedtimer.h \
+		../src/engine/context.h \
+		../src/additional/e_variant.h \
+		../src/engine/math/vector.h \
+		../src/gui/guimain.h \
+		../src/gui/guistack.h \
+		../src/gui/guielement.h \
+		../src/capabilities/controller.h \
+		../src/capabilities/capability.h \
+		../src/units/ship.h \
+		../src/units/movable.h \
+		../src/units/unit.h \
+		../src/capabilities/modulehandler.h \
+		../src/capabilities/modules/module.h \
+		../src/iinformative.h \
+		../src/engine/assettools/loadable.h \
+		../src/engine/variant.h \
+		../src/engine/type.h \
+		../src/animator.h \
+		../src/engine/graphics/image.h \
+		../src/engine/sharedcontainer.h \
+		../src/audio/audioplayer.h \
+		../src/engine/audio/audiochannel.h \
+		../src/engine/audio/audiosample.h \
+		../src/capabilities/docker.h \
+		../src/capabilities/modules/warpdrive.h \
+		../src/additional/trigger.h \
+		../src/gui/guicentralmessage.h \
+		../src/gui/guimenuelement.h \
+		../src/gui/guifloatingmessage.h \
+		../src/gui/guiminimap.h \
+		../src/gui/guidebugvalueinfo.h \
+		../src/near.h \
+		../src/background.h \
+		../src/engine/assettools/assetprovider.h \
+		../src/json/json.h \
+		../src/json/autolink.h \
+		../src/json/config.h \
+		../src/json/allocator.h \
+		../src/json/version.h \
+		../src/json/features.h \
+		../src/json/forwards.h \
+		../src/json/reader.h \
+		../src/json/value.h \
+		../src/json/writer.h \
+		../src/engine/abstractfactory.h \
+		../klibcore/src/memcontrol/kabstractfactory.h \
+		../klibcore/src/utility/ktype.h \
+		../src/engine/audio/abstractaudioprovider.h \
+		../src/engine/abstracteventhandler.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/engine/textformat.h \
+		../src/engine/graphics/abstractgraphicsprovider.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o gameapplication.o ../src/engine/gameapplication.cpp
 
 abstractgraphicsprovider.o: ../src/engine/graphics/abstractgraphicsprovider.cpp ../src/engine/graphics/abstractgraphicsprovider.h \
 		../src/engine/graphics/abstractrenderer.h \
@@ -1571,91 +2184,44 @@ image.o: ../src/engine/graphics/image.cpp ../src/engine/graphics/image.h \
 		../src/engine/sharedcontainer.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o image.o ../src/engine/graphics/image.cpp
 
+math.o: ../src/engine/math/math.cpp ../src/engine/math/math.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o math.o ../src/engine/math/math.cpp
+
+vector.o: ../src/engine/math/vector.cpp ../src/engine/math/vector.h \
+		../src/engine/math/math.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o vector.o ../src/engine/math/vector.cpp
+
+sharedcontainer.o: ../src/engine/sharedcontainer.cpp ../src/engine/sharedcontainer.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o sharedcontainer.o ../src/engine/sharedcontainer.cpp
+
 textformat.o: ../src/engine/textformat.cpp ../src/engine/textformat.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o textformat.o ../src/engine/textformat.cpp
 
-guidebugvalueinfo.o: ../src/gui/guidebugvalueinfo.cpp ../src/gui/guidebugvalueinfo.h \
-		../src/gui/guielement.h \
-		../src/capabilities/controller.h \
-		../src/capabilities/capability.h \
-		../src/worker.h \
-		../src/object.h \
-		../src/engine/graphics/abstractrenderer.h \
-		../src/engine/graphics/image.h \
-		../src/engine/sharedcontainer.h \
-		../src/engine/math/vector.h \
-		../src/additional/e_variant.h \
-		../src/engine/textformat.h \
-		../src/time/timer.h \
-		../src/units/ship.h \
-		../src/units/movable.h \
-		../src/units/unit.h \
-		../src/capabilities/modulehandler.h \
-		../src/capabilities/modules/module.h \
-		../src/iinformative.h \
-		../src/assettools/loadable.h \
-		../src/json/json.h \
-		../src/json/autolink.h \
-		../src/json/config.h \
-		../src/json/allocator.h \
-		../src/json/version.h \
-		../src/json/features.h \
-		../src/json/forwards.h \
-		../src/json/reader.h \
-		../src/json/value.h \
-		../src/json/writer.h \
-		../src/animator.h \
-		../src/audio/audioplayer.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audiosample.h \
-		../src/engine/variant.h \
-		../src/engine/type.h \
-		../src/capabilities/docker.h \
-		../src/capabilities/modules/warpdrive.h \
-		../src/additional/trigger.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o guidebugvalueinfo.o ../src/gui/guidebugvalueinfo.cpp
+deltatimecalculator.o: ../src/engine/time/deltatimecalculator.cpp ../src/engine/time/deltatimecalculator.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o deltatimecalculator.o ../src/engine/time/deltatimecalculator.cpp
 
-main.o: ../src/main.cpp ../src/environment.h \
+elapsedtimer.o: ../src/engine/time/elapsedtimer.cpp ../src/engine/time/elapsedtimer.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o elapsedtimer.o ../src/engine/time/elapsedtimer.cpp
+
+type.o: ../src/engine/type.cpp ../src/engine/type.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o type.o ../src/engine/type.cpp
+
+variant.o: ../src/engine/variant.cpp ../src/engine/variant.h \
+		../src/engine/type.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o variant.o ../src/engine/variant.cpp
+
+environment.o: ../src/environment.cpp ../src/environment.h \
 		../src/object.h \
 		../src/state.h \
 		../src/additional/e_variant.h \
 		../src/engine/math/vector.h \
-		../src/worker.h \
-		../src/engine/graphics/abstractrenderer.h \
-		../src/engine/graphics/image.h \
-		../src/engine/sharedcontainer.h \
-		../src/engine/textformat.h \
 		../src/background.h \
-		../src/time/timer.h \
+		../src/engine/entity.h \
+		../src/engine/time/elapsedtimer.h \
 		../src/additional/informative/fpsmonitor.h \
 		../src/iinformative.h \
 		../src/netlistener.h \
-		../src/additional/net/socket.h \
-		../src/additional/net/framebuilder.h \
-		../src/context.h \
-		../src/assettools/assetprovider.h \
-		../src/json/json.h \
-		../src/json/autolink.h \
-		../src/json/config.h \
-		../src/json/allocator.h \
-		../src/json/version.h \
-		../src/json/features.h \
-		../src/json/forwards.h \
-		../src/json/reader.h \
-		../src/json/value.h \
-		../src/json/writer.h \
-		../src/assettools/assetexecutors/assetexecutor.h \
-		../src/engine/variant.h \
-		../src/engine/type.h \
-		../src/audio/abstractaudioprovider.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audiosample.h \
-		../src/engine/abstractfactory.h \
-		../src/assettools/loadable.h \
-		../src/animator.h \
-		../src/audio/audioplayer.h \
-		../klibcore/src/memcontrol/kabstractfactory.h \
-		../klibcore/src/utility/ktype.h \
+		../src/engine/context.h \
 		../src/gui/guimain.h \
 		../src/gui/guistack.h \
 		../src/gui/guielement.h \
@@ -1666,6 +2232,15 @@ main.o: ../src/main.cpp ../src/environment.h \
 		../src/units/unit.h \
 		../src/capabilities/modulehandler.h \
 		../src/capabilities/modules/module.h \
+		../src/engine/assettools/loadable.h \
+		../src/engine/variant.h \
+		../src/engine/type.h \
+		../src/animator.h \
+		../src/engine/graphics/image.h \
+		../src/engine/sharedcontainer.h \
+		../src/audio/audioplayer.h \
+		../src/engine/audio/audiochannel.h \
+		../src/engine/audio/audiosample.h \
 		../src/capabilities/docker.h \
 		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h \
@@ -1675,14 +2250,697 @@ main.o: ../src/main.cpp ../src/environment.h \
 		../src/gui/guiminimap.h \
 		../src/gui/guidebugvalueinfo.h \
 		../src/near.h \
+		../src/additional/net/socket.h \
+		../src/additional/net/framebuilder.h \
 		../src/worldmanager.h \
 		../src/worlds/world.h \
+		../src/engine/assettools/assetprovider.h \
+		../src/json/json.h \
+		../src/json/autolink.h \
+		../src/json/config.h \
+		../src/json/allocator.h \
+		../src/json/version.h \
+		../src/json/features.h \
+		../src/json/forwards.h \
+		../src/json/reader.h \
+		../src/json/value.h \
+		../src/json/writer.h \
+		../src/engine/abstractfactory.h \
+		../klibcore/src/memcontrol/kabstractfactory.h \
+		../klibcore/src/utility/ktype.h \
 		../src/units/camera.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/engine/textformat.h \
+		../src/additional/mutex.h \
+		../src/worlds/defaultworld.h \
+		../src/worlds/arenaworld.h \
+		../src/worlds/heapworld.h \
+		../src/debug.h \
+		../klibcore/src/ksmartenum.h \
+		../src/filesystem.h \
+		../src/sdlimplementation/sdlaudioprovider.h \
+		../src/engine/audio/abstractaudioprovider.h \
+		../src/sdlimplementation/sdleventhandler.h \
+		../src/engine/abstracteventhandler.h \
+		../src/sdlimplementation/sdlgraphicsprovider.h \
+		../src/sdlimplementation/sdlrenderer.h \
+		../src/engine/graphics/abstractgraphicsprovider.h \
+		../src/assetexecutors/animatorassetexecutor.h \
+		../src/engine/assettools/abstractassetexecutor.h \
+		../src/assetexecutors/audioassetexecutor.h \
+		../src/assetexecutors/mapassetexecutor.h \
+		../src/assetexecutors/numberassetexecutor.h \
+		../src/assetexecutors/spriteassetexecutor.h \
+		../src/assetexecutors/stringassetexecutor.h \
+		../src/assetexecutors/vectorassetexecutor.h \
+		../src/units/particle.h \
+		../src/units/projectile.h \
+		../src/units/station.h \
+		../src/capabilities/player.h \
+		../src/capabilities/modules/engine.h \
+		../src/capabilities/modules/thruster.h \
+		../src/capabilities/modules/weapon.h \
+		../src/audio/audio.h \
+		../src/engine/additional.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o environment.o ../src/environment.cpp
+
+filesystem.o: ../src/filesystem.cpp ../src/filesystem.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o filesystem.o ../src/filesystem.cpp
+
+guiblushingfloatingmessage.o: ../src/gui/guiblushingfloatingmessage.cpp ../src/gui/guiblushingfloatingmessage.h \
+		../src/gui/guifloatingmessage.h \
+		../src/gui/guimenuelement.h \
+		../src/gui/guielement.h \
+		../src/capabilities/controller.h \
+		../src/capabilities/capability.h \
+		../src/engine/entity.h \
+		../src/object.h \
+		../src/units/ship.h \
+		../src/units/movable.h \
+		../src/units/unit.h \
+		../src/capabilities/modulehandler.h \
+		../src/capabilities/modules/module.h \
+		../src/iinformative.h \
+		../src/engine/assettools/loadable.h \
+		../src/engine/variant.h \
+		../src/engine/type.h \
+		../src/animator.h \
+		../src/engine/math/vector.h \
+		../src/engine/time/elapsedtimer.h \
+		../src/engine/graphics/image.h \
+		../src/engine/sharedcontainer.h \
+		../src/audio/audioplayer.h \
+		../src/engine/audio/audiochannel.h \
+		../src/engine/audio/audiosample.h \
+		../src/capabilities/docker.h \
+		../src/capabilities/modules/warpdrive.h \
+		../src/additional/trigger.h \
+		../src/engine/math/math.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/additional/e_variant.h \
+		../src/engine/textformat.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o guiblushingfloatingmessage.o ../src/gui/guiblushingfloatingmessage.cpp
+
+guicentralmessage.o: ../src/gui/guicentralmessage.cpp ../src/gui/guicentralmessage.h \
+		../src/gui/guimenuelement.h \
+		../src/gui/guielement.h \
+		../src/capabilities/controller.h \
+		../src/capabilities/capability.h \
+		../src/engine/entity.h \
+		../src/object.h \
+		../src/units/ship.h \
+		../src/units/movable.h \
+		../src/units/unit.h \
+		../src/capabilities/modulehandler.h \
+		../src/capabilities/modules/module.h \
+		../src/iinformative.h \
+		../src/engine/assettools/loadable.h \
+		../src/engine/variant.h \
+		../src/engine/type.h \
+		../src/animator.h \
+		../src/engine/math/vector.h \
+		../src/engine/time/elapsedtimer.h \
+		../src/engine/graphics/image.h \
+		../src/engine/sharedcontainer.h \
+		../src/audio/audioplayer.h \
+		../src/engine/audio/audiochannel.h \
+		../src/engine/audio/audiosample.h \
+		../src/capabilities/docker.h \
+		../src/capabilities/modules/warpdrive.h \
+		../src/additional/trigger.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/additional/e_variant.h \
+		../src/engine/textformat.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o guicentralmessage.o ../src/gui/guicentralmessage.cpp
+
+guichoice.o: ../src/gui/guichoice.cpp ../src/gui/guichoice.h \
+		../src/additional/e_variant.h \
+		../src/engine/math/vector.h \
+		../src/object.h \
+		../src/gui/guimenuelement.h \
+		../src/gui/guielement.h \
+		../src/capabilities/controller.h \
+		../src/capabilities/capability.h \
+		../src/engine/entity.h \
+		../src/units/ship.h \
+		../src/units/movable.h \
+		../src/units/unit.h \
+		../src/capabilities/modulehandler.h \
+		../src/capabilities/modules/module.h \
+		../src/iinformative.h \
+		../src/engine/assettools/loadable.h \
+		../src/engine/variant.h \
+		../src/engine/type.h \
+		../src/animator.h \
+		../src/engine/time/elapsedtimer.h \
+		../src/engine/graphics/image.h \
+		../src/engine/sharedcontainer.h \
+		../src/audio/audioplayer.h \
+		../src/engine/audio/audiochannel.h \
+		../src/engine/audio/audiosample.h \
+		../src/capabilities/docker.h \
+		../src/capabilities/modules/warpdrive.h \
+		../src/additional/trigger.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o guichoice.o ../src/gui/guichoice.cpp
+
+guicontainer.o: ../src/gui/guicontainer.cpp ../src/gui/guicontainer.h \
+		../src/gui/guimenuelement.h \
+		../src/gui/guielement.h \
+		../src/capabilities/controller.h \
+		../src/capabilities/capability.h \
+		../src/engine/entity.h \
+		../src/object.h \
+		../src/units/ship.h \
+		../src/units/movable.h \
+		../src/units/unit.h \
+		../src/capabilities/modulehandler.h \
+		../src/capabilities/modules/module.h \
+		../src/iinformative.h \
+		../src/engine/assettools/loadable.h \
+		../src/engine/variant.h \
+		../src/engine/type.h \
+		../src/animator.h \
+		../src/engine/math/vector.h \
+		../src/engine/time/elapsedtimer.h \
+		../src/engine/graphics/image.h \
+		../src/engine/sharedcontainer.h \
+		../src/audio/audioplayer.h \
+		../src/engine/audio/audiochannel.h \
+		../src/engine/audio/audiosample.h \
+		../src/capabilities/docker.h \
+		../src/capabilities/modules/warpdrive.h \
+		../src/additional/trigger.h \
+		../src/gui/guistack.h \
+		../src/sdlimplementation/sdlrenderer.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/additional/e_variant.h \
+		../src/engine/textformat.h \
+		../src/engine/abstracteventhandler.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o guicontainer.o ../src/gui/guicontainer.cpp
+
+guidebugvalueinfo.o: ../src/gui/guidebugvalueinfo.cpp ../src/gui/guidebugvalueinfo.h \
+		../src/gui/guielement.h \
+		../src/capabilities/controller.h \
+		../src/capabilities/capability.h \
+		../src/engine/entity.h \
+		../src/object.h \
+		../src/units/ship.h \
+		../src/units/movable.h \
+		../src/units/unit.h \
+		../src/capabilities/modulehandler.h \
+		../src/capabilities/modules/module.h \
+		../src/iinformative.h \
+		../src/engine/assettools/loadable.h \
+		../src/engine/variant.h \
+		../src/engine/type.h \
+		../src/animator.h \
+		../src/engine/math/vector.h \
+		../src/engine/time/elapsedtimer.h \
+		../src/engine/graphics/image.h \
+		../src/engine/sharedcontainer.h \
+		../src/audio/audioplayer.h \
+		../src/engine/audio/audiochannel.h \
+		../src/engine/audio/audiosample.h \
+		../src/capabilities/docker.h \
+		../src/capabilities/modules/warpdrive.h \
+		../src/additional/trigger.h \
+		../src/engine/abstracteventhandler.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/additional/e_variant.h \
+		../src/engine/textformat.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o guidebugvalueinfo.o ../src/gui/guidebugvalueinfo.cpp
+
+guielement.o: ../src/gui/guielement.cpp ../src/gui/guielement.h \
+		../src/capabilities/controller.h \
+		../src/capabilities/capability.h \
+		../src/engine/entity.h \
+		../src/object.h \
+		../src/units/ship.h \
+		../src/units/movable.h \
+		../src/units/unit.h \
+		../src/capabilities/modulehandler.h \
+		../src/capabilities/modules/module.h \
+		../src/iinformative.h \
+		../src/engine/assettools/loadable.h \
+		../src/engine/variant.h \
+		../src/engine/type.h \
+		../src/animator.h \
+		../src/engine/math/vector.h \
+		../src/engine/time/elapsedtimer.h \
+		../src/engine/graphics/image.h \
+		../src/engine/sharedcontainer.h \
+		../src/audio/audioplayer.h \
+		../src/engine/audio/audiochannel.h \
+		../src/engine/audio/audiosample.h \
+		../src/capabilities/docker.h \
+		../src/capabilities/modules/warpdrive.h \
+		../src/additional/trigger.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o guielement.o ../src/gui/guielement.cpp
+
+guifloatingmessage.o: ../src/gui/guifloatingmessage.cpp ../src/gui/guifloatingmessage.h \
+		../src/gui/guimenuelement.h \
+		../src/gui/guielement.h \
+		../src/capabilities/controller.h \
+		../src/capabilities/capability.h \
+		../src/engine/entity.h \
+		../src/object.h \
+		../src/units/ship.h \
+		../src/units/movable.h \
+		../src/units/unit.h \
+		../src/capabilities/modulehandler.h \
+		../src/capabilities/modules/module.h \
+		../src/iinformative.h \
+		../src/engine/assettools/loadable.h \
+		../src/engine/variant.h \
+		../src/engine/type.h \
+		../src/animator.h \
+		../src/engine/math/vector.h \
+		../src/engine/time/elapsedtimer.h \
+		../src/engine/graphics/image.h \
+		../src/engine/sharedcontainer.h \
+		../src/audio/audioplayer.h \
+		../src/engine/audio/audiochannel.h \
+		../src/engine/audio/audiosample.h \
+		../src/capabilities/docker.h \
+		../src/capabilities/modules/warpdrive.h \
+		../src/additional/trigger.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/additional/e_variant.h \
+		../src/engine/textformat.h \
+		../src/engine/context.h \
+		../src/gui/guimain.h \
+		../src/gui/guistack.h \
+		../src/gui/guicentralmessage.h \
+		../src/gui/guiminimap.h \
+		../src/gui/guidebugvalueinfo.h \
+		../src/near.h \
+		../src/background.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o guifloatingmessage.o ../src/gui/guifloatingmessage.cpp
+
+guilist.o: ../src/gui/guilist.cpp ../src/gui/guilist.h \
+		../src/gui/guicontainer.h \
+		../src/gui/guimenuelement.h \
+		../src/gui/guielement.h \
+		../src/capabilities/controller.h \
+		../src/capabilities/capability.h \
+		../src/engine/entity.h \
+		../src/object.h \
+		../src/units/ship.h \
+		../src/units/movable.h \
+		../src/units/unit.h \
+		../src/capabilities/modulehandler.h \
+		../src/capabilities/modules/module.h \
+		../src/iinformative.h \
+		../src/engine/assettools/loadable.h \
+		../src/engine/variant.h \
+		../src/engine/type.h \
+		../src/animator.h \
+		../src/engine/math/vector.h \
+		../src/engine/time/elapsedtimer.h \
+		../src/engine/graphics/image.h \
+		../src/engine/sharedcontainer.h \
+		../src/audio/audioplayer.h \
+		../src/engine/audio/audiochannel.h \
+		../src/engine/audio/audiosample.h \
+		../src/capabilities/docker.h \
+		../src/capabilities/modules/warpdrive.h \
+		../src/additional/trigger.h \
+		../src/gui/guistack.h \
+		../src/additional/e_variant.h \
+		../src/units/projectile.h \
+		../src/gui/guichoice.h \
+		../src/units/camera.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/engine/textformat.h \
+		../src/objectregistry.h \
+		../src/debug.h \
+		../klibcore/src/ksmartenum.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o guilist.o ../src/gui/guilist.cpp
+
+guimain.o: ../src/gui/guimain.cpp ../src/gui/guimain.h \
+		../src/gui/guistack.h \
+		../src/gui/guielement.h \
+		../src/capabilities/controller.h \
+		../src/capabilities/capability.h \
+		../src/engine/entity.h \
+		../src/object.h \
+		../src/units/ship.h \
+		../src/units/movable.h \
+		../src/units/unit.h \
+		../src/capabilities/modulehandler.h \
+		../src/capabilities/modules/module.h \
+		../src/iinformative.h \
+		../src/engine/assettools/loadable.h \
+		../src/engine/variant.h \
+		../src/engine/type.h \
+		../src/animator.h \
+		../src/engine/math/vector.h \
+		../src/engine/time/elapsedtimer.h \
+		../src/engine/graphics/image.h \
+		../src/engine/sharedcontainer.h \
+		../src/audio/audioplayer.h \
+		../src/engine/audio/audiochannel.h \
+		../src/engine/audio/audiosample.h \
+		../src/capabilities/docker.h \
+		../src/capabilities/modules/warpdrive.h \
+		../src/additional/trigger.h \
+		../src/gui/guicentralmessage.h \
+		../src/gui/guimenuelement.h \
+		../src/gui/guifloatingmessage.h \
+		../src/gui/guiminimap.h \
+		../src/gui/guidebugvalueinfo.h \
+		../src/gui/guiblushingfloatingmessage.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o guimain.o ../src/gui/guimain.cpp
+
+guimenuelement.o: ../src/gui/guimenuelement.cpp ../src/gui/guimenuelement.h \
+		../src/gui/guielement.h \
+		../src/capabilities/controller.h \
+		../src/capabilities/capability.h \
+		../src/engine/entity.h \
+		../src/object.h \
+		../src/units/ship.h \
+		../src/units/movable.h \
+		../src/units/unit.h \
+		../src/capabilities/modulehandler.h \
+		../src/capabilities/modules/module.h \
+		../src/iinformative.h \
+		../src/engine/assettools/loadable.h \
+		../src/engine/variant.h \
+		../src/engine/type.h \
+		../src/animator.h \
+		../src/engine/math/vector.h \
+		../src/engine/time/elapsedtimer.h \
+		../src/engine/graphics/image.h \
+		../src/engine/sharedcontainer.h \
+		../src/audio/audioplayer.h \
+		../src/engine/audio/audiochannel.h \
+		../src/engine/audio/audiosample.h \
+		../src/capabilities/docker.h \
+		../src/capabilities/modules/warpdrive.h \
+		../src/additional/trigger.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o guimenuelement.o ../src/gui/guimenuelement.cpp
+
+guiminimap.o: ../src/gui/guiminimap.cpp ../src/gui/guiminimap.h \
+		../src/gui/guielement.h \
+		../src/capabilities/controller.h \
+		../src/capabilities/capability.h \
+		../src/engine/entity.h \
+		../src/object.h \
+		../src/units/ship.h \
+		../src/units/movable.h \
+		../src/units/unit.h \
+		../src/capabilities/modulehandler.h \
+		../src/capabilities/modules/module.h \
+		../src/iinformative.h \
+		../src/engine/assettools/loadable.h \
+		../src/engine/variant.h \
+		../src/engine/type.h \
+		../src/animator.h \
+		../src/engine/math/vector.h \
+		../src/engine/time/elapsedtimer.h \
+		../src/engine/graphics/image.h \
+		../src/engine/sharedcontainer.h \
+		../src/audio/audioplayer.h \
+		../src/engine/audio/audiochannel.h \
+		../src/engine/audio/audiosample.h \
+		../src/capabilities/docker.h \
+		../src/capabilities/modules/warpdrive.h \
+		../src/additional/trigger.h \
+		../src/units/camera.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/additional/e_variant.h \
+		../src/engine/textformat.h \
+		../src/units/projectile.h \
+		../src/additional/lightparticle.h \
+		../src/engine/abstracteventhandler.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o guiminimap.o ../src/gui/guiminimap.cpp
+
+guiradar.o: ../src/gui/guiradar.cpp ../src/gui/guiradar.h \
+		../src/gui/guilist.h \
+		../src/gui/guicontainer.h \
+		../src/gui/guimenuelement.h \
+		../src/gui/guielement.h \
+		../src/capabilities/controller.h \
+		../src/capabilities/capability.h \
+		../src/engine/entity.h \
+		../src/object.h \
+		../src/units/ship.h \
+		../src/units/movable.h \
+		../src/units/unit.h \
+		../src/capabilities/modulehandler.h \
+		../src/capabilities/modules/module.h \
+		../src/iinformative.h \
+		../src/engine/assettools/loadable.h \
+		../src/engine/variant.h \
+		../src/engine/type.h \
+		../src/animator.h \
+		../src/engine/math/vector.h \
+		../src/engine/time/elapsedtimer.h \
+		../src/engine/graphics/image.h \
+		../src/engine/sharedcontainer.h \
+		../src/audio/audioplayer.h \
+		../src/engine/audio/audiochannel.h \
+		../src/engine/audio/audiosample.h \
+		../src/capabilities/docker.h \
+		../src/capabilities/modules/warpdrive.h \
+		../src/additional/trigger.h \
+		../src/gui/guistack.h \
+		../src/additional/e_variant.h \
+		../src/gui/guichoice.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o guiradar.o ../src/gui/guiradar.cpp
+
+guistack.o: ../src/gui/guistack.cpp ../src/gui/guistack.h \
+		../src/gui/guielement.h \
+		../src/capabilities/controller.h \
+		../src/capabilities/capability.h \
+		../src/engine/entity.h \
+		../src/object.h \
+		../src/units/ship.h \
+		../src/units/movable.h \
+		../src/units/unit.h \
+		../src/capabilities/modulehandler.h \
+		../src/capabilities/modules/module.h \
+		../src/iinformative.h \
+		../src/engine/assettools/loadable.h \
+		../src/engine/variant.h \
+		../src/engine/type.h \
+		../src/animator.h \
+		../src/engine/math/vector.h \
+		../src/engine/time/elapsedtimer.h \
+		../src/engine/graphics/image.h \
+		../src/engine/sharedcontainer.h \
+		../src/audio/audioplayer.h \
+		../src/engine/audio/audiochannel.h \
+		../src/engine/audio/audiosample.h \
+		../src/capabilities/docker.h \
+		../src/capabilities/modules/warpdrive.h \
+		../src/additional/trigger.h \
+		../src/gui/guicontainer.h \
+		../src/gui/guimenuelement.h \
+		../src/engine/abstracteventhandler.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o guistack.o ../src/gui/guistack.cpp
+
+guiswitch.o: ../src/gui/guiswitch.cpp ../src/gui/guiswitch.h \
+		../src/gui/guimenuelement.h \
+		../src/gui/guielement.h \
+		../src/capabilities/controller.h \
+		../src/capabilities/capability.h \
+		../src/engine/entity.h \
+		../src/object.h \
+		../src/units/ship.h \
+		../src/units/movable.h \
+		../src/units/unit.h \
+		../src/capabilities/modulehandler.h \
+		../src/capabilities/modules/module.h \
+		../src/iinformative.h \
+		../src/engine/assettools/loadable.h \
+		../src/engine/variant.h \
+		../src/engine/type.h \
+		../src/animator.h \
+		../src/engine/math/vector.h \
+		../src/engine/time/elapsedtimer.h \
+		../src/engine/graphics/image.h \
+		../src/engine/sharedcontainer.h \
+		../src/audio/audioplayer.h \
+		../src/engine/audio/audiochannel.h \
+		../src/engine/audio/audiosample.h \
+		../src/capabilities/docker.h \
+		../src/capabilities/modules/warpdrive.h \
+		../src/additional/trigger.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o guiswitch.o ../src/gui/guiswitch.cpp
+
+iinformative.o: ../src/iinformative.cpp ../src/iinformative.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o iinformative.o ../src/iinformative.cpp
+
+json_reader.o: ../src/json/json_reader.cpp ../src/json/json_tool.h \
+		../src/json/config.h \
+		../src/json/allocator.h \
+		../src/json/version.h \
+		../src/json/assertions.h \
+		../src/json/reader.h \
+		../src/json/features.h \
+		../src/json/forwards.h \
+		../src/json/value.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o json_reader.o ../src/json/json_reader.cpp
+
+json_value.o: ../src/json/json_value.cpp ../src/json/assertions.h \
+		../src/json/config.h \
+		../src/json/allocator.h \
+		../src/json/version.h \
+		../src/json/value.h \
+		../src/json/forwards.h \
+		../src/json/writer.h \
+		../src/json/json_valueiterator.inl
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o json_value.o ../src/json/json_value.cpp
+
+json_writer.o: ../src/json/json_writer.cpp ../src/json/json_tool.h \
+		../src/json/config.h \
+		../src/json/allocator.h \
+		../src/json/version.h \
+		../src/json/writer.h \
+		../src/json/value.h \
+		../src/json/forwards.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o json_writer.o ../src/json/json_writer.cpp
+
+main.o: ../src/main.cpp ../src/environment.h \
+		../src/object.h \
+		../src/state.h \
+		../src/additional/e_variant.h \
+		../src/engine/math/vector.h \
+		../src/background.h \
+		../src/engine/entity.h \
+		../src/engine/time/elapsedtimer.h \
+		../src/additional/informative/fpsmonitor.h \
+		../src/iinformative.h \
+		../src/netlistener.h \
+		../src/engine/context.h \
+		../src/gui/guimain.h \
+		../src/gui/guistack.h \
+		../src/gui/guielement.h \
+		../src/capabilities/controller.h \
+		../src/capabilities/capability.h \
+		../src/units/ship.h \
+		../src/units/movable.h \
+		../src/units/unit.h \
+		../src/capabilities/modulehandler.h \
+		../src/capabilities/modules/module.h \
+		../src/engine/assettools/loadable.h \
+		../src/engine/variant.h \
+		../src/engine/type.h \
+		../src/animator.h \
+		../src/engine/graphics/image.h \
+		../src/engine/sharedcontainer.h \
+		../src/audio/audioplayer.h \
+		../src/engine/audio/audiochannel.h \
+		../src/engine/audio/audiosample.h \
+		../src/capabilities/docker.h \
+		../src/capabilities/modules/warpdrive.h \
+		../src/additional/trigger.h \
+		../src/gui/guicentralmessage.h \
+		../src/gui/guimenuelement.h \
+		../src/gui/guifloatingmessage.h \
+		../src/gui/guiminimap.h \
+		../src/gui/guidebugvalueinfo.h \
+		../src/near.h \
+		../src/additional/net/socket.h \
+		../src/additional/net/framebuilder.h \
+		../src/worldmanager.h \
+		../src/worlds/world.h \
+		../src/engine/assettools/assetprovider.h \
+		../src/json/json.h \
+		../src/json/autolink.h \
+		../src/json/config.h \
+		../src/json/allocator.h \
+		../src/json/version.h \
+		../src/json/features.h \
+		../src/json/forwards.h \
+		../src/json/reader.h \
+		../src/json/value.h \
+		../src/json/writer.h \
+		../src/engine/abstractfactory.h \
+		../klibcore/src/memcontrol/kabstractfactory.h \
+		../klibcore/src/utility/ktype.h \
+		../src/units/camera.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/engine/textformat.h \
 		../src/additional/mutex.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../src/main.cpp
 
+near.o: ../src/near.cpp ../src/near.h \
+		../src/capabilities/controller.h \
+		../src/capabilities/capability.h \
+		../src/engine/entity.h \
+		../src/object.h \
+		../src/units/ship.h \
+		../src/units/movable.h \
+		../src/units/unit.h \
+		../src/capabilities/modulehandler.h \
+		../src/capabilities/modules/module.h \
+		../src/iinformative.h \
+		../src/engine/assettools/loadable.h \
+		../src/engine/variant.h \
+		../src/engine/type.h \
+		../src/animator.h \
+		../src/engine/math/vector.h \
+		../src/engine/time/elapsedtimer.h \
+		../src/engine/graphics/image.h \
+		../src/engine/sharedcontainer.h \
+		../src/audio/audioplayer.h \
+		../src/engine/audio/audiochannel.h \
+		../src/engine/audio/audiosample.h \
+		../src/capabilities/docker.h \
+		../src/capabilities/modules/warpdrive.h \
+		../src/additional/trigger.h \
+		../src/objectregistry.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o near.o ../src/near.cpp
+
+netlistener.o: ../src/netlistener.cpp ../src/netlistener.h \
+		../src/engine/context.h \
+		../src/additional/e_variant.h \
+		../src/engine/math/vector.h \
+		../src/object.h \
+		../src/gui/guimain.h \
+		../src/gui/guistack.h \
+		../src/gui/guielement.h \
+		../src/capabilities/controller.h \
+		../src/capabilities/capability.h \
+		../src/engine/entity.h \
+		../src/units/ship.h \
+		../src/units/movable.h \
+		../src/units/unit.h \
+		../src/capabilities/modulehandler.h \
+		../src/capabilities/modules/module.h \
+		../src/iinformative.h \
+		../src/engine/assettools/loadable.h \
+		../src/engine/variant.h \
+		../src/engine/type.h \
+		../src/animator.h \
+		../src/engine/time/elapsedtimer.h \
+		../src/engine/graphics/image.h \
+		../src/engine/sharedcontainer.h \
+		../src/audio/audioplayer.h \
+		../src/engine/audio/audiochannel.h \
+		../src/engine/audio/audiosample.h \
+		../src/capabilities/docker.h \
+		../src/capabilities/modules/warpdrive.h \
+		../src/additional/trigger.h \
+		../src/gui/guicentralmessage.h \
+		../src/gui/guimenuelement.h \
+		../src/gui/guifloatingmessage.h \
+		../src/gui/guiminimap.h \
+		../src/gui/guidebugvalueinfo.h \
+		../src/near.h \
+		../src/background.h \
+		../src/additional/net/socket.h \
+		../src/additional/net/framebuilder.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o netlistener.o ../src/netlistener.cpp
+
 object.o: ../src/object.cpp ../src/object.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o object.o ../src/object.cpp
+
+objectregistry.o: ../src/objectregistry.cpp ../src/objectregistry.h \
+		../src/object.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o objectregistry.o ../src/objectregistry.cpp
 
 openglgraphicsprovider.o: ../src/openglimplementation/openglgraphicsprovider.cpp ../src/openglimplementation/openglgraphicsprovider.h \
 		../src/engine/graphics/abstractgraphicsprovider.h \
@@ -1705,10 +2963,22 @@ openglrenderer.o: ../src/openglimplementation/openglrenderer.cpp ../src/openglim
 		../src/engine/textformat.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o openglrenderer.o ../src/openglimplementation/openglrenderer.cpp
 
+anaglyph.o: ../src/sdlimplementation/effects/anaglyph.cpp ../src/sdlimplementation/effects/anaglyph.h \
+		../src/sdlimplementation/effects/visualeffect.h \
+		../src/engine/math/vector.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o anaglyph.o ../src/sdlimplementation/effects/anaglyph.cpp
+
+visualeffect.o: ../src/sdlimplementation/effects/visualeffect.cpp ../src/sdlimplementation/effects/visualeffect.h \
+		../src/engine/math/vector.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o visualeffect.o ../src/sdlimplementation/effects/visualeffect.cpp
+
+rotozoom.o: ../src/sdlimplementation/rotozoom.cpp ../src/sdlimplementation/rotozoom.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o rotozoom.o ../src/sdlimplementation/rotozoom.cpp
+
 sdlaudioprovider.o: ../src/sdlimplementation/sdlaudioprovider.cpp ../src/sdlimplementation/sdlaudioprovider.h \
-		../src/audio/abstractaudioprovider.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audiosample.h \
+		../src/engine/audio/abstractaudioprovider.h \
+		../src/engine/audio/audiochannel.h \
+		../src/engine/audio/audiosample.h \
 		../src/engine/sharedcontainer.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o sdlaudioprovider.o ../src/sdlimplementation/sdlaudioprovider.cpp
 
@@ -1747,26 +3017,16 @@ sdlrenderer.o: ../src/sdlimplementation/sdlrenderer.cpp ../src/sdlimplementation
 		../src/capabilities/modulehandler.h \
 		../src/capabilities/modules/module.h \
 		../src/capabilities/capability.h \
-		../src/worker.h \
+		../src/engine/entity.h \
 		../src/iinformative.h \
-		../src/assettools/loadable.h \
-		../src/json/json.h \
-		../src/json/autolink.h \
-		../src/json/config.h \
-		../src/json/allocator.h \
-		../src/json/version.h \
-		../src/json/features.h \
-		../src/json/forwards.h \
-		../src/json/reader.h \
-		../src/json/value.h \
-		../src/json/writer.h \
-		../src/animator.h \
-		../src/time/timer.h \
-		../src/audio/audioplayer.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audiosample.h \
+		../src/engine/assettools/loadable.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
+		../src/animator.h \
+		../src/engine/time/elapsedtimer.h \
+		../src/audio/audioplayer.h \
+		../src/engine/audio/audiochannel.h \
+		../src/engine/audio/audiosample.h \
 		../src/capabilities/docker.h \
 		../src/capabilities/controller.h \
 		../src/units/ship.h \
@@ -1778,1332 +3038,11 @@ sdlrenderer.o: ../src/sdlimplementation/sdlrenderer.cpp ../src/sdlimplementation
 		../src/engine/math/math.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o sdlrenderer.o ../src/sdlimplementation/sdlrenderer.cpp
 
-worker.o: ../src/worker.cpp ../src/worker.h \
-		../src/object.h \
-		../src/engine/graphics/abstractrenderer.h \
-		../src/engine/graphics/image.h \
-		../src/engine/sharedcontainer.h \
-		../src/engine/math/vector.h \
-		../src/additional/e_variant.h \
-		../src/engine/textformat.h \
-		../src/objectregistry.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o worker.o ../src/worker.cpp
-
-world.o: ../src/worlds/world.cpp ../src/worlds/world.h \
-		../src/assettools/assetprovider.h \
-		../src/json/json.h \
-		../src/json/autolink.h \
-		../src/json/config.h \
-		../src/json/allocator.h \
-		../src/json/version.h \
-		../src/json/features.h \
-		../src/json/forwards.h \
-		../src/json/reader.h \
-		../src/json/value.h \
-		../src/json/writer.h \
-		../src/assettools/assetexecutors/assetexecutor.h \
-		../src/engine/variant.h \
-		../src/engine/type.h \
-		../src/audio/abstractaudioprovider.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audiosample.h \
-		../src/engine/sharedcontainer.h \
-		../src/engine/abstractfactory.h \
-		../src/assettools/loadable.h \
-		../src/animator.h \
-		../src/time/timer.h \
-		../src/worker.h \
-		../src/object.h \
-		../src/engine/graphics/abstractrenderer.h \
-		../src/engine/graphics/image.h \
-		../src/engine/math/vector.h \
-		../src/additional/e_variant.h \
-		../src/engine/textformat.h \
-		../src/audio/audioplayer.h \
-		../klibcore/src/memcontrol/kabstractfactory.h \
-		../klibcore/src/utility/ktype.h \
-		../src/capabilities/controller.h \
-		../src/capabilities/capability.h \
-		../src/units/ship.h \
-		../src/units/movable.h \
-		../src/units/unit.h \
-		../src/capabilities/modulehandler.h \
-		../src/capabilities/modules/module.h \
-		../src/iinformative.h \
-		../src/capabilities/docker.h \
-		../src/capabilities/modules/warpdrive.h \
-		../src/additional/trigger.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o world.o ../src/worlds/world.cpp
-
-filesystem.o: ../src/filesystem.cpp ../src/filesystem.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o filesystem.o ../src/filesystem.cpp
-
-animator.o: ../src/animator.cpp ../src/animator.h \
-		../src/time/timer.h \
-		../src/worker.h \
-		../src/object.h \
-		../src/engine/graphics/abstractrenderer.h \
-		../src/engine/graphics/image.h \
-		../src/engine/sharedcontainer.h \
-		../src/engine/math/vector.h \
-		../src/additional/e_variant.h \
-		../src/engine/textformat.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o animator.o ../src/animator.cpp
-
-background.o: ../src/background.cpp ../src/background.h \
-		../src/engine/math/vector.h \
-		../src/worker.h \
-		../src/object.h \
-		../src/engine/graphics/abstractrenderer.h \
-		../src/engine/graphics/image.h \
-		../src/engine/sharedcontainer.h \
-		../src/additional/e_variant.h \
-		../src/engine/textformat.h \
-		../src/time/timer.h \
-		../src/context.h \
-		../src/assettools/assetprovider.h \
-		../src/json/json.h \
-		../src/json/autolink.h \
-		../src/json/config.h \
-		../src/json/allocator.h \
-		../src/json/version.h \
-		../src/json/features.h \
-		../src/json/forwards.h \
-		../src/json/reader.h \
-		../src/json/value.h \
-		../src/json/writer.h \
-		../src/assettools/assetexecutors/assetexecutor.h \
-		../src/engine/variant.h \
-		../src/engine/type.h \
-		../src/audio/abstractaudioprovider.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audiosample.h \
-		../src/engine/abstractfactory.h \
-		../src/assettools/loadable.h \
-		../src/animator.h \
-		../src/audio/audioplayer.h \
-		../klibcore/src/memcontrol/kabstractfactory.h \
-		../klibcore/src/utility/ktype.h \
-		../src/gui/guimain.h \
-		../src/gui/guistack.h \
-		../src/gui/guielement.h \
-		../src/capabilities/controller.h \
-		../src/capabilities/capability.h \
-		../src/units/ship.h \
-		../src/units/movable.h \
-		../src/units/unit.h \
-		../src/capabilities/modulehandler.h \
-		../src/capabilities/modules/module.h \
-		../src/iinformative.h \
-		../src/capabilities/docker.h \
-		../src/capabilities/modules/warpdrive.h \
-		../src/additional/trigger.h \
-		../src/gui/guicentralmessage.h \
-		../src/gui/guimenuelement.h \
-		../src/gui/guifloatingmessage.h \
-		../src/gui/guiminimap.h \
-		../src/gui/guidebugvalueinfo.h \
-		../src/near.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o background.o ../src/background.cpp
-
-unit.o: ../src/units/unit.cpp ../src/units/unit.h \
-		../src/capabilities/modulehandler.h \
-		../src/capabilities/modules/module.h \
-		../src/capabilities/capability.h \
-		../src/worker.h \
-		../src/object.h \
-		../src/engine/graphics/abstractrenderer.h \
-		../src/engine/graphics/image.h \
-		../src/engine/sharedcontainer.h \
-		../src/engine/math/vector.h \
-		../src/additional/e_variant.h \
-		../src/engine/textformat.h \
-		../src/iinformative.h \
-		../src/assettools/loadable.h \
-		../src/json/json.h \
-		../src/json/autolink.h \
-		../src/json/config.h \
-		../src/json/allocator.h \
-		../src/json/version.h \
-		../src/json/features.h \
-		../src/json/forwards.h \
-		../src/json/reader.h \
-		../src/json/value.h \
-		../src/json/writer.h \
-		../src/animator.h \
-		../src/time/timer.h \
-		../src/audio/audioplayer.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audiosample.h \
-		../src/engine/variant.h \
-		../src/engine/type.h \
-		../src/capabilities/docker.h \
-		../src/context.h \
-		../src/assettools/assetprovider.h \
-		../src/assettools/assetexecutors/assetexecutor.h \
-		../src/audio/abstractaudioprovider.h \
-		../src/engine/abstractfactory.h \
-		../klibcore/src/memcontrol/kabstractfactory.h \
-		../klibcore/src/utility/ktype.h \
-		../src/gui/guimain.h \
-		../src/gui/guistack.h \
-		../src/gui/guielement.h \
-		../src/capabilities/controller.h \
-		../src/units/ship.h \
-		../src/units/movable.h \
-		../src/capabilities/modules/warpdrive.h \
-		../src/additional/trigger.h \
-		../src/gui/guicentralmessage.h \
-		../src/gui/guimenuelement.h \
-		../src/gui/guifloatingmessage.h \
-		../src/gui/guiminimap.h \
-		../src/gui/guidebugvalueinfo.h \
-		../src/near.h \
-		../src/background.h \
-		../src/units/projectile.h \
-		../src/units/station.h \
-		../src/time/time.h \
-		../src/engine/math/math.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o unit.o ../src/units/unit.cpp
-
-movable.o: ../src/units/movable.cpp ../src/units/movable.h \
-		../src/units/unit.h \
-		../src/capabilities/modulehandler.h \
-		../src/capabilities/modules/module.h \
-		../src/capabilities/capability.h \
-		../src/worker.h \
-		../src/object.h \
-		../src/engine/graphics/abstractrenderer.h \
-		../src/engine/graphics/image.h \
-		../src/engine/sharedcontainer.h \
-		../src/engine/math/vector.h \
-		../src/additional/e_variant.h \
-		../src/engine/textformat.h \
-		../src/iinformative.h \
-		../src/assettools/loadable.h \
-		../src/json/json.h \
-		../src/json/autolink.h \
-		../src/json/config.h \
-		../src/json/allocator.h \
-		../src/json/version.h \
-		../src/json/features.h \
-		../src/json/forwards.h \
-		../src/json/reader.h \
-		../src/json/value.h \
-		../src/json/writer.h \
-		../src/animator.h \
-		../src/time/timer.h \
-		../src/audio/audioplayer.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audiosample.h \
-		../src/engine/variant.h \
-		../src/engine/type.h \
-		../src/capabilities/docker.h \
-		../src/capabilities/modules/engine.h \
-		../src/context.h \
-		../src/assettools/assetprovider.h \
-		../src/assettools/assetexecutors/assetexecutor.h \
-		../src/audio/abstractaudioprovider.h \
-		../src/engine/abstractfactory.h \
-		../klibcore/src/memcontrol/kabstractfactory.h \
-		../klibcore/src/utility/ktype.h \
-		../src/gui/guimain.h \
-		../src/gui/guistack.h \
-		../src/gui/guielement.h \
-		../src/capabilities/controller.h \
-		../src/units/ship.h \
-		../src/capabilities/modules/warpdrive.h \
-		../src/additional/trigger.h \
-		../src/gui/guicentralmessage.h \
-		../src/gui/guimenuelement.h \
-		../src/gui/guifloatingmessage.h \
-		../src/gui/guiminimap.h \
-		../src/gui/guidebugvalueinfo.h \
-		../src/near.h \
-		../src/background.h \
-		../src/time/time.h \
-		../src/engine/math/math.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o movable.o ../src/units/movable.cpp
-
-camera.o: ../src/units/camera.cpp ../src/units/camera.h \
-		../src/units/movable.h \
-		../src/units/unit.h \
-		../src/capabilities/modulehandler.h \
-		../src/capabilities/modules/module.h \
-		../src/capabilities/capability.h \
-		../src/worker.h \
-		../src/object.h \
-		../src/engine/graphics/abstractrenderer.h \
-		../src/engine/graphics/image.h \
-		../src/engine/sharedcontainer.h \
-		../src/engine/math/vector.h \
-		../src/additional/e_variant.h \
-		../src/engine/textformat.h \
-		../src/iinformative.h \
-		../src/assettools/loadable.h \
-		../src/json/json.h \
-		../src/json/autolink.h \
-		../src/json/config.h \
-		../src/json/allocator.h \
-		../src/json/version.h \
-		../src/json/features.h \
-		../src/json/forwards.h \
-		../src/json/reader.h \
-		../src/json/value.h \
-		../src/json/writer.h \
-		../src/animator.h \
-		../src/time/timer.h \
-		../src/audio/audioplayer.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audiosample.h \
-		../src/engine/variant.h \
-		../src/engine/type.h \
-		../src/capabilities/docker.h \
-		../src/capabilities/controller.h \
-		../src/units/ship.h \
-		../src/capabilities/modules/warpdrive.h \
-		../src/additional/trigger.h \
-		../src/time/time.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o camera.o ../src/units/camera.cpp
-
-capability.o: ../src/capabilities/capability.cpp ../src/capabilities/capability.h \
-		../src/worker.h \
-		../src/object.h \
-		../src/engine/graphics/abstractrenderer.h \
-		../src/engine/graphics/image.h \
-		../src/engine/sharedcontainer.h \
-		../src/engine/math/vector.h \
-		../src/additional/e_variant.h \
-		../src/engine/textformat.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o capability.o ../src/capabilities/capability.cpp
-
-controller.o: ../src/capabilities/controller.cpp ../src/capabilities/controller.h \
-		../src/capabilities/capability.h \
-		../src/worker.h \
-		../src/object.h \
-		../src/engine/graphics/abstractrenderer.h \
-		../src/engine/graphics/image.h \
-		../src/engine/sharedcontainer.h \
-		../src/engine/math/vector.h \
-		../src/additional/e_variant.h \
-		../src/engine/textformat.h \
-		../src/time/timer.h \
-		../src/units/ship.h \
-		../src/units/movable.h \
-		../src/units/unit.h \
-		../src/capabilities/modulehandler.h \
-		../src/capabilities/modules/module.h \
-		../src/iinformative.h \
-		../src/assettools/loadable.h \
-		../src/json/json.h \
-		../src/json/autolink.h \
-		../src/json/config.h \
-		../src/json/allocator.h \
-		../src/json/version.h \
-		../src/json/features.h \
-		../src/json/forwards.h \
-		../src/json/reader.h \
-		../src/json/value.h \
-		../src/json/writer.h \
-		../src/animator.h \
-		../src/audio/audioplayer.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audiosample.h \
-		../src/engine/variant.h \
-		../src/engine/type.h \
-		../src/capabilities/docker.h \
-		../src/capabilities/modules/warpdrive.h \
-		../src/additional/trigger.h \
-		../src/context.h \
-		../src/assettools/assetprovider.h \
-		../src/assettools/assetexecutors/assetexecutor.h \
-		../src/audio/abstractaudioprovider.h \
-		../src/engine/abstractfactory.h \
-		../klibcore/src/memcontrol/kabstractfactory.h \
-		../klibcore/src/utility/ktype.h \
-		../src/gui/guimain.h \
-		../src/gui/guistack.h \
-		../src/gui/guielement.h \
-		../src/gui/guicentralmessage.h \
-		../src/gui/guimenuelement.h \
-		../src/gui/guifloatingmessage.h \
-		../src/gui/guiminimap.h \
-		../src/gui/guidebugvalueinfo.h \
-		../src/near.h \
-		../src/background.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o controller.o ../src/capabilities/controller.cpp
-
-player.o: ../src/capabilities/player.cpp ../src/capabilities/player.h \
-		../src/capabilities/controller.h \
-		../src/capabilities/capability.h \
-		../src/worker.h \
-		../src/object.h \
-		../src/engine/graphics/abstractrenderer.h \
-		../src/engine/graphics/image.h \
-		../src/engine/sharedcontainer.h \
-		../src/engine/math/vector.h \
-		../src/additional/e_variant.h \
-		../src/engine/textformat.h \
-		../src/time/timer.h \
-		../src/units/ship.h \
-		../src/units/movable.h \
-		../src/units/unit.h \
-		../src/capabilities/modulehandler.h \
-		../src/capabilities/modules/module.h \
-		../src/iinformative.h \
-		../src/assettools/loadable.h \
-		../src/json/json.h \
-		../src/json/autolink.h \
-		../src/json/config.h \
-		../src/json/allocator.h \
-		../src/json/version.h \
-		../src/json/features.h \
-		../src/json/forwards.h \
-		../src/json/reader.h \
-		../src/json/value.h \
-		../src/json/writer.h \
-		../src/animator.h \
-		../src/audio/audioplayer.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audiosample.h \
-		../src/engine/variant.h \
-		../src/engine/type.h \
-		../src/capabilities/docker.h \
-		../src/capabilities/modules/warpdrive.h \
-		../src/additional/trigger.h \
-		../src/context.h \
-		../src/assettools/assetprovider.h \
-		../src/assettools/assetexecutors/assetexecutor.h \
-		../src/audio/abstractaudioprovider.h \
-		../src/engine/abstractfactory.h \
-		../klibcore/src/memcontrol/kabstractfactory.h \
-		../klibcore/src/utility/ktype.h \
-		../src/gui/guimain.h \
-		../src/gui/guistack.h \
-		../src/gui/guielement.h \
-		../src/gui/guicentralmessage.h \
-		../src/gui/guimenuelement.h \
-		../src/gui/guifloatingmessage.h \
-		../src/gui/guiminimap.h \
-		../src/gui/guidebugvalueinfo.h \
-		../src/near.h \
-		../src/background.h \
-		../src/objectregistry.h \
-		../src/capabilities/modules/weapon.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o player.o ../src/capabilities/player.cpp
-
-modulehandler.o: ../src/capabilities/modulehandler.cpp ../src/capabilities/modulehandler.h \
-		../src/capabilities/modules/module.h \
-		../src/capabilities/capability.h \
-		../src/worker.h \
-		../src/object.h \
-		../src/engine/graphics/abstractrenderer.h \
-		../src/engine/graphics/image.h \
-		../src/engine/sharedcontainer.h \
-		../src/engine/math/vector.h \
-		../src/additional/e_variant.h \
-		../src/engine/textformat.h \
-		../src/iinformative.h \
-		../src/assettools/loadable.h \
-		../src/json/json.h \
-		../src/json/autolink.h \
-		../src/json/config.h \
-		../src/json/allocator.h \
-		../src/json/version.h \
-		../src/json/features.h \
-		../src/json/forwards.h \
-		../src/json/reader.h \
-		../src/json/value.h \
-		../src/json/writer.h \
-		../src/animator.h \
-		../src/time/timer.h \
-		../src/audio/audioplayer.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audiosample.h \
-		../src/engine/variant.h \
-		../src/engine/type.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o modulehandler.o ../src/capabilities/modulehandler.cpp
-
-module.o: ../src/capabilities/modules/module.cpp ../src/capabilities/modules/module.h \
-		../src/capabilities/capability.h \
-		../src/worker.h \
-		../src/object.h \
-		../src/engine/graphics/abstractrenderer.h \
-		../src/engine/graphics/image.h \
-		../src/engine/sharedcontainer.h \
-		../src/engine/math/vector.h \
-		../src/additional/e_variant.h \
-		../src/engine/textformat.h \
-		../src/iinformative.h \
-		../src/assettools/loadable.h \
-		../src/json/json.h \
-		../src/json/autolink.h \
-		../src/json/config.h \
-		../src/json/allocator.h \
-		../src/json/version.h \
-		../src/json/features.h \
-		../src/json/forwards.h \
-		../src/json/reader.h \
-		../src/json/value.h \
-		../src/json/writer.h \
-		../src/animator.h \
-		../src/time/timer.h \
-		../src/audio/audioplayer.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audiosample.h \
-		../src/engine/variant.h \
-		../src/engine/type.h \
-		../src/units/unit.h \
-		../src/capabilities/modulehandler.h \
-		../src/capabilities/docker.h \
-		../src/units/camera.h \
-		../src/units/movable.h \
-		../src/capabilities/controller.h \
-		../src/units/ship.h \
-		../src/capabilities/modules/warpdrive.h \
-		../src/additional/trigger.h \
-		../src/engine/math/math.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o module.o ../src/capabilities/modules/module.cpp
-
-rotozoom.o: ../src/sdlimplementation/rotozoom.cpp ../src/sdlimplementation/rotozoom.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o rotozoom.o ../src/sdlimplementation/rotozoom.cpp
-
 spm.o: ../src/sdlimplementation/spm.cpp ../src/sdlimplementation/spm.h \
 		../src/sdlimplementation/effects/visualeffect.h \
 		../src/engine/math/vector.h \
 		../src/sdlimplementation/rotozoom.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o spm.o ../src/sdlimplementation/spm.cpp
-
-timer.o: ../src/time/timer.cpp ../src/time/timer.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o timer.o ../src/time/timer.cpp
-
-vector.o: ../src/engine/math/vector.cpp ../src/engine/math/vector.h \
-		../src/engine/math/math.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o vector.o ../src/engine/math/vector.cpp
-
-stringformer.o: ../src/additional/stringformer.cpp ../src/additional/stringformer.h \
-		../src/object.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o stringformer.o ../src/additional/stringformer.cpp
-
-anaglyph.o: ../src/sdlimplementation/effects/anaglyph.cpp ../src/sdlimplementation/effects/anaglyph.h \
-		../src/sdlimplementation/effects/visualeffect.h \
-		../src/engine/math/vector.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o anaglyph.o ../src/sdlimplementation/effects/anaglyph.cpp
-
-loadable.o: ../src/assettools/loadable.cpp ../src/assettools/loadable.h \
-		../src/json/json.h \
-		../src/json/autolink.h \
-		../src/json/config.h \
-		../src/json/allocator.h \
-		../src/json/version.h \
-		../src/json/features.h \
-		../src/json/forwards.h \
-		../src/json/reader.h \
-		../src/json/value.h \
-		../src/json/writer.h \
-		../src/animator.h \
-		../src/time/timer.h \
-		../src/worker.h \
-		../src/object.h \
-		../src/engine/graphics/abstractrenderer.h \
-		../src/engine/graphics/image.h \
-		../src/engine/sharedcontainer.h \
-		../src/engine/math/vector.h \
-		../src/additional/e_variant.h \
-		../src/engine/textformat.h \
-		../src/audio/audioplayer.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audiosample.h \
-		../src/engine/variant.h \
-		../src/engine/type.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o loadable.o ../src/assettools/loadable.cpp
-
-weapon.o: ../src/capabilities/modules/weapon.cpp ../src/capabilities/modules/weapon.h \
-		../src/capabilities/modules/module.h \
-		../src/capabilities/capability.h \
-		../src/worker.h \
-		../src/object.h \
-		../src/engine/graphics/abstractrenderer.h \
-		../src/engine/graphics/image.h \
-		../src/engine/sharedcontainer.h \
-		../src/engine/math/vector.h \
-		../src/additional/e_variant.h \
-		../src/engine/textformat.h \
-		../src/iinformative.h \
-		../src/assettools/loadable.h \
-		../src/json/json.h \
-		../src/json/autolink.h \
-		../src/json/config.h \
-		../src/json/allocator.h \
-		../src/json/version.h \
-		../src/json/features.h \
-		../src/json/forwards.h \
-		../src/json/reader.h \
-		../src/json/value.h \
-		../src/json/writer.h \
-		../src/animator.h \
-		../src/time/timer.h \
-		../src/audio/audioplayer.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audiosample.h \
-		../src/engine/variant.h \
-		../src/engine/type.h \
-		../src/context.h \
-		../src/assettools/assetprovider.h \
-		../src/assettools/assetexecutors/assetexecutor.h \
-		../src/audio/abstractaudioprovider.h \
-		../src/engine/abstractfactory.h \
-		../klibcore/src/memcontrol/kabstractfactory.h \
-		../klibcore/src/utility/ktype.h \
-		../src/gui/guimain.h \
-		../src/gui/guistack.h \
-		../src/gui/guielement.h \
-		../src/capabilities/controller.h \
-		../src/units/ship.h \
-		../src/units/movable.h \
-		../src/units/unit.h \
-		../src/capabilities/modulehandler.h \
-		../src/capabilities/docker.h \
-		../src/capabilities/modules/warpdrive.h \
-		../src/additional/trigger.h \
-		../src/gui/guicentralmessage.h \
-		../src/gui/guimenuelement.h \
-		../src/gui/guifloatingmessage.h \
-		../src/gui/guiminimap.h \
-		../src/gui/guidebugvalueinfo.h \
-		../src/near.h \
-		../src/background.h \
-		../src/additional/stringformer.h \
-		../src/units/projectile.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o weapon.o ../src/capabilities/modules/weapon.cpp
-
-projectile.o: ../src/units/projectile.cpp ../src/units/projectile.h \
-		../src/units/movable.h \
-		../src/units/unit.h \
-		../src/capabilities/modulehandler.h \
-		../src/capabilities/modules/module.h \
-		../src/capabilities/capability.h \
-		../src/worker.h \
-		../src/object.h \
-		../src/engine/graphics/abstractrenderer.h \
-		../src/engine/graphics/image.h \
-		../src/engine/sharedcontainer.h \
-		../src/engine/math/vector.h \
-		../src/additional/e_variant.h \
-		../src/engine/textformat.h \
-		../src/iinformative.h \
-		../src/assettools/loadable.h \
-		../src/json/json.h \
-		../src/json/autolink.h \
-		../src/json/config.h \
-		../src/json/allocator.h \
-		../src/json/version.h \
-		../src/json/features.h \
-		../src/json/forwards.h \
-		../src/json/reader.h \
-		../src/json/value.h \
-		../src/json/writer.h \
-		../src/animator.h \
-		../src/time/timer.h \
-		../src/audio/audioplayer.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audiosample.h \
-		../src/engine/variant.h \
-		../src/engine/type.h \
-		../src/capabilities/docker.h \
-		../src/context.h \
-		../src/assettools/assetprovider.h \
-		../src/assettools/assetexecutors/assetexecutor.h \
-		../src/audio/abstractaudioprovider.h \
-		../src/engine/abstractfactory.h \
-		../klibcore/src/memcontrol/kabstractfactory.h \
-		../klibcore/src/utility/ktype.h \
-		../src/gui/guimain.h \
-		../src/gui/guistack.h \
-		../src/gui/guielement.h \
-		../src/capabilities/controller.h \
-		../src/units/ship.h \
-		../src/capabilities/modules/warpdrive.h \
-		../src/additional/trigger.h \
-		../src/gui/guicentralmessage.h \
-		../src/gui/guimenuelement.h \
-		../src/gui/guifloatingmessage.h \
-		../src/gui/guiminimap.h \
-		../src/gui/guidebugvalueinfo.h \
-		../src/near.h \
-		../src/background.h \
-		../src/units/particle.h \
-		../src/units/camera.h \
-		../src/additional/lightparticle.h \
-		../src/objectregistry.h \
-		../src/debug.h \
-		../klibcore/src/ksmartenum.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o projectile.o ../src/units/projectile.cpp
-
-context.o: ../src/context.cpp ../src/context.h \
-		../src/assettools/assetprovider.h \
-		../src/json/json.h \
-		../src/json/autolink.h \
-		../src/json/config.h \
-		../src/json/allocator.h \
-		../src/json/version.h \
-		../src/json/features.h \
-		../src/json/forwards.h \
-		../src/json/reader.h \
-		../src/json/value.h \
-		../src/json/writer.h \
-		../src/assettools/assetexecutors/assetexecutor.h \
-		../src/engine/variant.h \
-		../src/engine/type.h \
-		../src/audio/abstractaudioprovider.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audiosample.h \
-		../src/engine/sharedcontainer.h \
-		../src/engine/abstractfactory.h \
-		../src/assettools/loadable.h \
-		../src/animator.h \
-		../src/time/timer.h \
-		../src/worker.h \
-		../src/object.h \
-		../src/engine/graphics/abstractrenderer.h \
-		../src/engine/graphics/image.h \
-		../src/engine/math/vector.h \
-		../src/additional/e_variant.h \
-		../src/engine/textformat.h \
-		../src/audio/audioplayer.h \
-		../klibcore/src/memcontrol/kabstractfactory.h \
-		../klibcore/src/utility/ktype.h \
-		../src/gui/guimain.h \
-		../src/gui/guistack.h \
-		../src/gui/guielement.h \
-		../src/capabilities/controller.h \
-		../src/capabilities/capability.h \
-		../src/units/ship.h \
-		../src/units/movable.h \
-		../src/units/unit.h \
-		../src/capabilities/modulehandler.h \
-		../src/capabilities/modules/module.h \
-		../src/iinformative.h \
-		../src/capabilities/docker.h \
-		../src/capabilities/modules/warpdrive.h \
-		../src/additional/trigger.h \
-		../src/gui/guicentralmessage.h \
-		../src/gui/guimenuelement.h \
-		../src/gui/guifloatingmessage.h \
-		../src/gui/guiminimap.h \
-		../src/gui/guidebugvalueinfo.h \
-		../src/near.h \
-		../src/background.h \
-		../src/objectregistry.h \
-		../src/debug.h \
-		../klibcore/src/ksmartenum.h \
-		../src/units/particle.h \
-		../src/additional/lightparticle.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o context.o ../src/context.cpp
-
-engine.o: ../src/capabilities/modules/engine.cpp ../src/capabilities/modules/engine.h \
-		../src/capabilities/modules/module.h \
-		../src/capabilities/capability.h \
-		../src/worker.h \
-		../src/object.h \
-		../src/engine/graphics/abstractrenderer.h \
-		../src/engine/graphics/image.h \
-		../src/engine/sharedcontainer.h \
-		../src/engine/math/vector.h \
-		../src/additional/e_variant.h \
-		../src/engine/textformat.h \
-		../src/iinformative.h \
-		../src/assettools/loadable.h \
-		../src/json/json.h \
-		../src/json/autolink.h \
-		../src/json/config.h \
-		../src/json/allocator.h \
-		../src/json/version.h \
-		../src/json/features.h \
-		../src/json/forwards.h \
-		../src/json/reader.h \
-		../src/json/value.h \
-		../src/json/writer.h \
-		../src/animator.h \
-		../src/time/timer.h \
-		../src/audio/audioplayer.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audiosample.h \
-		../src/engine/variant.h \
-		../src/engine/type.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o engine.o ../src/capabilities/modules/engine.cpp
-
-warpdrive.o: ../src/capabilities/modules/warpdrive.cpp ../src/capabilities/modules/warpdrive.h \
-		../src/capabilities/modules/module.h \
-		../src/capabilities/capability.h \
-		../src/worker.h \
-		../src/object.h \
-		../src/engine/graphics/abstractrenderer.h \
-		../src/engine/graphics/image.h \
-		../src/engine/sharedcontainer.h \
-		../src/engine/math/vector.h \
-		../src/additional/e_variant.h \
-		../src/engine/textformat.h \
-		../src/iinformative.h \
-		../src/assettools/loadable.h \
-		../src/json/json.h \
-		../src/json/autolink.h \
-		../src/json/config.h \
-		../src/json/allocator.h \
-		../src/json/version.h \
-		../src/json/features.h \
-		../src/json/forwards.h \
-		../src/json/reader.h \
-		../src/json/value.h \
-		../src/json/writer.h \
-		../src/animator.h \
-		../src/time/timer.h \
-		../src/audio/audioplayer.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audiosample.h \
-		../src/engine/variant.h \
-		../src/engine/type.h \
-		../src/context.h \
-		../src/assettools/assetprovider.h \
-		../src/assettools/assetexecutors/assetexecutor.h \
-		../src/audio/abstractaudioprovider.h \
-		../src/engine/abstractfactory.h \
-		../klibcore/src/memcontrol/kabstractfactory.h \
-		../klibcore/src/utility/ktype.h \
-		../src/gui/guimain.h \
-		../src/gui/guistack.h \
-		../src/gui/guielement.h \
-		../src/capabilities/controller.h \
-		../src/units/ship.h \
-		../src/units/movable.h \
-		../src/units/unit.h \
-		../src/capabilities/modulehandler.h \
-		../src/capabilities/docker.h \
-		../src/additional/trigger.h \
-		../src/gui/guicentralmessage.h \
-		../src/gui/guimenuelement.h \
-		../src/gui/guifloatingmessage.h \
-		../src/gui/guiminimap.h \
-		../src/gui/guidebugvalueinfo.h \
-		../src/near.h \
-		../src/background.h \
-		../src/additional/stringformer.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o warpdrive.o ../src/capabilities/modules/warpdrive.cpp
-
-ship.o: ../src/units/ship.cpp ../src/units/ship.h \
-		../src/units/movable.h \
-		../src/units/unit.h \
-		../src/capabilities/modulehandler.h \
-		../src/capabilities/modules/module.h \
-		../src/capabilities/capability.h \
-		../src/worker.h \
-		../src/object.h \
-		../src/engine/graphics/abstractrenderer.h \
-		../src/engine/graphics/image.h \
-		../src/engine/sharedcontainer.h \
-		../src/engine/math/vector.h \
-		../src/additional/e_variant.h \
-		../src/engine/textformat.h \
-		../src/iinformative.h \
-		../src/assettools/loadable.h \
-		../src/json/json.h \
-		../src/json/autolink.h \
-		../src/json/config.h \
-		../src/json/allocator.h \
-		../src/json/version.h \
-		../src/json/features.h \
-		../src/json/forwards.h \
-		../src/json/reader.h \
-		../src/json/value.h \
-		../src/json/writer.h \
-		../src/animator.h \
-		../src/time/timer.h \
-		../src/audio/audioplayer.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audiosample.h \
-		../src/engine/variant.h \
-		../src/engine/type.h \
-		../src/capabilities/docker.h \
-		../src/capabilities/modules/warpdrive.h \
-		../src/context.h \
-		../src/assettools/assetprovider.h \
-		../src/assettools/assetexecutors/assetexecutor.h \
-		../src/audio/abstractaudioprovider.h \
-		../src/engine/abstractfactory.h \
-		../klibcore/src/memcontrol/kabstractfactory.h \
-		../klibcore/src/utility/ktype.h \
-		../src/gui/guimain.h \
-		../src/gui/guistack.h \
-		../src/gui/guielement.h \
-		../src/capabilities/controller.h \
-		../src/additional/trigger.h \
-		../src/gui/guicentralmessage.h \
-		../src/gui/guimenuelement.h \
-		../src/gui/guifloatingmessage.h \
-		../src/gui/guiminimap.h \
-		../src/gui/guidebugvalueinfo.h \
-		../src/near.h \
-		../src/background.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ship.o ../src/units/ship.cpp
-
-guielement.o: ../src/gui/guielement.cpp ../src/gui/guielement.h \
-		../src/capabilities/controller.h \
-		../src/capabilities/capability.h \
-		../src/worker.h \
-		../src/object.h \
-		../src/engine/graphics/abstractrenderer.h \
-		../src/engine/graphics/image.h \
-		../src/engine/sharedcontainer.h \
-		../src/engine/math/vector.h \
-		../src/additional/e_variant.h \
-		../src/engine/textformat.h \
-		../src/time/timer.h \
-		../src/units/ship.h \
-		../src/units/movable.h \
-		../src/units/unit.h \
-		../src/capabilities/modulehandler.h \
-		../src/capabilities/modules/module.h \
-		../src/iinformative.h \
-		../src/assettools/loadable.h \
-		../src/json/json.h \
-		../src/json/autolink.h \
-		../src/json/config.h \
-		../src/json/allocator.h \
-		../src/json/version.h \
-		../src/json/features.h \
-		../src/json/forwards.h \
-		../src/json/reader.h \
-		../src/json/value.h \
-		../src/json/writer.h \
-		../src/animator.h \
-		../src/audio/audioplayer.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audiosample.h \
-		../src/engine/variant.h \
-		../src/engine/type.h \
-		../src/capabilities/docker.h \
-		../src/capabilities/modules/warpdrive.h \
-		../src/additional/trigger.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o guielement.o ../src/gui/guielement.cpp
-
-guicontainer.o: ../src/gui/guicontainer.cpp ../src/gui/guicontainer.h \
-		../src/gui/guimenuelement.h \
-		../src/gui/guielement.h \
-		../src/capabilities/controller.h \
-		../src/capabilities/capability.h \
-		../src/worker.h \
-		../src/object.h \
-		../src/engine/graphics/abstractrenderer.h \
-		../src/engine/graphics/image.h \
-		../src/engine/sharedcontainer.h \
-		../src/engine/math/vector.h \
-		../src/additional/e_variant.h \
-		../src/engine/textformat.h \
-		../src/time/timer.h \
-		../src/units/ship.h \
-		../src/units/movable.h \
-		../src/units/unit.h \
-		../src/capabilities/modulehandler.h \
-		../src/capabilities/modules/module.h \
-		../src/iinformative.h \
-		../src/assettools/loadable.h \
-		../src/json/json.h \
-		../src/json/autolink.h \
-		../src/json/config.h \
-		../src/json/allocator.h \
-		../src/json/version.h \
-		../src/json/features.h \
-		../src/json/forwards.h \
-		../src/json/reader.h \
-		../src/json/value.h \
-		../src/json/writer.h \
-		../src/animator.h \
-		../src/audio/audioplayer.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audiosample.h \
-		../src/engine/variant.h \
-		../src/engine/type.h \
-		../src/capabilities/docker.h \
-		../src/capabilities/modules/warpdrive.h \
-		../src/additional/trigger.h \
-		../src/gui/guistack.h \
-		../src/sdlimplementation/sdlrenderer.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o guicontainer.o ../src/gui/guicontainer.cpp
-
-iinformative.o: ../src/iinformative.cpp ../src/iinformative.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o iinformative.o ../src/iinformative.cpp
-
-guistack.o: ../src/gui/guistack.cpp ../src/gui/guistack.h \
-		../src/gui/guielement.h \
-		../src/capabilities/controller.h \
-		../src/capabilities/capability.h \
-		../src/worker.h \
-		../src/object.h \
-		../src/engine/graphics/abstractrenderer.h \
-		../src/engine/graphics/image.h \
-		../src/engine/sharedcontainer.h \
-		../src/engine/math/vector.h \
-		../src/additional/e_variant.h \
-		../src/engine/textformat.h \
-		../src/time/timer.h \
-		../src/units/ship.h \
-		../src/units/movable.h \
-		../src/units/unit.h \
-		../src/capabilities/modulehandler.h \
-		../src/capabilities/modules/module.h \
-		../src/iinformative.h \
-		../src/assettools/loadable.h \
-		../src/json/json.h \
-		../src/json/autolink.h \
-		../src/json/config.h \
-		../src/json/allocator.h \
-		../src/json/version.h \
-		../src/json/features.h \
-		../src/json/forwards.h \
-		../src/json/reader.h \
-		../src/json/value.h \
-		../src/json/writer.h \
-		../src/animator.h \
-		../src/audio/audioplayer.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audiosample.h \
-		../src/engine/variant.h \
-		../src/engine/type.h \
-		../src/capabilities/docker.h \
-		../src/capabilities/modules/warpdrive.h \
-		../src/additional/trigger.h \
-		../src/gui/guicontainer.h \
-		../src/gui/guimenuelement.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o guistack.o ../src/gui/guistack.cpp
-
-ai.o: ../src/capabilities/ai.cpp ../src/capabilities/ai.h \
-		../src/capabilities/controller.h \
-		../src/capabilities/capability.h \
-		../src/worker.h \
-		../src/object.h \
-		../src/engine/graphics/abstractrenderer.h \
-		../src/engine/graphics/image.h \
-		../src/engine/sharedcontainer.h \
-		../src/engine/math/vector.h \
-		../src/additional/e_variant.h \
-		../src/engine/textformat.h \
-		../src/time/timer.h \
-		../src/units/ship.h \
-		../src/units/movable.h \
-		../src/units/unit.h \
-		../src/capabilities/modulehandler.h \
-		../src/capabilities/modules/module.h \
-		../src/iinformative.h \
-		../src/assettools/loadable.h \
-		../src/json/json.h \
-		../src/json/autolink.h \
-		../src/json/config.h \
-		../src/json/allocator.h \
-		../src/json/version.h \
-		../src/json/features.h \
-		../src/json/forwards.h \
-		../src/json/reader.h \
-		../src/json/value.h \
-		../src/json/writer.h \
-		../src/animator.h \
-		../src/audio/audioplayer.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audiosample.h \
-		../src/engine/variant.h \
-		../src/engine/type.h \
-		../src/capabilities/docker.h \
-		../src/capabilities/modules/warpdrive.h \
-		../src/additional/trigger.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ai.o ../src/capabilities/ai.cpp
-
-station.o: ../src/units/station.cpp ../src/units/station.h \
-		../src/units/unit.h \
-		../src/capabilities/modulehandler.h \
-		../src/capabilities/modules/module.h \
-		../src/capabilities/capability.h \
-		../src/worker.h \
-		../src/object.h \
-		../src/engine/graphics/abstractrenderer.h \
-		../src/engine/graphics/image.h \
-		../src/engine/sharedcontainer.h \
-		../src/engine/math/vector.h \
-		../src/additional/e_variant.h \
-		../src/engine/textformat.h \
-		../src/iinformative.h \
-		../src/assettools/loadable.h \
-		../src/json/json.h \
-		../src/json/autolink.h \
-		../src/json/config.h \
-		../src/json/allocator.h \
-		../src/json/version.h \
-		../src/json/features.h \
-		../src/json/forwards.h \
-		../src/json/reader.h \
-		../src/json/value.h \
-		../src/json/writer.h \
-		../src/animator.h \
-		../src/time/timer.h \
-		../src/audio/audioplayer.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audiosample.h \
-		../src/engine/variant.h \
-		../src/engine/type.h \
-		../src/capabilities/docker.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o station.o ../src/units/station.cpp
-
-json_reader.o: ../src/json/json_reader.cpp ../src/json/json_tool.h \
-		../src/json/config.h \
-		../src/json/allocator.h \
-		../src/json/version.h \
-		../src/json/assertions.h \
-		../src/json/reader.h \
-		../src/json/features.h \
-		../src/json/forwards.h \
-		../src/json/value.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o json_reader.o ../src/json/json_reader.cpp
-
-json_value.o: ../src/json/json_value.cpp ../src/json/assertions.h \
-		../src/json/config.h \
-		../src/json/allocator.h \
-		../src/json/version.h \
-		../src/json/value.h \
-		../src/json/forwards.h \
-		../src/json/writer.h \
-		../src/json/json_valueiterator.inl
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o json_value.o ../src/json/json_value.cpp
-
-json_writer.o: ../src/json/json_writer.cpp ../src/json/json_tool.h \
-		../src/json/config.h \
-		../src/json/allocator.h \
-		../src/json/version.h \
-		../src/json/writer.h \
-		../src/json/value.h \
-		../src/json/forwards.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o json_writer.o ../src/json/json_writer.cpp
-
-debug.o: ../src/debug.cpp ../src/debug.h \
-		../klibcore/src/ksmartenum.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug.o ../src/debug.cpp
-
-guiswitch.o: ../src/gui/guiswitch.cpp ../src/gui/guiswitch.h \
-		../src/gui/guimenuelement.h \
-		../src/gui/guielement.h \
-		../src/capabilities/controller.h \
-		../src/capabilities/capability.h \
-		../src/worker.h \
-		../src/object.h \
-		../src/engine/graphics/abstractrenderer.h \
-		../src/engine/graphics/image.h \
-		../src/engine/sharedcontainer.h \
-		../src/engine/math/vector.h \
-		../src/additional/e_variant.h \
-		../src/engine/textformat.h \
-		../src/time/timer.h \
-		../src/units/ship.h \
-		../src/units/movable.h \
-		../src/units/unit.h \
-		../src/capabilities/modulehandler.h \
-		../src/capabilities/modules/module.h \
-		../src/iinformative.h \
-		../src/assettools/loadable.h \
-		../src/json/json.h \
-		../src/json/autolink.h \
-		../src/json/config.h \
-		../src/json/allocator.h \
-		../src/json/version.h \
-		../src/json/features.h \
-		../src/json/forwards.h \
-		../src/json/reader.h \
-		../src/json/value.h \
-		../src/json/writer.h \
-		../src/animator.h \
-		../src/audio/audioplayer.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audiosample.h \
-		../src/engine/variant.h \
-		../src/engine/type.h \
-		../src/capabilities/docker.h \
-		../src/capabilities/modules/warpdrive.h \
-		../src/additional/trigger.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o guiswitch.o ../src/gui/guiswitch.cpp
-
-visualeffect.o: ../src/sdlimplementation/effects/visualeffect.cpp ../src/sdlimplementation/effects/visualeffect.h \
-		../src/engine/math/vector.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o visualeffect.o ../src/sdlimplementation/effects/visualeffect.cpp
-
-guichoice.o: ../src/gui/guichoice.cpp ../src/gui/guichoice.h \
-		../src/gui/guimenuelement.h \
-		../src/gui/guielement.h \
-		../src/capabilities/controller.h \
-		../src/capabilities/capability.h \
-		../src/worker.h \
-		../src/object.h \
-		../src/engine/graphics/abstractrenderer.h \
-		../src/engine/graphics/image.h \
-		../src/engine/sharedcontainer.h \
-		../src/engine/math/vector.h \
-		../src/additional/e_variant.h \
-		../src/engine/textformat.h \
-		../src/time/timer.h \
-		../src/units/ship.h \
-		../src/units/movable.h \
-		../src/units/unit.h \
-		../src/capabilities/modulehandler.h \
-		../src/capabilities/modules/module.h \
-		../src/iinformative.h \
-		../src/assettools/loadable.h \
-		../src/json/json.h \
-		../src/json/autolink.h \
-		../src/json/config.h \
-		../src/json/allocator.h \
-		../src/json/version.h \
-		../src/json/features.h \
-		../src/json/forwards.h \
-		../src/json/reader.h \
-		../src/json/value.h \
-		../src/json/writer.h \
-		../src/animator.h \
-		../src/audio/audioplayer.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audiosample.h \
-		../src/engine/variant.h \
-		../src/engine/type.h \
-		../src/capabilities/docker.h \
-		../src/capabilities/modules/warpdrive.h \
-		../src/additional/trigger.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o guichoice.o ../src/gui/guichoice.cpp
-
-application.o: ../src/application.cpp ../src/application.h \
-		../src/object.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o application.o ../src/application.cpp
-
-fpsmonitor.o: ../src/additional/informative/fpsmonitor.cpp ../src/additional/informative/fpsmonitor.h \
-		../src/iinformative.h \
-		../src/time/timer.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o fpsmonitor.o ../src/additional/informative/fpsmonitor.cpp
-
-particle.o: ../src/units/particle.cpp ../src/units/particle.h \
-		../src/units/movable.h \
-		../src/units/unit.h \
-		../src/capabilities/modulehandler.h \
-		../src/capabilities/modules/module.h \
-		../src/capabilities/capability.h \
-		../src/worker.h \
-		../src/object.h \
-		../src/engine/graphics/abstractrenderer.h \
-		../src/engine/graphics/image.h \
-		../src/engine/sharedcontainer.h \
-		../src/engine/math/vector.h \
-		../src/additional/e_variant.h \
-		../src/engine/textformat.h \
-		../src/iinformative.h \
-		../src/assettools/loadable.h \
-		../src/json/json.h \
-		../src/json/autolink.h \
-		../src/json/config.h \
-		../src/json/allocator.h \
-		../src/json/version.h \
-		../src/json/features.h \
-		../src/json/forwards.h \
-		../src/json/reader.h \
-		../src/json/value.h \
-		../src/json/writer.h \
-		../src/animator.h \
-		../src/time/timer.h \
-		../src/audio/audioplayer.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audiosample.h \
-		../src/engine/variant.h \
-		../src/engine/type.h \
-		../src/capabilities/docker.h \
-		../src/context.h \
-		../src/assettools/assetprovider.h \
-		../src/assettools/assetexecutors/assetexecutor.h \
-		../src/audio/abstractaudioprovider.h \
-		../src/engine/abstractfactory.h \
-		../klibcore/src/memcontrol/kabstractfactory.h \
-		../klibcore/src/utility/ktype.h \
-		../src/gui/guimain.h \
-		../src/gui/guistack.h \
-		../src/gui/guielement.h \
-		../src/capabilities/controller.h \
-		../src/units/ship.h \
-		../src/capabilities/modules/warpdrive.h \
-		../src/additional/trigger.h \
-		../src/gui/guicentralmessage.h \
-		../src/gui/guimenuelement.h \
-		../src/gui/guifloatingmessage.h \
-		../src/gui/guiminimap.h \
-		../src/gui/guidebugvalueinfo.h \
-		../src/near.h \
-		../src/background.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o particle.o ../src/units/particle.cpp
-
-framebuilder.o: ../src/additional/net/framebuilder.cpp ../src/additional/net/framebuilder.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o framebuilder.o ../src/additional/net/framebuilder.cpp
-
-socket.o: ../src/additional/net/socket.cpp ../src/additional/net/socket.h \
-		../src/additional/net/framebuilder.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o socket.o ../src/additional/net/socket.cpp
-
-netlistener.o: ../src/netlistener.cpp ../src/netlistener.h \
-		../src/additional/net/socket.h \
-		../src/additional/net/framebuilder.h \
-		../src/context.h \
-		../src/assettools/assetprovider.h \
-		../src/json/json.h \
-		../src/json/autolink.h \
-		../src/json/config.h \
-		../src/json/allocator.h \
-		../src/json/version.h \
-		../src/json/features.h \
-		../src/json/forwards.h \
-		../src/json/reader.h \
-		../src/json/value.h \
-		../src/json/writer.h \
-		../src/assettools/assetexecutors/assetexecutor.h \
-		../src/engine/variant.h \
-		../src/engine/type.h \
-		../src/audio/abstractaudioprovider.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audiosample.h \
-		../src/engine/sharedcontainer.h \
-		../src/engine/abstractfactory.h \
-		../src/assettools/loadable.h \
-		../src/animator.h \
-		../src/time/timer.h \
-		../src/worker.h \
-		../src/object.h \
-		../src/engine/graphics/abstractrenderer.h \
-		../src/engine/graphics/image.h \
-		../src/engine/math/vector.h \
-		../src/additional/e_variant.h \
-		../src/engine/textformat.h \
-		../src/audio/audioplayer.h \
-		../klibcore/src/memcontrol/kabstractfactory.h \
-		../klibcore/src/utility/ktype.h \
-		../src/gui/guimain.h \
-		../src/gui/guistack.h \
-		../src/gui/guielement.h \
-		../src/capabilities/controller.h \
-		../src/capabilities/capability.h \
-		../src/units/ship.h \
-		../src/units/movable.h \
-		../src/units/unit.h \
-		../src/capabilities/modulehandler.h \
-		../src/capabilities/modules/module.h \
-		../src/iinformative.h \
-		../src/capabilities/docker.h \
-		../src/capabilities/modules/warpdrive.h \
-		../src/additional/trigger.h \
-		../src/gui/guicentralmessage.h \
-		../src/gui/guimenuelement.h \
-		../src/gui/guifloatingmessage.h \
-		../src/gui/guiminimap.h \
-		../src/gui/guidebugvalueinfo.h \
-		../src/near.h \
-		../src/background.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o netlistener.o ../src/netlistener.cpp
 
 state.o: ../src/state.cpp ../src/state.h \
 		../src/additional/e_variant.h \
@@ -3111,47 +3050,65 @@ state.o: ../src/state.cpp ../src/state.h \
 		../src/object.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o state.o ../src/state.cpp
 
-trigger.o: ../src/additional/trigger.cpp ../src/additional/trigger.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o trigger.o ../src/additional/trigger.cpp
-
-guimain.o: ../src/gui/guimain.cpp ../src/gui/guimain.h \
-		../src/gui/guistack.h \
-		../src/gui/guielement.h \
-		../src/capabilities/controller.h \
-		../src/capabilities/capability.h \
-		../src/worker.h \
-		../src/object.h \
-		../src/engine/graphics/abstractrenderer.h \
-		../src/engine/graphics/image.h \
-		../src/engine/sharedcontainer.h \
-		../src/engine/math/vector.h \
-		../src/additional/e_variant.h \
-		../src/engine/textformat.h \
-		../src/time/timer.h \
-		../src/units/ship.h \
+camera.o: ../src/units/camera.cpp ../src/units/camera.h \
 		../src/units/movable.h \
 		../src/units/unit.h \
 		../src/capabilities/modulehandler.h \
 		../src/capabilities/modules/module.h \
+		../src/capabilities/capability.h \
+		../src/engine/entity.h \
+		../src/object.h \
 		../src/iinformative.h \
-		../src/assettools/loadable.h \
-		../src/json/json.h \
-		../src/json/autolink.h \
-		../src/json/config.h \
-		../src/json/allocator.h \
-		../src/json/version.h \
-		../src/json/features.h \
-		../src/json/forwards.h \
-		../src/json/reader.h \
-		../src/json/value.h \
-		../src/json/writer.h \
-		../src/animator.h \
-		../src/audio/audioplayer.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audiosample.h \
+		../src/engine/assettools/loadable.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
+		../src/animator.h \
+		../src/engine/math/vector.h \
+		../src/engine/time/elapsedtimer.h \
+		../src/engine/graphics/image.h \
+		../src/engine/sharedcontainer.h \
+		../src/audio/audioplayer.h \
+		../src/engine/audio/audiochannel.h \
+		../src/engine/audio/audiosample.h \
 		../src/capabilities/docker.h \
+		../src/capabilities/controller.h \
+		../src/units/ship.h \
+		../src/capabilities/modules/warpdrive.h \
+		../src/additional/trigger.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/additional/e_variant.h \
+		../src/engine/textformat.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o camera.o ../src/units/camera.cpp
+
+movable.o: ../src/units/movable.cpp ../src/units/movable.h \
+		../src/units/unit.h \
+		../src/capabilities/modulehandler.h \
+		../src/capabilities/modules/module.h \
+		../src/capabilities/capability.h \
+		../src/engine/entity.h \
+		../src/object.h \
+		../src/iinformative.h \
+		../src/engine/assettools/loadable.h \
+		../src/engine/variant.h \
+		../src/engine/type.h \
+		../src/animator.h \
+		../src/engine/math/vector.h \
+		../src/engine/time/elapsedtimer.h \
+		../src/engine/graphics/image.h \
+		../src/engine/sharedcontainer.h \
+		../src/audio/audioplayer.h \
+		../src/engine/audio/audiochannel.h \
+		../src/engine/audio/audiosample.h \
+		../src/capabilities/docker.h \
+		../src/capabilities/modules/engine.h \
+		../src/engine/math/math.h \
+		../src/engine/context.h \
+		../src/additional/e_variant.h \
+		../src/gui/guimain.h \
+		../src/gui/guistack.h \
+		../src/gui/guielement.h \
+		../src/capabilities/controller.h \
+		../src/units/ship.h \
 		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h \
 		../src/gui/guicentralmessage.h \
@@ -3159,228 +3116,38 @@ guimain.o: ../src/gui/guimain.cpp ../src/gui/guimain.h \
 		../src/gui/guifloatingmessage.h \
 		../src/gui/guiminimap.h \
 		../src/gui/guidebugvalueinfo.h \
-		../src/gui/guiblushingfloatingmessage.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o guimain.o ../src/gui/guimain.cpp
+		../src/near.h \
+		../src/background.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o movable.o ../src/units/movable.cpp
 
-guicentralmessage.o: ../src/gui/guicentralmessage.cpp ../src/gui/guicentralmessage.h \
-		../src/gui/guimenuelement.h \
-		../src/gui/guielement.h \
-		../src/capabilities/controller.h \
-		../src/capabilities/capability.h \
-		../src/worker.h \
-		../src/object.h \
-		../src/engine/graphics/abstractrenderer.h \
-		../src/engine/graphics/image.h \
-		../src/engine/sharedcontainer.h \
-		../src/engine/math/vector.h \
-		../src/additional/e_variant.h \
-		../src/engine/textformat.h \
-		../src/time/timer.h \
-		../src/units/ship.h \
+particle.o: ../src/units/particle.cpp ../src/units/particle.h \
 		../src/units/movable.h \
 		../src/units/unit.h \
 		../src/capabilities/modulehandler.h \
 		../src/capabilities/modules/module.h \
-		../src/iinformative.h \
-		../src/assettools/loadable.h \
-		../src/json/json.h \
-		../src/json/autolink.h \
-		../src/json/config.h \
-		../src/json/allocator.h \
-		../src/json/version.h \
-		../src/json/features.h \
-		../src/json/forwards.h \
-		../src/json/reader.h \
-		../src/json/value.h \
-		../src/json/writer.h \
-		../src/animator.h \
-		../src/audio/audioplayer.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audiosample.h \
-		../src/engine/variant.h \
-		../src/engine/type.h \
-		../src/capabilities/docker.h \
-		../src/capabilities/modules/warpdrive.h \
-		../src/additional/trigger.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o guicentralmessage.o ../src/gui/guicentralmessage.cpp
-
-controllerfinder.o: ../src/additional/informative/controllerfinder.cpp ../src/additional/informative/controllerfinder.h \
-		../src/iinformative.h \
-		../src/capabilities/controller.h \
 		../src/capabilities/capability.h \
-		../src/worker.h \
+		../src/engine/entity.h \
 		../src/object.h \
-		../src/engine/graphics/abstractrenderer.h \
-		../src/engine/graphics/image.h \
-		../src/engine/sharedcontainer.h \
-		../src/engine/math/vector.h \
-		../src/additional/e_variant.h \
-		../src/engine/textformat.h \
-		../src/time/timer.h \
-		../src/units/ship.h \
-		../src/units/movable.h \
-		../src/units/unit.h \
-		../src/capabilities/modulehandler.h \
-		../src/capabilities/modules/module.h \
-		../src/assettools/loadable.h \
-		../src/json/json.h \
-		../src/json/autolink.h \
-		../src/json/config.h \
-		../src/json/allocator.h \
-		../src/json/version.h \
-		../src/json/features.h \
-		../src/json/forwards.h \
-		../src/json/reader.h \
-		../src/json/value.h \
-		../src/json/writer.h \
-		../src/animator.h \
-		../src/audio/audioplayer.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audiosample.h \
-		../src/engine/variant.h \
-		../src/engine/type.h \
-		../src/capabilities/docker.h \
-		../src/capabilities/modules/warpdrive.h \
-		../src/additional/trigger.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o controllerfinder.o ../src/additional/informative/controllerfinder.cpp
-
-guifloatingmessage.o: ../src/gui/guifloatingmessage.cpp ../src/gui/guifloatingmessage.h \
-		../src/gui/guimenuelement.h \
-		../src/gui/guielement.h \
-		../src/capabilities/controller.h \
-		../src/capabilities/capability.h \
-		../src/worker.h \
-		../src/object.h \
-		../src/engine/graphics/abstractrenderer.h \
-		../src/engine/graphics/image.h \
-		../src/engine/sharedcontainer.h \
-		../src/engine/math/vector.h \
-		../src/additional/e_variant.h \
-		../src/engine/textformat.h \
-		../src/time/timer.h \
-		../src/units/ship.h \
-		../src/units/movable.h \
-		../src/units/unit.h \
-		../src/capabilities/modulehandler.h \
-		../src/capabilities/modules/module.h \
 		../src/iinformative.h \
-		../src/assettools/loadable.h \
-		../src/json/json.h \
-		../src/json/autolink.h \
-		../src/json/config.h \
-		../src/json/allocator.h \
-		../src/json/version.h \
-		../src/json/features.h \
-		../src/json/forwards.h \
-		../src/json/reader.h \
-		../src/json/value.h \
-		../src/json/writer.h \
-		../src/animator.h \
-		../src/audio/audioplayer.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audiosample.h \
+		../src/engine/assettools/loadable.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
-		../src/capabilities/docker.h \
-		../src/capabilities/modules/warpdrive.h \
-		../src/additional/trigger.h \
-		../src/time/time.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o guifloatingmessage.o ../src/gui/guifloatingmessage.cpp
-
-guiblushingfloatingmessage.o: ../src/gui/guiblushingfloatingmessage.cpp ../src/gui/guiblushingfloatingmessage.h \
-		../src/gui/guifloatingmessage.h \
-		../src/gui/guimenuelement.h \
-		../src/gui/guielement.h \
-		../src/capabilities/controller.h \
-		../src/capabilities/capability.h \
-		../src/worker.h \
-		../src/object.h \
-		../src/engine/graphics/abstractrenderer.h \
+		../src/animator.h \
+		../src/engine/math/vector.h \
+		../src/engine/time/elapsedtimer.h \
 		../src/engine/graphics/image.h \
 		../src/engine/sharedcontainer.h \
-		../src/engine/math/vector.h \
-		../src/additional/e_variant.h \
-		../src/engine/textformat.h \
-		../src/time/timer.h \
-		../src/units/ship.h \
-		../src/units/movable.h \
-		../src/units/unit.h \
-		../src/capabilities/modulehandler.h \
-		../src/capabilities/modules/module.h \
-		../src/iinformative.h \
-		../src/assettools/loadable.h \
-		../src/json/json.h \
-		../src/json/autolink.h \
-		../src/json/config.h \
-		../src/json/allocator.h \
-		../src/json/version.h \
-		../src/json/features.h \
-		../src/json/forwards.h \
-		../src/json/reader.h \
-		../src/json/value.h \
-		../src/json/writer.h \
-		../src/animator.h \
 		../src/audio/audioplayer.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audiosample.h \
-		../src/engine/variant.h \
-		../src/engine/type.h \
+		../src/engine/audio/audiochannel.h \
+		../src/engine/audio/audiosample.h \
 		../src/capabilities/docker.h \
-		../src/capabilities/modules/warpdrive.h \
-		../src/additional/trigger.h \
-		../src/time/time.h \
-		../src/engine/math/math.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o guiblushingfloatingmessage.o ../src/gui/guiblushingfloatingmessage.cpp
-
-math.o: ../src/engine/math/math.cpp ../src/engine/math/math.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o math.o ../src/engine/math/math.cpp
-
-lightparticle.o: ../src/additional/lightparticle.cpp ../src/additional/lightparticle.h \
-		../src/worker.h \
-		../src/object.h \
-		../src/engine/graphics/abstractrenderer.h \
-		../src/engine/graphics/image.h \
-		../src/engine/sharedcontainer.h \
-		../src/engine/math/vector.h \
+		../src/engine/context.h \
 		../src/additional/e_variant.h \
-		../src/engine/textformat.h \
-		../src/time/timer.h \
-		../src/context.h \
-		../src/assettools/assetprovider.h \
-		../src/json/json.h \
-		../src/json/autolink.h \
-		../src/json/config.h \
-		../src/json/allocator.h \
-		../src/json/version.h \
-		../src/json/features.h \
-		../src/json/forwards.h \
-		../src/json/reader.h \
-		../src/json/value.h \
-		../src/json/writer.h \
-		../src/assettools/assetexecutors/assetexecutor.h \
-		../src/engine/variant.h \
-		../src/engine/type.h \
-		../src/audio/abstractaudioprovider.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audiosample.h \
-		../src/engine/abstractfactory.h \
-		../src/assettools/loadable.h \
-		../src/animator.h \
-		../src/audio/audioplayer.h \
-		../klibcore/src/memcontrol/kabstractfactory.h \
-		../klibcore/src/utility/ktype.h \
 		../src/gui/guimain.h \
 		../src/gui/guistack.h \
 		../src/gui/guielement.h \
 		../src/capabilities/controller.h \
-		../src/capabilities/capability.h \
 		../src/units/ship.h \
-		../src/units/movable.h \
-		../src/units/unit.h \
-		../src/capabilities/modulehandler.h \
-		../src/capabilities/modules/module.h \
-		../src/iinformative.h \
-		../src/capabilities/docker.h \
 		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h \
 		../src/gui/guicentralmessage.h \
@@ -3390,8 +3157,145 @@ lightparticle.o: ../src/additional/lightparticle.cpp ../src/additional/lightpart
 		../src/gui/guidebugvalueinfo.h \
 		../src/near.h \
 		../src/background.h \
-		../src/time/time.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o lightparticle.o ../src/additional/lightparticle.cpp
+		../src/engine/graphics/abstractrenderer.h \
+		../src/engine/textformat.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o particle.o ../src/units/particle.cpp
+
+projectile.o: ../src/units/projectile.cpp ../src/units/projectile.h \
+		../src/units/movable.h \
+		../src/units/unit.h \
+		../src/capabilities/modulehandler.h \
+		../src/capabilities/modules/module.h \
+		../src/capabilities/capability.h \
+		../src/engine/entity.h \
+		../src/object.h \
+		../src/iinformative.h \
+		../src/engine/assettools/loadable.h \
+		../src/engine/variant.h \
+		../src/engine/type.h \
+		../src/animator.h \
+		../src/engine/math/vector.h \
+		../src/engine/time/elapsedtimer.h \
+		../src/engine/graphics/image.h \
+		../src/engine/sharedcontainer.h \
+		../src/audio/audioplayer.h \
+		../src/engine/audio/audiochannel.h \
+		../src/engine/audio/audiosample.h \
+		../src/capabilities/docker.h \
+		../src/units/particle.h \
+		../src/units/camera.h \
+		../src/capabilities/controller.h \
+		../src/units/ship.h \
+		../src/capabilities/modules/warpdrive.h \
+		../src/additional/trigger.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/additional/e_variant.h \
+		../src/engine/textformat.h \
+		../src/additional/lightparticle.h \
+		../src/objectregistry.h \
+		../src/debug.h \
+		../klibcore/src/ksmartenum.h \
+		../src/engine/context.h \
+		../src/gui/guimain.h \
+		../src/gui/guistack.h \
+		../src/gui/guielement.h \
+		../src/gui/guicentralmessage.h \
+		../src/gui/guimenuelement.h \
+		../src/gui/guifloatingmessage.h \
+		../src/gui/guiminimap.h \
+		../src/gui/guidebugvalueinfo.h \
+		../src/near.h \
+		../src/background.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o projectile.o ../src/units/projectile.cpp
+
+ship.o: ../src/units/ship.cpp ../src/units/ship.h \
+		../src/units/movable.h \
+		../src/units/unit.h \
+		../src/capabilities/modulehandler.h \
+		../src/capabilities/modules/module.h \
+		../src/capabilities/capability.h \
+		../src/engine/entity.h \
+		../src/object.h \
+		../src/iinformative.h \
+		../src/engine/assettools/loadable.h \
+		../src/engine/variant.h \
+		../src/engine/type.h \
+		../src/animator.h \
+		../src/engine/math/vector.h \
+		../src/engine/time/elapsedtimer.h \
+		../src/engine/graphics/image.h \
+		../src/engine/sharedcontainer.h \
+		../src/audio/audioplayer.h \
+		../src/engine/audio/audiochannel.h \
+		../src/engine/audio/audiosample.h \
+		../src/capabilities/docker.h \
+		../src/capabilities/modules/warpdrive.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ship.o ../src/units/ship.cpp
+
+station.o: ../src/units/station.cpp ../src/units/station.h \
+		../src/units/unit.h \
+		../src/capabilities/modulehandler.h \
+		../src/capabilities/modules/module.h \
+		../src/capabilities/capability.h \
+		../src/engine/entity.h \
+		../src/object.h \
+		../src/iinformative.h \
+		../src/engine/assettools/loadable.h \
+		../src/engine/variant.h \
+		../src/engine/type.h \
+		../src/animator.h \
+		../src/engine/math/vector.h \
+		../src/engine/time/elapsedtimer.h \
+		../src/engine/graphics/image.h \
+		../src/engine/sharedcontainer.h \
+		../src/audio/audioplayer.h \
+		../src/engine/audio/audiochannel.h \
+		../src/engine/audio/audiosample.h \
+		../src/capabilities/docker.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o station.o ../src/units/station.cpp
+
+unit.o: ../src/units/unit.cpp ../src/units/unit.h \
+		../src/capabilities/modulehandler.h \
+		../src/capabilities/modules/module.h \
+		../src/capabilities/capability.h \
+		../src/engine/entity.h \
+		../src/object.h \
+		../src/iinformative.h \
+		../src/engine/assettools/loadable.h \
+		../src/engine/variant.h \
+		../src/engine/type.h \
+		../src/animator.h \
+		../src/engine/math/vector.h \
+		../src/engine/time/elapsedtimer.h \
+		../src/engine/graphics/image.h \
+		../src/engine/sharedcontainer.h \
+		../src/audio/audioplayer.h \
+		../src/engine/audio/audiochannel.h \
+		../src/engine/audio/audiosample.h \
+		../src/capabilities/docker.h \
+		../src/units/projectile.h \
+		../src/units/movable.h \
+		../src/units/station.h \
+		../src/engine/math/math.h \
+		../src/engine/context.h \
+		../src/additional/e_variant.h \
+		../src/gui/guimain.h \
+		../src/gui/guistack.h \
+		../src/gui/guielement.h \
+		../src/capabilities/controller.h \
+		../src/units/ship.h \
+		../src/capabilities/modules/warpdrive.h \
+		../src/additional/trigger.h \
+		../src/gui/guicentralmessage.h \
+		../src/gui/guimenuelement.h \
+		../src/gui/guifloatingmessage.h \
+		../src/gui/guiminimap.h \
+		../src/gui/guidebugvalueinfo.h \
+		../src/near.h \
+		../src/background.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/engine/textformat.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o unit.o ../src/units/unit.cpp
 
 worldmanager.o: ../src/worldmanager.cpp ../src/worldmanager.h \
 		../src/gui/guimain.h \
@@ -3399,38 +3303,25 @@ worldmanager.o: ../src/worldmanager.cpp ../src/worldmanager.h \
 		../src/gui/guielement.h \
 		../src/capabilities/controller.h \
 		../src/capabilities/capability.h \
-		../src/worker.h \
+		../src/engine/entity.h \
 		../src/object.h \
-		../src/engine/graphics/abstractrenderer.h \
-		../src/engine/graphics/image.h \
-		../src/engine/sharedcontainer.h \
-		../src/engine/math/vector.h \
-		../src/additional/e_variant.h \
-		../src/engine/textformat.h \
-		../src/time/timer.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
 		../src/units/unit.h \
 		../src/capabilities/modulehandler.h \
 		../src/capabilities/modules/module.h \
 		../src/iinformative.h \
-		../src/assettools/loadable.h \
-		../src/json/json.h \
-		../src/json/autolink.h \
-		../src/json/config.h \
-		../src/json/allocator.h \
-		../src/json/version.h \
-		../src/json/features.h \
-		../src/json/forwards.h \
-		../src/json/reader.h \
-		../src/json/value.h \
-		../src/json/writer.h \
-		../src/animator.h \
-		../src/audio/audioplayer.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audiosample.h \
+		../src/engine/assettools/loadable.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
+		../src/animator.h \
+		../src/engine/math/vector.h \
+		../src/engine/time/elapsedtimer.h \
+		../src/engine/graphics/image.h \
+		../src/engine/sharedcontainer.h \
+		../src/audio/audioplayer.h \
+		../src/engine/audio/audiochannel.h \
+		../src/engine/audio/audiosample.h \
 		../src/capabilities/docker.h \
 		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h \
@@ -3441,16 +3332,25 @@ worldmanager.o: ../src/worldmanager.cpp ../src/worldmanager.h \
 		../src/gui/guidebugvalueinfo.h \
 		../src/near.h \
 		../src/worlds/world.h \
-		../src/assettools/assetprovider.h \
-		../src/assettools/assetexecutors/assetexecutor.h \
-		../src/audio/abstractaudioprovider.h \
+		../src/engine/assettools/assetprovider.h \
+		../src/json/json.h \
+		../src/json/autolink.h \
+		../src/json/config.h \
+		../src/json/allocator.h \
+		../src/json/version.h \
+		../src/json/features.h \
+		../src/json/forwards.h \
+		../src/json/reader.h \
+		../src/json/value.h \
+		../src/json/writer.h \
 		../src/engine/abstractfactory.h \
 		../klibcore/src/memcontrol/kabstractfactory.h \
 		../klibcore/src/utility/ktype.h \
 		../src/additional/informative/fpsmonitor.h \
 		../src/units/camera.h \
-		../src/context.h \
-		../src/background.h \
+		../src/engine/graphics/abstractrenderer.h \
+		../src/additional/e_variant.h \
+		../src/engine/textformat.h \
 		../src/gui/guicontainer.h \
 		../src/gui/guiradar.h \
 		../src/gui/guilist.h \
@@ -3459,12 +3359,15 @@ worldmanager.o: ../src/worldmanager.cpp ../src/worldmanager.h \
 		../src/additional/informative/registryinfo.h \
 		../src/additional/informative/controllerfinder.h \
 		../src/additional/informative/unitsamountinfo.h \
-		../src/state.h
+		../src/state.h \
+		../src/engine/context.h \
+		../src/background.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o worldmanager.o ../src/worldmanager.cpp
 
-defaultworld.o: ../src/worlds/defaultworld.cpp ../src/worlds/defaultworld.h \
+arenaworld.o: ../src/worlds/arenaworld.cpp ../src/worlds/arenaworld.h \
 		../src/worlds/world.h \
-		../src/assettools/assetprovider.h \
+		../src/engine/assettools/assetprovider.h \
+		../src/object.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -3475,270 +3378,88 @@ defaultworld.o: ../src/worlds/defaultworld.cpp ../src/worlds/defaultworld.h \
 		../src/json/reader.h \
 		../src/json/value.h \
 		../src/json/writer.h \
-		../src/assettools/assetexecutors/assetexecutor.h \
-		../src/engine/variant.h \
-		../src/engine/type.h \
-		../src/audio/abstractaudioprovider.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audiosample.h \
-		../src/engine/sharedcontainer.h \
 		../src/engine/abstractfactory.h \
-		../src/assettools/loadable.h \
-		../src/animator.h \
-		../src/time/timer.h \
-		../src/worker.h \
-		../src/object.h \
-		../src/engine/graphics/abstractrenderer.h \
-		../src/engine/graphics/image.h \
-		../src/engine/math/vector.h \
-		../src/additional/e_variant.h \
-		../src/engine/textformat.h \
-		../src/audio/audioplayer.h \
+		../src/engine/type.h \
+		../src/engine/assettools/loadable.h \
+		../src/engine/variant.h \
 		../klibcore/src/memcontrol/kabstractfactory.h \
 		../klibcore/src/utility/ktype.h \
 		../src/capabilities/controller.h \
 		../src/capabilities/capability.h \
+		../src/engine/entity.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
 		../src/units/unit.h \
 		../src/capabilities/modulehandler.h \
 		../src/capabilities/modules/module.h \
 		../src/iinformative.h \
+		../src/animator.h \
+		../src/engine/math/vector.h \
+		../src/engine/time/elapsedtimer.h \
+		../src/engine/graphics/image.h \
+		../src/engine/sharedcontainer.h \
+		../src/audio/audioplayer.h \
+		../src/engine/audio/audiochannel.h \
+		../src/engine/audio/audiosample.h \
 		../src/capabilities/docker.h \
 		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h \
 		../src/capabilities/player.h \
+		../src/engine/abstracteventhandler.h \
+		../src/capabilities/aggressive.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o arenaworld.o ../src/worlds/arenaworld.cpp
+
+defaultworld.o: ../src/worlds/defaultworld.cpp ../src/worlds/defaultworld.h \
+		../src/worlds/world.h \
+		../src/engine/assettools/assetprovider.h \
+		../src/object.h \
+		../src/json/json.h \
+		../src/json/autolink.h \
+		../src/json/config.h \
+		../src/json/allocator.h \
+		../src/json/version.h \
+		../src/json/features.h \
+		../src/json/forwards.h \
+		../src/json/reader.h \
+		../src/json/value.h \
+		../src/json/writer.h \
+		../src/engine/abstractfactory.h \
+		../src/engine/type.h \
+		../src/engine/assettools/loadable.h \
+		../src/engine/variant.h \
+		../klibcore/src/memcontrol/kabstractfactory.h \
+		../klibcore/src/utility/ktype.h \
+		../src/capabilities/controller.h \
+		../src/capabilities/capability.h \
+		../src/engine/entity.h \
+		../src/units/ship.h \
+		../src/units/movable.h \
+		../src/units/unit.h \
+		../src/capabilities/modulehandler.h \
+		../src/capabilities/modules/module.h \
+		../src/iinformative.h \
+		../src/animator.h \
+		../src/engine/math/vector.h \
+		../src/engine/time/elapsedtimer.h \
+		../src/engine/graphics/image.h \
+		../src/engine/sharedcontainer.h \
+		../src/audio/audioplayer.h \
+		../src/engine/audio/audiochannel.h \
+		../src/engine/audio/audiosample.h \
+		../src/capabilities/docker.h \
+		../src/capabilities/modules/warpdrive.h \
+		../src/additional/trigger.h \
+		../src/capabilities/player.h \
+		../src/engine/abstracteventhandler.h \
 		../src/capabilities/ai.h \
 		../src/debug.h \
 		../klibcore/src/ksmartenum.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o defaultworld.o ../src/worlds/defaultworld.cpp
 
-arenaworld.o: ../src/worlds/arenaworld.cpp ../src/worlds/arenaworld.h \
-		../src/worlds/world.h \
-		../src/assettools/assetprovider.h \
-		../src/json/json.h \
-		../src/json/autolink.h \
-		../src/json/config.h \
-		../src/json/allocator.h \
-		../src/json/version.h \
-		../src/json/features.h \
-		../src/json/forwards.h \
-		../src/json/reader.h \
-		../src/json/value.h \
-		../src/json/writer.h \
-		../src/assettools/assetexecutors/assetexecutor.h \
-		../src/engine/variant.h \
-		../src/engine/type.h \
-		../src/audio/abstractaudioprovider.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audiosample.h \
-		../src/engine/sharedcontainer.h \
-		../src/engine/abstractfactory.h \
-		../src/assettools/loadable.h \
-		../src/animator.h \
-		../src/time/timer.h \
-		../src/worker.h \
-		../src/object.h \
-		../src/engine/graphics/abstractrenderer.h \
-		../src/engine/graphics/image.h \
-		../src/engine/math/vector.h \
-		../src/additional/e_variant.h \
-		../src/engine/textformat.h \
-		../src/audio/audioplayer.h \
-		../klibcore/src/memcontrol/kabstractfactory.h \
-		../klibcore/src/utility/ktype.h \
-		../src/capabilities/controller.h \
-		../src/capabilities/capability.h \
-		../src/units/ship.h \
-		../src/units/movable.h \
-		../src/units/unit.h \
-		../src/capabilities/modulehandler.h \
-		../src/capabilities/modules/module.h \
-		../src/iinformative.h \
-		../src/capabilities/docker.h \
-		../src/capabilities/modules/warpdrive.h \
-		../src/additional/trigger.h \
-		../src/capabilities/player.h \
-		../src/capabilities/aggressive.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o arenaworld.o ../src/worlds/arenaworld.cpp
-
-docker.o: ../src/capabilities/docker.cpp ../src/capabilities/docker.h \
-		../src/capabilities/capability.h \
-		../src/worker.h \
-		../src/object.h \
-		../src/engine/graphics/abstractrenderer.h \
-		../src/engine/graphics/image.h \
-		../src/engine/sharedcontainer.h \
-		../src/engine/math/vector.h \
-		../src/additional/e_variant.h \
-		../src/engine/textformat.h \
-		../src/units/unit.h \
-		../src/capabilities/modulehandler.h \
-		../src/capabilities/modules/module.h \
-		../src/iinformative.h \
-		../src/assettools/loadable.h \
-		../src/json/json.h \
-		../src/json/autolink.h \
-		../src/json/config.h \
-		../src/json/allocator.h \
-		../src/json/version.h \
-		../src/json/features.h \
-		../src/json/forwards.h \
-		../src/json/reader.h \
-		../src/json/value.h \
-		../src/json/writer.h \
-		../src/animator.h \
-		../src/time/timer.h \
-		../src/audio/audioplayer.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audiosample.h \
-		../src/engine/variant.h \
-		../src/engine/type.h \
-		../src/units/movable.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o docker.o ../src/capabilities/docker.cpp
-
-near.o: ../src/near.cpp ../src/near.h \
-		../src/capabilities/controller.h \
-		../src/capabilities/capability.h \
-		../src/worker.h \
-		../src/object.h \
-		../src/engine/graphics/abstractrenderer.h \
-		../src/engine/graphics/image.h \
-		../src/engine/sharedcontainer.h \
-		../src/engine/math/vector.h \
-		../src/additional/e_variant.h \
-		../src/engine/textformat.h \
-		../src/time/timer.h \
-		../src/units/ship.h \
-		../src/units/movable.h \
-		../src/units/unit.h \
-		../src/capabilities/modulehandler.h \
-		../src/capabilities/modules/module.h \
-		../src/iinformative.h \
-		../src/assettools/loadable.h \
-		../src/json/json.h \
-		../src/json/autolink.h \
-		../src/json/config.h \
-		../src/json/allocator.h \
-		../src/json/version.h \
-		../src/json/features.h \
-		../src/json/forwards.h \
-		../src/json/reader.h \
-		../src/json/value.h \
-		../src/json/writer.h \
-		../src/animator.h \
-		../src/audio/audioplayer.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audiosample.h \
-		../src/engine/variant.h \
-		../src/engine/type.h \
-		../src/capabilities/docker.h \
-		../src/capabilities/modules/warpdrive.h \
-		../src/additional/trigger.h \
-		../src/objectregistry.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o near.o ../src/near.cpp
-
-guilist.o: ../src/gui/guilist.cpp ../src/gui/guilist.h \
-		../src/gui/guicontainer.h \
-		../src/gui/guimenuelement.h \
-		../src/gui/guielement.h \
-		../src/capabilities/controller.h \
-		../src/capabilities/capability.h \
-		../src/worker.h \
-		../src/object.h \
-		../src/engine/graphics/abstractrenderer.h \
-		../src/engine/graphics/image.h \
-		../src/engine/sharedcontainer.h \
-		../src/engine/math/vector.h \
-		../src/additional/e_variant.h \
-		../src/engine/textformat.h \
-		../src/time/timer.h \
-		../src/units/ship.h \
-		../src/units/movable.h \
-		../src/units/unit.h \
-		../src/capabilities/modulehandler.h \
-		../src/capabilities/modules/module.h \
-		../src/iinformative.h \
-		../src/assettools/loadable.h \
-		../src/json/json.h \
-		../src/json/autolink.h \
-		../src/json/config.h \
-		../src/json/allocator.h \
-		../src/json/version.h \
-		../src/json/features.h \
-		../src/json/forwards.h \
-		../src/json/reader.h \
-		../src/json/value.h \
-		../src/json/writer.h \
-		../src/animator.h \
-		../src/audio/audioplayer.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audiosample.h \
-		../src/engine/variant.h \
-		../src/engine/type.h \
-		../src/capabilities/docker.h \
-		../src/capabilities/modules/warpdrive.h \
-		../src/additional/trigger.h \
-		../src/gui/guistack.h \
-		../src/units/projectile.h \
-		../src/gui/guichoice.h \
-		../src/units/camera.h \
-		../src/objectregistry.h \
-		../src/debug.h \
-		../klibcore/src/ksmartenum.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o guilist.o ../src/gui/guilist.cpp
-
-aggressive.o: ../src/capabilities/aggressive.cpp ../src/capabilities/aggressive.h \
-		../src/capabilities/controller.h \
-		../src/capabilities/capability.h \
-		../src/worker.h \
-		../src/object.h \
-		../src/engine/graphics/abstractrenderer.h \
-		../src/engine/graphics/image.h \
-		../src/engine/sharedcontainer.h \
-		../src/engine/math/vector.h \
-		../src/additional/e_variant.h \
-		../src/engine/textformat.h \
-		../src/time/timer.h \
-		../src/units/ship.h \
-		../src/units/movable.h \
-		../src/units/unit.h \
-		../src/capabilities/modulehandler.h \
-		../src/capabilities/modules/module.h \
-		../src/iinformative.h \
-		../src/assettools/loadable.h \
-		../src/json/json.h \
-		../src/json/autolink.h \
-		../src/json/config.h \
-		../src/json/allocator.h \
-		../src/json/version.h \
-		../src/json/features.h \
-		../src/json/forwards.h \
-		../src/json/reader.h \
-		../src/json/value.h \
-		../src/json/writer.h \
-		../src/animator.h \
-		../src/audio/audioplayer.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audiosample.h \
-		../src/engine/variant.h \
-		../src/engine/type.h \
-		../src/capabilities/docker.h \
-		../src/capabilities/modules/warpdrive.h \
-		../src/additional/trigger.h \
-		../src/objectregistry.h \
-		../src/units/particle.h \
-		../src/units/projectile.h \
-		../src/units/camera.h \
-		../src/additional/lightparticle.h \
-		../src/debug.h \
-		../klibcore/src/ksmartenum.h \
-		../src/capabilities/modules/weapon.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o aggressive.o ../src/capabilities/aggressive.cpp
-
 heapworld.o: ../src/worlds/heapworld.cpp ../src/worlds/heapworld.h \
 		../src/worlds/world.h \
-		../src/assettools/assetprovider.h \
+		../src/engine/assettools/assetprovider.h \
+		../src/object.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -3749,80 +3470,40 @@ heapworld.o: ../src/worlds/heapworld.cpp ../src/worlds/heapworld.h \
 		../src/json/reader.h \
 		../src/json/value.h \
 		../src/json/writer.h \
-		../src/assettools/assetexecutors/assetexecutor.h \
-		../src/engine/variant.h \
-		../src/engine/type.h \
-		../src/audio/abstractaudioprovider.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audiosample.h \
-		../src/engine/sharedcontainer.h \
 		../src/engine/abstractfactory.h \
-		../src/assettools/loadable.h \
-		../src/animator.h \
-		../src/time/timer.h \
-		../src/worker.h \
-		../src/object.h \
-		../src/engine/graphics/abstractrenderer.h \
-		../src/engine/graphics/image.h \
-		../src/engine/math/vector.h \
-		../src/additional/e_variant.h \
-		../src/engine/textformat.h \
-		../src/audio/audioplayer.h \
+		../src/engine/type.h \
+		../src/engine/assettools/loadable.h \
+		../src/engine/variant.h \
 		../klibcore/src/memcontrol/kabstractfactory.h \
 		../klibcore/src/utility/ktype.h \
 		../src/capabilities/controller.h \
 		../src/capabilities/capability.h \
+		../src/engine/entity.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
 		../src/units/unit.h \
 		../src/capabilities/modulehandler.h \
 		../src/capabilities/modules/module.h \
 		../src/iinformative.h \
+		../src/animator.h \
+		../src/engine/math/vector.h \
+		../src/engine/time/elapsedtimer.h \
+		../src/engine/graphics/image.h \
+		../src/engine/sharedcontainer.h \
+		../src/audio/audioplayer.h \
+		../src/engine/audio/audiochannel.h \
+		../src/engine/audio/audiosample.h \
 		../src/capabilities/docker.h \
 		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h \
 		../src/capabilities/player.h \
+		../src/engine/abstracteventhandler.h \
 		../src/capabilities/aggressive.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o heapworld.o ../src/worlds/heapworld.cpp
 
-objectregistry.o: ../src/objectregistry.cpp ../src/objectregistry.h \
-		../src/object.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o objectregistry.o ../src/objectregistry.cpp
-
-registryinfo.o: ../src/additional/informative/registryinfo.cpp ../src/additional/informative/registryinfo.h \
-		../src/iinformative.h \
-		../src/objectregistry.h \
-		../src/object.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o registryinfo.o ../src/additional/informative/registryinfo.cpp
-
-audio.o: ../src/audio/audio.cpp ../src/audio/audio.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o audio.o ../src/audio/audio.cpp
-
-audiochannel.o: ../src/audio/audiochannel.cpp ../src/audio/audiochannel.h \
-		../src/audio/audiosample.h \
-		../src/engine/sharedcontainer.h \
-		../src/engine/math/math.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o audiochannel.o ../src/audio/audiochannel.cpp
-
-audioplayer.o: ../src/audio/audioplayer.cpp ../src/audio/audioplayer.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audiosample.h \
-		../src/engine/sharedcontainer.h \
-		../src/worker.h \
+world.o: ../src/worlds/world.cpp ../src/worlds/world.h \
+		../src/engine/assettools/assetprovider.h \
 		../src/object.h \
-		../src/engine/graphics/abstractrenderer.h \
-		../src/engine/graphics/image.h \
-		../src/engine/math/vector.h \
-		../src/additional/e_variant.h \
-		../src/engine/textformat.h \
-		../src/units/camera.h \
-		../src/units/movable.h \
-		../src/units/unit.h \
-		../src/capabilities/modulehandler.h \
-		../src/capabilities/modules/module.h \
-		../src/capabilities/capability.h \
-		../src/iinformative.h \
-		../src/assettools/loadable.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
 		../src/json/config.h \
@@ -3833,291 +3514,33 @@ audioplayer.o: ../src/audio/audioplayer.cpp ../src/audio/audioplayer.h \
 		../src/json/reader.h \
 		../src/json/value.h \
 		../src/json/writer.h \
-		../src/animator.h \
-		../src/time/timer.h \
-		../src/engine/variant.h \
+		../src/engine/abstractfactory.h \
 		../src/engine/type.h \
-		../src/capabilities/docker.h \
-		../src/capabilities/controller.h \
-		../src/units/ship.h \
-		../src/capabilities/modules/warpdrive.h \
-		../src/additional/trigger.h \
-		../src/engine/math/math.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o audioplayer.o ../src/audio/audioplayer.cpp
-
-guiminimap.o: ../src/gui/guiminimap.cpp ../src/gui/guiminimap.h \
-		../src/gui/guielement.h \
+		../src/engine/assettools/loadable.h \
+		../src/engine/variant.h \
+		../klibcore/src/memcontrol/kabstractfactory.h \
+		../klibcore/src/utility/ktype.h \
 		../src/capabilities/controller.h \
 		../src/capabilities/capability.h \
-		../src/worker.h \
-		../src/object.h \
-		../src/engine/graphics/abstractrenderer.h \
-		../src/engine/graphics/image.h \
-		../src/engine/sharedcontainer.h \
-		../src/engine/math/vector.h \
-		../src/additional/e_variant.h \
-		../src/engine/textformat.h \
-		../src/time/timer.h \
+		../src/engine/entity.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
 		../src/units/unit.h \
 		../src/capabilities/modulehandler.h \
 		../src/capabilities/modules/module.h \
 		../src/iinformative.h \
-		../src/assettools/loadable.h \
-		../src/json/json.h \
-		../src/json/autolink.h \
-		../src/json/config.h \
-		../src/json/allocator.h \
-		../src/json/version.h \
-		../src/json/features.h \
-		../src/json/forwards.h \
-		../src/json/reader.h \
-		../src/json/value.h \
-		../src/json/writer.h \
 		../src/animator.h \
-		../src/audio/audioplayer.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audiosample.h \
-		../src/engine/variant.h \
-		../src/engine/type.h \
-		../src/capabilities/docker.h \
-		../src/capabilities/modules/warpdrive.h \
-		../src/additional/trigger.h \
-		../src/units/camera.h \
-		../src/units/projectile.h \
-		../src/additional/lightparticle.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o guiminimap.o ../src/gui/guiminimap.cpp
-
-guiradar.o: ../src/gui/guiradar.cpp ../src/gui/guiradar.h \
-		../src/gui/guilist.h \
-		../src/gui/guicontainer.h \
-		../src/gui/guimenuelement.h \
-		../src/gui/guielement.h \
-		../src/capabilities/controller.h \
-		../src/capabilities/capability.h \
-		../src/worker.h \
-		../src/object.h \
-		../src/engine/graphics/abstractrenderer.h \
+		../src/engine/math/vector.h \
+		../src/engine/time/elapsedtimer.h \
 		../src/engine/graphics/image.h \
 		../src/engine/sharedcontainer.h \
-		../src/engine/math/vector.h \
-		../src/additional/e_variant.h \
-		../src/engine/textformat.h \
-		../src/time/timer.h \
-		../src/units/ship.h \
-		../src/units/movable.h \
-		../src/units/unit.h \
-		../src/capabilities/modulehandler.h \
-		../src/capabilities/modules/module.h \
-		../src/iinformative.h \
-		../src/assettools/loadable.h \
-		../src/json/json.h \
-		../src/json/autolink.h \
-		../src/json/config.h \
-		../src/json/allocator.h \
-		../src/json/version.h \
-		../src/json/features.h \
-		../src/json/forwards.h \
-		../src/json/reader.h \
-		../src/json/value.h \
-		../src/json/writer.h \
-		../src/animator.h \
 		../src/audio/audioplayer.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audiosample.h \
-		../src/engine/variant.h \
-		../src/engine/type.h \
-		../src/capabilities/docker.h \
-		../src/capabilities/modules/warpdrive.h \
-		../src/additional/trigger.h \
-		../src/gui/guistack.h \
-		../src/gui/guichoice.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o guiradar.o ../src/gui/guiradar.cpp
-
-thruster.o: ../src/capabilities/modules/thruster.cpp ../src/capabilities/modules/thruster.h \
-		../src/capabilities/modules/module.h \
-		../src/capabilities/capability.h \
-		../src/worker.h \
-		../src/object.h \
-		../src/engine/graphics/abstractrenderer.h \
-		../src/engine/graphics/image.h \
-		../src/engine/sharedcontainer.h \
-		../src/engine/math/vector.h \
-		../src/additional/e_variant.h \
-		../src/engine/textformat.h \
-		../src/iinformative.h \
-		../src/assettools/loadable.h \
-		../src/json/json.h \
-		../src/json/autolink.h \
-		../src/json/config.h \
-		../src/json/allocator.h \
-		../src/json/version.h \
-		../src/json/features.h \
-		../src/json/forwards.h \
-		../src/json/reader.h \
-		../src/json/value.h \
-		../src/json/writer.h \
-		../src/animator.h \
-		../src/time/timer.h \
-		../src/audio/audioplayer.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audiosample.h \
-		../src/engine/variant.h \
-		../src/engine/type.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o thruster.o ../src/capabilities/modules/thruster.cpp
-
-time.o: ../src/time/time.cpp ../src/time/time.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o time.o ../src/time/time.cpp
-
-guimenuelement.o: ../src/gui/guimenuelement.cpp ../src/gui/guimenuelement.h \
-		../src/gui/guielement.h \
-		../src/capabilities/controller.h \
-		../src/capabilities/capability.h \
-		../src/worker.h \
-		../src/object.h \
-		../src/engine/graphics/abstractrenderer.h \
-		../src/engine/graphics/image.h \
-		../src/engine/sharedcontainer.h \
-		../src/engine/math/vector.h \
-		../src/additional/e_variant.h \
-		../src/engine/textformat.h \
-		../src/time/timer.h \
-		../src/units/ship.h \
-		../src/units/movable.h \
-		../src/units/unit.h \
-		../src/capabilities/modulehandler.h \
-		../src/capabilities/modules/module.h \
-		../src/iinformative.h \
-		../src/assettools/loadable.h \
-		../src/json/json.h \
-		../src/json/autolink.h \
-		../src/json/config.h \
-		../src/json/allocator.h \
-		../src/json/version.h \
-		../src/json/features.h \
-		../src/json/forwards.h \
-		../src/json/reader.h \
-		../src/json/value.h \
-		../src/json/writer.h \
-		../src/animator.h \
-		../src/audio/audioplayer.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audiosample.h \
-		../src/engine/variant.h \
-		../src/engine/type.h \
+		../src/engine/audio/audiochannel.h \
+		../src/engine/audio/audiosample.h \
 		../src/capabilities/docker.h \
 		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o guimenuelement.o ../src/gui/guimenuelement.cpp
-
-mutex.o: ../src/additional/mutex.cpp ../src/additional/mutex.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mutex.o ../src/additional/mutex.cpp
-
-unitsamountinfo.o: ../src/additional/informative/unitsamountinfo.cpp ../src/additional/informative/unitsamountinfo.h \
-		../src/worker.h \
-		../src/object.h \
-		../src/engine/graphics/abstractrenderer.h \
-		../src/engine/graphics/image.h \
-		../src/engine/sharedcontainer.h \
-		../src/engine/math/vector.h \
-		../src/additional/e_variant.h \
-		../src/engine/textformat.h \
-		../src/iinformative.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o unitsamountinfo.o ../src/additional/informative/unitsamountinfo.cpp
-
-environment.o: ../src/environment.cpp ../src/environment.h \
-		../src/object.h \
-		../src/state.h \
-		../src/additional/e_variant.h \
-		../src/engine/math/vector.h \
-		../src/worker.h \
-		../src/engine/graphics/abstractrenderer.h \
-		../src/engine/graphics/image.h \
-		../src/engine/sharedcontainer.h \
-		../src/engine/textformat.h \
-		../src/background.h \
-		../src/time/timer.h \
-		../src/additional/informative/fpsmonitor.h \
-		../src/iinformative.h \
-		../src/netlistener.h \
-		../src/additional/net/socket.h \
-		../src/additional/net/framebuilder.h \
-		../src/context.h \
-		../src/assettools/assetprovider.h \
-		../src/json/json.h \
-		../src/json/autolink.h \
-		../src/json/config.h \
-		../src/json/allocator.h \
-		../src/json/version.h \
-		../src/json/features.h \
-		../src/json/forwards.h \
-		../src/json/reader.h \
-		../src/json/value.h \
-		../src/json/writer.h \
-		../src/assettools/assetexecutors/assetexecutor.h \
-		../src/engine/variant.h \
-		../src/engine/type.h \
-		../src/audio/abstractaudioprovider.h \
-		../src/audio/audiochannel.h \
-		../src/audio/audiosample.h \
-		../src/engine/abstractfactory.h \
-		../src/assettools/loadable.h \
-		../src/animator.h \
-		../src/audio/audioplayer.h \
-		../klibcore/src/memcontrol/kabstractfactory.h \
-		../klibcore/src/utility/ktype.h \
-		../src/gui/guimain.h \
-		../src/gui/guistack.h \
-		../src/gui/guielement.h \
-		../src/capabilities/controller.h \
-		../src/capabilities/capability.h \
-		../src/units/ship.h \
-		../src/units/movable.h \
-		../src/units/unit.h \
-		../src/capabilities/modulehandler.h \
-		../src/capabilities/modules/module.h \
-		../src/capabilities/docker.h \
-		../src/capabilities/modules/warpdrive.h \
-		../src/additional/trigger.h \
-		../src/gui/guicentralmessage.h \
-		../src/gui/guimenuelement.h \
-		../src/gui/guifloatingmessage.h \
-		../src/gui/guiminimap.h \
-		../src/gui/guidebugvalueinfo.h \
-		../src/near.h \
-		../src/worldmanager.h \
-		../src/worlds/world.h \
-		../src/units/camera.h \
-		../src/additional/mutex.h \
-		../src/worlds/defaultworld.h \
-		../src/worlds/arenaworld.h \
-		../src/worlds/heapworld.h \
-		../src/debug.h \
-		../klibcore/src/ksmartenum.h \
-		../src/time/time.h \
-		../src/filesystem.h \
-		../src/sdlimplementation/sdlaudioprovider.h \
-		../src/sdlimplementation/sdlgraphicsprovider.h \
-		../src/sdlimplementation/sdlrenderer.h \
-		../src/engine/graphics/abstractgraphicsprovider.h \
-		../src/assettools/assetexecutors/animatorassetexecutor.h \
-		../src/assettools/assetexecutors/audioassetexecutor.h \
-		../src/assettools/assetexecutors/mapassetexecutor.h \
-		../src/assettools/assetexecutors/numberassetexecutor.h \
-		../src/assettools/assetexecutors/spriteassetexecutor.h \
-		../src/assettools/assetexecutors/stringassetexecutor.h \
-		../src/assettools/assetexecutors/vectorassetexecutor.h \
-		../src/units/particle.h \
-		../src/units/projectile.h \
-		../src/units/station.h \
-		../src/capabilities/player.h \
-		../src/capabilities/modules/engine.h \
-		../src/capabilities/modules/thruster.h \
-		../src/capabilities/modules/weapon.h \
-		../src/audio/audio.h \
-		../src/engine/additional.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o environment.o ../src/environment.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o world.o ../src/worlds/world.cpp
 
 ####### Install
 

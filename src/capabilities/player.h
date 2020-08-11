@@ -4,8 +4,10 @@
 
 #include "capabilities/controller.h"
 
+#include <engine/abstracteventhandler.h>
 
-class Player : public Controller, public Loadable {
+
+class Player : public Controller, public e172::Loadable {
 private:
     static const std::map<std::string, e172::Scancode> scancode;
 
@@ -18,14 +20,14 @@ public:
     Player(Loadable* tmp);
     void setArmor(Ship *armor);
 
-    // Worker interface
+    // Entity interface
 public:
-    void tick(Context *context, e172::AbstractEventHandler *eventHandler);
+    void proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler);
     void render(e172::AbstractRenderer *renderer);
 
     // Controller interface
 public:
-    void onHit(Context* context, int health);
+    void onHit(e172::Context* context, int health);
 };
 
 #endif // PLAYER_H

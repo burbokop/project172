@@ -34,11 +34,11 @@ public:
 
     bool prepareWarp();
     bool warp();
-    uint8_t abortWarp(Context *context);
+    uint8_t abortWarp(e172::Context *context);
 
-    // Worker interface
+    // Entity interface
 public:
-    void tick(Context *context, e172::AbstractEventHandler *eventHandler) override;
+    void proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) override;
 };
 
 #endif // WARPDRIVE_H

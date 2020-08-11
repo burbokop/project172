@@ -1,8 +1,8 @@
 #include "guiblushingfloatingmessage.h"
 
-#include "time/time.h"
-
 #include <src/engine/math/math.h>
+
+#include <engine/graphics/abstractrenderer.h>
 
 
 GUIBlushingFloatingMessage::GUIBlushingFloatingMessage(Unit *parent) : GUIFloatingMessage (parent) {
@@ -24,12 +24,8 @@ void GUIBlushingFloatingMessage::render(e172::AbstractRenderer *renderer) {
 
     renderer->drawString(
                 getTitle(),
-                parent->getPosition() + renderer->offset() + e172::Vector(0.0, horisontalOffset),
+                parent->getPosition() + renderer->offset() + e172::Vector(0.0, horisontalOffset()),
                 color,
                 e172::TextFormat(e172::TextFormat::AlignDefault, DEFAULT_FONT_SIZE)
                 );
-
-    //tick/-/-/-/-/
-    horisontalOffset -= Time::getDeltaTime() * DEFAULT_FLOATING_SPEED;
-    //tick/-/-/-/-/
 }

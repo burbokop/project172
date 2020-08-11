@@ -2,30 +2,33 @@
 #define ANIMATOR_H
 
 
-#include "time/timer.h"
-#include "worker.h"
 #include <vector>
+#include <engine/math/vector.h>
+#include <engine/time/elapsedtimer.h>
+#include <engine/graphics/image.h>
 
-class Animator : public Worker {
+namespace e172 { class AbstractRenderer; };
+
+class Animator {
 public:
     enum {
-        PING_PONG,
-        LOOP,
-        ONEFRAME,
-        FROZE,
-        NOTRENDER,
-        TOTHEFRAME,
-        DEFAULT_INACTIVE
+        PingPong,
+        Loop,
+        OneFrame,
+        Froze,
+        NotRender,
+        ToTheFrame,
+        Inactive
     };
 private:
     e172::Vector pos;
     double angle;
     double zoom;
 
-    unsigned mode = NOTRENDER;
-    unsigned defaultMode = DEFAULT_INACTIVE;
+    unsigned mode = NotRender;
+    unsigned defaultMode = Inactive;
 
-    Timer timer = Timer(100);
+    e172::ElapsedTimer timer = e172::ElapsedTimer(100);
     e172::Image origin;
     std::vector<e172::Image> frames;
     int m_frameCount;
@@ -45,9 +48,8 @@ public:
     void setAngle(double angle);
     void setZoom(double zoom);
 
-    // Worker interface
+    // Entity interface
 public:
-    void tick(Context *context,  e172::AbstractEventHandler *eventHandler);
     void render(e172::AbstractRenderer *renderer);
 
 

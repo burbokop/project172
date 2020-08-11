@@ -27,7 +27,7 @@ bool GUIMenuElement::hasSubElements() {
 
 void GUIMenuElement::onEnter() {}
 
-void GUIMenuElement::tick(Context *context, e172::AbstractEventHandler *eventHandler) {
+void GUIMenuElement::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
     UNUSED(context);
     UNUSED(eventHandler);
 }

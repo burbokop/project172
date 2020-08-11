@@ -21,7 +21,7 @@ unsigned State::getLoopBehaviour() {
     return loopBehaviour;
 }
 
-void State::setLoopBehaviour(Variant value) {
+void State::setLoopBehaviour(old::Variant value) {
     loopBehaviour = value.isUint32();
 }
 

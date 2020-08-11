@@ -1,5 +1,7 @@
 #include "guicentralmessage.h"
 
+#include <engine/graphics/abstractrenderer.h>
+
 const unsigned GUICentralMessage::DEFAULT_FLASHING_INTERVAL = 500;
 
 
@@ -14,7 +16,7 @@ GUICentralMessage::GUICentralMessage(Controller *player, IInformative *informati
 
 void GUICentralMessage::start(int flashesRemains, unsigned interval) {
     this->flashesRemains = flashesRemains;
-    this->flashingTimer = new Timer(interval);
+    this->flashingTimer = new e172::ElapsedTimer(interval);
     this->flashingTimer->reset();
     this->visible = true;
 }
@@ -28,7 +30,7 @@ void GUICentralMessage::render(e172::AbstractRenderer *renderer) {
         renderer->drawRect(center - half_size - e172::Vector(16, 16), center + half_size + e172::Vector(16, 24), 0xFFBA73);
     }
 
-    if(flashingTimer && flashingTimer->count()) {
+    if(flashingTimer && flashingTimer->check()) {
         visible = !visible;
         if(flashesRemains <= 0) {
             flashingTimer = nullptr;

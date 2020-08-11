@@ -1,6 +1,6 @@
 #include "abstractgraphicsprovider.h"
 
-using namespace e172;
+namespace e172 {
 
 
 Image AbstractGraphicsProvider::__createImage(Image::data_ptr data,
@@ -19,3 +19,4 @@ void AbstractGraphicsProvider::installParentToRenderer(AbstractRenderer *rendere
 }
 
 AbstractGraphicsProvider::~AbstractGraphicsProvider() {}
+}

@@ -1,12 +1,13 @@
 #include "guidebugvalueinfo.h"
 #include <math.h>
+#include <engine/abstracteventhandler.h>
+#include <engine/graphics/abstractrenderer.h>
 
-GUIDebugValueInfo::GUIDebugValueInfo(Controller *player, std::vector<Worker *> *units) {
-    m_player = player;
+GUIDebugValueInfo::GUIDebugValueInfo(Controller *player, std::list<Entity*> *) : GUIElement(player) {
     timer.reset();
 }
 
-void GUIDebugValueInfo::tick(Context *context, e172::AbstractEventHandler *eventHandler) {
+void GUIDebugValueInfo::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
 
     if(eventHandler->keyHolded(e172::Scancode1)) {
         coef *= 1.01;
@@ -19,7 +20,7 @@ void GUIDebugValueInfo::tick(Context *context, e172::AbstractEventHandler *event
 void GUIDebugValueInfo::render(e172::AbstractRenderer *renderer) {
     auto res = renderer->resolution();
 
-    const double module = std::round(m_player->parent()->getVelocity().module());
+    const double module = std::round(controller()->parent()->getVelocity().module());
 
     //renderer->applyLensEffect(e172::Vector(20, res.y() - 70), e172::Vector(70, res.y()-20), module / 240.);
 

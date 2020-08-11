@@ -28,7 +28,7 @@ public:
     virtual void update() override;
     virtual void setFullscreen() override;
     virtual void setResolution(e172::Vector value) override;
-    virtual void setResolutionCallback(Variant value) override;
+    virtual void setResolutionCallback(old::Variant value) override;
 };
 
 #endif // OPENGLRENDERER_H

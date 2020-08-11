@@ -4,16 +4,16 @@ Engine::Engine() {
 }
 
 bool Engine::forward() {
-    animate(Animator::LOOP);
+    animate(Animator::Loop);
     return true;
 }
 
 void Engine::stop() {
-    animate(Animator::NOTRENDER);
+    animate(Animator::NotRender);
 }
 
-void Engine::tick(Context *context, e172::AbstractEventHandler *eventHandler) {
-    this->Module::tick(context, eventHandler);
+void Engine::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
+    this->Module::proceed(context, eventHandler);
 }
 
 std::string Engine::getInfo() {

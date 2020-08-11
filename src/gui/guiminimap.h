@@ -8,15 +8,15 @@ private:
     unsigned sizeRelation = 6;
     unsigned range = 4098;
 
-    std::vector<Worker*> *units;
+    std::list<e172::Entity*> *units;
 
 public:
-    GUIMiniMap(Controller *player, std::vector<Worker*> *units);
+    GUIMiniMap(Controller *player, std::list<e172::Entity*> *units);
 
 
-    // Worker interface
+    // Entity interface
 public:
-    void tick(Context *context, e172::AbstractEventHandler *eventHandler);
+    void proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler);
     void render(e172::AbstractRenderer *renderer);
 };
 

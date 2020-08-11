@@ -5,6 +5,8 @@
 #include "units/movable.h"
 #include "capabilities/controller.h"
 
+#include <engine/graphics/abstractrenderer.h>
+
 
 class Camera : public Movable {
 
@@ -21,14 +23,14 @@ public:
     Camera(Controller *target);
     void setTarget(Controller *target);
 
-    // Worker interface
+    // Entity interface
 public:
-    void tick(Context *context, e172::AbstractEventHandler *eventHandler);
+    void proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler);
     void render(e172::AbstractRenderer *renderer);
 
     // Unit interface
 public:
-    void hit(Context *context, int value);
+    void hit(e172::Context *context, int value);
 };
 
 #endif // CAMERA_H

@@ -2,26 +2,24 @@
 #include "environment.h"
 
 
-#include "context.h"
 #include "worlds/defaultworld.h"
 #include "worlds/arenaworld.h"
 #include "worlds/heapworld.h"
 #include "debug.h"
 #include "units/camera.h"
-#include "time/time.h"
 #include "filesystem.h"
 
 #include <sdlimplementation/sdlaudioprovider.h>
 #include <sdlimplementation/sdleventhandler.h>
 #include <sdlimplementation/sdlgraphicsprovider.h>
 
-#include <assettools/assetexecutors/animatorassetexecutor.h>
-#include <assettools/assetexecutors/audioassetexecutor.h>
-#include <assettools/assetexecutors/mapassetexecutor.h>
-#include <assettools/assetexecutors/numberassetexecutor.h>
-#include <assettools/assetexecutors/spriteassetexecutor.h>
-#include <assettools/assetexecutors/stringassetexecutor.h>
-#include <assettools/assetexecutors/vectorassetexecutor.h>
+#include <assetexecutors/animatorassetexecutor.h>
+#include <assetexecutors/audioassetexecutor.h>
+#include <assetexecutors/mapassetexecutor.h>
+#include <assetexecutors/numberassetexecutor.h>
+#include <assetexecutors/spriteassetexecutor.h>
+#include <assetexecutors/stringassetexecutor.h>
+#include <assetexecutors/vectorassetexecutor.h>
 
 #include <units/particle.h>
 #include <units/projectile.h>
@@ -36,14 +34,14 @@
 #include "audio/audio.h"
 
 #include <engine/additional.h>
+#include <engine/context.h>
 
 Environment::Environment(std::vector<std::string> args) {
     Debug::init(false, true);
     Debug::out("INIT GAME");
     Audio::init();
 
-    units = new std::vector<Worker*>();
-    assetManager = new AssetProvider();
+    assetManager = new e172::AssetProvider();
 
     assetManager->installExecutor("animation", std::make_shared<AnimatorAssetExecutor>());
     assetManager->installExecutor("sprite", std::make_shared<SpriteAssetExecutor>());
@@ -80,7 +78,7 @@ Environment::Environment(std::vector<std::string> args) {
     assetManager->registerType<Thruster>();
 
 
-    context = new Context(units, assetManager); //tick {no}
+    context = new e172::Context(&m_entities, assetManager); //proceed {no}
 
     state = new State();
     eventHandler = new SDLEventHandler(); // io {no}
@@ -106,8 +104,7 @@ Environment::Environment(std::vector<std::string> args) {
     //assetManager->search(FileSystem::cutPath(args[0], 2) + "/assets");
     assetManager->searchInFolder("../assets", renderEngine, audioProvider);
 
-    worldManager->checkState(context, assetManager, units, renderer, fps, tps);
-    context->setBackground(background);
+    worldManager->checkState(context, assetManager, &m_entities, renderer, fps, tps);
 }
 
 
@@ -116,16 +113,15 @@ void Environment::start() {
     netListener->start();
 
     while (1) {
-        Time::update();
-        background->tick(this->context, eventHandler);
+        background->proceed(this->context, eventHandler);
         background->setSpeed(worldManager->getCamera()->getVelocity());
 
-        for(size_t i = 0, L = units->size(); i < L; i++) {
-            this->units->at(i)->tick(this->context, eventHandler);
+        for(auto e : m_entities) {
+            e->proceed(context, eventHandler);
         }
 
         context->handleEvents();
-        worldManager->checkState(context, assetManager, units, renderer, fps, tps);
+        worldManager->checkState(context, assetManager, &m_entities, renderer, fps, tps);
 
         tps->count();
 
@@ -133,12 +129,12 @@ void Environment::start() {
         eventHandler->update();
         background->render(renderer);
 
-        for(size_t i = 0, L = units->size(); i < L; i++) {
-            this->units->at(i)->render(this->renderer);
+        for(auto e : m_entities) {
+            e->render(renderer);
         }
 
         if(GUIElement *gui = worldManager->getGui()) {
-            gui->tick(context, eventHandler);
+            gui->proceed(context, eventHandler);
             gui->render(renderer);
         }
 
@@ -164,11 +160,11 @@ void Environment::quit() {
 void Environment::gameLogicLoop() {
     while(1) {
         Time::update();
-        background->tick(this->context, event);
+        background->proceed(this->context, event);
         background->setSpeed(worldManager->getCamera()->getVelocity());
 
         for(size_t i = 0, L = units->size(); i < L; i++) {
-            this->units->at(i)->tick(this->context, event);
+            this->units->at(i)->proceed(this->context, event);
         }
 
         context->handleEvents();

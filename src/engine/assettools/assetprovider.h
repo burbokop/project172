@@ -2,9 +2,9 @@
 #define ASSETPROVIDER_H
 
 #include <iostream>
+#include <object.h>
 #include <json/json.h>
 #include <SDL2/SDL_image.h>
-#include <assettools/assetexecutors/assetexecutor.h>
 #include <engine/abstractfactory.h>
 
 
@@ -12,6 +12,11 @@
 #include <src/memcontrol/kabstractfactory.h>
 
 
+namespace e172 {
+
+class AbstractAssetExecutor;
+class AbstractGraphicsProvider;
+class AbstractAudioProvider;
 
 class AssetProvider : public Object {
     struct LoadableTemplate {
@@ -20,13 +25,13 @@ class AssetProvider : public Object {
     };
     e172::AbstractFactory<std::string, Loadable> m_factory;
     std::map<std::string, LoadableTemplate> templates;
-    std::map<std::string, std::shared_ptr<AssetExecutor>> executors;
+    std::map<std::string, std::shared_ptr<AbstractAssetExecutor>> executors;
 
-    void processFile(std::string file, std::string path, e172::AbstractGraphicsProvider *graphicsProvider, e172::AbstractAudioProvider *audioProvider);
+    void processFile(std::string file, std::string path, AbstractGraphicsProvider *graphicsProvider, AbstractAudioProvider *audioProvider);
 public:
     Loadable *createLoadable(std::string key);
     AssetProvider();
-    void searchInFolder(std::string path, e172::AbstractGraphicsProvider *graphicsProvider, e172::AbstractAudioProvider *audioProvider);
+    void searchInFolder(std::string path, AbstractGraphicsProvider *graphicsProvider, AbstractAudioProvider *audioProvider);
     std::vector<std::string> loadableNames();
 
     template<typename T>
@@ -34,7 +39,9 @@ public:
         m_factory.registerType<T>();
     }
 
-    void installExecutor(const std::string &id, const std::shared_ptr<AssetExecutor> &executor);
+    void installExecutor(const std::string &id, const std::shared_ptr<AbstractAssetExecutor> &executor);
 };
+
+}
 
 #endif // ASSETPROVIDER_H

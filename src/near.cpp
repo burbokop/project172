@@ -9,17 +9,20 @@ const double Near::DEFAULT_RADIUS = 512;
 const double Near::WARP_RADIUS_MILTIPLIER = 8;
 
 
-Near::Near(std::vector<Worker *> *origin, Controller *center, double radius) {
+Near::Near(std::list<e172::Entity *> *origin, Controller *center, double radius) {
     this->origin = origin;
-    this->focus = new std::vector<Worker*>();
+    this->focus = new std::list<e172::Entity*>();
     this->center = center;
     this->radius = radius;
+
+    addingIterator = origin->begin();
+    removingIterator = focus->begin();
 }
 
 void Near::add() {
     if(origin->size() > 0 && center != nullptr) {
-        if(addingIterator < origin->size()) {
-            Worker *current = origin->at(addingIterator);
+        if(addingIterator != origin->end()) {
+            e172::Entity *current = *addingIterator;
             if(ObjectRegistry::getInstance()->exists(current)) {
                 Unit *currentUnit = dynamic_cast<Unit*>(current);
                 Unit *centerUnit = center->parent();
@@ -36,7 +39,8 @@ void Near::add() {
                 }
             }
         }
-        if(++addingIterator >= origin->size()) addingIterator = 0;
+
+        if(++addingIterator == origin->end()) addingIterator = origin->begin();
     }
 }
 
@@ -53,15 +57,15 @@ double Near::getLocalRadius(Unit *center) {
 
 void Near::remove() {
     if(focus->size() > 0) {
-        if(removingIterator < focus->size()) {
-            Worker *current = focus->at(removingIterator);
+        if(removingIterator != focus->end()) {
+            e172::Entity *current = *removingIterator;
             if(ObjectRegistry::getInstance()->exists(current)) {
                 Unit *currentUnit = dynamic_cast<Unit*>(current);
                 Unit *centerUnit = center->parent();
 
                 if(currentUnit != nullptr && centerUnit != nullptr) {
-                    std::vector<Worker*>::iterator focusIt = std::find(focus->begin(), focus->end(), current);
-                    std::vector<Worker*>::iterator originIt = std::find(origin->begin(), origin->end(), current);
+                    std::list<e172::Entity*>::iterator focusIt = std::find(focus->begin(), focus->end(), current);
+                    std::list<e172::Entity*>::iterator originIt = std::find(origin->begin(), origin->end(), current);
 
                     if(
                         (
@@ -74,11 +78,11 @@ void Near::remove() {
                     }
                 }
             } else {
-                std::vector<Worker*>::iterator focusIt = std::find(focus->begin(), focus->end(), current);
+                std::list<e172::Entity*>::iterator focusIt = std::find(focus->begin(), focus->end(), current);
                 if (focusIt != focus->end()) focus->erase(focusIt);
             }
         }
-        if(++removingIterator >= focus->size()) removingIterator = 0;
+        if(++removingIterator == focus->end()) removingIterator = focus->begin();
     }
 }
 
@@ -89,6 +93,6 @@ void Near::update() {
     }
 }
 
-std::vector<Worker *> *Near::getFocus() {
+std::list<e172::Entity *> *Near::entitiesInFocus() {
     return focus;
 }

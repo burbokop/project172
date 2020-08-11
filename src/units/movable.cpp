@@ -1,9 +1,8 @@
 #include "movable.h"
 #include "capabilities/modules/engine.h"
-#include "context.h"
-#include "time/time.h"
 #include <math.h>
 #include <engine/math/math.h>
+#include <engine/context.h>
 
 const double Movable::STOP_MOVING_VELOCITY = 1;
 const double Movable::DEFAULT_ACCELERATION_VALUE = 120;
@@ -137,17 +136,17 @@ e172::Vector Movable::getVelocity() {
     return vel;
 }
 
-void Movable::updatePosition() {
+void Movable::updatePosition(e172::Context *context) {
     accelerateIdle();
     if(relativisticVelocity) {
-        vel = vel.relativisticAddition(acc * Time::getDeltaTime(), getMaxSpeed());
+        vel = vel.relativisticAddition(acc * context->deltaTime(), getMaxSpeed());
     } else {
-        vel += (acc * Time::getDeltaTime());
+        vel += (acc * context->deltaTime());
     }
 
 
     setRotationSpeed(std::pow(2, -vel.module() * 0.004) * DEFAULT_ROTATION_SPEED);
-    pos += (vel * Time::getDeltaTime());
+    pos += (vel * context->deltaTime());
     accelerationLocked = false;
 }
 
@@ -155,12 +154,12 @@ double Movable::getReleaseSpead() const {
     return loadedValues.releaseVelocity;
 }
 
-void Movable::pursuit(Unit *target) {
-    accelerate((target->getPosition() - getPosition() - getVelocity()) / Time::getDeltaTime());
+void Movable::pursuit(e172::Context *context, Unit *target) {
+    accelerate((target->getPosition() - getPosition() - getVelocity()) / context->deltaTime());
 }
 
-void Movable::relativisticPursuit(Unit *target) {
-    if(!e172::Math::cmpf(Time::getDeltaTime(), 0.0)) {
+void Movable::relativisticPursuit(e172::Context *context, Unit *target) {
+    if(!e172::Math::cmpf(context->deltaTime(), 0.0)) {
         double velocity = target->getVelocity().module();
 
         if(e172::Math::cmpf(velocity, 0)) {
@@ -170,19 +169,21 @@ void Movable::relativisticPursuit(Unit *target) {
         }
 
         e172::Vector direction = target->getPosition() - getPosition();
-        accelerate(direction * velocity * RELATIVISTIC_PURSUIT_COEFFICIENT / Time::getDeltaTime());
+        if(!e172::Math::cmpf(context->deltaTime(), 0)) {
+            accelerate(direction * velocity * RELATIVISTIC_PURSUIT_COEFFICIENT / context->deltaTime());
+        }
         loadedValues.maxVelocity = direction.module();
     }
 }
 
-void Movable::tick(Context *context, e172::AbstractEventHandler *eventHandler) {
+void Movable::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
     if(alTmpFlag != accelerationLocked) {
         if(onAcceleration(accelerationLocked)) {
             alTmpFlag = accelerationLocked;
         }
     }
 
-    updatePosition();
-    this->Unit::tick(context, eventHandler);
+    updatePosition(context);
+    this->Unit::proceed(context, eventHandler);
 }
 

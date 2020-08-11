@@ -12,9 +12,9 @@ class Projectile : public Movable {
     static const int DEFAULT_AVERAGE_LIFE_TIME;
     static const int DEFAULT_LIFE_TIME_DELTA;
 
-    Timer *destroyTimer = nullptr;
+    e172::ElapsedTimer *destroyTimer = nullptr;
 
-    bool collision(Context *context, Unit *collider);
+    bool collision(e172::Context *context, Unit *collider);
     double damage;
     int lifetimeDelta;
     int averageLifetime;
@@ -23,9 +23,9 @@ public:
 
     Unit *mother = nullptr;
 
-    // Worker interface
+    // Entity interface
 public:
-    void tick(Context *context, e172::AbstractEventHandler *eventHandler) override;
+    void proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) override;
     void setMother(Unit *value);
 };
 

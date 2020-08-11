@@ -13,7 +13,7 @@ void FPSMonitor::count() {
 
     fpsArray.push_back(currentFPS);
 
-    if(outputTimer.count(true)) {
+    if(outputTimer.check()) {
         Uint32 sum = 0;
         Uint32 i = 0;
         for(Uint32 inst : fpsArray) {

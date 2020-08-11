@@ -7,27 +7,27 @@
 
 class Aggressive : public Controller {
 private:
-    std::vector<Worker*> *targets = nullptr;
+    std::list<Entity*> *targets = nullptr;
     Unit *target = nullptr;
     bool targeted = false;
     bool inWarp = false;
     Trigger stopWarpTrigger = Trigger();
-    Timer warpFatigueTimer = Timer(10000);
+    e172::ElapsedTimer warpFatigueTimer = e172::ElapsedTimer(10000);
 
 
     Unit *chooseTarget();
 
 public:
-    Aggressive(std::vector<Worker*> *units);
+    Aggressive(std::list<Entity*> *units);
 
-    // Worker interface
+    // Entity interface
 public:
-    void tick(Context *context, e172::AbstractEventHandler *eventHandler);
+    void proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler);
     void render(e172::AbstractRenderer *renderer);
 
     // Controller interface
 public:
-    void onHit(Context *context, int health);
+    void onHit(e172::Context *context, int health);
 };
 
 #endif // AGGRESSIVE_H

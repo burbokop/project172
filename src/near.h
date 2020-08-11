@@ -13,11 +13,12 @@ private:
     static const double DEFAULT_RADIUS;
     static const double WARP_RADIUS_MILTIPLIER;
 
-    std::vector<Worker*> *origin = nullptr;
-    std::vector<Worker*> *focus = nullptr;
+    std::list<e172::Entity*> *origin = nullptr;
+    std::list<e172::Entity*> *focus = nullptr;
     Controller *center = nullptr;
-    unsigned int addingIterator = 0;
-    unsigned int removingIterator = 0;
+
+    std::list<e172::Entity*>::iterator addingIterator;
+    std::list<e172::Entity*>::iterator removingIterator;
 
     double radius = 0;
 
@@ -29,10 +30,10 @@ private:
 public:
 
 
-    Near(std::vector<Worker*> *origin, Controller *center, double radius = DEFAULT_RADIUS);
+    Near(std::list<e172::Entity*> *origin, Controller *center, double radius = DEFAULT_RADIUS);
     void update();
 
-    std::vector<Worker*> *getFocus();
+    std::list<e172::Entity*> *entitiesInFocus();
 };
 
 #endif // NEAR_H

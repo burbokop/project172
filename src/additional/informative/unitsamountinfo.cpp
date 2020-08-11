@@ -1,6 +1,7 @@
 #include "unitsamountinfo.h"
+#include <list>
 
-UnitsAmountInfo::UnitsAmountInfo(std::vector<Worker *> *vector) {
+UnitsAmountInfo::UnitsAmountInfo(std::list<e172::Entity *> *vector) {
     this->vector = vector;
 }
 

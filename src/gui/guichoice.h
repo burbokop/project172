@@ -3,19 +3,21 @@
 
 #include <functional>
 
+#include <additional/e_variant.h>
+
 
 #include "gui/guimenuelement.h"
 
 
 class GUIChoice : public GUIMenuElement {
 private:
-    Variant value;
-    std::function<void(Variant)> set;
+    old::Variant value;
+    std::function<void(old::Variant)> set;
 
 public:
-    GUIChoice(Controller *player, Variant value, std::function<void(Variant)> set);
-    GUIChoice(Controller *player, std::string label, Variant value, std::function<void(Variant)> set);
-    GUIChoice(Controller *player, IInformative *informative, Variant value, std::function<void(Variant)> set);
+    GUIChoice(Controller *player, old::Variant value, std::function<void(old::Variant)> set);
+    GUIChoice(Controller *player, std::string label, old::Variant value, std::function<void(old::Variant)> set);
+    GUIChoice(Controller *player, IInformative *informative, old::Variant value, std::function<void(old::Variant)> set);
 
     // GUIElement interface
 public:

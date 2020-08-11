@@ -1,17 +1,18 @@
 #ifndef UNITSAMOUNTINFO_H
 #define UNITSAMOUNTINFO_H
 
-#include <vector>
+#include <list>
 
-#include "worker.h"
+#include <engine/entity.h>
+
 #include "iinformative.h"
 
 class UnitsAmountInfo : public IInformative {
 private:
-    std::vector<Worker*> *vector;
+    std::list<e172::Entity*> *vector;
 
 public:
-    UnitsAmountInfo(std::vector<Worker*> *vector);
+    UnitsAmountInfo(std::list<e172::Entity*> *vector);
 
     // IInformative interface
 public:

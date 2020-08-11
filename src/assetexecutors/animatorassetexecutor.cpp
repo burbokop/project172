@@ -17,12 +17,12 @@ e172::Variant AnimatorAssetExecutor::proceed(const Json::Value &value, e172::Abs
         Animator anim(graphicsProvider->loadImage(fullPath(spritesheet.asString())), frames.isNull() ? 1 : frames.asInt(), tracks.isNull() ? 1 : tracks.asInt());
         if(play.isString()) {
             if(play == "loop") {
-                anim.play(Animator::LOOP);
+                anim.play(Animator::Loop);
             } else {
-                anim.play(Animator::NOTRENDER);
+                anim.play(Animator::NotRender);
             }
         } else {
-            anim.play(Animator::LOOP);
+            anim.play(Animator::Loop);
         }
         return e172::Variant::fromValue(anim);
     }

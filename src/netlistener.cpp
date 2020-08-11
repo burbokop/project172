@@ -1,6 +1,6 @@
 #include "netlistener.h"
 
-NetListener::NetListener(Context *context) {
+NetListener::NetListener(e172::Context *context) {
     this->context = context;
     serverSocket = new burbokop::Socket(7788);
 }

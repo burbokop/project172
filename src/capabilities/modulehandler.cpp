@@ -73,9 +73,9 @@ bool ModuleHandler::hasModuleOfClass(std::string moduleClass) {
 }
 
 
-void ModuleHandler::tick(Context *context, e172::AbstractEventHandler *eventHandler) {
+void ModuleHandler::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
     for(Module *module : modules) {
-        module->tick(context, eventHandler);
+        module->proceed(context, eventHandler);
     }
 }
 

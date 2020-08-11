@@ -8,7 +8,7 @@
 #include "capabilities/modulehandler.h"
 #include "capabilities/docker.h"
 
-class Unit : public Worker, public Loadable, public IInformative {
+class Unit : public e172::Entity, public e172::Loadable, public IInformative {
 private:
     double angle = 0;
     double rotationSpeed = DEFAULT_ROTATION_SPEED;
@@ -40,11 +40,11 @@ public:
     Docker *getDocker();
 
 
-    void rotateLeft();
-    void rotateRight();
+    void rotateLeft(e172::Context *context);
+    void rotateRight(e172::Context *context);
     void lockAngle(double angle);
-    void rotateToAngle(double angle);
-    bool isOnAngle(double angle);
+    void rotateToAngle(e172::Context *context, double angle);
+    bool isOnAngle(e172::Context *context, double angle);
     void unlockAngle();
 
 
@@ -52,10 +52,10 @@ public:
     virtual e172::Vector getVelocity();
     double getAngle();
 
-    virtual void hit(Context *context, int value);
+    virtual void hit(e172::Context *context, int value);
 
-    // Worker interface
-    void tick(Context *context, e172::AbstractEventHandler *eventHandler);
+    // Entity interface
+    void proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler);
     void render(e172::AbstractRenderer *renderer);
 
     ~Unit();

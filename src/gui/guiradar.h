@@ -9,8 +9,8 @@ public:
     GUIRadar(Controller *player, std::string label);
     GUIRadar(Controller *player, IInformative *informative);
 
-    void onDock(Variant value);
-    void onSelect(Variant value);
+    void onDock(old::Variant value);
+    void onSelect(old::Variant value);
 
     // GUIList interface
 private:

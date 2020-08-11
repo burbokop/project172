@@ -5,18 +5,21 @@
 #include "capabilities/controller.h"
 
 
-class GUIElement : public Worker {
+class GUIElement : public e172::Entity {
+    Controller *m_controller = nullptr;
+    int m_margin = 24;
 protected:
-    static const uint32_t DEFAULT_COLOR = 0xC97878;
-    static const uint32_t SELECTED_COLOR = 0xD2BB5F;
+    static constexpr uint32_t DefaultColor = 0xC97878;
+    static constexpr uint32_t SelectedColor = 0xD2BB5F;
 
-    Controller *player = nullptr;
-    int margin = 24;
+    void setMargin(int margin);
 public:
     GUIElement();
-    GUIElement(Controller *player);
+    GUIElement(Controller *controller);
 
     virtual ~GUIElement();    
+    Controller *controller() const;
+    int margin() const;
 };
 
 #endif // GUIELEMENT_H

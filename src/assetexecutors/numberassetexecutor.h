@@ -1,11 +1,11 @@
 #ifndef NUMBERASSETEXECUTOR_H
 #define NUMBERASSETEXECUTOR_H
 
-#include "assetexecutor.h"
+#include <engine/assettools/abstractassetexecutor.h>
 
 
 
-class NumberAssetExecutor : public AssetExecutor {
+class NumberAssetExecutor : public e172::AbstractAssetExecutor {
 public:
     NumberAssetExecutor();
 

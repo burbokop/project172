@@ -1,5 +1,7 @@
 #include "animator.h"
 
+#include <engine/graphics/abstractrenderer.h>
+
 
 void Animator::setDefaultMode(unsigned value) {
     defaultMode = value;
@@ -49,11 +51,6 @@ void Animator::play(unsigned mode) {
 }
 
 
-void Animator::tick(Context *context, e172::AbstractEventHandler *eventHandler) {
-    UNUSED(context);
-    UNUSED(eventHandler);
-}
-
 void Animator::setPosition(e172::Vector pos) {
     this->pos = pos;
 }
@@ -68,17 +65,17 @@ void Animator::setZoom(double zoom) {
 
 void Animator::render(e172::AbstractRenderer *renderer) {
     if(m_isValid) {
-        if (renderer != nullptr && this->mode != NOTRENDER) {
+        if (renderer != nullptr && this->mode != NotRender) {
             e172::Vector local = pos + renderer->offset();
             renderer->drawImage(frames[static_cast<unsigned long>(currentFrame)], local, angle, zoom);
         }
-        if(this->timer.count()) {
-            if(this->mode == LOOP) {
+        if(this->timer.check()) {
+            if(this->mode == Loop) {
                 this->currentFrame++;
                 if(this->currentFrame >= m_frameCount) this->currentFrame = 0;
             }
         }
-        if(defaultMode != DEFAULT_INACTIVE) mode = defaultMode;
+        if(defaultMode != Inactive) mode = defaultMode;
     }
 }
 

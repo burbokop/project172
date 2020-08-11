@@ -2,11 +2,10 @@
 #define AUDIOPLAYER_H
 
 
-#include "audio/audiochannel.h"
-#include "worker.h"
+#include <engine/audio/audiochannel.h>
 
 
-class AudioPlayer : public Worker {
+class AudioPlayer {
 public:
     enum State {
         Idle,
@@ -35,13 +34,12 @@ public:
             const e172::AudioSample &stop = e172::AudioSample()
             );
 
-    // Worker interface
+    // Entity interface
 public:
     bool play();
     bool stop();
 
-    void tick(Context *context, e172::AbstractEventHandler *eventHandler);
-    void render(e172::AbstractRenderer *renderer);
+    void proceed();
 
     /**
      * @brief setVolume

@@ -2,6 +2,8 @@
 
 #include <audio/audioplayer.h>
 
+#include <engine/audio/abstractaudioprovider.h>
+
 AudioAssetExecutor::AudioAssetExecutor() {}
 
 e172::Variant AudioAssetExecutor::proceed(const Json::Value &value, e172::AbstractGraphicsProvider*, e172::AbstractAudioProvider *audioProvider) {

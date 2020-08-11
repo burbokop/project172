@@ -10,7 +10,7 @@
 #include <engine/math/math.h>
 
 
-const int SDLRenderer::DEFAULT_FONT_SIZE = 20;
+const int SDLRenderer::DefaultFontSize = 20;
 
 
 e172::Vector SDLRenderer::resolution() const {
@@ -47,13 +47,13 @@ void SDLRenderer::setResolution(e172::Vector value) {
     m_resolution = value;
 }
 
-void SDLRenderer::setResolutionCallback(Variant value) {
+void SDLRenderer::setResolutionCallback(old::Variant value) {
     setResolution(value.toVector());
 }
 
 void SDLRenderer::applyLensEffect(const e172::Vector &point0, const e172::Vector &point1, double coefficient) {
     const auto delta = point1 - point0;
-    if(delta.x() == 0 || delta.y() == 0 || e172::Math::cmpf(coefficient, 0))
+    if(e172::Math::cmpf(delta.x(), 0) || e172::Math::cmpf(delta.y(), 0) || e172::Math::cmpf(coefficient, 0))
         return;
 
     m_lensQueue.push({ point0, point1, coefficient });
@@ -83,8 +83,8 @@ void SDLRenderer::__applyLensEffect(SDL_Surface *surface, const e172::Vector poi
 
 
 
-            auto rx = ( center.x()) ;
-            auto ry = ( center.y()) ;
+            //auto rx = ( center.x()) ;
+            //auto ry = ( center.y()) ;
 
             //int newX = static_cast<int>(abs(x - rx) *1* (std::sin(coef * (x - rx))) + rx);
             //int newY = static_cast<int>(abs(y - ry) *1* (std::sin(coef * (y - ry))) + ry);
@@ -95,8 +95,8 @@ void SDLRenderer::__applyLensEffect(SDL_Surface *surface, const e172::Vector poi
 
 
 
-            int newY = (y-center.y()) + coef * sin((y-center.y()) * my) + center.y();
-            int newX = (x-center.x()) + coef * sin((x-center.x()) * mx) + center.x();
+            int newY = static_cast<int>((y-center.y()) + coef * sin((y-center.y()) * my) + center.y());
+            int newX = static_cast<int>((x-center.x()) + coef * sin((x-center.x()) * mx) + center.x());
 
             //int newY = (y-center.y()) + coef * (cos((y-center.y()) * my*2) + 1) + center.y();
             //int newX = (x-center.x()) + coef * (cos((x-center.x()) * mx*2) + 1) + center.x();
@@ -117,7 +117,6 @@ void SDLRenderer::__applyLensEffect(SDL_Surface *surface, const e172::Vector poi
     }
     for(int y = point0.intY(); y < point1.intY(); ++y) {
         for(int x = point0.intX(); x < point1.intX(); ++x) {
-            uint32_t p = pixels[(y * surface->w) + x];
 
             //if(std::pow(x-center.x(), 2) + std::pow(y-center.y(), 2) < std::pow((point1.x() - point0.x()) / 2, 2.)) {
                 SPM::FillPixel(surface, x, y, pix[y-point0.intY()][x-point0.intX()]);
@@ -196,7 +195,7 @@ void SDLRenderer::drawImage(const e172::Image &image, const e172::Vector &pos, d
 }
 
 e172::Vector SDLRenderer::drawString(const std::string &string, const e172::Vector &pos, uint32_t color, const e172::TextFormat &format) {
-    int expectedSize = DEFAULT_FONT_SIZE;
+    int expectedSize = DefaultFontSize;
     if(format.fontSize() > 0) {
         expectedSize = format.fontSize();
     }
@@ -245,17 +244,15 @@ void SDLRenderer::update() {
 }
 
 
-void SDLRenderer::applySmooth(const e172::Vector &point0, const e172::Vector &point1, double coefficient) {
-    auto pixels = reinterpret_cast<uint32_t*>(surface->pixels);
-
+void SDLRenderer::applySmooth(const e172::Vector &point0, const e172::Vector &point1, double coefficient) {    
     uint32_t pix[point1.intY()-point0.intY()][point1.intX()-point0.intX()];
     for(int y = point0.intY(); y < point1.intY(); ++y) {
         for(int x = point0.intX(); x < point1.intX(); ++x) {
             pix[y-point0.intY()][x-point0.intX()]
-            = (SPM::GetPixel(surface, x + coefficient, y)
-            + SPM::GetPixel(surface, x - coefficient, y)
-            + SPM::GetPixel(surface, x, y + coefficient)
-            + SPM::GetPixel(surface, x, y - coefficient)) / 4;
+            = (SPM::GetPixel(surface, static_cast<int>(x + coefficient), y)
+            + SPM::GetPixel(surface, static_cast<int>(x - coefficient), y)
+            + SPM::GetPixel(surface, x, static_cast<int>(y + coefficient))
+            + SPM::GetPixel(surface, x, static_cast<int>(y - coefficient))) / 4;
 
     //        SPM::FillPixel(surface, x, y, pix[y-point0.intY()][x-point0.intX()]);
         }
@@ -263,7 +260,6 @@ void SDLRenderer::applySmooth(const e172::Vector &point0, const e172::Vector &po
 
     for(int y = point0.intY(); y < point1.intY(); ++y) {
         for(int x = point0.intX(); x < point1.intX(); ++x) {
-            uint32_t p = pixels[(y * surface->w) + x];
             SPM::FillPixel(surface, x, y, pix[y-point0.intY()][x-point0.intX()]);
         }
     }

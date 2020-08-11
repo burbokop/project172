@@ -9,17 +9,17 @@ GUIRadar::GUIRadar(Controller *player, IInformative *informative) : GUIList (pla
 
 
 GUIMenuElement *GUIRadar::forEach(Unit *unit) {
-    GUIContainer *container = new GUIContainer(player, unit);
-    container->addElement(new GUIChoice(player, "dock", unit, std::bind(&GUIRadar::onDock, this, std::placeholders::_1)));
-    container->addElement(new GUIChoice(player, "select", unit, std::bind(&GUIRadar::onSelect, this, std::placeholders::_1)));
+    GUIContainer *container = new GUIContainer(controller(), unit);
+    container->addElement(new GUIChoice(controller(), "dock", unit, std::bind(&GUIRadar::onDock, this, std::placeholders::_1)));
+    container->addElement(new GUIChoice(controller(), "select", unit, std::bind(&GUIRadar::onSelect, this, std::placeholders::_1)));
     return container;
 }
 
 
-void GUIRadar::onDock(Variant value) {
+void GUIRadar::onDock(old::Variant value) {
     if(value.isUnit()) {
         Unit *target = value.toUnit();
-        Unit *parent = player->parent();
+        Unit *parent = controller()->parent();
         if(target && parent) {
             Docker *docker = parent->getDocker();
             if(docker) {
@@ -29,11 +29,11 @@ void GUIRadar::onDock(Variant value) {
     }
 }
 
-void GUIRadar::onSelect(Variant value) {
+void GUIRadar::onSelect(old::Variant value) {
     if(value.isUnit()) {
         Unit *target = value.toUnit();
         if(target) {
-            player->setSelected(target);
+            controller()->setSelected(target);
         }
     }
 }

@@ -1,7 +1,5 @@
 #include "camera.h"
 
-#include "time/time.h"
-
 const double Camera::STOP_DISTANCE = 4;
 const double Camera::MAX_SPEED_MULTIPLIER = 0.002 * 1000;
 
@@ -21,13 +19,13 @@ void Camera::setTarget(Controller *target) {
     this->target = target;
 }
 
-void Camera::tick(Context *context, e172::AbstractEventHandler *eventHandler) {
+void Camera::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
     if(target) {
         if(Unit *targetUnit = target->parent()) {
-            relativisticPursuit(targetUnit);
+            relativisticPursuit(context, targetUnit);
         }
     }
-    this->Movable::tick(context, eventHandler);
+    this->Movable::proceed(context, eventHandler);
 }
 
 void Camera::render(e172::AbstractRenderer *renderer) {
@@ -50,7 +48,7 @@ void Camera::render(e172::AbstractRenderer *renderer) {
     }
 }
 
-void Camera::hit(Context *context, int value) {
+void Camera::hit(e172::Context *context, int value) {
     UNUSED(context);
     UNUSED(value);
 }

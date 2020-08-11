@@ -1,12 +1,14 @@
 #ifndef LIGHTPARTICLE_H
 #define LIGHTPARTICLE_H
 
+#include <engine/entity.h>
 
-#include "worker.h"
-#include "time/timer.h"
+#include <engine/math/vector.h>
+
+#include <engine/time/elapsedtimer.h>
 
 
-class LightParticle : public Worker {
+class LightParticle : public e172::Entity {
 public:
     static const unsigned PIXEL;
     static const unsigned SQUARE;
@@ -25,7 +27,7 @@ private:
     unsigned shape = PIXEL;
     int radius = 2;
     uint32_t color = 0xff00ff;
-    Timer *destroyTimer = nullptr;
+    e172::ElapsedTimer *destroyTimer = nullptr;
     double velocityMultiplier = 0;
 
 
@@ -33,9 +35,9 @@ public:
     LightParticle(unsigned shape = PIXEL, int averageLifeTime = DEFAULT_AVERAGE_LIFE_TIME, int lifeTimeDelta = DEFAULT_LIFE_TIME_DELTA);
     void place(e172::Vector pos, e172::Vector vel);
 
-    // Worker interface
+    // Entity interface
 public:
-    void tick(Context *context, e172::AbstractEventHandler *eventHandler);
+    void proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler);
     void render(e172::AbstractRenderer *renderer);
 };
 

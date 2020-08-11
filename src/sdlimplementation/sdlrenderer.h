@@ -15,7 +15,7 @@ typedef _TTF_Font TTF_Font;
 class SDLRenderer : public e172::AbstractRenderer {
     friend class SDLGraphicsProvider;
 public:
-    static const int DEFAULT_FONT_SIZE;
+    static const int DefaultFontSize;
 private:
     Camera *camera = nullptr;
 
@@ -78,7 +78,7 @@ public:
     [[deprecated]]
     void setResolution(e172::Vector value) override;
     [[deprecated]]
-    void setResolutionCallback(Variant value) override;
+    void setResolutionCallback(old::Variant value) override;
 
 
     // AbstractRenderer interface

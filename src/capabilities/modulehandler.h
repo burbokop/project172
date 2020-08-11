@@ -26,9 +26,9 @@ public:
     std::vector<Module*> *getModulesByClass(std::string moduleClass);
     bool hasModuleOfClass(std::string moduleClass);
 
-    // Worker interface
+    // Entity interface
 public:
-    void tick(Context *context, e172::AbstractEventHandler *eventHandler) override;
+    void proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) override;
     void render(e172::AbstractRenderer *renderer) override;
 };
 

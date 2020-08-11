@@ -1,32 +1,34 @@
 #include "particle.h"
-#include "context.h"
 
+#include <engine/context.h>
 
-const Uint8 Particle::PIXEL = 0;
-const Uint8 Particle::SQUARE = 1;
-const Uint8 Particle::CIRCLE = 2;
+#include <engine/graphics/abstractrenderer.h>
+
+const uint8_t Particle::PIXEL = 0;
+const uint8_t Particle::SQUARE = 1;
+const uint8_t Particle::CIRCLE = 2;
 
 const int Particle::DEFAULT_AVERAGE_LIFE_TIME = 6000;
 const int Particle::DEFAULT_LIFE_TIME_DELTA = 4000;
 
-Uint32 Particle::generateColor() {
-    Uint32 colors[] = { 0xdeff17, 0xfe4600, 0xf9990f, 0x8a27ff };
+uint32_t Particle::generateColor() {
+    uint32_t colors[] = { 0xdeff17, 0xfe4600, 0xf9990f, 0x8a27ff };
     return  colors[std::rand() % 4];
 }
 
 Particle::Particle() : Movable() {
     color = generateColor();
     setRelativisticVelocity(false);
-    destroyTimer = new Timer((rand() % (2 * DEFAULT_LIFE_TIME_DELTA)) + (DEFAULT_AVERAGE_LIFE_TIME - DEFAULT_LIFE_TIME_DELTA));
+    destroyTimer = new e172::ElapsedTimer((rand() % (2 * DEFAULT_LIFE_TIME_DELTA)) + (DEFAULT_AVERAGE_LIFE_TIME - DEFAULT_LIFE_TIME_DELTA));
     destroyTimer->reset();
 
 }
 
-Particle::Particle(Uint8 shape, int averageLifeTime, int lifeTimeDelta) {
+Particle::Particle(uint8_t shape, int averageLifeTime, int lifeTimeDelta) {
     color = generateColor();
     this->shape = shape;
     setRelativisticVelocity(false);
-    destroyTimer = new Timer((rand() % (2 * lifeTimeDelta)) + (averageLifeTime - lifeTimeDelta));
+    destroyTimer = new e172::ElapsedTimer((rand() % (2 * lifeTimeDelta)) + (averageLifeTime - lifeTimeDelta));
     destroyTimer->reset();
 }
 
@@ -41,14 +43,14 @@ void Particle::render(e172::AbstractRenderer *renderer) {
     }
 }
 
-void Particle::hit(Context *context, int value) {
+void Particle::hit(e172::Context *context, int value) {
     UNUSED(context);
     UNUSED(value);
 }
 
-void Particle::tick(Context *context, e172::AbstractEventHandler *eventHandler) {
-    if(destroyTimer && destroyTimer->count()) {
-        context->addEvent(this, Context::DELETE_UNIT);
+void Particle::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
+    if(destroyTimer && destroyTimer->check()) {
+        context->addEvent(this, e172::Context::DELETE_UNIT);
     }
-    this->Movable::tick(context, eventHandler);
+    this->Movable::proceed(context, eventHandler);
 }

@@ -1,6 +1,8 @@
 #include "guistack.h"
 #include "guicontainer.h"
 
+#include <engine/abstracteventhandler.h>
+
 GUIStack::GUIStack() : GUIElement () {}
 
 void GUIStack::push(GUIElement *element) {
@@ -20,19 +22,19 @@ void GUIStack::pop() {
     }
 }
 
-void GUIStack::tick(Context *context, e172::AbstractEventHandler *eventHandler) {
+void GUIStack::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
     UNUSED(context);
     if(elements.size() > 0) {
         current = elements[elements.size() - 1];
     } else {
         current = nullptr;
-        if(eventHandler->keySinglePressed(e172::ScancodeRETURN) && reserved) {
+        if(eventHandler->keySinglePressed(e172::ScancodeReturn) && reserved) {
             push(reserved);
         }
     }
 
     if(current) {
-        current->tick(context, eventHandler);
+        current->proceed(context, eventHandler);
     }
 }
 

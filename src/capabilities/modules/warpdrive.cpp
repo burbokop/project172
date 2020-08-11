@@ -1,13 +1,14 @@
 #include "warpdrive.h"
-#include "context.h"
 #include "additional/stringformer.h"
 
+#include <engine/context.h>
 
-const Uint8 WarpDrive::WARP_DISABLED = 0;
-const Uint8 WarpDrive::WARP_LOADING = 1;
-const Uint8 WarpDrive::WARP_READY = 2;
-const Uint8 WarpDrive::WARP_EXECUTING = 3;
-const Uint8 WarpDrive::WARP_RECHARGING = 4;
+
+const uint8_t WarpDrive::WARP_DISABLED = 0;
+const uint8_t WarpDrive::WARP_LOADING = 1;
+const uint8_t WarpDrive::WARP_READY = 2;
+const uint8_t WarpDrive::WARP_EXECUTING = 3;
+const uint8_t WarpDrive::WARP_RECHARGING = 4;
 
 
 
@@ -64,7 +65,7 @@ std::string WarpDrive::getInfo() {
     if(warpState == WarpDrive::WARP_RECHARGING) {
         chargingBar = StringFormer::line(static_cast<unsigned int>((1 - getCharging()) * 4));
     } else if (warpState == WarpDrive::WARP_LOADING) {
-        chargingBar = StringFormer::line(static_cast<unsigned int>((timer.ready() * 4)));
+        chargingBar = StringFormer::line(static_cast<unsigned int>((timer.progress() * 4)));
     } else if (warpState == WarpDrive::WARP_DISABLED) {
         chargingBar = "";
     } else if (warpState == WarpDrive::WARP_EXECUTING) {
@@ -94,30 +95,30 @@ bool WarpDrive::warp() {
     if(warpState == WARP_READY) {
         warpState = WARP_EXECUTING;
         audioPlayer.play();
-        animator.play(Animator::LOOP);
+        animator.play(Animator::Loop);
         return true;
     }
     return false;
 }
 
-Uint8 WarpDrive::abortWarp(Context* context) {
-    Uint8 result = warpState;
+uint8_t WarpDrive::abortWarp(e172::Context* context) {
+    uint8_t result = warpState;
     if(warpState == WARP_EXECUTING) {
-        context->addEvent(parent(), Context::SPAWN_ENGINE_EXPLOSIVE, 16);
+        context->addEvent(parent(), e172::Context::SPAWN_ENGINE_EXPLOSIVE, 16);
         audioPlayer.stop();
-        animator.play(Animator::NOTRENDER);
+        animator.play(Animator::NotRender);
     }
     if(warpState == WARP_EXECUTING || warpState == WARP_READY || warpState == WARP_LOADING) warpState = WARP_RECHARGING;
     return result;
 }
 
-void WarpDrive::tick(Context *context, e172::AbstractEventHandler *eventHandler) {
+void WarpDrive::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
     if(warpState == WARP_LOADING) {
-        if(timer.count(true)) {
+        if(timer.check()) {
             warpState = WARP_READY;
         }
     } else if(warpState == WARP_RECHARGING) {
-        if(timer.count(true)) {
+        if(timer.check()) {
             currentChargindIteration++;
             if(currentChargindIteration >= chargindIterations) {
                 currentChargindIteration = 0;
@@ -126,6 +127,6 @@ void WarpDrive::tick(Context *context, e172::AbstractEventHandler *eventHandler)
         }
     }
 
-    this->Module::tick(context, eventHandler);
+    this->Module::proceed(context, eventHandler);
 }
 

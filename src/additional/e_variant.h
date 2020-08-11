@@ -8,6 +8,8 @@
 
 class Unit;
 
+namespace old {
+
 class Variant : public Object {
 private:
     enum Type {
@@ -74,5 +76,6 @@ public:
     bool isUnit();
     bool isVector();
 };
+}
 
 #endif // AUTO_H

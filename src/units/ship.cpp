@@ -1,7 +1,5 @@
 #include "ship.h"
 
-#include "context.h"
-
 const double Ship::ONE_WARP_POINT = 9513.98639961;
 
 Ship::Ship() {}
@@ -27,7 +25,7 @@ bool Ship::warp() {
     return false;
 }
 
-Uint8 Ship::abortWarp(Context *context) {
+uint8_t Ship::abortWarp(e172::Context *context) {
     WarpDrive *driveUnit = getFirstWarp();
     if(driveUnit) {
         bool success = driveUnit->abortWarp(context);
@@ -50,7 +48,7 @@ WarpDrive *Ship::getFirstWarp() {
     return nullptr;
 }
 
-void Ship::tick(Context *context, e172::AbstractEventHandler *eventHandler) {
+void Ship::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
     ModuleHandler *modules = getModuleHandler();
     if(modules) {
         std::vector<Module*> *drives = modules->getModulesByClass("WarpDrive");
@@ -64,7 +62,7 @@ void Ship::tick(Context *context, e172::AbstractEventHandler *eventHandler) {
             }
         }
     }
-    this->Movable::tick(context, eventHandler);
+    this->Movable::proceed(context, eventHandler);
 }
 
 bool Ship::onAcceleration(bool start) {

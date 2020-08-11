@@ -1,11 +1,11 @@
 #ifndef SPRITEASSETEXECUTOR_H
 #define SPRITEASSETEXECUTOR_H
 
-#include "assetexecutor.h"
+#include <engine/assettools/abstractassetexecutor.h>
 
 
 
-class SpriteAssetExecutor : public AssetExecutor {
+class SpriteAssetExecutor : public e172::AbstractAssetExecutor {
 public:
     SpriteAssetExecutor();
 

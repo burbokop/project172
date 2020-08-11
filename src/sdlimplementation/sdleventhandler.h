@@ -7,7 +7,7 @@ union SDL_Event;
 
 class SDLEventHandler : public e172::AbstractEventHandler {
     void handleEvent(SDL_Event event);
-    static constexpr size_t bufferSize = 256;
+    static constexpr size_t bufferSize = 512;
     bool m_holdedKeys[bufferSize];
     bool m_singlePressedKeys[bufferSize];
     e172::Vector m_mousePosition;

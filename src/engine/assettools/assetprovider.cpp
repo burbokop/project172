@@ -1,3 +1,4 @@
+#include "abstractassetexecutor.h"
 #include "assetprovider.h"
 
 
@@ -13,6 +14,7 @@
 
 
 #include <engine/graphics/abstractgraphicsprovider.h>
+namespace e172 {
 
 
 AssetProvider::AssetProvider() {}
@@ -68,37 +70,9 @@ std::vector<std::string> AssetProvider::loadableNames() {
     return result;
 }
 
-void AssetProvider::installExecutor(const std::string &id, const std::shared_ptr<AssetExecutor> &executor) {
+void AssetProvider::installExecutor(const std::string &id, const std::shared_ptr<AbstractAssetExecutor> &executor) {
     executors[id] = executor;
 }
-
-//void AssetProvider::processFile(std::string file, std::string location, e172::AbstractGraphicsProvider *graphicsProvider) {
-//    std::string sufix = FileSystem::getSufix(file);
-//    if(sufix == ".json") {
-//        std::string content = FileSystem::readFile(file);
-//        Json::Reader reader;
-//        Json::Value root;
-//        reader.parse(content, root);
-//        Json::Value key = root["id"];
-//        if(!key.isNull()) {
-//
-//            unsigned intervalValue = 1000;
-//
-//            Json::Value rate = root["rate"];
-//            Json::Value interval = root["interval"];
-//
-//            if(rate.isNumeric()) {
-//                intervalValue = static_cast<unsigned>(60000 / rate.asDouble());
-//            } else if (interval.isNumeric()) {
-//                intervalValue = static_cast<unsigned>(interval.asDouble());
-//            }
-//            Timer timer(intervalValue);
-//
-//
-//            //assets[key.asString()] = new Loadable(root, anim, audioPlayer, timer, offsetVector);
-//        }
-//    }
-//}
 
 void AssetProvider::processFile(std::string file, std::string path, e172::AbstractGraphicsProvider *graphicsProvider, e172::AbstractAudioProvider *audioProvider) {
     std::string sufix = FileSystem::getSufix(file);
@@ -139,3 +113,5 @@ void AssetProvider::processFile(std::string file, std::string path, e172::Abstra
         templates[id.asString()] = newTemplate;
     }
 };
+
+}

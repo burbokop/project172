@@ -1,3 +1,4 @@
+#include "additional.h"
 #include "context.h"
 
 
@@ -6,6 +7,10 @@
 #include "units/particle.h"
 #include "additional/lightparticle.h"
 #include <math.h>
+#include "assettools/assetprovider.h"
+#include "gameapplication.h"
+
+namespace e172 {
 
 const unsigned Context::DELETE_UNIT = 0;
 const unsigned Context::SPAWN_EXPLOSIVE = 1;
@@ -20,28 +25,18 @@ const unsigned Context::EMERGENCY_MESSAGE = 8;
 const unsigned Context::BACKGROUND_FLASHING = 9;
 const unsigned Context::FLOATING_MESSAGE = 10;
 
-void Context::setGui(GUIMain *value) {
-    gui = value;
-}
 
-void Context::setBackground(Background *value) {
-    background = value;
+double Context::deltaTime() const {
+    return m_deltaTime;
 }
-
-void Context::setNear(Near *value) {
-    _near = value;
-}
-
 
 void Context::handleRequest(Request request) {
-    PROTECT_OBJECT(request.requester);
+    PROTECT_OBJECT(request.requester)
     if(request.command == DELETE_UNIT) {
         Debug::out("DELETE: " + std::to_string(reinterpret_cast<uintptr_t>(request.requester)));
-        std::vector<Worker*>::iterator pos = std::find(units->begin(), units->end(), request.requester);
-        if(pos != units->end()) {
-            units->erase(pos);
-            //std::cout << "deleted +++ " << request.requester.uncover() << " : " << request.requester.getDeleted() << " : " << *request.requester.getDeleted() << "\n";
-
+        const auto pos = std::find(m_entities->begin(), m_entities->end(), request.requester);
+        if(pos != m_entities->end()) {
+            m_entities->erase(pos);
             delete request.requester;
         }
     } else if (request.command == SPAWN_EXPLOSIVE || request.command == SPAWN_ENGINE_EXPLOSIVE) {
@@ -64,7 +59,7 @@ void Context::handleRequest(Request request) {
                 } else {
                     particle->place(requester->getPosition(), e172::Vector::createRandom(v0));
                 }
-                units->push_back(particle);
+                m_entities->push_back(particle);
             }
         }
     } else if (request.command == SPAWN_ENGINE_PARTICLES) {
@@ -78,7 +73,7 @@ void Context::handleRequest(Request request) {
                 unsigned types[] = { Particle::PIXEL, Particle::CIRCLE, Particle::SQUARE };
                 LightParticle *particle = new LightParticle(types[rand() % 3], radius * 600, radius * 400);
                 particle->place(requester->getPosition(), e172::Vector::createRandom(v0) / 2 + e172::Vector::createByAngle(requester->getVelocity().module() / 2, requester->getAngle()));
-                units->push_back(particle);
+                m_entities->push_back(particle);
             }
         }
     } else if (request.command == SPAWN_UNIT) {
@@ -95,7 +90,7 @@ void Context::handleRequest(Request request) {
                 } else if(unitToSpawn) {
                     unitToSpawn->place(parent->getPosition(), 0.785);
                 }
-                units->push_back(unitToSpawn);
+                m_entities->push_back(unitToSpawn);
             }
         }
     } else if (request.command == SPAWN_SURFACE) {
@@ -152,41 +147,46 @@ void Context::handleRequest(Request request) {
             const char *message = static_cast<char*>(request.argument.toObject());
             GUICentralMessage *element = new GUICentralMessage(nullptr, message);
             element->start(2);
-            gui->setMessage(element);
+            //gui->setMessage(element);
         }
     } else if (request.command == BACKGROUND_FLASHING) {
         Debug::out("BACKGROUND_FLASHING: " + std::to_string(reinterpret_cast<uintptr_t>(request.requester)));
         if(request.argument.isNumber()) {
             int repeats = request.argument.toInt32();
-            background->flashing(repeats);
+            //background->flashing(repeats);
         }
     } else if (request.command == FLOATING_MESSAGE) {
         Debug::out("FLOATING_MESSAGE: " + std::to_string(reinterpret_cast<uintptr_t>(request.requester)));
         if(request.argument.isNumber()) {
             Unit *unit = dynamic_cast<Unit*>(request.requester);
-            if(unit) {
-                gui->addBlushingFloatingMessage(unit, request.argument.toInt32());
-            }
+            //if(unit) {
+            //    gui->addBlushingFloatingMessage(unit, request.argument.toInt32());
+            //}
         }
     }
 }
 
-Context::Context(std::vector<Worker *> *units, AssetProvider *assets, GUIMain *gui) {
-    this->units = units;
-    this->assets = assets;
-    this->gui = gui;
+Context::Context(std::list<Entity *> *entities, AssetProvider *assetProvider) {
+    m_entities = entities;
+    m_assetProvider = assetProvider;
 }
 
-std::vector<Worker *> *Context::getUnits() const {
-    return units;
+std::string Context::absolutePath(const std::string &path) const {
+    if(m_appliation) {
+        const auto args = m_appliation->arguments();
+        if(args.size() > 0) {
+            return e172::Additional::absolutePath(path, args[0]);
+        }
+    }
+    return std::string();
 }
 
-AssetProvider *Context::getAssets() const {
-    return assets;
+std::list<Entity *> *Context::entities() const {
+    return m_entities;
 }
 
 
-void Context::addEvent(Worker *requester, unsigned command, Variant argument) {
+void Context::addEvent(Entity *requester, unsigned command, old::Variant argument) {
     eventQueue.push({
         requester,
         command,
@@ -200,4 +200,9 @@ void Context::handleEvents() {
         handleRequest(eventQueue.front());
         eventQueue.pop();
     }
+}
+
+AssetProvider *Context::assetProvider() const {
+    return m_assetProvider;
+}
 }

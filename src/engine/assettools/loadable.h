@@ -2,12 +2,10 @@
 #define LOADABLE_H
 
 
-#include "json/json.h"
-#include "animator.h"
-#include "time/timer.h"
-#include "audio/audioplayer.h"
-
 #include <engine/variant.h>
+
+namespace e172 {
+
 
 class AssetProvider;
 class Loadable {
@@ -44,5 +42,7 @@ public:
     std::string loadableId() const;
     AssetProvider *assetProvider() const;
 };
+
+}
 
 #endif // LOADABLE_H

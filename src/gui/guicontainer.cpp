@@ -2,6 +2,8 @@
 
 #include <sdlimplementation/sdlrenderer.h>
 
+#include <engine/abstracteventhandler.h>
+
 
 
 GUIContainer::GUIContainer(Controller *player) : GUIMenuElement (player) {
@@ -102,20 +104,20 @@ bool GUIContainer::hasSubElements() {
     return true;
 }
 
-void GUIContainer::tick(Context *context, e172::AbstractEventHandler *eventHandler) {
+void GUIContainer::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
     UNUSED(context);
-    if(eventHandler->keySinglePressed(e172::ScancodeDOWN)) {
+    if(eventHandler->keySinglePressed(e172::ScancodeDown)) {
         selectedElement = selectDown();
-    } else if(eventHandler->keySinglePressed(e172::ScancodeUP)) {
+    } else if(eventHandler->keySinglePressed(e172::ScancodeUp)) {
         selectedElement = selectUp();
-    } else if(eventHandler->keySinglePressed(e172::ScancodeRETURN)) {
+    } else if(eventHandler->keySinglePressed(e172::ScancodeReturn)) {
         if(selectedElement != nullptr) {
             selectedElement->onEnter();
             if(selectedElement->hasSubElements()) {
                 stack->push(selectedElement);
             }
         }
-    } else if(eventHandler->keySinglePressed(e172::ScancodeBACKSPACE)) {
+    } else if(eventHandler->keySinglePressed(e172::ScancodeBackSpace)) {
         stack->pop();
     }
 }
@@ -123,12 +125,12 @@ void GUIContainer::tick(Context *context, e172::AbstractEventHandler *eventHandl
 
 void GUIContainer::render(e172::AbstractRenderer *renderer) {
     if(elements) {
-        e172::Vector pointer = e172::Vector(margin, margin);
+        e172::Vector pointer = e172::Vector(margin(), margin());
         std::string title = getTitle();
-        renderer->drawString(title, pointer, DEFAULT_COLOR);
-        pointer += e172::Vector(0, SDLRenderer::DEFAULT_FONT_SIZE * 2);
-        renderer->drawLine(pointer, pointer + e172::Vector(title.size() * static_cast<uint32_t>(SDLRenderer::DEFAULT_FONT_SIZE), 0.0), DEFAULT_COLOR);
-        pointer += e172::Vector(0, SDLRenderer::DEFAULT_FONT_SIZE);
+        renderer->drawString(title, pointer, DefaultColor);
+        pointer += e172::Vector(0, SDLRenderer::DefaultFontSize * 2);
+        renderer->drawLine(pointer, pointer + e172::Vector(title.size() * static_cast<uint32_t>(SDLRenderer::DefaultFontSize), 0.0), DefaultColor);
+        pointer += e172::Vector(0, SDLRenderer::DefaultFontSize);
 
         int i = 0;
         for(GUIMenuElement *element : *elements) {
@@ -136,7 +138,7 @@ void GUIContainer::render(e172::AbstractRenderer *renderer) {
                 if(i == selected)
                     renderer->enableEffect(0);
 
-                renderer->drawString(element->getTitle(), pointer, (i == selected) ? SELECTED_COLOR : DEFAULT_COLOR);
+                renderer->drawString(element->getTitle(), pointer, (i == selected) ? SelectedColor : DefaultColor);
                 renderer->disableEffect(0);
                 pointer += e172::Vector(4, interval);
                 i++;

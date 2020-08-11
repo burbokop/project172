@@ -1,6 +1,6 @@
 #include "abstractrenderer.h"
 
-using namespace e172;
+namespace e172 {
 
 
 
@@ -54,4 +54,6 @@ Vector AbstractRenderer::Camera::position() const {
     if(m_getter)
         return m_getter();
     return Vector();
+}
+
 }

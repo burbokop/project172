@@ -1,16 +1,17 @@
 #include "unit.h"
-#include "context.h"
 #include "projectile.h"
 #include "units/station.h"
-#include "time/time.h"
 
 #include <engine/math/math.h>
+
+#include <engine/context.h>
+
+#include <engine/graphics/abstractrenderer.h>
 
 const double Unit::DEFAULT_ROTATION_SPEED = 0.0014 * 1000;
 const double Unit::ANGLE_DELTA_MULTIPLIER = 2;
 
-void Unit::setRotationSpeed(double value)
-{
+void Unit::setRotationSpeed(double value) {
     if(value > DEFAULT_ROTATION_SPEED ){
         rotationSpeed = DEFAULT_ROTATION_SPEED ;
 
@@ -75,12 +76,12 @@ Docker *Unit::getDocker() {
     return nullptr;
 }
 
-void Unit::rotateLeft() {
-    angle = e172::Math::constrainAngle(angle - (getRotationSpeed() * Time::getDeltaTime()));
+void Unit::rotateLeft(e172::Context *context) {
+    angle = e172::Math::constrainAngle(angle - (getRotationSpeed() * context->deltaTime()));
 }
 
-void Unit::rotateRight() {
-    angle = e172::Math::constrainAngle(angle + (getRotationSpeed() * Time::getDeltaTime()));
+void Unit::rotateRight(e172::Context *context) {
+    angle = e172::Math::constrainAngle(angle + (getRotationSpeed() * context->deltaTime()));
 }
 
 void Unit::lockAngle(double angle) {
@@ -89,27 +90,27 @@ void Unit::lockAngle(double angle) {
 }
 
 
-void Unit::rotateToAngle(double angle) {
+void Unit::rotateToAngle(e172::Context *context, double angle) {
     angle = e172::Math::constrainAngle(angle);
-    const double delta = getRotationSpeed() * Time::getDeltaTime() * ANGLE_DELTA_MULTIPLIER;
+    const double delta = getRotationSpeed() * context->deltaTime() * ANGLE_DELTA_MULTIPLIER;
     if(angle + delta - getAngle() < 0) {
         if(std::abs(angle - getAngle()) < M_PI) {
-            rotateLeft();
+            rotateLeft(context);
         } else {
-            rotateRight();
+            rotateRight(context);
         }
     } else if(angle - delta - getAngle() > 0) {
         if(std::abs(angle - getAngle()) < M_PI) {
-            rotateRight();
+            rotateRight(context);
         } else {
-            rotateLeft();
+            rotateLeft(context);
         }
     }
 }
 
-bool Unit::isOnAngle(double angle) {
+bool Unit::isOnAngle(e172::Context *context, double angle) {
     angle = e172::Math::constrainAngle(angle);
-    const double doubleDelta = getRotationSpeed() * Time::getDeltaTime() * ANGLE_DELTA_MULTIPLIER * 2;
+    const double doubleDelta = getRotationSpeed() * context->deltaTime() * ANGLE_DELTA_MULTIPLIER * 2;
     return !(getAngle() > angle + doubleDelta || getAngle() < angle - doubleDelta);
 }
 
@@ -129,44 +130,44 @@ double Unit::getAngle() {
     return angle;
 }
 
-void Unit::hit(Context* context, int value) {
+void Unit::hit(e172::Context* context, int value) {
     if(value != 0) {
         health -= value;
 
         for(Capability *capability : capabilities) {
             Controller *controller = dynamic_cast<Controller*>(capability);
             if(controller) {
-                controller->onHit(context, health);
+                controller->onHit(context, static_cast<int>(health));
             }
         }
 
         if(dynamic_cast<Projectile*>(this) == nullptr) {
-            context->addEvent(this, Context::FLOATING_MESSAGE, health);
+            context->addEvent(this, e172::Context::FLOATING_MESSAGE, health);
         }
 
         if(health < 0) {
-            context->addEvent(this, Context::SPAWN_EXPLOSIVE, explosiveRadius);
+            context->addEvent(this, e172::Context::SPAWN_EXPLOSIVE, explosiveRadius);
             ModuleHandler *mh = getModuleHandler();
             if(mh) {
                 std::vector<Module*> *modules = mh->getAllModules();
                 if(modules) {
                     for(Module* module : *modules) {
                         if(module) {
-                            module->animate(Animator::NOTRENDER, Animator::NOTRENDER);
+                            module->animate(Animator::NotRender, Animator::NotRender);
                         }
                     }
                 }
             }
-            context->addEvent(this, Context::DELETE_UNIT);
+            context->addEvent(this, e172::Context::DELETE_UNIT);
         }
     } else {
         if(dynamic_cast<Projectile*>(this) == nullptr) {
-            context->addEvent(this, Context::FLOATING_MESSAGE, const_cast<char*>("no damage"));
+            context->addEvent(this, e172::Context::FLOATING_MESSAGE, const_cast<char*>("no damage"));
         }
     }
 }
 
-void Unit::tick(Context *context, e172::AbstractEventHandler *eventHandler) {
+void Unit::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
     const double rotationSpeed = getRotationSpeed();
     if(angleLocked && std::abs(angle - dstAngle) > rotationSpeed * 5) {
         if(angle > dstAngle) angle -= rotationSpeed;
@@ -174,7 +175,7 @@ void Unit::tick(Context *context, e172::AbstractEventHandler *eventHandler) {
     }
 
     for(Capability *cap : capabilities) {
-        cap->tick(context, eventHandler);
+        cap->proceed(context, eventHandler);
     }
 }
 

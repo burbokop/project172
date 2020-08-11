@@ -1,5 +1,8 @@
 #include "background.h"
-#include "context.h"
+
+#include <engine/time/elapsedtimer.h>
+
+#include <engine/graphics/abstractrenderer.h>
 
 
 
@@ -16,7 +19,7 @@ void Background::setSpeed(const e172::Vector &value) {
 }
 
 void Background::flashing(int repeats) {
-    flashingTimer = new Timer(DEFAULT_FLASHING_INTERVAL);
+    flashingTimer = new e172::ElapsedTimer(DEFAULT_FLASHING_INTERVAL);
     flashingTimer->reset();
     flashesRemains = repeats;
 }
@@ -40,19 +43,19 @@ void Background::onResolutionChange(e172::Vector resolution) {
     }
 }
 
-void Background::tick(Context *context, e172::AbstractEventHandler *eventHandler) {
+void Background::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
     UNUSED(context);
     UNUSED(eventHandler);
 }
 
 void Background::render(e172::AbstractRenderer *renderer) {
-    if(observer.count(true)) {
+    if(observer.check()) {
         if(resolution != renderer->resolution()) {
             onResolutionChange(renderer->resolution());
         }
     }
 
-    if(flashingTimer && flashingTimer->count()) {
+    if(flashingTimer && flashingTimer->check()) {
         if(mainColor != flashingColor) {
             colorBuffer = mainColor;
             mainColor = flashingColor;

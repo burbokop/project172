@@ -5,24 +5,28 @@
 #include "capabilities/capability.h"
 #include "iinformative.h"
 
-#include <assettools/loadable.h>
+#include <engine/assettools/loadable.h>
+
+#include <animator.h>
+
+#include <audio/audioplayer.h>
 
 
 
-class Module : public Capability, public Loadable, public IInformative {
+class Module : public Capability, public e172::Loadable, public IInformative {
 protected:
     Animator animator;
     AudioPlayer audioPlayer;
     e172::Vector attachOffset;
-    Timer timer = Timer(100);
+    e172::ElapsedTimer timer = e172::ElapsedTimer(100);
 public:
     Module();
-    void animate(unsigned mode, unsigned def = Animator::DEFAULT_INACTIVE);
+    void animate(unsigned mode, unsigned def = Animator::Inactive);
 
-    // Worker interface
+    // Entity interface
 public:
 
-    void tick(Context *context, e172::AbstractEventHandler *eventHandler);
+    void proceed(e172::Context *, e172::AbstractEventHandler *);
     void render(e172::AbstractRenderer *renderer);
 };
 

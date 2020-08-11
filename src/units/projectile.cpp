@@ -1,11 +1,12 @@
 #include "projectile.h"
 
-#include "context.h"
 #include "units/particle.h"
 #include "units/camera.h"
 #include "additional/lightparticle.h"
 #include "objectregistry.h"
 #include "debug.h"
+
+#include <engine/context.h>
 
 const double Projectile::DEFAULT_HIT_RADIUS = 16.0;
 const int Projectile::DEFAULT_DAMAGE = 4;
@@ -15,7 +16,7 @@ const int Projectile::DEFAULT_AVERAGE_LIFE_TIME = 6000;
 const int Projectile::DEFAULT_LIFE_TIME_DELTA = 4000;
 
 
-bool Projectile::collision(Context* context, Unit *collider) {
+bool Projectile::collision(e172::Context* context, Unit *collider) {
     if(
         collider->isNot<Camera*>() &&
         collider->isNot<Particle*>() &&
@@ -36,7 +37,7 @@ Projectile::Projectile() {
         lifetimeDelta = asset<double>("lifetime-delta", DEFAULT_LIFE_TIME_DELTA);
         averageLifetime = asset<double>("lifetime", DEFAULT_AVERAGE_LIFE_TIME);
         setIdleEnabled(false);
-        destroyTimer = new Timer((rand() % (2 * lifetimeDelta) + (averageLifetime - lifetimeDelta)));
+        destroyTimer = new e172::ElapsedTimer((rand() % (2 * lifetimeDelta) + (averageLifetime - lifetimeDelta)));
         destroyTimer->reset();
     });
 }
@@ -45,14 +46,14 @@ void Projectile::setMother(Unit *value) {
     mother = value;
 }
 
-void Projectile::tick(Context *context, e172::AbstractEventHandler *eventHandler) {
-    if(destroyTimer && destroyTimer->count()) {
-        context->addEvent(this, Context::DELETE_UNIT);
+void Projectile::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
+    if(destroyTimer && destroyTimer->check()) {
+        context->addEvent(this, e172::Context::DELETE_UNIT);
     }
 
-    for(Worker *worker : *(context->getUnits())) {
-        EXISTS(worker) {
-            Unit *unit = dynamic_cast<Unit*>(worker);
+    for(Entity *e : *(context->entities())) {
+        EXISTS(e) {
+            Unit *unit = dynamic_cast<Unit*>(e);
             if(unit != nullptr && unit != this) {
                 if((unit->getPosition() - getPosition()).module() < DEFAULT_HIT_RADIUS) {
                     collision(context, unit);
@@ -62,6 +63,6 @@ void Projectile::tick(Context *context, e172::AbstractEventHandler *eventHandler
             Debug::err(Debug::Code::APPEAL_TO_REMOVED, __PRETTY_FUNCTION__);
         }
     }
-    this->Movable::tick(context, eventHandler);
+    this->Movable::proceed(context, eventHandler);
 }
 

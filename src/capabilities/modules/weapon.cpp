@@ -1,8 +1,10 @@
 #include "weapon.h"
 
-#include "context.h"
 #include "additional/stringformer.h"
 #include "units/projectile.h"
+
+#include <engine/context.h>
+#include <engine/assettools/assetprovider.h>
 
 const double Weapon::DEFAULT_PROJECTILE_SPEED = 200.0;
 double Weapon::getProjectileSpead() const {
@@ -24,21 +26,21 @@ void Weapon::setFiring(bool condition) {
 
 std::string Weapon::getInfo() {
     return "WP   |"
-            + StringFormer::line(static_cast<unsigned int>((timer.ready() * 4)), static_cast<unsigned int>(4))
+            + StringFormer::line(static_cast<unsigned int>((timer.progress() * 4)), static_cast<unsigned int>(4))
             + "|   "
-            + ((timer.ready() > 1) ? "ready" : "");
+            + ((timer.progress() > 1) ? "ready" : "");
 }
 
-void Weapon::tick(Context *context, e172::AbstractEventHandler *eventHandler) {
-    this->Module::tick(context, eventHandler);
-    if(timer.count(firing)) {
+void Weapon::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
+    this->Module::proceed(context, eventHandler);
+    if(timer.check(firing)) {
         if(projectileName.size() > 0) {
-            Projectile *object = static_cast<Projectile*>(context->getAssets()->createLoadable(projectileName));
+            Projectile *object = static_cast<Projectile*>(context->assetProvider()->createLoadable(projectileName));
             object->setMother(parent());
 
             object->place(parent()->getPosition(), parent()->getVelocity() + e172::Vector::createByAngle(getProjectileSpead(), parent()->getAngle()), e172::Vector(), parent()->getAngle());
 
-            context->getUnits()->push_back(object);
+            context->entities()->push_back(object);
 
             audioPlayer.play();
             //this.parent.audioPlayer.play(this, 14);

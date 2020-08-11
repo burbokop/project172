@@ -1,6 +1,7 @@
 #include "loadable.h"
 
 
+namespace e172 {
 
 std::string Loadable::className() const {
     return m_className;
@@ -26,3 +27,4 @@ void Loadable::registerInitFunction(const std::function<void ()> &function) {
 Loadable::Loadable() {}
 
 Loadable::~Loadable() {}
+}
