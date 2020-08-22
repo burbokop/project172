@@ -41,6 +41,13 @@ public:
     std::vector<std::string> arguments() const;
 
     inline void addEntity(Entity *entity) { m_entities.push_back(entity); }
+    inline void clearEntities() { m_entities.clear(); }
+    inline void terminateEntities() {
+        for(auto e : m_entities) {
+            delete e;
+        }
+        m_entities.clear();
+    }
 
     AssetProvider *assetProvider() const;
     e172::Context *context() const;

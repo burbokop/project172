@@ -31,7 +31,7 @@ void GUIMiniMap::render(e172::AbstractRenderer *renderer) {
         for(Entity *worker : *units) {
             Unit *unit = dynamic_cast<Unit*>(worker);
             if(unit) {
-                e172::Vector posOnMap = ((unit->getPosition() - renderer->cameraPosition()) / range * size.module()) + (size / 2);
+                e172::Vector posOnMap = ((unit->position() - renderer->cameraPosition()) / range * size.module()) + (size / 2);
 
                 if(posOnMap.quarter() == e172::Vector::QUARTER_RIGHT_DOWN && (size - posOnMap).quarter() == e172::Vector::QUARTER_RIGHT_DOWN) {
                     if(unit->is<Projectile*>()) {

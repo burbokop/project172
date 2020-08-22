@@ -131,6 +131,7 @@ SOURCES       = ../klibcore/src/experimental/universalqueue/kuniversalqueue.cpp 
 		../src/gui/guiblushingfloatingmessage.cpp \
 		../src/gui/guicentralmessage.cpp \
 		../src/gui/guichoice.cpp \
+		../src/gui/guicombobox.cpp \
 		../src/gui/guidebugvalueinfo.cpp \
 		../src/gui/guifloatingmessage.cpp \
 		../src/gui/guilist.cpp \
@@ -169,7 +170,7 @@ SOURCES       = ../klibcore/src/experimental/universalqueue/kuniversalqueue.cpp 
 		../src/worldmanager.cpp \
 		../src/worlds/arenaworld.cpp \
 		../src/worlds/defaultworld.cpp \
-		../src/worlds/guisetup.cpp \
+		../src/worlds/guimaker.cpp \
 		../src/worlds/heapworld.cpp \
 		../src/worlds/world.cpp 
 OBJECTS       = kuniversalqueue.o \
@@ -251,6 +252,7 @@ OBJECTS       = kuniversalqueue.o \
 		guiblushingfloatingmessage.o \
 		guicentralmessage.o \
 		guichoice.o \
+		guicombobox.o \
 		guidebugvalueinfo.o \
 		guifloatingmessage.o \
 		guilist.o \
@@ -289,7 +291,7 @@ OBJECTS       = kuniversalqueue.o \
 		worldmanager.o \
 		arenaworld.o \
 		defaultworld.o \
-		guisetup.o \
+		guimaker.o \
 		heapworld.o \
 		world.o
 DIST          = ../../../../Qt/5.15.0/gcc_64/mkspecs/features/spec_pre.prf \
@@ -547,6 +549,7 @@ DIST          = ../../../../Qt/5.15.0/gcc_64/mkspecs/features/spec_pre.prf \
 		src/gui/guiblushingfloatingmessage.h \
 		src/gui/guicentralmessage.h \
 		src/gui/guichoice.h \
+		src/gui/guicombobox.h \
 		src/gui/guidebugvalueinfo.h \
 		src/gui/guifloatingmessage.h \
 		src/gui/guilist.h \
@@ -594,7 +597,7 @@ DIST          = ../../../../Qt/5.15.0/gcc_64/mkspecs/features/spec_pre.prf \
 		src/worldmanager.h \
 		src/worlds/arenaworld.h \
 		src/worlds/defaultworld.h \
-		src/worlds/guisetup.h \
+		src/worlds/guimaker.h \
 		src/worlds/heapworld.h \
 		src/worlds/world.h ../klibcore/src/experimental/universalqueue/kuniversalqueue.cpp \
 		../klibcore/src/utility/ktype.cpp \
@@ -675,6 +678,7 @@ DIST          = ../../../../Qt/5.15.0/gcc_64/mkspecs/features/spec_pre.prf \
 		../src/gui/guiblushingfloatingmessage.cpp \
 		../src/gui/guicentralmessage.cpp \
 		../src/gui/guichoice.cpp \
+		../src/gui/guicombobox.cpp \
 		../src/gui/guidebugvalueinfo.cpp \
 		../src/gui/guifloatingmessage.cpp \
 		../src/gui/guilist.cpp \
@@ -713,7 +717,7 @@ DIST          = ../../../../Qt/5.15.0/gcc_64/mkspecs/features/spec_pre.prf \
 		../src/worldmanager.cpp \
 		../src/worlds/arenaworld.cpp \
 		../src/worlds/defaultworld.cpp \
-		../src/worlds/guisetup.cpp \
+		../src/worlds/guimaker.cpp \
 		../src/worlds/heapworld.cpp \
 		../src/worlds/world.cpp
 QMAKE_TARGET  = project172
@@ -1458,9 +1462,23 @@ background.o: ../src/background.cpp ../src/background.h \
 		../src/object.h \
 		../src/engine/time/elapsedtimer.h \
 		../src/engine/math/vector.h \
-		../src/engine/graphics/abstractrenderer.h \
+		../src/units/movable.h \
+		../src/units/unit.h \
+		../src/capabilities/modulehandler.h \
+		../src/capabilities/modules/module.h \
+		../src/capabilities/capability.h \
+		../src/iinformative.h \
+		../src/engine/assettools/loadable.h \
+		../src/engine/variant.h \
+		../src/engine/type.h \
+		../src/animator.h \
 		../src/engine/graphics/image.h \
 		../src/engine/sharedcontainer.h \
+		../src/audio/audioplayer.h \
+		../src/engine/audio/audiochannel.h \
+		../src/engine/audio/audiosample.h \
+		../src/capabilities/docker.h \
+		../src/engine/graphics/abstractrenderer.h \
 		../src/additional/e_variant.h \
 		../src/engine/textformat.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o background.o ../src/background.cpp
@@ -2135,21 +2153,12 @@ environment.o: ../src/environment.cpp ../src/environment.h \
 		../src/background.h \
 		../src/engine/entity.h \
 		../src/engine/time/elapsedtimer.h \
-		../src/additional/informative/fpsmonitor.h \
-		../src/iinformative.h \
-		../src/netlistener.h \
-		../src/engine/context.h \
-		../src/gui/guimain.h \
-		../src/gui/guicentralmessage.h \
-		../src/gui/base/guimenuelement.h \
-		../src/gui/base/guielement.h \
-		../src/capabilities/controller.h \
-		../src/capabilities/capability.h \
-		../src/units/ship.h \
 		../src/units/movable.h \
 		../src/units/unit.h \
 		../src/capabilities/modulehandler.h \
 		../src/capabilities/modules/module.h \
+		../src/capabilities/capability.h \
+		../src/iinformative.h \
 		../src/engine/assettools/loadable.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
@@ -2160,6 +2169,15 @@ environment.o: ../src/environment.cpp ../src/environment.h \
 		../src/engine/audio/audiochannel.h \
 		../src/engine/audio/audiosample.h \
 		../src/capabilities/docker.h \
+		../src/additional/informative/fpsmonitor.h \
+		../src/netlistener.h \
+		../src/engine/context.h \
+		../src/gui/guimain.h \
+		../src/gui/guicentralmessage.h \
+		../src/gui/base/guimenuelement.h \
+		../src/gui/base/guielement.h \
+		../src/capabilities/controller.h \
+		../src/units/ship.h \
 		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h \
 		../src/gui/base/guibaseelement.h \
@@ -2476,6 +2494,40 @@ guichoice.o: ../src/gui/guichoice.cpp ../src/gui/guichoice.h \
 		../src/additional/trigger.h \
 		../src/gui/base/guibaseelement.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o guichoice.o ../src/gui/guichoice.cpp
+
+guicombobox.o: ../src/gui/guicombobox.cpp ../src/gui/guicombobox.h \
+		../src/gui/guichoice.h \
+		../src/additional/e_variant.h \
+		../src/engine/math/vector.h \
+		../src/object.h \
+		../src/gui/base/guimenuelement.h \
+		../src/gui/base/guielement.h \
+		../src/capabilities/controller.h \
+		../src/capabilities/capability.h \
+		../src/engine/entity.h \
+		../src/units/ship.h \
+		../src/units/movable.h \
+		../src/units/unit.h \
+		../src/capabilities/modulehandler.h \
+		../src/capabilities/modules/module.h \
+		../src/iinformative.h \
+		../src/engine/assettools/loadable.h \
+		../src/engine/variant.h \
+		../src/engine/type.h \
+		../src/animator.h \
+		../src/engine/time/elapsedtimer.h \
+		../src/engine/graphics/image.h \
+		../src/engine/sharedcontainer.h \
+		../src/audio/audioplayer.h \
+		../src/engine/audio/audiochannel.h \
+		../src/engine/audio/audiosample.h \
+		../src/capabilities/docker.h \
+		../src/capabilities/modules/warpdrive.h \
+		../src/additional/trigger.h \
+		../src/gui/base/guibaseelement.h \
+		../src/gui/base/guicontainer.h \
+		../src/gui/base/guistack.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o guicombobox.o ../src/gui/guicombobox.cpp
 
 guidebugvalueinfo.o: ../src/gui/guidebugvalueinfo.cpp ../src/gui/guidebugvalueinfo.h \
 		../src/gui/base/guielement.h \
@@ -2874,18 +2926,21 @@ main.o: ../src/main.cpp ../src/engine/gameapplication.h \
 		../klibcore/src/memcontrol/kabstractfactory.h \
 		../klibcore/src/utility/ktype.h \
 		../src/worlds/defaultworld.h \
-		../src/worlds/guisetup.h \
+		../src/worlds/guimaker.h \
 		../src/units/camera.h \
+		../src/worldmanager.h \
+		../src/additional/informative/fpsmonitor.h \
+		../src/engine/memcontrol/abstractstrategy.h \
+		../klibcore/src/kmacro.h \
+		../src/gui/guicombobox.h \
+		../src/gui/guichoice.h \
+		../src/gui/base/guicontainer.h \
 		../src/worlds/heapworld.h \
 		../src/environment.h \
 		../src/state.h \
-		../src/additional/informative/fpsmonitor.h \
 		../src/netlistener.h \
 		../src/additional/net/socket.h \
 		../src/additional/net/framebuilder.h \
-		../src/worldmanager.h \
-		../src/engine/memcontrol/abstractstrategy.h \
-		../klibcore/src/kmacro.h \
 		../src/additional/mutex.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../src/main.cpp
 
@@ -3506,7 +3561,7 @@ defaultworld.o: ../src/worlds/defaultworld.cpp ../src/worlds/defaultworld.h \
 		../klibcore/src/ksmartenum.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o defaultworld.o ../src/worlds/defaultworld.cpp
 
-guisetup.o: ../src/worlds/guisetup.cpp ../src/worlds/guisetup.h \
+guimaker.o: ../src/worlds/guimaker.cpp ../src/worlds/guimaker.h \
 		../src/worlds/world.h \
 		../src/engine/assettools/assetprovider.h \
 		../src/object.h \
@@ -3562,17 +3617,23 @@ guisetup.o: ../src/worlds/guisetup.cpp ../src/worlds/guisetup.h \
 		../src/units/camera.h \
 		../src/engine/graphics/abstractrenderer.h \
 		../src/engine/textformat.h \
+		../src/worldmanager.h \
+		../src/additional/informative/fpsmonitor.h \
+		../src/engine/memcontrol/abstractstrategy.h \
+		../klibcore/src/kmacro.h \
+		../src/gui/guicombobox.h \
 		../src/gui/guichoice.h \
+		../src/gui/base/guicontainer.h \
+		../src/gui/guimoduleview.h \
 		../src/gui/guiradar.h \
 		../src/gui/guilist.h \
-		../src/gui/base/guicontainer.h \
 		../src/gui/guiswitch.h \
 		../src/engine/gameapplication.h \
 		../src/engine/time/deltatimecalculator.h \
 		../src/additional/informative/controllerfinder.h \
 		../src/additional/informative/registryinfo.h \
 		../src/additional/informative/unitsamountinfo.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o guisetup.o ../src/worlds/guisetup.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o guimaker.o ../src/worlds/guimaker.cpp
 
 heapworld.o: ../src/worlds/heapworld.cpp ../src/worlds/heapworld.h \
 		../src/worlds/world.h \

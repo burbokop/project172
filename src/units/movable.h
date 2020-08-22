@@ -54,13 +54,13 @@ public:
 
     void place(e172::Vector pos, e172::Vector vel = e172::Vector(), e172::Vector acc = e172::Vector(), double angle = 0);
 
-    void accelerate(e172::Vector acc);
+    void accelerate(e172::Vector acceleration);
     bool accelerateForward();
     bool accelerateLeft();
     bool accelerateRight();
 
 
-    e172::Vector getVelocity();
+    e172::Vector velocity() const;
     double getReleaseSpead() const;
 
     void pursuit(e172::Context *context, Unit *target);

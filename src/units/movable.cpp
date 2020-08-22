@@ -125,14 +125,14 @@ void Movable::accelerateIdle() {
     }
 }
 
-void Movable::accelerate(e172::Vector acc) {
+void Movable::accelerate(e172::Vector acceleration) {
     if(!accelerationLocked) {
-        this->acc = acc;
+        this->acc = acceleration;
         accelerationLocked = true;
     }
 }
 
-e172::Vector Movable::getVelocity() {
+e172::Vector Movable::velocity() const {
     return vel;
 }
 
@@ -155,12 +155,12 @@ double Movable::getReleaseSpead() const {
 }
 
 void Movable::pursuit(e172::Context *context, Unit *target) {
-    accelerate((target->getPosition() - getPosition() - getVelocity()) / context->deltaTime());
+    accelerate((target->position() - position() - velocity()) / context->deltaTime());
 }
 
 void Movable::relativisticPursuit(e172::Context *context, Unit *target) {
     if(!e172::Math::cmpf(context->deltaTime(), 0.0)) {
-        double velocity = target->getVelocity().module();
+        double velocity = target->velocity().module();
 
         if(e172::Math::cmpf(velocity, 0)) {
             velocity = 1.0;
@@ -168,7 +168,7 @@ void Movable::relativisticPursuit(e172::Context *context, Unit *target) {
             velocity = std::pow(velocity, 2);
         }
 
-        e172::Vector direction = target->getPosition() - getPosition();
+        e172::Vector direction = target->position() - position();
         if(!e172::Math::cmpf(context->deltaTime(), 0)) {
             accelerate(direction * velocity * RELATIVISTIC_PURSUIT_COEFFICIENT / context->deltaTime());
         }

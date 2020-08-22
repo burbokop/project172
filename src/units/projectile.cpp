@@ -55,7 +55,7 @@ void Projectile::proceed(e172::Context *context, e172::AbstractEventHandler *eve
         EXISTS(e) {
             Unit *unit = dynamic_cast<Unit*>(e);
             if(unit != nullptr && unit != this) {
-                if((unit->getPosition() - getPosition()).module() < DEFAULT_HIT_RADIUS) {
+                if((unit->position() - position()).module() < DEFAULT_HIT_RADIUS) {
                     collision(context, unit);
                 }
             }

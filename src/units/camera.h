@@ -30,7 +30,7 @@ public:
 
     // Unit interface
 public:
-    void hit(e172::Context *context, int value);
+    void hit(e172::Context *, int);
 };
 
 #endif // CAMERA_H

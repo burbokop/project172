@@ -12,6 +12,7 @@ public:
     bool addChildElement(GUIBaseElement *element);
     bool removeChildElement(GUIBaseElement *element);
     void clearChildren();
+    void terminateChildren();
     void setController(Controller *controller);
 
     GUIBaseElement *parentElement() const;

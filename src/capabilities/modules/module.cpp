@@ -38,10 +38,10 @@ void Module::proceed(e172::Context *, e172::AbstractEventHandler *) {
 }
 
 void Module::render(e172::AbstractRenderer *renderer) {
-    audioPlayer.setDistance((parentUnit()->getPosition() - renderer->cameraPosition()).module());
+    audioPlayer.setDistance((parentUnit()->position() - renderer->cameraPosition()).module());
 
     this->animator.setAngle(parentUnit()->getAngle());
-    e172::Vector local = parentUnit()->getPosition() + e172::Vector::createByAngle(-this->attachOffset.module(), parentUnit()->getAngle());
+    e172::Vector local = parentUnit()->position() + e172::Vector::createByAngle(-this->attachOffset.module(), parentUnit()->getAngle());
     this->animator.setPosition(local);
     this->animator.render(renderer);
 }

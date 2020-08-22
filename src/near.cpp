@@ -33,7 +33,7 @@ void Near::add() {
                     centerUnit != nullptr &&
                     currentUnit != centerUnit &&
                     std::find(focus->begin(), focus->end(), current) == focus->end() &&
-                    (currentUnit->getPosition() - centerUnit->getPosition()).module() <= getLocalRadius(centerUnit)
+                    (currentUnit->position() - centerUnit->position()).module() <= getLocalRadius(centerUnit)
                 ) {
                     focus->push_back(current);
                 }
@@ -70,7 +70,7 @@ void Near::remove() {
                     if(
                         (
                             focusIt != focus->end() &&
-                            (currentUnit->getPosition() - centerUnit->getPosition()).module() > (getLocalRadius(centerUnit) + RADIUS_DELTA)
+                            (currentUnit->position() - centerUnit->position()).module() > (getLocalRadius(centerUnit) + RADIUS_DELTA)
                         ) ||
                         originIt == origin->end()
                     ) {

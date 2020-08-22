@@ -21,7 +21,7 @@ void GUIDebugValueInfo::render(e172::AbstractRenderer *renderer) {
     auto res = renderer->resolution();
 
     if(controller()) {
-        const double module = std::round(controller()->parentUnit()->getVelocity().module());
+        const double module = std::round(controller()->parentUnit()->velocity().module());
 
         //renderer->applyLensEffect(e172::Vector(20, res.y() - 70), e172::Vector(70, res.y()-20), module / 240.);
 

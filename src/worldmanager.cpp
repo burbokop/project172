@@ -18,6 +18,7 @@ void WorldPresetStrategy::proceed(e172::Context *context, e172::AbstractEventHan
     if(m_strategy.activeModule() != m_last) {
         m_last = m_strategy.activeModule();
         if(m_last) {
+            context->appliation()->clearEntities();
             const auto result = m_last->generate(context);
 
             for(auto r : result.entities)

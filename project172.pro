@@ -101,6 +101,7 @@ HEADERS += \
     src/gui/guiblushingfloatingmessage.h \
     src/gui/guicentralmessage.h \
     src/gui/guichoice.h \
+    src/gui/guicombobox.h \
     src/gui/guidebugvalueinfo.h \
     src/gui/guifloatingmessage.h \
     src/gui/guilist.h \
@@ -148,7 +149,7 @@ HEADERS += \
     src/worldmanager.h \
     src/worlds/arenaworld.h \
     src/worlds/defaultworld.h \
-    src/worlds/guisetup.h \
+    src/worlds/guimaker.h \
     src/worlds/heapworld.h \
     src/worlds/world.h
 
@@ -224,6 +225,7 @@ SOURCES += \
     src/gui/guiblushingfloatingmessage.cpp \
     src/gui/guicentralmessage.cpp \
     src/gui/guichoice.cpp \
+    src/gui/guicombobox.cpp \
     src/gui/guidebugvalueinfo.cpp \
     src/gui/guifloatingmessage.cpp \
     src/gui/guilist.cpp \
@@ -262,6 +264,6 @@ SOURCES += \
     src/worldmanager.cpp \
     src/worlds/arenaworld.cpp \
     src/worlds/defaultworld.cpp \
-    src/worlds/guisetup.cpp \
+    src/worlds/guimaker.cpp \
     src/worlds/heapworld.cpp \
     src/worlds/world.cpp

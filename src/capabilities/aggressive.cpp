@@ -38,7 +38,7 @@ Aggressive::Aggressive(std::list<Entity*> *units) {
 void Aggressive::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
     EXISTS(target) {
         if(target != nullptr && parentUnit() != nullptr && target->is<Ship*>() && target != parentUnit()) {
-            e172::Vector dst = target->getPosition() - parentUnit()->getPosition();
+            e172::Vector dst = target->position() - parentUnit()->position();
             const double dstAngle = dst.angle();
             const double dstModule = dst.module();
 

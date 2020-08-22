@@ -118,11 +118,11 @@ void Unit::unlockAngle() {
     angleLocked = false;
 }
 
-e172::Vector Unit::getPosition() {
+e172::Vector Unit::position() {
     return pos;
 }
 
-e172::Vector Unit::getVelocity() {
+e172::Vector Unit::velocity() {
     return e172::Vector();
 }
 

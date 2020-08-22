@@ -7,6 +7,7 @@
 #include <engine/entity.h>
 #include <engine/time/elapsedtimer.h>
 #include <src/engine/math/vector.h>
+#include <units/movable.h>
 #include <vector>
 
 
@@ -26,7 +27,6 @@ private:
 
     Uint32 mainColor = DEFAULT_MAIN_COLOR;
     std::vector<Star> stars;
-    e172::Vector speed;
     unsigned int amount;
     double slidingStart;
 
@@ -36,7 +36,7 @@ private:
     Uint32 flashingColor = DEFAULT_FLASHING_COLOR;
     Uint32 colorBuffer = DEFAULT_MAIN_COLOR;
     int flashesRemains = 0;
-
+    Movable *m_movable = nullptr;
     void onResolutionChanged(const e172::Vector &resolution);
 public:
     Background(unsigned int amount, double slidingStart = STARS_SLIDING_SPEED);
@@ -44,9 +44,9 @@ public:
 
     // Entity interface
 public:
-    void proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler);
+    void proceed(e172::Context *, e172::AbstractEventHandler *);
     void render(e172::AbstractRenderer *renderer);
-    void setSpeed(const e172::Vector &value);
+    void bindToMovable(Movable *value);
 
     void flashing(int repeats);
 };

@@ -57,3 +57,10 @@ void GUIBaseElement::clearChildren() {
     }
     m_children.clear();
 }
+
+void GUIBaseElement::terminateChildren() {
+    for(auto c : m_children) {
+        delete c;
+    }
+    m_children.clear();
+}

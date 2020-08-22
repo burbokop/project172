@@ -48,8 +48,8 @@ public:
     void unlockAngle();
 
 
-    e172::Vector getPosition();
-    virtual e172::Vector getVelocity();
+    e172::Vector position();
+    virtual e172::Vector velocity();
     double getAngle();
 
     virtual void hit(e172::Context *context, int value);

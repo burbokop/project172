@@ -48,7 +48,4 @@ void Camera::render(e172::AbstractRenderer *renderer) {
     }
 }
 
-void Camera::hit(e172::Context *context, int value) {
-    UNUSED(context);
-    UNUSED(value);
-}
+void Camera::hit(e172::Context *, int) {}

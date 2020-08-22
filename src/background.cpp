@@ -14,10 +14,6 @@ const long Background::DEFAULT_FLASHING_INTERVAL = 32;
 
 
 
-void Background::setSpeed(const e172::Vector &value) {
-    speed = value;
-}
-
 void Background::flashing(int repeats) {
     flashingTimer = new e172::ElapsedTimer(DEFAULT_FLASHING_INTERVAL);
     flashingTimer->reset();
@@ -41,10 +37,7 @@ void Background::onResolutionChanged(const e172::Vector &resolution) {
     }
 }
 
-void Background::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
-    UNUSED(context);
-    UNUSED(eventHandler);
-}
+void Background::proceed(e172::Context *, e172::AbstractEventHandler *) {}
 
 void Background::render(e172::AbstractRenderer *renderer) {
     const auto resolution = renderer->resolution();
@@ -81,11 +74,19 @@ void Background::render(e172::AbstractRenderer *renderer) {
             if(y >= 0) y = y % resolution.intY();
             else y = y % resolution.intY() + resolution.intY();
 
-            if(speed.module() < slidingStart) {
+            e172::Vector velocity;
+            if(m_movable)
+                velocity = m_movable->velocity();
+
+            if(velocity.module() < slidingStart) {
                 renderer->drawPixel(e172::Vector(x, y), star.color);
             } else {
-                renderer->drawLine(e172::Vector(x, y), e172::Vector(x, y) - (speed - slidingStart) * SLIDING_LEGHTH, star.color);
+                renderer->drawLine(e172::Vector(x, y), e172::Vector(x, y) - (velocity - slidingStart) * SLIDING_LEGHTH, star.color);
             }
         }
     }
+}
+
+void Background::bindToMovable(Movable *value) {
+    m_movable = value;
 }

@@ -29,7 +29,7 @@
 
 #include <worlds/arenaworld.h>
 #include <worlds/defaultworld.h>
-#include <worlds/guisetup.h>
+#include <worlds/guimaker.h>
 #include <worlds/heapworld.h>
 
 
@@ -88,51 +88,46 @@ int main(int argc, char *argv[]) {
 
     //INITIALIZATION CONMPLEATED
 
-
+    //initialization background
     Background background = 128;
     app.addEntity(&background);
 
 
-
-
-
     //player1
-    Player *player1 = static_cast<Player*>(app.assetProvider()->createLoadable("player1"));
+    Player *player = static_cast<Player*>(app.assetProvider()->createLoadable("player1"));
+
+    //installing armor to player
     Ship *playerArmor = static_cast<Ship*>(app.assetProvider()->createLoadable("astro"));
     ModuleHandler *playerArmorModules = new ModuleHandler();
     playerArmorModules->addModule(static_cast<Module*>(app.assetProvider()->createLoadable("mini-engine")));
     playerArmorModules->addModule(static_cast<Module*>(app.assetProvider()->createLoadable("repair-laser")));
     playerArmor->addCapability(playerArmorModules);
-    static_cast<Player*>(player1)->setArmor(playerArmor);
+    static_cast<Player*>(player)->setArmor(playerArmor);
 
+    //setting up player's ship
     Unit *playerShip = static_cast<Unit*>(app.assetProvider()->createLoadable("sh1"));
     playerShip->place(e172::Vector(100, 100), -0.7);
-
     playerShip->addCapability(new Docker());
-    playerShip->addCapability(player1);
+    playerShip->addCapability(player);
     ModuleHandler *playerModuleHandler = new ModuleHandler();
     playerModuleHandler->addModule(static_cast<Module*>(app.assetProvider()->createLoadable("pistol")));
     playerModuleHandler->addModule(static_cast<Module*>(app.assetProvider()->createLoadable("engine2")));
     playerModuleHandler->addModule(static_cast<Module*>(app.assetProvider()->createLoadable("warp-drive1")));
     playerModuleHandler->addModule(static_cast<Module*>(app.assetProvider()->createLoadable("thruster1")));
     playerShip->addCapability(playerModuleHandler);
-
     app.addEntity(playerShip);
 
-    GuiSetup guiSetup(app.context());
-    guiSetup.gui()->setController(player1);
-    app.addEntity(guiSetup.gui());
+    //setup gui
+    GUIMaker guiMaker(app.context());
+    guiMaker.gui()->setController(player);
+    app.addEntity(guiMaker.gui());
 
-    //GUIContainer container("ggg");
-    //
-    //GUIMenuElement menu_e("gogadoda");
-    //container.addMenuElement(&menu_e);
-    //GUIMenuElement menu_e2("kilikili");
-    //container.addMenuElement(&menu_e2);
-    //
-    //app.addEntity(&container);
+    //setup camera
+    Camera camera(player);
+    app.addEntity(&camera);
+    background.bindToMovable(&camera);
 
-
+    //setup world strategy
     WorldPresetStrategy worldPresetStrategy;
     worldPresetStrategy.registerType<DefaultWorld>();
     worldPresetStrategy.registerType<ArenaWorld>();
@@ -140,8 +135,9 @@ int main(int argc, char *argv[]) {
     app.addEntity(&worldPresetStrategy);
 
 
+    guiMaker.setWorldPresetStrategy(&worldPresetStrategy);
 
-
+    //start application
 
     return app.exec();
 }

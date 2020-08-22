@@ -26,7 +26,7 @@ GUIFloatingMessage::GUIFloatingMessage(Unit *parent, IInformative *informative) 
 }
 
 void GUIFloatingMessage::render(e172::AbstractRenderer *renderer) {
-    renderer->drawString(getTitle(), parent->getPosition() + renderer->offset() + e172::Vector(0.0, m_horisontalOffset), DEFAULT_COLOR, e172::TextFormat(e172::TextFormat::AlignCenter, DEFAULT_FONT_SIZE));
+    renderer->drawString(getTitle(), parent->position() + renderer->offset() + e172::Vector(0.0, m_horisontalOffset), DEFAULT_COLOR, e172::TextFormat(e172::TextFormat::AlignCenter, DEFAULT_FONT_SIZE));
 
     //tttt
     //tttt
