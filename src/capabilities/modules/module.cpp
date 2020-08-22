@@ -21,10 +21,14 @@ Module::Module() {
         }
     });
 }
-
+#include <iostream>
 void Module::animate(unsigned mode, unsigned def) {
     animator.setDefaultMode(def);
     animator.play(mode);
+
+
+    std::cout << "validation: " << audioPlayer.beginningSample().isValid() << audioPlayer.loopSample().isValid() << audioPlayer.endingSample().isValid() << "\n";
+
     if(mode == Animator::Loop) audioPlayer.play();
     else audioPlayer.stop();
 }
@@ -34,10 +38,10 @@ void Module::proceed(e172::Context *, e172::AbstractEventHandler *) {
 }
 
 void Module::render(e172::AbstractRenderer *renderer) {
-    audioPlayer.setDistance((parent()->getPosition() - renderer->cameraPosition()).module());
+    audioPlayer.setDistance((parentUnit()->getPosition() - renderer->cameraPosition()).module());
 
-    this->animator.setAngle(parent()->getAngle());
-    e172::Vector local = parent()->getPosition() + e172::Vector::createByAngle(-this->attachOffset.module(), parent()->getAngle());
+    this->animator.setAngle(parentUnit()->getAngle());
+    e172::Vector local = parentUnit()->getPosition() + e172::Vector::createByAngle(-this->attachOffset.module(), parentUnit()->getAngle());
     this->animator.setPosition(local);
     this->animator.render(renderer);
 }

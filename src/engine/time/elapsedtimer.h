@@ -21,7 +21,6 @@ public:
     void reset();
     double progress();
 
-    static time_t currentMilliseconds();
     time_t interval() const;
 };
 

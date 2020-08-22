@@ -10,13 +10,17 @@
 #include "../capabilities/controller.h"
 
 
-class World : public Object {
+class WorldPreset : public Object {
 public:
-    World();
-    virtual std::vector<Controller*> generate(e172::AssetProvider *assets, std::list<e172::Entity*> *units) = 0;
-    virtual std::string getName() = 0;
+    struct GenerationResult {
+        std::list<e172::Entity*> entities;
+        std::list<Controller*> controllers;
+    };
 
-    virtual ~World();
+    WorldPreset();
+    virtual GenerationResult generate(e172::Context *context) = 0;
+
+    virtual ~WorldPreset();
 };
 
 #endif // WORLD_H

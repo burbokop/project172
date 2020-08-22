@@ -5,14 +5,10 @@
 const unsigned GUICentralMessage::DEFAULT_FLASHING_INTERVAL = 500;
 
 
-GUICentralMessage::GUICentralMessage(Controller *player) : GUIMenuElement (player) {
-}
 
-GUICentralMessage::GUICentralMessage(Controller *player, std::string label) : GUIMenuElement (player, label) {
-}
+GUICentralMessage::GUICentralMessage(std::string label) : GUIMenuElement (label) {}
 
-GUICentralMessage::GUICentralMessage(Controller *player, IInformative *informative) : GUIMenuElement (player, informative) {
-}
+GUICentralMessage::GUICentralMessage(IInformative *informative) : GUIMenuElement (informative) {}
 
 void GUICentralMessage::start(int flashesRemains, unsigned interval) {
     this->flashesRemains = flashesRemains;

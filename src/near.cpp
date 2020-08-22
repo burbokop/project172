@@ -25,7 +25,7 @@ void Near::add() {
             e172::Entity *current = *addingIterator;
             if(ObjectRegistry::getInstance()->exists(current)) {
                 Unit *currentUnit = dynamic_cast<Unit*>(current);
-                Unit *centerUnit = center->parent();
+                Unit *centerUnit = center->parentUnit();
 
 
                 if(
@@ -61,7 +61,7 @@ void Near::remove() {
             e172::Entity *current = *removingIterator;
             if(ObjectRegistry::getInstance()->exists(current)) {
                 Unit *currentUnit = dynamic_cast<Unit*>(current);
-                Unit *centerUnit = center->parent();
+                Unit *centerUnit = center->parentUnit();
 
                 if(currentUnit != nullptr && centerUnit != nullptr) {
                     std::list<e172::Entity*>::iterator focusIt = std::find(focus->begin(), focus->end(), current);

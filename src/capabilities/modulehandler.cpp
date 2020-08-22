@@ -5,25 +5,25 @@ ModuleHandler::ModuleHandler() {
 
 }
 
-bool ModuleHandler::setParent(Unit *parent) {
-    if(this->Capability::setParent(parent)) {
+bool ModuleHandler::setParentUnit(Unit *parent) {
+    if(this->Capability::setParentUnit(parent)) {
         for(Module *module : modules) {
-            module->setParent(parent);
+            module->setParentUnit(parent);
         }
         return true;
     }
     return false;
 }
 
-void ModuleHandler::unsetParent() {
+void ModuleHandler::unsetParentUnit() {
     for(Module *module : modules) {
-        module->unsetParent();
+        module->unsetParentUnit();
     }
-    this->Capability::unsetParent();
+    this->Capability::unsetParentUnit();
 }
 
 void ModuleHandler::addModule(Module *module) {
-    if(module->setParent(this->parent())) {
+    if(module->setParentUnit(this->parentUnit())) {
         modules.push_back(module);
         categories = nullptr;
     }
@@ -32,7 +32,7 @@ void ModuleHandler::addModule(Module *module) {
 void ModuleHandler::removeModule(Module *module) {
     std::vector<Module*>::iterator pos = std::find(modules.begin(), modules.end(), module);
     if(pos != modules.end()) {
-        module->unsetParent();
+        module->unsetParentUnit();
         modules.erase(pos);
         categories = nullptr;
     }

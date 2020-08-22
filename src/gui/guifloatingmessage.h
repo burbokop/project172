@@ -1,8 +1,10 @@
 #ifndef GUIFLOATINGMESSAGE_H
 #define GUIFLOATINGMESSAGE_H
 
+#include <gui/base/guimenuelement.h>
 
-#include "gui/guimenuelement.h"
+
+
 
 
 class GUIFloatingMessage : public GUIMenuElement {

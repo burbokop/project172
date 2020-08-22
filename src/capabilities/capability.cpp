@@ -1,18 +1,18 @@
 #include "capability.h"
 
-Unit *Capability::parent() const
+Unit *Capability::parentUnit() const
 {
-    return m_parent;
+    return m_parentUnit;
 }
 
-bool Capability::setParent(Unit *parent) {
-    if(this->m_parent == nullptr) {
-        this->m_parent = parent;
+bool Capability::setParentUnit(Unit *parent) {
+    if(this->m_parentUnit == nullptr) {
+        this->m_parentUnit = parent;
         return true;
     }
     return false;
 }
 
-void Capability::unsetParent() {
-    this->m_parent = nullptr;
+void Capability::unsetParentUnit() {
+    this->m_parentUnit = nullptr;
 }

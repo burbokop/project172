@@ -17,11 +17,11 @@ GUIFloatingMessage::GUIFloatingMessage(Unit *parent) : GUIMenuElement(nullptr) {
     this->parent = parent;
 }
 
-GUIFloatingMessage::GUIFloatingMessage(Unit *parent, std::string label) : GUIMenuElement (nullptr, label) {
+GUIFloatingMessage::GUIFloatingMessage(Unit *parent, std::string label) : GUIMenuElement (label) {
     this->parent = parent;
 }
 
-GUIFloatingMessage::GUIFloatingMessage(Unit *parent, IInformative *informative) : GUIMenuElement (nullptr, informative) {
+GUIFloatingMessage::GUIFloatingMessage(Unit *parent, IInformative *informative) : GUIMenuElement (informative) {
     this->parent = parent;
 }
 

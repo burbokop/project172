@@ -5,13 +5,13 @@
 #include "worlds/world.h"
 
 
-class HeapWorld : public World {
+class HeapWorld : public WorldPreset {
 public:
     HeapWorld();
 
     // World interface
 public:
-    std::vector<Controller *> generate(e172::AssetProvider *assets, std::list<e172::Entity*> *units);
+    virtual GenerationResult generate(e172::Context *context) override;
     std::string getName();
 };
 

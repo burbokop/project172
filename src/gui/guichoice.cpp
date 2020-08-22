@@ -1,17 +1,17 @@
 #include "guichoice.h"
 
 
-GUIChoice::GUIChoice(Controller *player, old::Variant value, std::function<void(old::Variant)> set) : GUIMenuElement (player) {
+GUIChoice::GUIChoice(old::Variant value, std::function<void(old::Variant)> set) {
     this->value = value;
     this->set = set;
 }
 
-GUIChoice::GUIChoice(Controller *player, std::string label, old::Variant value, std::function<void(old::Variant)> set) : GUIMenuElement (player, label) {
+GUIChoice::GUIChoice(std::string label, old::Variant value, std::function<void(old::Variant)> set) : GUIMenuElement (label) {
     this->value = value;
     this->set = set;
 }
 
-GUIChoice::GUIChoice(Controller *player, IInformative *informative, old::Variant value, std::function<void(old::Variant)> set) : GUIMenuElement (player, informative) {
+GUIChoice::GUIChoice(IInformative *informative, old::Variant value, std::function<void(old::Variant)> set) : GUIMenuElement (informative) {
     this->value = value;
     this->set = set;
 }

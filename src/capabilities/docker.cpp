@@ -32,23 +32,23 @@ void Docker::proceed(e172::Context *context, e172::AbstractEventHandler *eventHa
     UNUSED(context);
     UNUSED(eventHandler);
     if(state == IN_INTERCEPTION) {
-        double dst = (parent()->getPosition() - target->getPosition()).module();
+        double dst = (parentUnit()->getPosition() - target->getPosition()).module();
         if(dst < 64) {
             state = ATTRACTED;
         }
     } else if(state == ATTRACTED) {
-        double dst = (parent()->getPosition() - target->getPosition()).module();
+        double dst = (parentUnit()->getPosition() - target->getPosition()).module();
         double dstAngle = target->getAngle();
-        if(dst < 4 && parent()->isOnAngle(context, dstAngle)) {
+        if(dst < 4 && parentUnit()->isOnAngle(context, dstAngle)) {
             attach(target);
         }
-        parent()->rotateToAngle(context, dstAngle);
-        Movable *movableParent = dynamic_cast<Movable*>(parent());
+        parentUnit()->rotateToAngle(context, dstAngle);
+        Movable *movableParent = dynamic_cast<Movable*>(parentUnit());
         if(movableParent) {
-            movableParent->place(parent()->getPosition(), (target->getPosition() - parent()->getPosition()) / 100, e172::Vector(), parent()->getAngle());
+            movableParent->place(parentUnit()->getPosition(), (target->getPosition() - parentUnit()->getPosition()) / 100, e172::Vector(), parentUnit()->getAngle());
         }
     } else if(state == DOCKED) {
-        parent()->place(target->getPosition(), target->getAngle());
+        parentUnit()->place(target->getPosition(), target->getAngle());
     }
 }
 

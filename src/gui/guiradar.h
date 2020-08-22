@@ -6,8 +6,8 @@
 class GUIRadar : public GUIList {
 public:    
     GUIRadar(Controller *player);
-    GUIRadar(Controller *player, std::string label);
-    GUIRadar(Controller *player, IInformative *informative);
+    GUIRadar(std::string label);
+    GUIRadar(IInformative *informative);
 
     void onDock(old::Variant value);
     void onSelect(old::Variant value);

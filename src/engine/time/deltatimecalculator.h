@@ -13,13 +13,13 @@ class DeltaTimeCalculator {
     int64_t calculateDuration();
 
     double m_deltaTime = 0;
-    double m_globalTimeSpead = 1;
+    double m_timeSpead = 1;
 public:
     DeltaTimeCalculator();
     void update();
 
     double deltaTime();
-    void setGlobalTimeSpead(double value);
+    void setTimeSpead(double value);
 };
 
 }

@@ -29,11 +29,11 @@
 
 #include <worlds/arenaworld.h>
 #include <worlds/defaultworld.h>
+#include <worlds/guisetup.h>
 #include <worlds/heapworld.h>
 
+
 #include "environment.h"
-
-
 
 
 int main(int argc, char *argv[]) {
@@ -81,13 +81,67 @@ int main(int argc, char *argv[]) {
     app.assetProvider()->registerType<Thruster>();
 
 
-    app.assetProvider()->searchInFolder(app.context()->absolutePath("../assets"), &graphicsProvider, &audioProvider);
+    app.assetProvider()->searchInFolder(app.context()->absolutePath("../assets"));
+    graphicsProvider.loadFont(std::string(), app.context()->absolutePath("../assets/fonts/ZCOOL.ttf"));
 
 
 
-    WorldManager worldManager({ new DefaultWorld(), new ArenaWorld(), new HeapWorld() });
+    //INITIALIZATION CONMPLEATED
 
-//    app.addEntity(&worldManager);
+
+    Background background = 128;
+    app.addEntity(&background);
+
+
+
+
+
+    //player1
+    Player *player1 = static_cast<Player*>(app.assetProvider()->createLoadable("player1"));
+    Ship *playerArmor = static_cast<Ship*>(app.assetProvider()->createLoadable("astro"));
+    ModuleHandler *playerArmorModules = new ModuleHandler();
+    playerArmorModules->addModule(static_cast<Module*>(app.assetProvider()->createLoadable("mini-engine")));
+    playerArmorModules->addModule(static_cast<Module*>(app.assetProvider()->createLoadable("repair-laser")));
+    playerArmor->addCapability(playerArmorModules);
+    static_cast<Player*>(player1)->setArmor(playerArmor);
+
+    Unit *playerShip = static_cast<Unit*>(app.assetProvider()->createLoadable("sh1"));
+    playerShip->place(e172::Vector(100, 100), -0.7);
+
+    playerShip->addCapability(new Docker());
+    playerShip->addCapability(player1);
+    ModuleHandler *playerModuleHandler = new ModuleHandler();
+    playerModuleHandler->addModule(static_cast<Module*>(app.assetProvider()->createLoadable("pistol")));
+    playerModuleHandler->addModule(static_cast<Module*>(app.assetProvider()->createLoadable("engine2")));
+    playerModuleHandler->addModule(static_cast<Module*>(app.assetProvider()->createLoadable("warp-drive1")));
+    playerModuleHandler->addModule(static_cast<Module*>(app.assetProvider()->createLoadable("thruster1")));
+    playerShip->addCapability(playerModuleHandler);
+
+    app.addEntity(playerShip);
+
+    GuiSetup guiSetup(app.context());
+    guiSetup.gui()->setController(player1);
+    app.addEntity(guiSetup.gui());
+
+    //GUIContainer container("ggg");
+    //
+    //GUIMenuElement menu_e("gogadoda");
+    //container.addMenuElement(&menu_e);
+    //GUIMenuElement menu_e2("kilikili");
+    //container.addMenuElement(&menu_e2);
+    //
+    //app.addEntity(&container);
+
+
+    WorldPresetStrategy worldPresetStrategy;
+    worldPresetStrategy.registerType<DefaultWorld>();
+    worldPresetStrategy.registerType<ArenaWorld>();
+    worldPresetStrategy.registerType<HeapWorld>();
+    app.addEntity(&worldPresetStrategy);
+
+
+
+
 
     return app.exec();
 }

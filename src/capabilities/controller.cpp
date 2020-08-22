@@ -10,7 +10,7 @@ void Controller::setSelected(Unit *value) {
 }
 
 void Controller::releaseArmor() {
-    if(armor && parent() && armor != parent()) {
+    if(armor && parentUnit() && armor != parentUnit()) {
         armorReleaseTimer = new e172::ElapsedTimer(ARMOR_RELEASE_DELAY);
         armorReleaseTimer->reset();
         armorReleaseMessageTrigger.enable();
@@ -32,14 +32,14 @@ void Controller::onHit(e172::Context *context, int health) {
 void Controller::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
     UNUSED(eventHandler);
     if(armorReleaseMessageTrigger.check()) {
-        context->addEvent(parent(), e172::Context::EMERGENCY_MESSAGE, const_cast<char*>(ARMOR_RELEASE_MESSAGE));
+        context->addEvent(parentUnit(), e172::Context::EMERGENCY_MESSAGE, const_cast<char*>(ARMOR_RELEASE_MESSAGE));
     }
 
     if(armorReleaseTimer && armorReleaseTimer->check()) {
-        if(armor && parent()) {
-            context->addEvent(parent(), e172::Context::REMOVE_CAPABILITY, this);
+        if(armor && parentUnit()) {
+            context->addEvent(parentUnit(), e172::Context::REMOVE_CAPABILITY, this);
             context->addEvent(armor, e172::Context::ADD_CAPABILITY, this);
-            context->addEvent(parent(), e172::Context::SPAWN_UNIT, armor);
+            context->addEvent(parentUnit(), e172::Context::SPAWN_UNIT, armor);
             armorReleaseTimer = nullptr;
         }
     }

@@ -36,9 +36,9 @@ void Weapon::proceed(e172::Context *context, e172::AbstractEventHandler *eventHa
     if(timer.check(firing)) {
         if(projectileName.size() > 0) {
             Projectile *object = static_cast<Projectile*>(context->assetProvider()->createLoadable(projectileName));
-            object->setMother(parent());
+            object->setMother(parentUnit());
 
-            object->place(parent()->getPosition(), parent()->getVelocity() + e172::Vector::createByAngle(getProjectileSpead(), parent()->getAngle()), e172::Vector(), parent()->getAngle());
+            object->place(parentUnit()->getPosition(), parentUnit()->getVelocity() + e172::Vector::createByAngle(getProjectileSpead(), parentUnit()->getAngle()), e172::Vector(), parentUnit()->getAngle());
 
             context->entities()->push_back(object);
 

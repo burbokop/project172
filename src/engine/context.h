@@ -52,6 +52,7 @@ private:
 public:
     Context(std::list<Entity*> *entities = nullptr, AssetProvider *assetProvider = nullptr);
     std::string absolutePath(const std::string &path) const;
+    std::vector<std::string> arguments() const;
 
     [[deprecated]]
     std::list<Entity*> *entities() const;
@@ -62,6 +63,9 @@ public:
     void handleEvents();
 
     double deltaTime() const;
+
+    [[deprecated]]
+    GameApplication *appliation() const;
 };
 
 }

@@ -16,8 +16,8 @@ protected:
 public:
     ModuleHandler();
 
-    bool setParent(Unit *parent) override;
-    void unsetParent() override;
+    bool setParentUnit(Unit *parent) override;
+    void unsetParentUnit() override;
 
     void addModule(Module *module);
     void removeModule(Module *module);

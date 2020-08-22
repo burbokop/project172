@@ -27,7 +27,6 @@ private:
     FPSMonitor *fps = nullptr;
     FPSMonitor *tps = nullptr;
     NetListener *netListener = nullptr;
-    WorldManager *worldManager = nullptr;
     e172::AbstractGraphicsProvider *renderEngine = nullptr;
     e172::AbstractRenderer *renderer = nullptr;
 

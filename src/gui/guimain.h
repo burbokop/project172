@@ -2,12 +2,14 @@
 #define GUIMAIN_H
 
 
-#include "gui/guistack.h"
 #include "gui/guicentralmessage.h"
 #include "gui/guifloatingmessage.h"
 #include "gui/guiminimap.h"
 
 #include "guidebugvalueinfo.h"
+
+#include <gui/base/guielement.h>
+#include <gui/base/guistack.h>
 
 
 class GUIMain : public GUIElement {
@@ -23,7 +25,6 @@ private:
 
 public:
     GUIMain();
-    GUIMain(Controller *player);
 
 
     void addFloatingMessage(Unit *unit, std::string message);

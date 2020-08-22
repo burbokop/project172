@@ -5,9 +5,10 @@
 #include <engine/audio/abstractaudioprovider.h>
 
 class SDLAudioProvider: public e172::AbstractAudioProvider {
+    enum { ReserveStep = 10 };
+
     int m_reservedChannelCount = 0;
     int m_currentChannelCount = 0;
-    static constexpr int RESERVESTEP = 10;
     std::queue<int> freeChannel;
 public:
     SDLAudioProvider();

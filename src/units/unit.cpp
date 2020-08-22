@@ -43,7 +43,7 @@ void Unit::place(e172::Vector pos, double angle) {
 
 
 void Unit::addCapability(Capability *capability) {
-    if(capability->setParent(this)) {
+    if(capability->setParentUnit(this)) {
         capabilities.push_back(capability);
     }
 }
@@ -51,7 +51,7 @@ void Unit::addCapability(Capability *capability) {
 void Unit::removeCapability(Capability *capability) {
     std::vector<Capability*>::iterator pos = std::find(capabilities.begin(), capabilities.end(), capability);
     if(pos != capabilities.end()) {
-        capability->unsetParent();
+        capability->unsetParentUnit();
         capabilities.erase(pos);
     }
 }

@@ -24,6 +24,7 @@ AbstractGraphicsProvider *GameApplication::graphicsProvider() const {
 
 void GameApplication::setGraphicsProvider(AbstractGraphicsProvider *graphicsProvider) {
     m_graphicsProvider = graphicsProvider;
+    m_assetProvider->m_graphicsProvider = graphicsProvider;
 }
 
 AbstractAudioProvider *GameApplication::audioProvider() const {
@@ -32,6 +33,7 @@ AbstractAudioProvider *GameApplication::audioProvider() const {
 
 void GameApplication::setAudioProvider(AbstractAudioProvider *audioProvider) {
     m_audioProvider = audioProvider;
+    m_assetProvider->m_audioProvider = audioProvider;
 }
 
 void GameApplication::setEventHandler(AbstractEventHandler *eventHandler) {
@@ -40,6 +42,12 @@ void GameApplication::setEventHandler(AbstractEventHandler *eventHandler) {
 
 AbstractEventHandler *GameApplication::eventHandler() const {
     return m_eventHandler;
+}
+
+AbstractRenderer *GameApplication::renderer() const {
+    if(m_graphicsProvider)
+        return m_graphicsProvider->renderer();
+    return nullptr;
 }
 
 Context *GameApplication::context() const {
@@ -58,6 +66,7 @@ GameApplication::GameApplication(int argc, char *argv[]) {
     m_arguments = coverArgs(argc, argv);
     m_assetProvider = new AssetProvider();
     m_context = new Context(&m_entities, m_assetProvider);
+    m_assetProvider->m_context = m_context;
     m_context->m_appliation = this;
 }
 
@@ -78,9 +87,11 @@ int GameApplication::exec() {
         if(m_graphicsProvider && m_renderTimer.check()) {
             auto r = m_graphicsProvider->renderer();
             if(r) {
+                r->m_locked = false;
                 for(auto e : m_entities) {
                     e->render(r);
                 }
+                r->m_locked = true;
                 r->update();
             }
         }

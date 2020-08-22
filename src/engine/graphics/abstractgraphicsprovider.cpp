@@ -15,7 +15,7 @@ Image AbstractGraphicsProvider::__createImage(Image::data_ptr data,
 
 void AbstractGraphicsProvider::installParentToRenderer(AbstractRenderer *renderer) {
     renderer->m_provider = this;
-    renderer->m_isActive = true;
+    renderer->m_isValid = true;
 }
 
 AbstractGraphicsProvider::~AbstractGraphicsProvider() {}

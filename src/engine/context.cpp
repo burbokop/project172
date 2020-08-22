@@ -30,6 +30,11 @@ double Context::deltaTime() const {
     return m_deltaTime;
 }
 
+GameApplication *Context::appliation() const
+{
+    return m_appliation;
+}
+
 void Context::handleRequest(Request request) {
     PROTECT_OBJECT(request.requester)
     if(request.command == DELETE_UNIT) {
@@ -145,7 +150,7 @@ void Context::handleRequest(Request request) {
         Debug::out("EMERGENCY_MESSAGE: " + std::to_string(reinterpret_cast<uintptr_t>(request.requester)));
         if(request.argument.isObject()) {
             const char *message = static_cast<char*>(request.argument.toObject());
-            GUICentralMessage *element = new GUICentralMessage(nullptr, message);
+            GUICentralMessage *element = new GUICentralMessage(message);
             element->start(2);
             //gui->setMessage(element);
         }
@@ -179,6 +184,12 @@ std::string Context::absolutePath(const std::string &path) const {
         }
     }
     return std::string();
+}
+
+std::vector<std::string> Context::arguments() const {
+    if(m_appliation)
+        return m_appliation->arguments();
+    return std::vector<std::string>();
 }
 
 std::list<Entity *> *Context::entities() const {

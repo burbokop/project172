@@ -24,14 +24,12 @@ void Background::flashing(int repeats) {
     flashesRemains = repeats;
 }
 
-Background::Background(e172::Vector resolution, unsigned int amount, double slidingStart) {
+Background::Background(unsigned int amount, double slidingStart) {
     this->slidingStart = slidingStart;
     this->amount = amount;
-    onResolutionChange(resolution);
 }
 
-void Background::onResolutionChange(e172::Vector resolution) {
-    this->resolution = resolution;
+void Background::onResolutionChanged(const e172::Vector &resolution) {
     Uint32 colors[] = { 0xdeff17, 0xfe4600, 0xf9990f, 0x8a27ff };
 
     stars.clear();
@@ -49,10 +47,10 @@ void Background::proceed(e172::Context *context, e172::AbstractEventHandler *eve
 }
 
 void Background::render(e172::AbstractRenderer *renderer) {
-    if(observer.check()) {
-        if(resolution != renderer->resolution()) {
-            onResolutionChange(renderer->resolution());
-        }
+    const auto resolution = renderer->resolution();
+    if(m_lastResolution != resolution) {
+        onResolutionChanged(resolution);
+        m_lastResolution = resolution;
     }
 
     if(flashingTimer && flashingTimer->check()) {
@@ -76,12 +74,12 @@ void Background::render(e172::AbstractRenderer *renderer) {
 
         for(Star star : stars) {
             int x = star.pos.intX() - localOffset.intX();
-            if(x >= 0) x = x % renderer->resolution().intX();
-            else x = x % renderer->resolution().intX() + renderer->resolution().intX();
+            if(x >= 0) x = x % resolution.intX();
+            else x = x % resolution.intX() + resolution.intX();
 
             int y = star.pos.intY() - localOffset.intY();
-            if(y >= 0) y = y % renderer->resolution().intY();
-            else y = y % renderer->resolution().intY() + renderer->resolution().intY();
+            if(y >= 0) y = y % resolution.intY();
+            else y = y % resolution.intY() + resolution.intY();
 
             if(speed.module() < slidingStart) {
                 renderer->drawPixel(e172::Vector(x, y), star.color);

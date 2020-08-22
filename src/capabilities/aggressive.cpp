@@ -37,16 +37,16 @@ Aggressive::Aggressive(std::list<Entity*> *units) {
 
 void Aggressive::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
     EXISTS(target) {
-        if(target != nullptr && parent() != nullptr && target->is<Ship*>() && target != parent()) {
-            e172::Vector dst = target->getPosition() - parent()->getPosition();
+        if(target != nullptr && parentUnit() != nullptr && target->is<Ship*>() && target != parentUnit()) {
+            e172::Vector dst = target->getPosition() - parentUnit()->getPosition();
             const double dstAngle = dst.angle();
             const double dstModule = dst.module();
 
-            parent()->rotateToAngle(context, dstAngle);
-            targeted = parent()->isOnAngle(context, dstAngle) && !inWarp && dstModule < 400;
-            Ship *ship = dynamic_cast<Ship*>(parent());
+            parentUnit()->rotateToAngle(context, dstAngle);
+            targeted = parentUnit()->isOnAngle(context, dstAngle) && !inWarp && dstModule < 400;
+            Ship *ship = dynamic_cast<Ship*>(parentUnit());
 
-            ModuleHandler *modules = parent()->getModuleHandler();
+            ModuleHandler *modules = parentUnit()->getModuleHandler();
             if(modules) {
                 std::vector<Module*> *weapons = modules->getModulesByClass("Weapon");
 

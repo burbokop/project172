@@ -3,8 +3,7 @@
 
 #include <functional>
 
-
-#include "gui/guimenuelement.h"
+#include <gui/base/guimenuelement.h>
 
 
 class GUISwitch : public GUIMenuElement {
@@ -14,9 +13,9 @@ private:
     bool enabled = false;
 
 public:
-    GUISwitch(Controller *player, std::function<void()> on = nullptr,  std::function<void()> off = nullptr);
-    GUISwitch(Controller *player, std::string label, std::function<void()> on = nullptr,  std::function<void()> off = nullptr);
-    GUISwitch(Controller *player, IInformative *informative, std::function<void()> on = nullptr,  std::function<void()> off = nullptr);
+    GUISwitch(std::function<void()> on = nullptr,  std::function<void()> off = nullptr);
+    GUISwitch(std::string label, std::function<void()> on = nullptr,  std::function<void()> off = nullptr);
+    GUISwitch(IInformative *informative, std::function<void()> on = nullptr,  std::function<void()> off = nullptr);
 
     // GUILabel interface
 public:

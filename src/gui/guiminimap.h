@@ -1,7 +1,9 @@
 #ifndef GUIMINIMAP_H
 #define GUIMINIMAP_H
 
-#include "gui/guielement.h"
+#include <gui/base/guielement.h>
+
+
 
 class GUIMiniMap : public GUIElement {
 private:
@@ -11,7 +13,7 @@ private:
     std::list<e172::Entity*> *units;
 
 public:
-    GUIMiniMap(Controller *player, std::list<e172::Entity*> *units);
+    GUIMiniMap(std::list<e172::Entity*> *units);
 
 
     // Entity interface

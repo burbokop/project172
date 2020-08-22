@@ -1,13 +1,14 @@
 #ifndef GUIDEBUGVALUEINFO_H
 #define GUIDEBUGVALUEINFO_H
 
-#include "guielement.h"
+#include <gui/base/guielement.h>
+
 
 class GUIDebugValueInfo : public GUIElement {
     double coef = 6;
     e172::ElapsedTimer timer;
 public:
-    GUIDebugValueInfo(Controller *player, std::list<Entity*> *);
+    GUIDebugValueInfo(std::list<Entity*> *);
 
     // Entity interface
 public:

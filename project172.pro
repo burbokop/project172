@@ -51,7 +51,6 @@ HEADERS += \
     src/assetexecutors/spriteassetexecutor.h \
     src/assetexecutors/stringassetexecutor.h \
     src/assetexecutors/vectorassetexecutor.h \
-    src/audio/audio.h \
     src/audio/audioplayer.h \
     src/background.h \
     src/capabilities/aggressive.h \
@@ -68,7 +67,7 @@ HEADERS += \
     src/capabilities/player.h \
     src/debug.h \
     src/engine/abstracteventhandler.h \
-    src/engine/abstractfactory.h \
+    src/engine/memcontrol/abstractfactory.h \
     src/engine/additional.h \
     src/engine/assettools/abstractassetexecutor.h \
     src/engine/assettools/assetprovider.h \
@@ -84,27 +83,31 @@ HEADERS += \
     src/engine/graphics/image.h \
     src/engine/math/math.h \
     src/engine/math/vector.h \
+    src/engine/memcontrol/abstractstrategy.h \
     src/engine/sharedcontainer.h \
     src/engine/textformat.h \
     src/engine/time/deltatimecalculator.h \
     src/engine/time/elapsedtimer.h \
+    src/engine/time/time.h \
     src/engine/type.h \
     src/engine/variant.h \
     src/environment.h \
     src/filesystem.h \
+    src/gui/base/guibaseelement.h \
+    src/gui/base/guicontainer.h \
+    src/gui/base/guielement.h \
+    src/gui/base/guimenuelement.h \
+    src/gui/base/guistack.h \
     src/gui/guiblushingfloatingmessage.h \
     src/gui/guicentralmessage.h \
     src/gui/guichoice.h \
-    src/gui/guicontainer.h \
     src/gui/guidebugvalueinfo.h \
-    src/gui/guielement.h \
     src/gui/guifloatingmessage.h \
     src/gui/guilist.h \
     src/gui/guimain.h \
-    src/gui/guimenuelement.h \
     src/gui/guiminimap.h \
+    src/gui/guimoduleview.h \
     src/gui/guiradar.h \
-    src/gui/guistack.h \
     src/gui/guiswitch.h \
     src/iinformative.h \
     src/json/allocator.h \
@@ -145,6 +148,7 @@ HEADERS += \
     src/worldmanager.h \
     src/worlds/arenaworld.h \
     src/worlds/defaultworld.h \
+    src/worlds/guisetup.h \
     src/worlds/heapworld.h \
     src/worlds/world.h
 
@@ -170,7 +174,6 @@ SOURCES += \
     src/assetexecutors/spriteassetexecutor.cpp \
     src/assetexecutors/stringassetexecutor.cpp \
     src/assetexecutors/vectorassetexecutor.cpp \
-    src/audio/audio.cpp \
     src/audio/audioplayer.cpp \
     src/background.cpp \
     src/capabilities/aggressive.cpp \
@@ -187,7 +190,7 @@ SOURCES += \
     src/capabilities/player.cpp \
     src/debug.cpp \
     src/engine/abstracteventhandler.cpp \
-    src/engine/abstractfactory.cpp \
+    src/engine/memcontrol/abstractfactory.cpp \
     src/engine/additional.cpp \
     src/engine/assettools/abstractassetexecutor.cpp \
     src/engine/assettools/assetprovider.cpp \
@@ -203,27 +206,31 @@ SOURCES += \
     src/engine/graphics/image.cpp \
     src/engine/math/math.cpp \
     src/engine/math/vector.cpp \
+    src/engine/memcontrol/abstractstrategy.cpp \
     src/engine/sharedcontainer.cpp \
     src/engine/textformat.cpp \
     src/engine/time/deltatimecalculator.cpp \
     src/engine/time/elapsedtimer.cpp \
+    src/engine/time/time.cpp \
     src/engine/type.cpp \
     src/engine/variant.cpp \
     src/environment.cpp \
     src/filesystem.cpp \
+    src/gui/base/guibaseelement.cpp \
+    src/gui/base/guicontainer.cpp \
+    src/gui/base/guielement.cpp \
+    src/gui/base/guimenuelement.cpp \
+    src/gui/base/guistack.cpp \
     src/gui/guiblushingfloatingmessage.cpp \
     src/gui/guicentralmessage.cpp \
     src/gui/guichoice.cpp \
-    src/gui/guicontainer.cpp \
     src/gui/guidebugvalueinfo.cpp \
-    src/gui/guielement.cpp \
     src/gui/guifloatingmessage.cpp \
     src/gui/guilist.cpp \
     src/gui/guimain.cpp \
-    src/gui/guimenuelement.cpp \
     src/gui/guiminimap.cpp \
+    src/gui/guimoduleview.cpp \
     src/gui/guiradar.cpp \
-    src/gui/guistack.cpp \
     src/gui/guiswitch.cpp \
     src/iinformative.cpp \
     src/json/json_reader.cpp \
@@ -255,5 +262,6 @@ SOURCES += \
     src/worldmanager.cpp \
     src/worlds/arenaworld.cpp \
     src/worlds/defaultworld.cpp \
+    src/worlds/guisetup.cpp \
     src/worlds/heapworld.cpp \
     src/worlds/world.cpp

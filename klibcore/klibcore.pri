@@ -13,7 +13,6 @@ HEADERS += \
     $$PWD/src/utility/kmetafunction.h \
     $$PWD/src/memcontrol/kabstractfactory.h \
     $$PWD/src/memcontrol/kpull.h \
-    $$PWD/src/memcontrol/kmoduleswitch.h \
     $$PWD/src/ksmartenum.h
 
 
@@ -25,5 +24,4 @@ SOURCES += \
     $$PWD/src/utility/kmetafunction.cpp \
     $$PWD/src/memcontrol/kabstractfactory.cpp \
     $$PWD/src/memcontrol/kpull.cpp \
-    $$PWD/src/memcontrol/kmoduleswitch.cpp \
     $$PWD/src/ksmartenum.cpp

@@ -9,34 +9,26 @@
 
 #include <units/camera.h>
 
+#include <engine/memcontrol/abstractstrategy.h>
 
-class WorldManager : public e172::Entity {
-private:
-    Camera *camera = nullptr;
-    GUIMain *gui = nullptr;
-    Near *_near = nullptr;
-    e172::AbstractRenderer * m_renderer = nullptr;
-    std::vector<World*> worlds;
-    World *activeWorld = nullptr;
-    bool worldIsChanged = true;
 
-    void onChangeReset(old::Variant caseValue);
-    void clear(std::list<e172::Entity *> *units);
+class WorldPresetStrategy : public e172::Entity {
+    e172::AbstractStrategy<std::string, WorldPreset> m_strategy;
+    WorldPreset *m_last = nullptr;
 
-    void init(e172::AssetProvider *assets, std::list<e172::Entity *> *units, e172::AbstractRenderer *renderer, FPSMonitor *fps, FPSMonitor *tps);
 public:
-    WorldManager(std::vector<World*> worlds);
+    WorldPresetStrategy();
 
-    void checkState(e172::Context *context, e172::AssetProvider *assets, std::list<e172::Entity *> *units, e172::AbstractRenderer *renderer, FPSMonitor *fps, FPSMonitor *tps);
+    template<typename T>
+    void registerType() { m_strategy.registerType<T>(); }
+    std::list<std::string> presetNames() const;
 
-    Camera *getCamera() const;
-    GUIMain *getGui() const;
-    Near *getNear() const;
+    void activatePreset(const std::string &preset);
 
     // Entity interface
 public:
-    virtual void proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) override;
-    virtual void render(e172::AbstractRenderer *renderer) override;
+    virtual void proceed(e172::Context *context, e172::AbstractEventHandler *) override;
+    virtual void render(e172::AbstractRenderer *) override;
 };
 
 #endif // WORLDMANAGER_H

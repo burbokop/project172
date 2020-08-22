@@ -31,7 +31,6 @@
 #include <capabilities/modules/thruster.h>
 #include <capabilities/modules/weapon.h>
 
-#include "audio/audio.h"
 
 #include <engine/additional.h>
 #include <engine/context.h>
@@ -39,7 +38,6 @@
 Environment::Environment(std::vector<std::string> args) {
     Debug::init(false, true);
     Debug::out("INIT GAME");
-    Audio::init();
 
     assetManager = new e172::AssetProvider();
 
@@ -88,13 +86,11 @@ Environment::Environment(std::vector<std::string> args) {
 
     renderEngine->loadFont(std::string(), e172::Additional::absolutePath("../assets/fonts/ZCOOL.ttf", args[0]));
 
-    auto audioProvider = new SDLAudioProvider();
 
     renderer = renderEngine->renderer();
 
-    background = new Background(renderer->resolution(), 128);
+    background = new Background(128);
 
-    worldManager = new WorldManager({ new DefaultWorld(), new ArenaWorld(), new HeapWorld() });
 
     fps = new FPSMonitor("FPS:");
     tps = new FPSMonitor("TPS:");
@@ -102,9 +98,8 @@ Environment::Environment(std::vector<std::string> args) {
     std::cout << "lll: " << args[0] << "\n";
 
     //assetManager->search(FileSystem::cutPath(args[0], 2) + "/assets");
-    assetManager->searchInFolder("../assets", renderEngine, audioProvider);
+    assetManager->searchInFolder("../assets");
 
-    worldManager->checkState(context, assetManager, &m_entities, renderer, fps, tps);
 }
 
 
@@ -114,14 +109,12 @@ void Environment::start() {
 
     while (1) {
         background->proceed(this->context, eventHandler);
-        background->setSpeed(worldManager->getCamera()->getVelocity());
 
         for(auto e : m_entities) {
             e->proceed(context, eventHandler);
         }
 
         context->handleEvents();
-        worldManager->checkState(context, assetManager, &m_entities, renderer, fps, tps);
 
         tps->count();
 
@@ -133,10 +126,6 @@ void Environment::start() {
             e->render(renderer);
         }
 
-        if(GUIElement *gui = worldManager->getGui()) {
-            gui->proceed(context, eventHandler);
-            gui->render(renderer);
-        }
 
         renderer->update();
 

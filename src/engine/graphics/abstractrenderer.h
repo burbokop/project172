@@ -16,7 +16,9 @@ namespace e172 {
 class AbstractGraphicsProvider;
 class AbstractRenderer {
     friend AbstractGraphicsProvider;
-    bool m_isActive = false;
+    friend class GameApplication;
+    bool m_isValid = false;
+    bool m_locked = true;
     AbstractGraphicsProvider *m_provider = nullptr;
     Vector m_position;
     bool m_cameraLocked = false;
@@ -85,6 +87,7 @@ public:
     Camera detachCamera();
     Vector cameraPosition() const;
     bool isActive() const;
+    bool isValid() const;
 };
 
 }

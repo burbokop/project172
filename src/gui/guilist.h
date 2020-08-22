@@ -1,10 +1,9 @@
 #ifndef GUILIST_H
 #define GUILIST_H
 
-
-#include "gui/guicontainer.h"
-
 #include <additional/e_variant.h>
+
+#include <gui/base/guicontainer.h>
 
 
 class GUIList : public GUIContainer {
@@ -13,14 +12,13 @@ private:
 
     virtual GUIMenuElement *forEach(Unit *unit);
 
-    std::vector<GUIMenuElement*> *informativeToElement(std::list<Entity*> *array);
+    std::vector<GUIMenuElement *> informativeToElement(std::list<Entity*> *array);
 
     void onChoice(old::Variant value);
 
 public:
-    GUIList(Controller *player);
-    GUIList(Controller *player, std::string label);
-    GUIList(Controller *player, IInformative *informative);
+    GUIList(std::string label);
+    GUIList(IInformative *informative);
 
     void addArray(std::list<Entity*> *array);
 

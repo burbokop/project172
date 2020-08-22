@@ -20,7 +20,7 @@ namespace e172 {
 AssetProvider::AssetProvider() {}
 
 
-void AssetProvider::searchInFolder(std::string path, e172::AbstractGraphicsProvider *graphicsProvider, e172::AbstractAudioProvider *audioProvider) {
+void AssetProvider::searchInFolder(std::string path) {
     Debug::out("AssetProvider: assets path: " + path);
 
     if(path[path.length() - 1] == '/') path.pop_back();
@@ -29,9 +29,9 @@ void AssetProvider::searchInFolder(std::string path, e172::AbstractGraphicsProvi
         std::string item = items[i];
         std::string file = path + '/' + item;
         if(FileSystem::isDir(file)) {
-            searchInFolder(file, graphicsProvider, audioProvider);
+            searchInFolder(file);
         } else {
-            processFile(file, path, graphicsProvider, audioProvider);
+            processFile(file, path);
         }
     }
 }
@@ -74,7 +74,7 @@ void AssetProvider::installExecutor(const std::string &id, const std::shared_ptr
     executors[id] = executor;
 }
 
-void AssetProvider::processFile(std::string file, std::string path, e172::AbstractGraphicsProvider *graphicsProvider, e172::AbstractAudioProvider *audioProvider) {
+void AssetProvider::processFile(std::string file, std::string path) {
     std::string sufix = FileSystem::getSufix(file);
     if(sufix == ".json") {
         const std::string content = FileSystem::readFile(file);
@@ -102,8 +102,8 @@ void AssetProvider::processFile(std::string file, std::string path, e172::Abstra
                     if(item->isNull()) {
                         Debug::err(Debug::Code::ASSET_IS_NULL, __PRETTY_FUNCTION__, "asset id: " + assetId + " path: " + path);
                     } else {
-                        it->second->executor_path = path;
-                        newTemplate.assets[assetId] = it->second->proceed(*item, graphicsProvider, audioProvider);
+                        it->second->executor_path = m_context->absolutePath(path);
+                        newTemplate.assets[assetId] = it->second->proceed(*item, m_graphicsProvider, m_audioProvider);
                     }
                 } else {
                     Debug::err(Debug::Code::EXECUTOR_NOT_INSTALLED_FOR_ASSET, __PRETTY_FUNCTION__, "asset id: " + assetId + " path: " + path);

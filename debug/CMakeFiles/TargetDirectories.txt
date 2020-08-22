@@ -1,5 +1,0 @@
-C:/Users/Panasonic-PC/Documents/project172/debug/CMakeFiles/e172.dir
-C:/Users/Panasonic-PC/Documents/project172/debug/CMakeFiles/klibcore.dir
-C:/Users/Panasonic-PC/Documents/project172/debug/CMakeFiles/project172.dir
-C:/Users/Panasonic-PC/Documents/project172/debug/CMakeFiles/edit_cache.dir
-C:/Users/Panasonic-PC/Documents/project172/debug/CMakeFiles/rebuild_cache.dir

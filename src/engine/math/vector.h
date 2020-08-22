@@ -54,10 +54,10 @@ public:
     Vector operator-(double subtrahend) const;
 
 
-    int intX() const;
-    int intY() const;
-    double x() const;
-    double y() const;
+    inline int intX() const { return static_cast<int>(this->m_x); }
+    inline int intY() const { return static_cast<int>(this->m_y); }
+    inline double x() const { return this->m_x; }
+    inline double y() const { return this->m_y; }
 
 
     friend std::ostream &operator<<(std::ostream &os, const e172::Vector &dt);

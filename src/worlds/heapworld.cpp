@@ -4,61 +4,60 @@
 #include "capabilities/player.h"
 #include "capabilities/aggressive.h"
 
+#include <engine/context.h>
 
-HeapWorld::HeapWorld()
-{
 
-}
+HeapWorld::HeapWorld() {}
 
-std::vector<Controller *> HeapWorld::generate(e172::AssetProvider *assets, std::list<e172::Entity *> *units) {
-    std::vector<Controller*> result;
+WorldPreset::GenerationResult HeapWorld::generate(e172::Context *context) {
+    GenerationResult result;
 
     //player1
-    Player *player1 = static_cast<Player*>(assets->createLoadable("player1"));
-    Ship *playerArmor = static_cast<Ship*>(assets->createLoadable("astro"));
+    Player *player1 = static_cast<Player*>(context->assetProvider()->createLoadable("player1"));
+    Ship *playerArmor = static_cast<Ship*>(context->assetProvider()->createLoadable("astro"));
     ModuleHandler *playerArmorModules = new ModuleHandler();
-    playerArmorModules->addModule(static_cast<Module*>(assets->createLoadable("mini-engine")));
-    playerArmorModules->addModule(static_cast<Module*>(assets->createLoadable("repair-laser")));
+    playerArmorModules->addModule(static_cast<Module*>(context->assetProvider()->createLoadable("mini-engine")));
+    playerArmorModules->addModule(static_cast<Module*>(context->assetProvider()->createLoadable("repair-laser")));
     playerArmor->addCapability(playerArmorModules);
     static_cast<Player*>(player1)->setArmor(playerArmor);
-    result.push_back(player1);
+    result.controllers.push_back(player1);
 
 
-    Unit *playerShip = static_cast<Unit*>(assets->createLoadable("sh1"));
+    Unit *playerShip = static_cast<Unit*>(context->assetProvider()->createLoadable("sh1"));
     playerShip->place(e172::Vector(), -0.7);
     playerShip->addCapability(player1);
     ModuleHandler *playerModuleHandler = new ModuleHandler();
-    playerModuleHandler->addModule(static_cast<Module*>(assets->createLoadable("pistol")));
-    playerModuleHandler->addModule(static_cast<Module*>(assets->createLoadable("engine2")));
-    playerModuleHandler->addModule(static_cast<Module*>(assets->createLoadable("warp-drive1")));
+    playerModuleHandler->addModule(static_cast<Module*>(context->assetProvider()->createLoadable("pistol")));
+    playerModuleHandler->addModule(static_cast<Module*>(context->assetProvider()->createLoadable("engine2")));
+    playerModuleHandler->addModule(static_cast<Module*>(context->assetProvider()->createLoadable("warp-drive1")));
     playerShip->addCapability(playerModuleHandler);
-    units->push_back(playerShip);
+    result.entities.push_back(playerShip);
 
 
-    std::vector<std::string> assetKeys = assets->loadableNames();
+    std::vector<std::string> assetKeys = context->assetProvider()->loadableNames();
     unsigned int i = 0;
     for (std::string key : assetKeys) {
         for(int j = 0; j < 32; j++) {
-            Movable *unit = dynamic_cast<Movable*>(assets->createLoadable(key));
+            Movable *unit = dynamic_cast<Movable*>(context->assetProvider()->createLoadable(key));
             if(unit) {
                 unit->place(e172::Vector::createByAngle(10000, rand()), e172::Vector(), e172::Vector(), 0);
 
-                unit->addCapability(new Aggressive(units));
+                unit->addCapability(new Aggressive(context->entities()));
                 ModuleHandler *playerModuleHandler = new ModuleHandler();
                 int mul = static_cast<int>(i) * j;
                 if(mul % 2 == 0) {
-                    playerModuleHandler->addModule(static_cast<Module*>(assets->createLoadable("plasma-launcher")));
+                    playerModuleHandler->addModule(static_cast<Module*>(context->assetProvider()->createLoadable("plasma-launcher")));
                 } else if (mul % 3 == 0) {
-                    playerModuleHandler->addModule(static_cast<Module*>(assets->createLoadable("mega-launcher")));
+                    playerModuleHandler->addModule(static_cast<Module*>(context->assetProvider()->createLoadable("mega-launcher")));
                 } else {
-                    playerModuleHandler->addModule(static_cast<Module*>(assets->createLoadable("pistol")));
+                    playerModuleHandler->addModule(static_cast<Module*>(context->assetProvider()->createLoadable("pistol")));
                 }
-                playerModuleHandler->addModule(static_cast<Module*>(assets->createLoadable("engine1")));
-                playerModuleHandler->addModule(static_cast<Module*>(assets->createLoadable("warp-drive1")));
+                playerModuleHandler->addModule(static_cast<Module*>(context->assetProvider()->createLoadable("engine1")));
+                playerModuleHandler->addModule(static_cast<Module*>(context->assetProvider()->createLoadable("warp-drive1")));
 
                 unit->addCapability(playerModuleHandler);
 
-                units->push_back(unit);
+                result.entities.push_back(unit);
                 i++;
             }
         }

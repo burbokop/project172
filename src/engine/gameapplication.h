@@ -45,7 +45,8 @@ public:
     AssetProvider *assetProvider() const;
     e172::Context *context() const;
     AbstractEventHandler *eventHandler() const;
-    AbstractGraphicsProvider *renderEngine() const;
+
+    [[deprecated]]
     AbstractRenderer *renderer() const;
     AbstractAudioProvider *audioProvider() const;
     AbstractGraphicsProvider *graphicsProvider() const;

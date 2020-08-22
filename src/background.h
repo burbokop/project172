@@ -30,18 +30,16 @@ private:
     unsigned int amount;
     double slidingStart;
 
-    e172::Vector resolution;
-    e172::ElapsedTimer observer = e172::ElapsedTimer(4000);
-
+    e172::Vector m_lastResolution;
 
     e172::ElapsedTimer *flashingTimer = nullptr;
     Uint32 flashingColor = DEFAULT_FLASHING_COLOR;
     Uint32 colorBuffer = DEFAULT_MAIN_COLOR;
     int flashesRemains = 0;
 
-    void onResolutionChange(e172::Vector resolution);
+    void onResolutionChanged(const e172::Vector &resolution);
 public:
-    Background(e172::Vector resolution, unsigned int amount, double slidingStart = STARS_SLIDING_SPEED);
+    Background(unsigned int amount, double slidingStart = STARS_SLIDING_SPEED);
 
 
     // Entity interface

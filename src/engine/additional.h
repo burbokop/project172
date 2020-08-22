@@ -8,11 +8,11 @@ namespace e172 {
 
 struct Additional {
 #ifdef __WIN32__
-    static constexpr char separator = '/';
-    static inline const std::string separatorString = "/";
-#else
     static constexpr char separator = '\\';
     static inline const std::string separatorString = "\\";
+#else
+    static constexpr char separator = '/';
+    static inline const std::string separatorString = "/";
 #endif
 
     static std::string constrainPath(const std::string &path);

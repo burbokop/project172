@@ -1,5 +1,6 @@
 #include "elapsedtimer.h"
-#include <sys/timeb.h>
+
+#include "time.h"
 
 namespace e172 {
 
@@ -14,7 +15,7 @@ ElapsedTimer::ElapsedTimer(time_t interval) {
 
 bool ElapsedTimer::check(bool condition) {
     if(m_interval > 0) {
-        const auto milliseconds = ElapsedTimer::currentMilliseconds();
+        const auto milliseconds = Time::currentMilliseconds();
         if (milliseconds - m_checkPoint > m_interval && condition) {
             m_checkPoint = milliseconds;
             return true;
@@ -25,25 +26,19 @@ bool ElapsedTimer::check(bool condition) {
 }
 
 ElapsedTimer::time_t ElapsedTimer::elapsed() {
-    return ElapsedTimer::currentMilliseconds() - m_startPoint;
+    return Time::currentMilliseconds() - m_startPoint;
 }
 
 void ElapsedTimer::reset() {
-    m_startPoint = ElapsedTimer::currentMilliseconds();
+    m_startPoint = Time::currentMilliseconds();
     m_checkPoint = m_startPoint;
 }
 
 double ElapsedTimer::progress() {
-    const double milliseconds = ElapsedTimer::currentMilliseconds();
+    const double milliseconds = Time::currentMilliseconds();
     if(m_interval == 0)\
         return 0;
     return (milliseconds - m_checkPoint) / m_interval;
 }
 
-ElapsedTimer::time_t ElapsedTimer::currentMilliseconds(){
-    timeb tb;
-    ftime(&tb);
-    unsigned nCount = tb.millitm + (tb.time & 0xfffff) * 1000;
-    return nCount;
-}
 }

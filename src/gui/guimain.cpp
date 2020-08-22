@@ -9,10 +9,12 @@ const unsigned GUIMain::FLOATING_LIFE_TIME = 1000;
 
 void GUIMain::setMessage(GUICentralMessage *value) {
     centralMessage = value;
+    addChildElement(value);
 }
 
 void GUIMain::setMenu(GUIStack *value) {
     menu = value;
+    addChildElement(value);
 }
 
 void GUIMain::addFloatingMessage(Unit *unit, std::string message) {
@@ -25,19 +27,17 @@ void GUIMain::addBlushingFloatingMessage(Unit *unit, int value) {
     floatingMessageLifeTimer.reset();
 }
 
-void GUIMain::setMiniMap(GUIMiniMap *value)
-{
+void GUIMain::setMiniMap(GUIMiniMap *value) {
     miniMap = value;
+    addChildElement(value);
 }
 
-void GUIMain::setDebugValueInfo(GUIDebugValueInfo *value)
-{
+void GUIMain::setDebugValueInfo(GUIDebugValueInfo *value) {
     debugValueInfo = value;
+    addChildElement(value);
 }
 
-GUIMain::GUIMain() : GUIElement () {}
-
-GUIMain::GUIMain(Controller *player) : GUIElement (player) {}
+GUIMain::GUIMain() {}
 
 void GUIMain::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
     if(floatingMessageLifeTimer.check()) {

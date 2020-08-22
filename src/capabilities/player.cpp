@@ -56,7 +56,7 @@ void Player::setArmor(Ship *armor) {
 }
 
 void Player::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
-    EXISTS(parent()) {
+    EXISTS(parentUnit()) {
 
     } else {
         //std::cout << "ERRROOOORR\n";
@@ -70,14 +70,14 @@ void Player::proceed(e172::Context *context, e172::AbstractEventHandler *eventHa
 
 
     if(getPersonalKey(eventHandler, "left")) {
-        parent()->rotateLeft(context);
+        parentUnit()->rotateLeft(context);
     } else if(getPersonalKey(eventHandler, "right")) {
-        parent()->rotateRight(context);
+        parentUnit()->rotateRight(context);
     }
 
-    Ship *ship = dynamic_cast<Ship*>(parent());
+    Ship *ship = dynamic_cast<Ship*>(parentUnit());
 
-    ModuleHandler *modules = parent()->getModuleHandler();
+    ModuleHandler *modules = parentUnit()->getModuleHandler();
     if(modules) {
         std::vector<Module*> *weapons = modules->getModulesByClass("Weapon");
 
@@ -122,5 +122,5 @@ void Player::render(e172::AbstractRenderer *renderer) {
 
 void Player::onHit(e172::Context *context, int health) {
     UNUSED(health);
-    context->addEvent(parent(), e172::Context::BACKGROUND_FLASHING, 8);
+    context->addEvent(parentUnit(), e172::Context::BACKGROUND_FLASHING, 8);
 }

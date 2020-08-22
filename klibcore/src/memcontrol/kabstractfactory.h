@@ -6,7 +6,7 @@
 #include <map>
 #include <functional>
 
-#include <klibcore/src/utility/ktype.h>
+#include <src/utility/ktype.h>
 
 template<typename T>
 class KType;

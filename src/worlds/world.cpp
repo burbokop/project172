@@ -1,5 +1,5 @@
 #include "world.h"
 
-World::World() {}
+WorldPreset::WorldPreset() {}
 
-World::~World() {}
+WorldPreset::~WorldPreset() {}

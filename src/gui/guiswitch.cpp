@@ -1,17 +1,17 @@
 #include "guiswitch.h"
 
 
-GUISwitch::GUISwitch(Controller *player, std::function<void()> on,  std::function<void()> off) : GUIMenuElement (player) {
+GUISwitch::GUISwitch(std::function<void()> on,  std::function<void()> off) {
     this->on = on;
     this->off = off;
 }
 
-GUISwitch::GUISwitch(Controller *player, std::string label, std::function<void()> on,  std::function<void()> off) : GUIMenuElement (player, label) {
+GUISwitch::GUISwitch(std::string label, std::function<void()> on,  std::function<void()> off) : GUIMenuElement (label) {
     this->on = on;
     this->off = off;
 }
 
-GUISwitch::GUISwitch(Controller *player, IInformative *informative, std::function<void()> on,  std::function<void()> off) : GUIMenuElement (player, informative) {
+GUISwitch::GUISwitch(IInformative *informative, std::function<void()> on,  std::function<void()> off) : GUIMenuElement (informative) {
     this->on = on;
     this->off = off;
 }

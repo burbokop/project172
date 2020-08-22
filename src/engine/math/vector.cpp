@@ -169,22 +169,6 @@ Vector Vector::operator-(double subtrahend) const  {
     return Vector();
 }
 
-int Vector::intX() const {
-    return static_cast<int>(this->m_x);
-}
-
-int Vector::intY() const {
-    return static_cast<int>(this->m_y);
-}
-
-double Vector::x() const {
-    return this->m_x;
-}
-
-double Vector::y() const {
-    return this->m_y;
-}
-
 std::ostream &operator<<(std::ostream &os, const e172::Vector &dt) {
     os << "Vector(" << std::to_string(dt.x()).c_str() << ", " << std::to_string(dt.y()).c_str() << ")";
     return os;

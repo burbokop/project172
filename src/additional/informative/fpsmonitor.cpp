@@ -1,12 +1,18 @@
 #include "fpsmonitor.h"
 
+#include <engine/time/time.h>
+
+
+
 FPSMonitor::FPSMonitor(std::string title) {
     this->title = title;
 }
 
 void FPSMonitor::count() {
-    deltaclock = SDL_GetTicks() - startclock;
-    startclock = SDL_GetTicks();
+    const auto cms = e172::Time::currentMilliseconds();
+
+    deltaclock = cms - startclock;
+    startclock = cms;
 
     if ( deltaclock != 0 )
         currentFPS = 1000 / deltaclock;
@@ -14,9 +20,9 @@ void FPSMonitor::count() {
     fpsArray.push_back(currentFPS);
 
     if(outputTimer.check()) {
-        Uint32 sum = 0;
-        Uint32 i = 0;
-        for(Uint32 inst : fpsArray) {
+        uint32_t sum = 0;
+        uint32_t i = 0;
+        for(uint32_t inst : fpsArray) {
             sum += inst;
             i++;
         }
@@ -30,7 +36,7 @@ int FPSMonitor::operator*(int term) {
     return static_cast<int>(currentFPS) * term;
 }
 
-Uint32 FPSMonitor::toUint32() {
+uint32_t FPSMonitor::toUint32() {
     return currentFPS;
 }
 

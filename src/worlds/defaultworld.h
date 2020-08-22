@@ -5,14 +5,13 @@
 #include "worlds/world.h"
 
 
-class DefaultWorld : public World {
+class DefaultWorld : public WorldPreset {
 public:
     DefaultWorld();
 
     // World interface
 public:
-    std::vector<Controller *> generate(e172::AssetProvider *assets, std::list<e172::Entity*> *units);
-    std::string getName();
+    virtual GenerationResult generate(e172::Context *context) override;
 };
 
 #endif // DEFAULTWORLD_H

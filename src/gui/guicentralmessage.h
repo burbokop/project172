@@ -1,8 +1,11 @@
 #ifndef GUICENTRALMESSAGE_H
 #define GUICENTRALMESSAGE_H
 
+#include <gui/base/guimenuelement.h>
 
-#include "gui/guimenuelement.h"
+
+
+
 
 
 class GUICentralMessage : public GUIMenuElement {
@@ -14,9 +17,8 @@ private:
     int flashesRemains;
 
 public:
-    GUICentralMessage(Controller *player);
-    GUICentralMessage(Controller *player, std::string label);
-    GUICentralMessage(Controller *player, IInformative *informative);
+    GUICentralMessage(std::string label);
+    GUICentralMessage(IInformative *informative);
 
     void start(int flashesRemains, unsigned interval = DEFAULT_FLASHING_INTERVAL);
 

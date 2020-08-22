@@ -5,7 +5,7 @@
 
 #include <engine/abstracteventhandler.h>
 
-GUIMiniMap::GUIMiniMap(Controller *player, std::list<Entity*> *units) : GUIElement (player) {
+GUIMiniMap::GUIMiniMap(std::list<Entity*> *units) {
     this->units = units;
 }
 
@@ -40,7 +40,7 @@ void GUIMiniMap::render(e172::AbstractRenderer *renderer) {
                         if(unit->is<Camera*>()) {
                             renderer->drawLine(point1 + posOnMap, point1 + playerShipPosOnMap, SelectedColor);
                             renderer->drawCircle(point1 + posOnMap, 4, SelectedColor >> 8);
-                        } else if(controller() && unit == controller()->parent()) {
+                        } else if(controller() && unit == controller()->parentUnit()) {
                             playerShipPosOnMap = posOnMap;
                             renderer->drawCircle(point1 + posOnMap, 2, SelectedColor << 8);
                         } else {

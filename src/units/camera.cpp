@@ -21,7 +21,7 @@ void Camera::setTarget(Controller *target) {
 
 void Camera::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
     if(target) {
-        if(Unit *targetUnit = target->parent()) {
+        if(Unit *targetUnit = target->parentUnit()) {
             relativisticPursuit(context, targetUnit);
         }
     }

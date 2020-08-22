@@ -3,6 +3,9 @@
 namespace e172 {
 
 
+bool AbstractRenderer::isValid() const {
+    return m_isValid;
+}
 
 Image::ptr AbstractRenderer::imageId(const Image &image) {
     return image.id();
@@ -38,7 +41,7 @@ Vector AbstractRenderer::cameraPosition() const {
 }
 
 bool AbstractRenderer::isActive() const {
-    return m_isActive;
+    return m_isValid && !m_locked;
 }
 
 AbstractRenderer * AbstractRenderer::Camera::renderer() const {

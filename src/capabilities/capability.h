@@ -8,11 +8,11 @@
 class Unit;
 
 class Capability : public e172::Entity {
-    Unit *m_parent = nullptr;
+    Unit *m_parentUnit = nullptr;
 public:
-    virtual bool setParent(Unit *parent);
-    virtual void unsetParent();
-    Unit *parent() const;
+    virtual bool setParentUnit(Unit *parent);
+    virtual void unsetParentUnit();
+    Unit *parentUnit() const;
 };
 
 #endif // COMPONENTS_H

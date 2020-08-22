@@ -19,9 +19,9 @@ private:
     unsigned state = Idle;
     bool m_waitStopPlaing = false;
 
-    e172::AudioSample beginningSample;
-    e172::AudioSample loopSample;
-    e172::AudioSample endingSample;
+    e172::AudioSample m_beginningSample;
+    e172::AudioSample m_loopSample;
+    e172::AudioSample m_endingSample;
 
 
     static inline int nextId = 0;
@@ -51,6 +51,10 @@ public:
     void setWaitStopPlaing(bool waitStopPlaing);
 
     friend bool operator ==(const AudioPlayer& ap0, const AudioPlayer& ap1);
+    e172::AudioSample beginningSample() const;
+    e172::AudioSample loopSample() const;
+    e172::AudioSample endingSample() const;
+    e172::AudioChannel channel() const;
 };
 
 #endif // AUDIOPLAYER_H

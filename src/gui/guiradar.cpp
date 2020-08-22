@@ -1,17 +1,16 @@
 #include "guiradar.h"
 #include "gui/guichoice.h"
 
-GUIRadar::GUIRadar(Controller *player) : GUIList (player) {}
 
-GUIRadar::GUIRadar(Controller *player, std::string label) : GUIList (player, label) {}
+GUIRadar::GUIRadar(std::string label) : GUIList (label) {}
 
-GUIRadar::GUIRadar(Controller *player, IInformative *informative) : GUIList (player, informative) {}
+GUIRadar::GUIRadar(IInformative *informative) : GUIList (informative) {}
 
 
 GUIMenuElement *GUIRadar::forEach(Unit *unit) {
-    GUIContainer *container = new GUIContainer(controller(), unit);
-    container->addElement(new GUIChoice(controller(), "dock", unit, std::bind(&GUIRadar::onDock, this, std::placeholders::_1)));
-    container->addElement(new GUIChoice(controller(), "select", unit, std::bind(&GUIRadar::onSelect, this, std::placeholders::_1)));
+    GUIContainer *container = new GUIContainer(unit);
+    container->addMenuElement(new GUIChoice("dock", unit, std::bind(&GUIRadar::onDock, this, std::placeholders::_1)));
+    container->addMenuElement(new GUIChoice("select", unit, std::bind(&GUIRadar::onSelect, this, std::placeholders::_1)));
     return container;
 }
 
@@ -19,7 +18,7 @@ GUIMenuElement *GUIRadar::forEach(Unit *unit) {
 void GUIRadar::onDock(old::Variant value) {
     if(value.isUnit()) {
         Unit *target = value.toUnit();
-        Unit *parent = controller()->parent();
+        Unit *parent = controller()->parentUnit();
         if(target && parent) {
             Docker *docker = parent->getDocker();
             if(docker) {

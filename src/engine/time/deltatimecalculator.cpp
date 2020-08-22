@@ -11,8 +11,8 @@ int64_t DeltaTimeCalculator::calculateDuration() {
 
 DeltaTimeCalculator::DeltaTimeCalculator() {}
 
-void DeltaTimeCalculator::setGlobalTimeSpead(double value) {
-    m_globalTimeSpead = value;
+void DeltaTimeCalculator::setTimeSpead(double value) {
+    m_timeSpead = value;
 }
 
 double DeltaTimeCalculator::deltaTime() {
@@ -20,6 +20,7 @@ double DeltaTimeCalculator::deltaTime() {
 }
 
 void DeltaTimeCalculator::update() {
-    m_deltaTime = calculateDuration() * 0.000001 * m_globalTimeSpead;
+    m_deltaTime = calculateDuration() * 0.000001 * m_timeSpead;
 }
+
 }

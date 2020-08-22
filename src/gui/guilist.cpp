@@ -7,15 +7,15 @@
 #include "objectregistry.h"
 #include "debug.h"
 
-std::vector<GUIMenuElement *> *GUIList::informativeToElement(std::list<Entity*> *array) {
-    std::vector<GUIMenuElement*> *result = new std::vector<GUIMenuElement*>();
+std::vector<GUIMenuElement *> GUIList::informativeToElement(std::list<Entity*> *array) {
+    std::vector<GUIMenuElement*> result;
     if(array && array->size() > 0) {
         for(Entity *worker : *array) {
             EXISTS(worker) {
                 if(worker->isNot<Camera*>() && worker->isNot<Projectile*>()) {
                     Unit *unit = dynamic_cast<Unit*>(worker);
                     if(unit) {
-                        result->push_back(forEach(unit));
+                        result.push_back(forEach(unit));
                     }
                 }
             } else {
@@ -29,7 +29,7 @@ std::vector<GUIMenuElement *> *GUIList::informativeToElement(std::list<Entity*> 
 
 void GUIList::onChoice(old::Variant value) {
     Unit *target = value.toUnit();
-    Unit *parent = controller()->parent();
+    Unit *parent = controller()->parentUnit();
     if(target && parent) {
         Docker *docker = parent->getDocker();
         if(docker) {
@@ -39,21 +39,19 @@ void GUIList::onChoice(old::Variant value) {
 }
 
 GUIMenuElement *GUIList::forEach(Unit *unit) {
-    return new GUIChoice(controller(), unit, unit, std::bind(&GUIList::onChoice, this, std::placeholders::_1));
+    return new GUIChoice(unit, unit, std::bind(&GUIList::onChoice, this, std::placeholders::_1));
 }
 
-GUIList::GUIList(Controller *player) : GUIContainer (player) {}
 
-GUIList::GUIList(Controller *player, std::string label) : GUIContainer (player, label) {}
+GUIList::GUIList(std::string label) : GUIContainer (label) {}
 
-GUIList::GUIList(Controller *player, IInformative *informative) : GUIContainer (player, informative) {}
+GUIList::GUIList(IInformative *informative) : GUIContainer (informative) {}
 
 void GUIList::addArray(std::list<Entity*> *array) {
     this->array = array;
 }
 
 void GUIList::render(e172::AbstractRenderer *renderer) {
-    delete elements;
-    elements = informativeToElement(array);
+    m_menuElements = informativeToElement(array);
     this->GUIContainer::render(renderer);
 }
