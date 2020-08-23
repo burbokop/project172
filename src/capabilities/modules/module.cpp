@@ -21,13 +21,10 @@ Module::Module() {
         }
     });
 }
-#include <iostream>
+
 void Module::animate(unsigned mode, unsigned def) {
     animator.setDefaultMode(def);
     animator.play(mode);
-
-
-    std::cout << "validation: " << audioPlayer.beginningSample().isValid() << audioPlayer.loopSample().isValid() << audioPlayer.endingSample().isValid() << "\n";
 
     if(mode == Animator::Loop) audioPlayer.play();
     else audioPlayer.stop();

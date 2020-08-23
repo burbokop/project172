@@ -11,6 +11,7 @@
 #include "near.h"
 #include "background.h"
 #include "entity.h"
+#include "messagequeue.h"
 
 
 
@@ -47,6 +48,8 @@ private:
     std::list<Entity*> *m_entities;
 
     AssetProvider *m_assetProvider= nullptr;
+    e172::MessageBus<std::string, e172::Variant> *m_messageBus
+    = new e172::MessageBus<std::string, e172::Variant>();
 
     void handleRequest(Request request);
 public:
@@ -66,6 +69,9 @@ public:
 
     [[deprecated]]
     GameApplication *appliation() const;
+    e172::MessageBus<std::string, e172::Variant> *messageBus() const;
+
+    ~Context();
 };
 
 }

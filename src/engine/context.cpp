@@ -30,14 +30,21 @@ double Context::deltaTime() const {
     return m_deltaTime;
 }
 
-GameApplication *Context::appliation() const
-{
+GameApplication *Context::appliation() const {
     return m_appliation;
+}
+
+e172::MessageBus<std::string, e172::Variant> *Context::messageBus() const {
+    return m_messageBus;
+}
+
+Context::~Context() {
+    delete m_messageBus;
 }
 
 void Context::handleRequest(Request request) {
     PROTECT_OBJECT(request.requester)
-    if(request.command == DELETE_UNIT) {
+            if(request.command == DELETE_UNIT) {
         Debug::out("DELETE: " + std::to_string(reinterpret_cast<uintptr_t>(request.requester)));
         const auto pos = std::find(m_entities->begin(), m_entities->end(), request.requester);
         if(pos != m_entities->end()) {
@@ -157,13 +164,13 @@ void Context::handleRequest(Request request) {
     } else if (request.command == BACKGROUND_FLASHING) {
         Debug::out("BACKGROUND_FLASHING: " + std::to_string(reinterpret_cast<uintptr_t>(request.requester)));
         if(request.argument.isNumber()) {
-            int repeats = request.argument.toInt32();
+            //int repeats = request.argument.toInt32();
             //background->flashing(repeats);
         }
     } else if (request.command == FLOATING_MESSAGE) {
         Debug::out("FLOATING_MESSAGE: " + std::to_string(reinterpret_cast<uintptr_t>(request.requester)));
         if(request.argument.isNumber()) {
-            Unit *unit = dynamic_cast<Unit*>(request.requester);
+            //Unit *unit = dynamic_cast<Unit*>(request.requester);
             //if(unit) {
             //    gui->addBlushingFloatingMessage(unit, request.argument.toInt32());
             //}

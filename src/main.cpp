@@ -135,6 +135,27 @@ int main(int argc, char *argv[]) {
     app.addEntity(&worldPresetStrategy);
 
 
+
+    struct s {
+        e172::Variant value;
+        int loop_count;
+    };
+    std::map<std::string, std::list<s>> m_data;
+
+    for(auto q : m_data) {
+        auto it = q.second.begin();
+        while(it != q.second.end()) {
+            if(it->loop_count-- <= 0) {
+                it = q.second.erase(it);
+            } else {
+                ++it;
+            }
+        }
+    }
+
+
+
+
     guiMaker.setWorldPresetStrategy(&worldPresetStrategy);
 
     //start application

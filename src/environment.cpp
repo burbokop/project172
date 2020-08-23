@@ -126,7 +126,6 @@ void Environment::start() {
             e->render(renderer);
         }
 
-
         renderer->update();
 
         fps->count();

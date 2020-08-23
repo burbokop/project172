@@ -114,6 +114,7 @@ SOURCES       = ../klibcore/src/experimental/universalqueue/kuniversalqueue.cpp 
 		../src/engine/math/math.cpp \
 		../src/engine/math/vector.cpp \
 		../src/engine/memcontrol/abstractstrategy.cpp \
+		../src/engine/messagequeue.cpp \
 		../src/engine/sharedcontainer.cpp \
 		../src/engine/textformat.cpp \
 		../src/engine/time/deltatimecalculator.cpp \
@@ -235,6 +236,7 @@ OBJECTS       = kuniversalqueue.o \
 		math.o \
 		vector.o \
 		abstractstrategy.o \
+		messagequeue.o \
 		sharedcontainer.o \
 		textformat.o \
 		deltatimecalculator.o \
@@ -532,6 +534,7 @@ DIST          = ../../../../Qt/5.15.0/gcc_64/mkspecs/features/spec_pre.prf \
 		src/engine/math/math.h \
 		src/engine/math/vector.h \
 		src/engine/memcontrol/abstractstrategy.h \
+		src/engine/messagequeue.h \
 		src/engine/sharedcontainer.h \
 		src/engine/textformat.h \
 		src/engine/time/deltatimecalculator.h \
@@ -661,6 +664,7 @@ DIST          = ../../../../Qt/5.15.0/gcc_64/mkspecs/features/spec_pre.prf \
 		../src/engine/math/math.cpp \
 		../src/engine/math/vector.cpp \
 		../src/engine/memcontrol/abstractstrategy.cpp \
+		../src/engine/messagequeue.cpp \
 		../src/engine/sharedcontainer.cpp \
 		../src/engine/textformat.cpp \
 		../src/engine/time/deltatimecalculator.cpp \
@@ -2121,6 +2125,11 @@ abstractstrategy.o: ../src/engine/memcontrol/abstractstrategy.cpp ../src/engine/
 		../src/engine/type.h \
 		../klibcore/src/kmacro.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o abstractstrategy.o ../src/engine/memcontrol/abstractstrategy.cpp
+
+messagequeue.o: ../src/engine/messagequeue.cpp ../src/engine/messagequeue.h \
+		../src/engine/variant.h \
+		../src/engine/type.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o messagequeue.o ../src/engine/messagequeue.cpp
 
 sharedcontainer.o: ../src/engine/sharedcontainer.cpp ../src/engine/sharedcontainer.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o sharedcontainer.o ../src/engine/sharedcontainer.cpp

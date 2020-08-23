@@ -84,6 +84,7 @@ HEADERS += \
     src/engine/math/math.h \
     src/engine/math/vector.h \
     src/engine/memcontrol/abstractstrategy.h \
+    src/engine/messagequeue.h \
     src/engine/sharedcontainer.h \
     src/engine/textformat.h \
     src/engine/time/deltatimecalculator.h \
@@ -208,6 +209,7 @@ SOURCES += \
     src/engine/math/math.cpp \
     src/engine/math/vector.cpp \
     src/engine/memcontrol/abstractstrategy.cpp \
+    src/engine/messagequeue.cpp \
     src/engine/sharedcontainer.cpp \
     src/engine/textformat.cpp \
     src/engine/time/deltatimecalculator.cpp \
