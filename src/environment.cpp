@@ -76,8 +76,6 @@ Environment::Environment(std::vector<std::string> args) {
     assetManager->registerType<Thruster>();
 
 
-    context = new e172::Context(&m_entities, assetManager); //proceed {no}
-
     state = new State();
     eventHandler = new SDLEventHandler(); // io {no}
     netListener = new NetListener(context);
@@ -114,8 +112,6 @@ void Environment::start() {
             e->proceed(context, eventHandler);
         }
 
-        context->handleEvents();
-
         tps->count();
 
         //IO
@@ -125,8 +121,6 @@ void Environment::start() {
         for(auto e : m_entities) {
             e->render(renderer);
         }
-
-        renderer->update();
 
         fps->count();
         if(eventHandler->exitFlag()) break;

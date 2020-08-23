@@ -13,15 +13,51 @@
 
 namespace e172 {
 
+typedef uint32_t Color;
+
+/**
+ * @brief argb
+ * @param alpha
+ * @param r
+ * @param g
+ * @param b
+ * @return color
+ * @note all arguments from 0 to 255
+ */
+inline Color argb(uint8_t alpha, uint8_t r, uint8_t g, uint8_t b) {
+    return (static_cast<Color>(alpha) << 24)
+            | (static_cast<Color>(r) << 16)
+            | (static_cast<Color>(g) << 8)
+            | static_cast<Color>(b);
+}
+
+/**
+ * @brief rgb
+ * @param r
+ * @param g
+ * @param b
+ * @return
+ * @note all arguments from 0 to 255
+ */
+inline Color rgb(uint8_t r, uint8_t g, uint8_t b) {
+    return argb(0xff, r, g, b);
+}
+
 class AbstractGraphicsProvider;
 class AbstractRenderer {
     friend AbstractGraphicsProvider;
-    friend class GameApplication;
     bool m_isValid = false;
     bool m_locked = true;
     AbstractGraphicsProvider *m_provider = nullptr;
     Vector m_position;
     bool m_cameraLocked = false;
+
+    /**
+     * Only GameApplication class cann call update function
+     */
+    friend class GameApplication;
+protected:
+    virtual void update() = 0;
 public:
     class Camera : public SharedContainer {
         friend AbstractRenderer;
@@ -69,19 +105,11 @@ public:
     virtual void applySmooth(const Vector &point0, const Vector &point1, double coefficient) = 0;
     virtual void enableEffect(uint64_t effect) = 0;
     virtual void disableEffect(uint64_t effect) = 0;
-    virtual Vector resolution() const = 0;
 
-    virtual void update() = 0;
-
-
-
-    [[deprecated]]
-    virtual void setFullscreen() = 0;
-    [[deprecated]]
+    virtual void setFullscreen(bool value) = 0;
     virtual void setResolution(Vector value) = 0;
-    [[deprecated]]
-    virtual void setResolutionCallback(old::Variant value) = 0;
-
+    virtual Vector resolution() const = 0;
+    virtual Vector screenSize() const = 0;
 
     Vector offset() const;
     Camera detachCamera();

@@ -18,10 +18,10 @@ const int Projectile::DEFAULT_LIFE_TIME_DELTA = 4000;
 
 bool Projectile::collision(e172::Context* context, Unit *collider) {
     if(
-        collider->isNot<Camera*>() &&
-        collider->isNot<Particle*>() &&
-        collider->isNot<LightParticle*>() &&
-        collider->isNot<Projectile*>() &&
+        !collider->instanceOf<Camera>() &&
+        !collider->instanceOf<Particle>() &&
+        !collider->instanceOf<LightParticle>() &&
+        !collider->instanceOf<Projectile>() &&
         collider != mother
     ) {
         collider->hit(context, damage);
@@ -48,10 +48,10 @@ void Projectile::setMother(Unit *value) {
 
 void Projectile::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
     if(destroyTimer && destroyTimer->check()) {
-        context->addEvent(this, e172::Context::DELETE_UNIT);
+        context->emitMessage(e172::Context::DELETE_UNIT, entityId());
     }
 
-    for(Entity *e : *(context->entities())) {
+    for(Entity *e : context->entities()) {
         EXISTS(e) {
             Unit *unit = dynamic_cast<Unit*>(e);
             if(unit != nullptr && unit != this) {

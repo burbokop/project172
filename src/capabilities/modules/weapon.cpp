@@ -5,6 +5,8 @@
 
 #include <engine/context.h>
 #include <engine/assettools/assetprovider.h>
+#include <engine/gameapplication.h>
+
 
 const double Weapon::DEFAULT_PROJECTILE_SPEED = 200.0;
 double Weapon::getProjectileSpead() const {
@@ -39,8 +41,7 @@ void Weapon::proceed(e172::Context *context, e172::AbstractEventHandler *eventHa
             object->setMother(parentUnit());
 
             object->place(parentUnit()->position(), parentUnit()->velocity() + e172::Vector::createByAngle(getProjectileSpead(), parentUnit()->getAngle()), e172::Vector(), parentUnit()->getAngle());
-
-            context->entities()->push_back(object);
+            context->addEntity(object);
 
             audioPlayer.play();
             //this.parent.audioPlayer.play(this, 14);

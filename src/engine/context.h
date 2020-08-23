@@ -22,56 +22,54 @@ class GameApplication;
 class Context : public Object {
     friend GameApplication;
     double m_deltaTime = 0;
-    GameApplication *m_appliation = nullptr;
+    GameApplication *m_application = nullptr;
 
-    struct Request {
-        Entity *requester;
-        unsigned command;
-        old::Variant argument;
-    };
 public:
-    static const unsigned DELETE_UNIT;
-    static const unsigned SPAWN_EXPLOSIVE;
-    static const unsigned SPAWN_ENGINE_EXPLOSIVE;
-    static const unsigned SPAWN_ENGINE_PARTICLES;
-    static const unsigned SPAWN_UNIT;
-    static const unsigned SPAWN_SURFACE;
-    static const unsigned ADD_CAPABILITY;
-    static const unsigned REMOVE_CAPABILITY;
 
-    static const unsigned EMERGENCY_MESSAGE;
-    static const unsigned BACKGROUND_FLASHING;
-    static const unsigned FLOATING_MESSAGE;
+    enum {
+        DELETE_UNIT = 0,
+        DELETE_ALL_UNITS,
+        SPAWN_EXPLOSIVE,
+        SPAWN_ENGINE_EXPLOSIVE,
+        SPAWN_ENGINE_PARTICLES,
+        SPAWN_UNIT,
+        SPAWN_SURFACE,
+        ADD_CAPABILITY,
+        REMOVE_CAPABILITY,
+        EMERGENCY_MESSAGE,
+        BACKGROUND_FLASHING,
+        FLOATING_MESSAGE,
+        CHANGE_RESOLUTION,
+        CHANGE_FULLSCREEN,
+        CHANGE_ANAGLYPH
+    };
 
 private:
-    std::queue<Request> eventQueue;
-    std::list<Entity*> *m_entities;
-
-    AssetProvider *m_assetProvider= nullptr;
-    e172::MessageBus<std::string, e172::Variant> *m_messageBus
-    = new e172::MessageBus<std::string, e172::Variant>();
-
-    void handleRequest(Request request);
+    e172::MessageBus<Entity::message_id_t, Variant> m_messageBus;
 public:
-    Context(std::list<Entity*> *entities = nullptr, AssetProvider *assetProvider = nullptr);
+    Context(GameApplication *application);
     std::string absolutePath(const std::string &path) const;
     std::vector<std::string> arguments() const;
-
-    [[deprecated]]
-    std::list<Entity*> *entities() const;
-    AssetProvider *assetProvider() const;
-
-    void addEvent(Entity *requester, unsigned command, old::Variant argument = old::Variant());
-
-    void handleEvents();
-
     double deltaTime() const;
 
-    [[deprecated]]
-    GameApplication *appliation() const;
-    e172::MessageBus<std::string, e172::Variant> *messageBus() const;
+    AssetProvider *assetProvider() const;
+    std::list<Entity *> entities() const;
+    void addEntity(Entity *entity);
 
-    ~Context();
+
+    Promice *emitMessage(const Entity::message_id_t &messageId, const Variant &value = Variant());
+    bool containsMessage(const Entity::message_id_t &messageId);
+    Variant popMessage(const Entity::message_id_t &messageId, bool *ok = nullptr);
+
+
+    void registerMessageHandler(const Entity::message_id_t &messageId, const std::function<void(const Vector&)> &callback);
+    template<typename C>
+    void registerMessageHandler(const Entity::message_id_t &messageId, C *object, void(C::*callback)(const Vector&)) {
+        registerMessageHandler([messageId, object, callback](auto v){
+            (object->*callback)(messageId, v);
+        });
+    }
+
 };
 
 }

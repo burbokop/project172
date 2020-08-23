@@ -4,13 +4,13 @@
 #include "additional/lightparticle.h"
 
 #include <engine/abstracteventhandler.h>
+#include <engine/context.h>
 
-GUIMiniMap::GUIMiniMap(std::list<Entity*> *units) {
-    this->units = units;
-}
+GUIMiniMap::GUIMiniMap() {}
 
 void GUIMiniMap::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
-    UNUSED(context);
+    m_entities = context->entities();
+
     if(eventHandler->keySinglePressed(e172::ScancodeEquals) || eventHandler->keySinglePressed(e172::ScancodeKpPlus)) {
         range /= 2;
     }
@@ -28,16 +28,16 @@ void GUIMiniMap::render(e172::AbstractRenderer *renderer) {
         renderer->drawRect(point1, point2, DefaultColor);
 
         e172::Vector playerShipPosOnMap;
-        for(Entity *worker : *units) {
-            Unit *unit = dynamic_cast<Unit*>(worker);
+        for(Entity *entity : m_entities) {
+            Unit *unit = dynamic_cast<Unit*>(entity);
             if(unit) {
                 e172::Vector posOnMap = ((unit->position() - renderer->cameraPosition()) / range * size.module()) + (size / 2);
 
                 if(posOnMap.quarter() == e172::Vector::QUARTER_RIGHT_DOWN && (size - posOnMap).quarter() == e172::Vector::QUARTER_RIGHT_DOWN) {
-                    if(unit->is<Projectile*>()) {
+                    if(unit->instanceOf<Projectile>()) {
                         renderer->drawSquare(point1 + posOnMap, 1, SelectedColor);
-                    } else if (unit->isNot<LightParticle*>()) {
-                        if(unit->is<Camera*>()) {
+                    } else if (!unit->instanceOf<LightParticle>()) {
+                        if(unit->instanceOf<Camera>()) {
                             renderer->drawLine(point1 + posOnMap, point1 + playerShipPosOnMap, SelectedColor);
                             renderer->drawCircle(point1 + posOnMap, 4, SelectedColor >> 8);
                         } else if(controller() && unit == controller()->parentUnit()) {

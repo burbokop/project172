@@ -3,11 +3,11 @@
 #include <engine/abstracteventhandler.h>
 #include <engine/graphics/abstractrenderer.h>
 
-GUIDebugValueInfo::GUIDebugValueInfo(std::list<Entity*> *) {
+GUIDebugValueInfo::GUIDebugValueInfo() {
     timer.reset();
 }
 
-void GUIDebugValueInfo::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
+void GUIDebugValueInfo::proceed(e172::Context *, e172::AbstractEventHandler *eventHandler) {
 
     if(eventHandler->keyHolded(e172::Scancode1)) {
         coef *= 1.01;

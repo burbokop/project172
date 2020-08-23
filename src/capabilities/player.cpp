@@ -120,7 +120,6 @@ void Player::render(e172::AbstractRenderer *renderer) {
     UNUSED(renderer);
 }
 
-void Player::onHit(e172::Context *context, int health) {
-    UNUSED(health);
-    context->addEvent(parentUnit(), e172::Context::BACKGROUND_FLASHING, 8);
+void Player::onHit(e172::Context *context, int) {
+    context->emitMessage(e172::Context::BACKGROUND_FLASHING, 8);
 }

@@ -27,7 +27,7 @@ public:
 
     // Controller interface
 public:
-    void onHit(e172::Context* context, int health);
+    void onHit(e172::Context* context, int);
 };
 
 #endif // PLAYER_H

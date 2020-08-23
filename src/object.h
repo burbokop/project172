@@ -1,6 +1,7 @@
 #ifndef OBJECT_H
 #define OBJECT_H
 
+#include <type_traits>
 
 #define UNUSED(expr) do { (void)(expr); } while (0)
 
@@ -15,12 +16,20 @@ public:
     Object();
 
     template <typename Type>
+    [[deprecated("Use instanceOf instead")]]
     bool is() {
         return dynamic_cast<Type>(this) != nullptr;
     }
 
+    template <typename Type>
+    bool instanceOf() {
+        typedef typename std::remove_pointer<Type>::type no_ptr_t;
+        return dynamic_cast<no_ptr_t*>(this) != nullptr;
+    }
+
 
     template <typename Type>
+    [[deprecated("Use !instanceOf instead")]]
     bool isNot() {
         return dynamic_cast<Type>(this) == nullptr;
     }

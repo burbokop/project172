@@ -9,10 +9,9 @@
 
 class UnitsAmountInfo : public IInformative {
 private:
-    std::list<e172::Entity*> *vector;
-
+    e172::Context *m_context = nullptr;
 public:
-    UnitsAmountInfo(std::list<e172::Entity*> *vector);
+    UnitsAmountInfo(e172::Context *context);
 
     // IInformative interface
 public:

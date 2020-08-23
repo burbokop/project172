@@ -50,7 +50,7 @@ void Particle::hit(e172::Context *context, int value) {
 
 void Particle::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
     if(destroyTimer && destroyTimer->check()) {
-        context->addEvent(this, e172::Context::DELETE_UNIT);
+        context->emitMessage(e172::Context::DELETE_UNIT, entityId());
     }
     this->Movable::proceed(context, eventHandler);
 }

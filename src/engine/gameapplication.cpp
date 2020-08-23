@@ -18,6 +18,11 @@ std::vector<std::string> GameApplication::coverArgs(int argc, char *argv[]) {
     return result;
 }
 
+std::list<Entity *> GameApplication::entities() const
+{
+    return m_entities;
+}
+
 AbstractGraphicsProvider *GameApplication::graphicsProvider() const {
     return m_graphicsProvider;
 }
@@ -65,9 +70,8 @@ std::vector<std::string> GameApplication::arguments() const {
 GameApplication::GameApplication(int argc, char *argv[]) {
     m_arguments = coverArgs(argc, argv);
     m_assetProvider = new AssetProvider();
-    m_context = new Context(&m_entities, m_assetProvider);
+    m_context = new Context(this);
     m_assetProvider->m_context = m_context;
-    m_context->m_appliation = this;
 }
 
 int GameApplication::exec() {
@@ -97,7 +101,8 @@ int GameApplication::exec() {
         }
 
         if(m_context) {
-            m_context->handleEvents();
+            m_context->m_messageBus.invokeInternalFunctions();
+            m_context->m_messageBus.flushMessages();
             m_context->m_deltaTime = m_deltaTimeCalculator.deltaTime();
         }
     }

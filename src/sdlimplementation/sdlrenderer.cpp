@@ -47,10 +47,6 @@ void SDLRenderer::setResolution(e172::Vector value) {
     m_resolution = value;
 }
 
-void SDLRenderer::setResolutionCallback(old::Variant value) {
-    setResolution(value.toVector());
-}
-
 void SDLRenderer::applyLensEffect(const e172::Vector &point0, const e172::Vector &point1, double coefficient) {
     const auto delta = point1 - point0;
     if(e172::Math::cmpf(delta.x(), 0) || e172::Math::cmpf(delta.y(), 0) || e172::Math::cmpf(coefficient, 0))
@@ -136,15 +132,33 @@ void SDLRenderer::fill(uint32_t color) {
     SDL_FillRect(surface, nullptr, color);
 }
 
-void SDLRenderer::setFullscreen() {
-    fullscreen = !fullscreen;
-    if(fullscreen) {
+
+e172::Vector SDLRenderer::screenSize() const {
+    SDL_DisplayMode displayMode;
+    SDL_GetCurrentDisplayMode(0, &displayMode);
+    return e172::Vector(displayMode.w, displayMode.h);
+}
+
+void SDLRenderer::setFullscreen(bool value) {
+    if(m_lastFullscreen == value)
+        return;
+
+    m_lastFullscreen = value;
+
+    if(value) {
+        SDL_DisplayMode displayMode;
+        SDL_GetCurrentDisplayMode(0, &displayMode);
+        setResolution(e172::Vector(displayMode.w, displayMode.h));
+
         SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN);
         SDL_ShowCursor(false);
     } else {
         SDL_SetWindowFullscreen(window, 0);
         SDL_ShowCursor(true);
     }
+    if(surface)
+        SDL_FreeSurface(surface);
+
     surface = SDL_GetWindowSurface(window);
 }
 

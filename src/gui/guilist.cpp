@@ -12,7 +12,7 @@ std::vector<GUIMenuElement *> GUIList::informativeToElement(std::list<Entity*> *
     if(array && array->size() > 0) {
         for(Entity *worker : *array) {
             EXISTS(worker) {
-                if(worker->isNot<Camera*>() && worker->isNot<Projectile*>()) {
+                if(!worker->instanceOf<Camera>() && !worker->instanceOf<Projectile>()) {
                     Unit *unit = dynamic_cast<Unit*>(worker);
                     if(unit) {
                         result.push_back(forEach(unit));

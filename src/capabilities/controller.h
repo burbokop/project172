@@ -12,7 +12,7 @@
 class Controller : public Capability {    
 protected:
     static const long ARMOR_RELEASE_DELAY;
-    static const char *ARMOR_RELEASE_MESSAGE;
+    static const std::string ARMOR_RELEASE_MESSAGE;
 
 
     Ship *armor = nullptr;

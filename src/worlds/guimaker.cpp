@@ -57,7 +57,7 @@ GUIMaker::GUIMaker(e172::Context *context) {
                     m_worldComboBox = new GUIComboBox<std::string>("worlds"); {
                     } testMenu->addMenuElement(m_worldComboBox);
                     testMenu->addMenuElement(new GUIMenuElement(new RegistryInfo()));
-                    testMenu->addMenuElement(new GUIMenuElement(new UnitsAmountInfo(context->entities())));
+                    testMenu->addMenuElement(new GUIMenuElement(new UnitsAmountInfo(context)));
 
                     //if (fps){
                     //    testMenu->addMenuElement(new GUIMenuElement(fps));
@@ -72,17 +72,30 @@ GUIMaker::GUIMaker(e172::Context *context) {
                 GUIContainer *optionsMenu = new GUIContainer("options"); {
                     GUIContainer *effectsMenu = new GUIContainer("effects"); {
                         effectsMenu->addMenuElement(new GUISwitch(std::string("anaglyph"), [context](){
-                            context->appliation()->renderer()->enableEffect(1);
-                        }, [context](){
-                            context->appliation()->renderer()->disableEffect(1);
+                            context->emitMessage(e172::Context::CHANGE_ANAGLYPH, true);
+                            //context->appliation()->renderer()->enableEffect(1);
+                        }, [context]() {
+                            context->emitMessage(e172::Context::CHANGE_ANAGLYPH, false);
+                            //context->appliation()->renderer()->disableEffect(1);
                         }));
                     } optionsMenu->addMenuElement(effectsMenu);
                     GUIContainer *resolutionMenu = new GUIContainer(std::string("resolution")); {
-                        resolutionMenu->addMenuElement(new GUIChoice(std::string("600x600"), e172::Vector(600, 600), std::bind(&e172::AbstractRenderer::setResolutionCallback, context->appliation()->renderer(), std::placeholders::_1)));
-                        resolutionMenu->addMenuElement(new GUIChoice(std::string("1360x768"), e172::Vector(1360, 768), std::bind(&e172::AbstractRenderer::setResolutionCallback, context->appliation()->renderer(), std::placeholders::_1)));
-                        resolutionMenu->addMenuElement(new GUIChoice(std::string("1920x1080"), e172::Vector(1920, 1080), std::bind(&e172::AbstractRenderer::setResolutionCallback, context->appliation()->renderer(), std::placeholders::_1)))  ;
+                        const auto f = [context](old::Variant value) {
+                            context->emitMessage(e172::Context::CHANGE_RESOLUTION, value.toVector());
+                        };
+                        resolutionMenu->addMenuElement(new GUIChoice(std::string("600x600"), e172::Vector(600, 600), f));
+                        resolutionMenu->addMenuElement(new GUIChoice(std::string("1360x768"), e172::Vector(1360, 768), f));
+                        resolutionMenu->addMenuElement(new GUIChoice(std::string("1920x1080"), e172::Vector(1920, 1080), f));
                     } optionsMenu->addMenuElement(resolutionMenu);
-                    optionsMenu->addMenuElement(new GUISwitch(std::string("fullscreen"), std::bind(&e172::AbstractRenderer::setFullscreen, context->appliation()->renderer())));
+
+                    GUIContainer *fullscreenMenu = new GUIContainer(std::string("fullscreen")); {
+                        const auto f = [context](old::Variant value){
+                            context->emitMessage(e172::Context::CHANGE_FULLSCREEN, value.toInt32());
+                        };
+                        fullscreenMenu->addMenuElement(new GUIChoice(std::string("yes"), 1, f));
+                        fullscreenMenu->addMenuElement(new GUIChoice(std::string("no"), 0, f));
+                    } optionsMenu->addMenuElement(fullscreenMenu);
+
                 } mainMenu->addMenuElement(optionsMenu);
 
                 GUIContainer *stationMenu = new GUIContainer("station"); {
@@ -91,7 +104,7 @@ GUIMaker::GUIMaker(e172::Context *context) {
 
             } stack->push(mainMenu);
         } m_gui->setMenu(stack);
-        m_gui->setMiniMap(new GUIMiniMap(context->entities()));
-        m_gui->setDebugValueInfo(new GUIDebugValueInfo(context->entities()));
+        m_gui->setMiniMap(new GUIMiniMap());
+        m_gui->setDebugValueInfo(new GUIDebugValueInfo());
     }
 }

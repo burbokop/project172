@@ -1,10 +1,13 @@
 #include "unitsamountinfo.h"
 #include <list>
+#include <engine/context.h>
 
-UnitsAmountInfo::UnitsAmountInfo(std::list<e172::Entity *> *vector) {
-    this->vector = vector;
+UnitsAmountInfo::UnitsAmountInfo(e172::Context *context) {
+    m_context = context;
 }
 
 std::string UnitsAmountInfo::getInfo() {
-    return "Units amount: " + std::to_string(vector->size()) + '\n';
+    if(m_context)
+        return "Units amount: " + std::to_string(m_context->entities().size()) + '\n';
+    return "Context missing\n";
 }

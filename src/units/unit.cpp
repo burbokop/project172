@@ -130,6 +130,7 @@ double Unit::getAngle() {
     return angle;
 }
 
+#include <iostream>
 void Unit::hit(e172::Context* context, int value) {
     if(value != 0) {
         health -= value;
@@ -142,11 +143,12 @@ void Unit::hit(e172::Context* context, int value) {
         }
 
         if(dynamic_cast<Projectile*>(this) == nullptr) {
-            context->addEvent(this, e172::Context::FLOATING_MESSAGE, health);
+            std::cout << __PRETTY_FUNCTION__ << " : " << entityId() << " : " << health << "\n";
+            context->emitMessage(e172::Context::FLOATING_MESSAGE, e172::VariantVector { entityId(), health });
         }
 
         if(health < 0) {
-            context->addEvent(this, e172::Context::SPAWN_EXPLOSIVE, explosiveRadius);
+            context->emitMessage(e172::Context::SPAWN_EXPLOSIVE, e172::VariantVector { entityId(), explosiveRadius });
             ModuleHandler *mh = getModuleHandler();
             if(mh) {
                 std::vector<Module*> *modules = mh->getAllModules();
@@ -158,11 +160,11 @@ void Unit::hit(e172::Context* context, int value) {
                     }
                 }
             }
-            context->addEvent(this, e172::Context::DELETE_UNIT);
+            context->emitMessage(e172::Context::DELETE_UNIT, entityId());
         }
     } else {
         if(dynamic_cast<Projectile*>(this) == nullptr) {
-            context->addEvent(this, e172::Context::FLOATING_MESSAGE, const_cast<char*>("no damage"));
+            context->emitMessage(e172::Context::FLOATING_MESSAGE, e172::VariantVector { entityId(), "no damage" });
         }
     }
 }

@@ -61,6 +61,7 @@ public:
     void setEventHandler(AbstractEventHandler *eventHandler);
     void setAudioProvider(AbstractAudioProvider *audioProvider);
     void setGraphicsProvider(AbstractGraphicsProvider *graphicsProvider);
+    std::list<Entity *> entities() const;
 };
 
 }

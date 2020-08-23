@@ -25,10 +25,13 @@ public:
     virtual void enableEffect(uint64_t effect) override;
     virtual void disableEffect(uint64_t effect) override;
 
-    virtual void update() override;
-    virtual void setFullscreen() override;
+    virtual void applyLensEffect(const e172::Vector &point0, const e172::Vector &point1, double coefficient) override;
+    virtual void setFullscreen(bool value) override;
     virtual void setResolution(e172::Vector value) override;
-    virtual void setResolutionCallback(old::Variant value) override;
+    virtual e172::Vector screenSize() const override;
+
+protected:
+    virtual void update() override;
 };
 
 #endif // OPENGLRENDERER_H

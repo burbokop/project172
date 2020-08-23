@@ -7,7 +7,7 @@
 
 class Aggressive : public Controller {
 private:
-    std::list<Entity*> *targets = nullptr;
+    std::list<Entity*> targets;
     Unit *target = nullptr;
     bool targeted = false;
     bool inWarp = false;
@@ -18,7 +18,7 @@ private:
     Unit *chooseTarget();
 
 public:
-    Aggressive(std::list<Entity*> *units);
+    Aggressive(std::list<Entity*> units);
 
     // Entity interface
 public:

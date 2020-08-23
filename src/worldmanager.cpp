@@ -18,14 +18,15 @@ void WorldPresetStrategy::proceed(e172::Context *context, e172::AbstractEventHan
     if(m_strategy.activeModule() != m_last) {
         m_last = m_strategy.activeModule();
         if(m_last) {
-            context->appliation()->clearEntities();
-            const auto result = m_last->generate(context);
+            context->emitMessage(e172::Context::DELETE_ALL_UNITS)
+                ->onDone([context, this](){
+                const auto result = m_last->generate(context);
 
-            for(auto r : result.entities)
-                context->appliation()->addEntity(r);
+                for(auto r : result.entities)
+                    context->addEntity(r);
+            });
         }
     }
 }
 
-void WorldPresetStrategy::render(e172::AbstractRenderer *) {
-}
+void WorldPresetStrategy::render(e172::AbstractRenderer *) {}

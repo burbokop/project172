@@ -117,6 +117,57 @@ int main(int argc, char *argv[]) {
     playerShip->addCapability(playerModuleHandler);
     app.addEntity(playerShip);
 
+
+
+
+    //player2
+    Player *player2 = static_cast<Player*>(app.assetProvider()->createLoadable("player2"));
+    //installing armor to player2
+
+    Ship *playerArmor2 = static_cast<Ship*>(app.assetProvider()->createLoadable("astro"));
+    ModuleHandler *playerArmorModules2 = new ModuleHandler();
+    playerArmorModules2->addModule(static_cast<Module*>(app.assetProvider()->createLoadable("mini-engine")));
+    playerArmorModules2->addModule(static_cast<Module*>(app.assetProvider()->createLoadable("repair-laser")));
+    playerArmor2->addCapability(playerArmorModules2);
+    player2->setArmor(playerArmor2);
+
+    for(int i = 0; i < 3; i++) {
+        Unit *s = nullptr;
+        switch (i) {
+            case 0:
+                s = static_cast<Unit*>(app.assetProvider()->createLoadable("sh1"));
+                break;
+            case 1:
+                s = static_cast<Unit*>(app.assetProvider()->createLoadable("sh2"));
+                break;
+            case 2:
+                s = static_cast<Unit*>(app.assetProvider()->createLoadable("sh3"));
+                break;
+        }
+
+        s->place(e172::Vector(-50 + i * 50, 100), -0.7);
+
+        ModuleHandler *mx = new ModuleHandler();
+        if(i == 1) {
+            mx->addModule(static_cast<Module*>(app.assetProvider()->createLoadable("pistol")));
+            mx->addModule(static_cast<Module*>(app.assetProvider()->createLoadable("mega-launcher")));
+        } else {
+            mx->addModule(static_cast<Module*>(app.assetProvider()->createLoadable("pistol")));
+        }
+        mx->addModule(static_cast<Module*>(app.assetProvider()->createLoadable("engine1")));
+        mx->addModule(static_cast<Module*>(app.assetProvider()->createLoadable("warp-drive1")));
+
+        s->addCapability(mx);
+
+        s->addCapability(new Docker());
+
+        if(i == 1) s->addCapability(player2);
+        app.addEntity(s);
+    }
+
+
+
+
     //setup gui
     GUIMaker guiMaker(app.context());
     guiMaker.gui()->setController(player);
@@ -133,27 +184,6 @@ int main(int argc, char *argv[]) {
     worldPresetStrategy.registerType<ArenaWorld>();
     worldPresetStrategy.registerType<HeapWorld>();
     app.addEntity(&worldPresetStrategy);
-
-
-
-    struct s {
-        e172::Variant value;
-        int loop_count;
-    };
-    std::map<std::string, std::list<s>> m_data;
-
-    for(auto q : m_data) {
-        auto it = q.second.begin();
-        while(it != q.second.end()) {
-            if(it->loop_count-- <= 0) {
-                it = q.second.erase(it);
-            } else {
-                ++it;
-            }
-        }
-    }
-
-
 
 
     guiMaker.setWorldPresetStrategy(&worldPresetStrategy);

@@ -31,7 +31,7 @@ private:
     std::map<std::string, Font> m_fonts;
 
 
-    bool fullscreen = false;
+    bool m_lastFullscreen = false;
     e172::Vector m_resolution;
     bool anaglyphEnabled = false;
     bool anaglyphEnabled2 = false;
@@ -57,34 +57,24 @@ public:
     void drawImage(const e172::Image &image, const e172::Vector &pos, double angle, double zoom) override;
     e172::Vector drawString(const std::string &string, const e172::Vector &pos, uint32_t color, const e172::TextFormat &format = e172::TextFormat()) override;
 
-
-
-
-    e172::Vector resolution() const override;
-
     void enableEffect(uint64_t effect) override;
     void disableEffect(uint64_t effect) override;
 
+    e172::Vector resolution() const override;
+    void setResolution(e172::Vector value) override;
+    virtual void setFullscreen(bool value) override;
+    virtual e172::Vector screenSize() const override;
 
     ~SDLRenderer() override;
-
-    /**
-     * deprecated functionns;
-     */
-    [[deprecated]]
-    void update() override;
-    [[deprecated]]
-    void setFullscreen() override;
-    [[deprecated]]
-    void setResolution(e172::Vector value) override;
-    [[deprecated]]
-    void setResolutionCallback(old::Variant value) override;
-
 
     // AbstractRenderer interface
 public:
     virtual void applyLensEffect(const e172::Vector &point0, const e172::Vector &point1, double coefficient) override;
     virtual void applySmooth(const e172::Vector &point0, const e172::Vector &point1, double coefficient) override;
+
+    // AbstractRenderer interface
+protected:
+    virtual void update() override;
 };
 
 

@@ -67,6 +67,7 @@ HEADERS += \
     src/capabilities/player.h \
     src/debug.h \
     src/engine/abstracteventhandler.h \
+    src/engine/functional/metafunction.h \
     src/engine/memcontrol/abstractfactory.h \
     src/engine/additional.h \
     src/engine/assettools/abstractassetexecutor.h \
@@ -91,6 +92,7 @@ HEADERS += \
     src/engine/time/elapsedtimer.h \
     src/engine/time/time.h \
     src/engine/type.h \
+    src/engine/typedefs.h \
     src/engine/variant.h \
     src/environment.h \
     src/filesystem.h \
@@ -192,6 +194,7 @@ SOURCES += \
     src/capabilities/player.cpp \
     src/debug.cpp \
     src/engine/abstracteventhandler.cpp \
+    src/engine/functional/metafunction.cpp \
     src/engine/memcontrol/abstractfactory.cpp \
     src/engine/additional.cpp \
     src/engine/assettools/abstractassetexecutor.cpp \

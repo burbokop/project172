@@ -104,7 +104,7 @@ bool WarpDrive::warp() {
 uint8_t WarpDrive::abortWarp(e172::Context* context) {
     uint8_t result = warpState;
     if(warpState == WARP_EXECUTING) {
-        context->addEvent(parentUnit(), e172::Context::SPAWN_ENGINE_EXPLOSIVE, 16);
+        context->emitMessage(e172::Context::SPAWN_ENGINE_EXPLOSIVE, e172::VariantVector { parentUnit()->entityId(), 16 });
         audioPlayer.stop();
         animator.play(Animator::NotRender);
     }

@@ -12,13 +12,20 @@
 #include <map>
 #include <cassert>
 
+#include <engine/math/vector.h>
+
 #include "type.h"
 
+#include "typedefs.h"
+
+#define E172_VARIANT_NUM_CONVERTER(NAME, TYPE) \
+    inline auto to ## NAME(bool *ok = nullptr) const { return toNumber<TYPE>(ok); }
 
 namespace e172 {
 
 
-namespace kgram_stream_operator__ {
+
+namespace __StreamOperator {
     struct no { bool b[2]; };
     template<typename T, typename Arg> no operator<< (T&, const Arg&);
 
@@ -31,46 +38,53 @@ namespace kgram_stream_operator__ {
     };
 }
 
-struct kgram_variant_handle_base_t { virtual ~kgram_variant_handle_base_t() {}; };
+template <typename T>
+class __StringConvertionOperator {
+    typedef char one;
+    typedef long two;
+
+    template <typename C> static one test( decltype(&C::operator std::string) ) ;
+    template <typename C> static two test(...);
+
+public:
+    enum { value = sizeof(test<T>(0)) == sizeof(one) };
+};
+
+
+struct VariantBaseHandle { virtual ~VariantBaseHandle() {}; };
 template<typename T>
-struct kgram_variant_handle_t : kgram_variant_handle_base_t { T value; };
+struct VariantHandle : public VariantBaseHandle { T value; };
 
 class Variant;
-std::ostream &operator<<(std::ostream &stream, const Variant &arg);
+
 typedef std::vector<Variant> VariantVector;
 typedef std::list<Variant> VariantList;
 typedef std::map<std::string, Variant> VariantMap;
 
+std::ostream &operator<<(std::ostream &stream, const VariantVector &vector);
+std::ostream &operator<<(std::ostream &stream, const VariantList &vector);
+
 class Variant {
-    kgram_variant_handle_base_t *m_data = nullptr;
+    friend std::ostream &operator<<(std::ostream &stream, const Variant &arg);
+    VariantBaseHandle *m_data = nullptr;
     std::string m_type;
 
-    std::function<void(kgram_variant_handle_base_t*)> m_destructor;
-    std::function<kgram_variant_handle_base_t*(kgram_variant_handle_base_t*)> m_copy_constructor;
-    std::function<std::string(kgram_variant_handle_base_t*)> m_to_string;
+    std::function<void(VariantBaseHandle*)> m_destructor;
+    std::function<VariantBaseHandle*(VariantBaseHandle*)> m_copy_constructor;
+    std::function<std::string(VariantBaseHandle*)> m_stream_value;
+    std::function<std::string(VariantBaseHandle*)> m_string_convertor;
 
-    std::function<bool(kgram_variant_handle_base_t*, kgram_variant_handle_base_t*)> m_comparator;
+    std::function<bool(VariantBaseHandle*, VariantBaseHandle*)> m_comparator;
 
-    bool m_single_print = false;
 public:
+
+    // Variant base functional
     Variant() {};
 
 #ifndef E172_DISABLE_VARIANT_ABSTRACT_CONSTRUCTOR
     template<typename T>
     Variant(T value) { assign(value); }
 #endif
-
-    template<typename T>
-    static Variant fromValue(const T &value) { Variant v; v.assign(value); return v; }
-
-    Variant(const std::string &value) { assign(value); }
-    Variant(const int &value) { assign(value); }
-    Variant(const unsigned int &value) { assign(value); }
-    Variant(const double &value) { assign(value); }
-    Variant(const char *value) : Variant(std::string(value)) {}
-    Variant(const VariantMap &value) { assign(value); }
-    Variant(const VariantList &value) { assign(value); }
-    Variant(const VariantVector &value) { assign(value); }
 
     Variant(const Variant &obj);
     template<typename T>
@@ -79,8 +93,9 @@ public:
         m_type = obj.m_type;
         m_destructor = obj.m_destructor;
         m_copy_constructor = obj.m_copy_constructor;
-        m_to_string = obj.m_to_string;
+        m_stream_value = obj.m_stream_value;
         m_comparator = obj.m_comparator;
+        m_string_convertor = obj.m_string_convertor;
         if(obj.m_data && obj.m_copy_constructor)
             m_data = obj.m_copy_constructor(obj.m_data);
     }
@@ -93,19 +108,18 @@ public:
             throw std::runtime_error("Variant does not contain type: " + Type<T>::name);
         }
         if(m_data)
-            return dynamic_cast<kgram_variant_handle_t<T>*>(m_data)->value;
+            return dynamic_cast<VariantHandle<T>*>(m_data)->value;
         return T();
     }
 
-    std::string toString() const { if(m_data && m_to_string) return m_to_string(m_data); return std::string(); }
-    bool single_print() const { return m_single_print; };
+    template<typename T>
+    T value_default() const {
+        if(containsType<T>()) {
+            return dynamic_cast<VariantHandle<T>*>(m_data)->value;
+        }
+        return T();
+    }
 
-    VariantVector constrained();
-    bool isNumber();
-    static bool __str_is_number(const std::string& string);
-    double toDouble(bool *ok = nullptr);
-
-    VariantMap toMap();
 
     template<typename T>
     void assign(T value) {
@@ -115,52 +129,177 @@ public:
             if(m_data)
                 m_destructor(m_data);
 
-            m_data = new kgram_variant_handle_t<T>();
-            m_destructor = [](kgram_variant_handle_base_t* obj){
-                kgram_variant_handle_t<T>* casted_obj = dynamic_cast<kgram_variant_handle_t<T>*>(obj);
-                delete casted_obj;
+            m_data = new VariantHandle<T>();
+            m_destructor = [](VariantBaseHandle* obj){
+                delete dynamic_cast<VariantHandle<T>*>(obj);
             };
-            m_copy_constructor = [](kgram_variant_handle_base_t* obj) {
-                kgram_variant_handle_t<T>* casted_obj = dynamic_cast<kgram_variant_handle_t<T>*>(obj);
-                return new kgram_variant_handle_t<T>(*casted_obj);
-            };
-
-            m_comparator = [](kgram_variant_handle_base_t* obj1, kgram_variant_handle_base_t* obj2) -> bool {
-                return dynamic_cast<kgram_variant_handle_t<T>*>(obj1)->value
-                == dynamic_cast<kgram_variant_handle_t<T>*>(obj2)->value;
+            m_copy_constructor = [](VariantBaseHandle* obj) {
+                const auto casted_obj = dynamic_cast<VariantHandle<T>*>(obj);
+                return new VariantHandle<T>(*casted_obj);
             };
 
-            if constexpr(kgram_stream_operator__::exists<std::ostream, T>::value) {
-                m_to_string = [](kgram_variant_handle_base_t* obj) {
-                    kgram_variant_handle_t<T>* casted_obj = dynamic_cast<kgram_variant_handle_t<T>*>(obj);
+            m_comparator = [](VariantBaseHandle* obj1, VariantBaseHandle* obj2) -> bool {
+                return dynamic_cast<VariantHandle<T>*>(obj1)->value
+                == dynamic_cast<VariantHandle<T>*>(obj2)->value;
+            };
+
+            if constexpr(__StreamOperator::exists<std::ostream, T>::value) {
+                m_stream_value = [](VariantBaseHandle* obj) {
+                    VariantHandle<T>* casted_obj = dynamic_cast<VariantHandle<T>*>(obj);
                     std::stringstream ss;
                         ss << casted_obj->value;
                     return ss.str();
                 };
             }
 
+            if constexpr(std::is_same<T, std::string>::value || __StringConvertionOperator<T>::value) {
+                m_string_convertor = [](VariantBaseHandle* obj) {
+                    return dynamic_cast<VariantHandle<T>*>(obj)->value;
+                };
+            } else if constexpr(std::is_integral<T>::value) {
+                m_string_convertor = [](VariantBaseHandle* obj) {
+                    return std::to_string(dynamic_cast<VariantHandle<T>*>(obj)->value);
+                };
+            }
 
             m_type = t;
         }
 
-        dynamic_cast<kgram_variant_handle_t<T>*>(m_data)->value = value;
+        dynamic_cast<VariantHandle<T>*>(m_data)->value = value;
     }
     std::string type() const { return m_type; }
     template<typename T>
     bool containsType() const { return m_type == Type<T>::name; }
 
     friend bool operator==(const Variant &varian0, const Variant &varian1);
+    friend bool operator<(const Variant &varian0, const Variant &varian1);
+
+    template<typename T>
+    static Variant fromValue(const T &value) { Variant v; v.assign(value); return v; }
+
+
+    // Static tools
+
+    static bool containsNumber(const std::string& string);
+
+
+    // User interface methods
+    Variant(const std::string &value) { assign(value); }
+    Variant(const char *value) : Variant(std::string(value)) {}
+    Variant(const VariantMap &value) { assign(value); }
+    Variant(const VariantList &value) { assign(value); }
+    Variant(const VariantVector &value) { assign(value); }
+    Variant(const Vector &value) { assign(value); }
+
+    Variant(double value) { assign(value); }
+
+    Variant(uint8_t value) { assign(value); }
+    Variant(uint16_t value) { assign(value); }
+    Variant(uint32_t value) { assign(value); }
+    Variant(uint64_t value) { assign(value); }
+
+    Variant(int8_t value) { assign(value); }
+    Variant(int16_t value) { assign(value); }
+    Variant(int32_t value) { assign(value); }
+    Variant(int64_t value) { assign(value); }
+
+
+    VariantVector constrained();
+
+    bool isNumber();
+
+    template<typename T>
+    T toNumber(bool *ok = nullptr) const;
+
+    E172_VARIANT_NUM_CONVERTER(Double, double)
+    E172_VARIANT_NUM_CONVERTER(Float, float)
+    E172_VARIANT_NUM_CONVERTER(Int, int)
+    E172_VARIANT_NUM_CONVERTER(UInt, unsigned int)
+    E172_VARIANT_NUM_CONVERTER(Char, char)
+    E172_VARIANT_NUM_CONVERTER(Bool, bool)
+
+    E172_VARIANT_NUM_CONVERTER(UInt8, uint8_t)
+    E172_VARIANT_NUM_CONVERTER(UInt16, uint16_t)
+    E172_VARIANT_NUM_CONVERTER(UInt32, uint32_t)
+    E172_VARIANT_NUM_CONVERTER(UInt64, uint64_t)
+
+    E172_VARIANT_NUM_CONVERTER(Int8, int8_t)
+    E172_VARIANT_NUM_CONVERTER(Int16, int16_t)
+    E172_VARIANT_NUM_CONVERTER(Int32, int32_t)
+    E172_VARIANT_NUM_CONVERTER(Int64, int64_t)
+
+    inline auto toMap() const { value_default<VariantMap>(); };
+    inline auto toList() const { value_default<VariantList>(); };
+    inline auto toVector() const { value_default<VariantVector>();};
+    inline auto toMathVector() const { value_default<Vector>();};
+
+    std::string toString() const;
+
+
+    [[deprecated("Will be added in future")]]
+    ByteArray toJson();
+    [[deprecated("Will be added in future")]]
+    static Variant fromJson(const ByteArray &json);
 };
 
 
 
 
+template<typename T>
+T Variant::toNumber(bool *ok) const {
+    if(ok)
+        *ok = true;
+
+    if(containsType<bool>()) {
+        return value<bool>();
+    } else if(containsType<char>()) {
+        return value<char>();
+    } else if(containsType<signed char>()) {
+        return value<signed char>();
+    } else if(containsType<unsigned char>()) {
+        return value<unsigned char>();
+    } else if(containsType<wchar_t>()) {
+        return value<wchar_t>();
+    } else if(containsType<char16_t>()) {
+        return value<char16_t>();
+    } else if(containsType<char32_t>()) {
+        return value<char32_t>();
+    } else if(containsType<short>()) {
+        return value<short>();
+    } else if(containsType<unsigned short>()) {
+        return value<unsigned short>();
+    } else if(containsType<unsigned int>()) {
+        return value<unsigned int>();
+    } else if(containsType<unsigned long>()) {
+        return value<unsigned long>();
+    } else if(containsType<long long>()) {
+        return value<long long>();
+    } else if(containsType<unsigned long long>()) {
+        return value<unsigned long long>();
+    } else if(containsType<float>()) {
+        return value<float>();
+    } else if(containsType<double>()) {
+        return value<double>();
+    } else if(containsType<long double>()) {
+        return value<long double>();
+    } else if(containsType<std::string>()) {
+        try {
+            return std::stod(value<std::string>());
+        } catch (std::invalid_argument) {
+            if(ok)
+                *ok = false;
+            return 0;
+        }
+    }
+
+    if(ok)
+        *ok = false;
+    return 0;
+}
 
 
 
 
-std::ostream &operator<<(std::ostream &stream, const std::vector<Variant> &vector);
-std::ostream &operator<<(std::ostream &stream, const std::list<Variant> &vector);
 
 
 

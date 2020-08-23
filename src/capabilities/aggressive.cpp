@@ -13,9 +13,10 @@
 
 
 Unit *Aggressive::chooseTarget() {
-    if(targets == nullptr) return nullptr;
+    if(targets.size() <= 0)
+        return nullptr;
 
-    Entity *target = targets->front();
+    Entity *target = targets.front();
 
     EXISTS(target) {
         Camera *camera = dynamic_cast<Camera*>(target);
@@ -30,14 +31,18 @@ Unit *Aggressive::chooseTarget() {
     }
 }
 
-Aggressive::Aggressive(std::list<Entity*> *units) {
-    targets = units;
+Aggressive::Aggressive(std::list<Entity *> units) {
+    for(auto u : units) {
+        if(u->instanceOf<Unit>()) {
+            targets.push_back(u);
+        }
+    }
     target = chooseTarget();
 }
 
 void Aggressive::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
     EXISTS(target) {
-        if(target != nullptr && parentUnit() != nullptr && target->is<Ship*>() && target != parentUnit()) {
+        if(target != nullptr && parentUnit() != nullptr && target->instanceOf<Ship>() && target != parentUnit()) {
             e172::Vector dst = target->position() - parentUnit()->position();
             const double dstAngle = dst.angle();
             const double dstModule = dst.module();
