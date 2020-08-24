@@ -53,12 +53,31 @@ private:
     ExceptionHandlingMode m_exceptionHandlingMode = IgnoreException;
 public:
 
+    static std::string produceExeption(const IdType &id, const ValueType &value) {
+        std::stringstream ss;
+        ss << "MessageBus: message flushed ";
+        constexpr bool hasAny =
+                sfinae::StreamOperator::exists<std::ostream, IdType>::value
+                || sfinae::StreamOperator::exists<std::ostream, ValueType>::value;
+        if constexpr (sfinae::StreamOperator::exists<std::ostream, IdType>::value) {
+            ss << "(message id: " << id;
+        }
+        if constexpr (sfinae::StreamOperator::exists<std::ostream, ValueType>::value) {
+            ss << ", value: " << value;
+        }
+        if constexpr(hasAny) {
+            ss << ")";
+        }
+        ss << ".";
+        return ss.str();
+    }
+
+
     static void filterList(std::list<MessageType> *list, ExceptionHandlingMode exceptionHandlingMode, const IdType &id) {
         auto it = list->begin();
         while(it != list->end()) {
             if(it->loop_count-- <= 0) {
                 auto message = *it;
-                MessageBusPrivate::warningExeption("+++ " + message.value.toString());
                 if(message.promice) {
                     if(message.promice->m_fail)
                         message.promice->m_fail();
@@ -66,12 +85,10 @@ public:
                 }
 
                 if(exceptionHandlingMode != IgnoreException) {
-                    std::stringstream ss;
-                    ss << "MessageBus: message flushed (message id: " << id << ")";
                     if(exceptionHandlingMode == ThrowException) {
-                        MessageBusPrivate::throwExeption(ss.str());
+                        MessageBusPrivate::throwExeption(produceExeption(id, message.value));
                     } else if(exceptionHandlingMode == WarningException) {
-                        MessageBusPrivate::warningExeption(ss.str());
+                        MessageBusPrivate::warningExeption(produceExeption(id, message.value));
                     }
                 }
                 it = list->erase(it);
@@ -108,14 +125,14 @@ public:
             }
 
             if(ok)
-                *ok = false;
+                *ok = true;
             return message.value;
         }
         return ValueType();
     }
     Promice *emitMessage(const IdType &id, const ValueType &value) {
         const auto p = new MessageBusPromice();
-        m_data[id].queue.push_back(MessageType { value, 0, p });
+        m_data[id].queue.push_back(MessageType { value, m_messageLifeTime, p });
         return p;
     }
     void flushMessages() {

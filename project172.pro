@@ -43,7 +43,6 @@ HEADERS += \
     src/additional/variant.cpp.new \
     src/additional/variant.h.new \
     src/animator.h \
-    src/application.h \
     src/assetexecutors/animatorassetexecutor.h \
     src/assetexecutors/audioassetexecutor.h \
     src/assetexecutors/mapassetexecutor.h \
@@ -86,6 +85,7 @@ HEADERS += \
     src/engine/math/vector.h \
     src/engine/memcontrol/abstractstrategy.h \
     src/engine/messagequeue.h \
+    src/engine/sfinae.h \
     src/engine/sharedcontainer.h \
     src/engine/textformat.h \
     src/engine/time/deltatimecalculator.h \
@@ -170,7 +170,6 @@ SOURCES += \
     src/additional/stringformer.cpp \
     src/additional/trigger.cpp \
     src/animator.cpp \
-    src/application.cpp \
     src/assetexecutors/animatorassetexecutor.cpp \
     src/assetexecutors/audioassetexecutor.cpp \
     src/assetexecutors/mapassetexecutor.cpp \

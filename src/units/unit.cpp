@@ -130,7 +130,7 @@ double Unit::getAngle() {
     return angle;
 }
 
-#include <iostream>
+
 void Unit::hit(e172::Context* context, int value) {
     if(value != 0) {
         health -= value;
@@ -143,7 +143,6 @@ void Unit::hit(e172::Context* context, int value) {
         }
 
         if(dynamic_cast<Projectile*>(this) == nullptr) {
-            std::cout << __PRETTY_FUNCTION__ << " : " << entityId() << " : " << health << "\n";
             context->emitMessage(e172::Context::FLOATING_MESSAGE, e172::VariantVector { entityId(), health });
         }
 

@@ -4,6 +4,8 @@
 
 #include <engine/graphics/abstractrenderer.h>
 
+#include <engine/context.h>
+
 
 
 const double Background::STARS_SLIDING_SPEED = 400.0;
@@ -11,6 +13,7 @@ const double Background::SLIDING_LEGHTH = 0.05;
 const Uint32 Background::DEFAULT_MAIN_COLOR = 0x333353;
 const Uint32 Background::DEFAULT_FLASHING_COLOR = 0xff0000;
 const long Background::DEFAULT_FLASHING_INTERVAL = 32;
+
 
 
 
@@ -36,8 +39,15 @@ void Background::onResolutionChanged(const e172::Vector &resolution) {
         stars.push_back(star);
     }
 }
-
-void Background::proceed(e172::Context *, e172::AbstractEventHandler *) {}
+#include <iostream>
+void Background::proceed(e172::Context *context, e172::AbstractEventHandler *) {
+    bool ok = false;
+    const auto value = context->popMessage(e172::Context::BACKGROUND_FLASHING, &ok);
+    if(ok) {
+        std::cout << "BF\n";
+        flashing(value.toInt());
+    }
+}
 
 void Background::render(e172::AbstractRenderer *renderer) {
     const auto resolution = renderer->resolution();

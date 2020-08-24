@@ -89,7 +89,14 @@ bool operator==(const Variant &varian0, const Variant &varian1) {
 }
 
 bool operator<(const Variant &varian0, const Variant &varian1) {
-    return false;
+    if(varian0.type() == varian1.type()) {
+        if(varian0.m_less_operator)
+            return varian0.m_less_operator(varian0.m_data, varian1.m_data);
+
+        return false;
+    }
+
+    return varian0.type() < varian1.type();
 }
 
 bool Variant::containsNumber(const std::string &string) {

@@ -16,6 +16,7 @@
 
 #include "type.h"
 
+#include "sfinae.h"
 #include "typedefs.h"
 
 #define E172_VARIANT_NUM_CONVERTER(NAME, TYPE) \
@@ -25,30 +26,6 @@ namespace e172 {
 
 
 
-namespace __StreamOperator {
-    struct no { bool b[2]; };
-    template<typename T, typename Arg> no operator<< (T&, const Arg&);
-
-    bool check (...);
-    no& check (const no&);
-
-    template <typename T, typename Arg = T>
-    struct exists {
-        enum { value = (sizeof(check(*(T*)(0) << *(Arg*)(0))) != sizeof(no)) };
-    };
-}
-
-template <typename T>
-class __StringConvertionOperator {
-    typedef char one;
-    typedef long two;
-
-    template <typename C> static one test( decltype(&C::operator std::string) ) ;
-    template <typename C> static two test(...);
-
-public:
-    enum { value = sizeof(test<T>(0)) == sizeof(one) };
-};
 
 
 struct VariantBaseHandle { virtual ~VariantBaseHandle() {}; };
@@ -75,6 +52,7 @@ class Variant {
     std::function<std::string(VariantBaseHandle*)> m_string_convertor;
 
     std::function<bool(VariantBaseHandle*, VariantBaseHandle*)> m_comparator;
+    std::function<bool(VariantBaseHandle*, VariantBaseHandle*)> m_less_operator;
 
 public:
 
@@ -95,6 +73,7 @@ public:
         m_copy_constructor = obj.m_copy_constructor;
         m_stream_value = obj.m_stream_value;
         m_comparator = obj.m_comparator;
+        m_less_operator = obj.m_less_operator;
         m_string_convertor = obj.m_string_convertor;
         if(obj.m_data && obj.m_copy_constructor)
             m_data = obj.m_copy_constructor(obj.m_data);
@@ -129,6 +108,7 @@ public:
             if(m_data)
                 m_destructor(m_data);
 
+            // main operators
             m_data = new VariantHandle<T>();
             m_destructor = [](VariantBaseHandle* obj){
                 delete dynamic_cast<VariantHandle<T>*>(obj);
@@ -138,21 +118,19 @@ public:
                 return new VariantHandle<T>(*casted_obj);
             };
 
-            m_comparator = [](VariantBaseHandle* obj1, VariantBaseHandle* obj2) -> bool {
-                return dynamic_cast<VariantHandle<T>*>(obj1)->value
-                == dynamic_cast<VariantHandle<T>*>(obj2)->value;
-            };
-
-            if constexpr(__StreamOperator::exists<std::ostream, T>::value) {
+            // additional operators
+            if constexpr(sfinae::StreamOperator::exists<std::ostream, T>::value) {
                 m_stream_value = [](VariantBaseHandle* obj) {
                     VariantHandle<T>* casted_obj = dynamic_cast<VariantHandle<T>*>(obj);
                     std::stringstream ss;
                         ss << casted_obj->value;
                     return ss.str();
                 };
+            } else {
+                m_stream_value = nullptr;
             }
 
-            if constexpr(std::is_same<T, std::string>::value || __StringConvertionOperator<T>::value) {
+            if constexpr(std::is_same<T, std::string>::value || sfinae::TypeConvertionOperator<T, std::string>::value) {
                 m_string_convertor = [](VariantBaseHandle* obj) {
                     return dynamic_cast<VariantHandle<T>*>(obj)->value;
                 };
@@ -160,6 +138,26 @@ public:
                 m_string_convertor = [](VariantBaseHandle* obj) {
                     return std::to_string(dynamic_cast<VariantHandle<T>*>(obj)->value);
                 };
+            } else {
+                m_string_convertor = nullptr;
+            }
+
+            if constexpr(sfinae::EquealOperator::exists<T>::value) {
+                m_comparator = [](VariantBaseHandle* obj1, VariantBaseHandle* obj2) -> bool {
+                    return dynamic_cast<VariantHandle<T>*>(obj1)->value
+                            == dynamic_cast<VariantHandle<T>*>(obj2)->value;
+                };
+            } else {
+                m_comparator = nullptr;
+            }
+
+            if constexpr(sfinae::LessOperator::exists<T>::value) {
+                m_less_operator = [](VariantBaseHandle* obj1, VariantBaseHandle* obj2){
+                    return dynamic_cast<VariantHandle<T>*>(obj1)->value
+                    < dynamic_cast<VariantHandle<T>*>(obj2)->value;
+                };
+            } else {
+                m_less_operator = nullptr;
             }
 
             m_type = t;

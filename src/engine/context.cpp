@@ -153,12 +153,6 @@ void Context::addEntity(Entity *entity) {
 //            element->start(2);
 //            //gui->setMessage(element);
 //        }
-//    } else if (request.command == BACKGROUND_FLASHING) {
-//        Debug::out("BACKGROUND_FLASHING: " + std::to_string(reinterpret_cast<uintptr_t>(request.requester)));
-//        if(request.argument.isNumber()) {
-//            //int repeats = request.argument.toInt32();
-//            //background->flashing(repeats);
-//        }
 //    } else if (request.command == FLOATING_MESSAGE) {
 //        Debug::out("FLOATING_MESSAGE: " + std::to_string(reinterpret_cast<uintptr_t>(request.requester)));
 //        if(request.argument.isNumber()) {
@@ -193,7 +187,6 @@ std::vector<std::string> Context::arguments() const {
 }
 
 Promice *Context::emitMessage(const Entity::message_id_t &messageId, const Variant &value) {
-    std::cout << __PRETTY_FUNCTION__ << " " << messageId << "\n";
     return m_messageBus.emitMessage(messageId, value);
 }
 

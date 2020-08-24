@@ -72,7 +72,6 @@ SOURCES       = ../klibcore/src/experimental/universalqueue/kuniversalqueue.cpp 
 		../src/additional/stringformer.cpp \
 		../src/additional/trigger.cpp \
 		../src/animator.cpp \
-		../src/application.cpp \
 		../src/assetexecutors/animatorassetexecutor.cpp \
 		../src/assetexecutors/audioassetexecutor.cpp \
 		../src/assetexecutors/mapassetexecutor.cpp \
@@ -194,7 +193,6 @@ OBJECTS       = kuniversalqueue.o \
 		stringformer.o \
 		trigger.o \
 		animator.o \
-		application.o \
 		animatorassetexecutor.o \
 		audioassetexecutor.o \
 		mapassetexecutor.o \
@@ -492,7 +490,6 @@ DIST          = ../../../../Qt/5.15.0/gcc_64/mkspecs/features/spec_pre.prf \
 		src/additional/variant.cpp.new \
 		src/additional/variant.h.new \
 		src/animator.h \
-		src/application.h \
 		src/assetexecutors/animatorassetexecutor.h \
 		src/assetexecutors/audioassetexecutor.h \
 		src/assetexecutors/mapassetexecutor.h \
@@ -535,6 +532,7 @@ DIST          = ../../../../Qt/5.15.0/gcc_64/mkspecs/features/spec_pre.prf \
 		src/engine/math/vector.h \
 		src/engine/memcontrol/abstractstrategy.h \
 		src/engine/messagequeue.h \
+		src/engine/sfinae.h \
 		src/engine/sharedcontainer.h \
 		src/engine/textformat.h \
 		src/engine/time/deltatimecalculator.h \
@@ -623,7 +621,6 @@ DIST          = ../../../../Qt/5.15.0/gcc_64/mkspecs/features/spec_pre.prf \
 		../src/additional/stringformer.cpp \
 		../src/additional/trigger.cpp \
 		../src/animator.cpp \
-		../src/application.cpp \
 		../src/assetexecutors/animatorassetexecutor.cpp \
 		../src/assetexecutors/audioassetexecutor.cpp \
 		../src/assetexecutors/mapassetexecutor.cpp \
@@ -1167,7 +1164,9 @@ controllerfinder.o: ../src/additional/informative/controllerfinder.cpp ../src/ad
 		../src/engine/entity.h \
 		../src/object.h \
 		../src/engine/variant.h \
+		../src/engine/math/vector.h \
 		../src/engine/type.h \
+		../src/engine/sfinae.h \
 		../src/engine/typedefs.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
@@ -1176,7 +1175,6 @@ controllerfinder.o: ../src/additional/informative/controllerfinder.cpp ../src/ad
 		../src/capabilities/modules/module.h \
 		../src/engine/assettools/loadable.h \
 		../src/animator.h \
-		../src/engine/math/vector.h \
 		../src/engine/time/elapsedtimer.h \
 		../src/engine/graphics/image.h \
 		../src/engine/sharedcontainer.h \
@@ -1204,18 +1202,53 @@ unitsamountinfo.o: ../src/additional/informative/unitsamountinfo.cpp ../src/addi
 		../src/engine/entity.h \
 		../src/object.h \
 		../src/engine/variant.h \
+		../src/engine/math/vector.h \
 		../src/engine/type.h \
+		../src/engine/sfinae.h \
 		../src/engine/typedefs.h \
-		../src/iinformative.h
+		../src/iinformative.h \
+		../src/engine/context.h \
+		../src/additional/e_variant.h \
+		../src/gui/guimain.h \
+		../src/gui/guicentralmessage.h \
+		../src/gui/base/guimenuelement.h \
+		../src/gui/base/guielement.h \
+		../src/capabilities/controller.h \
+		../src/capabilities/capability.h \
+		../src/units/ship.h \
+		../src/units/movable.h \
+		../src/units/unit.h \
+		../src/capabilities/modulehandler.h \
+		../src/capabilities/modules/module.h \
+		../src/engine/assettools/loadable.h \
+		../src/animator.h \
+		../src/engine/time/elapsedtimer.h \
+		../src/engine/graphics/image.h \
+		../src/engine/sharedcontainer.h \
+		../src/audio/audioplayer.h \
+		../src/engine/audio/audiochannel.h \
+		../src/engine/audio/audiosample.h \
+		../src/capabilities/docker.h \
+		../src/capabilities/modules/warpdrive.h \
+		../src/additional/trigger.h \
+		../src/gui/base/guibaseelement.h \
+		../src/gui/guifloatingmessage.h \
+		../src/gui/guiminimap.h \
+		../src/gui/guidebugvalueinfo.h \
+		../src/gui/base/guistack.h \
+		../src/near.h \
+		../src/background.h \
+		../src/engine/messagequeue.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o unitsamountinfo.o ../src/additional/informative/unitsamountinfo.cpp
 
 lightparticle.o: ../src/additional/lightparticle.cpp ../src/additional/lightparticle.h \
 		../src/engine/entity.h \
 		../src/object.h \
 		../src/engine/variant.h \
-		../src/engine/type.h \
-		../src/engine/typedefs.h \
 		../src/engine/math/vector.h \
+		../src/engine/type.h \
+		../src/engine/sfinae.h \
+		../src/engine/typedefs.h \
 		../src/engine/time/elapsedtimer.h \
 		../src/engine/context.h \
 		../src/additional/e_variant.h \
@@ -1291,14 +1324,12 @@ animator.o: ../src/animator.cpp ../src/animator.h \
 		../src/engine/textformat.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o animator.o ../src/animator.cpp
 
-application.o: ../src/application.cpp ../src/application.h \
-		../src/object.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o application.o ../src/application.cpp
-
 animatorassetexecutor.o: ../src/assetexecutors/animatorassetexecutor.cpp ../src/assetexecutors/animatorassetexecutor.h \
 		../src/engine/assettools/abstractassetexecutor.h \
 		../src/engine/variant.h \
+		../src/engine/math/vector.h \
 		../src/engine/type.h \
+		../src/engine/sfinae.h \
 		../src/engine/typedefs.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
@@ -1314,7 +1345,6 @@ animatorassetexecutor.o: ../src/assetexecutors/animatorassetexecutor.cpp ../src/
 		../src/engine/graphics/abstractrenderer.h \
 		../src/engine/graphics/image.h \
 		../src/engine/sharedcontainer.h \
-		../src/engine/math/vector.h \
 		../src/additional/e_variant.h \
 		../src/object.h \
 		../src/engine/textformat.h \
@@ -1325,7 +1355,9 @@ animatorassetexecutor.o: ../src/assetexecutors/animatorassetexecutor.cpp ../src/
 audioassetexecutor.o: ../src/assetexecutors/audioassetexecutor.cpp ../src/assetexecutors/audioassetexecutor.h \
 		../src/engine/assettools/abstractassetexecutor.h \
 		../src/engine/variant.h \
+		../src/engine/math/vector.h \
 		../src/engine/type.h \
+		../src/engine/sfinae.h \
 		../src/engine/typedefs.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
@@ -1347,7 +1379,9 @@ audioassetexecutor.o: ../src/assetexecutors/audioassetexecutor.cpp ../src/assete
 mapassetexecutor.o: ../src/assetexecutors/mapassetexecutor.cpp ../src/assetexecutors/mapassetexecutor.h \
 		../src/engine/assettools/abstractassetexecutor.h \
 		../src/engine/variant.h \
+		../src/engine/math/vector.h \
 		../src/engine/type.h \
+		../src/engine/sfinae.h \
 		../src/engine/typedefs.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
@@ -1364,7 +1398,9 @@ mapassetexecutor.o: ../src/assetexecutors/mapassetexecutor.cpp ../src/assetexecu
 numberassetexecutor.o: ../src/assetexecutors/numberassetexecutor.cpp ../src/assetexecutors/numberassetexecutor.h \
 		../src/engine/assettools/abstractassetexecutor.h \
 		../src/engine/variant.h \
+		../src/engine/math/vector.h \
 		../src/engine/type.h \
+		../src/engine/sfinae.h \
 		../src/engine/typedefs.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
@@ -1381,7 +1417,9 @@ numberassetexecutor.o: ../src/assetexecutors/numberassetexecutor.cpp ../src/asse
 spriteassetexecutor.o: ../src/assetexecutors/spriteassetexecutor.cpp ../src/assetexecutors/spriteassetexecutor.h \
 		../src/engine/assettools/abstractassetexecutor.h \
 		../src/engine/variant.h \
+		../src/engine/math/vector.h \
 		../src/engine/type.h \
+		../src/engine/sfinae.h \
 		../src/engine/typedefs.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
@@ -1397,7 +1435,6 @@ spriteassetexecutor.o: ../src/assetexecutors/spriteassetexecutor.cpp ../src/asse
 		../src/engine/graphics/abstractrenderer.h \
 		../src/engine/graphics/image.h \
 		../src/engine/sharedcontainer.h \
-		../src/engine/math/vector.h \
 		../src/additional/e_variant.h \
 		../src/object.h \
 		../src/engine/textformat.h \
@@ -1408,7 +1445,9 @@ spriteassetexecutor.o: ../src/assetexecutors/spriteassetexecutor.cpp ../src/asse
 stringassetexecutor.o: ../src/assetexecutors/stringassetexecutor.cpp ../src/assetexecutors/stringassetexecutor.h \
 		../src/engine/assettools/abstractassetexecutor.h \
 		../src/engine/variant.h \
+		../src/engine/math/vector.h \
 		../src/engine/type.h \
+		../src/engine/sfinae.h \
 		../src/engine/typedefs.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
@@ -1425,7 +1464,9 @@ stringassetexecutor.o: ../src/assetexecutors/stringassetexecutor.cpp ../src/asse
 vectorassetexecutor.o: ../src/assetexecutors/vectorassetexecutor.cpp ../src/assetexecutors/vectorassetexecutor.h \
 		../src/engine/assettools/abstractassetexecutor.h \
 		../src/engine/variant.h \
+		../src/engine/math/vector.h \
 		../src/engine/type.h \
+		../src/engine/sfinae.h \
 		../src/engine/typedefs.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
@@ -1436,8 +1477,7 @@ vectorassetexecutor.o: ../src/assetexecutors/vectorassetexecutor.cpp ../src/asse
 		../src/json/forwards.h \
 		../src/json/reader.h \
 		../src/json/value.h \
-		../src/json/writer.h \
-		../src/engine/math/vector.h
+		../src/json/writer.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o vectorassetexecutor.o ../src/assetexecutors/vectorassetexecutor.cpp
 
 audioplayer.o: ../src/audio/audioplayer.cpp ../src/audio/audioplayer.h \
@@ -1453,12 +1493,13 @@ audioplayer.o: ../src/audio/audioplayer.cpp ../src/audio/audioplayer.h \
 		../src/engine/entity.h \
 		../src/object.h \
 		../src/engine/variant.h \
+		../src/engine/math/vector.h \
 		../src/engine/type.h \
+		../src/engine/sfinae.h \
 		../src/engine/typedefs.h \
 		../src/iinformative.h \
 		../src/engine/assettools/loadable.h \
 		../src/animator.h \
-		../src/engine/math/vector.h \
 		../src/engine/time/elapsedtimer.h \
 		../src/engine/graphics/image.h \
 		../src/capabilities/docker.h \
@@ -1476,10 +1517,11 @@ background.o: ../src/background.cpp ../src/background.h \
 		../src/engine/entity.h \
 		../src/object.h \
 		../src/engine/variant.h \
+		../src/engine/math/vector.h \
 		../src/engine/type.h \
+		../src/engine/sfinae.h \
 		../src/engine/typedefs.h \
 		../src/engine/time/elapsedtimer.h \
-		../src/engine/math/vector.h \
 		../src/units/movable.h \
 		../src/units/unit.h \
 		../src/capabilities/modulehandler.h \
@@ -1496,7 +1538,23 @@ background.o: ../src/background.cpp ../src/background.h \
 		../src/capabilities/docker.h \
 		../src/engine/graphics/abstractrenderer.h \
 		../src/additional/e_variant.h \
-		../src/engine/textformat.h
+		../src/engine/textformat.h \
+		../src/engine/context.h \
+		../src/gui/guimain.h \
+		../src/gui/guicentralmessage.h \
+		../src/gui/base/guimenuelement.h \
+		../src/gui/base/guielement.h \
+		../src/capabilities/controller.h \
+		../src/units/ship.h \
+		../src/capabilities/modules/warpdrive.h \
+		../src/additional/trigger.h \
+		../src/gui/base/guibaseelement.h \
+		../src/gui/guifloatingmessage.h \
+		../src/gui/guiminimap.h \
+		../src/gui/guidebugvalueinfo.h \
+		../src/gui/base/guistack.h \
+		../src/near.h \
+		../src/engine/messagequeue.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o background.o ../src/background.cpp
 
 aggressive.o: ../src/capabilities/aggressive.cpp ../src/capabilities/aggressive.h \
@@ -1505,7 +1563,9 @@ aggressive.o: ../src/capabilities/aggressive.cpp ../src/capabilities/aggressive.
 		../src/engine/entity.h \
 		../src/object.h \
 		../src/engine/variant.h \
+		../src/engine/math/vector.h \
 		../src/engine/type.h \
+		../src/engine/sfinae.h \
 		../src/engine/typedefs.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
@@ -1515,7 +1575,6 @@ aggressive.o: ../src/capabilities/aggressive.cpp ../src/capabilities/aggressive.
 		../src/iinformative.h \
 		../src/engine/assettools/loadable.h \
 		../src/animator.h \
-		../src/engine/math/vector.h \
 		../src/engine/time/elapsedtimer.h \
 		../src/engine/graphics/image.h \
 		../src/engine/sharedcontainer.h \
@@ -1544,7 +1603,9 @@ ai.o: ../src/capabilities/ai.cpp ../src/capabilities/ai.h \
 		../src/engine/entity.h \
 		../src/object.h \
 		../src/engine/variant.h \
+		../src/engine/math/vector.h \
 		../src/engine/type.h \
+		../src/engine/sfinae.h \
 		../src/engine/typedefs.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
@@ -1554,7 +1615,6 @@ ai.o: ../src/capabilities/ai.cpp ../src/capabilities/ai.h \
 		../src/iinformative.h \
 		../src/engine/assettools/loadable.h \
 		../src/animator.h \
-		../src/engine/math/vector.h \
 		../src/engine/time/elapsedtimer.h \
 		../src/engine/graphics/image.h \
 		../src/engine/sharedcontainer.h \
@@ -1570,7 +1630,9 @@ capability.o: ../src/capabilities/capability.cpp ../src/capabilities/capability.
 		../src/engine/entity.h \
 		../src/object.h \
 		../src/engine/variant.h \
+		../src/engine/math/vector.h \
 		../src/engine/type.h \
+		../src/engine/sfinae.h \
 		../src/engine/typedefs.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o capability.o ../src/capabilities/capability.cpp
 
@@ -1579,7 +1641,9 @@ controller.o: ../src/capabilities/controller.cpp ../src/capabilities/controller.
 		../src/engine/entity.h \
 		../src/object.h \
 		../src/engine/variant.h \
+		../src/engine/math/vector.h \
 		../src/engine/type.h \
+		../src/engine/sfinae.h \
 		../src/engine/typedefs.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
@@ -1589,7 +1653,6 @@ controller.o: ../src/capabilities/controller.cpp ../src/capabilities/controller.
 		../src/iinformative.h \
 		../src/engine/assettools/loadable.h \
 		../src/animator.h \
-		../src/engine/math/vector.h \
 		../src/engine/time/elapsedtimer.h \
 		../src/engine/graphics/image.h \
 		../src/engine/sharedcontainer.h \
@@ -1620,7 +1683,9 @@ docker.o: ../src/capabilities/docker.cpp ../src/capabilities/docker.h \
 		../src/engine/entity.h \
 		../src/object.h \
 		../src/engine/variant.h \
+		../src/engine/math/vector.h \
 		../src/engine/type.h \
+		../src/engine/sfinae.h \
 		../src/engine/typedefs.h \
 		../src/units/unit.h \
 		../src/capabilities/modulehandler.h \
@@ -1628,7 +1693,6 @@ docker.o: ../src/capabilities/docker.cpp ../src/capabilities/docker.h \
 		../src/iinformative.h \
 		../src/engine/assettools/loadable.h \
 		../src/animator.h \
-		../src/engine/math/vector.h \
 		../src/engine/time/elapsedtimer.h \
 		../src/engine/graphics/image.h \
 		../src/engine/sharedcontainer.h \
@@ -1644,12 +1708,13 @@ modulehandler.o: ../src/capabilities/modulehandler.cpp ../src/capabilities/modul
 		../src/engine/entity.h \
 		../src/object.h \
 		../src/engine/variant.h \
+		../src/engine/math/vector.h \
 		../src/engine/type.h \
+		../src/engine/sfinae.h \
 		../src/engine/typedefs.h \
 		../src/iinformative.h \
 		../src/engine/assettools/loadable.h \
 		../src/animator.h \
-		../src/engine/math/vector.h \
 		../src/engine/time/elapsedtimer.h \
 		../src/engine/graphics/image.h \
 		../src/engine/sharedcontainer.h \
@@ -1664,12 +1729,13 @@ engine.o: ../src/capabilities/modules/engine.cpp ../src/capabilities/modules/eng
 		../src/engine/entity.h \
 		../src/object.h \
 		../src/engine/variant.h \
+		../src/engine/math/vector.h \
 		../src/engine/type.h \
+		../src/engine/sfinae.h \
 		../src/engine/typedefs.h \
 		../src/iinformative.h \
 		../src/engine/assettools/loadable.h \
 		../src/animator.h \
-		../src/engine/math/vector.h \
 		../src/engine/time/elapsedtimer.h \
 		../src/engine/graphics/image.h \
 		../src/engine/sharedcontainer.h \
@@ -1683,12 +1749,13 @@ module.o: ../src/capabilities/modules/module.cpp ../src/capabilities/modules/mod
 		../src/engine/entity.h \
 		../src/object.h \
 		../src/engine/variant.h \
+		../src/engine/math/vector.h \
 		../src/engine/type.h \
+		../src/engine/sfinae.h \
 		../src/engine/typedefs.h \
 		../src/iinformative.h \
 		../src/engine/assettools/loadable.h \
 		../src/animator.h \
-		../src/engine/math/vector.h \
 		../src/engine/time/elapsedtimer.h \
 		../src/engine/graphics/image.h \
 		../src/engine/sharedcontainer.h \
@@ -1716,12 +1783,13 @@ thruster.o: ../src/capabilities/modules/thruster.cpp ../src/capabilities/modules
 		../src/engine/entity.h \
 		../src/object.h \
 		../src/engine/variant.h \
+		../src/engine/math/vector.h \
 		../src/engine/type.h \
+		../src/engine/sfinae.h \
 		../src/engine/typedefs.h \
 		../src/iinformative.h \
 		../src/engine/assettools/loadable.h \
 		../src/animator.h \
-		../src/engine/math/vector.h \
 		../src/engine/time/elapsedtimer.h \
 		../src/engine/graphics/image.h \
 		../src/engine/sharedcontainer.h \
@@ -1736,12 +1804,13 @@ warpdrive.o: ../src/capabilities/modules/warpdrive.cpp ../src/capabilities/modul
 		../src/engine/entity.h \
 		../src/object.h \
 		../src/engine/variant.h \
+		../src/engine/math/vector.h \
 		../src/engine/type.h \
+		../src/engine/sfinae.h \
 		../src/engine/typedefs.h \
 		../src/iinformative.h \
 		../src/engine/assettools/loadable.h \
 		../src/animator.h \
-		../src/engine/math/vector.h \
 		../src/engine/time/elapsedtimer.h \
 		../src/engine/graphics/image.h \
 		../src/engine/sharedcontainer.h \
@@ -1778,12 +1847,13 @@ weapon.o: ../src/capabilities/modules/weapon.cpp ../src/capabilities/modules/wea
 		../src/engine/entity.h \
 		../src/object.h \
 		../src/engine/variant.h \
+		../src/engine/math/vector.h \
 		../src/engine/type.h \
+		../src/engine/sfinae.h \
 		../src/engine/typedefs.h \
 		../src/iinformative.h \
 		../src/engine/assettools/loadable.h \
 		../src/animator.h \
-		../src/engine/math/vector.h \
 		../src/engine/time/elapsedtimer.h \
 		../src/engine/graphics/image.h \
 		../src/engine/sharedcontainer.h \
@@ -1827,7 +1897,9 @@ weapon.o: ../src/capabilities/modules/weapon.cpp ../src/capabilities/modules/wea
 		../src/json/writer.h \
 		../src/engine/memcontrol/abstractfactory.h \
 		../klibcore/src/memcontrol/kabstractfactory.h \
-		../klibcore/src/utility/ktype.h
+		../klibcore/src/utility/ktype.h \
+		../src/engine/gameapplication.h \
+		../src/engine/time/deltatimecalculator.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o weapon.o ../src/capabilities/modules/weapon.cpp
 
 player.o: ../src/capabilities/player.cpp ../src/capabilities/player.h \
@@ -1836,7 +1908,9 @@ player.o: ../src/capabilities/player.cpp ../src/capabilities/player.h \
 		../src/engine/entity.h \
 		../src/object.h \
 		../src/engine/variant.h \
+		../src/engine/math/vector.h \
 		../src/engine/type.h \
+		../src/engine/sfinae.h \
 		../src/engine/typedefs.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
@@ -1846,7 +1920,6 @@ player.o: ../src/capabilities/player.cpp ../src/capabilities/player.h \
 		../src/iinformative.h \
 		../src/engine/assettools/loadable.h \
 		../src/animator.h \
-		../src/engine/math/vector.h \
 		../src/engine/time/elapsedtimer.h \
 		../src/engine/graphics/image.h \
 		../src/engine/sharedcontainer.h \
@@ -1895,7 +1968,9 @@ additional.o: ../src/engine/additional.cpp ../src/engine/additional.h
 
 abstractassetexecutor.o: ../src/engine/assettools/abstractassetexecutor.cpp ../src/engine/assettools/abstractassetexecutor.h \
 		../src/engine/variant.h \
+		../src/engine/math/vector.h \
 		../src/engine/type.h \
+		../src/engine/sfinae.h \
 		../src/engine/typedefs.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
@@ -1912,7 +1987,9 @@ abstractassetexecutor.o: ../src/engine/assettools/abstractassetexecutor.cpp ../s
 
 assetprovider.o: ../src/engine/assettools/assetprovider.cpp ../src/engine/assettools/abstractassetexecutor.h \
 		../src/engine/variant.h \
+		../src/engine/math/vector.h \
 		../src/engine/type.h \
+		../src/engine/sfinae.h \
 		../src/engine/typedefs.h \
 		../src/json/json.h \
 		../src/json/autolink.h \
@@ -1929,7 +2006,6 @@ assetprovider.o: ../src/engine/assettools/assetprovider.cpp ../src/engine/assett
 		../src/engine/memcontrol/abstractfactory.h \
 		../src/engine/context.h \
 		../src/additional/e_variant.h \
-		../src/engine/math/vector.h \
 		../src/gui/guimain.h \
 		../src/gui/guicentralmessage.h \
 		../src/gui/base/guimenuelement.h \
@@ -1981,7 +2057,9 @@ assetprovider.o: ../src/engine/assettools/assetprovider.cpp ../src/engine/assett
 
 loadable.o: ../src/engine/assettools/loadable.cpp ../src/engine/assettools/loadable.h \
 		../src/engine/variant.h \
+		../src/engine/math/vector.h \
 		../src/engine/type.h \
+		../src/engine/sfinae.h \
 		../src/engine/typedefs.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o loadable.o ../src/engine/assettools/loadable.cpp
 
@@ -2015,6 +2093,7 @@ context.o: ../src/engine/context.cpp ../src/engine/additional.h \
 		../src/engine/entity.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
+		../src/engine/sfinae.h \
 		../src/engine/typedefs.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
@@ -2067,11 +2146,12 @@ context.o: ../src/engine/context.cpp ../src/engine/additional.h \
 entity.o: ../src/engine/entity.cpp ../src/engine/entity.h \
 		../src/object.h \
 		../src/engine/variant.h \
+		../src/engine/math/vector.h \
 		../src/engine/type.h \
+		../src/engine/sfinae.h \
 		../src/engine/typedefs.h \
 		../src/engine/context.h \
 		../src/additional/e_variant.h \
-		../src/engine/math/vector.h \
 		../src/gui/guimain.h \
 		../src/gui/guicentralmessage.h \
 		../src/gui/base/guimenuelement.h \
@@ -2110,13 +2190,14 @@ gameapplication.o: ../src/engine/gameapplication.cpp ../src/engine/gameapplicati
 		../src/engine/entity.h \
 		../src/object.h \
 		../src/engine/variant.h \
+		../src/engine/math/vector.h \
 		../src/engine/type.h \
+		../src/engine/sfinae.h \
 		../src/engine/typedefs.h \
 		../src/engine/time/deltatimecalculator.h \
 		../src/engine/time/elapsedtimer.h \
 		../src/engine/context.h \
 		../src/additional/e_variant.h \
-		../src/engine/math/vector.h \
 		../src/gui/guimain.h \
 		../src/gui/guicentralmessage.h \
 		../src/gui/base/guimenuelement.h \
@@ -2206,7 +2287,9 @@ abstractstrategy.o: ../src/engine/memcontrol/abstractstrategy.cpp ../src/engine/
 
 messagequeue.o: ../src/engine/messagequeue.cpp ../src/engine/messagequeue.h \
 		../src/engine/variant.h \
+		../src/engine/math/vector.h \
 		../src/engine/type.h \
+		../src/engine/sfinae.h \
 		../src/engine/typedefs.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o messagequeue.o ../src/engine/messagequeue.cpp
 
@@ -2230,7 +2313,9 @@ type.o: ../src/engine/type.cpp ../src/engine/type.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o type.o ../src/engine/type.cpp
 
 variant.o: ../src/engine/variant.cpp ../src/engine/variant.h \
+		../src/engine/math/vector.h \
 		../src/engine/type.h \
+		../src/engine/sfinae.h \
 		../src/engine/typedefs.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o variant.o ../src/engine/variant.cpp
 
@@ -2243,6 +2328,7 @@ environment.o: ../src/environment.cpp ../src/environment.h \
 		../src/engine/entity.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
+		../src/engine/sfinae.h \
 		../src/engine/typedefs.h \
 		../src/engine/time/elapsedtimer.h \
 		../src/units/movable.h \
@@ -2341,7 +2427,9 @@ guibaseelement.o: ../src/gui/base/guibaseelement.cpp ../src/gui/base/guibaseelem
 		../src/engine/entity.h \
 		../src/object.h \
 		../src/engine/variant.h \
+		../src/engine/math/vector.h \
 		../src/engine/type.h \
+		../src/engine/sfinae.h \
 		../src/engine/typedefs.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
@@ -2351,7 +2439,6 @@ guibaseelement.o: ../src/gui/base/guibaseelement.cpp ../src/gui/base/guibaseelem
 		../src/iinformative.h \
 		../src/engine/assettools/loadable.h \
 		../src/animator.h \
-		../src/engine/math/vector.h \
 		../src/engine/time/elapsedtimer.h \
 		../src/engine/graphics/image.h \
 		../src/engine/sharedcontainer.h \
@@ -2371,7 +2458,9 @@ guicontainer.o: ../src/gui/base/guicontainer.cpp ../src/gui/base/guicontainer.h 
 		../src/engine/entity.h \
 		../src/object.h \
 		../src/engine/variant.h \
+		../src/engine/math/vector.h \
 		../src/engine/type.h \
+		../src/engine/sfinae.h \
 		../src/engine/typedefs.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
@@ -2381,7 +2470,6 @@ guicontainer.o: ../src/gui/base/guicontainer.cpp ../src/gui/base/guicontainer.h 
 		../src/iinformative.h \
 		../src/engine/assettools/loadable.h \
 		../src/animator.h \
-		../src/engine/math/vector.h \
 		../src/engine/time/elapsedtimer.h \
 		../src/engine/graphics/image.h \
 		../src/engine/sharedcontainer.h \
@@ -2406,7 +2494,9 @@ guielement.o: ../src/gui/base/guielement.cpp ../src/gui/base/guielement.h \
 		../src/engine/entity.h \
 		../src/object.h \
 		../src/engine/variant.h \
+		../src/engine/math/vector.h \
 		../src/engine/type.h \
+		../src/engine/sfinae.h \
 		../src/engine/typedefs.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
@@ -2416,7 +2506,6 @@ guielement.o: ../src/gui/base/guielement.cpp ../src/gui/base/guielement.h \
 		../src/iinformative.h \
 		../src/engine/assettools/loadable.h \
 		../src/animator.h \
-		../src/engine/math/vector.h \
 		../src/engine/time/elapsedtimer.h \
 		../src/engine/graphics/image.h \
 		../src/engine/sharedcontainer.h \
@@ -2436,7 +2525,9 @@ guimenuelement.o: ../src/gui/base/guimenuelement.cpp ../src/gui/base/guimenuelem
 		../src/engine/entity.h \
 		../src/object.h \
 		../src/engine/variant.h \
+		../src/engine/math/vector.h \
 		../src/engine/type.h \
+		../src/engine/sfinae.h \
 		../src/engine/typedefs.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
@@ -2446,7 +2537,6 @@ guimenuelement.o: ../src/gui/base/guimenuelement.cpp ../src/gui/base/guimenuelem
 		../src/iinformative.h \
 		../src/engine/assettools/loadable.h \
 		../src/animator.h \
-		../src/engine/math/vector.h \
 		../src/engine/time/elapsedtimer.h \
 		../src/engine/graphics/image.h \
 		../src/engine/sharedcontainer.h \
@@ -2466,7 +2556,9 @@ guistack.o: ../src/gui/base/guistack.cpp ../src/gui/base/guistack.h \
 		../src/engine/entity.h \
 		../src/object.h \
 		../src/engine/variant.h \
+		../src/engine/math/vector.h \
 		../src/engine/type.h \
+		../src/engine/sfinae.h \
 		../src/engine/typedefs.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
@@ -2476,7 +2568,6 @@ guistack.o: ../src/gui/base/guistack.cpp ../src/gui/base/guistack.h \
 		../src/iinformative.h \
 		../src/engine/assettools/loadable.h \
 		../src/animator.h \
-		../src/engine/math/vector.h \
 		../src/engine/time/elapsedtimer.h \
 		../src/engine/graphics/image.h \
 		../src/engine/sharedcontainer.h \
@@ -2501,7 +2592,9 @@ guiblushingfloatingmessage.o: ../src/gui/guiblushingfloatingmessage.cpp ../src/g
 		../src/engine/entity.h \
 		../src/object.h \
 		../src/engine/variant.h \
+		../src/engine/math/vector.h \
 		../src/engine/type.h \
+		../src/engine/sfinae.h \
 		../src/engine/typedefs.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
@@ -2511,7 +2604,6 @@ guiblushingfloatingmessage.o: ../src/gui/guiblushingfloatingmessage.cpp ../src/g
 		../src/iinformative.h \
 		../src/engine/assettools/loadable.h \
 		../src/animator.h \
-		../src/engine/math/vector.h \
 		../src/engine/time/elapsedtimer.h \
 		../src/engine/graphics/image.h \
 		../src/engine/sharedcontainer.h \
@@ -2536,7 +2628,9 @@ guicentralmessage.o: ../src/gui/guicentralmessage.cpp ../src/gui/guicentralmessa
 		../src/engine/entity.h \
 		../src/object.h \
 		../src/engine/variant.h \
+		../src/engine/math/vector.h \
 		../src/engine/type.h \
+		../src/engine/sfinae.h \
 		../src/engine/typedefs.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
@@ -2546,7 +2640,6 @@ guicentralmessage.o: ../src/gui/guicentralmessage.cpp ../src/gui/guicentralmessa
 		../src/iinformative.h \
 		../src/engine/assettools/loadable.h \
 		../src/animator.h \
-		../src/engine/math/vector.h \
 		../src/engine/time/elapsedtimer.h \
 		../src/engine/graphics/image.h \
 		../src/engine/sharedcontainer.h \
@@ -2573,6 +2666,7 @@ guichoice.o: ../src/gui/guichoice.cpp ../src/gui/guichoice.h \
 		../src/engine/entity.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
+		../src/engine/sfinae.h \
 		../src/engine/typedefs.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
@@ -2606,6 +2700,7 @@ guicombobox.o: ../src/gui/guicombobox.cpp ../src/gui/guicombobox.h \
 		../src/engine/entity.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
+		../src/engine/sfinae.h \
 		../src/engine/typedefs.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
@@ -2636,7 +2731,9 @@ guidebugvalueinfo.o: ../src/gui/guidebugvalueinfo.cpp ../src/gui/guidebugvaluein
 		../src/engine/entity.h \
 		../src/object.h \
 		../src/engine/variant.h \
+		../src/engine/math/vector.h \
 		../src/engine/type.h \
+		../src/engine/sfinae.h \
 		../src/engine/typedefs.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
@@ -2646,7 +2743,6 @@ guidebugvalueinfo.o: ../src/gui/guidebugvalueinfo.cpp ../src/gui/guidebugvaluein
 		../src/iinformative.h \
 		../src/engine/assettools/loadable.h \
 		../src/animator.h \
-		../src/engine/math/vector.h \
 		../src/engine/time/elapsedtimer.h \
 		../src/engine/graphics/image.h \
 		../src/engine/sharedcontainer.h \
@@ -2671,7 +2767,9 @@ guifloatingmessage.o: ../src/gui/guifloatingmessage.cpp ../src/gui/guifloatingme
 		../src/engine/entity.h \
 		../src/object.h \
 		../src/engine/variant.h \
+		../src/engine/math/vector.h \
 		../src/engine/type.h \
+		../src/engine/sfinae.h \
 		../src/engine/typedefs.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
@@ -2681,7 +2779,6 @@ guifloatingmessage.o: ../src/gui/guifloatingmessage.cpp ../src/gui/guifloatingme
 		../src/iinformative.h \
 		../src/engine/assettools/loadable.h \
 		../src/animator.h \
-		../src/engine/math/vector.h \
 		../src/engine/time/elapsedtimer.h \
 		../src/engine/graphics/image.h \
 		../src/engine/sharedcontainer.h \
@@ -2718,6 +2815,7 @@ guilist.o: ../src/gui/guilist.cpp ../src/gui/guilist.h \
 		../src/engine/entity.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
+		../src/engine/sfinae.h \
 		../src/engine/typedefs.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
@@ -2757,7 +2855,9 @@ guimain.o: ../src/gui/guimain.cpp ../src/gui/guimain.h \
 		../src/engine/entity.h \
 		../src/object.h \
 		../src/engine/variant.h \
+		../src/engine/math/vector.h \
 		../src/engine/type.h \
+		../src/engine/sfinae.h \
 		../src/engine/typedefs.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
@@ -2767,7 +2867,6 @@ guimain.o: ../src/gui/guimain.cpp ../src/gui/guimain.h \
 		../src/iinformative.h \
 		../src/engine/assettools/loadable.h \
 		../src/animator.h \
-		../src/engine/math/vector.h \
 		../src/engine/time/elapsedtimer.h \
 		../src/engine/graphics/image.h \
 		../src/engine/sharedcontainer.h \
@@ -2792,7 +2891,9 @@ guiminimap.o: ../src/gui/guiminimap.cpp ../src/gui/guiminimap.h \
 		../src/engine/entity.h \
 		../src/object.h \
 		../src/engine/variant.h \
+		../src/engine/math/vector.h \
 		../src/engine/type.h \
+		../src/engine/sfinae.h \
 		../src/engine/typedefs.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
@@ -2802,7 +2903,6 @@ guiminimap.o: ../src/gui/guiminimap.cpp ../src/gui/guiminimap.h \
 		../src/iinformative.h \
 		../src/engine/assettools/loadable.h \
 		../src/animator.h \
-		../src/engine/math/vector.h \
 		../src/engine/time/elapsedtimer.h \
 		../src/engine/graphics/image.h \
 		../src/engine/sharedcontainer.h \
@@ -2819,7 +2919,17 @@ guiminimap.o: ../src/gui/guiminimap.cpp ../src/gui/guiminimap.h \
 		../src/engine/textformat.h \
 		../src/units/projectile.h \
 		../src/additional/lightparticle.h \
-		../src/engine/abstracteventhandler.h
+		../src/engine/abstracteventhandler.h \
+		../src/engine/context.h \
+		../src/gui/guimain.h \
+		../src/gui/guicentralmessage.h \
+		../src/gui/base/guimenuelement.h \
+		../src/gui/guifloatingmessage.h \
+		../src/gui/guidebugvalueinfo.h \
+		../src/gui/base/guistack.h \
+		../src/near.h \
+		../src/background.h \
+		../src/engine/messagequeue.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o guiminimap.o ../src/gui/guiminimap.cpp
 
 guimoduleview.o: ../src/gui/guimoduleview.cpp ../src/gui/guimoduleview.h \
@@ -2831,7 +2941,9 @@ guimoduleview.o: ../src/gui/guimoduleview.cpp ../src/gui/guimoduleview.h \
 		../src/engine/entity.h \
 		../src/object.h \
 		../src/engine/variant.h \
+		../src/engine/math/vector.h \
 		../src/engine/type.h \
+		../src/engine/sfinae.h \
 		../src/engine/typedefs.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
@@ -2841,7 +2953,6 @@ guimoduleview.o: ../src/gui/guimoduleview.cpp ../src/gui/guimoduleview.h \
 		../src/iinformative.h \
 		../src/engine/assettools/loadable.h \
 		../src/animator.h \
-		../src/engine/math/vector.h \
 		../src/engine/time/elapsedtimer.h \
 		../src/engine/graphics/image.h \
 		../src/engine/sharedcontainer.h \
@@ -2868,6 +2979,7 @@ guiradar.o: ../src/gui/guiradar.cpp ../src/gui/guiradar.h \
 		../src/engine/entity.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
+		../src/engine/sfinae.h \
 		../src/engine/typedefs.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
@@ -2899,7 +3011,9 @@ guiswitch.o: ../src/gui/guiswitch.cpp ../src/gui/guiswitch.h \
 		../src/engine/entity.h \
 		../src/object.h \
 		../src/engine/variant.h \
+		../src/engine/math/vector.h \
 		../src/engine/type.h \
+		../src/engine/sfinae.h \
 		../src/engine/typedefs.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
@@ -2909,7 +3023,6 @@ guiswitch.o: ../src/gui/guiswitch.cpp ../src/gui/guiswitch.h \
 		../src/iinformative.h \
 		../src/engine/assettools/loadable.h \
 		../src/animator.h \
-		../src/engine/math/vector.h \
 		../src/engine/time/elapsedtimer.h \
 		../src/engine/graphics/image.h \
 		../src/engine/sharedcontainer.h \
@@ -2959,13 +3072,14 @@ main.o: ../src/main.cpp ../src/engine/gameapplication.h \
 		../src/engine/entity.h \
 		../src/object.h \
 		../src/engine/variant.h \
+		../src/engine/math/vector.h \
 		../src/engine/type.h \
+		../src/engine/sfinae.h \
 		../src/engine/typedefs.h \
 		../src/engine/time/deltatimecalculator.h \
 		../src/engine/time/elapsedtimer.h \
 		../src/engine/context.h \
 		../src/additional/e_variant.h \
-		../src/engine/math/vector.h \
 		../src/gui/guimain.h \
 		../src/gui/guicentralmessage.h \
 		../src/gui/base/guimenuelement.h \
@@ -3061,7 +3175,9 @@ near.o: ../src/near.cpp ../src/near.h \
 		../src/engine/entity.h \
 		../src/object.h \
 		../src/engine/variant.h \
+		../src/engine/math/vector.h \
 		../src/engine/type.h \
+		../src/engine/sfinae.h \
 		../src/engine/typedefs.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
@@ -3071,7 +3187,6 @@ near.o: ../src/near.cpp ../src/near.h \
 		../src/iinformative.h \
 		../src/engine/assettools/loadable.h \
 		../src/animator.h \
-		../src/engine/math/vector.h \
 		../src/engine/time/elapsedtimer.h \
 		../src/engine/graphics/image.h \
 		../src/engine/sharedcontainer.h \
@@ -3098,6 +3213,7 @@ netlistener.o: ../src/netlistener.cpp ../src/netlistener.h \
 		../src/engine/entity.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
+		../src/engine/sfinae.h \
 		../src/engine/typedefs.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
@@ -3213,6 +3329,7 @@ sdlrenderer.o: ../src/sdlimplementation/sdlrenderer.cpp ../src/sdlimplementation
 		../src/engine/entity.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
+		../src/engine/sfinae.h \
 		../src/engine/typedefs.h \
 		../src/iinformative.h \
 		../src/engine/assettools/loadable.h \
@@ -3253,12 +3370,13 @@ camera.o: ../src/units/camera.cpp ../src/units/camera.h \
 		../src/engine/entity.h \
 		../src/object.h \
 		../src/engine/variant.h \
+		../src/engine/math/vector.h \
 		../src/engine/type.h \
+		../src/engine/sfinae.h \
 		../src/engine/typedefs.h \
 		../src/iinformative.h \
 		../src/engine/assettools/loadable.h \
 		../src/animator.h \
-		../src/engine/math/vector.h \
 		../src/engine/time/elapsedtimer.h \
 		../src/engine/graphics/image.h \
 		../src/engine/sharedcontainer.h \
@@ -3283,12 +3401,13 @@ movable.o: ../src/units/movable.cpp ../src/units/movable.h \
 		../src/engine/entity.h \
 		../src/object.h \
 		../src/engine/variant.h \
+		../src/engine/math/vector.h \
 		../src/engine/type.h \
+		../src/engine/sfinae.h \
 		../src/engine/typedefs.h \
 		../src/iinformative.h \
 		../src/engine/assettools/loadable.h \
 		../src/animator.h \
-		../src/engine/math/vector.h \
 		../src/engine/time/elapsedtimer.h \
 		../src/engine/graphics/image.h \
 		../src/engine/sharedcontainer.h \
@@ -3327,12 +3446,13 @@ particle.o: ../src/units/particle.cpp ../src/units/particle.h \
 		../src/engine/entity.h \
 		../src/object.h \
 		../src/engine/variant.h \
+		../src/engine/math/vector.h \
 		../src/engine/type.h \
+		../src/engine/sfinae.h \
 		../src/engine/typedefs.h \
 		../src/iinformative.h \
 		../src/engine/assettools/loadable.h \
 		../src/animator.h \
-		../src/engine/math/vector.h \
 		../src/engine/time/elapsedtimer.h \
 		../src/engine/graphics/image.h \
 		../src/engine/sharedcontainer.h \
@@ -3371,12 +3491,13 @@ projectile.o: ../src/units/projectile.cpp ../src/units/projectile.h \
 		../src/engine/entity.h \
 		../src/object.h \
 		../src/engine/variant.h \
+		../src/engine/math/vector.h \
 		../src/engine/type.h \
+		../src/engine/sfinae.h \
 		../src/engine/typedefs.h \
 		../src/iinformative.h \
 		../src/engine/assettools/loadable.h \
 		../src/animator.h \
-		../src/engine/math/vector.h \
 		../src/engine/time/elapsedtimer.h \
 		../src/engine/graphics/image.h \
 		../src/engine/sharedcontainer.h \
@@ -3421,12 +3542,13 @@ ship.o: ../src/units/ship.cpp ../src/units/ship.h \
 		../src/engine/entity.h \
 		../src/object.h \
 		../src/engine/variant.h \
+		../src/engine/math/vector.h \
 		../src/engine/type.h \
+		../src/engine/sfinae.h \
 		../src/engine/typedefs.h \
 		../src/iinformative.h \
 		../src/engine/assettools/loadable.h \
 		../src/animator.h \
-		../src/engine/math/vector.h \
 		../src/engine/time/elapsedtimer.h \
 		../src/engine/graphics/image.h \
 		../src/engine/sharedcontainer.h \
@@ -3445,12 +3567,13 @@ station.o: ../src/units/station.cpp ../src/units/station.h \
 		../src/engine/entity.h \
 		../src/object.h \
 		../src/engine/variant.h \
+		../src/engine/math/vector.h \
 		../src/engine/type.h \
+		../src/engine/sfinae.h \
 		../src/engine/typedefs.h \
 		../src/iinformative.h \
 		../src/engine/assettools/loadable.h \
 		../src/animator.h \
-		../src/engine/math/vector.h \
 		../src/engine/time/elapsedtimer.h \
 		../src/engine/graphics/image.h \
 		../src/engine/sharedcontainer.h \
@@ -3467,12 +3590,13 @@ unit.o: ../src/units/unit.cpp ../src/units/unit.h \
 		../src/engine/entity.h \
 		../src/object.h \
 		../src/engine/variant.h \
+		../src/engine/math/vector.h \
 		../src/engine/type.h \
+		../src/engine/sfinae.h \
 		../src/engine/typedefs.h \
 		../src/iinformative.h \
 		../src/engine/assettools/loadable.h \
 		../src/animator.h \
-		../src/engine/math/vector.h \
 		../src/engine/time/elapsedtimer.h \
 		../src/engine/graphics/image.h \
 		../src/engine/sharedcontainer.h \
@@ -3516,7 +3640,9 @@ worldmanager.o: ../src/worldmanager.cpp ../src/worldmanager.h \
 		../src/engine/entity.h \
 		../src/object.h \
 		../src/engine/variant.h \
+		../src/engine/math/vector.h \
 		../src/engine/type.h \
+		../src/engine/sfinae.h \
 		../src/engine/typedefs.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
@@ -3526,7 +3652,6 @@ worldmanager.o: ../src/worldmanager.cpp ../src/worldmanager.h \
 		../src/iinformative.h \
 		../src/engine/assettools/loadable.h \
 		../src/animator.h \
-		../src/engine/math/vector.h \
 		../src/engine/time/elapsedtimer.h \
 		../src/engine/graphics/image.h \
 		../src/engine/sharedcontainer.h \
@@ -3598,6 +3723,7 @@ arenaworld.o: ../src/worlds/arenaworld.cpp ../src/worlds/arenaworld.h \
 		../src/capabilities/capability.h \
 		../src/engine/entity.h \
 		../src/engine/variant.h \
+		../src/engine/sfinae.h \
 		../src/engine/typedefs.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
@@ -3658,6 +3784,7 @@ defaultworld.o: ../src/worlds/defaultworld.cpp ../src/worlds/defaultworld.h \
 		../src/capabilities/capability.h \
 		../src/engine/entity.h \
 		../src/engine/variant.h \
+		../src/engine/sfinae.h \
 		../src/engine/typedefs.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
@@ -3720,6 +3847,7 @@ guimaker.o: ../src/worlds/guimaker.cpp ../src/worlds/guimaker.h \
 		../src/capabilities/capability.h \
 		../src/engine/entity.h \
 		../src/engine/variant.h \
+		../src/engine/sfinae.h \
 		../src/engine/typedefs.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
@@ -3796,6 +3924,7 @@ heapworld.o: ../src/worlds/heapworld.cpp ../src/worlds/heapworld.h \
 		../src/capabilities/capability.h \
 		../src/engine/entity.h \
 		../src/engine/variant.h \
+		../src/engine/sfinae.h \
 		../src/engine/typedefs.h \
 		../src/units/ship.h \
 		../src/units/movable.h \
@@ -3855,6 +3984,7 @@ world.o: ../src/worlds/world.cpp ../src/worlds/world.h \
 		../src/capabilities/capability.h \
 		../src/engine/entity.h \
 		../src/engine/variant.h \
+		../src/engine/sfinae.h \
 		../src/engine/typedefs.h \
 		../src/units/ship.h \
 		../src/units/movable.h \

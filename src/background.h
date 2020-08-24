@@ -44,7 +44,7 @@ public:
 
     // Entity interface
 public:
-    void proceed(e172::Context *, e172::AbstractEventHandler *);
+    void proceed(e172::Context *context, e172::AbstractEventHandler *);
     void render(e172::AbstractRenderer *renderer);
     void bindToMovable(Movable *value);
 

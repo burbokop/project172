@@ -55,8 +55,6 @@ public:
     AssetProvider *assetProvider() const;
     std::list<Entity *> entities() const;
     void addEntity(Entity *entity);
-
-
     Promice *emitMessage(const Entity::message_id_t &messageId, const Variant &value = Variant());
     bool containsMessage(const Entity::message_id_t &messageId);
     Variant popMessage(const Entity::message_id_t &messageId, bool *ok = nullptr);
