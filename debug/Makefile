@@ -59,7 +59,6 @@ SOURCES       = ../klibcore/src/experimental/universalqueue/kuniversalqueue.cpp 
 		../klibcore/src/memcontrol/kabstractfactory.cpp \
 		../klibcore/src/memcontrol/kpull.cpp \
 		../klibcore/src/ksmartenum.cpp \
-		../src/additional/e_variant.cpp \
 		../src/additional/informative/controllerfinder.cpp \
 		../src/additional/informative/fpsmonitor.cpp \
 		../src/additional/informative/registryinfo.cpp \
@@ -159,7 +158,6 @@ SOURCES       = ../klibcore/src/experimental/universalqueue/kuniversalqueue.cpp 
 		../src/sdlimplementation/sdlgraphicsprovider.cpp \
 		../src/sdlimplementation/sdlrenderer.cpp \
 		../src/sdlimplementation/spm.cpp \
-		../src/state.cpp \
 		../src/units/camera.cpp \
 		../src/units/movable.cpp \
 		../src/units/particle.cpp \
@@ -180,7 +178,6 @@ OBJECTS       = kuniversalqueue.o \
 		kabstractfactory.o \
 		kpull.o \
 		ksmartenum.o \
-		e_variant.o \
 		controllerfinder.o \
 		fpsmonitor.o \
 		registryinfo.o \
@@ -280,7 +277,6 @@ OBJECTS       = kuniversalqueue.o \
 		sdlgraphicsprovider.o \
 		sdlrenderer.o \
 		spm.o \
-		state.o \
 		camera.o \
 		movable.o \
 		particle.o \
@@ -475,7 +471,6 @@ DIST          = ../../../../Qt/5.15.0/gcc_64/mkspecs/features/spec_pre.prf \
 		/home/viktor/projects/project172/klibcore/src/memcontrol/kabstractfactory.h \
 		/home/viktor/projects/project172/klibcore/src/memcontrol/kpull.h \
 		/home/viktor/projects/project172/klibcore/src/ksmartenum.h \
-		src/additional/e_variant.h \
 		src/additional/informative/controllerfinder.h \
 		src/additional/informative/fpsmonitor.h \
 		src/additional/informative/registryinfo.h \
@@ -588,7 +583,6 @@ DIST          = ../../../../Qt/5.15.0/gcc_64/mkspecs/features/spec_pre.prf \
 		src/sdlimplementation/sdlgraphicsprovider.h \
 		src/sdlimplementation/sdlrenderer.h \
 		src/sdlimplementation/spm.h \
-		src/state.h \
 		src/units/camera.h \
 		src/units/movable.h \
 		src/units/particle.h \
@@ -608,7 +602,6 @@ DIST          = ../../../../Qt/5.15.0/gcc_64/mkspecs/features/spec_pre.prf \
 		../klibcore/src/memcontrol/kabstractfactory.cpp \
 		../klibcore/src/memcontrol/kpull.cpp \
 		../klibcore/src/ksmartenum.cpp \
-		../src/additional/e_variant.cpp \
 		../src/additional/informative/controllerfinder.cpp \
 		../src/additional/informative/fpsmonitor.cpp \
 		../src/additional/informative/registryinfo.cpp \
@@ -708,7 +701,6 @@ DIST          = ../../../../Qt/5.15.0/gcc_64/mkspecs/features/spec_pre.prf \
 		../src/sdlimplementation/sdlgraphicsprovider.cpp \
 		../src/sdlimplementation/sdlrenderer.cpp \
 		../src/sdlimplementation/spm.cpp \
-		../src/state.cpp \
 		../src/units/camera.cpp \
 		../src/units/movable.cpp \
 		../src/units/particle.cpp \
@@ -1152,11 +1144,6 @@ kpull.o: ../klibcore/src/memcontrol/kpull.cpp ../klibcore/src/memcontrol/kpull.h
 ksmartenum.o: ../klibcore/src/ksmartenum.cpp ../klibcore/src/ksmartenum.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ksmartenum.o ../klibcore/src/ksmartenum.cpp
 
-e_variant.o: ../src/additional/e_variant.cpp ../src/additional/e_variant.h \
-		../src/engine/math/vector.h \
-		../src/object.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o e_variant.o ../src/additional/e_variant.cpp
-
 controllerfinder.o: ../src/additional/informative/controllerfinder.cpp ../src/additional/informative/controllerfinder.h \
 		../src/iinformative.h \
 		../src/capabilities/controller.h \
@@ -1208,7 +1195,6 @@ unitsamountinfo.o: ../src/additional/informative/unitsamountinfo.cpp ../src/addi
 		../src/engine/typedefs.h \
 		../src/iinformative.h \
 		../src/engine/context.h \
-		../src/additional/e_variant.h \
 		../src/gui/guimain.h \
 		../src/gui/guicentralmessage.h \
 		../src/gui/base/guimenuelement.h \
@@ -1251,7 +1237,6 @@ lightparticle.o: ../src/additional/lightparticle.cpp ../src/additional/lightpart
 		../src/engine/typedefs.h \
 		../src/engine/time/elapsedtimer.h \
 		../src/engine/context.h \
-		../src/additional/e_variant.h \
 		../src/gui/guimain.h \
 		../src/gui/guicentralmessage.h \
 		../src/gui/base/guimenuelement.h \
@@ -1301,8 +1286,6 @@ speedindicator.o: ../src/additional/speedindicator.cpp ../src/additional/speedin
 		../src/engine/graphics/image.h \
 		../src/engine/sharedcontainer.h \
 		../src/engine/math/vector.h \
-		../src/additional/e_variant.h \
-		../src/object.h \
 		../src/engine/textformat.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o speedindicator.o ../src/additional/speedindicator.cpp
 
@@ -1319,8 +1302,6 @@ animator.o: ../src/animator.cpp ../src/animator.h \
 		../src/engine/graphics/image.h \
 		../src/engine/sharedcontainer.h \
 		../src/engine/graphics/abstractrenderer.h \
-		../src/additional/e_variant.h \
-		../src/object.h \
 		../src/engine/textformat.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o animator.o ../src/animator.cpp
 
@@ -1345,8 +1326,6 @@ animatorassetexecutor.o: ../src/assetexecutors/animatorassetexecutor.cpp ../src/
 		../src/engine/graphics/abstractrenderer.h \
 		../src/engine/graphics/image.h \
 		../src/engine/sharedcontainer.h \
-		../src/additional/e_variant.h \
-		../src/object.h \
 		../src/engine/textformat.h \
 		../src/animator.h \
 		../src/engine/time/elapsedtimer.h
@@ -1435,8 +1414,6 @@ spriteassetexecutor.o: ../src/assetexecutors/spriteassetexecutor.cpp ../src/asse
 		../src/engine/graphics/abstractrenderer.h \
 		../src/engine/graphics/image.h \
 		../src/engine/sharedcontainer.h \
-		../src/additional/e_variant.h \
-		../src/object.h \
 		../src/engine/textformat.h \
 		../src/animator.h \
 		../src/engine/time/elapsedtimer.h
@@ -1508,7 +1485,6 @@ audioplayer.o: ../src/audio/audioplayer.cpp ../src/audio/audioplayer.h \
 		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h \
 		../src/engine/graphics/abstractrenderer.h \
-		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
 		../src/engine/math/math.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o audioplayer.o ../src/audio/audioplayer.cpp
@@ -1537,7 +1513,6 @@ background.o: ../src/background.cpp ../src/background.h \
 		../src/engine/audio/audiosample.h \
 		../src/capabilities/docker.h \
 		../src/engine/graphics/abstractrenderer.h \
-		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
 		../src/engine/context.h \
 		../src/gui/guimain.h \
@@ -1589,7 +1564,6 @@ aggressive.o: ../src/capabilities/aggressive.cpp ../src/capabilities/aggressive.
 		../src/units/projectile.h \
 		../src/units/camera.h \
 		../src/engine/graphics/abstractrenderer.h \
-		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
 		../src/additional/lightparticle.h \
 		../src/debug.h \
@@ -1663,7 +1637,6 @@ controller.o: ../src/capabilities/controller.cpp ../src/capabilities/controller.
 		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h \
 		../src/engine/context.h \
-		../src/additional/e_variant.h \
 		../src/gui/guimain.h \
 		../src/gui/guicentralmessage.h \
 		../src/gui/base/guimenuelement.h \
@@ -1772,7 +1745,6 @@ module.o: ../src/capabilities/modules/module.cpp ../src/capabilities/modules/mod
 		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h \
 		../src/engine/graphics/abstractrenderer.h \
-		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
 		../src/engine/math/math.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o module.o ../src/capabilities/modules/module.cpp
@@ -1819,7 +1791,6 @@ warpdrive.o: ../src/capabilities/modules/warpdrive.cpp ../src/capabilities/modul
 		../src/engine/audio/audiosample.h \
 		../src/additional/stringformer.h \
 		../src/engine/context.h \
-		../src/additional/e_variant.h \
 		../src/gui/guimain.h \
 		../src/gui/guicentralmessage.h \
 		../src/gui/base/guimenuelement.h \
@@ -1867,7 +1838,6 @@ weapon.o: ../src/capabilities/modules/weapon.cpp ../src/capabilities/modules/wea
 		../src/capabilities/modulehandler.h \
 		../src/capabilities/docker.h \
 		../src/engine/context.h \
-		../src/additional/e_variant.h \
 		../src/gui/guimain.h \
 		../src/gui/guicentralmessage.h \
 		../src/gui/base/guimenuelement.h \
@@ -1933,7 +1903,6 @@ player.o: ../src/capabilities/player.cpp ../src/capabilities/player.h \
 		../src/objectregistry.h \
 		../src/capabilities/modules/weapon.h \
 		../src/engine/context.h \
-		../src/additional/e_variant.h \
 		../src/gui/guimain.h \
 		../src/gui/guicentralmessage.h \
 		../src/gui/base/guimenuelement.h \
@@ -2005,7 +1974,6 @@ assetprovider.o: ../src/engine/assettools/assetprovider.cpp ../src/engine/assett
 		../src/object.h \
 		../src/engine/memcontrol/abstractfactory.h \
 		../src/engine/context.h \
-		../src/additional/e_variant.h \
 		../src/gui/guimain.h \
 		../src/gui/guicentralmessage.h \
 		../src/gui/base/guimenuelement.h \
@@ -2081,9 +2049,6 @@ audiosample.o: ../src/engine/audio/audiosample.cpp ../src/engine/audio/audiosamp
 
 context.o: ../src/engine/context.cpp ../src/engine/additional.h \
 		../src/engine/context.h \
-		../src/additional/e_variant.h \
-		../src/engine/math/vector.h \
-		../src/object.h \
 		../src/gui/guimain.h \
 		../src/gui/guicentralmessage.h \
 		../src/gui/base/guimenuelement.h \
@@ -2091,7 +2056,9 @@ context.o: ../src/engine/context.cpp ../src/engine/additional.h \
 		../src/capabilities/controller.h \
 		../src/capabilities/capability.h \
 		../src/engine/entity.h \
+		../src/object.h \
 		../src/engine/variant.h \
+		../src/engine/math/vector.h \
 		../src/engine/type.h \
 		../src/engine/sfinae.h \
 		../src/engine/typedefs.h \
@@ -2151,7 +2118,6 @@ entity.o: ../src/engine/entity.cpp ../src/engine/entity.h \
 		../src/engine/sfinae.h \
 		../src/engine/typedefs.h \
 		../src/engine/context.h \
-		../src/additional/e_variant.h \
 		../src/gui/guimain.h \
 		../src/gui/guicentralmessage.h \
 		../src/gui/base/guimenuelement.h \
@@ -2197,7 +2163,6 @@ gameapplication.o: ../src/engine/gameapplication.cpp ../src/engine/gameapplicati
 		../src/engine/time/deltatimecalculator.h \
 		../src/engine/time/elapsedtimer.h \
 		../src/engine/context.h \
-		../src/additional/e_variant.h \
 		../src/gui/guimain.h \
 		../src/gui/guicentralmessage.h \
 		../src/gui/base/guimenuelement.h \
@@ -2254,8 +2219,6 @@ abstractgraphicsprovider.o: ../src/engine/graphics/abstractgraphicsprovider.cpp 
 		../src/engine/graphics/image.h \
 		../src/engine/sharedcontainer.h \
 		../src/engine/math/vector.h \
-		../src/additional/e_variant.h \
-		../src/object.h \
 		../src/engine/textformat.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o abstractgraphicsprovider.o ../src/engine/graphics/abstractgraphicsprovider.cpp
 
@@ -2263,8 +2226,6 @@ abstractrenderer.o: ../src/engine/graphics/abstractrenderer.cpp ../src/engine/gr
 		../src/engine/graphics/image.h \
 		../src/engine/sharedcontainer.h \
 		../src/engine/math/vector.h \
-		../src/additional/e_variant.h \
-		../src/object.h \
 		../src/engine/textformat.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o abstractrenderer.o ../src/engine/graphics/abstractrenderer.cpp
 
@@ -2321,12 +2282,10 @@ variant.o: ../src/engine/variant.cpp ../src/engine/variant.h \
 
 environment.o: ../src/environment.cpp ../src/environment.h \
 		../src/object.h \
-		../src/state.h \
-		../src/additional/e_variant.h \
-		../src/engine/math/vector.h \
 		../src/background.h \
 		../src/engine/entity.h \
 		../src/engine/variant.h \
+		../src/engine/math/vector.h \
 		../src/engine/type.h \
 		../src/engine/sfinae.h \
 		../src/engine/typedefs.h \
@@ -2483,7 +2442,6 @@ guicontainer.o: ../src/gui/base/guicontainer.cpp ../src/gui/base/guicontainer.h 
 		../src/gui/base/guistack.h \
 		../src/sdlimplementation/sdlrenderer.h \
 		../src/engine/graphics/abstractrenderer.h \
-		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
 		../src/engine/abstracteventhandler.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o guicontainer.o ../src/gui/base/guicontainer.cpp
@@ -2616,7 +2574,6 @@ guiblushingfloatingmessage.o: ../src/gui/guiblushingfloatingmessage.cpp ../src/g
 		../src/gui/base/guibaseelement.h \
 		../src/engine/math/math.h \
 		../src/engine/graphics/abstractrenderer.h \
-		../src/additional/e_variant.h \
 		../src/engine/textformat.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o guiblushingfloatingmessage.o ../src/gui/guiblushingfloatingmessage.cpp
 
@@ -2651,20 +2608,18 @@ guicentralmessage.o: ../src/gui/guicentralmessage.cpp ../src/gui/guicentralmessa
 		../src/additional/trigger.h \
 		../src/gui/base/guibaseelement.h \
 		../src/engine/graphics/abstractrenderer.h \
-		../src/additional/e_variant.h \
 		../src/engine/textformat.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o guicentralmessage.o ../src/gui/guicentralmessage.cpp
 
 guichoice.o: ../src/gui/guichoice.cpp ../src/gui/guichoice.h \
-		../src/additional/e_variant.h \
-		../src/engine/math/vector.h \
-		../src/object.h \
 		../src/gui/base/guimenuelement.h \
 		../src/gui/base/guielement.h \
 		../src/capabilities/controller.h \
 		../src/capabilities/capability.h \
 		../src/engine/entity.h \
+		../src/object.h \
 		../src/engine/variant.h \
+		../src/engine/math/vector.h \
 		../src/engine/type.h \
 		../src/engine/sfinae.h \
 		../src/engine/typedefs.h \
@@ -2690,15 +2645,14 @@ guichoice.o: ../src/gui/guichoice.cpp ../src/gui/guichoice.h \
 
 guicombobox.o: ../src/gui/guicombobox.cpp ../src/gui/guicombobox.h \
 		../src/gui/guichoice.h \
-		../src/additional/e_variant.h \
-		../src/engine/math/vector.h \
-		../src/object.h \
 		../src/gui/base/guimenuelement.h \
 		../src/gui/base/guielement.h \
 		../src/capabilities/controller.h \
 		../src/capabilities/capability.h \
 		../src/engine/entity.h \
+		../src/object.h \
 		../src/engine/variant.h \
+		../src/engine/math/vector.h \
 		../src/engine/type.h \
 		../src/engine/sfinae.h \
 		../src/engine/typedefs.h \
@@ -2755,7 +2709,6 @@ guidebugvalueinfo.o: ../src/gui/guidebugvalueinfo.cpp ../src/gui/guidebugvaluein
 		../src/gui/base/guibaseelement.h \
 		../src/engine/abstracteventhandler.h \
 		../src/engine/graphics/abstractrenderer.h \
-		../src/additional/e_variant.h \
 		../src/engine/textformat.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o guidebugvalueinfo.o ../src/gui/guidebugvalueinfo.cpp
 
@@ -2790,7 +2743,6 @@ guifloatingmessage.o: ../src/gui/guifloatingmessage.cpp ../src/gui/guifloatingme
 		../src/additional/trigger.h \
 		../src/gui/base/guibaseelement.h \
 		../src/engine/graphics/abstractrenderer.h \
-		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
 		../src/engine/context.h \
 		../src/gui/guimain.h \
@@ -2804,16 +2756,15 @@ guifloatingmessage.o: ../src/gui/guifloatingmessage.cpp ../src/gui/guifloatingme
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o guifloatingmessage.o ../src/gui/guifloatingmessage.cpp
 
 guilist.o: ../src/gui/guilist.cpp ../src/gui/guilist.h \
-		../src/additional/e_variant.h \
-		../src/engine/math/vector.h \
-		../src/object.h \
 		../src/gui/base/guicontainer.h \
 		../src/gui/base/guimenuelement.h \
 		../src/gui/base/guielement.h \
 		../src/capabilities/controller.h \
 		../src/capabilities/capability.h \
 		../src/engine/entity.h \
+		../src/object.h \
 		../src/engine/variant.h \
+		../src/engine/math/vector.h \
 		../src/engine/type.h \
 		../src/engine/sfinae.h \
 		../src/engine/typedefs.h \
@@ -2915,7 +2866,6 @@ guiminimap.o: ../src/gui/guiminimap.cpp ../src/gui/guiminimap.h \
 		../src/gui/base/guibaseelement.h \
 		../src/units/camera.h \
 		../src/engine/graphics/abstractrenderer.h \
-		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
 		../src/units/projectile.h \
 		../src/additional/lightparticle.h \
@@ -2968,16 +2918,15 @@ guimoduleview.o: ../src/gui/guimoduleview.cpp ../src/gui/guimoduleview.h \
 
 guiradar.o: ../src/gui/guiradar.cpp ../src/gui/guiradar.h \
 		../src/gui/guilist.h \
-		../src/additional/e_variant.h \
-		../src/engine/math/vector.h \
-		../src/object.h \
 		../src/gui/base/guicontainer.h \
 		../src/gui/base/guimenuelement.h \
 		../src/gui/base/guielement.h \
 		../src/capabilities/controller.h \
 		../src/capabilities/capability.h \
 		../src/engine/entity.h \
+		../src/object.h \
 		../src/engine/variant.h \
+		../src/engine/math/vector.h \
 		../src/engine/type.h \
 		../src/engine/sfinae.h \
 		../src/engine/typedefs.h \
@@ -3079,7 +3028,6 @@ main.o: ../src/main.cpp ../src/engine/gameapplication.h \
 		../src/engine/time/deltatimecalculator.h \
 		../src/engine/time/elapsedtimer.h \
 		../src/engine/context.h \
-		../src/additional/e_variant.h \
 		../src/gui/guimain.h \
 		../src/gui/guicentralmessage.h \
 		../src/gui/base/guimenuelement.h \
@@ -3162,7 +3110,6 @@ main.o: ../src/main.cpp ../src/engine/gameapplication.h \
 		../src/gui/base/guicontainer.h \
 		../src/worlds/heapworld.h \
 		../src/environment.h \
-		../src/state.h \
 		../src/netlistener.h \
 		../src/additional/net/socket.h \
 		../src/additional/net/framebuilder.h \
@@ -3201,9 +3148,6 @@ near.o: ../src/near.cpp ../src/near.h \
 
 netlistener.o: ../src/netlistener.cpp ../src/netlistener.h \
 		../src/engine/context.h \
-		../src/additional/e_variant.h \
-		../src/engine/math/vector.h \
-		../src/object.h \
 		../src/gui/guimain.h \
 		../src/gui/guicentralmessage.h \
 		../src/gui/base/guimenuelement.h \
@@ -3211,7 +3155,9 @@ netlistener.o: ../src/netlistener.cpp ../src/netlistener.h \
 		../src/capabilities/controller.h \
 		../src/capabilities/capability.h \
 		../src/engine/entity.h \
+		../src/object.h \
 		../src/engine/variant.h \
+		../src/engine/math/vector.h \
 		../src/engine/type.h \
 		../src/engine/sfinae.h \
 		../src/engine/typedefs.h \
@@ -3257,8 +3203,6 @@ openglgraphicsprovider.o: ../src/openglimplementation/openglgraphicsprovider.cpp
 		../src/engine/graphics/image.h \
 		../src/engine/sharedcontainer.h \
 		../src/engine/math/vector.h \
-		../src/additional/e_variant.h \
-		../src/object.h \
 		../src/engine/textformat.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o openglgraphicsprovider.o ../src/openglimplementation/openglgraphicsprovider.cpp
 
@@ -3267,8 +3211,6 @@ openglrenderer.o: ../src/openglimplementation/openglrenderer.cpp ../src/openglim
 		../src/engine/graphics/image.h \
 		../src/engine/sharedcontainer.h \
 		../src/engine/math/vector.h \
-		../src/additional/e_variant.h \
-		../src/object.h \
 		../src/engine/textformat.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o openglrenderer.o ../src/openglimplementation/openglrenderer.cpp
 
@@ -3302,8 +3244,6 @@ sdlgraphicsprovider.o: ../src/sdlimplementation/sdlgraphicsprovider.cpp ../src/s
 		../src/engine/graphics/image.h \
 		../src/engine/sharedcontainer.h \
 		../src/engine/math/vector.h \
-		../src/additional/e_variant.h \
-		../src/object.h \
 		../src/engine/textformat.h \
 		../src/engine/graphics/abstractgraphicsprovider.h \
 		../src/sdlimplementation/spm.h \
@@ -3315,8 +3255,6 @@ sdlrenderer.o: ../src/sdlimplementation/sdlrenderer.cpp ../src/sdlimplementation
 		../src/engine/graphics/image.h \
 		../src/engine/sharedcontainer.h \
 		../src/engine/math/vector.h \
-		../src/additional/e_variant.h \
-		../src/object.h \
 		../src/engine/textformat.h \
 		../src/sdlimplementation/spm.h \
 		../src/sdlimplementation/effects/visualeffect.h \
@@ -3327,6 +3265,7 @@ sdlrenderer.o: ../src/sdlimplementation/sdlrenderer.cpp ../src/sdlimplementation
 		../src/capabilities/modules/module.h \
 		../src/capabilities/capability.h \
 		../src/engine/entity.h \
+		../src/object.h \
 		../src/engine/variant.h \
 		../src/engine/type.h \
 		../src/engine/sfinae.h \
@@ -3354,12 +3293,6 @@ spm.o: ../src/sdlimplementation/spm.cpp ../src/sdlimplementation/spm.h \
 		../src/engine/math/vector.h \
 		../src/sdlimplementation/rotozoom.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o spm.o ../src/sdlimplementation/spm.cpp
-
-state.o: ../src/state.cpp ../src/state.h \
-		../src/additional/e_variant.h \
-		../src/engine/math/vector.h \
-		../src/object.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o state.o ../src/state.cpp
 
 camera.o: ../src/units/camera.cpp ../src/units/camera.h \
 		../src/units/movable.h \
@@ -3389,7 +3322,6 @@ camera.o: ../src/units/camera.cpp ../src/units/camera.h \
 		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h \
 		../src/engine/graphics/abstractrenderer.h \
-		../src/additional/e_variant.h \
 		../src/engine/textformat.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o camera.o ../src/units/camera.cpp
 
@@ -3418,7 +3350,6 @@ movable.o: ../src/units/movable.cpp ../src/units/movable.h \
 		../src/capabilities/modules/engine.h \
 		../src/engine/math/math.h \
 		../src/engine/context.h \
-		../src/additional/e_variant.h \
 		../src/gui/guimain.h \
 		../src/gui/guicentralmessage.h \
 		../src/gui/base/guimenuelement.h \
@@ -3461,7 +3392,6 @@ particle.o: ../src/units/particle.cpp ../src/units/particle.h \
 		../src/engine/audio/audiosample.h \
 		../src/capabilities/docker.h \
 		../src/engine/context.h \
-		../src/additional/e_variant.h \
 		../src/gui/guimain.h \
 		../src/gui/guicentralmessage.h \
 		../src/gui/base/guimenuelement.h \
@@ -3512,7 +3442,6 @@ projectile.o: ../src/units/projectile.cpp ../src/units/projectile.h \
 		../src/capabilities/modules/warpdrive.h \
 		../src/additional/trigger.h \
 		../src/engine/graphics/abstractrenderer.h \
-		../src/additional/e_variant.h \
 		../src/engine/textformat.h \
 		../src/additional/lightparticle.h \
 		../src/objectregistry.h \
@@ -3609,7 +3538,6 @@ unit.o: ../src/units/unit.cpp ../src/units/unit.h \
 		../src/units/station.h \
 		../src/engine/math/math.h \
 		../src/engine/context.h \
-		../src/additional/e_variant.h \
 		../src/gui/guimain.h \
 		../src/gui/guicentralmessage.h \
 		../src/gui/base/guimenuelement.h \
@@ -3681,7 +3609,6 @@ worldmanager.o: ../src/worldmanager.cpp ../src/worldmanager.h \
 		../src/json/writer.h \
 		../src/engine/memcontrol/abstractfactory.h \
 		../src/engine/context.h \
-		../src/additional/e_variant.h \
 		../src/background.h \
 		../src/engine/messagequeue.h \
 		../klibcore/src/memcontrol/kabstractfactory.h \
@@ -3713,8 +3640,6 @@ arenaworld.o: ../src/worlds/arenaworld.cpp ../src/worlds/arenaworld.h \
 		../src/engine/memcontrol/abstractfactory.h \
 		../src/engine/type.h \
 		../src/engine/context.h \
-		../src/additional/e_variant.h \
-		../src/engine/math/vector.h \
 		../src/gui/guimain.h \
 		../src/gui/guicentralmessage.h \
 		../src/gui/base/guimenuelement.h \
@@ -3723,6 +3648,7 @@ arenaworld.o: ../src/worlds/arenaworld.cpp ../src/worlds/arenaworld.h \
 		../src/capabilities/capability.h \
 		../src/engine/entity.h \
 		../src/engine/variant.h \
+		../src/engine/math/vector.h \
 		../src/engine/sfinae.h \
 		../src/engine/typedefs.h \
 		../src/units/ship.h \
@@ -3774,8 +3700,6 @@ defaultworld.o: ../src/worlds/defaultworld.cpp ../src/worlds/defaultworld.h \
 		../src/engine/memcontrol/abstractfactory.h \
 		../src/engine/type.h \
 		../src/engine/context.h \
-		../src/additional/e_variant.h \
-		../src/engine/math/vector.h \
 		../src/gui/guimain.h \
 		../src/gui/guicentralmessage.h \
 		../src/gui/base/guimenuelement.h \
@@ -3784,6 +3708,7 @@ defaultworld.o: ../src/worlds/defaultworld.cpp ../src/worlds/defaultworld.h \
 		../src/capabilities/capability.h \
 		../src/engine/entity.h \
 		../src/engine/variant.h \
+		../src/engine/math/vector.h \
 		../src/engine/sfinae.h \
 		../src/engine/typedefs.h \
 		../src/units/ship.h \
@@ -3837,8 +3762,6 @@ guimaker.o: ../src/worlds/guimaker.cpp ../src/worlds/guimaker.h \
 		../src/engine/memcontrol/abstractfactory.h \
 		../src/engine/type.h \
 		../src/engine/context.h \
-		../src/additional/e_variant.h \
-		../src/engine/math/vector.h \
 		../src/gui/guimain.h \
 		../src/gui/guicentralmessage.h \
 		../src/gui/base/guimenuelement.h \
@@ -3847,6 +3770,7 @@ guimaker.o: ../src/worlds/guimaker.cpp ../src/worlds/guimaker.h \
 		../src/capabilities/capability.h \
 		../src/engine/entity.h \
 		../src/engine/variant.h \
+		../src/engine/math/vector.h \
 		../src/engine/sfinae.h \
 		../src/engine/typedefs.h \
 		../src/units/ship.h \
@@ -3914,8 +3838,6 @@ heapworld.o: ../src/worlds/heapworld.cpp ../src/worlds/heapworld.h \
 		../src/engine/memcontrol/abstractfactory.h \
 		../src/engine/type.h \
 		../src/engine/context.h \
-		../src/additional/e_variant.h \
-		../src/engine/math/vector.h \
 		../src/gui/guimain.h \
 		../src/gui/guicentralmessage.h \
 		../src/gui/base/guimenuelement.h \
@@ -3924,6 +3846,7 @@ heapworld.o: ../src/worlds/heapworld.cpp ../src/worlds/heapworld.h \
 		../src/capabilities/capability.h \
 		../src/engine/entity.h \
 		../src/engine/variant.h \
+		../src/engine/math/vector.h \
 		../src/engine/sfinae.h \
 		../src/engine/typedefs.h \
 		../src/units/ship.h \
@@ -3974,8 +3897,6 @@ world.o: ../src/worlds/world.cpp ../src/worlds/world.h \
 		../src/engine/memcontrol/abstractfactory.h \
 		../src/engine/type.h \
 		../src/engine/context.h \
-		../src/additional/e_variant.h \
-		../src/engine/math/vector.h \
 		../src/gui/guimain.h \
 		../src/gui/guicentralmessage.h \
 		../src/gui/base/guimenuelement.h \
@@ -3984,6 +3905,7 @@ world.o: ../src/worlds/world.cpp ../src/worlds/world.h \
 		../src/capabilities/capability.h \
 		../src/engine/entity.h \
 		../src/engine/variant.h \
+		../src/engine/math/vector.h \
 		../src/engine/sfinae.h \
 		../src/engine/typedefs.h \
 		../src/units/ship.h \

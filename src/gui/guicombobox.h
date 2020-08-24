@@ -23,7 +23,7 @@ public:
             m_menuElements.clear();
             terminateChildren();
             for(const auto l : m_list) {
-                addMenuElement(new GUIChoice(e172::Variant::fromValue<T>(l).toString(), old::Variant(), [this, l](auto) {
+                addMenuElement(new GUIChoice(e172::Variant::fromValue<T>(l).toString(), e172::Variant(), [this, l](auto) {
                     if(m_callback)
                         m_callback(l);
                 }));

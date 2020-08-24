@@ -22,6 +22,7 @@ public:
     Docker();
 
     void dock(Unit *target);
+    void dock(Entity::id_t targetId);
     void undock();
     State getState();
 

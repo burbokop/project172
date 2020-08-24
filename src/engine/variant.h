@@ -202,9 +202,9 @@ public:
     Variant(int64_t value) { assign(value); }
 
 
-    VariantVector constrained();
+    VariantVector constrained() const;
 
-    bool isNumber();
+    bool isNumber() const;
 
     template<typename T>
     T toNumber(bool *ok = nullptr) const;
@@ -226,10 +226,10 @@ public:
     E172_VARIANT_NUM_CONVERTER(Int32, int32_t)
     E172_VARIANT_NUM_CONVERTER(Int64, int64_t)
 
-    inline auto toMap() const { value_default<VariantMap>(); };
-    inline auto toList() const { value_default<VariantList>(); };
-    inline auto toVector() const { value_default<VariantVector>();};
-    inline auto toMathVector() const { value_default<Vector>();};
+    inline auto toMap() const { return value_default<VariantMap>(); };
+    inline auto toList() const { return value_default<VariantList>(); };
+    inline auto toVector() const { return value_default<VariantVector>();};
+    inline auto toMathVector() const { return value_default<Vector>();};
 
     std::string toString() const;
 
@@ -248,39 +248,25 @@ T Variant::toNumber(bool *ok) const {
     if(ok)
         *ok = true;
 
-    if(containsType<bool>()) {
-        return value<bool>();
-    } else if(containsType<char>()) {
-        return value<char>();
-    } else if(containsType<signed char>()) {
-        return value<signed char>();
-    } else if(containsType<unsigned char>()) {
-        return value<unsigned char>();
-    } else if(containsType<wchar_t>()) {
-        return value<wchar_t>();
-    } else if(containsType<char16_t>()) {
-        return value<char16_t>();
-    } else if(containsType<char32_t>()) {
-        return value<char32_t>();
-    } else if(containsType<short>()) {
-        return value<short>();
-    } else if(containsType<unsigned short>()) {
-        return value<unsigned short>();
-    } else if(containsType<unsigned int>()) {
-        return value<unsigned int>();
-    } else if(containsType<unsigned long>()) {
-        return value<unsigned long>();
-    } else if(containsType<long long>()) {
-        return value<long long>();
-    } else if(containsType<unsigned long long>()) {
-        return value<unsigned long long>();
-    } else if(containsType<float>()) {
-        return value<float>();
-    } else if(containsType<double>()) {
-        return value<double>();
-    } else if(containsType<long double>()) {
-        return value<long double>();
-    } else if(containsType<std::string>()) {
+    if(containsType<bool>()) { return value<bool>();
+    } else if(containsType<char               >()) { return value<char>();
+    } else if(containsType<signed char        >()) { return value<signed char>();
+    } else if(containsType<unsigned char      >()) { return value<unsigned char>();
+    } else if(containsType<wchar_t            >()) { return value<wchar_t>();
+    } else if(containsType<char16_t           >()) { return value<char16_t>();
+    } else if(containsType<char32_t           >()) { return value<char32_t>();
+    } else if(containsType<short              >()) { return value<short>();
+    } else if(containsType<unsigned short     >()) { return value<unsigned short>();
+    } else if(containsType<int                >()) { return value<int>();
+    } else if(containsType<unsigned int       >()) { return value<unsigned int>();
+    } else if(containsType<long               >()) { return value<long>();
+    } else if(containsType<unsigned long      >()) { return value<unsigned long>();
+    } else if(containsType<long long          >()) { return value<long long>();
+    } else if(containsType<unsigned long long >()) { return value<unsigned long long>();
+    } else if(containsType<float              >()) { return value<float>();
+    } else if(containsType<double             >()) { return value<double>();
+    } else if(containsType<long double        >()) { return value<long double>();
+    } else if(containsType<std::string        >()) {
         try {
             return std::stod(value<std::string>());
         } catch (std::invalid_argument) {

@@ -76,7 +76,6 @@ Environment::Environment(std::vector<std::string> args) {
     assetManager->registerType<Thruster>();
 
 
-    state = new State();
     eventHandler = new SDLEventHandler(); // io {no}
     netListener = new NetListener(context);
 

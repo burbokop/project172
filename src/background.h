@@ -32,7 +32,7 @@ private:
 
     e172::Vector m_lastResolution;
 
-    e172::ElapsedTimer *flashingTimer = nullptr;
+    e172::ElapsedTimer flashingTimer = e172::ElapsedTimer(DEFAULT_FLASHING_INTERVAL);
     Uint32 flashingColor = DEFAULT_FLASHING_COLOR;
     Uint32 colorBuffer = DEFAULT_MAIN_COLOR;
     int flashesRemains = 0;

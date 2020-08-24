@@ -15,11 +15,8 @@ const Uint32 Background::DEFAULT_FLASHING_COLOR = 0xff0000;
 const long Background::DEFAULT_FLASHING_INTERVAL = 32;
 
 
-
-
 void Background::flashing(int repeats) {
-    flashingTimer = new e172::ElapsedTimer(DEFAULT_FLASHING_INTERVAL);
-    flashingTimer->reset();
+    flashingTimer.reset();
     flashesRemains = repeats;
 }
 
@@ -39,12 +36,10 @@ void Background::onResolutionChanged(const e172::Vector &resolution) {
         stars.push_back(star);
     }
 }
-#include <iostream>
 void Background::proceed(e172::Context *context, e172::AbstractEventHandler *) {
     bool ok = false;
     const auto value = context->popMessage(e172::Context::BACKGROUND_FLASHING, &ok);
     if(ok) {
-        std::cout << "BF\n";
         flashing(value.toInt());
     }
 }
@@ -56,7 +51,7 @@ void Background::render(e172::AbstractRenderer *renderer) {
         m_lastResolution = resolution;
     }
 
-    if(flashingTimer && flashingTimer->check()) {
+    if(flashesRemains >= 0 && flashingTimer.check()) {
         if(mainColor != flashingColor) {
             colorBuffer = mainColor;
             mainColor = flashingColor;
@@ -65,7 +60,6 @@ void Background::render(e172::AbstractRenderer *renderer) {
         }
 
         if(flashesRemains <= 0) {
-            flashingTimer = nullptr;
             mainColor = colorBuffer;
         }
         flashesRemains--;

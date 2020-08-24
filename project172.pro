@@ -28,7 +28,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
-    src/additional/e_variant.h \
     src/additional/informative/controllerfinder.h \
     src/additional/informative/fpsmonitor.h \
     src/additional/informative/registryinfo.h \
@@ -141,7 +140,6 @@ HEADERS += \
     src/sdlimplementation/sdlgraphicsprovider.h \
     src/sdlimplementation/sdlrenderer.h \
     src/sdlimplementation/spm.h \
-    src/state.h \
     src/units/camera.h \
     src/units/movable.h \
     src/units/particle.h \
@@ -157,7 +155,6 @@ HEADERS += \
     src/worlds/world.h
 
 SOURCES += \
-    src/additional/e_variant.cpp \
     src/additional/informative/controllerfinder.cpp \
     src/additional/informative/fpsmonitor.cpp \
     src/additional/informative/registryinfo.cpp \
@@ -257,7 +254,6 @@ SOURCES += \
     src/sdlimplementation/sdlgraphicsprovider.cpp \
     src/sdlimplementation/sdlrenderer.cpp \
     src/sdlimplementation/spm.cpp \
-    src/state.cpp \
     src/units/camera.cpp \
     src/units/movable.cpp \
     src/units/particle.cpp \

@@ -54,7 +54,7 @@ Variant::Variant(const Variant &obj) {
 }
 
 
-VariantVector Variant::constrained() {
+VariantVector Variant::constrained() const {
     VariantVector result;
     if(containsType<VariantVector>()) {
         const auto vec = value<VariantVector>();
@@ -107,7 +107,7 @@ bool Variant::containsNumber(const std::string &string) {
 
 
 
-bool Variant::isNumber() {
+bool Variant::isNumber() const {
     if(containsType<bool>()
     || containsType<char>()
     || containsType<signed char>()

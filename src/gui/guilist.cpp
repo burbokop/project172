@@ -27,8 +27,8 @@ std::vector<GUIMenuElement *> GUIList::informativeToElement(std::list<Entity*> *
 }
 
 
-void GUIList::onChoice(old::Variant value) {
-    Unit *target = value.toUnit();
+void GUIList::onChoice(e172::Variant value) {
+    auto target = value.toNumber<e172::Entity::id_t>();
     Unit *parent = controller()->parentUnit();
     if(target && parent) {
         Docker *docker = parent->getDocker();
@@ -39,7 +39,10 @@ void GUIList::onChoice(old::Variant value) {
 }
 
 GUIMenuElement *GUIList::forEach(Unit *unit) {
-    return new GUIChoice(unit, unit, std::bind(&GUIList::onChoice, this, std::placeholders::_1));
+    return nullptr;
+    return new GUIChoice(unit, unit->entityId(), [this](const e172::Variant &v){
+        onChoice(v);
+    });
 }
 
 

@@ -1,7 +1,6 @@
 #ifndef GUILIST_H
 #define GUILIST_H
 
-#include <additional/e_variant.h>
 
 #include <gui/base/guicontainer.h>
 
@@ -14,7 +13,7 @@ private:
 
     std::vector<GUIMenuElement *> informativeToElement(std::list<Entity*> *array);
 
-    void onChoice(old::Variant value);
+    void onChoice(e172::Variant value);
 
 public:
     GUIList(std::string label);

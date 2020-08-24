@@ -71,7 +71,7 @@ GUIMaker::GUIMaker(e172::Context *context) {
 
                 GUIContainer *optionsMenu = new GUIContainer("options"); {
                     GUIContainer *effectsMenu = new GUIContainer("effects"); {
-                        effectsMenu->addMenuElement(new GUISwitch(std::string("anaglyph"), [context](){
+                        effectsMenu->addMenuElement(new GUISwitch(std::string("anaglyph"), [context]() {
                             context->emitMessage(e172::Context::CHANGE_ANAGLYPH, true);
                             //context->appliation()->renderer()->enableEffect(1);
                         }, [context]() {
@@ -80,8 +80,8 @@ GUIMaker::GUIMaker(e172::Context *context) {
                         }));
                     } optionsMenu->addMenuElement(effectsMenu);
                     GUIContainer *resolutionMenu = new GUIContainer(std::string("resolution")); {
-                        const auto f = [context](old::Variant value) {
-                            context->emitMessage(e172::Context::CHANGE_RESOLUTION, value.toVector());
+                        const auto f = [context](e172::Variant value) {
+                            context->emitMessage(e172::Context::CHANGE_RESOLUTION, value);
                         };
                         resolutionMenu->addMenuElement(new GUIChoice(std::string("600x600"), e172::Vector(600, 600), f));
                         resolutionMenu->addMenuElement(new GUIChoice(std::string("1360x768"), e172::Vector(1360, 768), f));
@@ -89,8 +89,8 @@ GUIMaker::GUIMaker(e172::Context *context) {
                     } optionsMenu->addMenuElement(resolutionMenu);
 
                     GUIContainer *fullscreenMenu = new GUIContainer(std::string("fullscreen")); {
-                        const auto f = [context](old::Variant value){
-                            context->emitMessage(e172::Context::CHANGE_FULLSCREEN, value.toInt32());
+                        const auto f = [context](e172::Variant value) {
+                            context->emitMessage(e172::Context::CHANGE_FULLSCREEN, value);
                         };
                         fullscreenMenu->addMenuElement(new GUIChoice(std::string("yes"), 1, f));
                         fullscreenMenu->addMenuElement(new GUIChoice(std::string("no"), 0, f));

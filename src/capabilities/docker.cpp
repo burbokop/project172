@@ -18,6 +18,10 @@ void Docker::dock(Unit *target) {
     }
 }
 
+void Docker::dock(e172::Entity::id_t targetId) {
+    (void)targetId;
+}
+
 void Docker::undock() {
     if(state == DOCKED) {
         state = NOT_DOCKED;

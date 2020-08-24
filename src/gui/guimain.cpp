@@ -3,6 +3,8 @@
 
 #include "gui/guiblushingfloatingmessage.h"
 
+#include <engine/context.h>
+
 
 
 const unsigned GUIMain::FLOATING_LIFE_TIME = 1000;
@@ -40,6 +42,19 @@ void GUIMain::setDebugValueInfo(GUIDebugValueInfo *value) {
 GUIMain::GUIMain() {}
 
 void GUIMain::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
+    bool ok = false;
+    const auto value = context->popMessage(e172::Context::FLOATING_MESSAGE, &ok);
+    if(ok) {
+        const auto list = value.toVector();
+        if(list.size() > 1) {
+            const auto entity = context->entityById(list[0].toNumber<Entity::id_t>());
+            if(auto target = dynamic_cast<Unit*>(entity)) {
+                const auto v = list[1].toInt();
+                addBlushingFloatingMessage(target, v);
+            }
+        }
+    }
+
     if(floatingMessageLifeTimer.check()) {
         floatingMessage = nullptr;
     }

@@ -1,7 +1,7 @@
 #ifndef METAFUNCTION_H
 #define METAFUNCTION_H
 
-#include "ktype.h"
+#include "../type.h"
 
 #include <string>
 #include <functional>
@@ -168,7 +168,7 @@ public:
 template<typename VariantList>
 template<typename Function>
 void MetaFunction<VariantList>::assignFunction(Function function) {
-    std::string name = KType<Function>();
+    std::string name = Type<Function>::name;
     this->function = [name, function](VariantList args) {
         MetaFunction::invokeMethod(name, function, args);
     };
@@ -177,7 +177,7 @@ void MetaFunction<VariantList>::assignFunction(Function function) {
 template<typename VariantList>
 template<typename T, typename ...A>
 void MetaFunction<VariantList>::assignFunction(T (*function)(A...)) {
-    std::string name = KType<T(*)(A...)>();
+    std::string name = Type<T(*)(A...)>::name;
     this->function = [name, function](VariantList args) {
         MetaFunction::invokeMethod(name, function, args);
     };
@@ -186,7 +186,7 @@ void MetaFunction<VariantList>::assignFunction(T (*function)(A...)) {
 template<typename VariantList>
 template<typename T, typename C, typename ...A>
 void MetaFunction<VariantList>::assignFunction(C *object, T (C::*function)(A...)) {
-    std::string name = KType<T(C::*)(A...)>();
+    std::string name = Type<T(C::*)(A...)>::name;
     this->function = [name, function, object](VariantList args) {
         MetaFunction::invokeMethod(name, [function, object](A ...a) {
             (object->*function)(a...);

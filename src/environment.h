@@ -5,10 +5,7 @@
 #include <SDL2/SDL.h>
 
 
-
-
 #include "object.h"
-#include "state.h"
 
 #include "background.h"
 #include "additional/informative/fpsmonitor.h"
@@ -19,7 +16,6 @@
 
 class Environment : public Object {
 private:
-    State *state = nullptr;
     std::list<e172::Entity*> m_entities;
     e172::AssetProvider *assetManager = nullptr;
     e172::Context *context = nullptr;

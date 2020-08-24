@@ -5,8 +5,12 @@
 const long Controller::ARMOR_RELEASE_DELAY = 1000;
 const std::string Controller::ARMOR_RELEASE_MESSAGE = "emergency catapult";
 
-void Controller::setSelected(Unit *value) {
-    selected = value;
+e172::Entity::id_t Controller::selectedEntity() const {
+    return m_selectedEntity;
+}
+
+void Controller::setSelectedEntity(const Entity::id_t &selectedEntity) {
+    m_selectedEntity = selectedEntity;
 }
 
 void Controller::releaseArmor() {

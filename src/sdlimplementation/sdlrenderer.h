@@ -5,7 +5,6 @@
 #include <map>
 
 #include <src/engine/math/vector.h>
-#include "additional/e_variant.h"
 #include <queue>
 
 struct SDL_Window;

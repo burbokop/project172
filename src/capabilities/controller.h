@@ -19,7 +19,7 @@ protected:
     e172::ElapsedTimer *armorReleaseTimer = nullptr;
     Trigger armorReleaseMessageTrigger;
 
-    Unit *selected = nullptr;
+    e172::Entity::id_t m_selectedEntity = 0;
 
     void releaseArmor();
 public:
@@ -32,7 +32,8 @@ public:
 public:
     void proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler);
     void render(e172::AbstractRenderer *renderer);
-    void setSelected(Unit *value);
+    e172::Entity::id_t selectedEntity() const;
+    void setSelectedEntity(const e172::Entity::id_t &selectedEntity);
 };
 
 #endif // CONTROLLER_H

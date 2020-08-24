@@ -6,7 +6,7 @@
 
 #include <inttypes.h>
 
-#include <additional/e_variant.h>
+
 
 #include <engine/textformat.h>
 
@@ -119,4 +119,5 @@ public:
 };
 
 }
+
 #endif // ABSTRACTRENDERER_H

@@ -3,9 +3,6 @@
 
 #include <queue>
 
-#include <additional/e_variant.h>
-
-
 
 #include "gui/guimain.h"
 #include "near.h"
@@ -59,6 +56,7 @@ public:
     bool containsMessage(const Entity::message_id_t &messageId);
     Variant popMessage(const Entity::message_id_t &messageId, bool *ok = nullptr);
 
+    Entity *entityById(const Entity::id_t &id) const;
 
     void registerMessageHandler(const Entity::message_id_t &messageId, const std::function<void(const Vector&)> &callback);
     template<typename C>

@@ -153,14 +153,6 @@ void Context::addEntity(Entity *entity) {
 //            element->start(2);
 //            //gui->setMessage(element);
 //        }
-//    } else if (request.command == FLOATING_MESSAGE) {
-//        Debug::out("FLOATING_MESSAGE: " + std::to_string(reinterpret_cast<uintptr_t>(request.requester)));
-//        if(request.argument.isNumber()) {
-//            //Unit *unit = dynamic_cast<Unit*>(request.requester);
-//            //if(unit) {
-//            //    gui->addBlushingFloatingMessage(unit, request.argument.toInt32());
-//            //}
-//        }
 //    }
 //}
 
@@ -196,6 +188,15 @@ bool Context::containsMessage(const Entity::message_id_t &messageId) {
 
 Variant Context::popMessage(const Entity::message_id_t &messageId, bool *ok) {
     return m_messageBus.popMessage(messageId, ok);
+}
+
+Entity *Context::entityById(const Entity::id_t &id) const {
+    const auto e = m_application->entities();
+    for(auto a : e) {
+        if(a && a->entityId() == id)
+            return a;
+    }
+    return nullptr;
 }
 
 

@@ -17,11 +17,11 @@ class Context;
 
 class Entity : public Object {
 public:
-    typedef uint64_t id_t;
+    typedef uintptr_t id_t;
     typedef Variant message_id_t;
 private:
     static inline id_t nextId = 0;
-    id_t m_entityId = nextId++;
+    id_t m_entityId = ++nextId;
 public:
     Entity();
     void virtual proceed(e172::Context *context, AbstractEventHandler *eventHandler) = 0;
