@@ -6,7 +6,7 @@
 #include <src/units/projectile.h>
 #include <src/units/camera.h>
 #include <src/additional/lightparticle.h>
-#include <src/debug.h>
+#include <src/old_debug.h>
 #include <src/capabilities/modules/weapon.h>
 
 

@@ -5,7 +5,7 @@
 #include "guichoice.h"
 #include <src/units/camera.h>
 #include <src/engine/objectregistry.h>
-#include <src/debug.h>
+#include <src/old_debug.h>
 
 std::vector<GUIMenuElement *> GUIList::informativeToElement(std::list<Entity*> *array) {
     std::vector<GUIMenuElement*> result;

@@ -138,8 +138,8 @@ add_executable(project172
     ${CMAKE_CURRENT_LIST_DIR}/src/animator.h
     ${CMAKE_CURRENT_LIST_DIR}/src/background.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/background.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/debug.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/debug.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/old_debug.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/old_debug.h
     ${CMAKE_CURRENT_LIST_DIR}/src/environment.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/environment.h
     ${CMAKE_CURRENT_LIST_DIR}/src/iinformative.cpp

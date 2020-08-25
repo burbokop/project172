@@ -4,7 +4,7 @@
 #include <src/capabilities/player.h>
 #include <src/capabilities/ai.h>
 #include <src/capabilities/docker.h>
-#include <src/debug.h>
+#include <src/old_debug.h>
 
 #include <src/engine/context.h>
 

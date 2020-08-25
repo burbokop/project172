@@ -1,4 +1,4 @@
-#include "debug.h"
+#include "old_debug.h"
 
 
 #ifdef __unix__

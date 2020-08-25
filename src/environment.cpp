@@ -5,7 +5,7 @@
 #include "worlds/defaultworld.h"
 #include "worlds/arenaworld.h"
 #include "worlds/heapworld.h"
-#include "debug.h"
+#include "old_debug.h"
 #include <src/units/camera.h>
 
 #include <src/sdlimplementation/sdlaudioprovider.h>
@@ -111,6 +111,7 @@ void Environment::start() {
         }
 
         tps->count();
+
 
         //IO
         eventHandler->update();

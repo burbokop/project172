@@ -5,7 +5,7 @@
 
 #include <src/additional/lightparticle.h>
 #include <src/engine/objectregistry.h>
-#include <src/debug.h>
+#include <src/old_debug.h>
 
 #include <src/engine/context.h>
 
