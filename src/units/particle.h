@@ -2,7 +2,7 @@
 #define PARTICLE_H
 
 
-#include "units/movable.h"
+#include "movable.h"
 
 
 class Particle : public Movable {

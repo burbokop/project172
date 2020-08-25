@@ -1,17 +1,15 @@
 #include "background.h"
 
-#include <engine/time/elapsedtimer.h>
-
-#include <engine/graphics/abstractrenderer.h>
-
-#include <engine/context.h>
+#include <src/engine/time/elapsedtimer.h>
+#include <src/engine/graphics/abstractrenderer.h>
+#include <src/engine/context.h>
 
 
 
 const double Background::STARS_SLIDING_SPEED = 400.0;
 const double Background::SLIDING_LEGHTH = 0.05;
-const Uint32 Background::DEFAULT_MAIN_COLOR = 0x333353;
-const Uint32 Background::DEFAULT_FLASHING_COLOR = 0xff0000;
+const uint32_t Background::DEFAULT_MAIN_COLOR = 0x333353;
+const uint32_t Background::DEFAULT_FLASHING_COLOR = 0xff0000;
 const long Background::DEFAULT_FLASHING_INTERVAL = 32;
 
 
@@ -26,7 +24,7 @@ Background::Background(unsigned int amount, double slidingStart) {
 }
 
 void Background::onResolutionChanged(const e172::Vector &resolution) {
-    Uint32 colors[] = { 0xdeff17, 0xfe4600, 0xf9990f, 0x8a27ff };
+    uint32_t colors[] = { 0xdeff17, 0xfe4600, 0xf9990f, 0x8a27ff };
 
     stars.clear();
     for(unsigned int i = 0; i < amount; i++) {

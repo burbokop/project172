@@ -1,8 +1,7 @@
 #include "particle.h"
 
-#include <engine/context.h>
-
-#include <engine/graphics/abstractrenderer.h>
+#include <src/engine/context.h>
+#include <src/engine/graphics/abstractrenderer.h>
 
 const uint8_t Particle::PIXEL = 0;
 const uint8_t Particle::SQUARE = 1;

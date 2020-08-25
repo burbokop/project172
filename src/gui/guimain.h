@@ -2,14 +2,14 @@
 #define GUIMAIN_H
 
 
-#include "gui/guicentralmessage.h"
-#include "gui/guifloatingmessage.h"
-#include "gui/guiminimap.h"
+#include "guicentralmessage.h"
+#include "guifloatingmessage.h"
+#include "guiminimap.h"
 
 #include "guidebugvalueinfo.h"
 
-#include <gui/base/guielement.h>
-#include <gui/base/guistack.h>
+#include <src/gui/base/guielement.h>
+#include <src/gui/base/guistack.h>
 
 
 class GUIMain : public GUIElement {

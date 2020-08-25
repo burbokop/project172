@@ -10,12 +10,13 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-#include <klibcore/src/ksmartenum.h>
+#include <src/engine/smartenum.h>
 
+namespace old {
 
 class Debug {
 public:
-    K_SMART_ENUM(Code,
+    E172_SMART_ENUM(Code,
         APPEAL_TO_REMOVED,
         ASSET_ID_NOT_FOUND,
         ASSET_TYPE_NOT_REGISTERED,
@@ -51,4 +52,5 @@ public:
 
 };
 
+}
 #endif // DEBUG_H

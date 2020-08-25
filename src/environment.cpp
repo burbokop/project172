@@ -6,38 +6,37 @@
 #include "worlds/arenaworld.h"
 #include "worlds/heapworld.h"
 #include "debug.h"
-#include "units/camera.h"
-#include "filesystem.h"
+#include <src/units/camera.h>
 
-#include <sdlimplementation/sdlaudioprovider.h>
-#include <sdlimplementation/sdleventhandler.h>
-#include <sdlimplementation/sdlgraphicsprovider.h>
+#include <src/sdlimplementation/sdlaudioprovider.h>
+#include <src/sdlimplementation/sdleventhandler.h>
+#include <src/sdlimplementation/sdlgraphicsprovider.h>
 
-#include <assetexecutors/animatorassetexecutor.h>
-#include <assetexecutors/audioassetexecutor.h>
-#include <assetexecutors/mapassetexecutor.h>
-#include <assetexecutors/numberassetexecutor.h>
-#include <assetexecutors/spriteassetexecutor.h>
-#include <assetexecutors/stringassetexecutor.h>
-#include <assetexecutors/vectorassetexecutor.h>
+#include <src/assetexecutors/animatorassetexecutor.h>
+#include <src/assetexecutors/audioassetexecutor.h>
+#include <src/assetexecutors/mapassetexecutor.h>
+#include <src/assetexecutors/numberassetexecutor.h>
+#include <src/assetexecutors/spriteassetexecutor.h>
+#include <src/assetexecutors/stringassetexecutor.h>
+#include <src/assetexecutors/vectorassetexecutor.h>
 
-#include <units/particle.h>
-#include <units/projectile.h>
-#include <units/station.h>
+#include <src/units/particle.h>
+#include <src/units/projectile.h>
+#include <src/units/station.h>
 
-#include <capabilities/player.h>
+#include <src/capabilities/player.h>
 
-#include <capabilities/modules/engine.h>
-#include <capabilities/modules/thruster.h>
-#include <capabilities/modules/weapon.h>
+#include <src/capabilities/modules/engine.h>
+#include <src/capabilities/modules/thruster.h>
+#include <src/capabilities/modules/weapon.h>
 
 
-#include <engine/additional.h>
-#include <engine/context.h>
+#include <src/engine/additional.h>
+#include <src/engine/context.h>
 
 Environment::Environment(std::vector<std::string> args) {
-    Debug::init(false, true);
-    Debug::out("INIT GAME");
+    old::Debug::init(false, true);
+    old::Debug::out("INIT GAME");
 
     assetManager = new e172::AssetProvider();
 
@@ -101,7 +100,7 @@ Environment::Environment(std::vector<std::string> args) {
 
 
 void Environment::start() {
-    Debug::out("GAME STARTED");
+    old::Debug::out("GAME STARTED");
     netListener->start();
 
     while (1) {
@@ -129,10 +128,11 @@ void Environment::start() {
 }
 
 void Environment::quit() {
-    Debug::out("DESTRUCTING GAME");
+    old::Debug::out("DESTRUCTING GAME");
     netListener->quit();
     delete renderer;
-    Debug::out("GAME STOPED");
+    old::Debug::out("GAME STOPED");
+
 }
 
 

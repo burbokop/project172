@@ -2,7 +2,7 @@
 #define HEAPWORLD_H
 
 
-#include "worlds/world.h"
+#include "world.h"
 
 
 class HeapWorld : public WorldPreset {

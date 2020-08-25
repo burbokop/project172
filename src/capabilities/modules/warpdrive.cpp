@@ -1,8 +1,9 @@
 #include "warpdrive.h"
-#include "additional/stringformer.h"
 
-#include <engine/context.h>
 
+#include <src/additional/stringformer.h>
+#include <src/engine/context.h>
+#include <src/units/unit.h>
 
 const uint8_t WarpDrive::WARP_DISABLED = 0;
 const uint8_t WarpDrive::WARP_LOADING = 1;

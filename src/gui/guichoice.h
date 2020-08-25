@@ -4,7 +4,7 @@
 #include <functional>
 
 
-#include <gui/base/guimenuelement.h>
+#include <src/gui/base/guimenuelement.h>
 
 
 class GUIChoice : public GUIMenuElement {

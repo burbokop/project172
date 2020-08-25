@@ -1,8 +1,8 @@
 #include "guifloatingmessage.h"
 
-#include <engine/graphics/abstractrenderer.h>
+#include <src/engine/graphics/abstractrenderer.h>
 
-#include <engine/context.h>
+#include <src/engine/context.h>
 
 const uint32_t GUIFloatingMessage::DEFAULT_COLOR = 0xFFEF40;
 const int GUIFloatingMessage::DEFAULT_FONT_SIZE = 14;

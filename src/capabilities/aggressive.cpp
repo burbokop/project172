@@ -1,13 +1,13 @@
 #include "aggressive.h"
 
 
-#include "objectregistry.h"
-#include "units/particle.h"
-#include "units/projectile.h"
-#include "units/camera.h"
-#include "additional/lightparticle.h"
-#include "debug.h"
-#include "capabilities/modules/weapon.h"
+#include <src/engine/objectregistry.h>
+#include <src/units/particle.h>
+#include <src/units/projectile.h>
+#include <src/units/camera.h>
+#include <src/additional/lightparticle.h>
+#include <src/debug.h>
+#include <src/capabilities/modules/weapon.h>
 
 
 
@@ -26,7 +26,7 @@ Unit *Aggressive::chooseTarget() {
 
         return camera || particle || lightParticle || projectile ? nullptr : dynamic_cast<Unit*>(target);
     } else {
-        Debug::err(Debug::Code::APPEAL_TO_REMOVED, __PRETTY_FUNCTION__);
+        old::Debug::err(old::Debug::Code::APPEAL_TO_REMOVED, __PRETTY_FUNCTION__);
         return nullptr;
     }
 }
@@ -96,7 +96,7 @@ void Aggressive::proceed(e172::Context *context, e172::AbstractEventHandler *eve
             target = chooseTarget();
         }
     } else {
-        Debug::err(Debug::Code::APPEAL_TO_REMOVED, __PRETTY_FUNCTION__);
+        old::Debug::err(old::Debug::Code::APPEAL_TO_REMOVED, __PRETTY_FUNCTION__);
         targeted = false;
         target = chooseTarget();
     }

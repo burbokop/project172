@@ -2,7 +2,7 @@
 #define AI_H
 
 
-#include "capabilities/controller.h"
+#include "controller.h"
 
 
 class AI : public Controller {

@@ -2,11 +2,6 @@
 #ifndef ENVIRONMENT_H
 #define ENVIRONMENT_H
 
-#include <SDL2/SDL.h>
-
-
-#include "object.h"
-
 #include "background.h"
 #include "additional/informative/fpsmonitor.h"
 #include "netlistener.h"
@@ -14,7 +9,7 @@
 #include "additional/mutex.h"
 
 
-class Environment : public Object {
+class Environment {
 private:
     std::list<e172::Entity*> m_entities;
     e172::AssetProvider *assetManager = nullptr;

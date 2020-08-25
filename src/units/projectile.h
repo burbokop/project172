@@ -2,7 +2,7 @@
 #define PROJECTILE_H
 
 
-#include "units/movable.h"
+#include "movable.h"
 
 
 class Projectile : public Movable {

@@ -3,13 +3,13 @@
 
 #include "world.h"
 
-#include <units/camera.h>
+#include <src/units/camera.h>
 
-#include <near.h>
-#include <worldmanager.h>
+#include <src/near.h>
+#include <src/worldmanager.h>
 
-#include <gui/guicombobox.h>
-#include <gui/guimain.h>
+#include <src/gui/guicombobox.h>
+#include <src/gui/guimain.h>
 
 
 

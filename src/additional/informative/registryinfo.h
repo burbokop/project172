@@ -2,7 +2,7 @@
 #define REGISTRYINFO_H
 
 
-#include "iinformative.h"
+#include <src/iinformative.h>
 
 
 class RegistryInfo : public IInformative {

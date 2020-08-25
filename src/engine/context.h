@@ -4,9 +4,6 @@
 #include <queue>
 
 
-#include "gui/guimain.h"
-#include "near.h"
-#include "background.h"
 #include "entity.h"
 #include "messagequeue.h"
 

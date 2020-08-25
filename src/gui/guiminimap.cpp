@@ -1,10 +1,11 @@
 #include "guiminimap.h"
-#include "units/camera.h"
-#include "units/projectile.h"
-#include "additional/lightparticle.h"
 
-#include <engine/abstracteventhandler.h>
-#include <engine/context.h>
+#include <src/units/camera.h>
+#include <src/units/projectile.h>
+#include <src/additional/lightparticle.h>
+
+#include <src/engine/abstracteventhandler.h>
+#include <src/engine/context.h>
 
 GUIMiniMap::GUIMiniMap() {}
 

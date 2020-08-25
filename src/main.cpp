@@ -2,39 +2,37 @@
 #include <locale>
 
 
-#include <engine/gameapplication.h>
-#include <engine/context.h>
+#include <src/engine/gameapplication.h>
+#include <src/engine/context.h>
 
-#include <sdlimplementation/sdlaudioprovider.h>
-#include <sdlimplementation/sdleventhandler.h>
-#include <sdlimplementation/sdlgraphicsprovider.h>
+#include <src/sdlimplementation/sdlaudioprovider.h>
+#include <src/sdlimplementation/sdleventhandler.h>
+#include <src/sdlimplementation/sdlgraphicsprovider.h>
 
-#include <assetexecutors/animatorassetexecutor.h>
-#include <assetexecutors/audioassetexecutor.h>
-#include <assetexecutors/mapassetexecutor.h>
-#include <assetexecutors/numberassetexecutor.h>
-#include <assetexecutors/spriteassetexecutor.h>
-#include <assetexecutors/stringassetexecutor.h>
-#include <assetexecutors/vectorassetexecutor.h>
+#include <src/assetexecutors/animatorassetexecutor.h>
+#include <src/assetexecutors/audioassetexecutor.h>
+#include <src/assetexecutors/mapassetexecutor.h>
+#include <src/assetexecutors/numberassetexecutor.h>
+#include <src/assetexecutors/spriteassetexecutor.h>
+#include <src/assetexecutors/stringassetexecutor.h>
+#include <src/assetexecutors/vectorassetexecutor.h>
 
-#include <units/particle.h>
-#include <units/projectile.h>
-#include <units/station.h>
+#include <src/units/particle.h>
+#include <src/units/projectile.h>
+#include <src/units/station.h>
 
-#include <capabilities/player.h>
+#include <src/capabilities/player.h>
 
-#include <capabilities/modules/engine.h>
-#include <capabilities/modules/thruster.h>
-#include <capabilities/modules/weapon.h>
+#include <src/capabilities/modules/engine.h>
+#include <src/capabilities/modules/thruster.h>
+#include <src/capabilities/modules/weapon.h>
 
-#include <worlds/arenaworld.h>
-#include <worlds/defaultworld.h>
-#include <worlds/guimaker.h>
-#include <worlds/heapworld.h>
+#include <src/worlds/arenaworld.h>
+#include <src/worlds/defaultworld.h>
+#include <src/worlds/guimaker.h>
+#include <src/worlds/heapworld.h>
 
-
-#include "environment.h"
-
+#include <src/background.h>
 
 int main(int argc, char *argv[]) {
     e172::GameApplication app(argc, argv);

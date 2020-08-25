@@ -7,8 +7,8 @@
 #include <string>
 
 
-#include <engine/time/deltatimecalculator.h>
-#include <engine/time/elapsedtimer.h>
+#include <src/engine/time/deltatimecalculator.h>
+#include <src/engine/time/elapsedtimer.h>
 #include <list>
 
 

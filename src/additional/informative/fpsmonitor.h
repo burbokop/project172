@@ -1,10 +1,10 @@
 #ifndef FPSMONITOR_H
 #define FPSMONITOR_H
 
-#include <engine/time/elapsedtimer.h>
+#include <src/engine/time/elapsedtimer.h>
 #include <vector>
 
-#include "iinformative.h"
+#include <src/iinformative.h>
 
 class FPSMonitor : public IInformative {
 private:

@@ -2,7 +2,7 @@
 #define WEAPON_H
 
 
-#include "capabilities/modules/module.h"
+#include "module.h"
 
 
 class Weapon : public Module {

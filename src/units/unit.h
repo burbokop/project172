@@ -5,8 +5,8 @@
 #include <algorithm>
 
 
-#include "capabilities/modulehandler.h"
-#include "capabilities/docker.h"
+#include <src/capabilities/modulehandler.h>
+#include <src/capabilities/docker.h>
 
 class Unit : public e172::Entity, public e172::Loadable, public IInformative {
 private:

@@ -1,11 +1,11 @@
 #include "guilist.h"
 
 
-#include "units/projectile.h"
-#include "gui/guichoice.h"
-#include "units/camera.h"
-#include "objectregistry.h"
-#include "debug.h"
+#include <src/units/projectile.h>
+#include "guichoice.h"
+#include <src/units/camera.h>
+#include <src/engine/objectregistry.h>
+#include <src/debug.h>
 
 std::vector<GUIMenuElement *> GUIList::informativeToElement(std::list<Entity*> *array) {
     std::vector<GUIMenuElement*> result;
@@ -19,7 +19,7 @@ std::vector<GUIMenuElement *> GUIList::informativeToElement(std::list<Entity*> *
                     }
                 }
             } else {
-                Debug::err(Debug::Code::APPEAL_TO_REMOVED, __func__);
+                old::Debug::err(old::Debug::Code::APPEAL_TO_REMOVED, __func__);
             }
         }
     }

@@ -1,11 +1,11 @@
 #include "weapon.h"
 
-#include "additional/stringformer.h"
-#include "units/projectile.h"
+#include <src/additional/stringformer.h>
+#include <src/units/projectile.h>
 
-#include <engine/context.h>
-#include <engine/assettools/assetprovider.h>
-#include <engine/gameapplication.h>
+#include <src/engine/context.h>
+#include <src/engine/assettools/assetprovider.h>
+#include <src/engine/gameapplication.h>
 
 
 const double Weapon::DEFAULT_PROJECTILE_SPEED = 200.0;

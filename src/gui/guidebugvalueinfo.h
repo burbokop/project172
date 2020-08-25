@@ -1,7 +1,7 @@
 #ifndef GUIDEBUGVALUEINFO_H
 #define GUIDEBUGVALUEINFO_H
 
-#include <gui/base/guielement.h>
+#include <src/gui/base/guielement.h>
 
 
 class GUIDebugValueInfo : public GUIElement {

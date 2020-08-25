@@ -1,22 +1,22 @@
 #include "guimaker.h"
 
 
-#include <capabilities/controller.h>
+#include <src/capabilities/controller.h>
 
-#include <gui/guichoice.h>
-#include <gui/guimain.h>
-#include <gui/guimoduleview.h>
-#include <gui/guiradar.h>
-#include <gui/guiswitch.h>
+#include <src/gui/guichoice.h>
+#include <src/gui/guimain.h>
+#include <src/gui/guimoduleview.h>
+#include <src/gui/guiradar.h>
+#include <src/gui/guiswitch.h>
 
-#include <engine/context.h>
-#include <engine/gameapplication.h>
+#include <src/engine/context.h>
+#include <src/engine/gameapplication.h>
 
-#include <additional/informative/controllerfinder.h>
-#include <additional/informative/registryinfo.h>
-#include <additional/informative/unitsamountinfo.h>
+#include <src/additional/informative/controllerfinder.h>
+#include <src/additional/informative/registryinfo.h>
+#include <src/additional/informative/unitsamountinfo.h>
 
-#include <gui/base/guicontainer.h>
+#include <src/gui/base/guicontainer.h>
 
 
 GUIMain *GUIMaker::gui() const {

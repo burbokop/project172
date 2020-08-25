@@ -3,9 +3,9 @@
 
 #include <list>
 
-#include <engine/entity.h>
+#include <src/engine/entity.h>
 
-#include "iinformative.h"
+#include <src/iinformative.h>
 
 class UnitsAmountInfo : public IInformative {
 private:

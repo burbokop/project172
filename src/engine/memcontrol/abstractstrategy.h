@@ -3,7 +3,6 @@
 
 #include "abstractfactory.h"
 
-#include <src/kmacro.h>
 #include <list>
 
 namespace e172 {

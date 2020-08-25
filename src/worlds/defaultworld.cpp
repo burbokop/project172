@@ -1,12 +1,12 @@
 #include "defaultworld.h"
 
 
-#include "capabilities/player.h"
-#include "capabilities/ai.h"
-#include "capabilities/docker.h"
-#include "debug.h"
+#include <src/capabilities/player.h>
+#include <src/capabilities/ai.h>
+#include <src/capabilities/docker.h>
+#include <src/debug.h>
 
-#include <engine/context.h>
+#include <src/engine/context.h>
 
 
 DefaultWorld::DefaultWorld() {
@@ -101,7 +101,7 @@ WorldPreset::GenerationResult DefaultWorld::generate(e172::Context *context) {
         std::vector<std::string> assetKeys = context->assetProvider()->loadableNames();
         unsigned int i = 0;
         for (std::string key : assetKeys) {
-            Debug::out("DefaultWorld::generate(assets, units): loading key ( key" + key + " )");
+            old::Debug::out("DefaultWorld::generate(assets, units): loading key ( key" + key + " )");
             Movable *unit = dynamic_cast<Movable*>(context->assetProvider()->createLoadable(key));
             if(unit) {
                 unit->place(e172::Vector(static_cast<int>((i + 4) * 64), -200), e172::Vector(), e172::Vector(), 0);

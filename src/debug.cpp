@@ -1,10 +1,5 @@
 #include "debug.h"
 
-bool Debug::errEnbled = false;
-bool Debug::outEnbled = false;
-
-unsigned Debug::lastError = 0;
-std::string Debug::lastSite = "";
 
 #ifdef __unix__
 #include <execinfo.h>  // for backtrace
@@ -14,6 +9,9 @@ std::string Debug::lastSite = "";
 
 #include <string>
 #include <sstream>
+
+
+
 
 
 int get_sym_name(void *addr) {
@@ -27,6 +25,38 @@ int get_sym_name(void *addr) {
     return -100;
 #endif
 }
+
+void process_mem_usage(double& vm_usage, double& resident_set) {
+#ifdef __unix__
+    vm_usage = 0.0;
+    resident_set = 0.0;
+    unsigned long vsize;
+    long rss;
+    {
+        std::string ignore;
+        std::ifstream ifs("/proc/self/stat", std::ios_base::in);
+        ifs >> ignore >> ignore >> ignore >> ignore >> ignore >> ignore >> ignore >> ignore >> ignore >> ignore
+            >> ignore >> ignore >> ignore >> ignore >> ignore >> ignore >> ignore >> ignore >> ignore >> ignore
+            >> ignore >> ignore >> vsize >> rss;
+    }
+
+    long page_size_kb = sysconf(_SC_PAGE_SIZE) / 1024; // in case x86-64 is configured to use 2MB pages
+    vm_usage = vsize / 1024.0;
+    resident_set = rss * page_size_kb;
+#endif
+    (void)vm_usage;
+    (void)resident_set;
+}
+
+
+
+namespace old {
+
+bool Debug::errEnbled = false;
+bool Debug::outEnbled = false;
+
+unsigned Debug::lastError = 0;
+std::string Debug::lastSite = "";
 
 
 void Debug::onSegSignal(int signum) {
@@ -65,9 +95,9 @@ void Debug::err(Code::Enum code, std::string site, std::string comment) {
     if(errEnbled) {
         if(code != lastError || site != lastSite) {
             if(comment == "") {
-                std::cerr << "ERROR: <code: " << Code::__map.at(code) << " appearance: " << site << ">\n";
+                std::cerr << "ERROR: <code: " << Code::names.at(code) << " appearance: " << site << ">\n";
             } else {
-                std::cerr << "ERROR: <code: " << Code::__map.at(code) << " ( " << comment << " ) appearance: " << site << ">\n";
+                std::cerr << "ERROR: <code: " << Code::names.at(code) << " ( " << comment << " ) appearance: " << site << ">\n";
             }
         }
         lastError = code;
@@ -84,27 +114,6 @@ void Debug::init(bool out, bool err) {
 }
 
 
-void process_mem_usage(double& vm_usage, double& resident_set) {
-#ifdef __unix__
-    vm_usage = 0.0;
-    resident_set = 0.0;
-    unsigned long vsize;
-    long rss;
-    {
-        std::string ignore;
-        std::ifstream ifs("/proc/self/stat", std::ios_base::in);
-        ifs >> ignore >> ignore >> ignore >> ignore >> ignore >> ignore >> ignore >> ignore >> ignore >> ignore
-            >> ignore >> ignore >> ignore >> ignore >> ignore >> ignore >> ignore >> ignore >> ignore >> ignore
-            >> ignore >> ignore >> vsize >> rss;
-    }
-
-    long page_size_kb = sysconf(_SC_PAGE_SIZE) / 1024; // in case x86-64 is configured to use 2MB pages
-    vm_usage = vsize / 1024.0;
-    resident_set = rss * page_size_kb;
-#endif
-    (void)vm_usage;
-    (void)resident_set;
-}
 
 double Debug::getRuntimeVM() {
     double vm, rss;
@@ -119,6 +128,6 @@ double Debug::getRuntimeRSS() {
 }
 
 
-
+}
 
 

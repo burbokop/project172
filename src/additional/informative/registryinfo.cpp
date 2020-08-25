@@ -1,6 +1,6 @@
 #include "registryinfo.h"
 
-#include "objectregistry.h"
+#include <src/engine/objectregistry.h>
 
 RegistryInfo::RegistryInfo(){
 }

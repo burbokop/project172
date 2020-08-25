@@ -12,7 +12,7 @@
 #include <map>
 #include <cassert>
 
-#include <engine/math/vector.h>
+#include <src/engine/math/vector.h>
 
 #include "type.h"
 
@@ -20,7 +20,7 @@
 #include "typedefs.h"
 
 #define E172_VARIANT_NUM_CONVERTER(NAME, TYPE) \
-    inline auto to ## NAME(bool *ok = nullptr) const { return toNumber<TYPE>(ok); }
+    inline TYPE to ## NAME(bool *ok = nullptr) const { return toNumber<TYPE>(ok); }
 
 namespace e172 {
 

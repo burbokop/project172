@@ -1,8 +1,8 @@
 #include "movable.h"
-#include "capabilities/modules/engine.h"
+#include <src/capabilities/modules/engine.h>
 #include <math.h>
-#include <engine/math/math.h>
-#include <engine/context.h>
+#include <src/engine/math/math.h>
+#include <src/engine/context.h>
 
 const double Movable::STOP_MOVING_VELOCITY = 1;
 const double Movable::DEFAULT_ACCELERATION_VALUE = 120;

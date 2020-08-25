@@ -4,7 +4,7 @@
 #include <SDL2/SDL.h>
 
 
-#include "engine/math/vector.h"
+#include <src/engine/math/vector.h>
 
 
 class VisualEffect {

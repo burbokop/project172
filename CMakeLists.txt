@@ -1,42 +1,21 @@
 
-
 cmake_minimum_required(VERSION 3.0)
+#set(CMAKE_TRY_COMPILE_TARGET_TYPE "STATIC_LIBRARY")
+
+project(project172)
+
 add_compile_options(-no-pie)
-project(project172 DESCRIPTION "project172 game")
+
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+include_directories(${CMAKE_CURRENT_LIST_DIR})
 
-
-
-add_library(klibcore SHARED
-    ${CMAKE_CURRENT_LIST_DIR}/klibcore/src/experimental/universalqueue/kvoidhandle.h
-    ${CMAKE_CURRENT_LIST_DIR}/klibcore/src/experimental/universalqueue/kcirclebuffer.h
-    ${CMAKE_CURRENT_LIST_DIR}/klibcore/src/experimental/universalqueue/kuniversalqueue.h
-    ${CMAKE_CURRENT_LIST_DIR}/klibcore/src/memcontrol/kpull.h
-    ${CMAKE_CURRENT_LIST_DIR}/klibcore/src/memcontrol/kabstractfactory.h
-    ${CMAKE_CURRENT_LIST_DIR}/klibcore/src/utility/ktype.h
-    ${CMAKE_CURRENT_LIST_DIR}/klibcore/src/utility/kmetafunction.h
-    ${CMAKE_CURRENT_LIST_DIR}/klibcore/src/ksmartenum.h
-
-    ${CMAKE_CURRENT_LIST_DIR}/klibcore/src/experimental/universalqueue/kcirclebuffer.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/klibcore/src/experimental/universalqueue/kuniversalqueue.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/klibcore/src/experimental/universalqueue/kvoidhandle.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/klibcore/src/memcontrol/kabstractfactory.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/klibcore/src/memcontrol/kpull.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/klibcore/src/utility/kmetafunction.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/klibcore/src/utility/ktype.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/klibcore/src/ksmartenum.cpp
-    )
-
-
-target_include_directories(klibcore PRIVATE $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/klibcore>)
-
-include(${CMAKE_CURRENT_LIST_DIR}/src/json/CMakeLists.txt)
 
 
 add_library(e172 SHARED
+
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/assettools/abstractassetexecutor.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/assettools/abstractassetexecutor.h
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/assettools/assetprovider.cpp
@@ -93,15 +72,37 @@ add_library(e172 SHARED
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/type.h
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/variant.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/variant.h
-    )
-target_include_directories(e172 PRIVATE $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/engine>)
 
+    ${CMAKE_CURRENT_LIST_DIR}/src/engine/smartenum.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/engine/smartenum.h
+
+    ${CMAKE_CURRENT_LIST_DIR}/src/engine/object.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/engine/object.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/engine/objectregistry.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/engine/objectregistry.h
+
+    ${CMAKE_CURRENT_LIST_DIR}/src/engine/messagequeue.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/engine/messagequeue.cpp
+
+    ${CMAKE_CURRENT_LIST_DIR}/src/engine/functional/metafunction.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/engine/functional/metafunction.cpp
+
+    ${CMAKE_CURRENT_LIST_DIR}/src/engine/debug.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/engine/debug.h
+
+    ${CMAKE_CURRENT_LIST_DIR}/src/engine/sfinae.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/engine/typedefs.h
+
+    )
+
+include(${CMAKE_CURRENT_LIST_DIR}/src/json/CMakeLists.txt)
 target_link_libraries(e172
     json
     )
 
 
-add_library(sdl_impl
+add_library(sdl_impl SHARED
+
     ${CMAKE_CURRENT_LIST_DIR}/src/sdlimplementation/effects/anaglyph.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/sdlimplementation/effects/anaglyph.h
     ${CMAKE_CURRENT_LIST_DIR}/src/sdlimplementation/effects/visualeffect.cpp
@@ -119,21 +120,28 @@ add_library(sdl_impl
     ${CMAKE_CURRENT_LIST_DIR}/src/sdlimplementation/sdlrenderer.h
     ${CMAKE_CURRENT_LIST_DIR}/src/sdlimplementation/spm.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/sdlimplementation/spm.h
+
     )
+
+target_link_libraries(sdl_impl
+    SDL2
+    SDL2_image
+    SDL2_ttf
+    SDL2_mixer
+
+    e172
+    )
+
 
 add_executable(project172
     ${CMAKE_CURRENT_LIST_DIR}/src/animator.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/animator.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/application.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/application.h
     ${CMAKE_CURRENT_LIST_DIR}/src/background.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/background.h
     ${CMAKE_CURRENT_LIST_DIR}/src/debug.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/debug.h
     ${CMAKE_CURRENT_LIST_DIR}/src/environment.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/environment.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/filesystem.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/filesystem.h
     ${CMAKE_CURRENT_LIST_DIR}/src/iinformative.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/iinformative.h
     ${CMAKE_CURRENT_LIST_DIR}/src/main.cpp
@@ -141,12 +149,6 @@ add_executable(project172
     ${CMAKE_CURRENT_LIST_DIR}/src/near.h
     ${CMAKE_CURRENT_LIST_DIR}/src/netlistener.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/netlistener.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/object.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/object.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/objectregistry.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/objectregistry.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/state.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/state.h
     ${CMAKE_CURRENT_LIST_DIR}/src/worldmanager.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/worldmanager.h
 
@@ -164,8 +166,6 @@ add_executable(project172
     ${CMAKE_CURRENT_LIST_DIR}/src/additional/net/socket.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/additional/net/socket.h
 
-    ${CMAKE_CURRENT_LIST_DIR}/src/additional/e_variant.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/additional/e_variant.h
     ${CMAKE_CURRENT_LIST_DIR}/src/additional/lightparticle.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/additional/lightparticle.h
     ${CMAKE_CURRENT_LIST_DIR}/src/additional/mutex.cpp
@@ -223,6 +223,14 @@ add_executable(project172
 
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/base/guibaseelement.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/base/guibaseelement.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/gui/base/guielement.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/gui/base/guielement.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/gui/base/guicontainer.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/gui/base/guicontainer.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/gui/base/guimenuelement.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/gui/base/guimenuelement.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/gui/base/guistack.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/gui/base/guistack.h
 
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/guiblushingfloatingmessage.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/guiblushingfloatingmessage.h
@@ -230,30 +238,25 @@ add_executable(project172
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/guicentralmessage.h
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/guichoice.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/guichoice.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/gui/guicontainer.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/gui/guicontainer.h
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/guidebugvalueinfo.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/guidebugvalueinfo.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/gui/guielement.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/gui/guielement.h
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/guifloatingmessage.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/guifloatingmessage.h
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/guilist.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/guilist.h
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/guimain.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/guimain.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/gui/guimainshell.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/gui/guimainshell.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/gui/guimenuelement.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/gui/guimenuelement.h
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/guiminimap.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/guiminimap.h
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/guiradar.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/guiradar.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/gui/guistack.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/gui/guistack.h
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/guiswitch.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/guiswitch.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/gui/guimoduleview.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/gui/guimoduleview.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/gui/guicombobox.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/gui/guicombobox.cpp
+
 
     ${CMAKE_CURRENT_LIST_DIR}/src/units/camera.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/units/camera.h
@@ -274,50 +277,20 @@ add_executable(project172
     ${CMAKE_CURRENT_LIST_DIR}/src/worlds/arenaworld.h
     ${CMAKE_CURRENT_LIST_DIR}/src/worlds/defaultworld.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/worlds/defaultworld.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/worlds/guisetup.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/worlds/guisetup.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/worlds/guimaker.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/worlds/guimaker.h
     ${CMAKE_CURRENT_LIST_DIR}/src/worlds/heapworld.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/worlds/heapworld.h
     ${CMAKE_CURRENT_LIST_DIR}/src/worlds/world.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/worlds/world.h
 
-    ${CMAKE_CURRENT_LIST_DIR}/src/animator.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/animator.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/application.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/application.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/background.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/background.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/debug.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/debug.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/environment.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/environment.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/filesystem.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/filesystem.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/iinformative.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/iinformative.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/main.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/near.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/near.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/netlistener.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/netlistener.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/object.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/object.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/objectregistry.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/objectregistry.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/state.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/state.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/worldmanager.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/worldmanager.h
     )
 
-target_include_directories(project172 PRIVATE $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}>)
-target_include_directories(project172 PRIVATE $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/klibcore>)
-target_include_directories(project172 PRIVATE $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/engine>)
 
 
 target_link_libraries(project172
-    klibcore
-    e172
-    json
     sdl_impl
+    e172
+    ws2_32
     )
+

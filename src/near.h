@@ -4,7 +4,7 @@
 #include <vector>
 
 
-#include "capabilities/controller.h"
+#include <src/capabilities/controller.h>
 
 
 class Near : public Object {

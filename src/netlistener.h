@@ -1,17 +1,16 @@
 #ifndef NETLISTENER_H
 #define NETLISTENER_H
 
+
+#include <src/engine/context.h>
+
+
+#include <src/additional/net/socket.h>
 #include <thread>
-
-#include <engine/context.h>
-
-
-#include "additional/net/socket.h"
-
 
 class NetListener {
 private:
-    std::thread *thread = nullptr;
+    // TO DO std::thread *thread = nullptr;
     bool quitFlag = false;
     burbokop::Socket *serverSocket = nullptr;
     e172::Context *context = nullptr;

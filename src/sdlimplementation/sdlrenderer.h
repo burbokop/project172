@@ -1,7 +1,7 @@
 #ifndef SDLRENDERER_H
 #define SDLRENDERER_H
 
-#include <engine/graphics/abstractrenderer.h>
+#include <src/engine/graphics/abstractrenderer.h>
 #include <map>
 
 #include <src/engine/math/vector.h>

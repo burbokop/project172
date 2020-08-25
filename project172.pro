@@ -1,9 +1,6 @@
-QT -= gui core
 
-CONFIG += c++17 console
-CONFIG -= app_bundle
+CONFIG += c++17
 
-DEFINES += QT_DEPRECATED_WARNINGS
 
 include(klibcore/klibcore.pri)
 

@@ -1,12 +1,12 @@
 #include "unit.h"
 #include "projectile.h"
-#include "units/station.h"
 
-#include <engine/math/math.h>
+#include <math.h>
+#include <src/capabilities/controller.h>
 
-#include <engine/context.h>
-
-#include <engine/graphics/abstractrenderer.h>
+#include <src/engine/math/math.h>
+#include <src/engine/context.h>
+#include <src/engine/graphics/abstractrenderer.h>
 
 const double Unit::DEFAULT_ROTATION_SPEED = 0.0014 * 1000;
 const double Unit::ANGLE_DELTA_MULTIPLIER = 2;

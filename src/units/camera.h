@@ -2,10 +2,10 @@
 #define CAMERA_H
 
 
-#include "units/movable.h"
-#include "capabilities/controller.h"
+#include "movable.h"
+#include <src/capabilities/controller.h>
 
-#include <engine/graphics/abstractrenderer.h>
+#include <src/engine/graphics/abstractrenderer.h>
 
 
 class Camera : public Movable {

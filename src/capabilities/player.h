@@ -2,9 +2,9 @@
 #define PLAYER_H
 
 
-#include "capabilities/controller.h"
+#include "controller.h"
 
-#include <engine/abstracteventhandler.h>
+#include <src/engine/abstracteventhandler.h>
 
 
 class Player : public Controller, public e172::Loadable {

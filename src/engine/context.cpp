@@ -3,11 +3,6 @@
 
 
 #include "objectregistry.h"
-#include "debug.h"
-#include "units/particle.h"
-#include "additional/lightparticle.h"
-#include <math.h>
-#include "assettools/assetprovider.h"
 #include "gameapplication.h"
 
 namespace e172 {

@@ -1,8 +1,9 @@
 #include "module.h"
-#include "units/unit.h"
-#include "units/camera.h"
 
-#include <engine/math/math.h>
+
+#include <src/units/unit.h>
+#include <src/units/camera.h>
+#include <src/engine/math/math.h>
 
 Module::Module() {
     registerInitFunction([this](){

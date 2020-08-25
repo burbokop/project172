@@ -4,11 +4,9 @@
 #include <string>
 
 
-#include "object.h"
 
 
-class StringFormer : public Object {
-public:
+struct StringFormer {
     static std::string line(unsigned number);
     static std::string line(unsigned number, char simbol);
     static std::string line(unsigned number, unsigned max);

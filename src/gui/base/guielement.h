@@ -2,9 +2,9 @@
 #define GUIELEMENT_H
 
 
-#include "capabilities/controller.h"
+#include <src/capabilities/controller.h>
 
-#include <gui/base/guibaseelement.h>
+#include <src/gui/base/guibaseelement.h>
 
 class GUIElement : public GUIBaseElement {
     int m_margin = 24;

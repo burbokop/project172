@@ -2,7 +2,7 @@
 #define AUDIOPLAYER_H
 
 
-#include <engine/audio/audiochannel.h>
+#include <src/engine/audio/audiochannel.h>
 
 
 class AudioPlayer {

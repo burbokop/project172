@@ -3,7 +3,7 @@
 
 #include <functional>
 
-#include <gui/base/guimenuelement.h>
+#include <src/gui/base/guimenuelement.h>
 
 
 class GUISwitch : public GUIMenuElement {

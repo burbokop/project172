@@ -2,7 +2,7 @@
 #define DEFAULTWORLD_H
 
 
-#include "worlds/world.h"
+#include "world.h"
 
 
 class DefaultWorld : public WorldPreset {
