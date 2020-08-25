@@ -1,3 +1,5 @@
+#include "explosivespawner.h"
+
 #include <iostream>
 #include <locale>
 
@@ -185,6 +187,15 @@ int main(int argc, char *argv[]) {
 
 
     guiMaker.setWorldPresetStrategy(&worldPresetStrategy);
+
+
+
+
+
+    //independedt services initialization
+
+    ExplosiveSpawner explosiveSpawner;
+    app.addEntity(&explosiveSpawner);
 
     //start application
 

@@ -14,6 +14,8 @@ include_directories(${CMAKE_CURRENT_LIST_DIR})
 
 
 
+
+
 add_library(e172 SHARED
 
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/assettools/abstractassetexecutor.cpp
@@ -92,6 +94,9 @@ add_library(e172 SHARED
 
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/sfinae.h
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/typedefs.h
+
+    ${CMAKE_CURRENT_LIST_DIR}/src/engine/args.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/engine/args.cpp
 
     )
 
@@ -283,6 +288,9 @@ add_executable(project172
     ${CMAKE_CURRENT_LIST_DIR}/src/worlds/heapworld.h
     ${CMAKE_CURRENT_LIST_DIR}/src/worlds/world.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/worlds/world.h
+
+    ${CMAKE_CURRENT_LIST_DIR}/src/explosivespawner.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/explosivespawner.h
 
     )
 

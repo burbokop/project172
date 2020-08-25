@@ -34,6 +34,8 @@ class GameApplication {
     AssetProvider *m_assetProvider = nullptr;
     Context *m_context = nullptr;
 
+    void destroyAllEntities(Context*, const Variant&);
+    void destroyEntity(Context*context, const Variant&value);
 public:
     GameApplication(int argc, char *argv[]);
 
@@ -41,13 +43,6 @@ public:
     std::vector<std::string> arguments() const;
 
     inline void addEntity(Entity *entity) { m_entities.push_back(entity); }
-    inline void clearEntities() { m_entities.clear(); }
-    inline void terminateEntities() {
-        for(auto e : m_entities) {
-            delete e;
-        }
-        m_entities.clear();
-    }
 
     AssetProvider *assetProvider() const;
     e172::Context *context() const;

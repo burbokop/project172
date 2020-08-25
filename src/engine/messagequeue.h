@@ -130,6 +130,21 @@ public:
         }
         return ValueType();
     }
+
+    void popMessage(const IdType &id, const std::function<void(const ValueType&)>& callback) {
+        bool ok;
+        const auto value = popMessage(id, &ok);
+        if(ok) {
+            callback(value);
+        }
+    }
+
+
+    template<typename C>
+    void popMessage(const IdType &id, C *object, void(C::*callback)(const ValueType&)) {
+        popMessage(id, [object, callback](auto v) { (object->*callback)(v); });
+    }
+
     Promice *emitMessage(const IdType &id, const ValueType &value) {
         const auto p = new MessageBusPromice();
         m_data[id].queue.push_back(MessageType { value, m_messageLifeTime, p });

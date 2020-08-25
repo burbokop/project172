@@ -147,7 +147,7 @@ void Unit::hit(e172::Context* context, int value) {
         }
 
         if(health < 0) {
-            context->emitMessage(e172::Context::SPAWN_EXPLOSIVE, e172::VariantVector { entityId(), explosiveRadius });
+            context->emitMessage(e172::Context::SPAWN_EXPLOSIVE, e172::VariantVector { position(), velocity(), explosiveRadius });
             ModuleHandler *mh = getModuleHandler();
             if(mh) {
                 std::vector<Module*> *modules = mh->getAllModules();

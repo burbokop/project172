@@ -38,29 +38,6 @@ void Context::addEntity(Entity *entity) {
 //            m_entities->erase(pos);
 //            delete request.requester;
 //        }
-//    } else if (request.command == SPAWN_EXPLOSIVE || request.command == SPAWN_ENGINE_EXPLOSIVE) {
-//        Debug::out("BADABOOM: " + std::to_string(reinterpret_cast<uintptr_t>(request.requester)));
-//        Unit *requester = dynamic_cast<Unit*>(request.requester);
-//        int radius = request.argument.isNumber() ? request.argument.toInt32() : 10;
-//        int v0 = static_cast<int>(std::sqrt(radius)) * 350;
-//
-//        if(requester) {
-//            for(int i = 0; i < radius * 4; i++) {
-//                unsigned types[] = { Particle::PIXEL, Particle::CIRCLE, Particle::SQUARE };
-//                LightParticle *particle = new LightParticle(types[rand() % 3], radius * 600, radius * 400);
-//                Movable *requesterAsMovable = dynamic_cast<Movable*>(request.requester);
-//                if(requesterAsMovable) {
-//                    if(request.command == SPAWN_ENGINE_EXPLOSIVE) {
-//                        particle->place(requester->position(), e172::Vector::createRandom(v0) + requesterAsMovable->velocity() * 0.5);
-//                    } else {
-//                        particle->place(requester->position(), e172::Vector::createRandom(v0) + requesterAsMovable->velocity());
-//                    }
-//                } else {
-//                    particle->place(requester->position(), e172::Vector::createRandom(v0));
-//                }
-//                m_entities->push_back(particle);
-//            }
-//        }
 //    } else if (request.command == SPAWN_ENGINE_PARTICLES) {
 //        Debug::out("SPAWN_ENGINE_PARTICLES: " + std::to_string(reinterpret_cast<uintptr_t>(request.requester)));
 //        Movable *requester = dynamic_cast<Movable*>(request.requester);
@@ -173,15 +150,15 @@ std::vector<std::string> Context::arguments() const {
     return std::vector<std::string>();
 }
 
-Promice *Context::emitMessage(const Entity::message_id_t &messageId, const Variant &value) {
+Promice *Context::emitMessage(const MessageId &messageId, const Variant &value) {
     return m_messageBus.emitMessage(messageId, value);
 }
 
-bool Context::containsMessage(const Entity::message_id_t &messageId) {
+bool Context::containsMessage(const MessageId &messageId) {
     return m_messageBus.containsMessage(messageId);
 }
 
-Variant Context::popMessage(const Entity::message_id_t &messageId, bool *ok) {
+Variant Context::popMessage(const MessageId &messageId, bool *ok) {
     return m_messageBus.popMessage(messageId, ok);
 }
 

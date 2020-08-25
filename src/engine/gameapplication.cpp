@@ -18,6 +18,21 @@ std::vector<std::string> GameApplication::coverArgs(int argc, char *argv[]) {
     return result;
 }
 
+void GameApplication::destroyAllEntities(Context *, const Variant &) {
+    for(auto e : m_entities) {
+        delete e;
+    }
+    m_entities.clear();
+}
+
+void GameApplication::destroyEntity(Context* context, const Variant &value) {
+    if(const auto e = context->entityById(value.toNumber<Entity::id_t>())) {
+        m_entities.remove(e);
+        delete e;
+    }
+}
+
+
 std::list<Entity *> GameApplication::entities() const
 {
     return m_entities;
@@ -101,6 +116,9 @@ int GameApplication::exec() {
         }
 
         if(m_context) {
+            m_context->popMessage(Context::DELETE_UNIT, this, &GameApplication::destroyEntity);
+            m_context->popMessage(Context::DELETE_ALL_UNITS, this, &GameApplication::destroyAllEntities);
+
             m_context->m_messageBus.invokeInternalFunctions();
             m_context->m_messageBus.flushMessages();
             m_context->m_deltaTime = m_deltaTimeCalculator.deltaTime();

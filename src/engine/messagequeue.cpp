@@ -1,7 +1,5 @@
+#include "debug.h"
 #include "messagequeue.h"
-
-#include <iostream>
-
 
 
 void e172::MessageBusPrivate::throwExeption(const std::string &exeption) {
@@ -9,5 +7,5 @@ void e172::MessageBusPrivate::throwExeption(const std::string &exeption) {
 }
 
 void e172::MessageBusPrivate::warningExeption(const std::string &exeption) {
-    std::cout << exeption << "\n";
+    Debug::warning(exeption);
 }
