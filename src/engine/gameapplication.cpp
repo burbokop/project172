@@ -107,6 +107,10 @@ int GameApplication::exec() {
             auto r = m_graphicsProvider->renderer();
             if(r) {
                 r->m_locked = false;
+                for(auto m : m_applicationExtensions) {
+                    if(m->extensionType() == GameApplicationExtension::PreRenderExtension)
+                        m->proceed(this);
+                }
                 for(auto e : m_entities) {
                     e->render(r);
                 }
@@ -127,6 +131,18 @@ int GameApplication::exec() {
     delete m_assetProvider;
     delete m_context;
     return 0;
+}
+
+GameApplicationExtension::ExtensionType GameApplicationExtension::extensionType() const {
+    return m_extensionType;
+}
+
+void GameApplicationExtension::setExtensionType(const ExtensionType &extensionType) {
+    m_extensionType = extensionType;
+}
+
+GameApplicationExtension::GameApplicationExtension(GameApplicationExtension::ExtensionType extensionType) {
+    m_extensionType = extensionType;
 }
 
 

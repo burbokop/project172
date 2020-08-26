@@ -1,4 +1,5 @@
 #include "explosivespawner.h"
+#include "screensettingsextension.h"
 
 #include <iostream>
 #include <locale>
@@ -35,6 +36,7 @@
 #include <src/worlds/heapworld.h>
 
 #include <src/background.h>
+
 
 int main(int argc, char *argv[]) {
     e172::GameApplication app(argc, argv);
@@ -196,6 +198,9 @@ int main(int argc, char *argv[]) {
 
     ExplosiveSpawner explosiveSpawner;
     app.addEntity(&explosiveSpawner);
+
+    ScreenSettingsExtension screenSettingsExtension;
+    app.addApplicationExtension(&screenSettingsExtension);
 
     //start application
 

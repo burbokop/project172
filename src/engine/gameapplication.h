@@ -18,6 +18,25 @@ class AbstractGraphicsProvider;
 class AssetProvider;
 class Context;
 
+class GameApplication;
+
+class GameApplicationExtension {
+public:
+    enum ExtensionType {
+        UndefinedExtension,
+        PreRenderExtension
+    };
+    ExtensionType extensionType() const;
+protected:
+    void setExtensionType(const ExtensionType &extensionType);
+private:
+    ExtensionType m_extensionType = UndefinedExtension;
+public:
+    GameApplicationExtension(ExtensionType extensionType);
+    virtual void proceed(GameApplication *application) = 0;
+};
+
+
 class GameApplication {
     std::vector<std::string> coverArgs(int argc, char *argv[]);
     std::vector<std::string> m_arguments;
@@ -26,6 +45,7 @@ class GameApplication {
     ElapsedTimer m_renderTimer;
 
     std::list<Entity*> m_entities;
+    std::list<GameApplicationExtension*> m_applicationExtensions;
 
     AbstractEventHandler *m_eventHandler = nullptr;
     AbstractGraphicsProvider *m_graphicsProvider = nullptr;
@@ -43,6 +63,8 @@ public:
     std::vector<std::string> arguments() const;
 
     inline void addEntity(Entity *entity) { m_entities.push_back(entity); }
+    inline void addApplicationExtension(GameApplicationExtension *extension) { m_applicationExtensions.push_back(extension); }
+    inline void removeApplicationExtension(GameApplicationExtension *extension) { m_applicationExtensions.remove(extension); }
 
     AssetProvider *assetProvider() const;
     e172::Context *context() const;

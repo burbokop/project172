@@ -139,6 +139,8 @@ target_link_libraries(sdl_impl
 
 
 add_executable(project172
+    ${CMAKE_CURRENT_LIST_DIR}/src/screensettingsextension.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/screensettingsextension.h
     ${CMAKE_CURRENT_LIST_DIR}/src/animator.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/animator.h
     ${CMAKE_CURRENT_LIST_DIR}/src/background.cpp
