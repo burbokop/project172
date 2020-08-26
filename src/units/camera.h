@@ -9,7 +9,6 @@
 
 
 class Camera : public Movable {
-
     e172::AbstractRenderer::Camera r_cam;
     int m_i = 0;
 protected:

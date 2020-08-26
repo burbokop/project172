@@ -123,8 +123,8 @@ int GameApplication::exec() {
             m_context->popMessage(Context::DELETE_UNIT, this, &GameApplication::destroyEntity);
             m_context->popMessage(Context::DELETE_ALL_UNITS, this, &GameApplication::destroyAllEntities);
 
-            m_context->m_messageBus.invokeInternalFunctions();
-            m_context->m_messageBus.flushMessages();
+            m_context->m_messageQueue.invokeInternalFunctions();
+            m_context->m_messageQueue.flushMessages();
             m_context->m_deltaTime = m_deltaTimeCalculator.deltaTime();
         }
     }

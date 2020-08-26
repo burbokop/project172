@@ -39,7 +39,7 @@ public:
     };
 
 private:
-    e172::MessageBus<MessageId, Variant> m_messageBus;
+    e172::MessageQueue<MessageId, Variant> m_messageQueue;
 public:
     Context(GameApplication *application);
     std::string absolutePath(const std::string &path) const;
@@ -55,11 +55,11 @@ public:
 
     Variant popMessage(const MessageId &messageId, bool *ok = nullptr);
     inline void popMessage(const MessageId &messageId, const std::function<void(Context *, const Variant&)>& callback) {
-        m_messageBus.popMessage(messageId, [this, callback](const auto& value) { callback(this, value); });
+        m_messageQueue.popMessage(messageId, [this, callback](const auto& value) { callback(this, value); });
     }
     template<typename C>
     void popMessage(const MessageId &messageId, C *object, void(C::*callback)(Context *, const Variant&)) {
-        m_messageBus.popMessage(messageId, [object, this, callback](const auto& value) { (object->*callback)(this, value); });
+        m_messageQueue.popMessage(messageId, [object, this, callback](const auto& value) { (object->*callback)(this, value); });
     }
 
 

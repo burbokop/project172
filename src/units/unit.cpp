@@ -5,7 +5,9 @@
 #include <src/capabilities/controller.h>
 
 #include <src/engine/math/math.h>
+#include <src/engine/args.h>
 #include <src/engine/context.h>
+#include <src/engine/debug.h>
 #include <src/engine/graphics/abstractrenderer.h>
 
 const double Unit::DEFAULT_ROTATION_SPEED = 0.0014 * 1000;
@@ -147,7 +149,8 @@ void Unit::hit(e172::Context* context, int value) {
         }
 
         if(health < 0) {
-            context->emitMessage(e172::Context::SPAWN_EXPLOSIVE, e172::VariantVector { position(), velocity(), explosiveRadius });
+            e172::Debug::print("spawn exposive:", explosiveRadius);
+            context->emitMessage(e172::Context::SPAWN_EXPLOSIVE, e172::Args(position(), velocity(), explosiveRadius));
             ModuleHandler *mh = getModuleHandler();
             if(mh) {
                 std::vector<Module*> *modules = mh->getAllModules();

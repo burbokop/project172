@@ -159,21 +159,19 @@ void Movable::pursuit(e172::Context *context, Unit *target) {
 }
 
 void Movable::relativisticPursuit(e172::Context *context, Unit *target) {
-    if(!e172::Math::cmpf(context->deltaTime(), 0.0)) {
-        double velocity = target->velocity().module();
+    double velocity = target->velocity().module();
 
-        if(e172::Math::cmpf(velocity, 0)) {
-            velocity = 1.0;
-        } else {
-            velocity = std::pow(velocity, 2);
-        }
-
-        e172::Vector direction = target->position() - position();
-        if(!e172::Math::cmpf(context->deltaTime(), 0)) {
-            accelerate(direction * velocity * RELATIVISTIC_PURSUIT_COEFFICIENT / context->deltaTime());
-        }
-        loadedValues.maxVelocity = direction.module();
+    if(e172::Math::cmpf(velocity, 0)) {
+        velocity = 1.0;
+    } else {
+        velocity = std::pow(velocity, 2);
     }
+
+    e172::Vector direction = target->position() - position();
+    if(!e172::Math::cmpf(context->deltaTime(), 0)) {
+        accelerate(direction * velocity * RELATIVISTIC_PURSUIT_COEFFICIENT / context->deltaTime());
+    }
+    loadedValues.maxVelocity = direction.module();
 }
 
 void Movable::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {

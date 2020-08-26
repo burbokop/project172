@@ -83,7 +83,7 @@ GUIMaker::GUIMaker(e172::Context *context) {
                         const auto f = [context](e172::Variant value) {
                             context->emitMessage(e172::Context::CHANGE_RESOLUTION, value);
                         };
-                        resolutionMenu->addMenuElement(new GUIChoice(std::string("600x600"), e172::Vector(600, 600), f));
+                        resolutionMenu->addMenuElement(new GUIChoice(std::string("600x300"), e172::Vector(600, 300), f));
                         resolutionMenu->addMenuElement(new GUIChoice(std::string("1360x768"), e172::Vector(1360, 768), f));
                         resolutionMenu->addMenuElement(new GUIChoice(std::string("1920x1080"), e172::Vector(1920, 1080), f));
                     } optionsMenu->addMenuElement(resolutionMenu);

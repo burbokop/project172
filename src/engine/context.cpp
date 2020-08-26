@@ -130,8 +130,8 @@ void Context::addEntity(Entity *entity) {
 
 Context::Context(GameApplication *application) {
     m_application = application;
-    m_messageBus.setExceptionHandlingMode(decltype (m_messageBus)::WarningException);
-    m_messageBus.setMessageLifeTime(1);
+    m_messageQueue.setExceptionHandlingMode(decltype (m_messageQueue)::WarningException);
+    m_messageQueue.setMessageLifeTime(1);
 }
 
 std::string Context::absolutePath(const std::string &path) const {
@@ -151,15 +151,15 @@ std::vector<std::string> Context::arguments() const {
 }
 
 Promice *Context::emitMessage(const MessageId &messageId, const Variant &value) {
-    return m_messageBus.emitMessage(messageId, value);
+    return m_messageQueue.emitMessage(messageId, value);
 }
 
 bool Context::containsMessage(const MessageId &messageId) {
-    return m_messageBus.containsMessage(messageId);
+    return m_messageQueue.containsMessage(messageId);
 }
 
 Variant Context::popMessage(const MessageId &messageId, bool *ok) {
-    return m_messageBus.popMessage(messageId, ok);
+    return m_messageQueue.popMessage(messageId, ok);
 }
 
 Entity *Context::entityById(const Entity::id_t &id) const {
