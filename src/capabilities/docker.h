@@ -2,7 +2,7 @@
 #define DOCKER_H
 
 
-#include "capabilities/capability.h"
+#include "capability.h"
 
 
 class Docker : public Capability {

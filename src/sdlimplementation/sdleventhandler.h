@@ -1,7 +1,7 @@
 #ifndef SDLEVENTHANDLER_H
 #define SDLEVENTHANDLER_H
 
-#include "engine/abstracteventhandler.h"
+#include <src/engine/abstracteventhandler.h>
 
 union SDL_Event;
 

@@ -2,7 +2,7 @@
 #define ARENAWORLD_H
 
 
-#include "worlds/world.h"
+#include "world.h"
 
 
 class ArenaWorld : public WorldPreset {

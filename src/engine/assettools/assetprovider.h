@@ -1,16 +1,13 @@
-    #ifndef ASSETPROVIDER_H
+#ifndef ASSETPROVIDER_H
 #define ASSETPROVIDER_H
 
 #include <iostream>
-#include <object.h>
-#include <json/json.h>
-#include <SDL2/SDL_image.h>
-#include <engine/memcontrol/abstractfactory.h>
-#include <engine/context.h>
+#include <src/json/json.h>
+#include <src/engine/memcontrol/abstractfactory.h>
+#include <src/engine/context.h>
 
 
 #include "loadable.h"
-#include <src/memcontrol/kabstractfactory.h>
 
 
 namespace e172 {
@@ -19,7 +16,7 @@ class AbstractAssetExecutor;
 class AbstractGraphicsProvider;
 class AbstractAudioProvider;
 
-class AssetProvider : public Object {
+class AssetProvider {
     friend class GameApplication;
     AbstractGraphicsProvider *m_graphicsProvider = nullptr;
     AbstractAudioProvider *m_audioProvider = nullptr;
@@ -35,7 +32,7 @@ class AssetProvider : public Object {
 
     void processFile(std::string file, std::string path);
 public:
-    Loadable *createLoadable(std::string key);
+    Loadable *createLoadable(std::string templateId);
     AssetProvider();
     void searchInFolder(std::string path);
     std::vector<std::string> loadableNames();

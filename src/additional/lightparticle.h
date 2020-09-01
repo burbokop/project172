@@ -1,11 +1,9 @@
 #ifndef LIGHTPARTICLE_H
 #define LIGHTPARTICLE_H
 
-#include <engine/entity.h>
-
-#include <engine/math/vector.h>
-
-#include <engine/time/elapsedtimer.h>
+#include <src/engine/entity.h>
+#include <src/engine/math/vector.h>
+#include <src/engine/time/elapsedtimer.h>
 
 
 class LightParticle : public e172::Entity {

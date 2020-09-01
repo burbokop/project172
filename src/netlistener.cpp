@@ -6,7 +6,7 @@ NetListener::NetListener(e172::Context *context) {
 }
 
 void NetListener::start() {
-    thread = new std::thread(&NetListener::loop, this);
+    // TO DO thread = new std::thread(&NetListener::loop, this);
 }
 
 void NetListener::loop() {
@@ -17,9 +17,9 @@ void NetListener::loop() {
             while(!quitFlag) {
                 SDL_Surface *image = connection->receiveSurface();
                 if(image) {
-                    context->addEvent(nullptr, Context::SPAWN_UNIT, image);
+                    // TO DO context->addEvent(nullptr, e172::Context::SPAWN_UNIT, image);
                 } else {
-                    SDL_Delay(1000);
+                    // TO DO SDL_Delay(1000);
                 }
             }
         } else {
@@ -32,7 +32,9 @@ void NetListener::loop() {
 void NetListener::quit() {
     serverSocket->close();
     quitFlag = true;
-    if(thread != nullptr && thread->joinable()) {
-        thread->join();
-    }
+
+    // TO DO
+    //if(thread != nullptr && thread->joinable()) {
+    //    thread->join();
+    //}
 }

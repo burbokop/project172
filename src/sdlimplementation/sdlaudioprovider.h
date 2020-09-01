@@ -2,7 +2,7 @@
 #define SDLAUDIOPROVIDER_H
 #include <queue>
 
-#include <engine/audio/abstractaudioprovider.h>
+#include <src/engine/audio/abstractaudioprovider.h>
 
 class SDLAudioProvider: public e172::AbstractAudioProvider {
     enum { ReserveStep = 10 };

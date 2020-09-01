@@ -1,10 +1,7 @@
 #include "guicontainer.h"
 
-#include <sdlimplementation/sdlrenderer.h>
-
-#include <engine/abstracteventhandler.h>
-
-
+#include <src/engine/abstracteventhandler.h>
+#include <src/engine/graphics/abstractrenderer.h>
 
 GUIContainer::GUIContainer(std::string label) : GUIMenuElement (label) {}
 
@@ -131,10 +128,10 @@ void GUIContainer::proceed(e172::Context *context, e172::AbstractEventHandler *e
 void GUIContainer::render(e172::AbstractRenderer *renderer) {
     e172::Vector pointer = e172::Vector(margin(), margin());
     std::string title = getTitle();
-    renderer->drawString(title, pointer, DefaultColor);
-    pointer += e172::Vector(0, SDLRenderer::DefaultFontSize * 2);
-    renderer->drawLine(pointer, pointer + e172::Vector(title.size() * static_cast<uint32_t>(SDLRenderer::DefaultFontSize), 0.0), DefaultColor);
-    pointer += e172::Vector(0, SDLRenderer::DefaultFontSize);
+    auto textSize = renderer->drawString(title, pointer, DefaultColor);
+    pointer += e172::Vector(0, textSize.intY() * 2);
+    renderer->drawLine(pointer, pointer + e172::Vector(textSize.intX(), 0.0), DefaultColor);
+    pointer += e172::Vector(0, textSize.intY());
 
     int i = 0;
     for(GUIMenuElement *element : m_menuElements) {

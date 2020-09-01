@@ -4,9 +4,6 @@
 #include <queue>
 
 
-#include "gui/guimain.h"
-#include "near.h"
-#include "background.h"
 #include "entity.h"
 #include "messagequeue.h"
 
@@ -22,12 +19,12 @@ class Context : public Object {
     GameApplication *m_application = nullptr;
 
 public:
+    typedef Variant MessageId;
 
     enum {
         DELETE_UNIT = 0,
         DELETE_ALL_UNITS,
         SPAWN_EXPLOSIVE,
-        SPAWN_ENGINE_EXPLOSIVE,
         SPAWN_ENGINE_PARTICLES,
         SPAWN_UNIT,
         SPAWN_SURFACE,
@@ -42,7 +39,7 @@ public:
     };
 
 private:
-    e172::MessageBus<Entity::message_id_t, Variant> m_messageBus;
+    e172::MessageQueue<MessageId, Variant> m_messageQueue;
 public:
     Context(GameApplication *application);
     std::string absolutePath(const std::string &path) const;
@@ -52,15 +49,31 @@ public:
     AssetProvider *assetProvider() const;
     std::list<Entity *> entities() const;
     void addEntity(Entity *entity);
-    Promice *emitMessage(const Entity::message_id_t &messageId, const Variant &value = Variant());
-    bool containsMessage(const Entity::message_id_t &messageId);
-    Variant popMessage(const Entity::message_id_t &messageId, bool *ok = nullptr);
+    Promice *emitMessage(const MessageId &messageId, const Variant &value = Variant());
+    bool containsMessage(const MessageId &messageId);
+
+
+    Variant popMessage(const MessageId &messageId, bool *ok = nullptr);
+    inline void popMessage(const MessageId &messageId, const std::function<void(Context *, const Variant&)>& callback) {
+        m_messageQueue.popMessage(messageId, [this, callback](const auto& value) { callback(this, value); });
+    }
+    template<typename C>
+    void popMessage(const MessageId &messageId, C *object, void(C::*callback)(Context *, const Variant&)) {
+        m_messageQueue.popMessage(messageId, [object, this, callback](const auto& value) { (object->*callback)(this, value); });
+    }
+
+
 
     Entity *entityById(const Entity::id_t &id) const;
 
-    void registerMessageHandler(const Entity::message_id_t &messageId, const std::function<void(const Vector&)> &callback);
+    template<typename T>
+    T *entityById(const Entity::id_t &id) const {
+        return dynamic_cast<T*>(entityById(id));
+    }
+
+    void registerMessageHandler(const MessageId &messageId, const std::function<void(const Vector&)> &callback);
     template<typename C>
-    void registerMessageHandler(const Entity::message_id_t &messageId, C *object, void(C::*callback)(const Vector&)) {
+    void registerMessageHandler(const MessageId &messageId, C *object, void(C::*callback)(const Vector&)) {
         registerMessageHandler([messageId, object, callback](auto v){
             (object->*callback)(messageId, v);
         });

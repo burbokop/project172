@@ -3,7 +3,7 @@
 
 #include "guichoice.h"
 
-#include <gui/base/guicontainer.h>
+#include <src/gui/base/guicontainer.h>
 
 
 template<typename T>

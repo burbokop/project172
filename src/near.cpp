@@ -1,7 +1,7 @@
 #include "near.h"
 
 
-#include "objectregistry.h"
+#include <src/engine/objectregistry.h>
 
 
 const double Near::RADIUS_DELTA = 16;

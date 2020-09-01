@@ -18,7 +18,6 @@ class Context;
 class Entity : public Object {
 public:
     typedef uintptr_t id_t;
-    typedef Variant message_id_t;
 private:
     static inline id_t nextId = 0;
     id_t m_entityId = ++nextId;

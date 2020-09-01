@@ -1,6 +1,6 @@
 #include "guicentralmessage.h"
 
-#include <engine/graphics/abstractrenderer.h>
+#include <src/engine/graphics/abstractrenderer.h>
 
 const unsigned GUICentralMessage::DEFAULT_FLASHING_INTERVAL = 500;
 

@@ -3,11 +3,6 @@
 
 
 #include "objectregistry.h"
-#include "debug.h"
-#include "units/particle.h"
-#include "additional/lightparticle.h"
-#include <math.h>
-#include "assettools/assetprovider.h"
 #include "gameapplication.h"
 
 namespace e172 {
@@ -42,29 +37,6 @@ void Context::addEntity(Entity *entity) {
 //        if(pos != m_entities->end()) {
 //            m_entities->erase(pos);
 //            delete request.requester;
-//        }
-//    } else if (request.command == SPAWN_EXPLOSIVE || request.command == SPAWN_ENGINE_EXPLOSIVE) {
-//        Debug::out("BADABOOM: " + std::to_string(reinterpret_cast<uintptr_t>(request.requester)));
-//        Unit *requester = dynamic_cast<Unit*>(request.requester);
-//        int radius = request.argument.isNumber() ? request.argument.toInt32() : 10;
-//        int v0 = static_cast<int>(std::sqrt(radius)) * 350;
-//
-//        if(requester) {
-//            for(int i = 0; i < radius * 4; i++) {
-//                unsigned types[] = { Particle::PIXEL, Particle::CIRCLE, Particle::SQUARE };
-//                LightParticle *particle = new LightParticle(types[rand() % 3], radius * 600, radius * 400);
-//                Movable *requesterAsMovable = dynamic_cast<Movable*>(request.requester);
-//                if(requesterAsMovable) {
-//                    if(request.command == SPAWN_ENGINE_EXPLOSIVE) {
-//                        particle->place(requester->position(), e172::Vector::createRandom(v0) + requesterAsMovable->velocity() * 0.5);
-//                    } else {
-//                        particle->place(requester->position(), e172::Vector::createRandom(v0) + requesterAsMovable->velocity());
-//                    }
-//                } else {
-//                    particle->place(requester->position(), e172::Vector::createRandom(v0));
-//                }
-//                m_entities->push_back(particle);
-//            }
 //        }
 //    } else if (request.command == SPAWN_ENGINE_PARTICLES) {
 //        Debug::out("SPAWN_ENGINE_PARTICLES: " + std::to_string(reinterpret_cast<uintptr_t>(request.requester)));
@@ -158,8 +130,8 @@ void Context::addEntity(Entity *entity) {
 
 Context::Context(GameApplication *application) {
     m_application = application;
-    m_messageBus.setExceptionHandlingMode(decltype (m_messageBus)::WarningException);
-    m_messageBus.setMessageLifeTime(1);
+    m_messageQueue.setExceptionHandlingMode(decltype (m_messageQueue)::WarningException);
+    m_messageQueue.setMessageLifeTime(1);
 }
 
 std::string Context::absolutePath(const std::string &path) const {
@@ -178,16 +150,16 @@ std::vector<std::string> Context::arguments() const {
     return std::vector<std::string>();
 }
 
-Promice *Context::emitMessage(const Entity::message_id_t &messageId, const Variant &value) {
-    return m_messageBus.emitMessage(messageId, value);
+Promice *Context::emitMessage(const MessageId &messageId, const Variant &value) {
+    return m_messageQueue.emitMessage(messageId, value);
 }
 
-bool Context::containsMessage(const Entity::message_id_t &messageId) {
-    return m_messageBus.containsMessage(messageId);
+bool Context::containsMessage(const MessageId &messageId) {
+    return m_messageQueue.containsMessage(messageId);
 }
 
-Variant Context::popMessage(const Entity::message_id_t &messageId, bool *ok) {
-    return m_messageBus.popMessage(messageId, ok);
+Variant Context::popMessage(const MessageId &messageId, bool *ok) {
+    return m_messageQueue.popMessage(messageId, ok);
 }
 
 Entity *Context::entityById(const Entity::id_t &id) const {

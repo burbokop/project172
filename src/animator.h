@@ -3,9 +3,9 @@
 
 
 #include <vector>
-#include <engine/math/vector.h>
-#include <engine/time/elapsedtimer.h>
-#include <engine/graphics/image.h>
+#include <src/engine/math/vector.h>
+#include <src/engine/time/elapsedtimer.h>
+#include <src/engine/graphics/image.h>
 
 namespace e172 { class AbstractRenderer; };
 

@@ -7,9 +7,9 @@
 #include "worlds/world.h"
 #include "additional/informative/fpsmonitor.h"
 
-#include <units/camera.h>
+#include <src/units/camera.h>
 
-#include <engine/memcontrol/abstractstrategy.h>
+#include <src/engine/memcontrol/abstractstrategy.h>
 
 
 class WorldPresetStrategy : public e172::Entity {

@@ -1,8 +1,8 @@
 #include "animatorassetexecutor.h"
 
-#include <engine/graphics/abstractgraphicsprovider.h>
+#include <src/engine/graphics/abstractgraphicsprovider.h>
 
-#include <animator.h>
+#include <src/animator.h>
 
 
 

@@ -2,11 +2,11 @@
 #define CONTROLLER_H
 
 
-#include "capabilities/capability.h"
-#include "units/ship.h"
-#include "additional/trigger.h"
+#include "capability.h"
+#include <src/units/ship.h>
+#include <src/additional/trigger.h>
 
-#include <engine/time/elapsedtimer.h>
+#include <src/engine/time/elapsedtimer.h>
 
 
 class Controller : public Capability {    

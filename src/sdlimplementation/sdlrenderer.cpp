@@ -1,13 +1,11 @@
 #include "sdlrenderer.h"
 #include "spm.h"
 
-#include "units/camera.h"
-#include "debug.h"
 
-#include <sdlimplementation/effects/anaglyph.h>
+#include <src/sdlimplementation/effects/anaglyph.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
-#include <engine/math/math.h>
+#include <src/engine/math/math.h>
 
 
 const int SDLRenderer::DefaultFontSize = 20;

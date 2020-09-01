@@ -1,7 +1,7 @@
 #ifndef GUIFLOATINGMESSAGE_H
 #define GUIFLOATINGMESSAGE_H
 
-#include <gui/base/guimenuelement.h>
+#include <src/gui/base/guimenuelement.h>
 
 
 

@@ -1,12 +1,14 @@
 #include "unit.h"
 #include "projectile.h"
-#include "units/station.h"
 
-#include <engine/math/math.h>
+#include <math.h>
+#include <src/capabilities/controller.h>
 
-#include <engine/context.h>
-
-#include <engine/graphics/abstractrenderer.h>
+#include <src/engine/math/math.h>
+#include <src/engine/args.h>
+#include <src/engine/context.h>
+#include <src/engine/debug.h>
+#include <src/engine/graphics/abstractrenderer.h>
 
 const double Unit::DEFAULT_ROTATION_SPEED = 0.0014 * 1000;
 const double Unit::ANGLE_DELTA_MULTIPLIER = 2;
@@ -147,7 +149,8 @@ void Unit::hit(e172::Context* context, int value) {
         }
 
         if(health < 0) {
-            context->emitMessage(e172::Context::SPAWN_EXPLOSIVE, e172::VariantVector { entityId(), explosiveRadius });
+            e172::Debug::print("spawn exposive:", explosiveRadius);
+            context->emitMessage(e172::Context::SPAWN_EXPLOSIVE, e172::Args(position(), velocity(), explosiveRadius));
             ModuleHandler *mh = getModuleHandler();
             if(mh) {
                 std::vector<Module*> *modules = mh->getAllModules();

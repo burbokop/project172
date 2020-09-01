@@ -1,7 +1,7 @@
 #ifndef GUIBASEELEMENT_H
 #define GUIBASEELEMENT_H
 
-#include <capabilities/controller.h>
+#include <src/capabilities/controller.h>
 
 class GUIBaseElement : public e172::Entity {
     GUIBaseElement *m_parentElement = nullptr;

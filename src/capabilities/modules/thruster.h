@@ -1,7 +1,7 @@
 #ifndef THRUSTER_H
 #define THRUSTER_H
 
-#include "capabilities/modules/module.h"
+#include "module.h"
 
 class Thruster : public Module {
     bool leftThrust = false;

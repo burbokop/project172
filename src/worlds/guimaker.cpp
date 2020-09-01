@@ -1,22 +1,22 @@
 #include "guimaker.h"
 
 
-#include <capabilities/controller.h>
+#include <src/capabilities/controller.h>
 
-#include <gui/guichoice.h>
-#include <gui/guimain.h>
-#include <gui/guimoduleview.h>
-#include <gui/guiradar.h>
-#include <gui/guiswitch.h>
+#include <src/gui/guichoice.h>
+#include <src/gui/guimain.h>
+#include <src/gui/guimoduleview.h>
+#include <src/gui/guiradar.h>
+#include <src/gui/guiswitch.h>
 
-#include <engine/context.h>
-#include <engine/gameapplication.h>
+#include <src/engine/context.h>
+#include <src/engine/gameapplication.h>
 
-#include <additional/informative/controllerfinder.h>
-#include <additional/informative/registryinfo.h>
-#include <additional/informative/unitsamountinfo.h>
+#include <src/additional/informative/controllerfinder.h>
+#include <src/additional/informative/registryinfo.h>
+#include <src/additional/informative/unitsamountinfo.h>
 
-#include <gui/base/guicontainer.h>
+#include <src/gui/base/guicontainer.h>
 
 
 GUIMain *GUIMaker::gui() const {
@@ -83,7 +83,7 @@ GUIMaker::GUIMaker(e172::Context *context) {
                         const auto f = [context](e172::Variant value) {
                             context->emitMessage(e172::Context::CHANGE_RESOLUTION, value);
                         };
-                        resolutionMenu->addMenuElement(new GUIChoice(std::string("600x600"), e172::Vector(600, 600), f));
+                        resolutionMenu->addMenuElement(new GUIChoice(std::string("600x300"), e172::Vector(600, 300), f));
                         resolutionMenu->addMenuElement(new GUIChoice(std::string("1360x768"), e172::Vector(1360, 768), f));
                         resolutionMenu->addMenuElement(new GUIChoice(std::string("1920x1080"), e172::Vector(1920, 1080), f));
                     } optionsMenu->addMenuElement(resolutionMenu);

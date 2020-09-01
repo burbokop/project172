@@ -8,7 +8,7 @@
 #include <SDL2/SDL_ttf.h>
 #include <string>
 #include <functional>
-#include <sdlimplementation/effects/visualeffect.h>
+#include <src/sdlimplementation/effects/visualeffect.h>
 
 
 class SPM {

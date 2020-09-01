@@ -1,8 +1,8 @@
 #ifndef PLAYER2FINDER_H
 #define PLAYER2FINDER_H
 
-#include "iinformative.h"
-#include "capabilities/controller.h"
+#include <src/iinformative.h>
+#include <src/capabilities/controller.h>
 
 class ControllerFinder : public IInformative {
 

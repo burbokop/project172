@@ -2,14 +2,14 @@
 #define MODULE_H
 
 
-#include "capabilities/capability.h"
-#include "iinformative.h"
+#include "../capability.h"
+#include <src/iinformative.h>
 
-#include <engine/assettools/loadable.h>
+#include <src/engine/assettools/loadable.h>
 
-#include <animator.h>
+#include <src/animator.h>
 
-#include <audio/audioplayer.h>
+#include <src/audio/audioplayer.h>
 
 
 

@@ -1,7 +1,7 @@
 #ifndef KTYPE_H
 #define KTYPE_H
 
-
+#include <typeinfo>
 #include <string>
 
 namespace e172 {

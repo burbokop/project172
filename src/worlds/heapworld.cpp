@@ -1,10 +1,10 @@
 #include "heapworld.h"
 
 
-#include "capabilities/player.h"
-#include "capabilities/aggressive.h"
+#include <src/capabilities/player.h>
+#include <src/capabilities/aggressive.h>
 
-#include <engine/context.h>
+#include <src/engine/context.h>
 
 
 HeapWorld::HeapWorld() {}

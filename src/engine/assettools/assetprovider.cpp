@@ -1,19 +1,10 @@
-#include "abstractassetexecutor.h"
 #include "assetprovider.h"
 
+#include <src/engine/debug.h>
+#include <src/engine/graphics/abstractgraphicsprovider.h>
+#include <src/engine/additional.h>
+#include "abstractassetexecutor.h"
 
-#include "filesystem.h"
-#include "debug.h"
-#include "capabilities/player.h"
-#include "capabilities/modules/weapon.h"
-#include "capabilities/modules/engine.h"
-#include "capabilities/modules/thruster.h"
-#include "units/projectile.h"
-#include "units/station.h"
-
-
-
-#include <engine/graphics/abstractgraphicsprovider.h>
 namespace e172 {
 
 
@@ -21,14 +12,13 @@ AssetProvider::AssetProvider() {}
 
 
 void AssetProvider::searchInFolder(std::string path) {
-    Debug::out("AssetProvider: assets path: " + path);
 
     if(path[path.length() - 1] == '/') path.pop_back();
-    std::vector<std::string> items = FileSystem::readDir(path);
+    std::vector<std::string> items = Additional::directoryContent(path);
     for(unsigned long long i = 0, L = items.size(); i < L; i++) {
         std::string item = items[i];
         std::string file = path + '/' + item;
-        if(FileSystem::isDir(file)) {
+        if(Additional::isDirectory(file)) {
             searchInFolder(file);
         } else {
             processFile(file, path);
@@ -36,16 +26,16 @@ void AssetProvider::searchInFolder(std::string path) {
     }
 }
 
-Loadable *AssetProvider::createLoadable(std::string key) {
-    const auto it = templates.find(key);
+Loadable *AssetProvider::createLoadable(std::string templateId) {
+    const auto it = templates.find(templateId);
     if(it == templates.end()) {
-        Debug::err(Debug::Code::ASSET_ID_NOT_FOUND, __PRETTY_FUNCTION__, key);
+        Debug::warning("AssetProvider::createLoadable: Loadable template not found for id:", templateId);
         return nullptr;
     }
 
     auto result = m_factory.create(it->second.className);
     if(!result) {
-        Debug::err(Debug::Code::ASSET_TYPE_NOT_REGISTERED, __PRETTY_FUNCTION__, "class name: " + it->second.className + ", id: " + it->first);
+        Debug::warning("AssetProvider::createLoadable: Type not registered:", it->second.className, "( template id: ", templateId, ")");
         return nullptr;
     }
 
@@ -75,9 +65,9 @@ void AssetProvider::installExecutor(const std::string &id, const std::shared_ptr
 }
 
 void AssetProvider::processFile(std::string file, std::string path) {
-    std::string sufix = FileSystem::getSufix(file);
+    std::string sufix = Additional::fileSufix(file);
     if(sufix == ".json") {
-        const std::string content = FileSystem::readFile(file);
+        const std::string content = Additional::readFile(file);
         Json::Reader reader;
         Json::Value root;
         reader.parse(content, root);
@@ -85,9 +75,9 @@ void AssetProvider::processFile(std::string file, std::string path) {
         const auto className = root["class"];
         if(id.isNull() || className.isNull()) {
             if(id.isNull()) {
-                Debug::err(Debug::Code::ASSET_NOT_CONTAINS_ID, __PRETTY_FUNCTION__, path);
+                Debug::warning("Template id missing. path:", path);
             } else {
-                Debug::err(Debug::Code::ASSET_NOT_CONTAINS_CLASS_NAME, __PRETTY_FUNCTION__, path);
+                Debug::warning("Template class name missing. path:", path);
             }
             return;
         }
@@ -100,13 +90,13 @@ void AssetProvider::processFile(std::string file, std::string path) {
                 auto it = executors.find(assetId);
                 if(it != executors.end() && it->second){
                     if(item->isNull()) {
-                        Debug::err(Debug::Code::ASSET_IS_NULL, __PRETTY_FUNCTION__, "asset id: " + assetId + " path: " + path);
+                        Debug::warning("Asset is null. Id:", assetId, "path: ", path);
                     } else {
                         it->second->executor_path = m_context->absolutePath(path);
                         newTemplate.assets[assetId] = it->second->proceed(*item, m_graphicsProvider, m_audioProvider);
                     }
                 } else {
-                    Debug::err(Debug::Code::EXECUTOR_NOT_INSTALLED_FOR_ASSET, __PRETTY_FUNCTION__, "asset id: " + assetId + " path: " + path);
+                    Debug::warning("Executor not installed for asset:", assetId, "path: ", path);
                 }
             }
         }

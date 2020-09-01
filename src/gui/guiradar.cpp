@@ -1,5 +1,8 @@
 #include "guiradar.h"
-#include "gui/guichoice.h"
+
+
+
+#include "guichoice.h"
 
 
 GUIRadar::GUIRadar(std::string label) : GUIList (label) {}

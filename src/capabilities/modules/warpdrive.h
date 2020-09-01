@@ -1,7 +1,7 @@
 #ifndef WARPDRIVE_H
 #define WARPDRIVE_H
 
-#include "capabilities/modules/module.h"
+#include "module.h"
 
 class WarpDrive : public Module {
 public:

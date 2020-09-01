@@ -7,8 +7,8 @@
 #include <string>
 
 
-#include <engine/time/deltatimecalculator.h>
-#include <engine/time/elapsedtimer.h>
+#include <src/engine/time/deltatimecalculator.h>
+#include <src/engine/time/elapsedtimer.h>
 #include <list>
 
 
@@ -18,6 +18,25 @@ class AbstractGraphicsProvider;
 class AssetProvider;
 class Context;
 
+class GameApplication;
+
+class GameApplicationExtension {
+public:
+    enum ExtensionType {
+        UndefinedExtension,
+        PreRenderExtension
+    };
+    ExtensionType extensionType() const;
+protected:
+    void setExtensionType(const ExtensionType &extensionType);
+private:
+    ExtensionType m_extensionType = UndefinedExtension;
+public:
+    GameApplicationExtension(ExtensionType extensionType);
+    virtual void proceed(GameApplication *application) = 0;
+};
+
+
 class GameApplication {
     std::vector<std::string> coverArgs(int argc, char *argv[]);
     std::vector<std::string> m_arguments;
@@ -26,6 +45,7 @@ class GameApplication {
     ElapsedTimer m_renderTimer;
 
     std::list<Entity*> m_entities;
+    std::list<GameApplicationExtension*> m_applicationExtensions;
 
     AbstractEventHandler *m_eventHandler = nullptr;
     AbstractGraphicsProvider *m_graphicsProvider = nullptr;
@@ -34,6 +54,8 @@ class GameApplication {
     AssetProvider *m_assetProvider = nullptr;
     Context *m_context = nullptr;
 
+    void destroyAllEntities(Context*, const Variant&);
+    void destroyEntity(Context*context, const Variant&value);
 public:
     GameApplication(int argc, char *argv[]);
 
@@ -41,13 +63,8 @@ public:
     std::vector<std::string> arguments() const;
 
     inline void addEntity(Entity *entity) { m_entities.push_back(entity); }
-    inline void clearEntities() { m_entities.clear(); }
-    inline void terminateEntities() {
-        for(auto e : m_entities) {
-            delete e;
-        }
-        m_entities.clear();
-    }
+    inline void addApplicationExtension(GameApplicationExtension *extension) { m_applicationExtensions.push_back(extension); }
+    inline void removeApplicationExtension(GameApplicationExtension *extension) { m_applicationExtensions.remove(extension); }
 
     AssetProvider *assetProvider() const;
     e172::Context *context() const;

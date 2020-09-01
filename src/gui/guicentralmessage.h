@@ -1,7 +1,7 @@
 #ifndef GUICENTRALMESSAGE_H
 #define GUICENTRALMESSAGE_H
 
-#include <gui/base/guimenuelement.h>
+#include <src/gui/base/guimenuelement.h>
 
 
 

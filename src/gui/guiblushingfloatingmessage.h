@@ -2,7 +2,7 @@
 #define GUIBLUSHINGFLOATINGMESSAGE_H
 
 
-#include "gui/guifloatingmessage.h"
+#include <src/gui/guifloatingmessage.h>
 
 
 class GUIBlushingFloatingMessage : public GUIFloatingMessage {

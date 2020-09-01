@@ -2,8 +2,8 @@
 #define SHIP_H
 
 
-#include "units/movable.h"
-#include "capabilities/modules/warpdrive.h"
+#include "movable.h"
+#include <src/capabilities/modules/warpdrive.h>
 
 
 class Ship : public Movable {

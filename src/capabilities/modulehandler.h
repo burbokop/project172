@@ -5,7 +5,7 @@
 #include <algorithm>
 
 
-#include "capabilities/modules/module.h"
+#include "modules/module.h"
 
 
 class ModuleHandler : public Capability {

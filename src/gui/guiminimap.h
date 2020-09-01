@@ -1,7 +1,7 @@
 #ifndef GUIMINIMAP_H
 #define GUIMINIMAP_H
 
-#include <gui/base/guielement.h>
+#include <src/gui/base/guielement.h>
 
 
 

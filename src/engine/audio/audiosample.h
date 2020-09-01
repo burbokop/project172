@@ -1,7 +1,7 @@
 #ifndef AUDIOSAMPLE_H
 #define AUDIOSAMPLE_H
 
-#include <engine/sharedcontainer.h>
+#include <src/engine/sharedcontainer.h>
 
 namespace e172 {
 

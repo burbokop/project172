@@ -1,10 +1,11 @@
 #include "abstractassetexecutor.h"
 
-#include <filesystem.h>
+#include <src/engine/additional.h>
+
 namespace e172 {
 
 std::string AbstractAssetExecutor::fullPath(const std::string &path) {
-    return FileSystem::addPrefix(path, executor_path);
+    return Additional::concatenatePaths(executor_path, path);
 }
 
 AbstractAssetExecutor::AbstractAssetExecutor() {}

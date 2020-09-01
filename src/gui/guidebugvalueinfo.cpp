@@ -1,7 +1,8 @@
 #include "guidebugvalueinfo.h"
+
 #include <math.h>
-#include <engine/abstracteventhandler.h>
-#include <engine/graphics/abstractrenderer.h>
+#include <src/engine/abstracteventhandler.h>
+#include <src/engine/graphics/abstractrenderer.h>
 
 GUIDebugValueInfo::GUIDebugValueInfo() {
     timer.reset();

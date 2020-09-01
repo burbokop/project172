@@ -3,14 +3,12 @@
 
 #include <functional>
 
-#include <engine/assettools/assetprovider.h>
+#include <src/engine/assettools/assetprovider.h>
 
-
-#include "../object.h"
 #include "../capabilities/controller.h"
 
 
-class WorldPreset : public Object {
+class WorldPreset {
 public:
     struct GenerationResult {
         std::list<e172::Entity*> entities;

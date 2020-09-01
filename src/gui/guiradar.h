@@ -1,7 +1,7 @@
 #ifndef GUIRADAR_H
 #define GUIRADAR_H
 
-#include "gui/guilist.h"
+#include "guilist.h"
 
 class GUIRadar : public GUIList {
 public:    

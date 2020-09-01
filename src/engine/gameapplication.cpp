@@ -1,11 +1,11 @@
 #include "gameapplication.h"
 
-#include <engine/context.h>
-#include <engine/assettools/assetprovider.h>
-#include <engine/audio/abstractaudioprovider.h>
-#include <engine/abstracteventhandler.h>
-#include <engine/graphics/abstractrenderer.h>
-#include <engine/graphics/abstractgraphicsprovider.h>
+#include <src/engine/context.h>
+#include <src/engine/assettools/assetprovider.h>
+#include <src/engine/audio/abstractaudioprovider.h>
+#include <src/engine/abstracteventhandler.h>
+#include <src/engine/graphics/abstractrenderer.h>
+#include <src/engine/graphics/abstractgraphicsprovider.h>
 
 namespace e172 {
 
@@ -17,6 +17,21 @@ std::vector<std::string> GameApplication::coverArgs(int argc, char *argv[]) {
     }
     return result;
 }
+
+void GameApplication::destroyAllEntities(Context *, const Variant &) {
+    for(auto e : m_entities) {
+        delete e;
+    }
+    m_entities.clear();
+}
+
+void GameApplication::destroyEntity(Context* context, const Variant &value) {
+    if(const auto e = context->entityById(value.toNumber<Entity::id_t>())) {
+        m_entities.remove(e);
+        delete e;
+    }
+}
+
 
 std::list<Entity *> GameApplication::entities() const
 {
@@ -92,6 +107,10 @@ int GameApplication::exec() {
             auto r = m_graphicsProvider->renderer();
             if(r) {
                 r->m_locked = false;
+                for(auto m : m_applicationExtensions) {
+                    if(m->extensionType() == GameApplicationExtension::PreRenderExtension)
+                        m->proceed(this);
+                }
                 for(auto e : m_entities) {
                     e->render(r);
                 }
@@ -101,14 +120,29 @@ int GameApplication::exec() {
         }
 
         if(m_context) {
-            m_context->m_messageBus.invokeInternalFunctions();
-            m_context->m_messageBus.flushMessages();
+            m_context->popMessage(Context::DELETE_UNIT, this, &GameApplication::destroyEntity);
+            m_context->popMessage(Context::DELETE_ALL_UNITS, this, &GameApplication::destroyAllEntities);
+
+            m_context->m_messageQueue.invokeInternalFunctions();
+            m_context->m_messageQueue.flushMessages();
             m_context->m_deltaTime = m_deltaTimeCalculator.deltaTime();
         }
     }
     delete m_assetProvider;
     delete m_context;
     return 0;
+}
+
+GameApplicationExtension::ExtensionType GameApplicationExtension::extensionType() const {
+    return m_extensionType;
+}
+
+void GameApplicationExtension::setExtensionType(const ExtensionType &extensionType) {
+    m_extensionType = extensionType;
+}
+
+GameApplicationExtension::GameApplicationExtension(GameApplicationExtension::ExtensionType extensionType) {
+    m_extensionType = extensionType;
 }
 
 

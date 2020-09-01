@@ -1,9 +1,9 @@
 #include "player.h"
-#include "units/ship.h"
-#include "objectregistry.h"
-#include "capabilities/modules/weapon.h"
+#include <src/units/ship.h>
+#include <src/engine/objectregistry.h>
+#include <src/capabilities/modules/weapon.h>
 
-#include <engine/context.h>
+#include <src/engine/context.h>
 
 const std::map<std::string, e172::Scancode> Player::scancode = {
     { "q", e172::ScancodeQ },

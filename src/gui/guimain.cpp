@@ -1,9 +1,9 @@
 #include "guimain.h"
 
 
-#include "gui/guiblushingfloatingmessage.h"
+#include "guiblushingfloatingmessage.h"
 
-#include <engine/context.h>
+#include <src/engine/context.h>
 
 
 

@@ -1,6 +1,6 @@
 #include "animator.h"
 
-#include <engine/graphics/abstractrenderer.h>
+#include <src/engine/graphics/abstractrenderer.h>
 
 
 void Animator::setDefaultMode(unsigned value) {

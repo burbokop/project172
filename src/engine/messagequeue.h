@@ -15,25 +15,25 @@ public:
     void onFail(const std::function<void()> &callback) { m_fail = callback; }
 };
 
-class MessageBusPromice : public Promice {
+class MessageQueuePromice : public Promice {
     template <typename IdType, typename ValueType>
-    friend class MessageBus;
+    friend class MessageQueue;
 };
 
-class MessageBusPrivate {
+class MessageQueuePrivate {
     template <typename IdType, typename ValueType>
-    friend class MessageBus;
+    friend class MessageQueue;
 
     static void throwExeption(const std::string &exeption);
     static void warningExeption(const std::string &exeption);
 };
 
 template <typename IdType, typename ValueType>
-class MessageBus {
+class MessageQueue {
     struct MessageType {
         ValueType value;
         int loop_count = 0;
-        MessageBusPromice *promice = nullptr;
+        MessageQueuePromice *promice = nullptr;
     };
 
     struct IdentifiedData {
@@ -55,7 +55,7 @@ public:
 
     static std::string produceExeption(const IdType &id, const ValueType &value) {
         std::stringstream ss;
-        ss << "MessageBus: message flushed ";
+        ss << "MessageQueue: message flushed ";
         constexpr bool hasAny =
                 sfinae::StreamOperator::exists<std::ostream, IdType>::value
                 || sfinae::StreamOperator::exists<std::ostream, ValueType>::value;
@@ -86,9 +86,9 @@ public:
 
                 if(exceptionHandlingMode != IgnoreException) {
                     if(exceptionHandlingMode == ThrowException) {
-                        MessageBusPrivate::throwExeption(produceExeption(id, message.value));
+                        MessageQueuePrivate::throwExeption(produceExeption(id, message.value));
                     } else if(exceptionHandlingMode == WarningException) {
-                        MessageBusPrivate::warningExeption(produceExeption(id, message.value));
+                        MessageQueuePrivate::warningExeption(produceExeption(id, message.value));
                     }
                 }
                 it = list->erase(it);
@@ -98,7 +98,7 @@ public:
         }
     }
 
-    MessageBus() {}
+    MessageQueue() {}
     bool containsMessage(const IdType &id) {
         const auto it = m_data.find(id);
         if(it == m_data.end())
@@ -130,8 +130,25 @@ public:
         }
         return ValueType();
     }
+
+    void popMessage(const IdType &id, const std::function<void(const ValueType&)>& callback) {
+        bool ok;
+        __loop:
+        const auto value = popMessage(id, &ok);
+        if(ok) {
+            callback(value);
+            goto __loop;
+        }
+    }
+
+
+    template<typename C>
+    void popMessage(const IdType &id, C *object, void(C::*callback)(const ValueType&)) {
+        popMessage(id, [object, callback](auto v) { (object->*callback)(v); });
+    }
+
     Promice *emitMessage(const IdType &id, const ValueType &value) {
-        const auto p = new MessageBusPromice();
+        const auto p = new MessageQueuePromice();
         m_data[id].queue.push_back(MessageType { value, m_messageLifeTime, p });
         return p;
     }
