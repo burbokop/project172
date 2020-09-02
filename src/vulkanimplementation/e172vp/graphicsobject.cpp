@@ -119,7 +119,7 @@ e172vp::GraphicsObject::GraphicsObject(const GraphicsObjectCreateInfo &createInf
     const auto swapChainSupportDetails = e172vp::Hardware::querySwapChainSupport(m_physicalDevice, m_surface);
     m_swapChainSettings = e172vp::SwapChain::createSettings(swapChainSupportDetails);
     m_swapChain = e172vp::SwapChain(m_logicalDevice, m_surface, m_queueFamilies, m_swapChainSettings);
-    m_renderPass = e172vp::RenderPass(m_logicalDevice, m_swapChain);
+    m_renderPass = e172vp::RenderPass(m_logicalDevice, m_swapChain, createInfo.subpassCount());
     m_commandPool = e172vp::CommandPool(m_logicalDevice, m_queueFamilies, m_swapChain.imageCount());
 
     createDescriptorPool(m_logicalDevice, createInfo.descriptorPoolSize(), &m_descriptorPool, &m_errors);

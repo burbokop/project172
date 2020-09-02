@@ -22,6 +22,7 @@ e172vp::PresentationObject::PresentationObject(const std::string &assetFolder) {
     createInfo.setApplicationVersion(1);
     createInfo.setDebugEnabled(true);
     createInfo.setRequiredDeviceExtensions({ VK_KHR_SWAPCHAIN_EXTENSION_NAME });
+    createInfo.setSubpassCount(2);
     createInfo.setSurfaceCreator([this](vk::Instance i, vk::SurfaceKHR *s) {
         VkSurfaceKHR ss;
         SDL_Vulkan_CreateSurface(m_window, i, &ss);
@@ -51,12 +52,13 @@ e172vp::PresentationObject::PresentationObject(const std::string &assetFolder) {
 
     const std::vector<char> vertShaderCode = readFile(e172::Additional::constrainPath(assetFolder + "/shaders/vert_uniform.spv"));
     const std::vector<char> fragShaderCode = readFile(e172::Additional::constrainPath(assetFolder + "/shaders/frag_sampler.spv"));
-    pipeline = new Pipeline(m_graphicsObject.logicalDevice(), m_graphicsObject.swapChainSettings().extent, m_graphicsObject.renderPass(), { globalDescriptorSetLayout.descriptorSetLayoutHandle(), objectDescriptorSetLayout.descriptorSetLayoutHandle(), samplerDescriptorSetLayout.descriptorSetLayoutHandle() }, vertShaderCode, fragShaderCode, vk::PrimitiveTopology::eTriangleList);
+    pipeline = new Pipeline(m_graphicsObject.logicalDevice(), m_graphicsObject.swapChainSettings().extent, m_graphicsObject.renderPass(), 0, { globalDescriptorSetLayout.descriptorSetLayoutHandle(), objectDescriptorSetLayout.descriptorSetLayoutHandle(), samplerDescriptorSetLayout.descriptorSetLayoutHandle() }, vertShaderCode, fragShaderCode, vk::PrimitiveTopology::eTriangleList);
 
     pipeline2 = new Pipeline(
                 m_graphicsObject.logicalDevice(),
                 m_graphicsObject.swapChainSettings().extent,
                 m_graphicsObject.renderPass(),
+                1,
                 { globalDescriptorSetLayout.descriptorSetLayoutHandle() },
                 readFile(e172::Additional::constrainPath(assetFolder + "/shaders/vert_linestrip.spv")),
                 readFile(e172::Additional::constrainPath(assetFolder + "/shaders/frag_inter.spv")),
@@ -120,6 +122,13 @@ void e172vp::PresentationObject::present() {
     if(returnCode != vk::Result::eSuccess)
         throw std::runtime_error("present failed. code: " + vk::to_string(returnCode));
 
+
+
+    for(auto o : pl2objects) {
+        delete o;
+    }
+    pl2objects.clear();
+
 }
 
 void e172vp::PresentationObject::updateUniformBuffer(uint32_t currentImage) {
@@ -160,6 +169,9 @@ std::vector<std::string> e172vp::PresentationObject::sdlExtensions(SDL_Window *w
 }
 
 void e172vp::PresentationObject::proceedCommandBuffers() {
+    const auto centalIndex = m_graphicsObject.commandPool().commandBufferCount() / 2;
+
+
     for (size_t i = 0; i < m_graphicsObject.commandPool().commandBufferCount(); i++) {
         const auto commandBuffer = m_graphicsObject.commandPool().commandBuffer(i);
         const auto extent = m_graphicsObject.swapChainSettings().extent;
@@ -191,38 +203,38 @@ void e172vp::PresentationObject::proceedCommandBuffers() {
         viewport.setMaxDepth(1.0f);
 
         commandBuffer.beginRenderPass(&renderPassInfo, vk::SubpassContents::eInline);
-        commandBuffer.bindPipeline(vk::PipelineBindPoint::eGraphics, pipeline->handle());
         commandBuffer.setViewport(0, 1, &viewport);
 
-        for(auto object : vertexObjects) {
-            if(object->visible()) {
-                vk::Buffer vb[] = { object->vertexBuffer() };
-                vk::DeviceSize offsets[] = { 0 };
-                commandBuffer.bindVertexBuffers(0, 1, vb, offsets);
-                commandBuffer.bindIndexBuffer(object->indexBuffer(), 0, vk::IndexType::eUint32);
 
-                commandBuffer.bindDescriptorSets(vk::PipelineBindPoint::eGraphics, pipeline->pipelineLayout(), 0, { uniformDescriptorSets[i], object->descriptorSets()[i], object->textureDescriptorSets()[i] }, {});
-                commandBuffer.drawIndexed(object->indexCount(), 1, 0, 0, 0);
+        if(i < centalIndex) {
+            commandBuffer.bindPipeline(vk::PipelineBindPoint::eGraphics, pipeline->handle());
+
+            for(auto object : vertexObjects) {
+                if(object->visible()) {
+                    vk::Buffer vb[] = { object->vertexBuffer() };
+                    vk::DeviceSize offsets[] = { 0 };
+                    commandBuffer.bindVertexBuffers(0, 1, vb, offsets);
+                    commandBuffer.bindIndexBuffer(object->indexBuffer(), 0, vk::IndexType::eUint32);
+
+                    commandBuffer.bindDescriptorSets(vk::PipelineBindPoint::eGraphics, pipeline->pipelineLayout(), 0, { uniformDescriptorSets[i], object->descriptorSets()[i], object->textureDescriptorSets()[i] }, {});
+                    commandBuffer.drawIndexed(object->indexCount(), 1, 0, 0, 0);
+                }
+            }
+        } else {
+            //pipeline2
+            commandBuffer.bindPipeline(vk::PipelineBindPoint::eGraphics, pipeline2->handle());
+            for(auto object : pl2objects) {
+                if(object->visible()) {
+                    vk::Buffer vb[] = { object->vertexBuffer() };
+                    vk::DeviceSize offsets[] = { 0 };
+                    commandBuffer.bindVertexBuffers(0, 1, vb, offsets);
+                    commandBuffer.bindIndexBuffer(object->indexBuffer(), 0, vk::IndexType::eUint32);
+                    commandBuffer.drawIndexed(object->indexCount(), 1, 0, 0, 0);
+                }
             }
         }
 
-
         commandBuffer.endRenderPass();
-
-
-        //pipeline2
-        //commandBuffer.bindPipeline(vk::PipelineBindPoint::eGraphics, pipeline2->handle());
-        //for(auto object : pl2objects) {
-        //    if(object->visible()) {
-        //        vk::Buffer vb[] = { object->vertexBuffer() };
-        //        vk::DeviceSize offsets[] = { 0 };
-        //        commandBuffer.bindVertexBuffers(0, 1, vb, offsets);
-        //        commandBuffer.bindIndexBuffer(object->indexBuffer(), 0, vk::IndexType::eUint32);
-        //        commandBuffer.drawIndexed(object->indexCount(), 1, 0, 0, 0);
-        //    }
-        //}
-        //pl2objects.clear();
-
 
         commandBuffer.end();
     }

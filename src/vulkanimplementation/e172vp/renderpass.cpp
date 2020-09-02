@@ -47,7 +47,7 @@ bool e172vp::RenderPass::createFrameBuffers(const vk::Device &logicalDevice, con
     return true;
 }
 
-e172vp::RenderPass::RenderPass(const vk::Device &logicalDevice, const SwapChain &swapchain) {
+e172vp::RenderPass::RenderPass(const vk::Device &logicalDevice, const SwapChain &swapchain, int subpassCount) {
     vk::AttachmentDescription colorAttachment;
     colorAttachment.format = swapchain.settings().surfaceFormat.format;
     colorAttachment.samples = vk::SampleCountFlagBits::e1;
@@ -58,20 +58,23 @@ e172vp::RenderPass::RenderPass(const vk::Device &logicalDevice, const SwapChain 
     colorAttachment.initialLayout = vk::ImageLayout::eUndefined;
     colorAttachment.finalLayout = vk::ImageLayout::ePresentSrcKHR;
 
-    vk::AttachmentReference colorAttachmentRef;
-    colorAttachmentRef.attachment = 0;
-    colorAttachmentRef.layout = vk::ImageLayout::eColorAttachmentOptimal;
 
-    vk::SubpassDescription subpass{};
-    subpass.pipelineBindPoint = vk::PipelineBindPoint::eGraphics;
-    subpass.colorAttachmentCount = 1;
-    subpass.pColorAttachments = &colorAttachmentRef;
+
+    std::vector<vk::SubpassDescription> subpasses(subpassCount);
+    std::vector<vk::AttachmentReference> colorAttachmentRefs(subpassCount);
+    for(int i = 0; i < subpassCount; ++i) {
+        colorAttachmentRefs[i].attachment = 0;
+        colorAttachmentRefs[i].layout = vk::ImageLayout::eColorAttachmentOptimal;
+
+        subpasses[i].pipelineBindPoint = vk::PipelineBindPoint::eGraphics;
+        subpasses[i].setColorAttachments(colorAttachmentRefs[i]);
+    }
 
     vk::RenderPassCreateInfo renderPassInfo;
     renderPassInfo.attachmentCount = 1;
     renderPassInfo.pAttachments = &colorAttachment;
-    renderPassInfo.subpassCount = 1;
-    renderPassInfo.pSubpasses = &subpass;
+    renderPassInfo.setSubpasses(subpasses);
+
 
     const auto code = logicalDevice.createRenderPass(&renderPassInfo, nullptr, &m_renderPathHandle);
     if (code != vk::Result::eSuccess) {

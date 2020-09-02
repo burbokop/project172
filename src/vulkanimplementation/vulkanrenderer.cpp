@@ -16,12 +16,6 @@ VulkanRenderer::VulkanRenderer(const std::vector<std::string> &args) {
         m_pointMesh = new e172vp::Mesh(e172vp::Mesh::plate(0.25));
 
 
-        m_presentationObject->addVertexObject2({
-                                                   {  { -0.4, -0.4, 0 }, { 0., 1., 0. }, {} },
-                                                   {  { 0.4, -0.2, 0 }, { 0., 1., 0. }, {} }
-                                               }, {
-                                                   0, 1
-                                               });
     }
 }
 
@@ -95,8 +89,16 @@ void VulkanRenderer::drawPixel(const e172::Vector &point, uint32_t color) {
 }
 
 void VulkanRenderer::drawLine(const e172::Vector &point0, const e172::Vector &point1, uint32_t color) {
-    (void)point0;
-    (void)point1;
+    const auto tp0 = transformedPosition(point0);
+    const auto tp1 = transformedPosition(point1);
+
+    m_presentationObject->addVertexObject2({
+                                               {  { tp0.float32X(), tp0.float32Y(), 0 }, { 0., 1., 0. }, {} },
+                                               {  { tp1.float32X(), tp1.float32Y(), 0 }, { 0., 1., 0. }, {} }
+                                           }, {
+                                               0, 1
+                                           });
+
     (void)color;
 }
 

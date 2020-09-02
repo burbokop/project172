@@ -49,14 +49,20 @@ void e172vp::GraphicsObjectCreateInfo::setRequiredDeviceExtensions(const std::ve
     m_requiredDeviceExtensions = requiredDeviceExtensions;
 }
 
-
-
 size_t e172vp::GraphicsObjectCreateInfo::descriptorPoolSize() const {
     return m_descriptorPoolSize;
 }
 
 void e172vp::GraphicsObjectCreateInfo::setDescriptorPoolSize(const size_t &descriptorPoolSize) {
     m_descriptorPoolSize = descriptorPoolSize;
+}
+
+size_t e172vp::GraphicsObjectCreateInfo::subpassCount() const {
+    return m_subpassCount;
+}
+
+void e172vp::GraphicsObjectCreateInfo::setSubpassCount(const size_t &subpassCount) {
+    m_subpassCount = subpassCount;
 }
 
 e172vp::GraphicsObjectCreateInfo::GraphicsObjectCreateInfo() {}

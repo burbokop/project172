@@ -12,7 +12,7 @@ class Pipeline {
 public:
     static vk::ShaderModule createShaderModule(const vk::Device &logicDevice, const std::vector<char> &code);
 
-    Pipeline(const vk::Device &logicalDevice, const vk::Extent2D &extent, const vk::RenderPass &renderPass, const std::vector<vk::DescriptorSetLayout> &descriptorSetLayouts, const std::vector<char> &vertexShader, const std::vector<char> &fragmentShader, vk::PrimitiveTopology topology);
+    Pipeline(const vk::Device &logicalDevice, const vk::Extent2D &extent, const vk::RenderPass &renderPass, int subpass, const std::vector<vk::DescriptorSetLayout> &descriptorSetLayouts, const std::vector<char> &vertexShader, const std::vector<char> &fragmentShader, vk::PrimitiveTopology topology);
 
     Pipeline() = default;
     Pipeline(const Pipeline &) = delete;

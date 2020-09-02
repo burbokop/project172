@@ -38,7 +38,7 @@ vk::ShaderModule e172vp::Pipeline::createShaderModule(const vk::Device &logicDev
     return shaderModule;
 }
 
-e172vp::Pipeline::Pipeline(const vk::Device &logicalDevice, const vk::Extent2D &extent, const vk::RenderPass &renderPass, const std::vector<vk::DescriptorSetLayout> &descriptorSetLayouts, const std::vector<char> &vertexShader, const std::vector<char> &fragmentShader, vk::PrimitiveTopology topology) {
+e172vp::Pipeline::Pipeline(const vk::Device &logicalDevice, const vk::Extent2D &extent, const vk::RenderPass &renderPass, int subpass, const std::vector<vk::DescriptorSetLayout> &descriptorSetLayouts, const std::vector<char> &vertexShader, const std::vector<char> &fragmentShader, vk::PrimitiveTopology topology) {
     vk::ShaderModule vertShaderModule = createShaderModule(logicalDevice, vertexShader);
     vk::ShaderModule fragShaderModule = createShaderModule(logicalDevice, fragmentShader);
 
@@ -139,7 +139,7 @@ e172vp::Pipeline::Pipeline(const vk::Device &logicalDevice, const vk::Extent2D &
     pipelineInfo.pColorBlendState = &colorBlending;
     pipelineInfo.layout = m_pipelineLayout;
     pipelineInfo.renderPass = renderPass;
-    pipelineInfo.subpass = 0;
+    pipelineInfo.subpass = subpass;
 
     if (logicalDevice.createGraphicsPipelines(vk::PipelineCache(), 1, &pipelineInfo, nullptr, &m_handle) != vk::Result::eSuccess) {
         throw std::runtime_error("failed to create graphics pipeline!");

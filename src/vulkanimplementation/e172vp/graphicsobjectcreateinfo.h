@@ -17,6 +17,7 @@ class GraphicsObjectCreateInfo {
     std::vector<std::string> m_requiredDeviceExtensions;
     std::function<void(vk::Instance, vk::SurfaceKHR*)> m_surfaceCreator;
     size_t m_descriptorPoolSize = 2048;
+    size_t m_subpassCount = 1;
     bool m_debugEnabled = false;
 public:
     GraphicsObjectCreateInfo();
@@ -35,6 +36,8 @@ public:
     void setRequiredDeviceExtensions(const std::vector<std::string> &requiredDeviceExtensions);
     size_t descriptorPoolSize() const;
     void setDescriptorPoolSize(const size_t &descriptorPoolSize);
+    size_t subpassCount() const;
+    void setSubpassCount(const size_t &subpassCount);
 };
 
 }
