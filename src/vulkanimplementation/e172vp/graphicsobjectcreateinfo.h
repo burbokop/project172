@@ -1,3 +1,4 @@
+
 #ifndef GRAPHICSINSTANCECREATEINFO_H
 #define GRAPHICSINSTANCECREATEINFO_H
 
@@ -15,7 +16,7 @@ class GraphicsObjectCreateInfo {
     std::vector<std::string> m_requiredExtensions;
     std::vector<std::string> m_requiredDeviceExtensions;
     std::function<void(vk::Instance, vk::SurfaceKHR*)> m_surfaceCreator;
-    size_t m_descriptorPoolSize = 1024;
+    size_t m_descriptorPoolSize = 2048;
     bool m_debugEnabled = false;
 public:
     GraphicsObjectCreateInfo();

@@ -2,8 +2,10 @@
 #define VULKANRENDERER_H
 
 #include "../engine/graphics/abstractrenderer.h"
+#include <src/engine/math/math.h>
 
 #include <list>
+#include <map>
 
 namespace e172vp {
     class PresentationObject;
@@ -15,17 +17,26 @@ class VulkanRenderer : public e172::AbstractRenderer {
     e172vp::PresentationObject *m_presentationObject = nullptr;
     e172vp::Mesh *m_mesh0 = nullptr;
     e172vp::Mesh *m_mesh1 = nullptr;
+    e172vp::Mesh *m_pointMesh = nullptr;
 
-    struct ImageReciept {
+    struct Reciept {
         e172::Vector position;
         float rotation;
+        e172vp::Mesh *mesh = nullptr;
     };
 
     const e172::Vector m_resolution = e172::Vector(800, 600);
-    double divider = 1080;
 
-    std::list<ImageReciept> m_reciepts;
-    std::list<e172vp::VertexObject*> m_objectsPool;
+    std::list<Reciept> m_reciepts;
+    std::map<e172vp::Mesh*, std::list<e172vp::VertexObject*>> m_objectsPool;
+
+    inline e172::Vector transformedPosition(const e172::Vector &position) {
+        if(!e172::Math::cmpf(m_resolution.x(), 0) && !e172::Math::cmpf(m_resolution.y(), 0)) {
+            auto v = position * 2 - m_resolution;
+            return e172::Vector(v.x() / m_resolution.x(), v.y() / m_resolution.y());
+        }
+        return e172::Vector();
+    }
 public:
     VulkanRenderer(const std::vector<std::string> &args);
     ~VulkanRenderer();

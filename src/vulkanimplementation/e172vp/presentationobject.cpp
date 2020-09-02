@@ -49,17 +49,19 @@ e172vp::PresentationObject::PresentationObject(const std::string &assetFolder) {
     Buffer::createUniformBuffers<GlobalUniformBufferObject>(&m_graphicsObject, m_graphicsObject.swapChain().imageCount(), &uniformBuffers, &uniformBuffersMemory);
     Buffer::createUniformDescriptorSets<GlobalUniformBufferObject>(m_graphicsObject.logicalDevice(), m_graphicsObject.descriptorPool(), uniformBuffers, &globalDescriptorSetLayout, &uniformDescriptorSets);
 
-    bool useUniformBuffer = true;
-    std::vector<char> vertShaderCode;
-    if(useUniformBuffer) {
-        vertShaderCode = readFile(e172::Additional::constrainPath(assetFolder + "/shaders/vert_uniform.spv"));
-    } else {
-        vertShaderCode = readFile(e172::Additional::constrainPath(assetFolder + "/shaders/vert.spv"));
-    }
-    std::vector<char> fragShaderCode = readFile(e172::Additional::constrainPath(assetFolder + "/shaders/frag.spv"));
-
-
+    const std::vector<char> vertShaderCode = readFile(e172::Additional::constrainPath(assetFolder + "/shaders/vert_uniform.spv"));
+    const std::vector<char> fragShaderCode = readFile(e172::Additional::constrainPath(assetFolder + "/shaders/frag_sampler.spv"));
     pipeline = new Pipeline(m_graphicsObject.logicalDevice(), m_graphicsObject.swapChainSettings().extent, m_graphicsObject.renderPass(), { globalDescriptorSetLayout.descriptorSetLayoutHandle(), objectDescriptorSetLayout.descriptorSetLayoutHandle(), samplerDescriptorSetLayout.descriptorSetLayoutHandle() }, vertShaderCode, fragShaderCode, vk::PrimitiveTopology::eTriangleList);
+
+    pipeline2 = new Pipeline(
+                m_graphicsObject.logicalDevice(),
+                m_graphicsObject.swapChainSettings().extent,
+                m_graphicsObject.renderPass(),
+                { globalDescriptorSetLayout.descriptorSetLayoutHandle() },
+                readFile(e172::Additional::constrainPath(assetFolder + "/shaders/vert_linestrip.spv")),
+                readFile(e172::Additional::constrainPath(assetFolder + "/shaders/frag_inter.spv")),
+                vk::PrimitiveTopology::eLineStrip
+                );
 
     createSyncObjects(m_graphicsObject.logicalDevice(), &imageAvailableSemaphore, &renderFinishedSemaphore);
 
@@ -70,7 +72,7 @@ e172vp::PresentationObject::PresentationObject(const std::string &assetFolder) {
 
 void e172vp::PresentationObject::present() {
     resetCommandBuffers(m_graphicsObject.commandPool().commandBufferVector(), m_graphicsObject.graphicsQueue(), m_graphicsObject.presentQueue());
-    proceedCommandBuffers(m_graphicsObject.renderPass(), pipeline->handle(), pipeline->pipelineLayout(), m_graphicsObject.swapChainSettings().extent, m_graphicsObject.renderPass().frameBufferVector(), m_graphicsObject.commandPool().commandBufferVector(), uniformDescriptorSets, vertexObjects);
+    proceedCommandBuffers();
 
     uint32_t imageIndex = 0;
     vk::Result returnCode;
@@ -157,14 +159,14 @@ std::vector<std::string> e172vp::PresentationObject::sdlExtensions(SDL_Window *w
     return result;
 }
 
-void e172vp::PresentationObject::proceedCommandBuffers(const vk::RenderPass &renderPass, const vk::Pipeline &pipeline, const vk::PipelineLayout &pipelineLayout, const vk::Extent2D &extent, const std::vector<vk::Framebuffer> &swapChainFramebuffers, const std::vector<vk::CommandBuffer> &commandBuffers, const std::vector<vk::DescriptorSet> &uniformDescriptorSets, const std::list<VertexObject *> &vertexObjects) {
-    for (size_t i = 0; i < commandBuffers.size(); i++) {
-        vk::CommandBufferBeginInfo beginInfo{};
-        if (commandBuffers[i].begin(&beginInfo) != vk::Result::eSuccess) {
-            throw std::runtime_error("failed to begin recording command buffer!");
-        }
+void e172vp::PresentationObject::proceedCommandBuffers() {
+    for (size_t i = 0; i < m_graphicsObject.commandPool().commandBufferCount(); i++) {
+        const auto commandBuffer = m_graphicsObject.commandPool().commandBuffer(i);
+        const auto extent = m_graphicsObject.swapChainSettings().extent;
 
-        //#1A0033
+        vk::CommandBufferBeginInfo commandBufferBeginInfo;
+        commandBuffer.begin(&commandBufferBeginInfo);
+
         const vk::ClearValue clearColor = vk::ClearColorValue(std::array<float, 4> {
                                                                   0x1a / 256.,
                                                                   0x00 / 256.,
@@ -173,8 +175,8 @@ void e172vp::PresentationObject::proceedCommandBuffers(const vk::RenderPass &ren
                                                               });
 
         vk::RenderPassBeginInfo renderPassInfo;
-        renderPassInfo.renderPass = renderPass;
-        renderPassInfo.framebuffer = swapChainFramebuffers[i];
+        renderPassInfo.renderPass = m_graphicsObject.renderPass().renderPathHandle();
+        renderPassInfo.framebuffer = m_graphicsObject.renderPass().frameBuffer(i);
         renderPassInfo.renderArea.offset = vk::Offset2D();
         renderPassInfo.renderArea.extent = extent;
         renderPassInfo.clearValueCount = 1;
@@ -188,30 +190,41 @@ void e172vp::PresentationObject::proceedCommandBuffers(const vk::RenderPass &ren
         viewport.setMinDepth(0.0f);
         viewport.setMaxDepth(1.0f);
 
-        commandBuffers[i].beginRenderPass(&renderPassInfo, vk::SubpassContents::eInline);
-        commandBuffers[i].bindPipeline(vk::PipelineBindPoint::eGraphics, pipeline);
-        commandBuffers[i].setViewport(0, 1, &viewport);
-
+        commandBuffer.beginRenderPass(&renderPassInfo, vk::SubpassContents::eInline);
+        commandBuffer.bindPipeline(vk::PipelineBindPoint::eGraphics, pipeline->handle());
+        commandBuffer.setViewport(0, 1, &viewport);
 
         for(auto object : vertexObjects) {
             if(object->visible()) {
                 vk::Buffer vb[] = { object->vertexBuffer() };
                 vk::DeviceSize offsets[] = { 0 };
-                commandBuffers[i].bindVertexBuffers(0, 1, vb, offsets);
-                commandBuffers[i].bindIndexBuffer(object->indexBuffer(), 0, vk::IndexType::eUint32);
+                commandBuffer.bindVertexBuffers(0, 1, vb, offsets);
+                commandBuffer.bindIndexBuffer(object->indexBuffer(), 0, vk::IndexType::eUint32);
 
-                //commandBuffers[i].bind
-                commandBuffers[i].bindDescriptorSets(vk::PipelineBindPoint::eGraphics, pipelineLayout, 0, { uniformDescriptorSets[i], object->descriptorSets()[i], object->textureDescriptorSets()[i] }, {});
-                commandBuffers[i].drawIndexed(object->indexCount(), 1, 0, 0, 0);
+                commandBuffer.bindDescriptorSets(vk::PipelineBindPoint::eGraphics, pipeline->pipelineLayout(), 0, { uniformDescriptorSets[i], object->descriptorSets()[i], object->textureDescriptorSets()[i] }, {});
+                commandBuffer.drawIndexed(object->indexCount(), 1, 0, 0, 0);
             }
         }
 
 
-//        vk::ImageBlit blit;
-//        commandBuffers[i].blitImage(fgImage, vk::ImageLayout::eUndefined, swapChainImages[i], vk::ImageLayout::eTransferDstOptimal, { blit }, vk::Filter::eLinear);
-        commandBuffers[i].endRenderPass();
-        commandBuffers[i].end();
+        commandBuffer.endRenderPass();
 
+
+        //pipeline2
+        //commandBuffer.bindPipeline(vk::PipelineBindPoint::eGraphics, pipeline2->handle());
+        //for(auto object : pl2objects) {
+        //    if(object->visible()) {
+        //        vk::Buffer vb[] = { object->vertexBuffer() };
+        //        vk::DeviceSize offsets[] = { 0 };
+        //        commandBuffer.bindVertexBuffers(0, 1, vb, offsets);
+        //        commandBuffer.bindIndexBuffer(object->indexBuffer(), 0, vk::IndexType::eUint32);
+        //        commandBuffer.drawIndexed(object->indexCount(), 1, 0, 0, 0);
+        //    }
+        //}
+        //pl2objects.clear();
+
+
+        commandBuffer.end();
     }
 }
 
@@ -248,6 +261,12 @@ e172vp::VertexObject *e172vp::PresentationObject::addVertexObject(const std::vec
     return r;
 }
 
+e172vp::VertexObject *e172vp::PresentationObject::addVertexObject2(const std::vector<e172vp::Vertex> &vertices, const std::vector<uint32_t> &indices) {
+    const auto r = new VertexObject(&m_graphicsObject, 0, &objectDescriptorSetLayout, &samplerDescriptorSetLayout, vertices, indices, vk::ImageView());
+    pl2objects.push_back(r);
+    return r;
+}
+
 e172vp::VertexObject *e172vp::PresentationObject::addCharacter(char c) {
     const static std::vector<e172vp::Vertex> v = {
         { { -0.1f, -0.1f, 0 }, { 1.0f, 0.0f, 0.0f }, { 0.0f, 0.0f } },
@@ -264,6 +283,21 @@ e172vp::VertexObject *e172vp::PresentationObject::addCharacter(char c) {
     vertexObjects.push_back(r);
     return r;
 }
+
+
+//void e172vp::PresentationObject::singlePointPresentation(const glm::vec3 &point, uint32_t color, const glm::mat4 model) {
+//    const static std::vector<e172vp::Vertex> v = {
+//        { { -0.01f, -0.01f, 0 }, { 1.0f, 0.0f, 0.0f }, { 0.0f, 0.0f } },
+//        { { 0.01f, -0.01f, 0 }, { 0.0f, 1.0f, 0.0f }, { 1.0f, 0.0f } },
+//        { { 0.01f, 0.01f, 0 }, { 0.0f, 0.0f, 1.0f }, { 1.0f, 1.0f } },
+//        { { -0.01f, 0.01f, 0 }, { 1.0f, 1.0f, 1.0f }, { 0.0f, 1.0f } }
+//    };
+//    const static std::vector<uint32_t> i = {
+//        0, 1, 2,
+//        2, 3, 0
+//    };
+//    singleVertexObjectPresentation(v, i);
+//}
 
 e172vp::VertexObject *e172vp::PresentationObject::addVertexObject(const e172vp::Mesh &mesh) {
     return addVertexObject(Vertex::fromGlm(mesh.vertices, mesh.uvMap), mesh.vertexIndices);

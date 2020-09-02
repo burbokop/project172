@@ -72,3 +72,24 @@ e172vp::Mesh e172vp::Mesh::load(const std::string &path) {
     return load(path.c_str());
 }
 
+e172vp::Mesh e172vp::Mesh::plate(float radius) {
+    Mesh result;
+    result.vertices = {
+        { -radius, -radius, 0 },
+        { radius, -radius, 0 },
+        { radius, radius, 0 },
+        { -radius, radius, 0 }
+    };
+    result.uvMap = {
+        { 0.0f, 0.0f },
+        { 1.0f, 0.0f },
+        { 1.0f, 1.0f },
+        { 0.0f, 1.0f }
+    };
+    result.vertexIndices = {
+        0, 1, 2,
+        2, 3, 0
+    };
+    return result;
+}
+

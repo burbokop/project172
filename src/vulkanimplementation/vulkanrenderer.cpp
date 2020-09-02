@@ -13,6 +13,15 @@ VulkanRenderer::VulkanRenderer(const std::vector<std::string> &args) {
         m_presentationObject = new e172vp::PresentationObject(assetFolder);
         m_mesh0 = new e172vp::Mesh(e172vp::Mesh::load(e172::Additional::constrainPath(assetFolder + "/meshes/ship1.obj")));
         m_mesh1 = new e172vp::Mesh(e172vp::Mesh::load(e172::Additional::constrainPath(assetFolder + "/meshes/ship2.obj")));
+        m_pointMesh = new e172vp::Mesh(e172vp::Mesh::plate(0.25));
+
+
+        m_presentationObject->addVertexObject2({
+                                                   {  { -0.4, -0.4, 0 }, { 0., 1., 0. }, {} },
+                                                   {  { 0.4, -0.2, 0 }, { 0., 1., 0. }, {} }
+                                               }, {
+                                                   0, 1
+                                               });
     }
 }
 
@@ -23,26 +32,46 @@ VulkanRenderer::~VulkanRenderer() {
 
 bool VulkanRenderer::update() {
     if(m_presentationObject) {
-        while(m_reciepts.size() > m_objectsPool.size()) {
-            auto obj = m_presentationObject->addVertexObject(*m_mesh0);
-            obj->setScale(glm::scale(glm::mat4(1.), glm::vec3(0.02)));
-            m_objectsPool.push_back(obj);
-        }
-        for(auto p : m_objectsPool) {
-            p->setVisible(false);
-        }
-
-        auto obj_it = m_objectsPool.begin();
-        for(auto rec_it = m_reciepts.begin(); rec_it != m_reciepts.end(); ++rec_it) {
-            (*obj_it)->setRotation(glm::rotate(glm::mat4(1.), rec_it->rotation, glm::vec3(0., 0., 1.)));
-            (*obj_it)->setTranslation(glm::translate(glm::mat4(1.), glm::vec3(rec_it->position.float32X(), rec_it->position.float32Y(), 0)));
-            (*obj_it)->setVisible(true);
-            ++obj_it;
-        }
 
 
+        //GET OBJECTS FROM POOL
+        std::map<e172vp::Mesh*, std::list<e172vp::VertexObject*>> usedObjects;
+        for(auto reciept : m_reciepts) {
+            auto& list = m_objectsPool[reciept.mesh];
+
+            e172vp::VertexObject *obj;
+            if(list.size() > 0) {
+                obj = list.front();
+                list.remove(obj);
+            } else {
+                obj = m_presentationObject->addVertexObject(*reciept.mesh);
+                obj->setScale(glm::scale(glm::mat4(1.), glm::vec3(0.02)));
+            }
+
+            obj->setRotation(glm::rotate(glm::mat4(1.), reciept.rotation, glm::vec3(0., 0., 1.)));
+            obj->setTranslation(glm::translate(glm::mat4(1.), glm::vec3(reciept.position.float32X(), reciept.position.float32Y(), 0)));
+            obj->setVisible(true);
+            usedObjects[reciept.mesh].push_back(obj);
+        }
+
+        //HIDE OBJECTS IN POOL
+        for(auto l : m_objectsPool) {
+            for(auto o : l.second)
+                o->setVisible(false);
+        }
+
+
+        //PRESENT
         m_reciepts.clear();
         m_presentationObject->present();
+
+        //RETURN OBJECTS TO POOL
+        for(const auto& list : usedObjects) {
+            for(auto object : list.second) {
+                m_objectsPool[list.first].push_back(object);
+            }
+        }
+
         return true;
     }
     return false;
@@ -60,6 +89,7 @@ void VulkanRenderer::fill(uint32_t color) {
 }
 
 void VulkanRenderer::drawPixel(const e172::Vector &point, uint32_t color) {
+    m_reciepts.push_back({ transformedPosition(point), 0, m_pointMesh });
     (void)point;
     (void)color;
 }
@@ -96,10 +126,8 @@ void VulkanRenderer::drawDiagonalGrid(const e172::Vector &point0, const e172::Ve
 }
 
 void VulkanRenderer::drawImage(const e172::Image &image, const e172::Vector &position, double angle, double zoom) {
-    m_reciepts.push_back({ (position - m_resolution / 2) / 1080, static_cast<float>(angle) });
+    m_reciepts.push_back({ transformedPosition(position), static_cast<float>(angle), m_mesh0 });
     (void)image;
-    (void)position;
-    (void)angle;
     (void)zoom;
 }
 

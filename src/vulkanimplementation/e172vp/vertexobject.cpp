@@ -11,9 +11,13 @@ e172vp::VertexObject::VertexObject(const e172vp::GraphicsObject *graphicsObject,
     m_graphicsObject = const_cast<GraphicsObject*>(graphicsObject);
     Buffer::createVertexBuffer(graphicsObject, vertices, &m_vertexBuffer, &m_vertexBufferMemory);
     Buffer::createIndexBuffer(graphicsObject, indices, &m_indexBuffer, &m_indexBufferMemory);
-    Buffer::createUniformBuffers<ubo>(graphicsObject, imageCount, &m_uniformBuffers, &m_uniformBufferMemories);
-    Buffer::createUniformDescriptorSets<ubo>(graphicsObject->logicalDevice(), graphicsObject->descriptorPool(), m_uniformBuffers, descriptorSetLayout, &m_descriptorSets);
-    Buffer::createSamplerDescriptorSets(graphicsObject->logicalDevice(), graphicsObject->descriptorPool(), imageView, graphicsObject->sampler(), imageCount, samplerDescriptorSetLayout, &m_textureDescriptorSets);
+
+    if(imageCount > 0) {
+        Buffer::createUniformBuffers<ubo>(graphicsObject, imageCount, &m_uniformBuffers, &m_uniformBufferMemories);
+        Buffer::createUniformDescriptorSets<ubo>(graphicsObject->logicalDevice(), graphicsObject->descriptorPool(), m_uniformBuffers, descriptorSetLayout, &m_descriptorSets);
+        if(imageView)
+            Buffer::createSamplerDescriptorSets(graphicsObject->logicalDevice(), graphicsObject->descriptorPool(), imageView, graphicsObject->sampler(), imageCount, samplerDescriptorSetLayout, &m_textureDescriptorSets);
+    }
     m_indexCount = indices.size();
 }
 
@@ -82,19 +86,23 @@ bool e172vp::VertexObject::visible() const {
     return m_visible;
 }
 
-void e172vp::VertexObject::setVisible(bool visible)
-{
+void e172vp::VertexObject::setVisible(bool visible) {
     m_visible = visible;
 }
 
 e172vp::VertexObject::~VertexObject() {
-    m_graphicsObject->logicalDevice().destroyBuffer(m_vertexBuffer);
-    m_graphicsObject->logicalDevice().freeMemory(m_vertexBufferMemory);
-    m_graphicsObject->logicalDevice().destroyBuffer(m_indexBuffer);
-    m_graphicsObject->logicalDevice().freeMemory(m_indexBufferMemory);
+    if(m_vertexBuffer)
+        m_graphicsObject->logicalDevice().destroyBuffer(m_vertexBuffer);
+    if(m_vertexBufferMemory)
+        m_graphicsObject->logicalDevice().freeMemory(m_vertexBufferMemory);
+    if(m_indexBuffer)
+        m_graphicsObject->logicalDevice().destroyBuffer(m_indexBuffer);
+    if(m_indexBufferMemory)
+        m_graphicsObject->logicalDevice().freeMemory(m_indexBufferMemory);
     for(size_t i = 0; i < m_uniformBuffers.size(); ++i) {
         m_graphicsObject->logicalDevice().destroyBuffer(m_uniformBuffers[i]);
         m_graphicsObject->logicalDevice().freeMemory(m_uniformBufferMemories[i]);
     }
-    m_graphicsObject->logicalDevice().freeDescriptorSets(m_graphicsObject->descriptorPool(), m_descriptorSets);
+    if(m_descriptorSets.size() > 0)
+        m_graphicsObject->logicalDevice().freeDescriptorSets(m_graphicsObject->descriptorPool(), m_descriptorSets);
 }

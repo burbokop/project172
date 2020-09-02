@@ -2,7 +2,6 @@
 #define RENDERER_H
 
 #include "graphicsobject.h"
-#define GLFW_INCLUDE_VULKAN
 #define GLM_FORCE_RADIANS
 #include <SDL2/SDL.h>
 #include "time/elapsedtimer.h"
@@ -28,6 +27,8 @@ class PresentationObject {
     vk::Semaphore renderFinishedSemaphore;
 
     Pipeline *pipeline = nullptr;
+
+    Pipeline *pipeline2 = nullptr;
 
     vk::Buffer vertexBuffer;
     vk::DeviceMemory vertexBufferMemory;
@@ -55,18 +56,14 @@ class PresentationObject {
     };
 
     std::list<VertexObject*> vertexObjects;
+
+
+    std::list<VertexObject*> pl2objects;
 public:
     bool isValid() const;
     static std::vector<std::string> sdlExtensions(SDL_Window *window);
 
-    static void proceedCommandBuffers(const vk::RenderPass &renderPass,
-            const vk::Pipeline &pipeline,
-            const vk::PipelineLayout &pipelineLayout,
-            const vk::Extent2D &extent,
-            const std::vector<vk::Framebuffer> &swapChainFramebuffers,
-            const std::vector<vk::CommandBuffer> &commandBuffers,
-            const std::vector<vk::DescriptorSet> &uniformDescriptorSets,
-            const std::list<VertexObject *> &vertexObjects);
+    void proceedCommandBuffers();
 
     static void resetCommandBuffers(const std::vector<vk::CommandBuffer> &commandBuffers, const vk::Queue &graphicsQueue, const vk::Queue &presentQueue);
     static void createSyncObjects(const vk::Device &logicDevice, vk::Semaphore *imageAvailableSemaphore, vk::Semaphore *renderFinishedSemaphore);
@@ -74,7 +71,14 @@ public:
     static std::vector<char> readFile(const std::string &filename);
 
     VertexObject *addVertexObject(const std::vector<Vertex> &vertices, const std::vector<uint32_t> &indices);
+    VertexObject *addVertexObject2(const std::vector<Vertex> &vertices, const std::vector<uint32_t> &indices);
+
     VertexObject *addCharacter(char c);
+
+
+//    void singlePointPresentation(const glm::vec3 &point, uint32_t color, const glm::mat4 model);
+
+
 
     VertexObject *addVertexObject(const Mesh &mesh);
     bool removeVertexObject(VertexObject *vertexObject);
