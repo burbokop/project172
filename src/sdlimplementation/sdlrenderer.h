@@ -73,7 +73,7 @@ public:
 
     // AbstractRenderer interface
 protected:
-    virtual void update() override;
+    virtual bool update() override;
 };
 
 

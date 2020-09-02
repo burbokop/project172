@@ -3,8 +3,7 @@
 
 #include "SDL2/SDL_image.h"
 
-SDLGraphicsProvider::SDLGraphicsProvider(const char *title, int x, int y) {
-
+SDLGraphicsProvider::SDLGraphicsProvider(const std::vector<std::string> &args, const char *title, int x, int y) : e172::AbstractGraphicsProvider(args) {
     m_renderer = new SDLRenderer(title, x, y);
     installParentToRenderer(m_renderer);
 }
@@ -15,6 +14,10 @@ SDLGraphicsProvider::~SDLGraphicsProvider() {
 
 e172::AbstractRenderer *SDLGraphicsProvider::renderer() const {
     return m_renderer;
+}
+
+bool SDLGraphicsProvider::isValid() const {
+    return true;
 }
 
 e172::Image SDLGraphicsProvider::loadImage(const std::string &path) const {

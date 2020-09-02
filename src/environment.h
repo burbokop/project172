@@ -6,7 +6,6 @@
 #include "additional/informative/fpsmonitor.h"
 #include "netlistener.h"
 #include "worldmanager.h"
-#include "additional/mutex.h"
 
 
 class Environment {

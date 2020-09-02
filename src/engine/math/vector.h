@@ -54,6 +54,8 @@ public:
     Vector operator-(double subtrahend) const;
 
 
+    inline float float32X() const { return static_cast<float>(this->m_x); }
+    inline float float32Y() const { return static_cast<float>(this->m_y); }
     inline int intX() const { return static_cast<int>(this->m_x); }
     inline int intY() const { return static_cast<int>(this->m_y); }
     inline double x() const { return this->m_x; }

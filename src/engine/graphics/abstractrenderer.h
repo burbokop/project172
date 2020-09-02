@@ -57,7 +57,7 @@ class AbstractRenderer {
      */
     friend class GameApplication;
 protected:
-    virtual void update() = 0;
+    virtual bool update() = 0;
 public:
     class Camera : public SharedContainer {
         friend AbstractRenderer;

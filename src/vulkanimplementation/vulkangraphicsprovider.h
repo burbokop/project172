@@ -1,19 +1,15 @@
-#ifndef SDLGRAPHICSPROVIDER_H
-#define SDLGRAPHICSPROVIDER_H
-
-#include "sdlrenderer.h"
+#ifndef VULKANGRAPHICSPROVIDER_H
+#define VULKANGRAPHICSPROVIDER_H
 
 #include <src/engine/graphics/abstractgraphicsprovider.h>
 
+#include "vulkanrenderer.h"
 
-
-
-class SDLGraphicsProvider : public e172::AbstractGraphicsProvider {
-    SDLRenderer *m_renderer = nullptr;
-
+class VulkanGraphicsProvider : public e172::AbstractGraphicsProvider {
+    VulkanRenderer *m_renderer = nullptr;
 public:
-    SDLGraphicsProvider(const std::vector<std::string> &args, const char *title, int x, int y);
-    ~SDLGraphicsProvider() override;
+    VulkanGraphicsProvider(const std::vector<std::string> &args);
+    ~VulkanGraphicsProvider();
 
     // AbstractGraphicsProvider interface
 public:
@@ -25,6 +21,4 @@ public:
 
 };
 
-
-
-#endif // SDLGRAPHICSPROVIDER_H
+#endif // VULKANGRAPHICSPROVIDER_H

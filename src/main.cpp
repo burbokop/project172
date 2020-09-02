@@ -37,16 +37,27 @@
 
 #include <src/background.h>
 
+#include <src/vulkanimplementation/vulkangraphicsprovider.h>
+
 
 int main(int argc, char *argv[]) {
     e172::GameApplication app(argc, argv);
     SDLEventHandler eventHandle;
     SDLAudioProvider audioProvider;
-    SDLGraphicsProvider graphicsProvider("project172", 900, 600);
+
+    e172::AbstractGraphicsProvider *graphicsProvider = new VulkanGraphicsProvider(app.arguments());
+    if(!graphicsProvider->isValid()) {
+        delete graphicsProvider;
+        graphicsProvider = new SDLGraphicsProvider(app.arguments(), "project172", 900, 600);
+        if(!graphicsProvider->isValid()) {
+            std::cerr << "error: no graphics provider are valid.\n";
+            return -1;
+        }
+    }
 
     app.setEventHandler(&eventHandle);
     app.setAudioProvider(&audioProvider);
-    app.setGraphicsProvider(&graphicsProvider);
+    app.setGraphicsProvider(graphicsProvider);
 
     app.assetProvider()->installExecutor("animation", std::make_shared<AnimatorAssetExecutor>());
     app.assetProvider()->installExecutor("sprite", std::make_shared<SpriteAssetExecutor>());
@@ -84,7 +95,7 @@ int main(int argc, char *argv[]) {
 
 
     app.assetProvider()->searchInFolder(app.context()->absolutePath("../assets"));
-    graphicsProvider.loadFont(std::string(), app.context()->absolutePath("../assets/fonts/ZCOOL.ttf"));
+    graphicsProvider->loadFont(std::string(), app.context()->absolutePath("../assets/fonts/ZCOOL.ttf"));
 
 
 

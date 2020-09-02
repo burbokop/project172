@@ -45,6 +45,7 @@ Environment::Environment(std::vector<std::string> args) {
     assetManager->installExecutor("audio", std::make_shared<AudioAssetExecutor>());
     assetManager->installExecutor("offset", std::make_shared<VectorAssetExecutor>());
 
+
     assetManager->installExecutor("rate", std::make_shared<NumberAssetExecutor>());
     assetManager->installExecutor("interval", std::make_shared<NumberAssetExecutor>());
     assetManager->installExecutor("health", std::make_shared<NumberAssetExecutor>());
@@ -78,7 +79,7 @@ Environment::Environment(std::vector<std::string> args) {
     eventHandler = new SDLEventHandler(); // io {no}
     netListener = new NetListener(context);
 
-    renderEngine = new SDLGraphicsProvider("project172", 600, 600);
+    //renderEngine = new SDLGraphicsProvider("project172", 600, 600);
 
     renderEngine->loadFont(std::string(), e172::Additional::absolutePath("../assets/fonts/ZCOOL.ttf", args[0]));
 

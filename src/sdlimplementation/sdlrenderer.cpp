@@ -53,7 +53,6 @@ void SDLRenderer::applyLensEffect(const e172::Vector &point0, const e172::Vector
     m_lensQueue.push({ point0, point1, coefficient });
 }
 
-
 SDLRenderer::SDLRenderer(const char *title, int x, int y) {
     SDL_Init(SDL_INIT_EVERYTHING);
     TTF_Init();
@@ -63,6 +62,7 @@ SDLRenderer::SDLRenderer(const char *title, int x, int y) {
     this->window = window;
     this->m_resolution = e172::Vector(x, y);
     this->surface = surface;
+
 }
 
 void SDLRenderer::__applyLensEffect(SDL_Surface *surface, const e172::Vector point0, const e172::Vector point1, double coef) {
@@ -245,7 +245,7 @@ e172::Vector SDLRenderer::drawString(const std::string &string, const e172::Vect
     return e172::Vector();
 }
 
-void SDLRenderer::update() {
+bool SDLRenderer::update() {
     while (m_lensQueue.size() > 0) {
         const auto l = m_lensQueue.front();
         __applyLensEffect(surface, l.point0, l.point1, l.coeficient);
@@ -253,6 +253,7 @@ void SDLRenderer::update() {
     }
 
     SDL_UpdateWindowSurface(window);
+    return true;
 }
 
 

@@ -133,7 +133,6 @@ target_link_libraries(sdl_impl
     SDL2_image
     SDL2_ttf
     SDL2_mixer
-
     e172
     )
 
@@ -175,8 +174,6 @@ add_executable(project172
 
     ${CMAKE_CURRENT_LIST_DIR}/src/additional/lightparticle.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/additional/lightparticle.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/additional/mutex.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/additional/mutex.h
     ${CMAKE_CURRENT_LIST_DIR}/src/additional/speedindicator.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/additional/speedindicator.h
     ${CMAKE_CURRENT_LIST_DIR}/src/additional/stringformer.cpp
@@ -293,13 +290,15 @@ add_executable(project172
 
     ${CMAKE_CURRENT_LIST_DIR}/src/explosivespawner.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/explosivespawner.h
-
     )
 
+
+include(${CMAKE_CURRENT_LIST_DIR}/src/vulkanimplementation/CMakeLists.txt)
 
 
 target_link_libraries(project172
     sdl_impl
+    vulkan_impl
     e172
     )
 

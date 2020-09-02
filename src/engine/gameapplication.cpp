@@ -115,7 +115,9 @@ int GameApplication::exec() {
                     e->render(r);
                 }
                 r->m_locked = true;
-                r->update();
+                if(!r->update()) {
+                    break;
+                }
             }
         }
 
