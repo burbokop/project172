@@ -136,10 +136,10 @@ void e172vp::PresentationObject::updateUniformBuffer(uint32_t currentImage) {
     auto currentTime = std::chrono::high_resolution_clock::now();
     float time = std::chrono::duration<float, std::chrono::seconds::period>(currentTime - startTime).count();
     GlobalUniformBufferObject ubo;
-    //ubo.offset = { std::cos(time * 0.2) * 0.2, std::sin(time * 0.2) * 0.2 };
+    ubo.offset = { std::cos(time * 0.2) * 0.2, std::sin(time * 0.2) * 0.2 };
     ubo.offset = { 0, 0 };
     ubo.scale = m_globalScale;
-    ubo.currentTime = time;
+    ubo.time = time;
     void* data;
     vkMapMemory(m_graphicsObject.logicalDevice(), uniformBuffersMemory[currentImage], 0, sizeof(ubo), 0, &data);
     memcpy(data, &ubo, sizeof(ubo));

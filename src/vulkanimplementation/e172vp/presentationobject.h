@@ -50,9 +50,9 @@ class PresentationObject {
     glm::mat4 m_globalScale = glm::mat4(1.);
 
     struct GlobalUniformBufferObject {
+        float time;
         glm::vec2 offset;
         glm::mat4 scale;
-        float currentTime;
     };
 
     std::list<VertexObject*> vertexObjects;
