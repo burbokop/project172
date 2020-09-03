@@ -1,12 +1,13 @@
 #ifndef VERTEXOBJECT_H
 #define VERTEXOBJECT_H
 
-#include "vertex.h"
-#include "descriptorsetlayout.h"
+#include "../vertex.h"
+#include "../descriptorsetlayout.h"
 
 namespace e172vp {
 class GraphicsObject;
 class PresentationObject;
+class Pipeline;
 class VertexObject {
     friend PresentationObject;
     GraphicsObject *m_graphicsObject = nullptr;
@@ -31,23 +32,25 @@ class VertexObject {
     vk::DeviceMemory m_vertexBufferMemory;
     vk::Buffer m_indexBuffer;
     vk::DeviceMemory m_indexBufferMemory;
-    std::vector<vk::Buffer> m_uniformBuffers;
-    std::vector<vk::DeviceMemory> m_uniformBufferMemories;
+    vk::Buffer m_uniformBuffer;
+    vk::DeviceMemory m_uniformBufferMemory;
 
-    std::vector<vk::DescriptorSet> m_descriptorSets;
-    std::vector<vk::DescriptorSet> m_textureDescriptorSets;
+    vk::DescriptorSet m_descriptorSet;
+    vk::DescriptorSet m_textureDescriptorSet;
     uint32_t m_indexCount;
+
 
     bool m_visible = true;
     ~VertexObject();
     VertexObject(const e172vp::GraphicsObject *graphicsObject, size_t imageCount, const DescriptorSetLayout *descriptorSetLayout, const DescriptorSetLayout *samplerDescriptorSetLayout, const std::vector<Vertex> &vertices, const std::vector<uint32_t> &indices, const vk::ImageView &imageView);
 public:
     GraphicsObject *graphicsObject() const;
-    std::vector<vk::DescriptorSet> descriptorSets() const;
+    vk::DescriptorSet descriptorSet() const;
     vk::Buffer vertexBuffer() const;
     vk::Buffer indexBuffer() const;
     uint32_t indexCount() const;
 
+    void updateTexture(int w, int h, void *data) const;
 
     void setVertices(const std::vector<Vertex> &vertices);
 
@@ -58,9 +61,13 @@ public:
     void setTranslation(const glm::mat4 &translation);
     glm::mat4 scale() const;
     void setScale(const glm::mat4 &scale);
-    std::vector<vk::DescriptorSet> textureDescriptorSets() const;
+    vk::DescriptorSet textureDescriptorSet() const;
     bool visible() const;
     void setVisible(bool visible);
+    Pipeline *pipeline() const;
+    void setPipeline(Pipeline *pipeline);
+    bool bindGlobalDescriprorSet() const;
+    void setBindGlobalDescriprorSet(bool bindGlobalDescriprorSet);
 };
 }
 #endif // VERTEXOBJECT_H

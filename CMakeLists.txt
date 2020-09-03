@@ -14,8 +14,6 @@ include_directories(${CMAKE_CURRENT_LIST_DIR})
 
 
 
-
-
 add_library(e172 SHARED
 
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/assettools/abstractassetexecutor.cpp

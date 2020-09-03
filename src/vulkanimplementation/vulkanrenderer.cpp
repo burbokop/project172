@@ -1,6 +1,6 @@
 #include "vulkanrenderer.h"
 
-#include "e172vp/presentationobject.h"
+#include "e172vp/bootstrapobject.h"
 
 #include "../engine/additional.h"
 
@@ -10,7 +10,8 @@
 VulkanRenderer::VulkanRenderer(const std::vector<std::string> &args) {
     if(args.size() > 0) {
         const auto assetFolder = e172::Additional::absolutePath("../assets", args[0]);
-        m_presentationObject = new e172vp::PresentationObject(assetFolder);
+        m_bootstrapObject = new e172vp::BootstrapObject(assetFolder);
+
         m_mesh0 = new e172vp::Mesh(e172vp::Mesh::load(e172::Additional::constrainPath(assetFolder + "/meshes/ship1.obj")));
         m_mesh1 = new e172vp::Mesh(e172vp::Mesh::load(e172::Additional::constrainPath(assetFolder + "/meshes/ship2.obj")));
         m_plateMesh = new e172vp::Mesh(e172vp::Mesh::plate(0.01));
@@ -45,12 +46,12 @@ VulkanRenderer::VulkanRenderer(const std::vector<std::string> &args) {
 }
 
 VulkanRenderer::~VulkanRenderer() {
-    if(m_presentationObject)
-        delete m_presentationObject;
+    if(m_bootstrapObject)
+        delete m_bootstrapObject;
 }
 
 bool VulkanRenderer::update() {
-    if(m_presentationObject) {
+    if(m_bootstrapObject) {
 
 
         //GET OBJECTS FROM POOL
@@ -64,9 +65,9 @@ bool VulkanRenderer::update() {
                 list.remove(obj);
             } else {
                 if(reciept.mesh->useTexture) {
-                    obj = m_presentationObject->addVertexObject(*reciept.mesh);
+                    obj = m_bootstrapObject->addVertexObject(*reciept.mesh);
                 } else {
-                    obj = m_presentationObject->addVertexObject2(e172vp::Vertex::fromGlm(reciept.mesh->vertices), reciept.mesh->vertexIndices);
+                    obj = m_bootstrapObject->addVertexObject2(e172vp::Vertex::fromGlm(reciept.mesh->vertices), reciept.mesh->vertexIndices);
                 }
                 if(!reciept.modifyVertexBuffer) {
                     obj->setScale(glm::scale(glm::mat4(1.), glm::vec3(0.02)));
@@ -127,7 +128,7 @@ bool VulkanRenderer::update() {
 
         //PRESENT
         m_reciepts.clear();
-        m_presentationObject->present();
+        m_bootstrapObject->presentationObject()->present();
 
         //RETURN OBJECTS TO POOL
         for(const auto& list : usedObjects) {
@@ -142,8 +143,8 @@ bool VulkanRenderer::update() {
 }
 
 bool VulkanRenderer::isValid() const {
-    if(m_presentationObject)
-        return m_presentationObject->isValid();
+    if(m_bootstrapObject)
+        return m_bootstrapObject->isValid();
 
     return false;
 }

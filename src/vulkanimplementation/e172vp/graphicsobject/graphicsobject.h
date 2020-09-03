@@ -2,7 +2,7 @@
 #define GRAPHICSINSTANCE_H
 
 #include "graphicsobjectcreateinfo.h"
-#include "tools/hardware.h"
+#include "../tools/hardware.h"
 
 #include <vulkan/vulkan.hpp>
 #include <queue>

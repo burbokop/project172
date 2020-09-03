@@ -8,13 +8,13 @@
 #include <map>
 
 namespace e172vp {
-    class PresentationObject;
+    class BootstrapObject;
     class Mesh;
     class VertexObject;
 }
 
 class VulkanRenderer : public e172::AbstractRenderer {
-    e172vp::PresentationObject *m_presentationObject = nullptr;
+    e172vp::BootstrapObject *m_bootstrapObject = nullptr;
     e172vp::Mesh *m_mesh0 = nullptr;
     e172vp::Mesh *m_mesh1 = nullptr;
     e172vp::Mesh *m_plateMesh = nullptr;

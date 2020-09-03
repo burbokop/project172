@@ -1,11 +1,11 @@
 #include "graphicsobject.h"
 
-#include "tools/hardware.h"
-#include "tools/validation.h"
-#include "tools/stringvector.h"
-#include "tools/extensiontools.h"
-#include "tools/vulkaninstancefactory.h"
-#include "tools/logicdevicefactory.h"
+#include "../tools/hardware.h"
+#include "../tools/validation.h"
+#include "../tools/stringvector.h"
+#include "../tools/extensiontools.h"
+#include "../tools/vulkaninstancefactory.h"
+#include "../tools/logicdevicefactory.h"
 
 #include <set>
 #include <iostream>

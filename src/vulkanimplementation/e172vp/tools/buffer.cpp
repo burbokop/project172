@@ -1,6 +1,6 @@
 #include "buffer.h"
 
-#include "../graphicsobject.h"
+#include "../graphicsobject/graphicsobject.h"
 
 #include <iostream>
 

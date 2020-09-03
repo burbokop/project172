@@ -72,11 +72,27 @@ public:
 
     static void createUniformDescriptorSets(const vk::Device &logicalDevice, const vk::DescriptorPool &descriptorPool, size_t structSize, const std::vector<vk::Buffer> &uniformBuffers, const e172vp::DescriptorSetLayout *descriptorSetLayout, std::vector<vk::DescriptorSet> *descriptorSets);
 
+    static void createUniformDescriptorSet(const vk::Device &logicalDevice, const vk::DescriptorPool &descriptorPool, size_t structSize, const vk::Buffer &uniformBuffer, const e172vp::DescriptorSetLayout *descriptorSetLayout, vk::DescriptorSet *descriptorSet) {
+        std::vector<vk::DescriptorSet> array;
+        createUniformDescriptorSets(logicalDevice, descriptorPool, structSize, { uniformBuffer }, descriptorSetLayout, &array);
+        *descriptorSet = array[0];
+    }
+
     static void createSamplerDescriptorSets(const vk::Device &logicalDevice, const vk::DescriptorPool &descriptorPool, const vk::ImageView &imageView, const vk::Sampler &sampler, size_t count, const e172vp::DescriptorSetLayout *descriptorSetLayout, std::vector<vk::DescriptorSet> *descriptorSets);
+    static inline void createSamplerDescriptorSet(const vk::Device &logicalDevice, const vk::DescriptorPool &descriptorPool, const vk::ImageView &imageView, const vk::Sampler &sampler, const e172vp::DescriptorSetLayout *descriptorSetLayout, vk::DescriptorSet *descriptorSet) {
+        std::vector<vk::DescriptorSet> array;
+        createSamplerDescriptorSets(logicalDevice, descriptorPool, imageView, sampler, 1, descriptorSetLayout, &array);
+        *descriptorSet = array[0];
+    }
 
     template<typename T>
     static void createUniformDescriptorSets(const vk::Device &logicalDevice, const vk::DescriptorPool &descriptorPool, const std::vector<vk::Buffer> &uniformBuffers, const e172vp::DescriptorSetLayout *descriptorSetLayout, std::vector<vk::DescriptorSet> *descriptorSets) {
         createUniformDescriptorSets(logicalDevice, descriptorPool, sizeof (T), uniformBuffers, descriptorSetLayout, descriptorSets);
+    }
+
+    template<typename T>
+    static void createUniformDescriptorSet(const vk::Device &logicalDevice, const vk::DescriptorPool &descriptorPool, const vk::Buffer &uniformBuffer, const e172vp::DescriptorSetLayout *descriptorSetLayout, vk::DescriptorSet *descriptorSet) {
+        createUniformDescriptorSet(logicalDevice, descriptorPool, sizeof (T), uniformBuffer, descriptorSetLayout, descriptorSet);
     }
 };
 
