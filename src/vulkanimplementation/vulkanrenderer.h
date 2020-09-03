@@ -17,14 +17,19 @@ class VulkanRenderer : public e172::AbstractRenderer {
     e172vp::PresentationObject *m_presentationObject = nullptr;
     e172vp::Mesh *m_mesh0 = nullptr;
     e172vp::Mesh *m_mesh1 = nullptr;
-    e172vp::Mesh *m_pointMesh = nullptr;
+    e172vp::Mesh *m_plateMesh = nullptr;
     e172vp::Mesh *m_lineMesh = nullptr;
+    e172vp::Mesh *m_rectMesh = nullptr;
+    e172vp::Mesh *m_circleMesh = nullptr;
+
 
     struct Reciept {
         bool modifyVertexBuffer = false;
         e172::Vector position0;
         e172::Vector position1;
+        std::string text;
         float rotation;
+        uint32_t color;
         e172vp::Mesh *mesh = nullptr;
     };
 
@@ -58,7 +63,7 @@ public:
     virtual void drawCircle(const e172::Vector &point, int radius, uint32_t color) override;
     virtual void drawDiagonalGrid(const e172::Vector &point0, const e172::Vector &point1, int interval, uint32_t color) override;
     virtual void drawImage(const e172::Image &image, const e172::Vector &position, double angle, double zoom) override;
-    virtual e172::Vector drawString(const std::string &string, const e172::Vector &positions, uint32_t color, const e172::TextFormat &format) override;
+    virtual e172::Vector drawString(const std::string &string, const e172::Vector &position, uint32_t color, const e172::TextFormat &format) override;
     virtual void applyLensEffect(const e172::Vector &point0, const e172::Vector &point1, double coefficient) override;
     virtual void applySmooth(const e172::Vector &point0, const e172::Vector &point1, double coefficient) override;
     virtual void enableEffect(uint64_t effect) override;

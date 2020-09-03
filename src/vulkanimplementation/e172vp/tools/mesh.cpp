@@ -95,3 +95,25 @@ e172vp::Mesh e172vp::Mesh::plate(float radius) {
     return result;
 }
 
+e172vp::Mesh e172vp::Mesh::plate(const glm::vec2 point0, const glm::vec2 point1) {
+    Mesh result;
+    result.useTexture = true;
+    result.vertices = {
+        { point0.x, point0.y, 0 },
+        { point1.x, point0.y, 0 },
+        { point1.x, point1.y, 0 },
+        { point0.x, point1.y, 0 }
+    };
+    result.uvMap = {
+        { 0.0f, 0.0f },
+        { 1.0f, 0.0f },
+        { 1.0f, 1.0f },
+        { 0.0f, 1.0f }
+    };
+    result.vertexIndices = {
+        0, 1, 2,
+        2, 3, 0
+    };
+    return result;
+}
+

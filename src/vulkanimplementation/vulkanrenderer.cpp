@@ -13,12 +13,24 @@ VulkanRenderer::VulkanRenderer(const std::vector<std::string> &args) {
         m_presentationObject = new e172vp::PresentationObject(assetFolder);
         m_mesh0 = new e172vp::Mesh(e172vp::Mesh::load(e172::Additional::constrainPath(assetFolder + "/meshes/ship1.obj")));
         m_mesh1 = new e172vp::Mesh(e172vp::Mesh::load(e172::Additional::constrainPath(assetFolder + "/meshes/ship2.obj")));
-        m_pointMesh = new e172vp::Mesh(e172vp::Mesh::plate(0.25));
+        m_plateMesh = new e172vp::Mesh(e172vp::Mesh::plate(0.01));
 
         m_lineMesh = new e172vp::Mesh();
         m_lineMesh->vertices = { { }, { } };
         m_lineMesh->vertexIndices = { 0, 1 };
         m_lineMesh->useTexture = false;
+
+        m_rectMesh = new e172vp::Mesh();
+        m_rectMesh->vertices = { { }, { }, { }, { } };
+        m_rectMesh->vertexIndices = { 0, 1, 2, 2, 3, 0 };
+        m_rectMesh->useTexture = false;
+
+
+        m_circleMesh = new e172vp::Mesh();
+        m_circleMesh->vertices = { { }, { }, { }, { } };
+        m_circleMesh->vertexIndices = { 0, 1, 2, 2, 3, 0 };
+        m_circleMesh->useTexture = false;
+
 
         //m_lineMesh = new e172vp::Mesh();
         //m_lineMesh->vertices = {
@@ -56,15 +68,47 @@ bool VulkanRenderer::update() {
                 } else {
                     obj = m_presentationObject->addVertexObject2(e172vp::Vertex::fromGlm(reciept.mesh->vertices), reciept.mesh->vertexIndices);
                 }
-                obj->setScale(glm::scale(glm::mat4(1.), glm::vec3(0.02)));
+                if(!reciept.modifyVertexBuffer) {
+                    obj->setScale(glm::scale(glm::mat4(1.), glm::vec3(0.02)));
+                }
             }
 
             obj->setRotation(glm::rotate(glm::mat4(1.), reciept.rotation, glm::vec3(0., 0., 1.)));
             if(reciept.modifyVertexBuffer) {
-                obj->setVertices({
-                                     { { reciept.position0.float32X(), reciept.position0.float32Y(), 0 }, { 1, 1, 0 }, {} },
-                                     { { reciept.position1.float32X(), reciept.position1.float32Y(), 0 }, { 1, 1, 0 }, {} }
-                                 });
+                glm::vec3 color = {
+                    static_cast<uint8_t>(reciept.color >> 16) / 256.,
+                    static_cast<uint8_t>(reciept.color >> 8) / 256.,
+                    static_cast<uint8_t>(reciept.color >> 0) / 256.
+                };
+
+                if(reciept.mesh == m_lineMesh) {
+                    obj->setVertices({
+                                         { { reciept.position0.float32X(), reciept.position0.float32Y(), 0 }, color, {} },
+                                         { { reciept.position1.float32X(), reciept.position1.float32Y(), 0 }, color, {} }
+                                     });
+                } else if(reciept.mesh == m_rectMesh) {
+                    obj->setVertices({
+                                         { { reciept.position0.float32X(), reciept.position0.float32Y(), 0 }, color, {} },
+                                         { { reciept.position1.float32X(), reciept.position0.float32Y(), 0 }, color, {} },
+                                         { { reciept.position1.float32X(), reciept.position1.float32Y(), 0 }, color, {} },
+                                         { { reciept.position0.float32X(), reciept.position1.float32Y(), 0 }, color, {} }
+                                     });
+                } else if(reciept.mesh == m_circleMesh) {
+                    glm::vec3 p0((reciept.position0.float32X() + reciept.position1.float32X()) / 2, reciept.position0.float32Y(), 0);
+                    glm::vec3 p1(reciept.position1.float32X(), (reciept.position0.float32Y() + reciept.position1.float32Y()) / 2, 0);
+                    glm::vec3 p2((reciept.position0.float32X() + reciept.position1.float32X()) / 2, reciept.position1.float32Y(), 0);
+                    glm::vec3 p3(reciept.position0.float32X(), (reciept.position0.float32Y() + reciept.position1.float32Y()) / 2, 0);
+
+                    obj->setVertices({
+                                         { p0, color, {} },
+                                         { p1, color, {} },
+                                         { p2, color, {} },
+                                         { p3, color, {} }
+                                     });
+                } else if(reciept.mesh == m_plateMesh) {
+                    const auto plate = e172vp::Mesh::plate({ reciept.position0.float32X(), reciept.position0.float32Y() }, { reciept.position1.float32X(), reciept.position1.float32Y() });
+                    obj->setVertices(e172vp::Vertex::fromGlm(plate.vertices, plate.uvMap));
+                }
             } else {
                 obj->setTranslation(glm::translate(glm::mat4(1.), glm::vec3(reciept.position0.float32X(), reciept.position0.float32Y(), 0)));
             }
@@ -109,14 +153,7 @@ void VulkanRenderer::fill(uint32_t color) {
 }
 
 void VulkanRenderer::drawPixel(const e172::Vector &point, uint32_t color) {
-    Reciept reciept;
-    reciept.position0 = transformedPosition(point);
-    reciept.mesh = m_pointMesh;
-    m_reciepts.push_back(reciept);
-
-    m_reciepts.push_back(reciept);
-    (void)point;
-    (void)color;
+    drawSquare(point, 1, color);
 }
 
 void VulkanRenderer::drawLine(const e172::Vector &point0, const e172::Vector &point1, uint32_t color) {
@@ -125,26 +162,38 @@ void VulkanRenderer::drawLine(const e172::Vector &point0, const e172::Vector &po
     reciept.position1 = transformedPosition(point1);
     reciept.mesh = m_lineMesh;
     reciept.modifyVertexBuffer = true;
+    reciept.color = color;
     m_reciepts.push_back(reciept);
-    (void)color;
 }
 
 void VulkanRenderer::drawRect(const e172::Vector &point0, const e172::Vector &point1, uint32_t color) {
-    (void)point0;
-    (void)point1;
-    (void)color;
+    Reciept reciept;
+    reciept.position0 = transformedPosition(point0);
+    reciept.position1 = transformedPosition(point1);
+    reciept.mesh = m_rectMesh;
+    reciept.modifyVertexBuffer = true;
+    reciept.color = color;
+    m_reciepts.push_back(reciept);
 }
 
 void VulkanRenderer::drawSquare(const e172::Vector &point, int radius, uint32_t color) {
-    (void)point;
-    (void)radius;
-    (void)color;
+    Reciept reciept;
+    reciept.position0 = transformedPosition(point - radius);
+    reciept.position1 = transformedPosition(point + radius);
+    reciept.mesh = m_rectMesh;
+    reciept.modifyVertexBuffer = true;
+    reciept.color = color;
+    m_reciepts.push_back(reciept);
 }
 
 void VulkanRenderer::drawCircle(const e172::Vector &point, int radius, uint32_t color) {
-    (void)point;
-    (void)radius;
-    (void)color;
+    Reciept reciept;
+    reciept.position0 = transformedPosition(point - radius);
+    reciept.position1 = transformedPosition(point + radius);
+    reciept.mesh = m_circleMesh;
+    reciept.modifyVertexBuffer = true;
+    reciept.color = color;
+    m_reciepts.push_back(reciept);
 }
 
 void VulkanRenderer::drawDiagonalGrid(const e172::Vector &point0, const e172::Vector &point1, int interval, uint32_t color) {
@@ -164,12 +213,21 @@ void VulkanRenderer::drawImage(const e172::Image &image, const e172::Vector &pos
     (void)zoom;
 }
 
-e172::Vector VulkanRenderer::drawString(const std::string &string, const e172::Vector &positions, uint32_t color, const e172::TextFormat &format) {
-    (void)string;
-    (void)positions;
-    (void)color;
+e172::Vector VulkanRenderer::drawString(const std::string &string, const e172::Vector &position, uint32_t color, const e172::TextFormat &format) {
+    e172::Vector size(string.size() * 8, 8);
+
+    Reciept reciept;
+    reciept.position0 = transformedPosition(position);
+    reciept.position1 = transformedPosition(position + size);
+    reciept.mesh = m_plateMesh;
+    reciept.text = string;
+    reciept.modifyVertexBuffer = true;
+    reciept.color = color;
+    reciept.rotation = 0;
+    m_reciepts.push_back(reciept);
+
     (void)format;
-    return e172::Vector();
+    return size;
 }
 
 void VulkanRenderer::applyLensEffect(const e172::Vector &point0, const e172::Vector &point1, double coefficient) {

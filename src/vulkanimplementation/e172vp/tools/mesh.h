@@ -23,6 +23,7 @@ struct Mesh {
     static Mesh load(const char *path);
     static Mesh load(const std::string &path);
     static Mesh plate(float radius);
+    static Mesh plate(const glm::vec2 point0, const glm::vec2 point1);
 };
 
 }

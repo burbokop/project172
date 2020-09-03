@@ -88,7 +88,7 @@ public:
     virtual void drawCircle(const Vector &point, int radius, uint32_t color) = 0;
     virtual void drawDiagonalGrid(const Vector &point0, const Vector &point1, int interval, uint32_t color) = 0;
     virtual void drawImage(const Image &image, const Vector &position, double angle, double zoom) = 0;
-    virtual Vector drawString(const std::string &string, const Vector &positions, uint32_t color, const TextFormat &format = TextFormat()) = 0;
+    virtual Vector drawString(const std::string &string, const Vector &position, uint32_t color, const TextFormat &format = TextFormat()) = 0;
 
 
     inline void drawPixelShifted(const Vector &point, uint32_t color) { drawPixel(point + offset(), color); }

@@ -10,6 +10,13 @@
 
 
 bool e172vp::Font::createTextureImage32(const vk::Device &logicalDevice, const vk::PhysicalDevice &physicalDevice, const vk::CommandPool &commandPool, const vk::Queue &copyQueue, void* pixels, size_t w, size_t h, vk::Format format, vk::Image *image, vk::DeviceMemory *imageMemory) {
+
+    createImage(logicalDevice, physicalDevice, w, h, format, vk::ImageTiling::eOptimal, vk::ImageUsageFlagBits::eTransferDst | vk::ImageUsageFlagBits::eSampled, vk::MemoryPropertyFlagBits::eDeviceLocal, image, imageMemory);
+
+    return updateTextureImage(logicalDevice, physicalDevice, commandPool, copyQueue, pixels, w, h, format, *image);
+}
+
+bool e172vp::Font::updateTextureImage(const vk::Device &logicalDevice, const vk::PhysicalDevice &physicalDevice, const vk::CommandPool &commandPool, const vk::Queue &copyQueue, void *pixels, size_t w, size_t h, vk::Format format, const vk::Image &image) {
     int channelCount = 0;
     if(format == vk::Format::eR8G8B8Srgb) {
         channelCount = 3;
@@ -33,11 +40,10 @@ bool e172vp::Font::createTextureImage32(const vk::Device &logicalDevice, const v
     memcpy(data, pixels, static_cast<size_t>(imageSize));
     vkUnmapMemory(logicalDevice, stagingBufferMemory);
 
-    createImage(logicalDevice, physicalDevice, w, h, format, vk::ImageTiling::eOptimal, vk::ImageUsageFlagBits::eTransferDst | vk::ImageUsageFlagBits::eSampled, vk::MemoryPropertyFlagBits::eDeviceLocal, image, imageMemory);
 
-    transitionImageLayout(logicalDevice, commandPool, copyQueue, *image, vk::ImageLayout::eUndefined, vk::ImageLayout::eTransferDstOptimal);
-    copyBufferToImage(logicalDevice, commandPool, copyQueue, stagingBuffer, *image, static_cast<uint32_t>(w), static_cast<uint32_t>(h));
-    transitionImageLayout(logicalDevice, commandPool, copyQueue, *image, vk::ImageLayout::eTransferDstOptimal, vk::ImageLayout::eShaderReadOnlyOptimal);
+    transitionImageLayout(logicalDevice, commandPool, copyQueue, image, vk::ImageLayout::eUndefined, vk::ImageLayout::eTransferDstOptimal);
+    copyBufferToImage(logicalDevice, commandPool, copyQueue, stagingBuffer, image, static_cast<uint32_t>(w), static_cast<uint32_t>(h));
+    transitionImageLayout(logicalDevice, commandPool, copyQueue, image, vk::ImageLayout::eTransferDstOptimal, vk::ImageLayout::eShaderReadOnlyOptimal);
 
     logicalDevice.destroyBuffer(stagingBuffer);
     logicalDevice.freeMemory(stagingBufferMemory);
@@ -45,7 +51,7 @@ bool e172vp::Font::createTextureImage32(const vk::Device &logicalDevice, const v
 }
 
 void e172vp::Font::createImage(const vk::Device &logicalDevice, const vk::PhysicalDevice &physicalDevice, uint32_t width, uint32_t height, vk::Format format, vk::ImageTiling tiling, vk::ImageUsageFlags usage, vk::MemoryPropertyFlags properties, vk::Image *image, vk::DeviceMemory *imageMemory) {
-    vk::ImageCreateInfo imageInfo{};
+    vk::ImageCreateInfo imageInfo;
     imageInfo.imageType = vk::ImageType::e2D;
     imageInfo.extent.width = width;
     imageInfo.extent.height = height;
@@ -66,7 +72,7 @@ void e172vp::Font::createImage(const vk::Device &logicalDevice, const vk::Physic
     vk::MemoryRequirements memRequirements;
     logicalDevice.getImageMemoryRequirements(*image, &memRequirements);
 
-    vk::MemoryAllocateInfo allocInfo{};
+    vk::MemoryAllocateInfo allocInfo;
     allocInfo.allocationSize = memRequirements.size;
     allocInfo.memoryTypeIndex = Buffer::findMemoryType(physicalDevice, memRequirements.memoryTypeBits, properties);
 
