@@ -18,6 +18,7 @@ class VulkanRenderer : public e172::AbstractRenderer {
     e172vp::Mesh *m_mesh0 = nullptr;
     e172vp::Mesh *m_mesh1 = nullptr;
     e172vp::Mesh *m_pointMesh = nullptr;
+    e172vp::Mesh *m_lineMesh = nullptr;
 
     struct Reciept {
         e172::Vector position;

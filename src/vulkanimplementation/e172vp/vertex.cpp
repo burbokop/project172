@@ -25,7 +25,12 @@ std::array<vk::VertexInputAttributeDescription, 3> e172vp::Vertex::attributeDesc
 std::vector<e172vp::Vertex> e172vp::Vertex::fromGlm(const std::vector<glm::vec3> &vertices, const std::vector<glm::vec2> &texCoords, glm::vec3 color) {
     std::vector<e172vp::Vertex> result(vertices.size());
     for(size_t i = 0; i < vertices.size(); ++i) {
-        result[i] = { vertices[i], color, texCoords[i] };
+        glm::vec2 tex_c;
+        if(i < texCoords.size()) {
+            tex_c = texCoords[i];
+        }
+
+        result[i] = { vertices[i], color, tex_c };
     }
     return result;
 }

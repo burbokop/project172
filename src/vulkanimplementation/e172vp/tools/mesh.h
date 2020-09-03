@@ -17,6 +17,8 @@ struct Mesh {
     std::vector <uint32_t> uvIndices;
     std::vector <uint32_t> normalIndices;
 
+    bool useTexture = false;
+
     Mesh();
     static Mesh load(const char *path);
     static Mesh load(const std::string &path);

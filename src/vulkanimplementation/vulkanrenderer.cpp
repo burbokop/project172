@@ -15,6 +15,16 @@ VulkanRenderer::VulkanRenderer(const std::vector<std::string> &args) {
         m_mesh1 = new e172vp::Mesh(e172vp::Mesh::load(e172::Additional::constrainPath(assetFolder + "/meshes/ship2.obj")));
         m_pointMesh = new e172vp::Mesh(e172vp::Mesh::plate(0.25));
 
+        m_pointMesh->useTexture = false;
+
+        //m_lineMesh = new e172vp::Mesh();
+        //m_lineMesh->vertices = {
+        //    {  { tp0.float32X(), tp0.float32Y(), 0 }, { 0., 1., 0. }, {} },
+        //    {  { tp1.float32X(), tp1.float32Y(), 0 }, { 0., 1., 0. }, {} }
+        //};
+        //m_lineMesh->vertexIndices = {
+        //    0, 1
+        //};
 
     }
 }
@@ -38,7 +48,11 @@ bool VulkanRenderer::update() {
                 obj = list.front();
                 list.remove(obj);
             } else {
-                obj = m_presentationObject->addVertexObject(*reciept.mesh);
+                if(reciept.mesh->useTexture) {
+                    obj = m_presentationObject->addVertexObject(*reciept.mesh);
+                } else {
+                    obj = m_presentationObject->addVertexObject2(e172vp::Vertex::fromGlm(reciept.mesh->vertices), reciept.mesh->vertexIndices);
+                }
                 obj->setScale(glm::scale(glm::mat4(1.), glm::vec3(0.02)));
             }
 
@@ -92,13 +106,13 @@ void VulkanRenderer::drawLine(const e172::Vector &point0, const e172::Vector &po
     const auto tp0 = transformedPosition(point0);
     const auto tp1 = transformedPosition(point1);
 
-    m_presentationObject->addVertexObject2({
-                                               {  { tp0.float32X(), tp0.float32Y(), 0 }, { 0., 1., 0. }, {} },
-                                               {  { tp1.float32X(), tp1.float32Y(), 0 }, { 0., 1., 0. }, {} }
-                                           }, {
-                                               0, 1
-                                           });
-
+    //m_presentationObject->addVertexObject2({
+    //                                           {  { tp0.float32X(), tp0.float32Y(), 0 }, { 0., 1., 0. }, {} },
+    //                                           {  { tp1.float32X(), tp1.float32Y(), 0 }, { 0., 1., 0. }, {} }
+    //                                       }, {
+    //                                           0, 1
+    //                                       });
+    //
     (void)color;
 }
 

@@ -10,6 +10,7 @@ e172vp::Mesh::Mesh() {
 
 e172vp::Mesh e172vp::Mesh::load(const char *path) {
     Mesh result;
+    result.useTexture = true;
 
     FILE *file = fopen(path, "r");
     if(file == NULL) {
@@ -74,6 +75,7 @@ e172vp::Mesh e172vp::Mesh::load(const std::string &path) {
 
 e172vp::Mesh e172vp::Mesh::plate(float radius) {
     Mesh result;
+    result.useTexture = true;
     result.vertices = {
         { -radius, -radius, 0 },
         { radius, -radius, 0 },

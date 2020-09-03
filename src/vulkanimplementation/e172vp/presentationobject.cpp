@@ -124,10 +124,10 @@ void e172vp::PresentationObject::present() {
 
 
 
-    for(auto o : pl2objects) {
-        delete o;
-    }
-    pl2objects.clear();
+    //for(auto o : pl2objects) {
+    //    delete o;
+    //}
+    //pl2objects.clear();
 
 }
 
@@ -168,10 +168,7 @@ std::vector<std::string> e172vp::PresentationObject::sdlExtensions(SDL_Window *w
     return result;
 }
 
-void e172vp::PresentationObject::proceedCommandBuffers() {
-    const auto centalIndex = m_graphicsObject.commandPool().commandBufferCount() / 2;
-
-
+void e172vp::PresentationObject::proceedCommandBuffers() {    
     for (size_t i = 0; i < m_graphicsObject.commandPool().commandBufferCount(); i++) {
         const auto commandBuffer = m_graphicsObject.commandPool().commandBuffer(i);
         const auto extent = m_graphicsObject.swapChainSettings().extent;
@@ -206,33 +203,31 @@ void e172vp::PresentationObject::proceedCommandBuffers() {
         commandBuffer.setViewport(0, 1, &viewport);
 
 
-        if(i < centalIndex) {
-            commandBuffer.bindPipeline(vk::PipelineBindPoint::eGraphics, pipeline->handle());
+        commandBuffer.bindPipeline(vk::PipelineBindPoint::eGraphics, pipeline->handle());
+        for(auto object : vertexObjects) {
+            if(object->visible()) {
+                vk::Buffer vb[] = { object->vertexBuffer() };
+                vk::DeviceSize offsets[] = { 0 };
+                commandBuffer.bindVertexBuffers(0, 1, vb, offsets);
+                commandBuffer.bindIndexBuffer(object->indexBuffer(), 0, vk::IndexType::eUint32);
 
-            for(auto object : vertexObjects) {
-                if(object->visible()) {
-                    vk::Buffer vb[] = { object->vertexBuffer() };
-                    vk::DeviceSize offsets[] = { 0 };
-                    commandBuffer.bindVertexBuffers(0, 1, vb, offsets);
-                    commandBuffer.bindIndexBuffer(object->indexBuffer(), 0, vk::IndexType::eUint32);
-
-                    commandBuffer.bindDescriptorSets(vk::PipelineBindPoint::eGraphics, pipeline->pipelineLayout(), 0, { uniformDescriptorSets[i], object->descriptorSets()[i], object->textureDescriptorSets()[i] }, {});
-                    commandBuffer.drawIndexed(object->indexCount(), 1, 0, 0, 0);
-                }
-            }
-        } else {
-            //pipeline2
-            commandBuffer.bindPipeline(vk::PipelineBindPoint::eGraphics, pipeline2->handle());
-            for(auto object : pl2objects) {
-                if(object->visible()) {
-                    vk::Buffer vb[] = { object->vertexBuffer() };
-                    vk::DeviceSize offsets[] = { 0 };
-                    commandBuffer.bindVertexBuffers(0, 1, vb, offsets);
-                    commandBuffer.bindIndexBuffer(object->indexBuffer(), 0, vk::IndexType::eUint32);
-                    commandBuffer.drawIndexed(object->indexCount(), 1, 0, 0, 0);
-                }
+                commandBuffer.bindDescriptorSets(vk::PipelineBindPoint::eGraphics, pipeline->pipelineLayout(), 0, { uniformDescriptorSets[i], object->descriptorSets()[i], object->textureDescriptorSets()[i] }, {});
+                commandBuffer.drawIndexed(object->indexCount(), 1, 0, 0, 0);
             }
         }
+
+        //pipeline2
+        commandBuffer.bindPipeline(vk::PipelineBindPoint::eGraphics, pipeline2->handle());
+        for(auto object : pl2objects) {
+            if(object->visible()) {
+                vk::Buffer vb[] = { object->vertexBuffer() };
+                vk::DeviceSize offsets[] = { 0 };
+                commandBuffer.bindVertexBuffers(0, 1, vb, offsets);
+                commandBuffer.bindIndexBuffer(object->indexBuffer(), 0, vk::IndexType::eUint32);
+                commandBuffer.drawIndexed(object->indexCount(), 1, 0, 0, 0);
+            }
+        }
+
 
         commandBuffer.endRenderPass();
 
