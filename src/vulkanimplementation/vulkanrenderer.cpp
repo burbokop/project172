@@ -15,7 +15,10 @@ VulkanRenderer::VulkanRenderer(const std::vector<std::string> &args) {
         m_mesh1 = new e172vp::Mesh(e172vp::Mesh::load(e172::Additional::constrainPath(assetFolder + "/meshes/ship2.obj")));
         m_pointMesh = new e172vp::Mesh(e172vp::Mesh::plate(0.25));
 
-        m_pointMesh->useTexture = false;
+        m_lineMesh = new e172vp::Mesh();
+        m_lineMesh->vertices = { { }, { } };
+        m_lineMesh->vertexIndices = { 0, 1 };
+        m_lineMesh->useTexture = false;
 
         //m_lineMesh = new e172vp::Mesh();
         //m_lineMesh->vertices = {
@@ -57,8 +60,17 @@ bool VulkanRenderer::update() {
             }
 
             obj->setRotation(glm::rotate(glm::mat4(1.), reciept.rotation, glm::vec3(0., 0., 1.)));
-            obj->setTranslation(glm::translate(glm::mat4(1.), glm::vec3(reciept.position.float32X(), reciept.position.float32Y(), 0)));
+            if(reciept.modifyVertexBuffer) {
+                obj->setVertices({
+                                     { { reciept.position0.float32X(), reciept.position0.float32Y(), 0 }, { 1, 1, 0 }, {} },
+                                     { { reciept.position1.float32X(), reciept.position1.float32Y(), 0 }, { 1, 1, 0 }, {} }
+                                 });
+            } else {
+                obj->setTranslation(glm::translate(glm::mat4(1.), glm::vec3(reciept.position0.float32X(), reciept.position0.float32Y(), 0)));
+            }
             obj->setVisible(true);
+
+
             usedObjects[reciept.mesh].push_back(obj);
         }
 
@@ -97,22 +109,23 @@ void VulkanRenderer::fill(uint32_t color) {
 }
 
 void VulkanRenderer::drawPixel(const e172::Vector &point, uint32_t color) {
-    m_reciepts.push_back({ transformedPosition(point), 0, m_pointMesh });
+    Reciept reciept;
+    reciept.position0 = transformedPosition(point);
+    reciept.mesh = m_pointMesh;
+    m_reciepts.push_back(reciept);
+
+    m_reciepts.push_back(reciept);
     (void)point;
     (void)color;
 }
 
 void VulkanRenderer::drawLine(const e172::Vector &point0, const e172::Vector &point1, uint32_t color) {
-    const auto tp0 = transformedPosition(point0);
-    const auto tp1 = transformedPosition(point1);
-
-    //m_presentationObject->addVertexObject2({
-    //                                           {  { tp0.float32X(), tp0.float32Y(), 0 }, { 0., 1., 0. }, {} },
-    //                                           {  { tp1.float32X(), tp1.float32Y(), 0 }, { 0., 1., 0. }, {} }
-    //                                       }, {
-    //                                           0, 1
-    //                                       });
-    //
+    Reciept reciept;
+    reciept.position0 = transformedPosition(point0);
+    reciept.position1 = transformedPosition(point1);
+    reciept.mesh = m_lineMesh;
+    reciept.modifyVertexBuffer = true;
+    m_reciepts.push_back(reciept);
     (void)color;
 }
 
@@ -142,7 +155,11 @@ void VulkanRenderer::drawDiagonalGrid(const e172::Vector &point0, const e172::Ve
 }
 
 void VulkanRenderer::drawImage(const e172::Image &image, const e172::Vector &position, double angle, double zoom) {
-    m_reciepts.push_back({ transformedPosition(position), static_cast<float>(angle), m_mesh0 });
+    Reciept reciept;
+    reciept.position0 = transformedPosition(position);
+    reciept.rotation = angle;
+    reciept.mesh = m_mesh0;
+    m_reciepts.push_back(reciept);
     (void)image;
     (void)zoom;
 }

@@ -37,6 +37,10 @@ uint32_t e172vp::VertexObject::indexCount() const {
     return m_indexCount;
 }
 
+void e172vp::VertexObject::setVertices(const std::vector<e172vp::Vertex> &vertices) {
+    Buffer::updateVertexBuffer(m_graphicsObject, vertices, m_vertexBuffer);
+}
+
 void e172vp::VertexObject::updateUbo(int imageIndex) {
     ubo __ubo;
     __ubo.model = m_translation * m_rotation * m_scale;

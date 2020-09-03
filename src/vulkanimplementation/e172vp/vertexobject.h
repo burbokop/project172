@@ -48,6 +48,9 @@ public:
     vk::Buffer indexBuffer() const;
     uint32_t indexCount() const;
 
+
+    void setVertices(const std::vector<Vertex> &vertices);
+
     void updateUbo(int imageIndex);
     glm::mat4 rotation() const;
     void setRotation(const glm::mat4 &rotation);

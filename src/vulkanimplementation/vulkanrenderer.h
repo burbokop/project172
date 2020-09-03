@@ -21,7 +21,9 @@ class VulkanRenderer : public e172::AbstractRenderer {
     e172vp::Mesh *m_lineMesh = nullptr;
 
     struct Reciept {
-        e172::Vector position;
+        bool modifyVertexBuffer = false;
+        e172::Vector position0;
+        e172::Vector position1;
         float rotation;
         e172vp::Mesh *mesh = nullptr;
     };

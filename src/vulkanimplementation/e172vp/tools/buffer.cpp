@@ -90,6 +90,29 @@ void e172vp::Buffer::copyBuffer(const vk::Device &logicalDevice, const vk::Comma
 
 void e172vp::Buffer::createVertexBuffer(const vk::Device &logicalDevice, const vk::PhysicalDevice &physicalDevice, const vk::CommandPool &commandPool, const vk::Queue &graphicsQueue, const std::vector<Vertex> &vertices, vk::Buffer *vertexBuffer, vk::DeviceMemory *vertexBufferMemory) {
     VkDeviceSize bufferSize = sizeof(vertices[0]) * vertices.size();
+    //
+    //vk::Buffer stagingBuffer;
+    //vk::DeviceMemory stagingBufferMemory;
+    //Buffer::createAbstractBuffer(logicalDevice, physicalDevice, bufferSize, vk::BufferUsageFlagBits::eTransferSrc, vk::MemoryPropertyFlagBits::eHostVisible | vk::MemoryPropertyFlagBits::eHostCoherent, &stagingBuffer, &stagingBufferMemory);
+    //
+    //void* data;
+    //vkMapMemory(logicalDevice, stagingBufferMemory, 0, bufferSize, 0, &data);
+    //memcpy(data, vertices.data(), (size_t) bufferSize);
+    //vkUnmapMemory(logicalDevice, stagingBufferMemory);
+
+
+    Buffer::createAbstractBuffer(logicalDevice, physicalDevice, bufferSize, vk::BufferUsageFlagBits::eTransferDst | vk::BufferUsageFlagBits::eVertexBuffer, vk::MemoryPropertyFlagBits::eDeviceLocal, vertexBuffer, vertexBufferMemory);
+
+    Buffer::updateVertexBuffer(logicalDevice, physicalDevice, commandPool, graphicsQueue, vertices, *vertexBuffer);
+
+    //Buffer::copyBuffer(logicalDevice, commandPool, graphicsQueue, stagingBuffer, *vertexBuffer, bufferSize);
+    //
+    //vkDestroyBuffer(logicalDevice, stagingBuffer, nullptr);
+    //vkFreeMemory(logicalDevice, stagingBufferMemory, nullptr);
+}
+
+void e172vp::Buffer::updateVertexBuffer(const vk::Device &logicalDevice, const vk::PhysicalDevice &physicalDevice, const vk::CommandPool &commandPool, const vk::Queue &graphicsQueue, const std::vector<e172vp::Vertex> &vertices, const vk::Buffer &vertexBuffer) {
+    VkDeviceSize bufferSize = sizeof(vertices[0]) * vertices.size();
 
     vk::Buffer stagingBuffer;
     vk::DeviceMemory stagingBufferMemory;
@@ -100,11 +123,10 @@ void e172vp::Buffer::createVertexBuffer(const vk::Device &logicalDevice, const v
     memcpy(data, vertices.data(), (size_t) bufferSize);
     vkUnmapMemory(logicalDevice, stagingBufferMemory);
 
-    Buffer::createAbstractBuffer(logicalDevice, physicalDevice, bufferSize, vk::BufferUsageFlagBits::eTransferDst | vk::BufferUsageFlagBits::eVertexBuffer, vk::MemoryPropertyFlagBits::eDeviceLocal, vertexBuffer, vertexBufferMemory);
-    Buffer::copyBuffer(logicalDevice, commandPool, graphicsQueue, stagingBuffer, *vertexBuffer, bufferSize);
+    Buffer::copyBuffer(logicalDevice, commandPool, graphicsQueue, stagingBuffer, vertexBuffer, bufferSize);
 
-    vkDestroyBuffer(logicalDevice, stagingBuffer, nullptr);
-    vkFreeMemory(logicalDevice, stagingBufferMemory, nullptr);
+    logicalDevice.destroyBuffer(stagingBuffer);
+    logicalDevice.freeMemory(stagingBufferMemory);
 }
 
 void e172vp::Buffer::createIndexBuffer(const vk::Device &logicalDevice, const vk::PhysicalDevice &physicalDevice, const vk::CommandPool &commandPool, const vk::Queue &graphicsQueue, const std::vector<uint32_t> &indices, vk::Buffer *indexBuffer, vk::DeviceMemory *indexBufferMemory) {
@@ -136,6 +158,10 @@ void e172vp::Buffer::copyBuffer(const e172vp::GraphicsObject *graphicsObject, co
 
 void e172vp::Buffer::createVertexBuffer(const e172vp::GraphicsObject *graphicsObject, const std::vector<e172vp::Vertex> &vertices, vk::Buffer *vertexBuffer, vk::DeviceMemory *vertexBufferMemory) {
     createVertexBuffer(graphicsObject->logicalDevice(), graphicsObject->physicalDevice(), graphicsObject->commandPool(), graphicsObject->graphicsQueue(), vertices, vertexBuffer, vertexBufferMemory);
+}
+
+void e172vp::Buffer::updateVertexBuffer(const e172vp::GraphicsObject *graphicsObject, const std::vector<e172vp::Vertex> &vertices, const vk::Buffer &vertexBuffer) {
+    updateVertexBuffer(graphicsObject->logicalDevice(), graphicsObject->physicalDevice(), graphicsObject->commandPool(), graphicsObject->graphicsQueue(), vertices, vertexBuffer);
 }
 
 void e172vp::Buffer::createIndexBuffer(const e172vp::GraphicsObject *graphicsObject, const std::vector<uint32_t> &indices, vk::Buffer *indexBuffer, vk::DeviceMemory *indexBufferMemory) {
