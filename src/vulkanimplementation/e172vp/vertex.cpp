@@ -43,3 +43,9 @@ vk::VertexInputBindingDescription e172vp::Vertex::bindingDescription() {
 
     return bindingDescription;
 }
+
+bool e172vp::operator ==(const e172vp::Vertex &v0, const e172vp::Vertex &v1) {
+    return (v0.position == v1.position)
+            || (v0.color == v1.color)
+            || (v0.texCoord == v1.texCoord);
+}

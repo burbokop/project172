@@ -55,63 +55,72 @@ bool VulkanRenderer::update() {
 
 
         //GET OBJECTS FROM POOL
-        std::map<e172vp::Mesh*, std::list<e172vp::VertexObject*>> usedObjects;
+        std::map<e172vp::Mesh*, std::list<e172vp::AbstractVertexObject*>> usedObjects;
         for(auto reciept : m_reciepts) {
             auto& list = m_objectsPool[reciept.mesh];
 
-            e172vp::VertexObject *obj;
+            e172vp::AbstractVertexObject *obj = nullptr;
             if(list.size() > 0) {
                 obj = list.front();
                 list.remove(obj);
             } else {
                 if(reciept.mesh->useTexture) {
-                    obj = m_bootstrapObject->addVertexObject(*reciept.mesh);
+                    obj = m_bootstrapObject->addExternalTexVertexObject(*reciept.mesh);
                 } else {
-                    obj = m_bootstrapObject->addVertexObject2(e172vp::Vertex::fromGlm(reciept.mesh->vertices), reciept.mesh->vertexIndices);
+                    obj = m_bootstrapObject->addWireVertexObject(e172vp::Vertex::fromGlm(reciept.mesh->vertices), reciept.mesh->vertexIndices);
                 }
                 if(!reciept.modifyVertexBuffer) {
-                    obj->setScale(glm::scale(glm::mat4(1.), glm::vec3(0.02)));
+                    if(auto extTexObj = dynamic_cast<e172vp::ExternalTexVertexObject*>(obj)) {
+                        extTexObj->setScale(glm::scale(glm::mat4(1.), glm::vec3(0.02)));
+                    }
                 }
             }
 
-            obj->setRotation(glm::rotate(glm::mat4(1.), reciept.rotation, glm::vec3(0., 0., 1.)));
+            if(auto extTexObj = dynamic_cast<e172vp::ExternalTexVertexObject*>(obj)) {
+                extTexObj->setRotation(glm::rotate(glm::mat4(1.), reciept.rotation, glm::vec3(0., 0., 1.)));
+            }
             if(reciept.modifyVertexBuffer) {
-                glm::vec3 color = {
-                    static_cast<uint8_t>(reciept.color >> 16) / 256.,
-                    static_cast<uint8_t>(reciept.color >> 8) / 256.,
-                    static_cast<uint8_t>(reciept.color >> 0) / 256.
-                };
+                if(auto wireObj = dynamic_cast<e172vp::WireVertexObject*>(obj)) {
+                    glm::vec3 color = {
+                        static_cast<uint8_t>(reciept.color >> 16) / 256.,
+                        static_cast<uint8_t>(reciept.color >> 8) / 256.,
+                        static_cast<uint8_t>(reciept.color >> 0) / 256.
+                    };
 
-                if(reciept.mesh == m_lineMesh) {
-                    obj->setVertices({
-                                         { { reciept.position0.float32X(), reciept.position0.float32Y(), 0 }, color, {} },
-                                         { { reciept.position1.float32X(), reciept.position1.float32Y(), 0 }, color, {} }
-                                     });
-                } else if(reciept.mesh == m_rectMesh) {
-                    obj->setVertices({
-                                         { { reciept.position0.float32X(), reciept.position0.float32Y(), 0 }, color, {} },
-                                         { { reciept.position1.float32X(), reciept.position0.float32Y(), 0 }, color, {} },
-                                         { { reciept.position1.float32X(), reciept.position1.float32Y(), 0 }, color, {} },
-                                         { { reciept.position0.float32X(), reciept.position1.float32Y(), 0 }, color, {} }
-                                     });
-                } else if(reciept.mesh == m_circleMesh) {
-                    glm::vec3 p0((reciept.position0.float32X() + reciept.position1.float32X()) / 2, reciept.position0.float32Y(), 0);
-                    glm::vec3 p1(reciept.position1.float32X(), (reciept.position0.float32Y() + reciept.position1.float32Y()) / 2, 0);
-                    glm::vec3 p2((reciept.position0.float32X() + reciept.position1.float32X()) / 2, reciept.position1.float32Y(), 0);
-                    glm::vec3 p3(reciept.position0.float32X(), (reciept.position0.float32Y() + reciept.position1.float32Y()) / 2, 0);
+                    if(reciept.mesh == m_lineMesh) {
 
-                    obj->setVertices({
-                                         { p0, color, {} },
-                                         { p1, color, {} },
-                                         { p2, color, {} },
-                                         { p3, color, {} }
-                                     });
-                } else if(reciept.mesh == m_plateMesh) {
-                    const auto plate = e172vp::Mesh::plate({ reciept.position0.float32X(), reciept.position0.float32Y() }, { reciept.position1.float32X(), reciept.position1.float32Y() });
-                    obj->setVertices(e172vp::Vertex::fromGlm(plate.vertices, plate.uvMap));
+                        wireObj->setVertices({
+                                             { { reciept.position0.float32X(), reciept.position0.float32Y(), 0 }, color, {} },
+                                             { { reciept.position1.float32X(), reciept.position1.float32Y(), 0 }, color, {} }
+                                         });
+                    } else if(reciept.mesh == m_rectMesh) {
+                        wireObj->setVertices({
+                                             { { reciept.position0.float32X(), reciept.position0.float32Y(), 0 }, color, {} },
+                                             { { reciept.position1.float32X(), reciept.position0.float32Y(), 0 }, color, {} },
+                                             { { reciept.position1.float32X(), reciept.position1.float32Y(), 0 }, color, {} },
+                                             { { reciept.position0.float32X(), reciept.position1.float32Y(), 0 }, color, {} }
+                                         });
+                    } else if(reciept.mesh == m_circleMesh) {
+                        glm::vec3 p0((reciept.position0.float32X() + reciept.position1.float32X()) / 2, reciept.position0.float32Y(), 0);
+                        glm::vec3 p1(reciept.position1.float32X(), (reciept.position0.float32Y() + reciept.position1.float32Y()) / 2, 0);
+                        glm::vec3 p2((reciept.position0.float32X() + reciept.position1.float32X()) / 2, reciept.position1.float32Y(), 0);
+                        glm::vec3 p3(reciept.position0.float32X(), (reciept.position0.float32Y() + reciept.position1.float32Y()) / 2, 0);
+
+                        wireObj->setVertices({
+                                             { p0, color, {} },
+                                             { p1, color, {} },
+                                             { p2, color, {} },
+                                             { p3, color, {} }
+                                         });
+                    } else if(reciept.mesh == m_plateMesh) {
+                        const auto plate = e172vp::Mesh::plate({ reciept.position0.float32X(), reciept.position0.float32Y() }, { reciept.position1.float32X(), reciept.position1.float32Y() });
+                        wireObj->setVertices(e172vp::Vertex::fromGlm(plate.vertices, plate.uvMap));
+                    }
                 }
             } else {
-                obj->setTranslation(glm::translate(glm::mat4(1.), glm::vec3(reciept.position0.float32X(), reciept.position0.float32Y(), 0)));
+                if(auto extTexObj = dynamic_cast<e172vp::ExternalTexVertexObject*>(obj)) {
+                    extTexObj->setTranslation(glm::translate(glm::mat4(1.), glm::vec3(reciept.position0.float32X(), reciept.position0.float32Y(), 0)));
+                }
             }
             obj->setVisible(true);
 

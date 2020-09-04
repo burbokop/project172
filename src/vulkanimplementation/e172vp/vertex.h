@@ -17,5 +17,7 @@ struct Vertex {
     static std::array<vk::VertexInputAttributeDescription, 3> attributeDescriptions();
 };
 
+bool operator ==(const Vertex &v0, const Vertex &v1);
+
 }
 #endif // VERTEX_H

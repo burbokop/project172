@@ -59,7 +59,8 @@ public:
     template<typename T, typename ...Args>
     T *addVertexObject(const Args&... args) {
         const auto r = new T(args...);
-        r.initialize(m_graphicsObject, m_graphicsObject->swapChain().imageCount(), globalDescriptorSetLayout, objectDescriptorSetLayout, samplerDescriptorSetLayout);
+        r->m_graphicsObject = m_graphicsObject;
+        r->initialize(m_graphicsObject, m_graphicsObject->swapChain().imageCount(), &objectDescriptorSetLayout, &samplerDescriptorSetLayout);
         vertexObjects.push_back(r);
         return r;
     }

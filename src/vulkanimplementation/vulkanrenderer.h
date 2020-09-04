@@ -10,7 +10,7 @@
 namespace e172vp {
     class BootstrapObject;
     class Mesh;
-    class VertexObject;
+    class AbstractVertexObject;
 }
 
 class VulkanRenderer : public e172::AbstractRenderer {
@@ -36,7 +36,7 @@ class VulkanRenderer : public e172::AbstractRenderer {
     const e172::Vector m_resolution = e172::Vector(800, 600);
 
     std::list<Reciept> m_reciepts;
-    std::map<e172vp::Mesh*, std::list<e172vp::VertexObject*>> m_objectsPool;
+    std::map<e172vp::Mesh*, std::list<e172vp::AbstractVertexObject*>> m_objectsPool;
 
     inline e172::Vector transformedPosition(const e172::Vector &position) {
         if(!e172::Math::cmpf(m_resolution.x(), 0) && !e172::Math::cmpf(m_resolution.y(), 0)) {

@@ -6,7 +6,8 @@
 #include <SDL2/SDL.h>
 
 #include "font.h"
-
+#include "vertexobjects/externaltexvertexobject.h"
+#include "vertexobjects/wirevertexobject.h"
 
 namespace e172vp {
 
@@ -22,10 +23,16 @@ class BootstrapObject {
     Pipeline *pipeline2 = nullptr;
     Font *font = nullptr;
     bool m_isValid = true;
+
 public:
     BootstrapObject(const std::string &assetFolder);
     ~BootstrapObject();
     PresentationObject *presentationObject() const;
+
+    ExternalTexVertexObject *addExternalTexVertexObject(const std::vector<Vertex> &vertices, const std::vector<uint32_t> &indices);
+    ExternalTexVertexObject *addExternalTexVertexObject(const Mesh &mesh);
+    WireVertexObject *addWireVertexObject(const std::vector<Vertex> &vertices, const std::vector<uint32_t> &indices);
+    void removeVertexObject(AbstractVertexObject *object);
 
 
     static std::vector<std::string> sdlExtensions(SDL_Window *window);

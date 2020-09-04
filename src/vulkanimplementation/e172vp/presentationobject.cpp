@@ -173,7 +173,6 @@ void e172vp::PresentationObject::proceedCommandBuffers() {
         commandBuffer.beginRenderPass(&renderPassInfo, vk::SubpassContents::eInline);
         commandBuffer.setViewport(0, 1, &viewport);
 
-
         for(auto object : vertexObjects) {
             if(object->visible()) {
                 commandBuffer.bindPipeline(vk::PipelineBindPoint::eGraphics, object->pipeline()->handle());
@@ -195,7 +194,9 @@ void e172vp::PresentationObject::proceedCommandBuffers() {
                 }
                 //MERGING DESCRIPTOR SETS END
 
-                commandBuffer.bindDescriptorSets(vk::PipelineBindPoint::eGraphics, object->pipeline()->pipelineLayout(), 0, dsa, {});
+                if(dsa.size() > 0) {
+                    commandBuffer.bindDescriptorSets(vk::PipelineBindPoint::eGraphics, object->pipeline()->pipelineLayout(), 0, dsa, {});
+                }
                 commandBuffer.drawIndexed(object->indexCount(), 1, 0, 0, 0);
             }
         }

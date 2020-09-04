@@ -10,6 +10,30 @@ e172vp::PresentationObject * e172vp::BootstrapObject::presentationObject() const
     return m_presentationObject;
 }
 
+e172vp::ExternalTexVertexObject *e172vp::BootstrapObject::addExternalTexVertexObject(const std::vector<e172vp::Vertex> &vertices, const std::vector<uint32_t> &indices) {
+    auto obj = m_presentationObject->addVertexObject<ExternalTexVertexObject>(vertices, indices, font->character('G').imageView());
+    obj->setPipeline(pipeline);
+    obj->setBindGlobalDescriptorSet(true);
+    return obj;
+}
+
+e172vp::ExternalTexVertexObject *e172vp::BootstrapObject::addExternalTexVertexObject(const e172vp::Mesh &mesh) {
+    auto obj = m_presentationObject->addVertexObject<ExternalTexVertexObject>(Vertex::fromGlm(mesh.vertices, mesh.uvMap), mesh.vertexIndices, font->character('G').imageView());
+    obj->setPipeline(pipeline);
+    obj->setBindGlobalDescriptorSet(true);
+    return obj;
+}
+
+e172vp::WireVertexObject *e172vp::BootstrapObject::addWireVertexObject(const std::vector<e172vp::Vertex> &vertices, const std::vector<uint32_t> &indices) {
+    auto obj = m_presentationObject->addVertexObject<WireVertexObject>(vertices, indices);
+    obj->setPipeline(pipeline2);
+    return obj;
+}
+
+void e172vp::BootstrapObject::removeVertexObject(e172vp::AbstractVertexObject *object) {
+    m_presentationObject->removeVertexObject(object);
+}
+
 std::vector<std::string> e172vp::BootstrapObject::sdlExtensions(SDL_Window *window) {
     uint32_t extensionCount = 0;
     SDL_Vulkan_GetInstanceExtensions(window, &extensionCount, nullptr);
@@ -41,8 +65,7 @@ std::vector<char> e172vp::BootstrapObject::readFile(const std::string &filename)
     return buffer;
 }
 
-bool BootstrapObject::isValid() const
-{
+bool e172vp::BootstrapObject::isValid() const {
     return m_isValid;
 }
 
@@ -76,6 +99,7 @@ e172vp::BootstrapObject::BootstrapObject(const std::string &assetFolder) {
                 readFile(e172::Additional::constrainPath(assetFolder + "/shaders/frag_sampler.spv")),
                 vk::PrimitiveTopology::eTriangleList
                 );
+
 
     pipeline2 = m_presentationObject->createPipeline(
                 1,

@@ -30,8 +30,8 @@ add_library(vulkan_impl SHARED
     ${CMAKE_CURRENT_LIST_DIR}/e172vp/vertex.h
     ${CMAKE_CURRENT_LIST_DIR}/e172vp/tools/buffer.cpp
     ${CMAKE_CURRENT_LIST_DIR}/e172vp/tools/buffer.h
-    ${CMAKE_CURRENT_LIST_DIR}/e172vp/vertexobjects/vertexobject.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/e172vp/vertexobjects/vertexobject.h
+    ${CMAKE_CURRENT_LIST_DIR}/e172vp/vertexobjects/externaltexvertexobject.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/e172vp/vertexobjects/externaltexvertexobject.h
     ${CMAKE_CURRENT_LIST_DIR}/e172vp/descriptorsetlayout.cpp
     ${CMAKE_CURRENT_LIST_DIR}/e172vp/descriptorsetlayout.h
     ${CMAKE_CURRENT_LIST_DIR}/e172vp/tools/mesh.cpp
@@ -44,6 +44,11 @@ add_library(vulkan_impl SHARED
     ${CMAKE_CURRENT_LIST_DIR}/e172vp/vertexobjects/abstractvertexobject.h
     ${CMAKE_CURRENT_LIST_DIR}/e172vp/bootstrapobject.cpp
     ${CMAKE_CURRENT_LIST_DIR}/e172vp/bootstrapobject.h
+    ${CMAKE_CURRENT_LIST_DIR}/e172vp/vertexobjects/texturedvertexobject.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/e172vp/vertexobjects/texturedvertexobject.h
+    ${CMAKE_CURRENT_LIST_DIR}/e172vp/vertexobjects/wirevertexobject.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/e172vp/vertexobjects/wirevertexobject.h
+
 
 
     ${CMAKE_CURRENT_LIST_DIR}/vulkanrenderer.h
