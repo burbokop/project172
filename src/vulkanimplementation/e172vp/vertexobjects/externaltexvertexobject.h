@@ -16,8 +16,6 @@ class ExternalTexVertexObject : public AbstractVertexObject {
     glm::mat4 m_translation = glm::mat4(1);
     glm::mat4 m_scale = glm::mat4(1);
 
-
-
     vk::Buffer m_vertexBuffer;
     vk::DeviceMemory m_vertexBufferMemory;
     vk::Buffer m_indexBuffer;
