@@ -56,8 +56,12 @@ class GameApplication {
 
     void destroyAllEntities(Context*, const Variant&);
     void destroyEntity(Context*context, const Variant&value);
+
+    bool mustQuit = false;
 public:
     GameApplication(int argc, char *argv[]);
+
+    void quit();
 
     int exec();
     std::vector<std::string> arguments() const;

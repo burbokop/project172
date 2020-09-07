@@ -89,6 +89,10 @@ GameApplication::GameApplication(int argc, char *argv[]) {
     m_assetProvider->m_context = m_context;
 }
 
+void GameApplication::quit() {
+    mustQuit = true;
+}
+
 int GameApplication::exec() {
     while (1) {
         m_deltaTimeCalculator.update();
@@ -129,6 +133,9 @@ int GameApplication::exec() {
             m_context->m_messageQueue.flushMessages();
             m_context->m_deltaTime = m_deltaTimeCalculator.deltaTime();
         }
+
+        if(mustQuit)
+            break;
     }
     delete m_assetProvider;
     delete m_context;

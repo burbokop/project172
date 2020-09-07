@@ -41,21 +41,64 @@
 
 
 int main(int argc, char *argv[]) {
-    e172::GameApplication app(argc, argv);
-    SDLEventHandler eventHandle;
-    SDLAudioProvider audioProvider;
+    enum RendererUsing {
+        Undefined,
+        SDL,
+        Vulkan
+    };
+    RendererUsing rendererUsing = Undefined;
+    {
+        e172::GameApplication chooseGraphicsProviderApp(argc, argv);
+        SDLGraphicsProvider gprovider(chooseGraphicsProviderApp.arguments(), "choose gprovider", 108, 148);
+        SDLEventHandler eventHandler;
+        chooseGraphicsProviderApp.setGraphicsProvider(&gprovider);
+        chooseGraphicsProviderApp.setEventHandler(&eventHandler);
 
-    e172::AbstractGraphicsProvider *graphicsProvider = new VulkanGraphicsProvider(app.arguments());
-    if(!graphicsProvider->isValid()) {
-        delete graphicsProvider;
-        graphicsProvider = new SDLGraphicsProvider(app.arguments(), "project172", 900, 600);
-        if(!graphicsProvider->isValid()) {
-            std::cerr << "error: no graphics provider are valid.\n";
-            return -1;
-        }
+        Background background = 32;
+        chooseGraphicsProviderApp.addEntity(&background);
+
+        GUIMain gui;
+        GUIStack stack;
+        GUIContainer menu("renderer");
+        const auto f = [&rendererUsing, &chooseGraphicsProviderApp](e172::Variant value) {
+            rendererUsing = static_cast<RendererUsing>(value.toInt());
+            chooseGraphicsProviderApp.quit();
+        };
+        menu.addMenuElement(new GUIChoice(std::string("SDL2"), SDL, f));
+        menu.addMenuElement(new GUIChoice(std::string("Vulkan"), Vulkan, f));
+        stack.push(&menu);
+        gui.setMenu(&stack);
+
+        gprovider.loadFont(std::string(), chooseGraphicsProviderApp.context()->absolutePath("../assets/fonts/ZCOOL.ttf"));
+
+        chooseGraphicsProviderApp.addEntity(&gui);
+        chooseGraphicsProviderApp.exec();
     }
 
-    app.setEventHandler(&eventHandle);
+
+    e172::GameApplication app(argc, argv);
+    SDLEventHandler eventHandler;
+    SDLAudioProvider audioProvider;
+
+    e172::AbstractGraphicsProvider *graphicsProvider = nullptr;
+    if(rendererUsing == Vulkan) {
+        graphicsProvider = new VulkanGraphicsProvider(app.arguments());
+        if(!graphicsProvider->isValid()) {
+            delete graphicsProvider;
+            graphicsProvider = new SDLGraphicsProvider(app.arguments(), "project172", 900, 600);
+            if(!graphicsProvider->isValid()) {
+                std::cerr << "error: no graphics provider are valid.\n";
+                return -1;
+            }
+        }
+    } else if(rendererUsing == SDL) {
+        graphicsProvider = new SDLGraphicsProvider(app.arguments(), "project172", 900, 600);
+    } else {
+        return 0;
+    }
+
+
+    app.setEventHandler(&eventHandler);
     app.setAudioProvider(&audioProvider);
     app.setGraphicsProvider(graphicsProvider);
 
