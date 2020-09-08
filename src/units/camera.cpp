@@ -1,5 +1,7 @@
 #include "camera.h"
 
+#include <src/engine/objectregistry.h>
+
 const double Camera::STOP_DISTANCE = 4;
 const double Camera::MAX_SPEED_MULTIPLIER = 0.002 * 1000;
 
@@ -22,7 +24,9 @@ void Camera::setTarget(Controller *target) {
 void Camera::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
     if(target) {
         if(Unit *targetUnit = target->parentUnit()) {
-            relativisticPursuit(context, targetUnit);
+            if(targetUnit == e172::Alive) {
+                relativisticPursuit(context, targetUnit);
+            }
         }
     }
     this->Movable::proceed(context, eventHandler);

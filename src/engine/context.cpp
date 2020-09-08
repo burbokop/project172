@@ -171,5 +171,12 @@ Entity *Context::entityById(const Entity::id_t &id) const {
     return nullptr;
 }
 
+Entity *Context::autoIteratingEntity() const {
+    if(m_application) {
+        return m_application->autoIteratingEntity();
+    }
+    return nullptr;
+}
+
 
 }

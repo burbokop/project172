@@ -7,13 +7,13 @@
 #include <src/engine/objectregistry.h>
 #include <src/old_debug.h>
 
-std::vector<GUIMenuElement *> GUIList::informativeToElement(std::list<Entity*> *array) {
+std::vector<GUIMenuElement *> GUIList::informativeToElements(std::list<Entity*> array) {
     std::vector<GUIMenuElement*> result;
-    if(array && array->size() > 0) {
-        for(Entity *worker : *array) {
-            EXISTS(worker) {
-                if(!worker->instanceOf<Camera>() && !worker->instanceOf<Projectile>()) {
-                    Unit *unit = dynamic_cast<Unit*>(worker);
+    if(array.size() > 0) {
+        for(Entity *entity : array) {
+             if(entity == e172::Alive) {
+                if(!entity->instanceOf<Camera>() && !entity->instanceOf<Projectile>()) {
+                    Unit *unit = dynamic_cast<Unit*>(entity);
                     if(unit) {
                         result.push_back(forEach(unit));
                     }
@@ -38,6 +38,14 @@ void GUIList::onChoice(e172::Variant value) {
     }
 }
 
+Near *GUIList::near() const {
+    return m_near;
+}
+
+void GUIList::setNear(Near *near) {
+    m_near = near;
+}
+
 GUIMenuElement *GUIList::forEach(Unit *unit) {
     return nullptr;
     return new GUIChoice(unit, unit->entityId(), [this](const e172::Variant &v){
@@ -50,11 +58,12 @@ GUIList::GUIList(std::string label) : GUIContainer (label) {}
 
 GUIList::GUIList(IInformative *informative) : GUIContainer (informative) {}
 
-void GUIList::addArray(std::list<Entity*> *array) {
-    this->array = array;
-}
-
 void GUIList::render(e172::AbstractRenderer *renderer) {
-    m_menuElements = informativeToElement(array);
+    if(m_near) {
+        terminateElements();
+        const auto newMenuElements = informativeToElements(m_near->entitiesInFocus());
+        for(const auto& n : newMenuElements)
+            addMenuElement(n);
+    }
     this->GUIContainer::render(renderer);
 }

@@ -66,6 +66,8 @@ public:
 
     Entity *entityById(const Entity::id_t &id) const;
 
+    Entity *autoIteratingEntity() const;
+
     template<typename T>
     T *entityById(const Entity::id_t &id) const {
         return dynamic_cast<T*>(entityById(id));

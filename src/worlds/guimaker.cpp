@@ -32,7 +32,7 @@ void GUIMaker::setWorldPresetStrategy(WorldPresetStrategy *worldPresetStrategy) 
     }
 }
 
-GUIMaker::GUIMaker(e172::Context *context) {
+GUIMaker::GUIMaker(e172::Context *context, Near *radarNear) {
     m_gui = new GUIMain(); {
         GUIStack *stack = new GUIStack(); {
             GUIContainer *mainMenu = new GUIContainer("main menu"); {
@@ -41,9 +41,11 @@ GUIMaker::GUIMaker(e172::Context *context) {
                 } mainMenu->addMenuElement(infoMenu);
                 GUIContainer *modulesMenu = new GUIModuleView("modules");
                 mainMenu->addMenuElement(modulesMenu);
-                //GUIRadar *radarMenu = new GUIRadar("radar"); {
-                //    radarMenu->addArray(m_near->entitiesInFocus());
-                //} mainMenu->addMenuElement(radarMenu);
+                if(radarNear) {
+                    GUIRadar *radarMenu = new GUIRadar("radar"); {
+                        radarMenu->setNear(radarNear);
+                    } mainMenu->addMenuElement(radarMenu);
+                }
 
                 GUIContainer *testMenu = new GUIContainer("for developers"); {
                     testMenu->addMenuElement(new GUIMenuElement(std::string("other players:")));
@@ -55,6 +57,7 @@ GUIMaker::GUIMaker(e172::Context *context) {
                     //    }
                     //}
                     m_worldComboBox = new GUIComboBox<std::string>("worlds"); {
+
                     } testMenu->addMenuElement(m_worldComboBox);
                     testMenu->addMenuElement(new GUIMenuElement(new RegistryInfo()));
                     testMenu->addMenuElement(new GUIMenuElement(new UnitsAmountInfo(context)));

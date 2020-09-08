@@ -65,11 +65,6 @@ public:
     std::string getInfo();
 
 
-
-
-    // Object interface
-
-    std::string getType() const;
     void setRotationSpeed(double value);
 };
 

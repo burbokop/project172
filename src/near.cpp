@@ -1,6 +1,7 @@
 #include "near.h"
 
 
+#include <src/engine/context.h>
 #include <src/engine/objectregistry.h>
 
 
@@ -9,42 +10,32 @@ const double Near::DEFAULT_RADIUS = 512;
 const double Near::WARP_RADIUS_MILTIPLIER = 8;
 
 
-Near::Near(std::list<e172::Entity *> *origin, Controller *center, double radius) {
-    this->origin = origin;
-    this->focus = new std::list<e172::Entity*>();
+Near::Near(Controller *center, double radius) {
     this->center = center;
     this->radius = radius;
-
-    addingIterator = origin->begin();
-    removingIterator = focus->begin();
 }
 
-void Near::add() {
-    if(origin->size() > 0 && center != nullptr) {
-        if(addingIterator != origin->end()) {
-            e172::Entity *current = *addingIterator;
-            if(ObjectRegistry::getInstance()->exists(current)) {
-                Unit *currentUnit = dynamic_cast<Unit*>(current);
-                Unit *centerUnit = center->parentUnit();
+void Near::addEntities(e172::Context *context) {
+    const auto current = context->autoIteratingEntity();
+
+    if(e172::ObjectRegistry::exists(current)) {
+        Unit *currentUnit = dynamic_cast<Unit*>(current);
+        Unit *centerUnit = center->parentUnit();
 
 
-                if(
-                    currentUnit != nullptr &&
-                    centerUnit != nullptr &&
-                    currentUnit != centerUnit &&
-                    std::find(focus->begin(), focus->end(), current) == focus->end() &&
-                    (currentUnit->position() - centerUnit->position()).module() <= getLocalRadius(centerUnit)
+        if(
+                currentUnit != nullptr &&
+                centerUnit != nullptr &&
+                currentUnit != centerUnit &&
+                std::find(m_entitiesInFocus.begin(), m_entitiesInFocus.end(), current) == m_entitiesInFocus.end() &&
+                (currentUnit->position() - centerUnit->position()).module() <= localRadius(centerUnit)
                 ) {
-                    focus->push_back(current);
-                }
-            }
+            m_entitiesInFocus.push_back(current);
         }
-
-        if(++addingIterator == origin->end()) addingIterator = origin->begin();
     }
 }
 
-double Near::getLocalRadius(Unit *center) {
+double Near::localRadius(Unit *center) {
     double result = radius;
     if(Ship *centerShip = dynamic_cast<Ship*>(center)) {
         WarpDrive *wd = centerShip->getFirstWarp();
@@ -55,44 +46,29 @@ double Near::getLocalRadius(Unit *center) {
     return result;
 }
 
-void Near::remove() {
-    if(focus->size() > 0) {
-        if(removingIterator != focus->end()) {
-            e172::Entity *current = *removingIterator;
-            if(ObjectRegistry::getInstance()->exists(current)) {
-                Unit *currentUnit = dynamic_cast<Unit*>(current);
-                Unit *centerUnit = center->parentUnit();
-
-                if(currentUnit != nullptr && centerUnit != nullptr) {
-                    std::list<e172::Entity*>::iterator focusIt = std::find(focus->begin(), focus->end(), current);
-                    std::list<e172::Entity*>::iterator originIt = std::find(origin->begin(), origin->end(), current);
-
-                    if(
-                        (
-                            focusIt != focus->end() &&
-                            (currentUnit->position() - centerUnit->position()).module() > (getLocalRadius(centerUnit) + RADIUS_DELTA)
-                        ) ||
-                        originIt == origin->end()
-                    ) {
-                        focus->erase(focusIt);
-                    }
+void Near::removeEntities(e172::Context *) {
+    if(removingIterator != m_entitiesInFocus.end()) {
+        e172::Entity *current = *removingIterator;
+        if(e172::ObjectRegistry::exists(current)) {
+            const auto currentUnit = dynamic_cast<Unit*>(current);
+            const auto centerUnit = center->parentUnit();
+            if(currentUnit && centerUnit == e172::Alive) {
+                if((currentUnit->position() - centerUnit->position()).module() > (localRadius(centerUnit) + RADIUS_DELTA)) {
+                    removingIterator = m_entitiesInFocus.erase(removingIterator);
                 }
-            } else {
-                std::list<e172::Entity*>::iterator focusIt = std::find(focus->begin(), focus->end(), current);
-                if (focusIt != focus->end()) focus->erase(focusIt);
             }
         }
-        if(++removingIterator == focus->end()) removingIterator = focus->begin();
     }
+    if(++removingIterator == m_entitiesInFocus.end()) removingIterator = m_entitiesInFocus.begin();
 }
 
-void Near::update() {
+std::list<e172::Entity *> Near::entitiesInFocus() {
+    return m_entitiesInFocus;
+}
+
+void Near::proceed(e172::Context *context, e172::AbstractEventHandler *) {
     if(center != nullptr) {
-        add();
-        remove();
+        addEntities(context);
+        removeEntities(context);
     }
-}
-
-std::list<e172::Entity *> *Near::entitiesInFocus() {
-    return focus;
 }

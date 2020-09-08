@@ -56,17 +56,6 @@ void Player::setArmor(Ship *armor) {
 }
 
 void Player::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
-    EXISTS(parentUnit()) {
-
-    } else {
-        //std::cout << "ERRROOOORR\n";
-    }
-
-    EXISTS(armor) {
-
-    } else {
-        //std::cout << "ERRROOOORR\n";
-    }
 
 
     if(getPersonalKey(eventHandler, "left")) {

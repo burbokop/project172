@@ -58,6 +58,8 @@ class GameApplication {
     void destroyEntity(Context*context, const Variant&value);
 
     bool mustQuit = false;
+
+    std::list<Entity*>::iterator m_autoIterator = m_entities.begin();
 public:
     GameApplication(int argc, char *argv[]);
 
@@ -83,6 +85,9 @@ public:
     void setAudioProvider(AbstractAudioProvider *audioProvider);
     void setGraphicsProvider(AbstractGraphicsProvider *graphicsProvider);
     std::list<Entity *> entities() const;
+
+    Entity *autoIteratingEntity() const;
+
 };
 
 }

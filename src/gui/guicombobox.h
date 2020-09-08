@@ -5,7 +5,6 @@
 
 #include <src/gui/base/guicontainer.h>
 
-
 template<typename T>
 class GUIComboBox : public GUIContainer {
     std::list<T> m_list;
@@ -18,10 +17,9 @@ public:
 
     // Entity interface
 public:
-    virtual void proceed(e172::Context *, e172::AbstractEventHandler *) override {
+    virtual void proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) override {
         if(m_last_cmp_id != cmp_id) {
-            m_menuElements.clear();
-            terminateChildren();
+            terminateElements();
             for(const auto l : m_list) {
                 addMenuElement(new GUIChoice(e172::Variant::fromValue<T>(l).toString(), e172::Variant(), [this, l](auto) {
                     if(m_callback)
@@ -30,6 +28,7 @@ public:
             }
             m_last_cmp_id = cmp_id;
         }
+        GUIContainer::proceed(context, eventHandler);
     }
 
     std::list<T> list() const { return m_list; }

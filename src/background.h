@@ -14,7 +14,6 @@ struct Star {
 };
 
 class Background : public e172::Entity {
-private:
     static const double STARS_SLIDING_SPEED;
     static const double SLIDING_LEGHTH;
     static const uint32_t DEFAULT_MAIN_COLOR;
@@ -37,7 +36,6 @@ private:
     void onResolutionChanged(const e172::Vector &resolution);
 public:
     Background(unsigned int amount, double slidingStart = STARS_SLIDING_SPEED);
-
 
     // Entity interface
 public:

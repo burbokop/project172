@@ -1,35 +1,43 @@
 #include "objectregistry.h"
 
 
-ObjectRegistry *ObjectRegistry::instance = nullptr;
+std::map<e172::Object*, bool> e172::ObjectRegistry::objects;
 
-ObjectRegistry::ObjectRegistry() {
-    objects = new std::map<Object*, bool>();
+
+void e172::ObjectRegistry::registerObject(Object *object) {
+    objects[object] = true;
 }
 
-ObjectRegistry *ObjectRegistry::getInstance() {
-    if(instance == nullptr) instance = new ObjectRegistry();
-    return instance;
+void e172::ObjectRegistry::markAsDeleted(Object *object) {
+    objects[object] = false;
 }
 
-void ObjectRegistry::registerObject(Object *object) {
-    objects->operator[](object) = true;
-}
-
-void ObjectRegistry::markAsDeleted(Object *object) {
-    objects->operator[](object) = false;
-}
-
-bool ObjectRegistry::exists(Object *object) {
+bool e172::ObjectRegistry::exists(Object *object) {
     if(object == nullptr) return false;
-    return objects->operator[](object);
+    return objects[object];
 }
 
-bool ObjectRegistry::isDeleted(Object *object) {
+bool e172::ObjectRegistry::isDeleted(Object *object) {
     if(object == nullptr) return true;
-    return !objects->operator[](object);
+    return !objects[object];
 }
 
-unsigned long ObjectRegistry::getSize() {
-    return objects->size();
+unsigned long e172::ObjectRegistry::size() {
+    return objects.size();
+}
+
+bool e172::operator ==(e172::Object *object, const e172::alive_t &) {
+    return ObjectRegistry::exists(object);
+}
+
+bool e172::operator ==(const e172::alive_t &, e172::Object *object) {
+    return ObjectRegistry::exists(object);
+}
+
+bool e172::operator !=(e172::Object *object, const e172::alive_t &) {
+    return ObjectRegistry::isDeleted(object);
+}
+
+bool e172::operator !=(const e172::alive_t &, e172::Object *object) {
+    return ObjectRegistry::isDeleted(object);
 }

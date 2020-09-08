@@ -7,7 +7,6 @@
 #include <SDL2/SDL_ttf.h>
 #include <src/engine/math/math.h>
 
-
 const int SDLRenderer::DefaultFontSize = 20;
 
 
@@ -35,8 +34,7 @@ void SDLRenderer::disableEffect(uint64_t effect) {
 
 SDLRenderer::~SDLRenderer() {
     SDL_FreeSurface(surface);
-    TTF_Quit();
-    SDL_Quit();
+    SDL_DestroyWindow(window);
 }
 
 void SDLRenderer::setResolution(e172::Vector value) {
@@ -54,8 +52,11 @@ void SDLRenderer::applyLensEffect(const e172::Vector &point0, const e172::Vector
 }
 
 SDLRenderer::SDLRenderer(const char *title, int x, int y) {
-    SDL_Init(SDL_INIT_EVERYTHING);
-    TTF_Init();
+    if(!sdl_initialized) {
+        SDL_Init(SDL_INIT_EVERYTHING);
+        TTF_Init();
+        sdl_initialized = true;
+    }
     SDL_Window *window = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, x, y, 0);
     SDL_Surface *surface = SDL_GetWindowSurface(window);
 

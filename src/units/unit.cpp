@@ -203,7 +203,3 @@ std::string Unit::getInfo() {
     return loadableId();
 }
 
-std::string Unit::getType() const {
-    return typeid (this).name();
-}
-

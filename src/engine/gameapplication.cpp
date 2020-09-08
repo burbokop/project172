@@ -7,6 +7,7 @@
 #include <src/engine/graphics/abstractrenderer.h>
 #include <src/engine/graphics/abstractgraphicsprovider.h>
 
+
 namespace e172 {
 
 
@@ -18,17 +19,36 @@ std::vector<std::string> GameApplication::coverArgs(int argc, char *argv[]) {
     return result;
 }
 
+
 void GameApplication::destroyAllEntities(Context *, const Variant &) {
-    for(auto e : m_entities) {
-        delete e;
+    auto it = m_entities.begin();
+    while (it != m_entities.end()) {
+        if((*it)->liveInHeap()) {
+            delete *it;
+            it = m_entities.erase(it);
+
+            if(m_autoIterator == m_entities.end()) {
+                m_autoIterator = m_entities.begin();
+            }
+        } else {
+            ++it;
+        }
     }
-    m_entities.clear();
 }
 
 void GameApplication::destroyEntity(Context* context, const Variant &value) {
     if(const auto e = context->entityById(value.toNumber<Entity::id_t>())) {
-        m_entities.remove(e);
-        delete e;
+        if(e->liveInHeap()) {
+            m_entities.remove(e);
+            if(m_autoIterator != m_entities.begin())
+                --m_autoIterator;
+
+            if(m_autoIterator == m_entities.end()) {
+                m_autoIterator = m_entities.begin();
+            }
+
+            delete e;
+        }
     }
 }
 
@@ -36,6 +56,13 @@ void GameApplication::destroyEntity(Context* context, const Variant &value) {
 std::list<Entity *> GameApplication::entities() const
 {
     return m_entities;
+}
+
+Entity *GameApplication::autoIteratingEntity() const {
+    if(m_autoIterator != m_entities.end()) {
+        return m_autoIterator.operator*();
+    }
+    return nullptr;
 }
 
 AbstractGraphicsProvider *GameApplication::graphicsProvider() const {
@@ -123,6 +150,11 @@ int GameApplication::exec() {
                     break;
                 }
             }
+        }
+
+        //AUTO ITERATOR RESET MUST BE BEFORE DESTRUCTION HANDLING
+        if(++m_autoIterator == m_entities.end()) {
+            m_autoIterator = m_entities.begin();
         }
 
         if(m_context) {

@@ -18,7 +18,7 @@ Unit *Aggressive::chooseTarget() {
 
     Entity *target = targets.front();
 
-    EXISTS(target) {
+    if(target == e172::Alive) {
         Camera *camera = dynamic_cast<Camera*>(target);
         Particle *particle = dynamic_cast<Particle*>(target);
         LightParticle *lightParticle = dynamic_cast<LightParticle*>(target);
@@ -41,7 +41,7 @@ Aggressive::Aggressive(std::list<Entity *> units) {
 }
 
 void Aggressive::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
-    EXISTS(target) {
+     if(target == e172::Alive) {
         if(target != nullptr && parentUnit() != nullptr && target->instanceOf<Ship>() && target != parentUnit()) {
             e172::Vector dst = target->position() - parentUnit()->position();
             const double dstAngle = dst.angle();

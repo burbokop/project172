@@ -6,24 +6,32 @@
 
 #include "object.h"
 
+namespace e172 {
+
 
 class ObjectRegistry {
-private:
-    static ObjectRegistry *instance;
-    std::map<Object*, bool> *objects;
-    ObjectRegistry();
+    static std::map<Object*, bool> objects;
 public:
-    static ObjectRegistry *getInstance();
-    void registerObject(Object* object);
-    void markAsDeleted(Object* object);
+    static void registerObject(Object* object);
+    static void markAsDeleted(Object* object);
 
-    bool exists(Object* object);
-    bool isDeleted(Object *object);
-    unsigned long getSize();
+    static bool exists(Object* object);
+    static bool isDeleted(Object *object);
+    static unsigned long size();
 };
 
-#define EXISTS(OBJECT) if(ObjectRegistry::getInstance()->exists(OBJECT))
-#define PROTECT_OBJECT(OBJECT) if(ObjectRegistry::getInstance()->isDeleted(OBJECT)) { Debug::err(Debug::Code::APPEAL_TO_REMOVED, __PRETTY_FUNCTION__); return; }
+struct alive_t {};
+
+static const inline alive_t Alive;
+
+bool operator ==(Object *object, const alive_t&);
+bool operator ==(const alive_t&, Object *object);
+bool operator !=(Object *object, const alive_t&);
+bool operator !=(const alive_t&, Object *object);
+
+}
+
+
 
 
 #endif // OBJECTREGISTER_H

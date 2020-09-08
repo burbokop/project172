@@ -53,7 +53,7 @@ void Projectile::proceed(e172::Context *context, e172::AbstractEventHandler *eve
     }
 
     for(Entity *e : context->entities()) {
-        EXISTS(e) {
+        if(e == e172::Alive) {
             Unit *unit = dynamic_cast<Unit*>(e);
             if(unit != nullptr && unit != this) {
                 if((unit->position() - position()).module() < DEFAULT_HIT_RADIUS) {

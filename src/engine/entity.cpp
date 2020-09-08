@@ -5,17 +5,16 @@
 
 namespace e172 {
 
-uint64_t Entity::entityId() const
-{
+uint64_t Entity::entityId() const {
     return m_entityId;
 }
 
 Entity::Entity() {
-    ObjectRegistry::getInstance()->registerObject(this);
+    ObjectRegistry::registerObject(this);
 }
 
 Entity::~Entity() {
-    ObjectRegistry::getInstance()->markAsDeleted(this);
+    ObjectRegistry::markAsDeleted(this);
 }
 
 

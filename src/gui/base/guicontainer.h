@@ -10,12 +10,12 @@
 
 class GUIContainer : public GUIMenuElement {
 protected:
-    std::vector<GUIMenuElement*> m_menuElements;
 
     GUIMenuElement *selectDown();
     GUIMenuElement *selectUp();
 
 private:
+    std::vector<GUIMenuElement*> m_menuElements;
 
     int interval = 24;
     int selected = -1;
@@ -36,6 +36,7 @@ public:
     void addMenuElement(GUIMenuElement *element);
     void removeMenuElement(GUIMenuElement *element);
     void clearElements();
+    void terminateElements();
 
     // GUIElement interface
 public:

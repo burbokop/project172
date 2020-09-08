@@ -13,6 +13,8 @@ struct _TTF_Font;
 typedef _TTF_Font TTF_Font;
 class SDLRenderer : public e172::AbstractRenderer {
     friend class SDLGraphicsProvider;
+
+    static inline auto sdl_initialized = false;
 public:
     static const int DefaultFontSize;
 private:

@@ -1,10 +1,6 @@
 #include "explosivespawner.h"
 #include "screensettingsextension.h"
 
-#include <iostream>
-#include <locale>
-
-
 #include <src/engine/gameapplication.h>
 #include <src/engine/context.h>
 
@@ -77,8 +73,6 @@ int main(int argc, char *argv[]) {
 
 
     e172::GameApplication app(argc, argv);
-    SDLEventHandler eventHandler;
-    SDLAudioProvider audioProvider;
 
     e172::AbstractGraphicsProvider *graphicsProvider = nullptr;
     if(rendererUsing == Vulkan) {
@@ -98,6 +92,9 @@ int main(int argc, char *argv[]) {
     }
 
 
+
+    SDLEventHandler eventHandler;
+    SDLAudioProvider audioProvider;
     app.setEventHandler(&eventHandler);
     app.setAudioProvider(&audioProvider);
     app.setGraphicsProvider(graphicsProvider);
@@ -149,27 +146,31 @@ int main(int argc, char *argv[]) {
     app.addEntity(&background);
 
 
-    //player1
-    Player *player = static_cast<Player*>(app.assetProvider()->createLoadable("player1"));
+
+    //creating players
+    Player *player = dynamic_cast<Player*>(app.assetProvider()->createLoadable("player1"));
 
     //installing armor to player
-    Ship *playerArmor = static_cast<Ship*>(app.assetProvider()->createLoadable("astro"));
+
+    /*
+    Ship *playerArmor = dynamic_cast<Ship*>(app.assetProvider()->createLoadable("astro"));
     ModuleHandler *playerArmorModules = new ModuleHandler();
-    playerArmorModules->addModule(static_cast<Module*>(app.assetProvider()->createLoadable("mini-engine")));
-    playerArmorModules->addModule(static_cast<Module*>(app.assetProvider()->createLoadable("repair-laser")));
+    playerArmorModules->addModule(dynamic_cast<Module*>(app.assetProvider()->createLoadable("mini-engine")));
+    playerArmorModules->addModule(dynamic_cast<Module*>(app.assetProvider()->createLoadable("repair-laser")));
     playerArmor->addCapability(playerArmorModules);
-    static_cast<Player*>(player)->setArmor(playerArmor);
+    dynamic_cast<Player*>(player)->setArmor(playerArmor);
+    */
 
     //setting up player's ship
-    Unit *playerShip = static_cast<Unit*>(app.assetProvider()->createLoadable("sh1"));
+    Unit *playerShip = dynamic_cast<Unit*>(app.assetProvider()->createLoadable("sh1"));
     playerShip->place(e172::Vector(100, 100), -0.7);
     playerShip->addCapability(new Docker());
     playerShip->addCapability(player);
     ModuleHandler *playerModuleHandler = new ModuleHandler();
-    playerModuleHandler->addModule(static_cast<Module*>(app.assetProvider()->createLoadable("pistol")));
-    playerModuleHandler->addModule(static_cast<Module*>(app.assetProvider()->createLoadable("engine2")));
-    playerModuleHandler->addModule(static_cast<Module*>(app.assetProvider()->createLoadable("warp-drive1")));
-    playerModuleHandler->addModule(static_cast<Module*>(app.assetProvider()->createLoadable("thruster1")));
+    playerModuleHandler->addModule(dynamic_cast<Module*>(app.assetProvider()->createLoadable("pistol")));
+    playerModuleHandler->addModule(dynamic_cast<Module*>(app.assetProvider()->createLoadable("engine2")));
+    playerModuleHandler->addModule(dynamic_cast<Module*>(app.assetProvider()->createLoadable("warp-drive1")));
+    playerModuleHandler->addModule(dynamic_cast<Module*>(app.assetProvider()->createLoadable("thruster1")));
     playerShip->addCapability(playerModuleHandler);
     app.addEntity(playerShip);
 
@@ -177,55 +178,23 @@ int main(int argc, char *argv[]) {
 
 
     //player2
-    Player *player2 = static_cast<Player*>(app.assetProvider()->createLoadable("player2"));
     //installing armor to player2
 
+    /*
     Ship *playerArmor2 = static_cast<Ship*>(app.assetProvider()->createLoadable("astro"));
     ModuleHandler *playerArmorModules2 = new ModuleHandler();
     playerArmorModules2->addModule(static_cast<Module*>(app.assetProvider()->createLoadable("mini-engine")));
     playerArmorModules2->addModule(static_cast<Module*>(app.assetProvider()->createLoadable("repair-laser")));
     playerArmor2->addCapability(playerArmorModules2);
     player2->setArmor(playerArmor2);
+    */
 
-    for(int i = 0; i < 3; i++) {
-        Unit *s = nullptr;
-        switch (i) {
-            case 0:
-                s = static_cast<Unit*>(app.assetProvider()->createLoadable("sh1"));
-                break;
-            case 1:
-                s = static_cast<Unit*>(app.assetProvider()->createLoadable("sh2"));
-                break;
-            case 2:
-                s = static_cast<Unit*>(app.assetProvider()->createLoadable("sh3"));
-                break;
-        }
-
-        s->place(e172::Vector(-50 + i * 50, 100), -0.7);
-
-        ModuleHandler *mx = new ModuleHandler();
-        if(i == 1) {
-            mx->addModule(static_cast<Module*>(app.assetProvider()->createLoadable("pistol")));
-            mx->addModule(static_cast<Module*>(app.assetProvider()->createLoadable("mega-launcher")));
-        } else {
-            mx->addModule(static_cast<Module*>(app.assetProvider()->createLoadable("pistol")));
-        }
-        mx->addModule(static_cast<Module*>(app.assetProvider()->createLoadable("engine1")));
-        mx->addModule(static_cast<Module*>(app.assetProvider()->createLoadable("warp-drive1")));
-
-        s->addCapability(mx);
-
-        s->addCapability(new Docker());
-
-        if(i == 1) s->addCapability(player2);
-        app.addEntity(s);
-    }
-
-
-
+    //setup radar near
+    Near radarNear(player);
+    app.addEntity(&radarNear);
 
     //setup gui
-    GUIMaker guiMaker(app.context());
+    GUIMaker guiMaker(app.context(), &radarNear);
     guiMaker.gui()->setController(player);
     app.addEntity(guiMaker.gui());
 

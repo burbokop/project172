@@ -36,6 +36,11 @@ void GUIContainer::clearElements() {
     m_menuElements.clear();
 }
 
+void GUIContainer::terminateElements() {
+    terminateChildren();
+    m_menuElements.clear();
+}
+
 void GUIContainer::setStack(GUIStack *value) {
     stack = value;
 }
