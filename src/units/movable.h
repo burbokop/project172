@@ -35,7 +35,8 @@ protected:
 
     double getAccelerationValue();
     static const double DEFAULT_MAX_SPEED;
-    double getMaxSpeed() const;
+    double maxVelocity() const;
+    void setMaxVelocity(double value);
 
 
     void setRelativisticVelocity(bool value);

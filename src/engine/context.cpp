@@ -154,14 +154,6 @@ Promice *Context::emitMessage(const MessageId &messageId, const Variant &value) 
     return m_messageQueue.emitMessage(messageId, value);
 }
 
-bool Context::containsMessage(const MessageId &messageId) {
-    return m_messageQueue.containsMessage(messageId);
-}
-
-Variant Context::popMessage(const MessageId &messageId, bool *ok) {
-    return m_messageQueue.popMessage(messageId, ok);
-}
-
 Entity *Context::entityById(const Entity::id_t &id) const {
     const auto e = m_application->entities();
     for(auto a : e) {

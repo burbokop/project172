@@ -49,7 +49,7 @@ void Projectile::setMother(Unit *value) {
 
 void Projectile::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
     if(destroyTimer && destroyTimer->check()) {
-        context->emitMessage(e172::Context::DELETE_UNIT, entityId());
+        context->emitMessage(e172::Context::DESTROY_ENTITY, entityId());
     }
 
     for(Entity *e : context->entities()) {

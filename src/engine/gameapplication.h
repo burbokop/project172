@@ -55,7 +55,8 @@ class GameApplication {
     Context *m_context = nullptr;
 
     void destroyAllEntities(Context*, const Variant&);
-    void destroyEntity(Context*context, const Variant&value);
+    void destroyEntity(Context*context, const Variant& value);
+    void destroyEntitiesWithTag(Context*, const Variant& value);
 
     bool mustQuit = false;
 

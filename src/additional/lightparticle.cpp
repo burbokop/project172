@@ -36,7 +36,7 @@ void LightParticle::place(e172::Vector pos, e172::Vector vel) {
 void LightParticle::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
     UNUSED(eventHandler);
     if(destroyTimer && destroyTimer->check()) {
-        context->emitMessage(e172::Context::DELETE_UNIT, entityId());
+        context->emitMessage(e172::Context::DESTROY_ENTITY, entityId());
     }
     vel = vel * (1 - context->deltaTime() * velocityMultiplier);
 

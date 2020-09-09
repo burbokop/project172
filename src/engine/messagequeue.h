@@ -51,7 +51,6 @@ public:
     };
 private:
     ExceptionHandlingMode m_exceptionHandlingMode = IgnoreException;
-public:
 
     static std::string produceExeption(const IdType &id, const ValueType &value) {
         std::stringstream ss;
@@ -98,7 +97,6 @@ public:
         }
     }
 
-    MessageQueue() {}
     bool containsMessage(const IdType &id) {
         const auto it = m_data.find(id);
         if(it == m_data.end())
@@ -107,40 +105,28 @@ public:
         return it->second.queue.size() > 0;
     }
 
-    ValueType popMessage(const IdType &id, bool *ok = nullptr) {
-        if(ok)
-            *ok = false;
+public:
+    MessageQueue() {}
+
+
+    void popMessage(const IdType &id, const std::function<void(const ValueType&)>& callback) {
         const auto it = m_data.find(id);
         if(it == m_data.end())
-            return ValueType();
+            return;
 
-        if(it->second.queue.size() > 0) {
+        while(it->second.queue.size() > 0) {
             const auto message = it->second.queue.front();
             it->second.queue.pop_front();
+
+            callback(message.value);
 
             if(message.promice) {
                 if(message.promice->m_done)
                     message.promice->m_done();
                 delete message.promice;
             }
-
-            if(ok)
-                *ok = true;
-            return message.value;
-        }
-        return ValueType();
-    }
-
-    void popMessage(const IdType &id, const std::function<void(const ValueType&)>& callback) {
-        bool ok;
-        __loop:
-        const auto value = popMessage(id, &ok);
-        if(ok) {
-            callback(value);
-            goto __loop;
         }
     }
-
 
     template<typename C>
     void popMessage(const IdType &id, C *object, void(C::*callback)(const ValueType&)) {

@@ -148,7 +148,7 @@ int main(int argc, char *argv[]) {
 
 
     //creating players
-    Player *player = dynamic_cast<Player*>(app.assetProvider()->createLoadable("player1"));
+    //Player *player = dynamic_cast<Player*>(app.assetProvider()->createLoadable("player1"));
 
     //installing armor to player
 
@@ -162,17 +162,17 @@ int main(int argc, char *argv[]) {
     */
 
     //setting up player's ship
-    Unit *playerShip = dynamic_cast<Unit*>(app.assetProvider()->createLoadable("sh1"));
-    playerShip->place(e172::Vector(100, 100), -0.7);
-    playerShip->addCapability(new Docker());
-    playerShip->addCapability(player);
-    ModuleHandler *playerModuleHandler = new ModuleHandler();
-    playerModuleHandler->addModule(dynamic_cast<Module*>(app.assetProvider()->createLoadable("pistol")));
-    playerModuleHandler->addModule(dynamic_cast<Module*>(app.assetProvider()->createLoadable("engine2")));
-    playerModuleHandler->addModule(dynamic_cast<Module*>(app.assetProvider()->createLoadable("warp-drive1")));
-    playerModuleHandler->addModule(dynamic_cast<Module*>(app.assetProvider()->createLoadable("thruster1")));
-    playerShip->addCapability(playerModuleHandler);
-    app.addEntity(playerShip);
+    //Unit *playerShip = dynamic_cast<Unit*>(app.assetProvider()->createLoadable("sh1"));
+    //playerShip->place(e172::Vector(120, 120), -0.7);
+    //playerShip->addCapability(new Docker());
+    //playerShip->addCapability(player);
+    //ModuleHandler *playerModuleHandler = new ModuleHandler();
+    //playerModuleHandler->addModule(dynamic_cast<Module*>(app.assetProvider()->createLoadable("pistol")));
+    //playerModuleHandler->addModule(dynamic_cast<Module*>(app.assetProvider()->createLoadable("engine2")));
+    //playerModuleHandler->addModule(dynamic_cast<Module*>(app.assetProvider()->createLoadable("warp-drive1")));
+    //playerModuleHandler->addModule(dynamic_cast<Module*>(app.assetProvider()->createLoadable("thruster1")));
+    //playerShip->addCapability(playerModuleHandler);
+    //app.addEntity(playerShip);
 
 
 
@@ -190,16 +190,15 @@ int main(int argc, char *argv[]) {
     */
 
     //setup radar near
-    Near radarNear(player);
+    Near radarNear;
     app.addEntity(&radarNear);
 
     //setup gui
     GUIMaker guiMaker(app.context(), &radarNear);
-    guiMaker.gui()->setController(player);
     app.addEntity(guiMaker.gui());
 
     //setup camera
-    Camera camera(player);
+    Camera camera;
     app.addEntity(&camera);
     background.bindToMovable(&camera);
 
@@ -210,6 +209,19 @@ int main(int argc, char *argv[]) {
     worldPresetStrategy.registerType<HeapWorld>();
     app.addEntity(&worldPresetStrategy);
 
+    worldPresetStrategy.controllersChanged([&guiMaker, &camera, &radarNear](auto c){
+        if(c.size() > 0) {
+            const auto controller = c.front();
+            camera.setTarget(controller);
+            guiMaker.gui()->setController(controller);
+            radarNear.setCenter(controller);
+        }
+    });
+
+
+    const auto presetNames = worldPresetStrategy.presetNames();
+    if(presetNames.size() > 0)
+        worldPresetStrategy.activatePreset(worldPresetStrategy.presetNames().front());
 
     guiMaker.setWorldPresetStrategy(&worldPresetStrategy);
 
@@ -217,7 +229,7 @@ int main(int argc, char *argv[]) {
 
 
 
-    //independedt services initialization
+    //independent services initialization
 
     ExplosiveSpawner explosiveSpawner;
     app.addEntity(&explosiveSpawner);

@@ -132,6 +132,9 @@ bool Variant::isNumber() const {
 }
 
 std::string Variant::toString() const {
+    if(containsType<std::string>())
+        return value<std::string>();
+
     if(m_string_convertor)
         return m_string_convertor(m_data);
 

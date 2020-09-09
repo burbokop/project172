@@ -1,5 +1,5 @@
-#ifndef WORLDMANAGER_H
-#define WORLDMANAGER_H
+#ifndef WORLDPRESETSTRATEGY_H
+#define WORLDPRESETSTRATEGY_H
 
 
 #include "gui/guimain.h"
@@ -12,11 +12,15 @@
 #include <src/engine/memcontrol/abstractstrategy.h>
 
 
+
 class WorldPresetStrategy : public e172::Entity {
     e172::AbstractStrategy<std::string, WorldPreset> m_strategy;
     WorldPreset *m_last = nullptr;
 
+    std::function<void(const std::list<Controller*>&)> controllersChangedCallback;
 public:
+    static inline const std::string WORLD_TAG = "W";
+
     WorldPresetStrategy();
 
     template<typename T>
@@ -24,6 +28,8 @@ public:
     std::list<std::string> presetNames() const;
 
     void activatePreset(const std::string &preset);
+
+    void controllersChanged(const std::function<void(const std::list<Controller*>&)>& callback);
 
     // Entity interface
 public:

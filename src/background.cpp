@@ -13,10 +13,16 @@ const uint32_t Background::DEFAULT_FLASHING_COLOR = 0xff0000;
 const long Background::DEFAULT_FLASHING_INTERVAL = 32;
 
 
-void Background::flashing(int repeats) {
+void Background::flashing(const int &repeats) {
     flashingTimer.reset();
     flashesRemains = repeats;
 }
+
+void Background::flashing(e172::Context *, const e172::Variant &repeats) {
+    flashingTimer.reset();
+    flashesRemains = repeats.toInt();
+}
+
 
 Background::Background(unsigned int amount, double slidingStart) {
     this->slidingStart = slidingStart;
@@ -35,11 +41,7 @@ void Background::onResolutionChanged(const e172::Vector &resolution) {
     }
 }
 void Background::proceed(e172::Context *context, e172::AbstractEventHandler *) {
-    bool ok = false;
-    const auto value = context->popMessage(e172::Context::BACKGROUND_FLASHING, &ok);
-    if(ok) {
-        flashing(value.toInt());
-    }
+    context->popMessage(e172::Context::BACKGROUND_FLASHING, this, &Background::flashing);
 }
 
 void Background::render(e172::AbstractRenderer *renderer) {
@@ -92,3 +94,4 @@ void Background::render(e172::AbstractRenderer *renderer) {
 void Background::bindToMovable(Movable *value) {
     m_movable = value;
 }
+

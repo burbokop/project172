@@ -3,7 +3,7 @@
 
 #include <src/engine/entity.h>
 
-
+#include <src/engine/math/vector.h>
 
 class ExplosiveSpawner : public e172::Entity {
 

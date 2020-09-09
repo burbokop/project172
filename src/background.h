@@ -43,7 +43,8 @@ public:
     void render(e172::AbstractRenderer *renderer);
     void bindToMovable(Movable *value);
 
-    void flashing(int repeats);
+    void flashing(e172::Context *, const e172::Variant &repeats);
+    void flashing(const int &repeats);
 };
 
 #endif // BACKGROUND_H

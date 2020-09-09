@@ -52,6 +52,26 @@ void GameApplication::destroyEntity(Context* context, const Variant &value) {
     }
 }
 
+void GameApplication::destroyEntitiesWithTag(Context *, const Variant &value) {
+    const auto tag = value.toString();
+
+    std::cout << "tag: " << tag << "\n";
+
+    auto it = m_entities.begin();
+    while (it != m_entities.end()) {
+        if((*it)->liveInHeap() && (*it)->containsTag(tag)) {
+            delete *it;
+            it = m_entities.erase(it);
+
+            if(m_autoIterator == m_entities.end()) {
+                m_autoIterator = m_entities.begin();
+            }
+        } else {
+            ++it;
+        }
+    }
+}
+
 
 std::list<Entity *> GameApplication::entities() const
 {
@@ -158,8 +178,9 @@ int GameApplication::exec() {
         }
 
         if(m_context) {
-            m_context->popMessage(Context::DELETE_UNIT, this, &GameApplication::destroyEntity);
-            m_context->popMessage(Context::DELETE_ALL_UNITS, this, &GameApplication::destroyAllEntities);
+            m_context->popMessage(Context::DESTROY_ENTITY, this, &GameApplication::destroyEntity);
+            m_context->popMessage(Context::DESTROY_ALL_ENTITIES, this, &GameApplication::destroyAllEntities);
+            m_context->popMessage(Context::DESTROY_ENTITIES_WITH_TAG, this, &GameApplication::destroyEntitiesWithTag);
 
             m_context->m_messageQueue.invokeInternalFunctions();
             m_context->m_messageQueue.flushMessages();

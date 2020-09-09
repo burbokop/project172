@@ -16,6 +16,7 @@ DefaultWorld::DefaultWorld() {
 WorldPreset::GenerationResult DefaultWorld::generate(e172::Context *context) {
     GenerationResult result;
 
+
     //player1
     Player *player1 = static_cast<Player*>(context->assetProvider()->createLoadable("player1"));
     Ship *playerArmor = static_cast<Ship*>(context->assetProvider()->createLoadable("astro"));
@@ -132,6 +133,8 @@ WorldPreset::GenerationResult DefaultWorld::generate(e172::Context *context) {
         s->place(e172::Vector(50, 150), 0);
         result.entities.push_back(s);
     }
+
+
     return result;
 }
 

@@ -5,25 +5,29 @@
 const double Camera::STOP_DISTANCE = 4;
 const double Camera::MAX_SPEED_MULTIPLIER = 0.002 * 1000;
 
+Controller *Camera::target() const {
+    return m_target;
+}
+
 Camera::Camera() : Movable () {
-    target = nullptr;
     //setRelativisticVelocity(false);
     place(e172::Vector(), e172::Vector(1, 1), e172::Vector(), 0);
 }
 
 Camera::Camera(Controller *target) : Movable () {
-    this->target = target;
+    m_target = target;
     //setRelativisticVelocity(false);
+
     place(e172::Vector(), e172::Vector(1, 1), e172::Vector(), 0);
 }
 
 void Camera::setTarget(Controller *target) {
-    this->target = target;
+    m_target = target;
 }
 
 void Camera::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
-    if(target) {
-        if(Unit *targetUnit = target->parentUnit()) {
+    if(m_target) {
+        if(Unit *targetUnit = m_target->parentUnit()) {
             if(targetUnit == e172::Alive) {
                 relativisticPursuit(context, targetUnit);
             }

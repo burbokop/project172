@@ -162,7 +162,7 @@ void Unit::hit(e172::Context* context, int value) {
                     }
                 }
             }
-            context->emitMessage(e172::Context::DELETE_UNIT, entityId());
+            context->emitMessage(e172::Context::DESTROY_ENTITY, entityId());
         }
     } else {
         if(dynamic_cast<Projectile*>(this) == nullptr) {

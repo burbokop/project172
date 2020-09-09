@@ -5,7 +5,6 @@
 #include "background.h"
 #include "additional/informative/fpsmonitor.h"
 #include "netlistener.h"
-#include "worldmanager.h"
 
 
 class Environment {
@@ -18,7 +17,6 @@ private:
     FPSMonitor *fps = nullptr;
     FPSMonitor *tps = nullptr;
     NetListener *netListener = nullptr;
-    e172::AbstractGraphicsProvider *renderEngine = nullptr;
     e172::AbstractRenderer *renderer = nullptr;
 
 public:

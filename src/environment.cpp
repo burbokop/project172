@@ -81,10 +81,8 @@ Environment::Environment(std::vector<std::string> args) {
 
     //renderEngine = new SDLGraphicsProvider("project172", 600, 600);
 
-    renderEngine->loadFont(std::string(), e172::Additional::absolutePath("../assets/fonts/ZCOOL.ttf", args[0]));
 
 
-    renderer = renderEngine->renderer();
 
     background = new Background(128);
 

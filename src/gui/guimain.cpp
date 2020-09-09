@@ -29,6 +29,17 @@ void GUIMain::addBlushingFloatingMessage(Unit *unit, int value) {
     floatingMessageLifeTimer.reset();
 }
 
+void GUIMain::addBlushingFloatingMessage(e172::Context *context, const e172::Variant &value) {
+    const auto list = value.toVector();
+    if(list.size() > 1) {
+        const auto entity = context->entityById(list[0].toNumber<Entity::id_t>());
+        if(auto target = dynamic_cast<Unit*>(entity)) {
+            const auto v = list[1].toInt();
+            addBlushingFloatingMessage(target, v);
+        }
+    }
+}
+
 void GUIMain::setMiniMap(GUIMiniMap *value) {
     miniMap = value;
     addChildElement(value);
@@ -42,18 +53,7 @@ void GUIMain::setDebugValueInfo(GUIDebugValueInfo *value) {
 GUIMain::GUIMain() {}
 
 void GUIMain::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
-    bool ok = false;
-    const auto value = context->popMessage(e172::Context::FLOATING_MESSAGE, &ok);
-    if(ok) {
-        const auto list = value.toVector();
-        if(list.size() > 1) {
-            const auto entity = context->entityById(list[0].toNumber<Entity::id_t>());
-            if(auto target = dynamic_cast<Unit*>(entity)) {
-                const auto v = list[1].toInt();
-                addBlushingFloatingMessage(target, v);
-            }
-        }
-    }
+    context->popMessage(e172::Context::FLOATING_MESSAGE, this, &GUIMain::addBlushingFloatingMessage);
 
     if(floatingMessageLifeTimer.check()) {
         floatingMessage = nullptr;

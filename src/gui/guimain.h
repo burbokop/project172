@@ -29,6 +29,7 @@ public:
 
     void addFloatingMessage(Unit *unit, std::string message);
     void addBlushingFloatingMessage(Unit *unit, int value);
+    void addBlushingFloatingMessage(e172::Context *context, const e172::Variant &value);
 
     void setMenu(GUIStack *value);
     void setMessage(GUICentralMessage *value);

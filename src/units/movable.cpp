@@ -51,12 +51,16 @@ double Movable::getAccelerationValue() {
     return loadedValues.acceleration;
 }
 
-double Movable::getMaxSpeed() const {
+double Movable::maxVelocity() const {
     if(!forcedMaxSpeedEnabled) {
         return loadedValues.maxVelocity;
     } else {
         return forcedMaxSpeedValue;
     }
+}
+
+void Movable::setMaxVelocity(double value) {
+    loadedValues.maxVelocity = value;
 }
 
 void Movable::setRelativisticVelocity(bool value) {
@@ -139,7 +143,7 @@ e172::Vector Movable::velocity() const {
 void Movable::updatePosition(e172::Context *context) {
     accelerateIdle();
     if(relativisticVelocity) {
-        vel = vel.relativisticAddition(acc * context->deltaTime(), getMaxSpeed());
+        vel = vel.relativisticAddition(acc * context->deltaTime(), maxVelocity());
     } else {
         vel += (acc * context->deltaTime());
     }

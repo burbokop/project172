@@ -11,7 +11,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 include_directories(${CMAKE_CURRENT_LIST_DIR})
 
-
 add_library(e172 SHARED
 
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/assettools/abstractassetexecutor.cpp
@@ -151,8 +150,8 @@ add_executable(project172
     ${CMAKE_CURRENT_LIST_DIR}/src/near.h
     ${CMAKE_CURRENT_LIST_DIR}/src/netlistener.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/netlistener.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/worldmanager.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/worldmanager.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/worldpresetstrategy.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/worldpresetstrategy.h
 
     ${CMAKE_CURRENT_LIST_DIR}/src/additional/informative/controllerfinder.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/additional/informative/controllerfinder.h

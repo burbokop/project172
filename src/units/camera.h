@@ -15,7 +15,7 @@ protected:
     static const double STOP_DISTANCE;
     static const double MAX_SPEED_MULTIPLIER;
 
-    Controller *target = nullptr;
+    Controller *m_target = nullptr;
 
 public:
     Camera();
@@ -30,6 +30,7 @@ public:
     // Unit interface
 public:
     void hit(e172::Context *, int);
+    Controller *target() const;
 };
 
 #endif // CAMERA_H

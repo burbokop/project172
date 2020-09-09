@@ -22,8 +22,9 @@ public:
     typedef Variant MessageId;
 
     enum {
-        DELETE_UNIT = 0,
-        DELETE_ALL_UNITS,
+        DESTROY_ENTITY = 0,
+        DESTROY_ALL_ENTITIES,
+        DESTROY_ENTITIES_WITH_TAG,
         SPAWN_EXPLOSIVE,
         SPAWN_ENGINE_PARTICLES,
         SPAWN_UNIT,
@@ -50,10 +51,7 @@ public:
     std::list<Entity *> entities() const;
     void addEntity(Entity *entity);
     Promice *emitMessage(const MessageId &messageId, const Variant &value = Variant());
-    bool containsMessage(const MessageId &messageId);
 
-
-    Variant popMessage(const MessageId &messageId, bool *ok = nullptr);
     inline void popMessage(const MessageId &messageId, const std::function<void(Context *, const Variant&)>& callback) {
         m_messageQueue.popMessage(messageId, [this, callback](const auto& value) { callback(this, value); });
     }

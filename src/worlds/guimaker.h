@@ -6,7 +6,7 @@
 #include <src/units/camera.h>
 
 #include <src/near.h>
-#include <src/worldmanager.h>
+#include <src/worldpresetstrategy.h>
 
 #include <src/gui/guicombobox.h>
 #include <src/gui/guimain.h>
