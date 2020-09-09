@@ -4,7 +4,7 @@
 #include "guilist.h"
 
 class GUIRadar : public GUIList {
-public:    
+public:
     GUIRadar(Controller *player);
     GUIRadar(std::string label);
     GUIRadar(IInformative *informative);

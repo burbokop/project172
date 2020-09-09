@@ -331,20 +331,22 @@ void SPM::BlendedText(SDL_Surface *surface, std::string text_line, TTF_Font *tex
     rgbColor.g = (color >> 8) & 255;
     rgbColor.b = (color >> 0) & 255;
     text_surface = TTF_RenderUTF8_Blended_Wrapped(text_font, text_line.c_str(), rgbColor, wrap);
-    text_rect.x = text_x;
-    text_rect.y = text_y;
+    if(text_surface) {
+        text_rect.x = text_x;
+        text_rect.y = text_y;
 
-    SDL_Surface *ets = nullptr;
-    if(effect) {
-        ets = (*effect)(text_surface);
-    } else {
-        ets = text_surface;
+        SDL_Surface *ets = nullptr;
+        if(effect) {
+            ets = (*effect)(text_surface);
+        } else {
+            ets = text_surface;
+        }
+
+        SDL_BlitSurface(ets, nullptr, surface, &text_rect);
+        if(ets != text_surface)
+            SDL_FreeSurface(ets);
+        SDL_FreeSurface(text_surface);
     }
-
-    SDL_BlitSurface(ets, nullptr, surface, &text_rect);
-    if(ets != text_surface)
-    SDL_FreeSurface(ets);
-    SDL_FreeSurface(text_surface);
 }
 
 SDL_Surface *SPM::CutOutSurface(const SDL_Surface *surface, int x, int y, int w, int h) {

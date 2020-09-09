@@ -255,7 +255,12 @@ add_executable(project172
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/guimoduleview.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/guicombobox.h
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/guicombobox.cpp
-
+    ${CMAKE_CURRENT_LIST_DIR}/src/gui/base/guilistview.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/gui/base/guilistview.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/gui/guistringlistview.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/gui/guistringlistview.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/gui/guiradar2.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/gui/guiradar2.cpp
 
     ${CMAKE_CURRENT_LIST_DIR}/src/units/camera.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/units/camera.h

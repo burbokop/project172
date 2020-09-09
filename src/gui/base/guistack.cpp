@@ -1,5 +1,6 @@
 #include "guistack.h"
 #include "guicontainer.h"
+#include "guilistview.h"
 
 #include <src/engine/abstracteventhandler.h>
 
@@ -10,6 +11,11 @@ void GUIStack::push(GUIElement *element) {
     GUIContainer *container = dynamic_cast<GUIContainer*>(element);
     if(container) {
         container->setStack(this);
+    }
+
+    GUIListView *listView = dynamic_cast<GUIListView*>(element);
+    if(listView) {
+        listView->setStack(this);
     }
     elements.push_back(element);
 }

@@ -15,6 +15,14 @@ Near::Near(Controller *center, double radius) {
     this->radius = radius;
 }
 
+int Near::entityInFocusCount() const {
+    return m_entitiesInFocus.size();
+}
+
+e172::Entity *Near::entityInFocus(int index) const {
+    return m_entitiesInFocus[index];
+}
+
 void Near::addEntities(e172::Context *context) {
     const auto current = context->autoIteratingEntity();
 
@@ -61,23 +69,20 @@ void Near::setCenter(Controller *center)
 }
 
 void Near::removeEntities(e172::Context *) {
-    if(removingIterator != m_entitiesInFocus.end()) {
-        e172::Entity *current = *removingIterator;
+    if(removingIterator < m_entitiesInFocus.size()) {
+        e172::Entity *current = m_entitiesInFocus[removingIterator];
         if(e172::ObjectRegistry::exists(current)) {
             const auto currentUnit = dynamic_cast<Unit*>(current);
             const auto centerUnit = m_center->parentUnit();
             if(currentUnit && centerUnit == e172::Alive) {
                 if((currentUnit->position() - centerUnit->position()).module() > (localRadius(centerUnit) + RADIUS_DELTA)) {
-                    removingIterator = m_entitiesInFocus.erase(removingIterator);
+                    const auto it = std::find(m_entitiesInFocus.begin(), m_entitiesInFocus.end(), current);
+                    m_entitiesInFocus.erase(it);
                 }
             }
         }
     }
-    if(++removingIterator == m_entitiesInFocus.end()) removingIterator = m_entitiesInFocus.begin();
-}
-
-std::list<e172::Entity *> Near::entitiesInFocus() {
-    return m_entitiesInFocus;
+    if(++removingIterator >= m_entitiesInFocus.size()) removingIterator = 0;
 }
 
 void Near::proceed(e172::Context *context, e172::AbstractEventHandler *) {

@@ -13,10 +13,10 @@ private:
     static const double DEFAULT_RADIUS;
     static const double WARP_RADIUS_MILTIPLIER;
 
-    std::list<e172::Entity*> m_entitiesInFocus;
+    std::vector<e172::Entity*> m_entitiesInFocus;
     Controller *m_center = nullptr;
 
-    std::list<e172::Entity*>::iterator removingIterator = m_entitiesInFocus.begin();
+    size_t removingIterator = 0;
 
     double radius = 0;
 
@@ -31,8 +31,8 @@ public:
     Near(Controller *center, double radius = DEFAULT_RADIUS);
 
 
-
-    std::list<e172::Entity*> entitiesInFocus();
+    int entityInFocusCount() const;
+    e172::Entity* entityInFocus(int index) const;
 
     // Entity interface
 public:

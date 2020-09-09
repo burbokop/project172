@@ -61,9 +61,9 @@ GUIList::GUIList(IInformative *informative) : GUIContainer (informative) {}
 void GUIList::render(e172::AbstractRenderer *renderer) {
     if(m_near) {
         terminateElements();
-        const auto newMenuElements = informativeToElements(m_near->entitiesInFocus());
-        for(const auto& n : newMenuElements)
-            addMenuElement(n);
+        //const auto newMenuElements = informativeToElements(m_near->entitiesInFocus());
+        //for(const auto& n : newMenuElements)
+        //    addMenuElement(n);
     }
     this->GUIContainer::render(renderer);
 }

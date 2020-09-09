@@ -7,6 +7,8 @@
 #include <src/gui/guimain.h>
 #include <src/gui/guimoduleview.h>
 #include <src/gui/guiradar.h>
+#include <src/gui/guiradar2.h>
+#include <src/gui/guistringlistview.h>
 #include <src/gui/guiswitch.h>
 
 #include <src/engine/context.h>
@@ -42,8 +44,20 @@ GUIMaker::GUIMaker(e172::Context *context, Near *radarNear) {
                 GUIContainer *modulesMenu = new GUIModuleView("modules");
                 mainMenu->addMenuElement(modulesMenu);
                 if(radarNear) {
-                    GUIRadar *radarMenu = new GUIRadar("radar"); {
+                    GUIRadar2 *radarMenu = new GUIRadar2("radar"); {
                         radarMenu->setNear(radarNear);
+                        GUIContainer *radarRowElement = new GUIContainer();
+                        radarRowElement->addMenuElement(new GUIChoice("info", 0, [](auto){
+                            std::cout << "INFO\n";
+                        }));
+                        radarRowElement->addMenuElement(new GUIChoice("select", 0, [](auto){
+                            std::cout << "SELECT\n";
+                        }));
+                        radarRowElement->addMenuElement(new GUIChoice("dock", 0, [](auto){
+                            std::cout << "DOCK\n";
+                        }));
+
+                        radarMenu->setRowElement(radarRowElement);
                     } mainMenu->addMenuElement(radarMenu);
                 }
 
@@ -59,6 +73,10 @@ GUIMaker::GUIMaker(e172::Context *context, Near *radarNear) {
                     m_worldComboBox = new GUIComboBox<std::string>("worlds"); {
 
                     } testMenu->addMenuElement(m_worldComboBox);
+
+
+                    testMenu->addMenuElement(new GUIStringListView("test static list", { "gog", "kilk", "kilk2", "end" }));
+
                     testMenu->addMenuElement(new GUIMenuElement(new RegistryInfo()));
                     testMenu->addMenuElement(new GUIMenuElement(new UnitsAmountInfo(context)));
 
