@@ -27,7 +27,10 @@ protected:
 
     e172::Vector pos;
 
+    bool m_selected = false;
 
+    uint32_t m_selectedColor;
+    e172::ElapsedTimer selectedAnimationTimer;
 public:
     Unit();
 
@@ -55,14 +58,14 @@ public:
     virtual void hit(e172::Context *context, int value);
 
     // Entity interface
-    void proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler);
-    void render(e172::AbstractRenderer *renderer);
+    void proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) override;
+    void render(e172::AbstractRenderer *renderer) override;
 
     ~Unit();
 
     // IInformative interface
 
-    std::string getInfo();
+    std::string info() const override;
 
 
     void setRotationSpeed(double value);

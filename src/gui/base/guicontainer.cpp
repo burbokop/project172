@@ -41,3 +41,7 @@ std::string GUIContainer::rowText(int index) const {
 GUIMenuElement *GUIContainer::rowElement(int index) const {
     return m_menuElements[index];
 }
+
+e172::Variant GUIContainer::rowModelData(int) const {
+    return e172::Variant();
+}

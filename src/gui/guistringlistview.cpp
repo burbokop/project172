@@ -20,3 +20,7 @@ std::string GUIStringListView::rowText(int index) const {
 GUIMenuElement *GUIStringListView::rowElement(int) const {
     return nullptr;
 }
+
+e172::Variant GUIStringListView::rowModelData(int) const {
+    return e172::Variant();
+}

@@ -5,6 +5,6 @@
 RegistryInfo::RegistryInfo(){
 }
 
-std::string RegistryInfo::getInfo() {
+std::string RegistryInfo::info() const {
     return "registry size: " + std::to_string(e172::ObjectRegistry::size());
 }

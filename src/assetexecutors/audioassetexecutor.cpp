@@ -5,7 +5,7 @@
 #include <src/engine/audio/abstractaudioprovider.h>
 
 AudioAssetExecutor::AudioAssetExecutor() {}
-#include <iostream>
+
 e172::Variant AudioAssetExecutor::proceed(const Json::Value &value, e172::AbstractGraphicsProvider*, e172::AbstractAudioProvider *audioProvider) {
     if(value.isObject()) {
         Json::Value audioStart = value["start"];

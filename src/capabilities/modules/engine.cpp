@@ -16,6 +16,6 @@ void Engine::proceed(e172::Context *context, e172::AbstractEventHandler *eventHa
     this->Module::proceed(context, eventHandler);
 }
 
-std::string Engine::getInfo() {
+std::string Engine::info() const {
     return "EG";
 }

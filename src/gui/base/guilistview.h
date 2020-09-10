@@ -8,7 +8,7 @@
 
 class GUIListView : public GUIMenuElement {
     GUIStack *m_stack = nullptr;
-    int m_selectedIndex = -1;
+    int m_selectedIndex = 0;
     int m_verticalInterval = 24;
 public:
     GUIListView() {}
@@ -22,6 +22,7 @@ public:
     virtual int rowCount() const = 0;
     virtual std::string rowText(int index) const = 0;
     virtual GUIMenuElement *rowElement(int index) const = 0;
+    virtual e172::Variant rowModelData(int index) const = 0;
 
     // Entity interface
 public:

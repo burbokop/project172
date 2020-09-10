@@ -55,8 +55,6 @@ void GameApplication::destroyEntity(Context* context, const Variant &value) {
 void GameApplication::destroyEntitiesWithTag(Context *, const Variant &value) {
     const auto tag = value.toString();
 
-    std::cout << "tag: " << tag << "\n";
-
     auto it = m_entities.begin();
     while (it != m_entities.end()) {
         if((*it)->liveInHeap() && (*it)->containsTag(tag)) {

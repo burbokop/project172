@@ -3,6 +3,7 @@
 
 #include <src/engine/gameapplication.h>
 #include <src/engine/context.h>
+#include <src/engine/debug.h>
 
 #include <src/sdlimplementation/sdlaudioprovider.h>
 #include <src/sdlimplementation/sdleventhandler.h>
@@ -81,7 +82,7 @@ int main(int argc, char *argv[]) {
             delete graphicsProvider;
             graphicsProvider = new SDLGraphicsProvider(app.arguments(), "project172", 900, 600);
             if(!graphicsProvider->isValid()) {
-                std::cerr << "error: no graphics provider are valid.\n";
+                e172::Debug::fatal("error: no graphics provider are valid.");
                 return -1;
             }
         }
@@ -137,57 +138,11 @@ int main(int argc, char *argv[]) {
     app.assetProvider()->searchInFolder(app.context()->absolutePath("../assets"));
     graphicsProvider->loadFont(std::string(), app.context()->absolutePath("../assets/fonts/ZCOOL.ttf"));
 
-
-
     //INITIALIZATION CONMPLEATED
 
     //initialization background
     Background background = 128;
     app.addEntity(&background);
-
-
-
-    //creating players
-    //Player *player = dynamic_cast<Player*>(app.assetProvider()->createLoadable("player1"));
-
-    //installing armor to player
-
-    /*
-    Ship *playerArmor = dynamic_cast<Ship*>(app.assetProvider()->createLoadable("astro"));
-    ModuleHandler *playerArmorModules = new ModuleHandler();
-    playerArmorModules->addModule(dynamic_cast<Module*>(app.assetProvider()->createLoadable("mini-engine")));
-    playerArmorModules->addModule(dynamic_cast<Module*>(app.assetProvider()->createLoadable("repair-laser")));
-    playerArmor->addCapability(playerArmorModules);
-    dynamic_cast<Player*>(player)->setArmor(playerArmor);
-    */
-
-    //setting up player's ship
-    //Unit *playerShip = dynamic_cast<Unit*>(app.assetProvider()->createLoadable("sh1"));
-    //playerShip->place(e172::Vector(120, 120), -0.7);
-    //playerShip->addCapability(new Docker());
-    //playerShip->addCapability(player);
-    //ModuleHandler *playerModuleHandler = new ModuleHandler();
-    //playerModuleHandler->addModule(dynamic_cast<Module*>(app.assetProvider()->createLoadable("pistol")));
-    //playerModuleHandler->addModule(dynamic_cast<Module*>(app.assetProvider()->createLoadable("engine2")));
-    //playerModuleHandler->addModule(dynamic_cast<Module*>(app.assetProvider()->createLoadable("warp-drive1")));
-    //playerModuleHandler->addModule(dynamic_cast<Module*>(app.assetProvider()->createLoadable("thruster1")));
-    //playerShip->addCapability(playerModuleHandler);
-    //app.addEntity(playerShip);
-
-
-
-
-    //player2
-    //installing armor to player2
-
-    /*
-    Ship *playerArmor2 = static_cast<Ship*>(app.assetProvider()->createLoadable("astro"));
-    ModuleHandler *playerArmorModules2 = new ModuleHandler();
-    playerArmorModules2->addModule(static_cast<Module*>(app.assetProvider()->createLoadable("mini-engine")));
-    playerArmorModules2->addModule(static_cast<Module*>(app.assetProvider()->createLoadable("repair-laser")));
-    playerArmor2->addCapability(playerArmorModules2);
-    player2->setArmor(playerArmor2);
-    */
 
     //setup radar near
     Near radarNear;

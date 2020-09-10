@@ -26,7 +26,7 @@ public:
 
     // IInformative interface
 public:
-    std::string getInfo();
+    std::string info() const override;
 };
 
 #endif // FPSMONITOR_H

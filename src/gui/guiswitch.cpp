@@ -20,7 +20,7 @@ bool GUISwitch::isSelectable() {
     return true;
 }
 
-void GUISwitch::onEnter() {
+void GUISwitch::enter() {
     if(on != nullptr) {
         if(off != nullptr) {
             if(!enabled) {

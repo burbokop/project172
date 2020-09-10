@@ -20,6 +20,6 @@ bool GUIChoice::isSelectable() {
     return true;
 }
 
-void GUIChoice::onEnter() {
+void GUIChoice::enter() {
     set(value);
 }

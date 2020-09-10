@@ -1,5 +1,6 @@
 #include "socket.h"
 
+#include <sstream>
 
 inline int inline_connect(CROSS_SOCKET socket, const struct sockaddr *name, int namelen) {
     return connect(socket, name, namelen);
@@ -120,14 +121,11 @@ void Socket::close() {
 #endif
 }
 
-#include <iostream>
 
 void Socket::sendFrame(std::vector<char> data) {
     std::vector<char> frame = FrameBuilder::cover(data);
     inline_send(sys_socket, &frame[0], static_cast<int>(frame.size()), 0);
 }
-#include <iostream>
-#include <sstream>
 std::string H(std::vector<char> data) {
     std::stringstream stream;
     for(char c : data) {
@@ -148,28 +146,23 @@ std::vector<char> Socket::receiveFrame() {
 
 
         if(bytes_read == 0) {
-            std::cout << "bytes_read: " << std::dec << bytes_read << "\n";
             //frame.push_back(0x7E);
             break;
         } else if(bytes_read < 0) {
             setError("<error: package lost>");
-            std::cout << "error: bytes_read: " << std::dec << bytes_read << ". package lost\n";
             break;
         }
         frame.push_back(byte[0]);
         if(i > 2 && byte[0] == 0x7E) {
-            std::cout << "byte[0] == 0x7E\n";
             break;
         }
         i++;
     }
 
-    std::cout << "frame recieved: " << H(frame) << "\n";
 
     std::vector<char> result = FrameBuilder::uncover(frame);
     if(result.size() <= 0) {
         setError("<checksum error or empty frame>");
-        std::cout << "checksum error or empty frame\n";
     }
     return result;
 }
@@ -203,8 +196,6 @@ SDL_Surface *Socket::receiveSurface() {
 
     int wigth = bitmap[size - 8] | bitmap[size - 7] | bitmap[size - 6] | bitmap[size - 5];
     int height = bitmap[size - 4] | bitmap[size - 3] | bitmap[size - 2] | bitmap[size - 1];
-
-    std::cout << "wigth: " << wigth << " height: " << height << "\n";
 
     const int format = 4;
     SDL_Surface *result = SDL_CreateRGBSurfaceFrom(bitmap, wigth, height, format * 8, format * wigth, 0x000000ff, 0x0000ff00, 0x00ff0000, 0xff000000);

@@ -44,10 +44,16 @@ std::string GUIRadar::rowText(int index) const {
     return "[error]";
 }
 
-GUIMenuElement *GUIRadar::rowElement(int index) const {
-    if(m_rowElement) {
-
-    }
-
+GUIMenuElement *GUIRadar::rowElement(int) const {
     return m_rowElement;
+}
+
+e172::Variant GUIRadar::rowModelData(int index) const {
+    if(m_near) {
+        const auto e = m_near->entityInFocus(index);
+        if(e == e172::Alive) {
+            return e->entityId();
+        }
+    }
+    return "[error]";
 }

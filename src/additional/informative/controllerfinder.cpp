@@ -5,7 +5,7 @@ ControllerFinder::ControllerFinder(Controller *p1, Controller *p2) {
     this->p2 = p2;
 }
 
-std::string ControllerFinder::getInfo() {
+std::string ControllerFinder::info() const {
     double value = (
         p2->parentUnit()->position() - p1->parentUnit()->position()
     ).angle() - p1->parentUnit()->getAngle();

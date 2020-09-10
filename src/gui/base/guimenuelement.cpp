@@ -2,6 +2,16 @@
 
 
 
+e172::Variant GUIMenuElement::modelData() const
+{
+    return m_modelData;
+}
+
+void GUIMenuElement::setModelData(const e172::Variant &modelData)
+{
+    m_modelData = modelData;
+}
+
 GUIMenuElement::GUIMenuElement() {}
 
 GUIMenuElement::GUIMenuElement(std::string label) {
@@ -24,7 +34,7 @@ bool GUIMenuElement::hasSubElements() {
     return false;
 }
 
-void GUIMenuElement::onEnter() {}
+void GUIMenuElement::enter() {}
 
 void GUIMenuElement::proceed(e172::Context *, e172::AbstractEventHandler *) {}
 void GUIMenuElement::render(e172::AbstractRenderer *) {}

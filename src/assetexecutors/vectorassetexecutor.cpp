@@ -1,11 +1,8 @@
 #include "vectorassetexecutor.h"
 
 #include <src/engine/math/vector.h>
-#include <iostream>
-VectorAssetExecutor::VectorAssetExecutor()
-{
 
-}
+VectorAssetExecutor::VectorAssetExecutor() {}
 
 e172::Variant VectorAssetExecutor::proceed(const Json::Value &value, e172::AbstractGraphicsProvider*, e172::AbstractAudioProvider *) {
     return e172::Variant::fromValue(e172::Vector(

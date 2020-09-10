@@ -3,6 +3,7 @@
 
 #include <src/capabilities/controller.h>
 
+#include <src/gui/guibutton.h>
 #include <src/gui/guichoice.h>
 #include <src/gui/guimain.h>
 #include <src/gui/guimoduleview.h>
@@ -11,6 +12,7 @@
 #include <src/gui/guiswitch.h>
 
 #include <src/engine/context.h>
+#include <src/engine/debug.h>
 #include <src/engine/gameapplication.h>
 
 #include <src/additional/informative/controllerfinder.h>
@@ -45,14 +47,14 @@ GUIMaker::GUIMaker(e172::Context *context, Near *radarNear) {
                     GUIRadar *radarMenu = new GUIRadar("radar"); {
                         radarMenu->setNear(radarNear);
                         GUIContainer *radarRowElement = new GUIContainer();
-                        radarRowElement->addMenuElement(new GUIChoice("info", 0, [](auto){
-                            std::cout << "INFO\n";
+                        radarRowElement->addMenuElement(new GUIButton("info", [](auto md){
+                            e172::Debug::print("INFO: ", md);
                         }));
-                        radarRowElement->addMenuElement(new GUIChoice("select", 0, [](auto){
-                            std::cout << "SELECT\n";
+                        radarRowElement->addMenuElement(new GUIButton("select", [context](auto md){
+                            context->setProperty("SU", md);
                         }));
-                        radarRowElement->addMenuElement(new GUIChoice("dock", 0, [](auto){
-                            std::cout << "DOCK\n";
+                        radarRowElement->addMenuElement(new GUIButton("dock", [](auto md){
+                            e172::Debug::print("DOCK: ", md);
                         }));
 
                         radarMenu->setRowElement(radarRowElement);

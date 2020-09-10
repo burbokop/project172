@@ -11,15 +11,19 @@ protected:
     std::string label = "[no data]";
     IInformative *informative = nullptr;
 
+    e172::Variant m_modelData;
 public:
     GUIMenuElement();
     GUIMenuElement(std::string label);
     GUIMenuElement(IInformative *informative);
 
+    e172::Variant modelData() const;
+    void setModelData(const e172::Variant &modelData);
+
     virtual std::string title();
     virtual bool isSelectable();
     virtual bool hasSubElements();
-    virtual void onEnter();
+    virtual void enter();
 
     // Entity interface
 public:

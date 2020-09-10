@@ -1,6 +1,5 @@
 #include "audiochannel.h"
 
-#include <iostream>
 
 #include <src/engine/math/math.h>
 

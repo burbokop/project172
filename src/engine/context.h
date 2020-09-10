@@ -18,6 +18,7 @@ class Context : public Object {
     double m_deltaTime = 0;
     GameApplication *m_application = nullptr;
 
+    e172::VariantMap m_properties;
 public:
     typedef Variant MessageId;
 
@@ -46,6 +47,9 @@ public:
     std::string absolutePath(const std::string &path) const;
     std::vector<std::string> arguments() const;
     double deltaTime() const;
+
+    e172::Variant property(const std::string &propertyId) const;
+    void setProperty(const std::string &propertyId, const e172::Variant &value);
 
     AssetProvider *assetProvider() const;
     std::list<Entity *> entities() const;

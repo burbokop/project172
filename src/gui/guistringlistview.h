@@ -19,14 +19,16 @@ public:
             m_data[i++] = a;
     }
 
+    std::vector<std::string> data() const;
+    void setData(const std::vector<std::string> &data);
+
     // GUIListView interface
 public:
     virtual int rowCount() const override;
     virtual std::string rowText(int index) const override;
     virtual GUIMenuElement *rowElement(int) const override;
+    virtual e172::Variant rowModelData(int) const override;
 
-    std::vector<std::string> data() const;
-    void setData(const std::vector<std::string> &data);
 };
 
 #endif // GUISTRINGLISTVIEW_H

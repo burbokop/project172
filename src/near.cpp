@@ -71,7 +71,7 @@ void Near::setCenter(Controller *center)
 void Near::removeEntities(e172::Context *) {
     if(removingIterator < m_entitiesInFocus.size()) {
         e172::Entity *current = m_entitiesInFocus[removingIterator];
-        if(e172::ObjectRegistry::exists(current)) {
+        if(current == e172::Alive) {
             const auto currentUnit = dynamic_cast<Unit*>(current);
             const auto centerUnit = m_center->parentUnit();
             if(currentUnit && centerUnit == e172::Alive) {
@@ -80,6 +80,9 @@ void Near::removeEntities(e172::Context *) {
                     m_entitiesInFocus.erase(it);
                 }
             }
+        } else {
+            const auto it = std::find(m_entitiesInFocus.begin(), m_entitiesInFocus.end(), current);
+            m_entitiesInFocus.erase(it);
         }
     }
     if(++removingIterator >= m_entitiesInFocus.size()) removingIterator = 0;

@@ -40,6 +40,10 @@ GUIMenuElement *GUIModuleView::rowElement(int) const {
     return nullptr;
 }
 
+e172::Variant GUIModuleView::rowModelData(int) const {
+    return e172::Variant();
+}
+
 //void GUIModuleView::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
 //    if(controller()) {
 //        const auto parentUnit = controller()->parentUnit();

@@ -3,7 +3,6 @@
 #include <src/engine/graphics/abstractgraphicsprovider.h>
 
 #include <src/animator.h>
-#include <iostream>
 
 SpriteAssetExecutor::SpriteAssetExecutor() {}
 

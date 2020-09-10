@@ -1,7 +1,6 @@
 #ifndef ASSETPROVIDER_H
 #define ASSETPROVIDER_H
 
-#include <iostream>
 #include <src/json/json.h>
 #include <src/engine/memcontrol/abstractfactory.h>
 #include <src/engine/context.h>

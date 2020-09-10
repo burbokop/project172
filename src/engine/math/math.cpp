@@ -30,7 +30,6 @@ bool e172::Math::cmpf(double a, double b, double epsilon) {
     return (fabs(a - b) < epsilon);
 }
 
-#include <iostream>
 double e172::Math::sin(double angle) {
     //std::cout << "SQRT: " << sqrtCache.size() << " ACOS: " << arccosCache.size() << " SIN: " << sinCache.size() << " COS: " << cosCache.size() << "\n";
 

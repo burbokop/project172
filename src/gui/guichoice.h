@@ -19,8 +19,8 @@ public:
 
     // GUIElement interface
 public:
-    bool isSelectable();
-    void onEnter();
+    bool isSelectable() override;
+    void enter() override;
 };
 
 #endif // GUICHOICE_H

@@ -40,6 +40,6 @@ uint32_t FPSMonitor::toUint32() {
     return currentFPS;
 }
 
-std::string FPSMonitor::getInfo() {
+std::string FPSMonitor::info() const {
     return title + ' ' + std::to_string(averageFPS);
 }

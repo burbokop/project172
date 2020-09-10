@@ -206,6 +206,8 @@ public:
 
     bool isNumber() const;
 
+    inline bool isNull() const { return m_type.size() <= 0; }
+
     template<typename T>
     T toNumber(bool *ok = nullptr) const;
 

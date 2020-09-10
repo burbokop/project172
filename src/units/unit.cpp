@@ -27,6 +27,8 @@ double Unit::getRotationSpeed() {
 }
 
 Unit::Unit() : Loadable () {
+    std::srand(clock());
+    m_selectedColor = rand() % static_cast<uint32_t>(std::pow(2, 24));
     registerInitFunction([this](){
         health = asset<double>("health");
         explosiveRadius = asset<double>("explosive");
@@ -178,6 +180,8 @@ void Unit::proceed(e172::Context *context, e172::AbstractEventHandler *eventHand
         else angle += rotationSpeed;
     }
 
+    m_selected = context->property("SU").toNumber<e172::Entity::id_t>() == entityId();
+
     for(Capability *cap : capabilities) {
         cap->proceed(context, eventHandler);
     }
@@ -188,6 +192,11 @@ void Unit::render(e172::AbstractRenderer *renderer) {
     animator.setAngle(angle);
     animator.setPosition(pos);
     animator.render(renderer);
+
+    if(m_selected) {
+        renderer->drawSquareShifted(pos, (selectedAnimationTimer.elapsed() / 50) % 24, m_selectedColor);
+    }
+
     for(Capability *cap : capabilities) {
         cap->render(renderer);
     }
@@ -199,7 +208,7 @@ Unit::~Unit() {
     }
 }
 
-std::string Unit::getInfo() {
+std::string Unit::info() const {
     return loadableId();
 }
 

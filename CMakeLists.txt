@@ -255,6 +255,8 @@ add_executable(project172
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/base/guilistview.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/guistringlistview.h
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/guistringlistview.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/gui/guibutton.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/gui/guibutton.cpp
 
     ${CMAKE_CURRENT_LIST_DIR}/src/units/camera.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/units/camera.h

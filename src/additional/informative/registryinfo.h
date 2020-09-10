@@ -11,7 +11,7 @@ public:
 
     // IInformative interface
 public:
-    std::string getInfo();
+    std::string info() const override;
 };
 
 #endif // REGISTRYINFO_H

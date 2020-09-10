@@ -19,8 +19,8 @@ public:
 
     // GUILabel interface
 public:
-    bool isSelectable();
-    void onEnter();
+    bool isSelectable() override;
+    void enter() override;
 };
 
 #endif // GUISWITCH_H

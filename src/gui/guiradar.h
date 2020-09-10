@@ -13,14 +13,17 @@ class GUIRadar : public GUIListView {
 public:
     GUIRadar(const std::string &title);
 
+    Near *near() const;
+    void setNear(Near *near);
+    void setRowElement(GUIMenuElement *rowElement);
+
     // GUIListView interface
 public:
     virtual int rowCount() const override;
     virtual std::string rowText(int index) const override;
-    virtual GUIMenuElement *rowElement(int index) const override;
-    Near *near() const;
-    void setNear(Near *near);
-    void setRowElement(GUIMenuElement *rowElement);
+    virtual GUIMenuElement *rowElement(int) const override;
+    virtual e172::Variant rowModelData(int index) const override;
+
 };
 
 #endif // GUIRADAR_H

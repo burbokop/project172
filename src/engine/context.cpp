@@ -12,6 +12,18 @@ double Context::deltaTime() const {
     return m_deltaTime;
 }
 
+Variant Context::property(const std::string &propertyId) const {
+    const auto it = m_properties.find(propertyId);
+    if(it != m_properties.end())
+        return it->second;
+
+    return e172::Variant();
+}
+
+void Context::setProperty(const std::string &propertyId, const Variant &value) {
+    m_properties[propertyId] = value;
+}
+
 AssetProvider *Context::assetProvider() const {
     if(m_application)
         return m_application->assetProvider();
