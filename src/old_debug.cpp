@@ -106,11 +106,15 @@ void Debug::err(Code::Enum code, std::string site, std::string comment) {
 }
 
 
+const int Debug::static_call = []{
+    signal(SIGSEGV, onSegSignal);
+    return 0;
+}();
+
 void Debug::init(bool out, bool err) {
     outEnbled = out;
     errEnbled = err;
     log("\n--------- DEBUG START ---------\n\n");
-    signal(SIGSEGV, onSegSignal);
 }
 
 

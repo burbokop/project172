@@ -11,6 +11,7 @@ class GUIListView : public GUIMenuElement {
     int m_selectedIndex = -1;
     int m_verticalInterval = 24;
 public:
+    GUIListView() {}
     GUIListView(const std::string &title);
 
     GUIStack *stack() const;

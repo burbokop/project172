@@ -1,6 +1,6 @@
 #include "iinformative.h"
 
-std::string IInformative::getInfo() { return ""; }
+std::string IInformative::info() const { return ""; }
 
 
 IInformative::~IInformative() {}

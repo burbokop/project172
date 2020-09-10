@@ -1,37 +1,53 @@
 #include "guiradar.h"
 
+#include <src/near.h>
+#include <src/engine/objectregistry.h>
 
 
-#include "guichoice.h"
-
-
-GUIRadar::GUIRadar(std::string label) : GUIList (label) {}
-
-GUIRadar::GUIRadar(IInformative *informative) : GUIList (informative) {}
-
-
-GUIMenuElement *GUIRadar::forEach(Unit *unit) {
-    GUIContainer *container = new GUIContainer(unit);
-    container->addMenuElement(new GUIChoice("dock", unit->entityId(), std::bind(&GUIRadar::onDock, this, std::placeholders::_1)));
-    container->addMenuElement(new GUIChoice("select", unit->entityId(), std::bind(&GUIRadar::onSelect, this, std::placeholders::_1)));
-    return container;
+Near *GUIRadar::near() const {
+    return m_near;
 }
 
+void GUIRadar::setNear(Near *near) {
+    m_near = near;
+}
 
-void GUIRadar::onDock(e172::Variant value) {
-    if(value.isNumber()) {
-        const auto targetId = value.toNumber<Entity::id_t>();
+void GUIRadar::setRowElement(GUIMenuElement *rowElement) {
+    m_rowElement = rowElement;
+}
 
-        Unit *parent = controller()->parentUnit();
-        if(targetId && parent) {
-            Docker *docker = parent->getDocker();
-            if(docker) {
-                docker->dock(targetId);
+GUIRadar::GUIRadar(const std::string &title) : GUIListView(title) {}
+
+int GUIRadar::rowCount() const {
+    if(m_near) {
+        return m_near->entityInFocusCount();
+    }
+    return 0;
+}
+
+std::string GUIRadar::rowText(int index) const {
+    if(m_near) {
+        const auto e = m_near->entityInFocus(index);
+        if(e == e172::Alive) {
+            const auto u = dynamic_cast<e172::Loadable*>(e);
+            if(u) {
+                const auto lid = u->loadableId();
+                if(lid.size() > 0)
+                    return lid;
+
+                return "[blank]";
             }
+
+            return "id: " + std::to_string(e->entityId());
         }
     }
+    return "[error]";
 }
 
-void GUIRadar::onSelect(e172::Variant value) {
-    controller()->setSelectedEntity(value.toNumber<Entity::id_t>());
+GUIMenuElement *GUIRadar::rowElement(int index) const {
+    if(m_rowElement) {
+
+    }
+
+    return m_rowElement;
 }

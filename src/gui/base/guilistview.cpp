@@ -47,8 +47,7 @@ void GUIListView::proceed(e172::Context *, e172::AbstractEventHandler *eventHand
 
 void GUIListView::render(e172::AbstractRenderer *renderer) {
     e172::Vector pointer = e172::Vector(margin(), margin());
-    std::string title = getTitle();
-    auto textSize = renderer->drawString(title, pointer, DefaultColor);
+    auto textSize = renderer->drawString(title(), pointer, DefaultColor);
     pointer += e172::Vector(0, textSize.intY() * 2);
     renderer->drawLine(pointer, pointer + e172::Vector(textSize.intX(), 0.0), DefaultColor);
     pointer += e172::Vector(0, textSize.intY());

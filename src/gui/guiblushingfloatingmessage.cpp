@@ -23,7 +23,7 @@ void GUIBlushingFloatingMessage::render(e172::AbstractRenderer *renderer) {
         : 0xff0000 | static_cast<uint32_t>(e172::Math::map(value, 0, 80, 0, 0xff) << 8);
 
     renderer->drawString(
-                getTitle(),
+                title(),
                 parent->position() + renderer->offset() + e172::Vector(0.0, horisontalOffset()),
                 color,
                 e172::TextFormat(e172::TextFormat::AlignDefault, DEFAULT_FONT_SIZE)

@@ -26,7 +26,7 @@ void Weapon::setFiring(bool condition) {
     firing = condition;
 }
 
-std::string Weapon::getInfo() {
+std::string Weapon::info() const {
     return "WP   |"
             + StringFormer::line(static_cast<unsigned int>((timer.progress() * 4)), static_cast<unsigned int>(4))
             + "|   "

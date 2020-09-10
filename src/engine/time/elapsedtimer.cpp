@@ -25,7 +25,7 @@ bool ElapsedTimer::check(bool condition) {
     return true;
 }
 
-ElapsedTimer::time_t ElapsedTimer::elapsed() {
+ElapsedTimer::time_t ElapsedTimer::elapsed() const {
     return Time::currentMilliseconds() - m_startPoint;
 }
 
@@ -34,7 +34,7 @@ void ElapsedTimer::reset() {
     m_checkPoint = m_startPoint;
 }
 
-double ElapsedTimer::progress() {
+double ElapsedTimer::progress() const {
     const double milliseconds = Time::currentMilliseconds();
     if(m_interval == 0)\
         return 0;

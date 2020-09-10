@@ -1,18 +1,19 @@
 #ifndef GUIMODULEVIEW_H
 #define GUIMODULEVIEW_H
 
-#include "base/guicontainer.h"
+#include "base/guilistview.h"
 
-class GUIModuleView : public GUIContainer {
-
+class GUIModuleView : public GUIListView {
 
     e172::ElapsedTimer updateTimer = e172::ElapsedTimer(2000);
 public:
     GUIModuleView(const std::string &label);
 
-    // Entity interface
+    // GUIListView interface
 public:
-    virtual void proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) override;
+    virtual int rowCount() const override;
+    virtual std::string rowText(int index) const override;
+    virtual GUIMenuElement *rowElement(int) const override;
 };
 
 #endif // GUIMODULEVIEW_H

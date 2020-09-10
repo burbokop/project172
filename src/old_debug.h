@@ -31,6 +31,9 @@ public:
 
 
 private:
+
+    static const int static_call;
+
     static bool errEnbled;
     static bool outEnbled;
 

@@ -1,5 +1,5 @@
 #include "explosivespawner.h"
-#include "screensettingsextension.h"
+#include "appextensions/screensettingsextension.h"
 
 #include <src/engine/gameapplication.h>
 #include <src/engine/context.h>

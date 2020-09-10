@@ -17,9 +17,9 @@ private:
 public:
     ElapsedTimer(time_t interval = 0);
     bool check(bool condition = true);
-    time_t elapsed();
+    time_t elapsed() const;
     void reset();
-    double progress();
+    double progress() const;
 
     time_t interval() const;
 };

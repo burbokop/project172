@@ -24,7 +24,7 @@ int WarpDrive::getState() {
     return warpState;
 }
 
-std::string WarpDrive::getStateAsString() {
+std::string WarpDrive::stateAsString() const {
     switch (warpState) {
     case WARP_DISABLED:
         return "WARP_DISABLED";
@@ -41,7 +41,7 @@ std::string WarpDrive::getStateAsString() {
     }
 }
 
-std::string WarpDrive::getStateAsIcon() {
+std::string WarpDrive::stateAsIcon() const {
     switch (warpState) {
     case WARP_DISABLED:
         return "disabled";
@@ -58,14 +58,14 @@ std::string WarpDrive::getStateAsIcon() {
     }
 }
 
-double WarpDrive::getCharging() {
+double WarpDrive::charging() const {
     return (static_cast<double>(currentChargindIteration) / chargindIterations);
 }
 
-std::string WarpDrive::getInfo() {
+std::string WarpDrive::info() const {
     std::string chargingBar;
     if(warpState == WarpDrive::WARP_RECHARGING) {
-        chargingBar = StringFormer::line(static_cast<unsigned int>((1 - getCharging()) * 4));
+        chargingBar = StringFormer::line(static_cast<unsigned int>((1 - charging()) * 4));
     } else if (warpState == WarpDrive::WARP_LOADING) {
         chargingBar = StringFormer::line(static_cast<unsigned int>((timer.progress() * 4)));
     } else if (warpState == WarpDrive::WARP_DISABLED) {
@@ -75,7 +75,7 @@ std::string WarpDrive::getInfo() {
     } else if (warpState == WarpDrive::WARP_READY) {
         chargingBar = "----";
     }
-    return "WD   |" + chargingBar + "|   " + getStateAsIcon();
+    return "WD   |" + chargingBar + "|   " + stateAsIcon();
 }
 
 double WarpDrive::getSpeadUnit() const {

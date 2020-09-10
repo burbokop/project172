@@ -7,7 +7,6 @@
 #include <src/gui/guimain.h>
 #include <src/gui/guimoduleview.h>
 #include <src/gui/guiradar.h>
-#include <src/gui/guiradar2.h>
 #include <src/gui/guistringlistview.h>
 #include <src/gui/guiswitch.h>
 
@@ -41,10 +40,9 @@ GUIMaker::GUIMaker(e172::Context *context, Near *radarNear) {
                 GUIContainer *infoMenu = new GUIContainer("info menu"); {
                     infoMenu->addMenuElement(new GUIMenuElement(manual));
                 } mainMenu->addMenuElement(infoMenu);
-                GUIContainer *modulesMenu = new GUIModuleView("modules");
-                mainMenu->addMenuElement(modulesMenu);
+                mainMenu->addMenuElement(new GUIModuleView("modules"));
                 if(radarNear) {
-                    GUIRadar2 *radarMenu = new GUIRadar2("radar"); {
+                    GUIRadar *radarMenu = new GUIRadar("radar"); {
                         radarMenu->setNear(radarNear);
                         GUIContainer *radarRowElement = new GUIContainer();
                         radarRowElement->addMenuElement(new GUIChoice("info", 0, [](auto){

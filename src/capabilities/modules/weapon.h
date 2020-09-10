@@ -19,7 +19,7 @@ public:
     Weapon();
 
     void setFiring(bool condition);
-    std::string getInfo() override;
+    std::string info() const override;
 
     // Entity interface
 public:

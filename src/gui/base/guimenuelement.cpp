@@ -12,8 +12,8 @@ GUIMenuElement::GUIMenuElement(IInformative *informative) {
     this->informative = informative;
 }
 
-std::string GUIMenuElement::getTitle() {
-    return informative ? informative->getInfo() : label;
+std::string GUIMenuElement::title() {
+    return informative ? informative->info() : label;
 }
 
 bool GUIMenuElement::isSelectable() {

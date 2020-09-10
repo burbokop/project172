@@ -19,16 +19,16 @@ private:
     int chargindIterations = DEFAULT_CYCLES_NUMBER;
     double warpVelocity = 0.1;
 
-    double getCharging();
-    std::string getStateAsString();
-    std::string getStateAsIcon();
+    double charging() const;
+    std::string stateAsString() const;
+    std::string stateAsIcon() const;
 public:
     WarpDrive();
     WarpDrive(Loadable *tmp);
 
     int getState();
 
-    std::string getInfo() override;
+    std::string info() const override;
 
     double getSpeadUnit() const;
 

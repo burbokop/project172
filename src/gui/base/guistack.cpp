@@ -8,15 +8,9 @@ GUIStack::GUIStack() : GUIElement () {}
 
 void GUIStack::push(GUIElement *element) {
     addChildElement(element);
-    GUIContainer *container = dynamic_cast<GUIContainer*>(element);
-    if(container) {
-        container->setStack(this);
-    }
-
-    GUIListView *listView = dynamic_cast<GUIListView*>(element);
-    if(listView) {
+    if(auto listView = dynamic_cast<GUIListView*>(element))
         listView->setStack(this);
-    }
+
     elements.push_back(element);
 }
 

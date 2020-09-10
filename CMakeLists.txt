@@ -133,16 +133,14 @@ target_link_libraries(sdl_impl
 
 
 add_executable(project172
-    ${CMAKE_CURRENT_LIST_DIR}/src/screensettingsextension.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/screensettingsextension.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/appextensions/screensettingsextension.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/appextensions/screensettingsextension.h
     ${CMAKE_CURRENT_LIST_DIR}/src/animator.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/animator.h
     ${CMAKE_CURRENT_LIST_DIR}/src/background.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/background.h
     ${CMAKE_CURRENT_LIST_DIR}/src/old_debug.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/old_debug.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/environment.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/environment.h
     ${CMAKE_CURRENT_LIST_DIR}/src/iinformative.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/iinformative.h
     ${CMAKE_CURRENT_LIST_DIR}/src/main.cpp
@@ -241,8 +239,6 @@ add_executable(project172
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/guidebugvalueinfo.h
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/guifloatingmessage.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/guifloatingmessage.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/gui/guilist.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/gui/guilist.h
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/guimain.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/guimain.h
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/guiminimap.cpp
@@ -259,8 +255,6 @@ add_executable(project172
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/base/guilistview.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/guistringlistview.h
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/guistringlistview.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/gui/guiradar2.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/gui/guiradar2.cpp
 
     ${CMAKE_CURRENT_LIST_DIR}/src/units/camera.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/units/camera.h

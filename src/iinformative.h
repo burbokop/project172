@@ -5,7 +5,7 @@
 
 class IInformative {
 public:
-    std::string virtual getInfo();
+    std::string virtual info() const;
     virtual ~IInformative();
 };
 
