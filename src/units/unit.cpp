@@ -9,6 +9,9 @@
 #include <src/engine/context.h>
 #include <src/engine/debug.h>
 #include <src/engine/graphics/abstractrenderer.h>
+#include <src/capabilities/modules/warpdrive.h>
+#include <src/capabilities/modulehandler.h>
+#include <src/capabilities/docker.h>
 
 const double Unit::DEFAULT_ROTATION_SPEED = 0.0014 * 1000;
 const double Unit::ANGLE_DELTA_MULTIPLIER = 2;
@@ -42,7 +45,7 @@ Unit::Unit() : Loadable () {
 
 void Unit::place(e172::Vector pos, double angle) {
     this->pos = pos;
-    this->angle = angle;
+    m_angle = angle;
 }
 
 
@@ -81,30 +84,30 @@ Docker *Unit::getDocker() {
 }
 
 void Unit::rotateLeft(e172::Context *context) {
-    angle = e172::Math::constrainAngle(angle - (getRotationSpeed() * context->deltaTime()));
+    m_angle = e172::Math::constrainRadians(m_angle - (getRotationSpeed() * context->deltaTime()));
 }
 
 void Unit::rotateRight(e172::Context *context) {
-    angle = e172::Math::constrainAngle(angle + (getRotationSpeed() * context->deltaTime()));
+    m_angle = e172::Math::constrainRadians(m_angle + (getRotationSpeed() * context->deltaTime()));
 }
 
 void Unit::lockAngle(double angle) {
     angleLocked = true;
-    dstAngle = e172::Math::constrainAngle(angle);
+    dstAngle = e172::Math::constrainRadians(angle);
 }
 
 
 void Unit::rotateToAngle(e172::Context *context, double angle) {
-    angle = e172::Math::constrainAngle(angle);
+    angle = e172::Math::constrainRadians(angle);
     const double delta = getRotationSpeed() * context->deltaTime() * ANGLE_DELTA_MULTIPLIER;
-    if(angle + delta - getAngle() < 0) {
-        if(std::abs(angle - getAngle()) < M_PI) {
+    if(angle + delta - m_angle < 0) {
+        if(std::abs(angle - m_angle) < M_PI) {
             rotateLeft(context);
         } else {
             rotateRight(context);
         }
-    } else if(angle - delta - getAngle() > 0) {
-        if(std::abs(angle - getAngle()) < M_PI) {
+    } else if(angle - delta - m_angle > 0) {
+        if(std::abs(angle - m_angle) < M_PI) {
             rotateRight(context);
         } else {
             rotateLeft(context);
@@ -113,9 +116,9 @@ void Unit::rotateToAngle(e172::Context *context, double angle) {
 }
 
 bool Unit::isOnAngle(e172::Context *context, double angle) {
-    angle = e172::Math::constrainAngle(angle);
+    angle = e172::Math::constrainRadians(angle);
     const double doubleDelta = getRotationSpeed() * context->deltaTime() * ANGLE_DELTA_MULTIPLIER * 2;
-    return !(getAngle() > angle + doubleDelta || getAngle() < angle - doubleDelta);
+    return !(m_angle > angle + doubleDelta || m_angle < angle - doubleDelta);
 }
 
 void Unit::unlockAngle() {
@@ -130,8 +133,8 @@ e172::Vector Unit::velocity() {
     return e172::Vector();
 }
 
-double Unit::getAngle() {
-    return angle;
+double Unit::angle() const {
+    return m_angle;
 }
 
 
@@ -175,9 +178,12 @@ void Unit::hit(e172::Context* context, int value) {
 
 void Unit::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
     const double rotationSpeed = getRotationSpeed();
-    if(angleLocked && std::abs(angle - dstAngle) > rotationSpeed * 5) {
-        if(angle > dstAngle) angle -= rotationSpeed;
-        else angle += rotationSpeed;
+    if(angleLocked && std::abs(m_angle - dstAngle) > rotationSpeed * 5) {
+        if(m_angle > dstAngle) {
+            m_angle -= rotationSpeed;
+        } else {
+            m_angle += rotationSpeed;
+        }
     }
 
     m_selected = context->property("SU").toNumber<e172::Entity::id_t>() == entityId();
@@ -189,7 +195,7 @@ void Unit::proceed(e172::Context *context, e172::AbstractEventHandler *eventHand
 
 void Unit::render(e172::AbstractRenderer *renderer) {
     renderer->resolution();
-    animator.setAngle(angle);
+    animator.setAngle(m_angle);
     animator.setPosition(pos);
     animator.render(renderer);
 

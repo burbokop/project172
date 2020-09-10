@@ -1,22 +1,25 @@
 #ifndef UNIT_H
 #define UNIT_H
 
-#include <iterator>
-#include <algorithm>
 
+#include <src/animator.h>
+#include <src/iinformative.h>
+#include <src/engine/assettools/loadable.h>
+#include <src/engine/entity.h>
 
-#include <src/capabilities/modulehandler.h>
-#include <src/capabilities/docker.h>
-
+class Capability;
+class ModuleHandler;
+class Docker;
 class Unit : public e172::Entity, public e172::Loadable, public IInformative {
 private:
-    double angle = 0;
+    double m_angle = 0;
     double rotationSpeed = DEFAULT_ROTATION_SPEED;
     double dstAngle = 0;
     bool angleLocked = false;
     double health = 0;
     double explosiveRadius = 0;
     Animator animator;
+
 protected:
     static const double DEFAULT_ROTATION_SPEED;
     static const double ANGLE_DELTA_MULTIPLIER;
@@ -53,7 +56,7 @@ public:
 
     e172::Vector position();
     virtual e172::Vector velocity();
-    double getAngle();
+    double angle() const;
 
     virtual void hit(e172::Context *context, int value);
 

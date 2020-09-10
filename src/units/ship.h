@@ -3,15 +3,13 @@
 
 
 #include "movable.h"
-#include <src/capabilities/modules/warpdrive.h>
 
-
+class WarpDrive;
 class Ship : public Movable {
 private:
     static const double ONE_WARP_POINT;
 public:
     Ship();
-    Ship(Loadable *tmp);
 
     bool prepareWarp();
     bool warp();

@@ -6,6 +6,7 @@
 #define INV_PI 180 / M_PI
 #define NOTINV_PI M_PI / 180
 
+const double e172::Math::Pi = M_PI;
 
 std::map<double, double> e172::Math::sinCache;
 std::map<double, double> e172::Math::cosCache;
@@ -83,10 +84,72 @@ double e172::Math::sqrt(double value) {
     }
 }
 
-double e172::Math::constrainAngle(double value) {
+double e172::Math::constrainRadians(double value) {
     const double max = M_PI * 2;
     value = fmod(value, max);
     if (value < 0)
         value += max;
     return value;
+}
+
+double e172::Math::constrainDegrees(double value) {
+    const double max = 360.0;
+    value = fmod(value, max);
+    if (value < 0)
+        value += max;
+    return value;
+}
+
+bool e172::Math::radiansDirection(double dstAngle, double angle) {
+    if((dstAngle - angle) < 0) {
+        if(std::abs(dstAngle - angle) < 180) {
+            return 1; // //
+        } else {
+            return 0; //right//
+        }
+    } else {
+        if(std::abs(dstAngle - angle) < 180) {
+            return 0; //right//
+        } else {
+            return 1; //left//
+        }
+    }
+}
+
+double e172::Math::radiansDistance(double dstAngle, double angle) {
+    if((dstAngle - angle) < 0) {
+        if(std::abs(dstAngle - angle) < 180) {
+            return std::abs(dstAngle - angle);
+        } else {
+            return std::abs(dstAngle - angle);
+        }
+    } else {
+        if(std::abs(dstAngle - angle) < 180) {
+            return std::abs(dstAngle - angle);
+        } else {
+            return std::abs(dstAngle - angle);
+        }
+    }
+}
+
+
+double e172::Math::degreesDistance(double angle1, double angle2) {
+    double max = 360;
+    double abs = std::abs(angle1 - angle2);
+    return abs > (max * 0.5) ? (max - abs) : abs;
+}
+
+double e172::Math::degreesDifference(double angle1, double angle2) {
+    double max = 360;
+    double diff = angle1 - angle2;
+    return std::abs(diff) > (max * 0.5)
+            ? ((diff >= 0)
+               ? (diff - max)
+               : (diff + max)
+                 )
+            : diff;
+}
+
+double e172::Math::map(double value, double inMin, double inMax, double outMin, double outMax) {
+    return (value - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
 }

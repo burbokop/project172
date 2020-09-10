@@ -4,6 +4,7 @@
 #include <src/capabilities/player.h>
 #include <src/capabilities/ai.h>
 #include <src/capabilities/docker.h>
+#include <src/capabilities/modulehandler.h>
 #include <src/old_debug.h>
 
 #include <src/engine/context.h>
@@ -90,7 +91,7 @@ WorldPreset::GenerationResult DefaultWorld::generate(e172::Context *context) {
 
             s->addCapability(mx);
 
-            s->addCapability(new Docker());
+            //s->addCapability(new Docker());
 
             if(i == 1) s->addCapability(player2);
             result.entities.push_back(s);
@@ -114,7 +115,7 @@ WorldPreset::GenerationResult DefaultWorld::generate(e172::Context *context) {
                 mhx->addModule(static_cast<Module*>(context->assetProvider()->createLoadable("warp-drive1")));
 
                 unit->addCapability(mhx);
-                unit->addCapability(new Docker());
+                //unit->addCapability(new Docker());
 
                 result.entities.push_back(unit);
                 i++;

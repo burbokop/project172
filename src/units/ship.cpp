@@ -1,5 +1,9 @@
 #include "ship.h"
 
+
+#include <src/capabilities/modules/warpdrive.h>
+#include <src/capabilities/modulehandler.h>
+
 const double Ship::ONE_WARP_POINT = 9513.98639961;
 
 Ship::Ship() {}

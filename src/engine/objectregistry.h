@@ -20,14 +20,6 @@ public:
     static unsigned long size();
 };
 
-struct alive_t {};
-
-static const inline alive_t Alive;
-
-bool operator ==(Object *object, const alive_t&);
-bool operator ==(const alive_t&, Object *object);
-bool operator !=(Object *object, const alive_t&);
-bool operator !=(const alive_t&, Object *object);
 
 }
 

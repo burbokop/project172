@@ -8,7 +8,7 @@ ControllerFinder::ControllerFinder(Controller *p1, Controller *p2) {
 std::string ControllerFinder::info() const {
     double value = (
         p2->parentUnit()->position() - p1->parentUnit()->position()
-    ).angle() - p1->parentUnit()->getAngle();
+    ).angle() - p1->parentUnit()->angle();
 
     return std::to_string(
         static_cast<int>(

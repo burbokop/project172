@@ -41,6 +41,7 @@ public:
     double operator*(Vector multiplier) const;
 
     double module() const; //checkpoint
+    double cheapModule() const;
     Vector normalized() const;
 
     double angle() const; //checkpoint

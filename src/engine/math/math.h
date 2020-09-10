@@ -22,6 +22,9 @@ private:
 
 
 public:
+
+    static const double Pi;
+
     template<typename A, typename B, typename C, typename D, typename E>
     static int map(const A &value, const B &inMin, const C &inMax, const D &outMin, const E &outMax) {
         return (value - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
@@ -36,7 +39,14 @@ public:
     static double sqrt(double value);
 
 
-    static double constrainAngle(double value);
+    static double constrainRadians(double value);
+    static double constrainDegrees(double value);
+    static bool radiansDirection(double dstAngle, double angle);
+    static double radiansDistance(double dstAngle, double angle);
+    static double degreesDistance(double angle1, double angle2);
+    static double degreesDifference(double angle1, double angle2);
+
+    static double map(double value, double inMin, double inMax, double outMin, double outMax);
 };
 
 }

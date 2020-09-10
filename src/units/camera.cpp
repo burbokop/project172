@@ -17,8 +17,8 @@ Camera::Camera() : Movable () {
 Camera::Camera(Controller *target) : Movable () {
     m_target = target;
     //setRelativisticVelocity(false);
-
     place(e172::Vector(), e172::Vector(1, 1), e172::Vector(), 0);
+    addTag("C");
 }
 
 void Camera::setTarget(Controller *target) {

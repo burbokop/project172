@@ -2,7 +2,7 @@
 #include <src/units/ship.h>
 #include <src/engine/objectregistry.h>
 #include <src/capabilities/modules/weapon.h>
-
+#include <src/capabilities/modulehandler.h>
 #include <src/engine/context.h>
 
 const std::map<std::string, e172::Scancode> Player::scancode = {

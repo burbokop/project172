@@ -3,6 +3,7 @@
 #include <math.h>
 #include <src/engine/math/math.h>
 #include <src/engine/context.h>
+#include <src/capabilities/modulehandler.h>
 
 const double Movable::STOP_MOVING_VELOCITY = 1;
 const double Movable::DEFAULT_ACCELERATION_VALUE = 120;
@@ -77,6 +78,16 @@ Movable::Movable() : Unit () {
     });
 }
 
+void Movable::physicallyAttachUnit(Movable *unit) {
+    m_physicallyAttachedUnits.insert(unit);
+}
+
+void Movable::physicallyDettachUnit(Movable *unit) {
+    const auto it = m_physicallyAttachedUnits.find(unit);
+    if(it != m_physicallyAttachedUnits.end())
+        m_physicallyAttachedUnits.erase(it);
+}
+
 void Movable::place(e172::Vector pos, e172::Vector vel, e172::Vector acc, double angle) {
     Unit::place(pos, angle);
     this->vel = vel;
@@ -88,7 +99,7 @@ bool Movable::accelerateForward() {
         ModuleHandler *modules = getModuleHandler();
         if(modules && modules->hasModuleOfClass("Engine")) {
             //std::cout << "forward\n";
-            acc = e172::Vector::createByAngle(getAccelerationValue(), getAngle());
+            acc = e172::Vector::createByAngle(getAccelerationValue(), angle());
             accelerationLocked = true;
             return true;
         }
@@ -100,7 +111,7 @@ bool Movable::accelerateLeft() {
     if(!accelerationLocked) {
         ModuleHandler *modules = getModuleHandler();
         if(modules && modules->hasModuleOfClass("Thruster")) {
-            acc = e172::Vector::createByAngle(getAccelerationValue(), getAngle() - M_PI / 2);
+            acc = e172::Vector::createByAngle(getAccelerationValue(), angle() - M_PI / 2);
             accelerationLocked = true;
             return true;
         }
@@ -112,7 +123,7 @@ bool Movable::accelerateRight() {
     if(!accelerationLocked) {
         ModuleHandler *modules = getModuleHandler();
         if(modules && modules->hasModuleOfClass("Thruster")) {
-            acc = e172::Vector::createByAngle(getAccelerationValue(), getAngle() + M_PI / 2);
+            acc = e172::Vector::createByAngle(getAccelerationValue(), angle() + M_PI / 2);
             accelerationLocked = true;
             return true;
         }
@@ -183,6 +194,10 @@ void Movable::proceed(e172::Context *context, e172::AbstractEventHandler *eventH
         if(onAcceleration(accelerationLocked)) {
             alTmpFlag = accelerationLocked;
         }
+    }
+
+    for(auto u : m_physicallyAttachedUnits) {
+        pursuit(context, u);
     }
 
     updatePosition(context);

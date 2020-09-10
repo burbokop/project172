@@ -26,18 +26,3 @@ unsigned long e172::ObjectRegistry::size() {
     return objects.size();
 }
 
-bool e172::operator ==(e172::Object *object, const e172::alive_t &) {
-    return ObjectRegistry::exists(object);
-}
-
-bool e172::operator ==(const e172::alive_t &, e172::Object *object) {
-    return ObjectRegistry::exists(object);
-}
-
-bool e172::operator !=(e172::Object *object, const e172::alive_t &) {
-    return ObjectRegistry::isDeleted(object);
-}
-
-bool e172::operator !=(const e172::alive_t &, e172::Object *object) {
-    return ObjectRegistry::isDeleted(object);
-}

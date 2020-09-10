@@ -1,5 +1,7 @@
 #include "guimoduleview.h"
 
+#include <src/capabilities/modulehandler.h>
+
 GUIModuleView::GUIModuleView(const std::string &label) : GUIListView(label) {
 
 }
@@ -43,17 +45,3 @@ GUIMenuElement *GUIModuleView::rowElement(int) const {
 e172::Variant GUIModuleView::rowModelData(int) const {
     return e172::Variant();
 }
-
-//void GUIModuleView::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
-//    if(controller()) {
-//        const auto parentUnit = controller()->parentUnit();
-//        if(parentUnit && updateTimer.check()) {
-//            clearElements();
-//            for(Module *module : *parentUnit->getModuleHandler()->getAllModules()) {
-//                addMenuElement(new GUIMenuElement(module));
-//            }
-//        }
-//    }
-//
-//    GUIContainer::proceed(context, eventHandler);
-//}

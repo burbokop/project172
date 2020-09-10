@@ -3,6 +3,7 @@
 
 #include <src/capabilities/player.h>
 #include <src/capabilities/aggressive.h>
+#include <src/capabilities/modulehandler.h>
 
 #include <src/engine/context.h>
 

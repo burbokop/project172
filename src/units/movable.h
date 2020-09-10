@@ -25,6 +25,8 @@ private:
         double maxVelocity;
         double releaseVelocity;
     } loadedValues;
+
+    std::set<Unit*> m_physicallyAttachedUnits;
 protected:
     static const double STOP_MOVING_VELOCITY;
     static const double DEFAULT_ACCELERATION_VALUE;
@@ -52,6 +54,10 @@ protected:
 public:
     Movable();
     Movable(Loadable *tmp);
+
+    void physicallyAttachUnit(Movable *unit);
+    void physicallyDettachUnit(Movable *unit);
+
 
     void place(e172::Vector pos, e172::Vector vel = e172::Vector(), e172::Vector acc = e172::Vector(), double angle = 0);
 

@@ -25,6 +25,7 @@
 
 #include <src/capabilities/modules/engine.h>
 #include <src/capabilities/modules/thruster.h>
+#include <src/capabilities/modules/warpdrive.h>
 #include <src/capabilities/modules/weapon.h>
 
 #include <src/worlds/arenaworld.h>

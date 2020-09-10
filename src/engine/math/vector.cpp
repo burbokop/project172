@@ -79,6 +79,10 @@ double Vector::module() const {
     return std::sqrt(this->m_x * this->m_x + this->m_y * this->m_y);
 }
 
+double Vector::cheapModule() const {
+    return std::abs(m_x) + std::abs(m_y);
+}
+
 Vector Vector::normalized() const {
     const auto module = this->module();
     if(!e172::Math::cmpf(module, 0)) {

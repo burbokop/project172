@@ -4,15 +4,20 @@
 #include <src/engine/context.h>
 #include <src/engine/objectregistry.h>
 
+#include <src/units/ship.h>
+#include <src/capabilities/capability.h>
+#include <src/capabilities/modules/warpdrive.h>
 
-const double Near::RADIUS_DELTA = 16;
+
+const double Near::DEFAULT_RADIUS_DELTA = 16;
 const double Near::DEFAULT_RADIUS = 512;
 const double Near::WARP_RADIUS_MILTIPLIER = 8;
 
 
-Near::Near(Controller *center, double radius) {
+Near::Near(Capability *center, double radius, double delta) {
     m_center = center;
-    this->radius = radius;
+    m_radius = radius;
+    m_delta = delta;
 }
 
 int Near::entityInFocusCount() const {
@@ -21,6 +26,14 @@ int Near::entityInFocusCount() const {
 
 e172::Entity *Near::entityInFocus(int index) const {
     return m_entitiesInFocus[index];
+}
+
+bool Near::containsEntity(e172::Entity *entity) const {
+    for(size_t i = 0; i < m_entitiesInFocus.size(); ++i) {
+        if(entity == m_entitiesInFocus[i])
+            return true;
+    }
+    return false;
 }
 
 void Near::addEntities(e172::Context *context) {
@@ -44,7 +57,7 @@ void Near::addEntities(e172::Context *context) {
 }
 
 double Near::localRadius(Unit *center) {
-    double result = radius;
+    double result = m_radius;
     if(Ship *centerShip = dynamic_cast<Ship*>(center)) {
         WarpDrive *wd = centerShip->getFirstWarp();
         if(wd && wd->getState() == WarpDrive::WARP_EXECUTING) {
@@ -54,17 +67,16 @@ double Near::localRadius(Unit *center) {
     return result;
 }
 
-Near::Near(double radius) {
-    this->radius = radius;
+Near::Near(double radius, double delta) {
+    m_radius = radius;
+    m_delta = delta;
 }
 
-Controller *Near::center() const
-{
+Capability *Near::center() const {
     return m_center;
 }
 
-void Near::setCenter(Controller *center)
-{
+void Near::setCenter(Capability *center) {
     m_center = center;
 }
 
@@ -75,7 +87,7 @@ void Near::removeEntities(e172::Context *) {
             const auto currentUnit = dynamic_cast<Unit*>(current);
             const auto centerUnit = m_center->parentUnit();
             if(currentUnit && centerUnit == e172::Alive) {
-                if((currentUnit->position() - centerUnit->position()).module() > (localRadius(centerUnit) + RADIUS_DELTA)) {
+                if((currentUnit->position() - centerUnit->position()).module() > (localRadius(centerUnit) + m_delta)) {
                     const auto it = std::find(m_entitiesInFocus.begin(), m_entitiesInFocus.end(), current);
                     m_entitiesInFocus.erase(it);
                 }

@@ -4,32 +4,32 @@
 
 #include "capability.h"
 
+#include <src/near.h>
+
 
 class Docker : public Capability {
+    Near near = Near(this, 64, 4);
 private:
     enum State {
-        NOT_DOCKED,
-        IN_INTERCEPTION,
-        ATTRACTED,
-        DOCKED
-    } state = NOT_DOCKED;
+        NotDocked,
+        InInterception,
+        Docked
+    } m_state = NotDocked;
 
-    Unit *target = nullptr;
+    bool m_enabled = true;
 
-    void attach(Unit *target);
-
+    Unit *m_target = nullptr;
 public:
     Docker();
 
-    void dock(Unit *target);
-    void dock(Entity::id_t targetId);
-    void undock();
-    State getState();
+    State state();
 
     // Entity interface
 public:
     void proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler);
     void render(e172::AbstractRenderer *renderer);
+    bool enabled() const;
+    void setEnabled(bool enabled);
 };
 
 #endif // DOCKER_H

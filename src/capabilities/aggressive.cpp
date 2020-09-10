@@ -8,7 +8,7 @@
 #include <src/additional/lightparticle.h>
 #include <src/old_debug.h>
 #include <src/capabilities/modules/weapon.h>
-
+#include <src/capabilities/modulehandler.h>
 
 
 
