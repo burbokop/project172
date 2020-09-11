@@ -132,6 +132,17 @@ double e172::Math::radiansDistance(double dstAngle, double angle) {
     }
 }
 
+double e172::Math::radiansDifference(double angle1, double angle2) {
+    double max = 2 * M_PI;
+    double diff = angle1 - angle2;
+    return std::abs(diff) > (max * 0.5)
+            ? ((diff >= 0)
+               ? (diff - max)
+               : (diff + max)
+                 )
+            : diff;
+}
+
 
 double e172::Math::degreesDistance(double angle1, double angle2) {
     double max = 360;

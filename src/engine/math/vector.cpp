@@ -49,6 +49,10 @@ Vector Vector::operator*(double multiplier) const {
     return Vector(this->m_x * multiplier, this->m_y * multiplier);
 }
 
+Vector operator*(double scalar, const Vector &vector) {
+    return Vector(vector.m_x * scalar, vector.m_y * scalar);
+}
+
 void Vector::operator*=(double multiplier) {
     this->m_x *= multiplier;
     this->m_y *= multiplier;

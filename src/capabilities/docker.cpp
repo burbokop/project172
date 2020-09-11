@@ -4,7 +4,6 @@
 #include <src/units/movable.h>
 
 #include <src/engine/math/math.h>
-#include <iostream>
 
 
 bool Docker::enabled() const
@@ -35,7 +34,7 @@ void Docker::proceed(e172::Context *context, e172::AbstractEventHandler *eventHa
                     m_target = dynamic_cast<Unit*>(t);
                     if(m_target && !m_target->containsTag("C")) {
                         const auto dd = e172::Math::radiansDistance(parentUnit()->angle(), e172::Math::constrainRadians(m_target->angle() - e172::Math::Pi));
-                        std::cout << "n: " << dd << " : " << e172::Math::Pi / 16 << "\n";
+                        //std::cout << "n: " << dd << " : " << e172::Math::Pi / 16 << "\n";
                         if(dd < e172::Math::Pi / 16) {
                             m_state = InInterception;
                             break;
@@ -48,7 +47,7 @@ void Docker::proceed(e172::Context *context, e172::AbstractEventHandler *eventHa
             const auto parent = parentUnit();
             const auto dd = e172::Math::radiansDistance(parent->angle(), e172::Math::constrainRadians(m_target->angle() - e172::Math::Pi));
 
-            std::cout << "InInterception: " << dd << "\n";
+            //std::cout << "InInterception: " << dd << "\n";
 
             if(const auto movable = dynamic_cast<Movable*>(parent)) {
                 movable->pursuit(context, m_target);
@@ -67,7 +66,7 @@ void Docker::proceed(e172::Context *context, e172::AbstractEventHandler *eventHa
                 m_state = NotDocked;
             }
         } else if(m_state == Docked) {
-            std::cout << "Docked\n";
+            //std::cout << "Docked\n";
         }
     } else {
         m_state = NotDocked;

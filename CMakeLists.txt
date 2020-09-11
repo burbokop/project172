@@ -38,6 +38,10 @@ add_library(e172 SHARED
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/math/math.h
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/math/vector.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/math/vector.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/engine/math/kinematics.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/engine/math/kinematics.h
+
+
 
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/memcontrol/abstractfactory.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/memcontrol/abstractfactory.h
@@ -69,6 +73,8 @@ add_library(e172 SHARED
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/type.h
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/variant.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/variant.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/engine/physicalobject.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/engine/physicalobject.h
 
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/smartenum.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/smartenum.h

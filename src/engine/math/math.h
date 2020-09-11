@@ -43,11 +43,23 @@ public:
     static double constrainDegrees(double value);
     static bool radiansDirection(double dstAngle, double angle);
     static double radiansDistance(double dstAngle, double angle);
+    static double radiansDifference(double angle1, double angle2);
     static double degreesDistance(double angle1, double angle2);
     static double degreesDifference(double angle1, double angle2);
 
     static double map(double value, double inMin, double inMax, double outMin, double outMax);
+
+    struct null_float_t {};
+    static constexpr null_float_t null = null_float_t();
+
+    friend bool operator ==(double value, const null_float_t&) { return Math::cmpf(value, 0); }
+    friend bool operator ==(const null_float_t&, double value) { return Math::cmpf(value, 0); }
+    friend bool operator !=(double value, const null_float_t&) { return !Math::cmpf(value, 0); }
+    friend bool operator !=(const null_float_t&, double value) { return !Math::cmpf(value, 0); }
+
 };
+
+
 
 }
 

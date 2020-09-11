@@ -68,4 +68,17 @@ struct exists {
 }
 }
 
+#define E172_SFINAE_METHOD_CHECKER(METHOD_NAME) \
+template <typename E172_SFINAE_ ## METHOD_NAME ## _T> \
+class has_ ## METHOD_NAME ## _method { \
+private: \
+    typedef char YesType[1]; \
+    typedef char NoType[2]; \
+    template <typename E172_SFINAE_ ## METHOD_NAME ## _C> static YesType& test( decltype(& E172_SFINAE_ ## METHOD_NAME ## _C:: METHOD_NAME) ) ; \
+    template <typename E172_SFINAE_ ## METHOD_NAME ## _C> static NoType& test(...); \
+public: \
+    enum { value = sizeof(test<E172_SFINAE_ ## METHOD_NAME ## _T>(0)) == sizeof(YesType) }; \
+};
+
+
 #endif // SFINAE_H

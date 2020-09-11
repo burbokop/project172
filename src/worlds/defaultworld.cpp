@@ -8,6 +8,8 @@
 #include <src/old_debug.h>
 
 #include <src/engine/context.h>
+#include <src/engine/physicalobject.h>
+#include <src/engine/physicalobject.h>
 
 
 DefaultWorld::DefaultWorld() {
@@ -38,6 +40,10 @@ WorldPreset::GenerationResult DefaultWorld::generate(e172::Context *context) {
     player2->setArmor(playerArmor2);
     result.controllers.push_back(player2);
 
+
+    auto ffo = new e172::PhysicalObject();
+    result.entities.push_back(ffo);
+    result.entities.push_back(new e172::PhysicalObject(ffo));
 
 
     Unit *playerShip = static_cast<Unit*>(context->assetProvider()->createLoadable("sh1"));

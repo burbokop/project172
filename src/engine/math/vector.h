@@ -30,6 +30,7 @@ public:
     Vector operator-(Vector subtrahend) const;
     void operator-=(Vector subtrahend);
     Vector operator*(double multiplier) const;
+    friend Vector operator*(double scalar, const Vector& vector);
     void operator*=(double multiplier);
     Vector operator/(double divider) const;
     void operator/=(double divider);
