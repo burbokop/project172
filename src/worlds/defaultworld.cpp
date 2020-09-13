@@ -5,7 +5,9 @@
 #include <src/capabilities/ai.h>
 #include <src/capabilities/docker.h>
 #include <src/capabilities/modulehandler.h>
+#include <src/ftestobject.h>
 #include <src/old_debug.h>
+#include <src/engine/math/math.h>
 
 #include <src/engine/context.h>
 #include <src/engine/physicalobject.h>
@@ -41,9 +43,18 @@ WorldPreset::GenerationResult DefaultWorld::generate(e172::Context *context) {
     result.controllers.push_back(player2);
 
 
-    auto ffo = new e172::PhysicalObject();
+    auto ffo = new FTestObject();
     result.entities.push_back(ffo);
-    result.entities.push_back(new e172::PhysicalObject(ffo));
+
+
+    auto sfo = new FTestObject(ffo);
+    result.entities.push_back(sfo);
+
+    ffo->setCOffset({ 0, -20 });
+    ffo->setCAngle(-e172::Math::Pi / 2);
+
+    sfo->setCOffset({ 0, 20 });
+    sfo->setCAngle(e172::Math::Pi / 2);
 
 
     Unit *playerShip = static_cast<Unit*>(context->assetProvider()->createLoadable("sh1"));

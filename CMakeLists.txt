@@ -99,6 +99,8 @@ add_library(e172 SHARED
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/args.h
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/args.cpp
 
+    ${CMAKE_CURRENT_LIST_DIR}/src/engine/math/matrix.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/engine/math/matrix.cpp
     )
 
 include(${CMAKE_CURRENT_LIST_DIR}/src/json/CMakeLists.txt)
@@ -292,6 +294,8 @@ add_executable(project172
 
     ${CMAKE_CURRENT_LIST_DIR}/src/explosivespawner.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/explosivespawner.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/ftestobject.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/ftestobject.h
     )
 
 

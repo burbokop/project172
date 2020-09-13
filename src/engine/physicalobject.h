@@ -1,19 +1,21 @@
 #ifndef PHYSICALOBJECT_H
 #define PHYSICALOBJECT_H
 
-#include "entity.h"
-
 #include <src/engine/math/kinematics.h>
+#include <src/engine/math/matrix.h>
 #include <src/engine/math/vector.h>
+
 
 
 namespace e172 {
 
-class PhysicalObject : public Entity {
+class PhysicalObject {
     Kinematics<double> rotationKinematics;
     Kinematics<Vector> positionKinematics;
     double m_mass = 1;
     double m_friction = 1;
+
+    Matrix m_rotationMatrix;
 public:
     class ConnectionNode {
         friend PhysicalObject;
@@ -24,8 +26,7 @@ public:
     ConnectionNode connectionNode(const Vector& offset, double rotation);
 
 
-    PhysicalObject *to;
-    PhysicalObject(PhysicalObject *object = nullptr);
+    PhysicalObject();
     inline auto rotation() const { return rotationKinematics.value(); };
     inline auto position() const { return positionKinematics.value(); };
 
@@ -38,8 +39,9 @@ public:
     void addRotationForce(double value);
 
     void addRotationGravityForce(double destiantionRotation, double coeficient = 1);
-    void addRotationPursuitForce(const Context *context, const PhysicalObject *object);
+    void addRotationPursuitForce(const PhysicalObject *object, double deltaTime);
     void addRotationFollowForce(double destiantionRotation, double maxAngleDistance, double coeficient = 1);
+    void addRotationRestoringForce(double destiantionRotation, double coeficient = 1);
 
     void addForce(const Vector& value);
     void addForwardForce(double module);
@@ -54,25 +56,22 @@ public:
     void addLimitedRightForce(double module, double maxVelocity);
 
 
-    void addPursuitForce(const Context *context, const PhysicalObject *object);
+    void addPursuitForce(const PhysicalObject *object, double deltaTime);
     void addGravityForce(const Vector &gravityCenter, double coeficient = 1);
     void addFollowForce(const Vector &targetPoint, double maxDistance, double coeficient = 1);
+    void addRestoringForce(const Vector &destiantionPosition, double coeficient = 1);
 
 
-    static void connectNodes(ConnectionNode node0, ConnectionNode node1, double coeficient = 1);
+    static void connectNodes(ConnectionNode node0, ConnectionNode node1, double coeficient = 1, double rotationCoeficient = 1);
 
     double mass() const;
     void setMass(double mass);
     double friction() const;
     void setFriction(double friction);
 
-    // Entity interface
-public:
-    virtual void proceed(Context *context, AbstractEventHandler *e) override;
+    void proceedPhysics(double deltaTime);
 
-    // Entity interface
-public:
-    virtual void render(AbstractRenderer *renderer) override;
+    Matrix rotationMatrix() const;
 };
 
 }

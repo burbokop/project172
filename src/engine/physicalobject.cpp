@@ -1,9 +1,6 @@
-#include "context.h"
 #include "physicalobject.h"
 #include "math.h"
-#include "abstracteventhandler.h"
 #include <src/engine/math/math.h>
-#include <src/engine/graphics/abstractrenderer.h>
 
 double e172::PhysicalObject::mass() const {
     return m_mass;
@@ -21,6 +18,11 @@ void e172::PhysicalObject::setFriction(double friction) {
     m_friction = friction;
 }
 
+e172::Matrix e172::PhysicalObject::rotationMatrix() const
+{
+    return m_rotationMatrix;
+}
+
 e172::PhysicalObject::ConnectionNode e172::PhysicalObject::connectionNode(const e172::Vector &offset, double rotation) {
     ConnectionNode node;
     node.m_object = this;
@@ -29,8 +31,8 @@ e172::PhysicalObject::ConnectionNode e172::PhysicalObject::connectionNode(const 
     return node;
 }
 
-e172::PhysicalObject::PhysicalObject(PhysicalObject *object) {
-    to = object;
+e172::PhysicalObject::PhysicalObject() {
+    rotationKinematics.setValueProcessor(&Math::constrainRadians);
 }
 
 void e172::PhysicalObject::addRotationForce(double value) {
@@ -46,23 +48,27 @@ void e172::PhysicalObject::addRotationGravityForce(double destiantionRotation, d
     }
 }
 
-void e172::PhysicalObject::addRotationPursuitForce(const e172::Context *context, const e172::PhysicalObject *object) {
-    const auto dt = context->deltaTime();
-    if(dt != Math::null) {
+void e172::PhysicalObject::addRotationPursuitForce(const e172::PhysicalObject *object, double deltaTime) {
+    if(deltaTime != Math::null) {
         const auto direction = Math::radiansDifference(object->rotation(), rotation());
-        addRotationForce((direction - rotationVelocity()) / dt);
+        addRotationForce((direction - rotationVelocity()) / deltaTime);
     }
 }
 
 void e172::PhysicalObject::addRotationFollowForce(double destiantionRotation, double maxAngleDistance, double coeficient) {
     if(maxAngleDistance != Math::null) {
-        const auto direction = Math::degreesDifference(destiantionRotation, rotation());
+        const auto direction = Math::radiansDifference(destiantionRotation, rotation());
         const auto a = (1 - direction / maxAngleDistance);
         if(a != Math::null) {
             const auto x = (1 / a - 1);
             addRotationForce(std::abs(x) * coeficient);
         }
     }
+}
+
+void e172::PhysicalObject::addRotationRestoringForce(double destiantionRotation, double coeficient) {
+    const auto direction = Math::radiansDifference(destiantionRotation, rotation());
+    addRotationForce(direction * coeficient);
 }
 
 void e172::PhysicalObject::addForce(const Vector& value) {
@@ -72,7 +78,7 @@ void e172::PhysicalObject::addForce(const Vector& value) {
 }
 
 void e172::PhysicalObject::addForwardForce(double module) {
-    addForce(Vector::createByAngle(module, rotation()));
+    addForce(m_rotationMatrix * e172::Vector { module, 0 });
 }
 
 void e172::PhysicalObject::addLeftForce(double module) {
@@ -107,10 +113,9 @@ void e172::PhysicalObject::addLimitedRotationForce(double value, double maxAngle
     }
 }
 
-void e172::PhysicalObject::addPursuitForce(const Context *context, const e172::PhysicalObject *object) {
-    const auto dt = context->deltaTime();
-    if(dt != Math::null) {
-        addForce((object->position() - position() - velocity()) / dt);
+void e172::PhysicalObject::addPursuitForce(const e172::PhysicalObject *object, double deltaTime) {
+    if(deltaTime != Math::null) {
+        addForce((object->position() - position() - velocity()) / deltaTime);
     }
 }
 
@@ -131,56 +136,34 @@ void e172::PhysicalObject::addFollowForce(const e172::Vector &targetPoint, doubl
     }
 }
 
-void e172::PhysicalObject::connectNodes(e172::PhysicalObject::ConnectionNode node0, e172::PhysicalObject::ConnectionNode node1, double coeficient) {
+void e172::PhysicalObject::addRestoringForce(const e172::Vector &destiantionPosition, double coeficient) {
+    addForce((destiantionPosition - position()) * coeficient);
+}
+
+void e172::PhysicalObject::connectNodes(e172::PhysicalObject::ConnectionNode node0, e172::PhysicalObject::ConnectionNode node1, double coeficient, double rotationCoeficient) {
     if(node0.m_object && node1.m_object) {
-        node0.m_object->addGravityForce(node1.m_object->position() + node1.m_offset, coeficient);
-        node1.m_object->addGravityForce(node0.m_object->position() + node0.m_offset, coeficient);
-        node0.m_object->addRotationGravityForce(node1.m_object->rotation() + node1.m_rotation, coeficient);
-        node1.m_object->addRotationGravityForce(node0.m_object->rotation() + node0.m_rotation, coeficient);
+        const auto point0 = node0.m_object->m_rotationMatrix * node0.m_offset;
+        const auto point1 = node1.m_object->m_rotationMatrix * node1.m_offset;
+
+        node0.m_rotation = Math::constrainRadians(node0.m_rotation + Math::Pi);
+
+        node0.m_object->addRestoringForce(node1.m_object->position() + point1 - point0, coeficient);
+        node1.m_object->addRestoringForce(node0.m_object->position() + point0 - point1, coeficient);
+
+        node0.m_object->addRotationRestoringForce(Math::radiansDifference(Math::constrainRadians(node1.m_object->rotation() + node1.m_rotation), node0.m_rotation), rotationCoeficient);
+        node1.m_object->addRotationRestoringForce(Math::radiansDifference(Math::constrainRadians(node0.m_object->rotation() + node0.m_rotation), node1.m_rotation), rotationCoeficient);
     }
 }
 
-void e172::PhysicalObject::proceed(e172::Context *context, e172::AbstractEventHandler *e) {
-    static id_t ee = entityId();
-
-    if(ee == entityId()) {
-        if(e->keyHolded(e172::ScancodeKp4)) {
-            addRotationForce(-1);
-        } else if(e->keyHolded(e172::ScancodeKp6)) {
-            addRotationForce(1);
-        }
-
-        if(e->keyHolded(e172::ScancodeKp8)) {
-            addForwardForce(100);
-        }
-    }
-
-    if(to) {
-        if(e->keyHolded(e172::Scancode1)) {
-            //addPursuitForce(context, to);
-            //addGravityForce(to->position(), 1000);
-            //to->addGravityForce(position(), 1000);
-            addFollowForce(to->position(), 200);
-        }
-    }
-
+void e172::PhysicalObject::proceedPhysics(double deltaTime) {
     if(m_mass != Math::null) {
         rotationKinematics.addFriction(m_friction / m_mass);
         positionKinematics.addFriction(m_friction / m_mass);
     }
 
-    rotationKinematics.accept(context->deltaTime());
-    positionKinematics.accept(context->deltaTime());
+    rotationKinematics.accept(deltaTime);
+    m_rotationMatrix = e172::Matrix::fromRadians(rotation());
+    positionKinematics.accept(deltaTime);
+
 }
 
-void e172::PhysicalObject::render(e172::AbstractRenderer *renderer) {
-    const auto r0 = 8;
-    const auto r1 = 4;
-
-    const auto d = (r0 + r1) / 2;
-    renderer->drawCircleShifted(position() - Vector::createByAngle(d, rotation()), r0, 0xff0000);
-    renderer->drawCircleShifted(position() + Vector::createByAngle(d, rotation()), r1, 0xff0000);
-
-    renderer->drawLineShifted(position(), position() + velocity(), 0x00ff00);
-    renderer->drawLineShifted(position(), position() + acceleration(), 0x0000ff);
-}

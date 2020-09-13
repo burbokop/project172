@@ -23,7 +23,7 @@ class Kinematics {
     T m_velocity = initValue<T>();
     T m_acceleration = initValue<T>();
 
-    std::function<T(const T&)> m_differentialProcessor;
+    std::function<T(const T&)> m_valueProcessor;
 
     E172_SFINAE_METHOD_CHECKER(length)
     E172_SFINAE_METHOD_CHECKER(module)
@@ -37,8 +37,8 @@ public:
     T value() const;
     T velocity() const;
     T acceleration() const;
-    std::function<T (const T&)> differentialProcessor() const;
-    void setDifferentialProcessor(const std::function<T (const T&)> &differentialProcessor);
+    std::function<T (const T&)> valueProcessor() const;
+    void setValueProcessor(const std::function<T (const T&)> &valueProcessor);
 };
 
 template<typename T>
@@ -77,8 +77,8 @@ void Kinematics<T>::addFriction(double coeficient) {
 template<typename T>
 void Kinematics<T>::accept(double deltaTime) {
     m_velocity += m_acceleration * deltaTime;
-    if(m_differentialProcessor) {
-        m_value += m_differentialProcessor(m_velocity * deltaTime);
+    if(m_valueProcessor) {
+        m_value = m_valueProcessor(m_value + (m_velocity * deltaTime));
     } else {
         m_value += m_velocity * deltaTime;
     }
@@ -87,13 +87,13 @@ void Kinematics<T>::accept(double deltaTime) {
 
 
 template<typename T>
-std::function<T (const T&)> Kinematics<T>::differentialProcessor() const {
-    return m_differentialProcessor;
+std::function<T (const T&)> Kinematics<T>::valueProcessor() const {
+    return m_valueProcessor;
 }
 
 template<typename T>
-void Kinematics<T>::setDifferentialProcessor(const std::function<T (const T&)> &differentialProcessor) {
-    m_differentialProcessor = differentialProcessor;
+void Kinematics<T>::setValueProcessor(const std::function<T (const T&)> &valueProcessor) {
+    m_valueProcessor = valueProcessor;
 }
 
 
