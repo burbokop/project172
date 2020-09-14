@@ -23,7 +23,7 @@ private:
 
 public:
 
-    static const double Pi;
+    static constexpr double Pi = 3.14159265358979323846;
 
     template<typename A, typename B, typename C, typename D, typename E>
     static int map(const A &value, const B &inMin, const C &inMax, const D &outMin, const E &outMax) {

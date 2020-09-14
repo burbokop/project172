@@ -9,6 +9,7 @@
 #include <src/old_debug.h>
 #include <src/capabilities/modules/weapon.h>
 #include <src/capabilities/modulehandler.h>
+#include <src/engine/math/math.h>
 
 
 
@@ -47,11 +48,12 @@ void Aggressive::proceed(e172::Context *context, e172::AbstractEventHandler *eve
             const double dstAngle = dst.angle();
             const double dstModule = dst.module();
 
-            parentUnit()->rotateToAngle(context, dstAngle);
-            targeted = parentUnit()->isOnAngle(context, dstAngle) && !inWarp && dstModule < 400;
+            parentUnit()->addTargetRotationForse(dstAngle, 1, 1);
+
+            targeted = (e172::Math::radiansDistance(dstAngle, parentUnit()->rotation()) < e172::Math::Pi / 32) && !inWarp && dstModule < 400;
             Ship *ship = dynamic_cast<Ship*>(parentUnit());
 
-            ModuleHandler *modules = parentUnit()->getModuleHandler();
+            ModuleHandler *modules = parentUnit()->moduleHandler();
             if(modules) {
                 std::vector<Module*> *weapons = modules->getModulesByClass("Weapon");
 

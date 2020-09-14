@@ -1,5 +1,7 @@
 #include "abstractrenderer.h"
 
+#include <math.h>
+
 namespace e172 {
 
 
@@ -57,6 +59,10 @@ Vector AbstractRenderer::Camera::position() const {
     if(m_getter)
         return m_getter();
     return Vector();
+}
+
+Color randomColor() {
+    return rand() % static_cast<uint32_t>(std::pow(2, 24));
 }
 
 }

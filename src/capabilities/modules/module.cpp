@@ -1,7 +1,6 @@
 #include "module.h"
 
 
-#include <src/units/unit.h>
 #include <src/units/camera.h>
 #include <src/engine/math/math.h>
 
@@ -38,8 +37,8 @@ void Module::proceed(e172::Context *, e172::AbstractEventHandler *) {
 void Module::render(e172::AbstractRenderer *renderer) {
     audioPlayer.setDistance((parentUnit()->position() - renderer->cameraPosition()).module());
 
-    this->animator.setAngle(parentUnit()->angle());
-    e172::Vector local = parentUnit()->position() + e172::Vector::createByAngle(-this->attachOffset.module(), parentUnit()->angle());
+    this->animator.setAngle(parentUnit()->rotation());
+    e172::Vector local = parentUnit()->position() + e172::Vector::createByAngle(-this->attachOffset.module(), parentUnit()->rotation());
     this->animator.setPosition(local);
     this->animator.render(renderer);
 }

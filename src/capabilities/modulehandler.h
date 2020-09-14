@@ -9,15 +9,14 @@
 
 
 class ModuleHandler : public Capability {
-protected:
     std::vector<Module*> modules;
     std::map<std::string, std::vector<Module*>*> *categories = nullptr;
+protected:
 
+    bool setParentUnit(Unit *parent) override;
 public:
     ModuleHandler();
 
-    bool setParentUnit(Unit *parent) override;
-    void unsetParentUnit() override;
 
     void addModule(Module *module);
     void removeModule(Module *module);

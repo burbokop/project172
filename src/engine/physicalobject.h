@@ -25,6 +25,7 @@ public:
     };
     ConnectionNode connectionNode(const Vector& offset, double rotation);
 
+    void resetPhysicsProperties(e172::Vector position, double rotation, e172::Vector velocity = e172::Vector(), double rotationVelocity = 0);
 
     PhysicalObject();
     inline auto rotation() const { return rotationKinematics.value(); };
@@ -42,6 +43,9 @@ public:
     void addRotationPursuitForce(const PhysicalObject *object, double deltaTime);
     void addRotationFollowForce(double destiantionRotation, double maxAngleDistance, double coeficient = 1);
     void addRotationRestoringForce(double destiantionRotation, double coeficient = 1);
+
+    void addTargetRotationForse(double destinationAngle, double rotationForceModule, double maxRotationVelocity);
+
 
     void addForce(const Vector& value);
     void addForwardForce(double module);

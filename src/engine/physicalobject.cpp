@@ -31,6 +31,13 @@ e172::PhysicalObject::ConnectionNode e172::PhysicalObject::connectionNode(const 
     return node;
 }
 
+void e172::PhysicalObject::resetPhysicsProperties(e172::Vector position, double rotation, e172::Vector velocity, double rotationVelocity) {
+    positionKinematics.setValue(position);
+    positionKinematics.setVelocity(velocity);
+    rotationKinematics.setValue(rotation);
+    rotationKinematics.setVelocity(rotationVelocity);
+}
+
 e172::PhysicalObject::PhysicalObject() {
     rotationKinematics.setValueProcessor(&Math::constrainRadians);
 }
@@ -69,6 +76,10 @@ void e172::PhysicalObject::addRotationFollowForce(double destiantionRotation, do
 void e172::PhysicalObject::addRotationRestoringForce(double destiantionRotation, double coeficient) {
     const auto direction = Math::radiansDifference(destiantionRotation, rotation());
     addRotationForce(direction * coeficient);
+}
+
+void e172::PhysicalObject::addTargetRotationForse(double destinationAngle, double rotationForceModule, double maxRotationVelocity) {
+    addLimitedRotationForce(static_cast<double>(Math::radiansDirection(destinationAngle, rotation())) * rotationForceModule, maxRotationVelocity);
 }
 
 void e172::PhysicalObject::addForce(const Vector& value) {

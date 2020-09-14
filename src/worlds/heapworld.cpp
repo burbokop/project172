@@ -25,7 +25,7 @@ WorldPreset::GenerationResult HeapWorld::generate(e172::Context *context) {
 
 
     Unit *playerShip = static_cast<Unit*>(context->assetProvider()->createLoadable("sh1"));
-    playerShip->place(e172::Vector(), -0.7);
+    playerShip->resetPhysicsProperties(e172::Vector(), -0.7);
     playerShip->addCapability(player1);
     ModuleHandler *playerModuleHandler = new ModuleHandler();
     playerModuleHandler->addModule(static_cast<Module*>(context->assetProvider()->createLoadable("pistol")));
@@ -41,7 +41,7 @@ WorldPreset::GenerationResult HeapWorld::generate(e172::Context *context) {
         for(int j = 0; j < 32; j++) {
             Movable *unit = dynamic_cast<Movable*>(context->assetProvider()->createLoadable(key));
             if(unit) {
-                unit->place(e172::Vector::createByAngle(10000, rand()), e172::Vector(), e172::Vector(), 0);
+                unit->resetPhysicsProperties(e172::Vector::createByAngle(10000, rand()), 0);
 
                 unit->addCapability(new Aggressive(context->entities()));
                 ModuleHandler *playerModuleHandler = new ModuleHandler();

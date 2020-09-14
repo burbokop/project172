@@ -278,8 +278,12 @@ add_executable(project172
     ${CMAKE_CURRENT_LIST_DIR}/src/units/ship.h
     ${CMAKE_CURRENT_LIST_DIR}/src/units/station.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/units/station.h
+    #${CMAKE_CURRENT_LIST_DIR}/src/units/old_unit.cpp
+    #${CMAKE_CURRENT_LIST_DIR}/src/units/old_unit.h
     ${CMAKE_CURRENT_LIST_DIR}/src/units/unit.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/units/unit.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/injectableentity.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/injectableentity.h
 
     ${CMAKE_CURRENT_LIST_DIR}/src/worlds/arenaworld.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/worlds/arenaworld.h

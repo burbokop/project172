@@ -1,6 +1,5 @@
 #include "docker.h"
 
-#include <src/units/unit.h>
 #include <src/units/movable.h>
 
 #include <src/engine/math/math.h>
@@ -33,7 +32,7 @@ void Docker::proceed(e172::Context *context, e172::AbstractEventHandler *eventHa
                 if(t == e172::Alive) {
                     m_target = dynamic_cast<Unit*>(t);
                     if(m_target && !m_target->containsTag("C")) {
-                        const auto dd = e172::Math::radiansDistance(parentUnit()->angle(), e172::Math::constrainRadians(m_target->angle() - e172::Math::Pi));
+                        const auto dd = e172::Math::radiansDistance(parentUnit()->rotation(), e172::Math::constrainRadians(m_target->rotation() - e172::Math::Pi));
                         //std::cout << "n: " << dd << " : " << e172::Math::Pi / 16 << "\n";
                         if(dd < e172::Math::Pi / 16) {
                             m_state = InInterception;
@@ -45,19 +44,19 @@ void Docker::proceed(e172::Context *context, e172::AbstractEventHandler *eventHa
         } else if(m_state == InInterception) {
 
             const auto parent = parentUnit();
-            const auto dd = e172::Math::radiansDistance(parent->angle(), e172::Math::constrainRadians(m_target->angle() - e172::Math::Pi));
+            const auto dd = e172::Math::radiansDistance(parent->rotation(), e172::Math::constrainRadians(m_target->rotation() - e172::Math::Pi));
 
             //std::cout << "InInterception: " << dd << "\n";
 
             if(const auto movable = dynamic_cast<Movable*>(parent)) {
-                movable->pursuit(context, m_target);
+                //movable->pursuit(context, m_target);
             }
 
             if(dd < e172::Math::Pi / 64 && (m_target->position() - parent->position()).cheapModule() < 2) {
                 m_state = Docked;
                 if(const auto movable = dynamic_cast<Movable*>(parent)) {
                     if(const auto movable2 = dynamic_cast<Movable*>(m_target)) {
-                        movable2->physicallyAttachUnit(movable);
+                        //movable2->physicallyAttachUnit(movable);
                     }
                 }
             }

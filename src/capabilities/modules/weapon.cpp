@@ -39,8 +39,7 @@ void Weapon::proceed(e172::Context *context, e172::AbstractEventHandler *eventHa
         if(projectileName.size() > 0) {
             Projectile *object = static_cast<Projectile*>(context->assetProvider()->createLoadable(projectileName));
             object->setMother(parentUnit());
-
-            object->place(parentUnit()->position(), parentUnit()->velocity() + e172::Vector::createByAngle(getProjectileSpead(), parentUnit()->angle()), e172::Vector(), parentUnit()->angle());
+            object->resetPhysicsProperties(parentUnit()->position(), parentUnit()->rotation(), parentUnit()->velocity() + e172::Vector::createByAngle(getProjectileSpead(), parentUnit()->rotation()));
             context->addEntity(object);
 
             audioPlayer.play();

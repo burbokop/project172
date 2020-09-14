@@ -32,7 +32,7 @@ class Background : public e172::Entity {
     uint32_t flashingColor = DEFAULT_FLASHING_COLOR;
     uint32_t colorBuffer = DEFAULT_MAIN_COLOR;
     int flashesRemains = 0;
-    Movable *m_movable = nullptr;
+    e172::PhysicalObject *m_physicalObject = nullptr;
     void onResolutionChanged(const e172::Vector &resolution);
 public:
     Background(unsigned int amount, double slidingStart = STARS_SLIDING_SPEED);
@@ -41,7 +41,7 @@ public:
 public:
     void proceed(e172::Context *context, e172::AbstractEventHandler *);
     void render(e172::AbstractRenderer *renderer);
-    void bindToMovable(Movable *value);
+    void bindToPhysicalObject(e172::PhysicalObject *value);
 
     void flashing(e172::Context *, const e172::Variant &repeats);
     void flashing(const int &repeats);

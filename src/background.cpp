@@ -79,8 +79,8 @@ void Background::render(e172::AbstractRenderer *renderer) {
             else y = y % resolution.intY() + resolution.intY();
 
             e172::Vector velocity;
-            if(m_movable)
-                velocity = m_movable->velocity();
+            if(m_physicalObject)
+                velocity = m_physicalObject->velocity();
 
             if(velocity.module() < slidingStart) {
                 renderer->drawPixel(e172::Vector(x, y), star.color);
@@ -91,7 +91,7 @@ void Background::render(e172::AbstractRenderer *renderer) {
     }
 }
 
-void Background::bindToMovable(Movable *value) {
-    m_movable = value;
+void Background::bindToPhysicalObject(e172::PhysicalObject *value) {
+    m_physicalObject = value;
 }
 

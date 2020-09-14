@@ -6,7 +6,6 @@
 #define INV_PI 180 / M_PI
 #define NOTINV_PI M_PI / 180
 
-const double e172::Math::Pi = M_PI;
 
 std::map<double, double> e172::Math::sinCache;
 std::map<double, double> e172::Math::cosCache;

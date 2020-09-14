@@ -59,14 +59,14 @@ void Player::proceed(e172::Context *context, e172::AbstractEventHandler *eventHa
 
 
     if(getPersonalKey(eventHandler, "left")) {
-        parentUnit()->rotateLeft(context);
+        parentUnit()->addLimitedRightForce(-1, 1);
     } else if(getPersonalKey(eventHandler, "right")) {
-        parentUnit()->rotateRight(context);
+        parentUnit()->addLimitedRightForce(1, 1);
     }
 
     Ship *ship = dynamic_cast<Ship*>(parentUnit());
 
-    ModuleHandler *modules = parentUnit()->getModuleHandler();
+    ModuleHandler *modules = parentUnit()->moduleHandler();
     if(modules) {
         std::vector<Module*> *weapons = modules->getModulesByClass("Weapon");
 

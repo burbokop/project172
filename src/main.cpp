@@ -156,7 +156,7 @@ int main(int argc, char *argv[]) {
     //setup camera
     Camera camera;
     app.addEntity(&camera);
-    background.bindToMovable(&camera);
+    background.bindToPhysicalObject(&camera);
 
     //setup world strategy
     WorldPresetStrategy worldPresetStrategy;

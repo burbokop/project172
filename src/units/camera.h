@@ -8,7 +8,7 @@
 #include <src/engine/graphics/abstractrenderer.h>
 
 
-class Camera : public Movable {
+class Camera : public e172::Entity, public e172::PhysicalObject {
     e172::AbstractRenderer::Camera r_cam;
     int m_i = 0;
 protected:
@@ -18,13 +18,12 @@ protected:
     Controller *m_target = nullptr;
 
 public:
-    Camera();
-    Camera(Controller *target);
+    Camera(Controller *target = nullptr);
     void setTarget(Controller *target);
 
     // Entity interface
 public:
-    void proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler);
+    void proceed(e172::Context *context, e172::AbstractEventHandler *);
     void render(e172::AbstractRenderer *renderer);
 
     // Unit interface

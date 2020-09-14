@@ -34,11 +34,11 @@ Particle::Particle(uint8_t shape, int averageLifeTime, int lifeTimeDelta) {
 
 void Particle::render(e172::AbstractRenderer *renderer) {
     if(shape == PIXEL) {
-        renderer->drawPixel(renderer->offset() + pos, color);
+        renderer->drawPixel(renderer->offset() + position(), color);
     } else if(shape == SQUARE) {
-        renderer->drawSquare(renderer->offset() + pos, radius, color);
+        renderer->drawSquare(renderer->offset() + position(), radius, color);
     } else if(shape == CIRCLE) {
-        renderer->drawCircle(renderer->offset() + pos, radius, color);
+        renderer->drawCircle(renderer->offset() + position(), radius, color);
     }
 }
 

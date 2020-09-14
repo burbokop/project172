@@ -38,7 +38,7 @@ WorldPreset::GenerationResult ArenaWorld::generate(e172::Context *context) {
 
     //player1 ship
     Unit *playerShip = static_cast<Unit*>(context->assetProvider()->createLoadable("sh1"));
-    playerShip->place(e172::Vector(100, 100), -0.7);
+    playerShip->resetPhysicsProperties({ 100, 100 }, -0.7);
     playerShip->addCapability(player1);
     ModuleHandler *playerModuleHandler = new ModuleHandler();
     playerModuleHandler->addModule(static_cast<Module*>(context->assetProvider()->createLoadable("pistol")));
@@ -49,7 +49,7 @@ WorldPreset::GenerationResult ArenaWorld::generate(e172::Context *context) {
 
     //player2 ship
     Unit *player2ship = static_cast<Unit*>(context->assetProvider()->createLoadable("sh2"));
-    player2ship->place(e172::Vector(0, 100), -0.7);
+    player2ship->resetPhysicsProperties(e172::Vector(0, 100), -0.7);
     ModuleHandler *player2ModuleHandler = new ModuleHandler();
     player2ModuleHandler->addModule(static_cast<Module*>(context->assetProvider()->createLoadable("plasma-launcher")));
     player2ModuleHandler->addModule(static_cast<Module*>(context->assetProvider()->createLoadable("engine1")));
@@ -61,7 +61,7 @@ WorldPreset::GenerationResult ArenaWorld::generate(e172::Context *context) {
 
 
     Movable *unit = dynamic_cast<Movable*>(context->assetProvider()->createLoadable("sh1"));
-    unit->place(e172::Vector(), e172::Vector(), e172::Vector(), 0);
+    unit->resetPhysicsProperties({}, 0);
     unit->addCapability(new Aggressive(context->entities()));
     ModuleHandler *mh = new ModuleHandler();
     mh->addModule(static_cast<Module*>(context->assetProvider()->createLoadable("pistol")));

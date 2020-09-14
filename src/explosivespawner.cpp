@@ -2,7 +2,6 @@
 
 #include <math.h>
 
-#include <src/units/unit.h>
 #include <src/units/particle.h>
 
 #include <src/engine/context.h>

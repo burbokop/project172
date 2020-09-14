@@ -38,7 +38,10 @@ public:
     T velocity() const;
     T acceleration() const;
     std::function<T (const T&)> valueProcessor() const;
+
     void setValueProcessor(const std::function<T (const T&)> &valueProcessor);
+    void setVelocity(const T& value) { m_velocity = value; }
+    void setValue(const T& value) { m_value = value; }
 };
 
 template<typename T>

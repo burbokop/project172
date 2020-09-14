@@ -42,7 +42,7 @@ uint8_t Ship::abortWarp(e172::Context *context) {
 }
 
 WarpDrive *Ship::getFirstWarp() {
-    ModuleHandler *modules = getModuleHandler();
+    ModuleHandler *modules = moduleHandler();
     if(modules) {
         std::vector<Module*> *drives = modules->getModulesByClass("WarpDrive");
         if(drives) {
@@ -53,7 +53,7 @@ WarpDrive *Ship::getFirstWarp() {
 }
 
 void Ship::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
-    ModuleHandler *modules = getModuleHandler();
+    ModuleHandler *modules = moduleHandler();
     if(modules) {
         std::vector<Module*> *drives = modules->getModulesByClass("WarpDrive");
         if(drives) {

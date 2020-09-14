@@ -1,77 +1,70 @@
 #ifndef UNIT_H
 #define UNIT_H
 
-
+#include <src/engine/entity.h>
+#include <src/engine/physicalobject.h>
+#include <src/engine/assettools/loadable.h>
 #include <src/animator.h>
 #include <src/iinformative.h>
-#include <src/engine/assettools/loadable.h>
-#include <src/engine/entity.h>
 
-class Capability;
 class ModuleHandler;
 class Docker;
-class Unit : public e172::Entity, public e172::Loadable, public IInformative {
+class Capability;
+class Unit : public e172::Entity, public e172::Loadable, public e172::PhysicalObject, public IInformative {
+public:
+    static constexpr double DefaultMaxRotationSpeed = 0.0014 * 1000;
+    static constexpr double StopMovingVelocity = 1;
+    static constexpr double DefaultAccelerationValue = 120;
+    static constexpr double DefaultReleaseSpead = 1;
+    static constexpr double DefaultMaxSpeed = 120;
+    static constexpr double DefaultIdleSpead = - 60;
+    static constexpr double RelativisticPursuitCoefficient = 0.0025;
+
 private:
-    double m_angle = 0;
-    double rotationSpeed = DEFAULT_ROTATION_SPEED;
-    double dstAngle = 0;
-    bool angleLocked = false;
-    double health = 0;
-    double explosiveRadius = 0;
-    Animator animator;
-
-protected:
-    static const double DEFAULT_ROTATION_SPEED;
-    static const double ANGLE_DELTA_MULTIPLIER;
-    double getRotationSpeed();
-
-    std::vector<Capability*> capabilities;
-
-
-    e172::Vector pos;
+    double m_health = 0;
+    double m_explosiveRadius = 0;
+    Animator m_animator;
+    std::vector<Capability*> m_capabilities;
 
     bool m_selected = false;
-
     uint32_t m_selectedColor;
-    e172::ElapsedTimer selectedAnimationTimer;
+    e172::ElapsedTimer m_selectedAnimationTimer;
+
+    double m_movingForce = 0;
+    double m_maxVelocity = 0;
+    double m_releaseVelocity = 0;
+    double m_maxRotationVelocity = 1;
 public:
     Unit();
-
-    void place(e172::Vector pos, double angle);
 
     void addCapability(Capability *capability);
     void removeCapability(Capability *capability);
 
-    ModuleHandler *getModuleHandler();
-    Docker *getDocker();
-
-
-    void rotateLeft(e172::Context *context);
-    void rotateRight(e172::Context *context);
-    void lockAngle(double angle);
-    void rotateToAngle(e172::Context *context, double angle);
-    bool isOnAngle(e172::Context *context, double angle);
-    void unlockAngle();
-
-
-    e172::Vector position();
-    virtual e172::Vector velocity();
-    double angle() const;
-
     virtual void hit(e172::Context *context, int value);
 
-    // Entity interface
-    void proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) override;
-    void render(e172::AbstractRenderer *renderer) override;
 
-    ~Unit();
+    ModuleHandler *moduleHandler() const;
+    Docker *docker() const;
+    bool selected() const;
+    double health() const;
+    double movingForce() const;
+    double maxVelocity() const;
+    double releaseVelocity() const;
+    void setMovingForce(double movingForce);
+    void setMaxVelocity(double maxVelocity);
+    void setReleaseVelocity(double releaseVelocity);
+    double maxRotationVelocity() const;
+    void setMaxRotationVelocity(double maxRotationVelocity);
+
 
     // IInformative interface
+public:
+    virtual std::string info() const override;
 
-    std::string info() const override;
-
-
-    void setRotationSpeed(double value);
+    // Entity interface
+public:
+    virtual void proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) override;
+    virtual void render(e172::AbstractRenderer *renderer) override;
 };
 
 #endif // UNIT_H

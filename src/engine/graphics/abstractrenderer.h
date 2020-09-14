@@ -43,6 +43,8 @@ inline Color rgb(uint8_t r, uint8_t g, uint8_t b) {
     return argb(0xff, r, g, b);
 }
 
+Color randomColor();
+
 class AbstractGraphicsProvider;
 class AbstractRenderer {
     friend AbstractGraphicsProvider;

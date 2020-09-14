@@ -10,23 +10,19 @@ void AudioPlayer::setWaitStopPlaing(bool waitStopPlaing) {
     m_waitStopPlaing = waitStopPlaing;
 }
 
-e172::AudioSample AudioPlayer::beginningSample() const
-{
+e172::AudioSample AudioPlayer::beginningSample() const {
     return m_beginningSample;
 }
 
-e172::AudioSample AudioPlayer::loopSample() const
-{
+e172::AudioSample AudioPlayer::loopSample() const {
     return m_loopSample;
 }
 
-e172::AudioSample AudioPlayer::endingSample() const
-{
+e172::AudioSample AudioPlayer::endingSample() const {
     return m_endingSample;
 }
 
-e172::AudioChannel AudioPlayer::channel() const
-{
+e172::AudioChannel AudioPlayer::channel() const {
     return m_channel;
 }
 
