@@ -33,7 +33,7 @@ const std::map<std::string, e172::Scancode> Player::scancode = {
 
 
 
-bool Player::getPersonalKey(e172::AbstractEventHandler *eventHandler, std::string id) {
+bool Player::personalKey(e172::AbstractEventHandler *eventHandler, std::string id) {
     if(personalScancode.find(id) != personalScancode.end()) {
         return eventHandler->keyHolded(personalScancode[id]);
     }
@@ -56,50 +56,45 @@ void Player::setArmor(Ship *armor) {
 }
 
 void Player::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
-
-
-    if(getPersonalKey(eventHandler, "left")) {
-        parentUnit()->addLimitedRightForce(-1, 1);
-    } else if(getPersonalKey(eventHandler, "right")) {
-        parentUnit()->addLimitedRightForce(1, 1);
-    }
-
-    Ship *ship = dynamic_cast<Ship*>(parentUnit());
-
-    ModuleHandler *modules = parentUnit()->moduleHandler();
-    if(modules) {
-        std::vector<Module*> *weapons = modules->getModulesByClass("Weapon");
-
-        if(weapons) {
-            for(Module *module : *weapons) {
-                Weapon *weapon = dynamic_cast<Weapon*>(module);
-                if(weapon) {
-                    weapon->setFiring(getPersonalKey(eventHandler, "action"));
-                }
-            }
+    if(auto ship = dynamic_cast<Ship*>(parentUnit())) {
+        if(personalKey(eventHandler, "left")) {
+            ship->maneuverLeft();
+        } else if(personalKey(eventHandler, "right")) {
+            ship->maneuverRight();
         }
 
-        if(ship && getPersonalKey(eventHandler, "warp")) {
-            if(!warpKeyPressed) {
-                warpKeyPressed = true;
-                if(!ship->warp()) {
-                    if(!ship->prepareWarp()) {
-                        if(!ship->abortWarp(context)) {
+        ModuleHandler *modules = parentUnit()->moduleHandler();
+        if(modules) {
+            const auto weapons = modules->modulesOfClass("Weapon");
+            for(Module *module : weapons) {
+                Weapon *weapon = dynamic_cast<Weapon*>(module);
+                if(weapon) {
+                    weapon->setFiring(personalKey(eventHandler, "action"));
+                }
+            }
+
+            if(ship && personalKey(eventHandler, "warp")) {
+                if(!warpKeyPressed) {
+                    warpKeyPressed = true;
+                    if(!ship->warp()) {
+                        if(!ship->prepareWarp()) {
+                            if(!ship->abortWarp(context)) {
+                            }
                         }
                     }
                 }
+            } else {
+                warpKeyPressed = false;
             }
-        } else {
-            warpKeyPressed = false;
         }
-    }
 
-    if(ship && getPersonalKey(eventHandler, "forward")) {
-        ship->accelerateForward();
-    }
+        if(ship && personalKey(eventHandler, "forward")) {
+            ship->thrustForward();
+        }
 
-    if(getPersonalKey(eventHandler, "armor")) {
-        releaseArmor();
+        if(personalKey(eventHandler, "armor")) {
+            releaseArmor();
+        }
     }
 
     this->Controller::proceed(context, eventHandler);

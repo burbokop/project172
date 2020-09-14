@@ -59,7 +59,7 @@ void Near::addEntities(e172::Context *context) {
 double Near::localRadius(Unit *center) {
     double result = m_radius;
     if(Ship *centerShip = dynamic_cast<Ship*>(center)) {
-        WarpDrive *wd = centerShip->getFirstWarp();
+        WarpDrive *wd = centerShip->firstWarp();
         if(wd && wd->getState() == WarpDrive::WARP_EXECUTING) {
             result *= WARP_RADIUS_MILTIPLIER;
         }

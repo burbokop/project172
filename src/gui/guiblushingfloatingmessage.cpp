@@ -3,7 +3,7 @@
 #include <src/engine/math/math.h>
 
 #include <src/engine/graphics/abstractrenderer.h>
-
+#include <src/units/unit.h>
 
 GUIBlushingFloatingMessage::GUIBlushingFloatingMessage(Unit *parent) : GUIFloatingMessage (parent) {
 }

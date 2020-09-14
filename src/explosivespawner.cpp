@@ -2,8 +2,6 @@
 
 #include <math.h>
 
-#include <src/units/particle.h>
-
 #include <src/engine/context.h>
 
 #include <src/additional/lightparticle.h>
@@ -18,7 +16,7 @@ void ExplosiveSpawner::spawnExplosive(e172::Context *context, const e172::Varian
 void ExplosiveSpawner::spawnExplosive(e172::Context *context, const e172::Vector& position, const e172::Vector& velocity, int radius) {
     const int v0 = static_cast<int>(std::sqrt(radius)) * 350;
     for(int i = 0; i < radius * 4; i++) {
-        unsigned types[] = { Particle::PIXEL, Particle::CIRCLE, Particle::SQUARE };
+        unsigned types[] = { LightParticle::PIXEL, LightParticle::CIRCLE, LightParticle::SQUARE };
         LightParticle *particle = new LightParticle(types[rand() % 3], radius * 600, radius * 400);
         particle->place(position, e172::Vector::createRandom(v0) + velocity);
         context->addEntity(particle);

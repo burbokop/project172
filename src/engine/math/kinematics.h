@@ -61,8 +61,8 @@ void Kinematics<T>::addAcceleration(T value) {
 
 template<typename T>
 void Kinematics<T>::addLimitedAcceleration(T value, double maxVelocity) {
-    if constexpr (std::is_integral<T>::value) {
-        addAcceleration((maxVelocity - m_velocity) * value);
+    if constexpr (std::is_integral<T>::value || std::is_same<T, double>::value || std::is_same<T, long double>::value) {
+        addAcceleration((maxVelocity - std::abs(m_velocity)) * value);
     } else if constexpr (has_length_method<T>::value) {
         addAcceleration((maxVelocity - m_velocity.length()) * value);
     } else if constexpr (has_module_method<T>::value) {

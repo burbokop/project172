@@ -119,7 +119,7 @@ void e172::PhysicalObject::addLimitedRightForce(double module, double maxVelocit
 }
 
 void e172::PhysicalObject::addLimitedRotationForce(double value, double maxAngleVelocity) {
-    if(!Math::cmpf(m_mass, 0)) {
+    if(m_mass != Math::null) {
         rotationKinematics.addLimitedAcceleration(value / m_mass, maxAngleVelocity);
     }
 }

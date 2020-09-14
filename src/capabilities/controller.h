@@ -3,12 +3,12 @@
 
 
 #include "capability.h"
-#include <src/units/ship.h>
+
 #include <src/additional/trigger.h>
 
 #include <src/engine/time/elapsedtimer.h>
 
-
+class Ship;
 class Controller : public Capability {    
 protected:
     static const long ARMOR_RELEASE_DELAY;

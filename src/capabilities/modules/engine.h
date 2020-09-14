@@ -4,6 +4,8 @@
 #include "module.h"
 
 class Engine : public Module {
+    bool m_running = false;
+    bool m_lastRunning = false;
 public:
     Engine();
     Engine(Loadable *tmp);
@@ -12,8 +14,6 @@ public:
     // Entity interface
 public:
     bool forward();
-    void stop();
-
 
     void proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) override;
 

@@ -3,6 +3,7 @@
 
 #include <src/units/camera.h>
 #include <src/engine/math/math.h>
+#include <src/units/unit.h>
 
 Module::Module() {
     registerInitFunction([this](){

@@ -2,10 +2,9 @@
 #define CAMERA_H
 
 
-#include "movable.h"
 #include <src/capabilities/controller.h>
-
 #include <src/engine/graphics/abstractrenderer.h>
+#include <src/engine/physicalobject.h>
 
 
 class Camera : public e172::Entity, public e172::PhysicalObject {
@@ -20,16 +19,12 @@ protected:
 public:
     Camera(Controller *target = nullptr);
     void setTarget(Controller *target);
+    Controller *target() const;
 
     // Entity interface
 public:
     void proceed(e172::Context *context, e172::AbstractEventHandler *);
     void render(e172::AbstractRenderer *renderer);
-
-    // Unit interface
-public:
-    void hit(e172::Context *, int);
-    Controller *target() const;
 };
 
 #endif // CAMERA_H

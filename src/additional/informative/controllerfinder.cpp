@@ -1,5 +1,7 @@
 #include "controllerfinder.h"
 
+#include <src/units/unit.h>
+
 ControllerFinder::ControllerFinder(Controller *p1, Controller *p2) {
     this->p1 = p1;
     this->p2 = p2;

@@ -17,8 +17,8 @@
 #include <src/assetexecutors/stringassetexecutor.h>
 #include <src/assetexecutors/vectorassetexecutor.h>
 
-#include <src/units/particle.h>
 #include <src/units/projectile.h>
+#include <src/units/ship.h>
 #include <src/units/station.h>
 
 #include <src/capabilities/player.h>
@@ -124,11 +124,9 @@ int main(int argc, char *argv[]) {
     app.assetProvider()->installExecutor("zoom", std::make_shared<NumberAssetExecutor>());
 
     app.assetProvider()->registerType<Unit>();
-    app.assetProvider()->registerType<Movable>();
     app.assetProvider()->registerType<Ship>();
     app.assetProvider()->registerType<Station>();
     app.assetProvider()->registerType<Projectile>();
-    app.assetProvider()->registerType<Particle>();
     app.assetProvider()->registerType<Player>();
     app.assetProvider()->registerType<Engine>();
     app.assetProvider()->registerType<Weapon>();

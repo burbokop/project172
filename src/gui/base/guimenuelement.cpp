@@ -2,13 +2,11 @@
 
 
 
-e172::Variant GUIMenuElement::modelData() const
-{
+e172::Variant GUIMenuElement::modelData() const {
     return m_modelData;
 }
 
-void GUIMenuElement::setModelData(const e172::Variant &modelData)
-{
+void GUIMenuElement::setModelData(const e172::Variant &modelData) {
     m_modelData = modelData;
 }
 
@@ -19,11 +17,11 @@ GUIMenuElement::GUIMenuElement(std::string label) {
 }
 
 GUIMenuElement::GUIMenuElement(IInformative *informative) {
-    this->informative = informative;
+    m_informative = informative;
 }
 
 std::string GUIMenuElement::title() {
-    return informative ? informative->info() : label;
+    return m_informative ? m_informative->info() : label;
 }
 
 bool GUIMenuElement::isSelectable() {

@@ -2,6 +2,7 @@
 
 #include <src/near.h>
 #include <src/engine/objectregistry.h>
+#include <src/engine/assettools/loadable.h>
 
 
 Near *GUIRadar::near() const {

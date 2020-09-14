@@ -9,8 +9,7 @@
 
 
 class ModuleHandler : public Capability {
-    std::vector<Module*> modules;
-    std::map<std::string, std::vector<Module*>*> *categories = nullptr;
+    std::vector<Module*> m_modules;
 protected:
 
     bool setParentUnit(Unit *parent) override;
@@ -21,8 +20,8 @@ public:
     void addModule(Module *module);
     void removeModule(Module *module);
 
-    std::vector<Module*> *getAllModules();
-    std::vector<Module*> *getModulesByClass(std::string moduleClass);
+    std::vector<Module*> modules();
+    std::vector<Module*> modulesOfClass(std::string moduleClass);
     bool hasModuleOfClass(std::string moduleClass);
 
     // Entity interface

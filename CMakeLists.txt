@@ -268,18 +268,12 @@ add_executable(project172
 
     ${CMAKE_CURRENT_LIST_DIR}/src/units/camera.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/units/camera.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/units/movable.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/units/movable.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/units/particle.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/units/particle.h
     ${CMAKE_CURRENT_LIST_DIR}/src/units/projectile.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/units/projectile.h
     ${CMAKE_CURRENT_LIST_DIR}/src/units/ship.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/units/ship.h
     ${CMAKE_CURRENT_LIST_DIR}/src/units/station.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/units/station.h
-    #${CMAKE_CURRENT_LIST_DIR}/src/units/old_unit.cpp
-    #${CMAKE_CURRENT_LIST_DIR}/src/units/old_unit.h
     ${CMAKE_CURRENT_LIST_DIR}/src/units/unit.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/units/unit.h
     ${CMAKE_CURRENT_LIST_DIR}/src/injectableentity.cpp

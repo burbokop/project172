@@ -7,6 +7,8 @@
 
 #include <src/engine/context.h>
 
+#include <src/units/ship.h>
+
 
 HeapWorld::HeapWorld() {}
 
@@ -14,13 +16,13 @@ WorldPreset::GenerationResult HeapWorld::generate(e172::Context *context) {
     GenerationResult result;
 
     //player1
-    Player *player1 = static_cast<Player*>(context->assetProvider()->createLoadable("player1"));
-    Ship *playerArmor = static_cast<Ship*>(context->assetProvider()->createLoadable("astro"));
+    Player *player1 = dynamic_cast<Player*>(context->assetProvider()->createLoadable("player1"));
+    Ship *playerArmor = dynamic_cast<Ship*>(context->assetProvider()->createLoadable("astro"));
     ModuleHandler *playerArmorModules = new ModuleHandler();
-    playerArmorModules->addModule(static_cast<Module*>(context->assetProvider()->createLoadable("mini-engine")));
-    playerArmorModules->addModule(static_cast<Module*>(context->assetProvider()->createLoadable("repair-laser")));
+    playerArmorModules->addModule(dynamic_cast<Module*>(context->assetProvider()->createLoadable("mini-engine")));
+    playerArmorModules->addModule(dynamic_cast<Module*>(context->assetProvider()->createLoadable("repair-laser")));
     playerArmor->addCapability(playerArmorModules);
-    static_cast<Player*>(player1)->setArmor(playerArmor);
+    dynamic_cast<Player*>(player1)->setArmor(playerArmor);
     result.controllers.push_back(player1);
 
 
@@ -39,7 +41,7 @@ WorldPreset::GenerationResult HeapWorld::generate(e172::Context *context) {
     unsigned int i = 0;
     for (std::string key : assetKeys) {
         for(int j = 0; j < 32; j++) {
-            Movable *unit = dynamic_cast<Movable*>(context->assetProvider()->createLoadable(key));
+            auto unit = dynamic_cast<Unit*>(context->assetProvider()->createLoadable(key));
             if(unit) {
                 unit->resetPhysicsProperties(e172::Vector::createByAngle(10000, rand()), 0);
 

@@ -3,13 +3,14 @@
 
 #include "guielement.h"
 
-
+#include <src/iinformative.h>
+#include <src/engine/variant.h>
 
 
 class GUIMenuElement : public GUIElement {
 protected:
     std::string label = "[no data]";
-    IInformative *informative = nullptr;
+    IInformative *m_informative = nullptr;
 
     e172::Variant m_modelData;
 public:

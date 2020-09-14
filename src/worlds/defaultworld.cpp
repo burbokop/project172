@@ -8,6 +8,8 @@
 #include <src/ftestobject.h>
 #include <src/old_debug.h>
 #include <src/engine/math/math.h>
+#include <src/units/ship.h>
+#include <src/units/unit.h>
 
 #include <src/engine/context.h>
 #include <src/engine/physicalobject.h>
@@ -23,21 +25,21 @@ WorldPreset::GenerationResult DefaultWorld::generate(e172::Context *context) {
 
 
     //player1
-    Player *player1 = static_cast<Player*>(context->assetProvider()->createLoadable("player1"));
-    Ship *playerArmor = static_cast<Ship*>(context->assetProvider()->createLoadable("astro"));
+    Player *player1 = dynamic_cast<Player*>(context->assetProvider()->createLoadable("player1"));
+    Ship *playerArmor = dynamic_cast<Ship*>(context->assetProvider()->createLoadable("astro"));
     ModuleHandler *playerArmorModules = new ModuleHandler();
-    playerArmorModules->addModule(static_cast<Module*>(context->assetProvider()->createLoadable("mini-engine")));
-    playerArmorModules->addModule(static_cast<Module*>(context->assetProvider()->createLoadable("repair-laser")));
+    playerArmorModules->addModule(dynamic_cast<Module*>(context->assetProvider()->createLoadable("mini-engine")));
+    playerArmorModules->addModule(dynamic_cast<Module*>(context->assetProvider()->createLoadable("repair-laser")));
     playerArmor->addCapability(playerArmorModules);
     static_cast<Player*>(player1)->setArmor(playerArmor);
     result.controllers.push_back(player1);
 
     //player2
-    Player *player2 = static_cast<Player*>(context->assetProvider()->createLoadable("player2"));
-    Ship *playerArmor2 = static_cast<Ship*>(context->assetProvider()->createLoadable("astro"));
+    Player *player2 = dynamic_cast<Player*>(context->assetProvider()->createLoadable("player2"));
+    Ship *playerArmor2 = dynamic_cast<Ship*>(context->assetProvider()->createLoadable("astro"));
     ModuleHandler *playerArmorModules2 = new ModuleHandler();
-    playerArmorModules2->addModule(static_cast<Module*>(context->assetProvider()->createLoadable("mini-engine")));
-    playerArmorModules2->addModule(static_cast<Module*>(context->assetProvider()->createLoadable("repair-laser")));
+    playerArmorModules2->addModule(dynamic_cast<Module*>(context->assetProvider()->createLoadable("mini-engine")));
+    playerArmorModules2->addModule(dynamic_cast<Module*>(context->assetProvider()->createLoadable("repair-laser")));
     playerArmor2->addCapability(playerArmorModules2);
     player2->setArmor(playerArmor2);
     result.controllers.push_back(player2);
@@ -74,7 +76,7 @@ WorldPreset::GenerationResult DefaultWorld::generate(e172::Context *context) {
 
     /*empty ship*/{
         Unit *someShip = static_cast<Unit*>(context->assetProvider()->createLoadable("sh1"));
-        dynamic_cast<Movable*>(someShip)->resetPhysicsProperties(e172::Vector(-200, -100), -0.7);
+        someShip->resetPhysicsProperties(e172::Vector(-200, -100), -0.7);
         result.entities.push_back(someShip);
     }
 
@@ -121,7 +123,7 @@ WorldPreset::GenerationResult DefaultWorld::generate(e172::Context *context) {
         unsigned int i = 0;
         for (std::string key : assetKeys) {
             old::Debug::out("DefaultWorld::generate(assets, units): loading key ( key" + key + " )");
-            Movable *unit = dynamic_cast<Movable*>(context->assetProvider()->createLoadable(key));
+            auto unit = dynamic_cast<Unit*>(context->assetProvider()->createLoadable(key));
             if(unit) {
                 unit->resetPhysicsProperties(e172::Vector(static_cast<int>((i + 4) * 64), -200), 0);
 

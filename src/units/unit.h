@@ -12,13 +12,6 @@ class Docker;
 class Capability;
 class Unit : public e172::Entity, public e172::Loadable, public e172::PhysicalObject, public IInformative {
 public:
-    static constexpr double DefaultMaxRotationSpeed = 0.0014 * 1000;
-    static constexpr double StopMovingVelocity = 1;
-    static constexpr double DefaultAccelerationValue = 120;
-    static constexpr double DefaultReleaseSpead = 1;
-    static constexpr double DefaultMaxSpeed = 120;
-    static constexpr double DefaultIdleSpead = - 60;
-    static constexpr double RelativisticPursuitCoefficient = 0.0025;
 
 private:
     double m_health = 0;
@@ -30,10 +23,7 @@ private:
     uint32_t m_selectedColor;
     e172::ElapsedTimer m_selectedAnimationTimer;
 
-    double m_movingForce = 0;
-    double m_maxVelocity = 0;
-    double m_releaseVelocity = 0;
-    double m_maxRotationVelocity = 1;
+
 public:
     Unit();
 
@@ -42,20 +32,10 @@ public:
 
     virtual void hit(e172::Context *context, int value);
 
-
     ModuleHandler *moduleHandler() const;
     Docker *docker() const;
     bool selected() const;
     double health() const;
-    double movingForce() const;
-    double maxVelocity() const;
-    double releaseVelocity() const;
-    void setMovingForce(double movingForce);
-    void setMaxVelocity(double maxVelocity);
-    void setReleaseVelocity(double releaseVelocity);
-    double maxRotationVelocity() const;
-    void setMaxRotationVelocity(double maxRotationVelocity);
-
 
     // IInformative interface
 public:

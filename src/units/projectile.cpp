@@ -1,6 +1,5 @@
 #include "projectile.h"
 
-#include "particle.h"
 #include "camera.h"
 
 #include <src/additional/lightparticle.h>
@@ -20,7 +19,6 @@ const int Projectile::DEFAULT_LIFE_TIME_DELTA = 4000;
 bool Projectile::collision(e172::Context* context, Unit *collider) {
     if(
         !collider->instanceOf<Camera>() &&
-        !collider->instanceOf<Particle>() &&
         !collider->instanceOf<LightParticle>() &&
         !collider->instanceOf<Projectile>() &&
         collider != mother
@@ -37,7 +35,7 @@ Projectile::Projectile() {
         damage = asset<double>("damage", DEFAULT_DAMAGE);
         lifetimeDelta = asset<double>("lifetime-delta", DEFAULT_LIFE_TIME_DELTA);
         averageLifetime = asset<double>("lifetime", DEFAULT_AVERAGE_LIFE_TIME);
-        setIdleEnabled(false);
+        setFriction(0);
         destroyTimer = new e172::ElapsedTimer((rand() % (2 * lifetimeDelta) + (averageLifetime - lifetimeDelta)));
         destroyTimer->reset();
     });
@@ -64,6 +62,6 @@ void Projectile::proceed(e172::Context *context, e172::AbstractEventHandler *eve
             old::Debug::err(old::Debug::Code::APPEAL_TO_REMOVED, __PRETTY_FUNCTION__);
         }
     }
-    this->Movable::proceed(context, eventHandler);
+    Unit::proceed(context, eventHandler);
 }
 

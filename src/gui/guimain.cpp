@@ -4,7 +4,7 @@
 #include "guiblushingfloatingmessage.h"
 
 #include <src/engine/context.h>
-
+#include <src/units/unit.h>
 
 
 const unsigned GUIMain::FLOATING_LIFE_TIME = 1000;

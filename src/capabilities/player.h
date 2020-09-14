@@ -6,6 +6,8 @@
 
 #include <src/engine/abstracteventhandler.h>
 
+#include <src/engine/assettools/loadable.h>
+
 
 class Player : public Controller, public e172::Loadable {
 private:
@@ -13,7 +15,7 @@ private:
 
     bool warpKeyPressed = false;
     std::map<std::string, e172::Scancode> personalScancode;
-    bool getPersonalKey(e172::AbstractEventHandler *eventHandler, std::string id);
+    bool personalKey(e172::AbstractEventHandler *eventHandler, std::string id);
 
 public:
     Player();

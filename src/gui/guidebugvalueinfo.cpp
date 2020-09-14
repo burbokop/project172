@@ -3,6 +3,7 @@
 #include <math.h>
 #include <src/engine/abstracteventhandler.h>
 #include <src/engine/graphics/abstractrenderer.h>
+#include <src/units/unit.h>
 
 GUIDebugValueInfo::GUIDebugValueInfo() {
     timer.reset();

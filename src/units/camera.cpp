@@ -2,6 +2,7 @@
 
 #include <src/engine/context.h>
 #include <src/engine/objectregistry.h>
+#include <src/units/unit.h>
 
 const double Camera::STOP_DISTANCE = 4;
 const double Camera::MAX_SPEED_MULTIPLIER = 0.002 * 1000;
@@ -50,5 +51,3 @@ void Camera::render(e172::AbstractRenderer *renderer) {
         renderer->drawSquare(position() + offset, 2, color);
     }
 }
-
-void Camera::hit(e172::Context *, int) {}

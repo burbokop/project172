@@ -2,7 +2,6 @@
 
 
 #include <src/engine/objectregistry.h>
-#include <src/units/particle.h>
 #include <src/units/projectile.h>
 #include <src/units/camera.h>
 #include <src/additional/lightparticle.h>
@@ -10,7 +9,7 @@
 #include <src/capabilities/modules/weapon.h>
 #include <src/capabilities/modulehandler.h>
 #include <src/engine/math/math.h>
-
+#include <src/units/ship.h>
 
 
 Unit *Aggressive::chooseTarget() {
@@ -21,11 +20,10 @@ Unit *Aggressive::chooseTarget() {
 
     if(target == e172::Alive) {
         Camera *camera = dynamic_cast<Camera*>(target);
-        Particle *particle = dynamic_cast<Particle*>(target);
         LightParticle *lightParticle = dynamic_cast<LightParticle*>(target);
         Projectile *projectile = dynamic_cast<Projectile*>(target);
 
-        return camera || particle || lightParticle || projectile ? nullptr : dynamic_cast<Unit*>(target);
+        return camera || lightParticle || projectile ? nullptr : dynamic_cast<Unit*>(target);
     } else {
         old::Debug::err(old::Debug::Code::APPEAL_TO_REMOVED, __PRETTY_FUNCTION__);
         return nullptr;
@@ -55,14 +53,12 @@ void Aggressive::proceed(e172::Context *context, e172::AbstractEventHandler *eve
 
             ModuleHandler *modules = parentUnit()->moduleHandler();
             if(modules) {
-                std::vector<Module*> *weapons = modules->getModulesByClass("Weapon");
+                auto weapons = modules->modulesOfClass("Weapon");
 
-                if(weapons) {
-                    for(Module *module : *weapons) {
-                        Weapon *weapon = dynamic_cast<Weapon*>(module);
-                        if(weapon) {
-                            weapon->setFiring(targeted);
-                        }
+                for(Module *module : weapons) {
+                    Weapon *weapon = dynamic_cast<Weapon*>(module);
+                    if(weapon) {
+                        weapon->setFiring(targeted);
                     }
                 }
                 if(ship) {
@@ -87,7 +83,7 @@ void Aggressive::proceed(e172::Context *context, e172::AbstractEventHandler *eve
 
 
             if(ship && dstModule > 200) {
-                ship->accelerateForward();
+                ship->thrustForward();
             }
     /*
             if(getPersonalKey(event, "armor")) {

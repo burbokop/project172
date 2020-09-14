@@ -7,6 +7,8 @@
 
 #include <src/engine/context.h>
 
+#include <src/units/ship.h>
+
 
 ArenaWorld::ArenaWorld() {
 
@@ -60,7 +62,7 @@ WorldPreset::GenerationResult ArenaWorld::generate(e172::Context *context) {
 
 
 
-    Movable *unit = dynamic_cast<Movable*>(context->assetProvider()->createLoadable("sh1"));
+    Unit *unit = dynamic_cast<Unit*>(context->assetProvider()->createLoadable("sh1"));
     unit->resetPhysicsProperties({}, 0);
     unit->addCapability(new Aggressive(context->entities()));
     ModuleHandler *mh = new ModuleHandler();

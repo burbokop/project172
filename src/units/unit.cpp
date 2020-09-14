@@ -48,56 +48,12 @@ void Unit::render(e172::AbstractRenderer *renderer) {
     }
 }
 
-double Unit::movingForce() const
-{
-    return m_movingForce;
-}
-
-double Unit::maxVelocity() const
-{
-    return m_maxVelocity;
-}
-
-double Unit::releaseVelocity() const
-{
-    return m_releaseVelocity;
-}
-
-void Unit::setMovingForce(double movingForce)
-{
-    m_movingForce = movingForce;
-}
-
-void Unit::setMaxVelocity(double maxVelocity)
-{
-    m_maxVelocity = maxVelocity;
-}
-
-void Unit::setReleaseVelocity(double releaseVelocity)
-{
-    m_releaseVelocity = releaseVelocity;
-}
-
-double Unit::maxRotationVelocity() const
-{
-    return m_maxRotationVelocity;
-}
-
-void Unit::setMaxRotationVelocity(double maxRotationVelocity)
-{
-    m_maxRotationVelocity = maxRotationVelocity;
-}
-
 Unit::Unit() {
     std::srand(clock());
     m_selectedColor = e172::randomColor();
     registerInitFunction([this](){
         m_health = asset<double>("health");
         m_explosiveRadius = asset<double>("explosive");
-
-        m_movingForce = asset<double>("acceleration", DefaultAccelerationValue);
-        m_maxVelocity = asset<double>("max-speed", DefaultMaxSpeed);
-        m_releaseVelocity = asset<double>("releaseVelocity", DefaultReleaseSpead);
 
         m_animator = asset<Animator>("sprite");
         if(!m_animator.isValid()) {
@@ -140,12 +96,10 @@ void Unit::hit(e172::Context *context, int value) {
             context->emitMessage(e172::Context::SPAWN_EXPLOSIVE, e172::Args(position(), velocity(), m_explosiveRadius));
             ModuleHandler *mh = moduleHandler();
             if(mh) {
-                std::vector<Module*> *modules = mh->getAllModules();
-                if(modules) {
-                    for(Module* module : *modules) {
-                        if(module) {
-                            module->animate(Animator::NotRender, Animator::NotRender);
-                        }
+                const auto modules = mh->modules();
+                for(Module* module : modules) {
+                    if(module) {
+                        module->animate(Animator::NotRender, Animator::NotRender);
                     }
                 }
             }

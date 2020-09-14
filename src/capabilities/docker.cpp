@@ -1,17 +1,15 @@
 #include "docker.h"
 
-#include <src/units/movable.h>
-
 #include <src/engine/math/math.h>
 
+#include <src/units/unit.h>
 
-bool Docker::enabled() const
-{
+
+bool Docker::enabled() const {
     return m_enabled;
 }
 
-void Docker::setEnabled(bool enabled)
-{
+void Docker::setEnabled(bool enabled) {
     m_enabled = enabled;
 }
 
@@ -48,17 +46,11 @@ void Docker::proceed(e172::Context *context, e172::AbstractEventHandler *eventHa
 
             //std::cout << "InInterception: " << dd << "\n";
 
-            if(const auto movable = dynamic_cast<Movable*>(parent)) {
-                //movable->pursuit(context, m_target);
-            }
+            //movable->pursuit(context, m_target);
 
             if(dd < e172::Math::Pi / 64 && (m_target->position() - parent->position()).cheapModule() < 2) {
                 m_state = Docked;
-                if(const auto movable = dynamic_cast<Movable*>(parent)) {
-                    if(const auto movable2 = dynamic_cast<Movable*>(m_target)) {
-                        //movable2->physicallyAttachUnit(movable);
-                    }
-                }
+                //movable2->physicallyAttachUnit(movable);
             }
 
             if(!near.containsEntity(m_target) || dd > e172::Math::Pi / 16) {

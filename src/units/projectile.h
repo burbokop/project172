@@ -1,11 +1,11 @@
 #ifndef PROJECTILE_H
 #define PROJECTILE_H
 
+#include "unit.h"
 
-#include "movable.h"
 
 
-class Projectile : public Movable {
+class Projectile : public Unit {
     static const double DEFAULT_HIT_RADIUS;
     static const int DEFAULT_DAMAGE;
 

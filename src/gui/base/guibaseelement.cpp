@@ -1,4 +1,5 @@
 #include "guibaseelement.h"
+#include <algorithm>
 
 GUIBaseElement *GUIBaseElement::parentElement() const {
     return m_parentElement;
