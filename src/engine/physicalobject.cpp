@@ -151,6 +151,20 @@ void e172::PhysicalObject::addRestoringForce(const e172::Vector &destiantionPosi
     addForce((destiantionPosition - position()) * coeficient);
 }
 
+void e172::PhysicalObject::addDiscanceRelatedForce(const e172::Vector &destiantionPosition, double (*f)(double, double), double cryticalDistance, double coeficient) {
+    const auto direction = destiantionPosition - position();
+    const auto module = direction.module();
+    if(module != Math::null && cryticalDistance >= 0) {
+        const auto force = f(module, cryticalDistance);
+        addForce(direction / module * force * coeficient);
+    }
+}
+
+void e172::PhysicalObject::addDiscanceRelatedRotationForce(double destiantionAngle, double (*f)(double, double), double cryticalDistance, double coeficient) {
+    const auto direction = Math::radiansDifference(destiantionAngle, rotation());
+    addRotationForce(f(direction, cryticalDistance) * coeficient);
+}
+
 void e172::PhysicalObject::connectNodes(e172::PhysicalObject::ConnectionNode node0, e172::PhysicalObject::ConnectionNode node1, double coeficient, double rotationCoeficient) {
     if(node0.m_object && node1.m_object) {
         const auto point0 = node0.m_object->m_rotationMatrix * node0.m_offset;
@@ -166,6 +180,33 @@ void e172::PhysicalObject::connectNodes(e172::PhysicalObject::ConnectionNode nod
     }
 }
 
+void e172::PhysicalObject::dockNodes(e172::PhysicalObject::ConnectionNode node0, e172::PhysicalObject::ConnectionNode node1, double coeficient, double rotationCoeficient) {
+    if(node0.m_object && node1.m_object) {
+        const auto point0 = node0.m_object->m_rotationMatrix * node0.m_offset;
+        const auto point1 = node1.m_object->m_rotationMatrix * node1.m_offset;
+
+        node0.m_rotation = Math::constrainRadians(node0.m_rotation + Math::Pi);
+
+        const auto f = [](double x, double c) {
+            if(x > c) {
+                return c / (x + 1 - c);
+            } else {
+                return x;
+            }
+        };
+
+        node0.m_object->addDiscanceRelatedForce(node1.m_object->position() + point1 - point0, f, 8, coeficient);
+        node1.m_object->addDiscanceRelatedForce(node0.m_object->position() + point0 - point1, f, 8, coeficient);
+
+        node0.m_object->addDiscanceRelatedRotationForce(Math::radiansDifference(Math::constrainRadians(node1.m_object->rotation() + node1.m_rotation), node0.m_rotation), f, 1, rotationCoeficient);
+        node1.m_object->addDiscanceRelatedRotationForce(Math::radiansDifference(Math::constrainRadians(node0.m_object->rotation() + node0.m_rotation), node1.m_rotation), f, 1, rotationCoeficient);
+    }
+}
+
+e172::PhysicalObject::Proximity e172::PhysicalObject::nodesProximity(const e172::PhysicalObject::ConnectionNode &node0, const e172::PhysicalObject::ConnectionNode &node1) {
+    return { (node0.position() - node1.position()).module(), Math::radiansDistance(node0.m_object->rotation() + node0.m_rotation + Math::Pi, node1.m_object->rotation() + node1.m_rotation) };
+}
+
 void e172::PhysicalObject::proceedPhysics(double deltaTime) {
     if(m_mass != Math::null) {
         rotationKinematics.addFriction(m_friction / m_mass);
@@ -178,3 +219,17 @@ void e172::PhysicalObject::proceedPhysics(double deltaTime) {
 
 }
 
+
+e172::Vector e172::PhysicalObject::ConnectionNode::position() const {
+    if(m_object)
+        return m_object->position() + (m_object->m_rotationMatrix * m_offset);
+
+    return e172::Vector();
+}
+
+e172::Vector e172::PhysicalObject::ConnectionNode::center() const {
+    if(m_object)
+        return m_object->position();
+
+    return e172::Vector();
+}

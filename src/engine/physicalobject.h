@@ -22,6 +22,9 @@ public:
         PhysicalObject *m_object = nullptr;
         Vector m_offset;
         double m_rotation;
+    public:
+        e172::Vector position() const;
+        e172::Vector center() const;
     };
     ConnectionNode connectionNode(const Vector& offset, double rotation);
 
@@ -66,7 +69,20 @@ public:
     void addRestoringForce(const Vector &destiantionPosition, double coeficient = 1);
 
 
+    void addDiscanceRelatedForce(const Vector &destiantionPosition, double(*f)(double, double), double cryticalDistance, double coeficient = 1);
+    void addDiscanceRelatedRotationForce(double destiantionAngle, double(*f)(double, double), double cryticalDistance, double coeficient = 1);
+
+
     static void connectNodes(ConnectionNode node0, ConnectionNode node1, double coeficient = 1, double rotationCoeficient = 1);
+    static void dockNodes(ConnectionNode node0, ConnectionNode node1, double coeficient = 1, double rotationCoeficient = 1);
+
+
+
+    struct Proximity {
+        double distance = 0;
+        double angle = 0;
+    };
+    static Proximity nodesProximity(const ConnectionNode &node0, const ConnectionNode &node1);
 
     double mass() const;
     void setMass(double mass);

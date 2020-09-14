@@ -2,6 +2,7 @@
 
 
 #include <src/capabilities/controller.h>
+#include <src/capabilities/player.h>
 
 #include <src/gui/guibutton.h>
 #include <src/gui/guichoice.h>
@@ -53,8 +54,11 @@ GUIMaker::GUIMaker(e172::Context *context, Near *radarNear) {
                         radarRowElement->addMenuElement(new GUIButton("select", [context](auto md){
                             context->setProperty("SU", md);
                         }));
-                        radarRowElement->addMenuElement(new GUIButton("dock", [](auto md){
-                            e172::Debug::print("DOCK: ", md);
+                        radarRowElement->addMenuElement(new GUIButton("dock", [](Controller* ctrl, const e172::Variant &md) {
+                            e172::Debug::print("DOCK: ", md, ctrl);
+                            if(const auto player = dynamic_cast<Player*>(ctrl)) {
+                                player->dock(md.toNumber<e172::Entity::id_t>());
+                            }
                         }));
 
                         radarMenu->setRowElement(radarRowElement);

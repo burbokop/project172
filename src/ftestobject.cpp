@@ -52,7 +52,7 @@ void FTestObject::proceed(e172::Context *context, e172::AbstractEventHandler *ev
             const auto node0 = connectionNode(m_cOffset, m_cAngle);
             const auto node1 = m_targetObject->connectionNode(m_targetObject->m_cOffset, m_targetObject->m_cAngle);
 
-            e172::PhysicalObject::connectNodes(node0, node1, 20);
+            e172::PhysicalObject::dockNodes(node0, node1, 20, 2);
         }
     }
 

@@ -1,4 +1,5 @@
 
+
 cmake_minimum_required(VERSION 3.0)
 #set(CMAKE_TRY_COMPILE_TARGET_TYPE "STATIC_LIBRARY")
 
@@ -181,6 +182,12 @@ add_executable(project172
     ${CMAKE_CURRENT_LIST_DIR}/src/additional/stringformer.h
     ${CMAKE_CURRENT_LIST_DIR}/src/additional/trigger.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/additional/trigger.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/additional/docking/physicaldockingattractor.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/additional/docking/physicaldockingattractor.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/additional/docking/dockingnodepool.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/additional/docking/dockingnodepool.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/additional/docking/dockingsession.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/additional/docking/dockingsession.h
 
     ${CMAKE_CURRENT_LIST_DIR}/src/assetexecutors/animatorassetexecutor.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/assetexecutors/animatorassetexecutor.h

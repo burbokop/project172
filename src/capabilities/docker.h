@@ -6,30 +6,26 @@
 
 #include <src/near.h>
 
+#include <src/engine/math/vector.h>
+
+#include <src/additional/docking/dockingnodepool.h>
+#include <src/additional/docking/dockingsession.h>
+#include <src/additional/docking/physicaldockingattractor.h>
+
 
 class Docker : public Capability {
-    Near near = Near(this, 64, 4);
-private:
-    enum State {
-        NotDocked,
-        InInterception,
-        Docked
-    } m_state = NotDocked;
-
-    bool m_enabled = true;
-
-    Unit *m_target = nullptr;
+    DockingNodePool m_nodePool;
+    std::list<DockingSession*> m_sessions;
 public:
     Docker();
-
-    State state();
+    bool createDockingSessionWithUnit(e172::Context *context, Unit *unit);
+    void closeAllSessions();
+    size_t sessionCount() const;
 
     // Entity interface
 public:
-    void proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler);
+    void proceed(e172::Context *, e172::AbstractEventHandler *);
     void render(e172::AbstractRenderer *renderer);
-    bool enabled() const;
-    void setEnabled(bool enabled);
 };
 
 #endif // DOCKER_H

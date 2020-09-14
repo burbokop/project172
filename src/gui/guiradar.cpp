@@ -14,7 +14,9 @@ void GUIRadar::setNear(Near *near) {
 }
 
 void GUIRadar::setRowElement(GUIMenuElement *rowElement) {
+    removeChildElement(m_rowElement);
     m_rowElement = rowElement;
+    addChildElement(rowElement);
 }
 
 GUIRadar::GUIRadar(const std::string &title) : GUIListView(title) {}

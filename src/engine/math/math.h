@@ -40,12 +40,16 @@ public:
 
 
     static double constrainRadians(double value);
-    static double constrainDegrees(double value);
     static bool radiansDirection(double dstAngle, double angle);
-    static double radiansDistance(double dstAngle, double angle);
+    static double radiansDistance(double angle0, double angle1);
     static double radiansDifference(double angle1, double angle2);
+
+#ifdef E172_USE_DEGREES_TRANSFORMS
+    static double constrainDegrees(double value);
+    static bool degreesDirection(double dstAngle, double angle);
     static double degreesDistance(double angle1, double angle2);
     static double degreesDifference(double angle1, double angle2);
+#endif
 
     static double map(double value, double inMin, double inMax, double outMin, double outMax);
 

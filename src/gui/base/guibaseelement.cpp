@@ -44,10 +44,14 @@ bool GUIBaseElement::addChildElement(GUIBaseElement *element) {
 }
 
 bool GUIBaseElement::removeChildElement(GUIBaseElement *element) {
-    const auto it = std::find(m_children.begin(), m_children.end(), element);
-    if(it != m_children.end()) {
-        m_children.erase(it);
-        return true;
+    if(element) {
+        const auto it = std::find(m_children.begin(), m_children.end(), element);
+        if(it != m_children.end()) {
+            (*it)->m_parentElement = nullptr;
+            (*it)->m_controller = nullptr;
+            m_children.erase(it);
+            return true;
+        }
     }
     return false;
 }
@@ -55,6 +59,7 @@ bool GUIBaseElement::removeChildElement(GUIBaseElement *element) {
 void GUIBaseElement::clearChildren() {
     for(auto c : m_children) {
         c->m_parentElement = nullptr;
+        c->m_controller = nullptr;
     }
     m_children.clear();
 }

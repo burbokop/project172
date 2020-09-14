@@ -76,6 +76,8 @@ WorldPreset::GenerationResult DefaultWorld::generate(e172::Context *context) {
 
     /*empty ship*/{
         Unit *someShip = static_cast<Unit*>(context->assetProvider()->createLoadable("sh1"));
+        someShip->addCapability(new Docker());
+
         someShip->resetPhysicsProperties(e172::Vector(-200, -100), -0.7);
         result.entities.push_back(someShip);
     }
@@ -98,6 +100,8 @@ WorldPreset::GenerationResult DefaultWorld::generate(e172::Context *context) {
             s->resetPhysicsProperties(e172::Vector(-50 + i * 50, 100), -0.7);
 
             s->addCapability(new AI());
+            s->addCapability(new Docker());
+
             ModuleHandler *mx = new ModuleHandler();
             if(i == 1) {
                 mx->addModule(static_cast<Module*>(context->assetProvider()->createLoadable("pistol")));

@@ -91,6 +91,45 @@ double e172::Math::constrainRadians(double value) {
     return value;
 }
 
+
+bool e172::Math::radiansDirection(double dstAngle, double angle) {
+    if((dstAngle - angle) < 0) {
+        if(std::abs(dstAngle - angle) < M_PI) {
+            return 1; // //
+        } else {
+            return 0; //right//
+        }
+    } else {
+        if(std::abs(dstAngle - angle) < M_PI) {
+            return 0; //right//
+        } else {
+            return 1; //left//
+        }
+    }
+}
+
+double e172::Math::radiansDistance(double angle0, double angle1) {
+    angle0 = constrainRadians(angle0);
+    angle1 = constrainRadians(angle1);
+
+    double max = 2 * M_PI;
+    double abs = std::abs(angle0 - angle1);
+    return abs > (max * 0.5) ? (max - abs) : abs;
+}
+
+double e172::Math::radiansDifference(double angle1, double angle2) {
+    double max = 2 * M_PI;
+    double diff = angle1 - angle2;
+    return std::abs(diff) > (max * 0.5)
+            ? ((diff >= 0)
+               ? (diff - max)
+               : (diff + max)
+                 )
+            : diff;
+}
+
+#ifdef E172_USE_DEGREES_TRANSFORMS
+
 double e172::Math::constrainDegrees(double value) {
     const double max = 360.0;
     value = fmod(value, max);
@@ -99,7 +138,7 @@ double e172::Math::constrainDegrees(double value) {
     return value;
 }
 
-bool e172::Math::radiansDirection(double dstAngle, double angle) {
+bool e172::Math::degreesDirection(double dstAngle, double angle) {
     if((dstAngle - angle) < 0) {
         if(std::abs(dstAngle - angle) < 180) {
             return 1; // //
@@ -115,35 +154,11 @@ bool e172::Math::radiansDirection(double dstAngle, double angle) {
     }
 }
 
-double e172::Math::radiansDistance(double dstAngle, double angle) {
-    if((dstAngle - angle) < 0) {
-        if(std::abs(dstAngle - angle) < 180) {
-            return std::abs(dstAngle - angle);
-        } else {
-            return std::abs(dstAngle - angle);
-        }
-    } else {
-        if(std::abs(dstAngle - angle) < 180) {
-            return std::abs(dstAngle - angle);
-        } else {
-            return std::abs(dstAngle - angle);
-        }
-    }
-}
-
-double e172::Math::radiansDifference(double angle1, double angle2) {
-    double max = 2 * M_PI;
-    double diff = angle1 - angle2;
-    return std::abs(diff) > (max * 0.5)
-            ? ((diff >= 0)
-               ? (diff - max)
-               : (diff + max)
-                 )
-            : diff;
-}
-
 
 double e172::Math::degreesDistance(double angle1, double angle2) {
+    angle1 = constrainDegrees(angle1);
+    angle2 = constrainDegrees(angle2);
+
     double max = 360;
     double abs = std::abs(angle1 - angle2);
     return abs > (max * 0.5) ? (max - abs) : abs;
@@ -159,6 +174,8 @@ double e172::Math::degreesDifference(double angle1, double angle2) {
                  )
             : diff;
 }
+
+#endif
 
 double e172::Math::map(double value, double inMin, double inMax, double outMin, double outMax) {
     return (value - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
