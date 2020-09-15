@@ -8,13 +8,16 @@
 #include <src/engine/math/math.h>
 #include <src/engine/math/matrix.h>
 
-e172::Vector FTestObject::cOffset() const
-{
+
+
+
+
+
+e172::Vector FTestObject::cOffset() const {
     return m_cOffset;
 }
 
-void FTestObject::setCOffset(const e172::Vector &cOffset)
-{
+void FTestObject::setCOffset(const e172::Vector &cOffset) {
     m_cOffset = cOffset;
 }
 
@@ -26,6 +29,10 @@ double FTestObject::cAngle() const
 void FTestObject::setCAngle(double cAngle)
 {
     m_cAngle = cAngle;
+}
+
+e172::ptr<e172::ltd> FTestObject::someData() const {
+    return m_someData;
 }
 
 FTestObject::FTestObject(FTestObject *object){

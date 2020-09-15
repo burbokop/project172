@@ -46,17 +46,36 @@ WorldPreset::GenerationResult DefaultWorld::generate(e172::Context *context) {
 
 
     auto ffo = new FTestObject();
-    result.entities.push_back(ffo);
 
 
-    auto sfo = new FTestObject(ffo);
-    result.entities.push_back(sfo);
+    std::shared_ptr<e172::ltd> sss = std::make_shared<e172::ltd>([](){});
+    e172::ltd* ltd = sss.operator->();
 
-    ffo->setCOffset({ 0, -20 });
-    ffo->setCAngle(-e172::Math::Pi / 2);
+    {
+        const auto ll = ffo->someData();
+        std::cout << "l0: " << ll.operator bool() << "\n";
 
-    sfo->setCOffset({ 0, 20 });
-    sfo->setCAngle(e172::Math::Pi / 2);
+        ll->foo();
+
+
+    }
+
+    const auto ll2 = ffo->someData();
+    std::cout << "l1: " << ll2.operator bool() << "\n";
+
+    delete ffo;
+
+    std::cout << "l2: " << ll2.operator bool() << "\n";
+
+    //result.entities.push_back(ffo);
+    //auto sfo = new FTestObject(ffo);
+    //result.entities.push_back(sfo);
+    //
+    //ffo->setCOffset({ 0, -20 });
+    //ffo->setCAngle(-e172::Math::Pi / 2);
+    //
+    //sfo->setCOffset({ 0, 20 });
+    //sfo->setCAngle(e172::Math::Pi / 2);
 
 
     Unit *playerShip = static_cast<Unit*>(context->assetProvider()->createLoadable("sh1"));
