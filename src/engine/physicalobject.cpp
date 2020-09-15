@@ -23,6 +23,10 @@ e172::Matrix e172::PhysicalObject::rotationMatrix() const
     return m_rotationMatrix;
 }
 
+void e172::PhysicalObject::blockFrictionPerTick() {
+    m_blockFrictionPerTick = true;
+}
+
 e172::PhysicalObject::ConnectionNode e172::PhysicalObject::connectionNode(const e172::Vector &offset, double rotation) {
     ConnectionNode node;
     node.m_object = this;
@@ -142,7 +146,7 @@ void e172::PhysicalObject::addFollowForce(const e172::Vector &targetPoint, doubl
         const auto a = (1 - direction.module() / maxDistance);
         if(a != Math::null) {
             const auto x = (1 / a - 1);
-            addForce(direction.normalized() * std::abs(x) * coeficient);
+            addForce(direction.normalized() * std::pow(x, 2) * coeficient);
         }
     }
 }
@@ -151,7 +155,7 @@ void e172::PhysicalObject::addRestoringForce(const e172::Vector &destiantionPosi
     addForce((destiantionPosition - position()) * coeficient);
 }
 
-void e172::PhysicalObject::addDiscanceRelatedForce(const e172::Vector &destiantionPosition, double (*f)(double, double), double cryticalDistance, double coeficient) {
+void e172::PhysicalObject::addDistanceRelatedForce(const e172::Vector &destiantionPosition, double (*f)(double, double), double cryticalDistance, double coeficient) {
     const auto direction = destiantionPosition - position();
     const auto module = direction.module();
     if(module != Math::null && cryticalDistance >= 0) {
@@ -160,9 +164,10 @@ void e172::PhysicalObject::addDiscanceRelatedForce(const e172::Vector &destianti
     }
 }
 
-void e172::PhysicalObject::addDiscanceRelatedRotationForce(double destiantionAngle, double (*f)(double, double), double cryticalDistance, double coeficient) {
+void e172::PhysicalObject::addDistanceRelatedRotationForce(double destiantionAngle, double (*f)(double, double), double cryticalDistance, double coeficient) {
     const auto direction = Math::radiansDifference(destiantionAngle, rotation());
-    addRotationForce(f(direction, cryticalDistance) * coeficient);
+    const auto force = f(std::abs(direction), cryticalDistance);
+    addRotationForce((direction >= 0 ? force : -force) * coeficient);
 }
 
 void e172::PhysicalObject::connectNodes(e172::PhysicalObject::ConnectionNode node0, e172::PhysicalObject::ConnectionNode node1, double coeficient, double rotationCoeficient) {
@@ -195,11 +200,11 @@ void e172::PhysicalObject::dockNodes(e172::PhysicalObject::ConnectionNode node0,
             }
         };
 
-        node0.m_object->addDiscanceRelatedForce(node1.m_object->position() + point1 - point0, f, 8, coeficient);
-        node1.m_object->addDiscanceRelatedForce(node0.m_object->position() + point0 - point1, f, 8, coeficient);
+        node0.m_object->addDistanceRelatedForce(node1.m_object->position() + point1 - point0, f, 8, coeficient);
+        node1.m_object->addDistanceRelatedForce(node0.m_object->position() + point0 - point1, f, 8, coeficient);
 
-        node0.m_object->addDiscanceRelatedRotationForce(Math::radiansDifference(Math::constrainRadians(node1.m_object->rotation() + node1.m_rotation), node0.m_rotation), f, 1, rotationCoeficient);
-        node1.m_object->addDiscanceRelatedRotationForce(Math::radiansDifference(Math::constrainRadians(node0.m_object->rotation() + node0.m_rotation), node1.m_rotation), f, 1, rotationCoeficient);
+        node0.m_object->addDistanceRelatedRotationForce(Math::radiansDifference(Math::constrainRadians(node1.m_object->rotation() + node1.m_rotation), node0.m_rotation), f, 1, rotationCoeficient);
+        node1.m_object->addDistanceRelatedRotationForce(Math::radiansDifference(Math::constrainRadians(node0.m_object->rotation() + node0.m_rotation), node1.m_rotation), f, 1, rotationCoeficient);
     }
 }
 
@@ -210,8 +215,11 @@ e172::PhysicalObject::Proximity e172::PhysicalObject::nodesProximity(const e172:
 void e172::PhysicalObject::proceedPhysics(double deltaTime) {
     if(m_mass != Math::null) {
         rotationKinematics.addFriction(m_friction / m_mass);
-        positionKinematics.addFriction(m_friction / m_mass);
+        if(!m_blockFrictionPerTick) {
+            positionKinematics.addFriction(m_friction / m_mass);
+        }
     }
+    m_blockFrictionPerTick = false;
 
     rotationKinematics.accept(deltaTime);
     m_rotationMatrix = e172::Matrix::fromRadians(rotation());

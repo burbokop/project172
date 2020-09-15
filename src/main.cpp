@@ -122,6 +122,7 @@ int main(int argc, char *argv[]) {
     app.assetProvider()->installExecutor("keymap", std::make_shared<MapAssetExecutor>());
     app.assetProvider()->installExecutor("damage", std::make_shared<NumberAssetExecutor>());
     app.assetProvider()->installExecutor("zoom", std::make_shared<NumberAssetExecutor>());
+    app.assetProvider()->installExecutor("mass", std::make_shared<NumberAssetExecutor>());
 
     app.assetProvider()->registerType<Unit>();
     app.assetProvider()->registerType<Ship>();

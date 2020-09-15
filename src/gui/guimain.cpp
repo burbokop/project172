@@ -34,8 +34,14 @@ void GUIMain::addBlushingFloatingMessage(e172::Context *context, const e172::Var
     if(list.size() > 1) {
         const auto entity = context->entityById(list[0].toNumber<Entity::id_t>());
         if(auto target = dynamic_cast<Unit*>(entity)) {
-            const auto v = list[1].toInt();
-            addBlushingFloatingMessage(target, v);
+            bool ok = false;
+            const auto i = list[1].toInt(&ok);
+            if(ok) {
+                addBlushingFloatingMessage(target, i);
+            } else {
+                const auto v = list[1].toString();
+                addFloatingMessage(target, v);
+            }
         }
     }
 }

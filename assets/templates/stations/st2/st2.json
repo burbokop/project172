@@ -1,7 +1,8 @@
 {
-    "id": "st2",
-    "class": "Station",
-    "sprite": "./st2.png",
-    "health": 340,
-    "explosive": 114
+    	"id": "st2",
+    	"class": "Station",
+    	"sprite": "./st2.png",
+    	"health": 340,
+    	"explosive": 114,
+	"mass": 64
 }

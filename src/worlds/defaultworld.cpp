@@ -62,7 +62,12 @@ WorldPreset::GenerationResult DefaultWorld::generate(e172::Context *context) {
     Unit *playerShip = static_cast<Unit*>(context->assetProvider()->createLoadable("sh1"));
     playerShip->resetPhysicsProperties(e172::Vector(100, 100), -0.7);
 
-    playerShip->addCapability(new Docker());
+    auto playerDocker = new Docker();
+    playerDocker->addNode({ 0, -20 }, -e172::Math::Pi / 2);
+    playerDocker->addNode({ 0, 20 }, e172::Math::Pi / 2);
+    playerShip->addCapability(playerDocker);
+
+
     playerShip->addCapability(player1);
     ModuleHandler *playerModuleHandler = new ModuleHandler();
     playerModuleHandler->addModule(static_cast<Module*>(context->assetProvider()->createLoadable("pistol")));
@@ -76,7 +81,11 @@ WorldPreset::GenerationResult DefaultWorld::generate(e172::Context *context) {
 
     /*empty ship*/{
         Unit *someShip = static_cast<Unit*>(context->assetProvider()->createLoadable("sh1"));
-        someShip->addCapability(new Docker());
+
+        auto someShipDocker = new Docker();
+        someShipDocker->addNode({ 0, -20 }, -e172::Math::Pi / 2);
+        someShipDocker->addNode({ 0, 20 }, e172::Math::Pi / 2);
+        someShip->addCapability(someShipDocker);
 
         someShip->resetPhysicsProperties(e172::Vector(-200, -100), -0.7);
         result.entities.push_back(someShip);
@@ -100,7 +109,11 @@ WorldPreset::GenerationResult DefaultWorld::generate(e172::Context *context) {
             s->resetPhysicsProperties(e172::Vector(-50 + i * 50, 100), -0.7);
 
             s->addCapability(new AI());
-            s->addCapability(new Docker());
+
+            auto docker = new Docker();
+            docker->addNode({ 0, -20 }, -e172::Math::Pi / 2);
+            docker->addNode({ 0, 20 }, e172::Math::Pi / 2);
+            s->addCapability(docker);
 
             ModuleHandler *mx = new ModuleHandler();
             if(i == 1) {
@@ -148,12 +161,24 @@ WorldPreset::GenerationResult DefaultWorld::generate(e172::Context *context) {
 
     /* station 1 */{
         Unit *s = static_cast<Unit*>(context->assetProvider()->createLoadable("st1"));
+
+        auto docker = new Docker();
+        docker->addNode({ -50, 0 }, -e172::Math::Pi);
+        docker->addNode({ 0, 50 }, 0);
+        s->addCapability(docker);
+
         s->resetPhysicsProperties(e172::Vector(50, -150), 0);
         result.entities.push_back(s);
     }
 
     /* station 1 */{
         Unit *s = static_cast<Unit*>(context->assetProvider()->createLoadable("st2"));
+
+        auto docker = new Docker();
+        docker->addNode({ -40, 0 }, -e172::Math::Pi);
+        docker->addNode({ 0, 40 }, 0);
+        s->addCapability(docker);
+
         s->resetPhysicsProperties(e172::Vector(50, 150), 0);
         result.entities.push_back(s);
     }

@@ -51,7 +51,7 @@ void Unit::render(e172::AbstractRenderer *renderer) {
 Unit::Unit() {
     std::srand(clock());
     m_selectedColor = e172::randomColor();
-    registerInitFunction([this](){
+    registerInitFunction([this]() {
         m_health = asset<double>("health");
         m_explosiveRadius = asset<double>("explosive");
 
@@ -59,6 +59,8 @@ Unit::Unit() {
         if(!m_animator.isValid()) {
             m_animator = asset<Animator>("animator");
         }
+
+        setMass(asset<double>("mass", 1));
     });
 }
 

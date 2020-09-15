@@ -1,5 +1,7 @@
 #include "dockingnodepool.h"
 
+#include <src/engine/graphics/abstractrenderer.h>
+
 DockingNodePool::DockingNodePool() {
 
 }
@@ -34,6 +36,11 @@ bool DockingNodePool::returnToPool(const DockingNodePool::Node &node) {
         }
     }
     return false;
+}
+
+
+size_t DockingNodePool::Node::nodeId() const {
+    return m_nodeId;
 }
 
 e172::Vector DockingNodePool::Node::offset() const {

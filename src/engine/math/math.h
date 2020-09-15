@@ -61,6 +61,9 @@ public:
     friend bool operator !=(double value, const null_float_t&) { return !Math::cmpf(value, 0); }
     friend bool operator !=(const null_float_t&, double value) { return !Math::cmpf(value, 0); }
 
+
+    static double topLimitedFunction(double x);
+
 };
 
 

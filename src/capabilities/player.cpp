@@ -60,6 +60,8 @@ void Player::dock(e172::Entity::id_t entity) {
     dockRequestedQueue.push(entity);
 }
 #include <iostream>
+
+#include <src/engine/args.h>
 void Player::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
     if(auto ship = dynamic_cast<Ship*>(parentUnit())) {
         if(personalKey(eventHandler, "left")) {
@@ -73,7 +75,9 @@ void Player::proceed(e172::Context *context, e172::AbstractEventHandler *eventHa
             const auto targetUnit = context->entityById<Unit>(dockRequestedQueue.front());
             const auto docker = parentUnit()->docker();
             if(docker && targetUnit) {
-                docker->createDockingSessionWithUnit(context, targetUnit);
+                if(!docker->createDockingSessionWithUnit(context, targetUnit)) {
+                    context->emitMessage(e172::Context::FLOATING_MESSAGE, e172::Args(parentUnit()->entityId(), "no awailable nodes"));
+                }
             }
             dockRequestedQueue.pop();
         }
@@ -93,7 +97,9 @@ void Player::proceed(e172::Context *context, e172::AbstractEventHandler *eventHa
                     warpKeyPressed = true;
                     if(!ship->warp()) {
                         if(!ship->prepareWarp()) {
-                            if(!ship->abortWarp(context)) {
+                            if(ship->inWarp()) {
+                                if(!ship->abortWarp(context)) {
+                                }
                             }
                         }
                     }

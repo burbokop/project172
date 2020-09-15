@@ -3,6 +3,7 @@
 #include <src/engine/context.h>
 #include <src/engine/objectregistry.h>
 #include <src/units/unit.h>
+#include <math.h>
 
 const double Camera::STOP_DISTANCE = 4;
 const double Camera::MAX_SPEED_MULTIPLIER = 0.002 * 1000;
@@ -24,7 +25,15 @@ void Camera::proceed(e172::Context *context, e172::AbstractEventHandler *) {
     if(m_target) {
         if(Unit *targetUnit = m_target->parentUnit()) {
             if(targetUnit == e172::Alive) {
-                addRestoringForce(targetUnit->position());
+                //addRestoringForce(targetUnit->position());
+
+                const auto f = [](double x, double x0){
+                    return std::sqrt(x) * x * 0.5;
+                };
+
+
+                addDistanceRelatedForce(targetUnit->position(), f, 0);
+                //addFollowForce(targetUnit->position(), 200);
                 //relativisticPursuit(context, targetUnit);
             }
         }

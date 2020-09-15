@@ -3,8 +3,14 @@
 #include <src/units/unit.h>
 #include <src/engine/context.h>
 
-Docker::Docker() {
-    m_nodePool.addNode({ 0, -20 }, -e172::Math::Pi / 2);
+void Docker::addNode(const e172::Vector &offset, double angle) {
+    m_nodePool.addNode(offset, angle);
+}
+
+Docker::Docker() {}
+
+Docker::~Docker() {
+    closeAllSessions();
 }
 
 bool Docker::createDockingSessionWithUnit(e172::Context* context, Unit *unit) {
@@ -30,6 +36,23 @@ void Docker::closeAllSessions() {
 
 size_t Docker::sessionCount() const {
     return m_sessions.size();
+}
+
+std::string Docker::sessionInfo(size_t index) const {
+    const auto session = m_sessions[index];
+    if(session) {
+        const auto oppositeUnit = session->oppositeUnit(parentUnit());
+        if(oppositeUnit) {
+            if(session->state() == PhysicalDockingAttractor::NotDocked) {
+                return oppositeUnit->info() + " [docking permitted]";
+            } else if(session->state() == PhysicalDockingAttractor::InInterception) {
+                return oppositeUnit->info() + " [docking strarted]";
+            } else if(session->state() == PhysicalDockingAttractor::Docked) {
+                return oppositeUnit->info() + " [docking compleated]";
+            }
+        }
+    }
+    return "[session info error]";
 }
 
 void Docker::proceed(e172::Context *, e172::AbstractEventHandler *) {

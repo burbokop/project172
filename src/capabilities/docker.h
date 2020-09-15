@@ -15,12 +15,16 @@
 
 class Docker : public Capability {
     DockingNodePool m_nodePool;
-    std::list<DockingSession*> m_sessions;
+    std::vector<DockingSession*> m_sessions;
 public:
+    void addNode(const e172::Vector &offset, double angle);
+
     Docker();
+    ~Docker();
     bool createDockingSessionWithUnit(e172::Context *context, Unit *unit);
     void closeAllSessions();
     size_t sessionCount() const;
+    std::string sessionInfo(size_t index) const;
 
     // Entity interface
 public:

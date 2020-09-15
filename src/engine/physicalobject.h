@@ -16,6 +16,8 @@ class PhysicalObject {
     double m_friction = 1;
 
     Matrix m_rotationMatrix;
+
+    bool m_blockFrictionPerTick = false;
 public:
     class ConnectionNode {
         friend PhysicalObject;
@@ -69,8 +71,8 @@ public:
     void addRestoringForce(const Vector &destiantionPosition, double coeficient = 1);
 
 
-    void addDiscanceRelatedForce(const Vector &destiantionPosition, double(*f)(double, double), double cryticalDistance, double coeficient = 1);
-    void addDiscanceRelatedRotationForce(double destiantionAngle, double(*f)(double, double), double cryticalDistance, double coeficient = 1);
+    void addDistanceRelatedForce(const Vector &destiantionPosition, double(*f)(double, double), double cryticalDistance, double coeficient = 1);
+    void addDistanceRelatedRotationForce(double destiantionAngle, double(*f)(double, double), double cryticalDistance, double coeficient = 1);
 
 
     static void connectNodes(ConnectionNode node0, ConnectionNode node1, double coeficient = 1, double rotationCoeficient = 1);
@@ -92,6 +94,7 @@ public:
     void proceedPhysics(double deltaTime);
 
     Matrix rotationMatrix() const;
+    void blockFrictionPerTick();
 };
 
 }

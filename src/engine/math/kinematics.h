@@ -8,6 +8,8 @@
 
 namespace e172 {
 
+double eFunction(double x, double c);
+
 template<typename T>
 class Kinematics {
     template<typename VT>
@@ -33,6 +35,7 @@ public:
     void addAcceleration(T value);
     void addLimitedAcceleration(T value, double maxVelocity);
     void addFriction(double coeficient);
+    void addLimitedFriction(double maxVelocity, double coeficient);
     void accept(double deltaTime);
     T value() const;
     T velocity() const;
@@ -62,13 +65,20 @@ void Kinematics<T>::addAcceleration(T value) {
 template<typename T>
 void Kinematics<T>::addLimitedAcceleration(T value, double maxVelocity) {
     if constexpr (std::is_integral<T>::value || std::is_same<T, double>::value || std::is_same<T, long double>::value) {
-        addAcceleration((maxVelocity - std::abs(m_velocity)) * value);
+        addAcceleration(eFunction(m_velocity, maxVelocity) * value);
     } else if constexpr (has_length_method<T>::value) {
-        addAcceleration((maxVelocity - m_velocity.length()) * value);
+        addAcceleration(eFunction(m_velocity.length(), maxVelocity) * value);
     } else if constexpr (has_module_method<T>::value) {
-        addAcceleration((maxVelocity - m_velocity.module()) * value);
+        addAcceleration(eFunction(m_velocity.module(), maxVelocity) * value);
     } else {
-        static_assert ("Kinematics<T>::addLimitedForce: T must be integral or have 'length' or 'module' method.");
+        static_assert (
+                std::is_integral<T>::value
+                || std::is_same<T, double>::value
+                || std::is_same<T, long double>::value
+                || has_length_method<T>::value
+                || has_module_method<T>::value,
+                "Kinematics<T>::addLimitedForce: T must be number type or have 'length' or 'module' method."
+                );
     }
 }
 
@@ -76,6 +86,12 @@ template<typename T>
 void Kinematics<T>::addFriction(double coeficient) {
     addAcceleration(m_velocity * coeficient * (-1));
 }
+
+template<typename T>
+void Kinematics<T>::addLimitedFriction(double maxVelocity, double coeficient) {
+    addLimitedAcceleration(m_velocity * coeficient * -1, maxVelocity);
+}
+
 
 template<typename T>
 void Kinematics<T>::accept(double deltaTime) {

@@ -6,6 +6,7 @@
 
 #include <src/gui/guibutton.h>
 #include <src/gui/guichoice.h>
+#include <src/gui/guidockingview.h>
 #include <src/gui/guimain.h>
 #include <src/gui/guimoduleview.h>
 #include <src/gui/guiradar.h>
@@ -44,6 +45,10 @@ GUIMaker::GUIMaker(e172::Context *context, Near *radarNear) {
                     infoMenu->addMenuElement(new GUIMenuElement(manual));
                 } mainMenu->addMenuElement(infoMenu);
                 mainMenu->addMenuElement(new GUIModuleView("modules"));
+
+                GUIDockingView *dockingView = new GUIDockingView("docking sessions");
+                mainMenu->addMenuElement(dockingView);
+
                 if(radarNear) {
                     GUIRadar *radarMenu = new GUIRadar("radar"); {
                         radarMenu->setNear(radarNear);
@@ -54,16 +59,20 @@ GUIMaker::GUIMaker(e172::Context *context, Near *radarNear) {
                         radarRowElement->addMenuElement(new GUIButton("select", [context](auto md){
                             context->setProperty("SU", md);
                         }));
-                        radarRowElement->addMenuElement(new GUIButton("dock", [](Controller* ctrl, const e172::Variant &md) {
+                        radarRowElement->addMenuElement(new GUIButton("dock", [stack, dockingView](Controller* ctrl, const e172::Variant &md) {
                             e172::Debug::print("DOCK: ", md, ctrl);
                             if(const auto player = dynamic_cast<Player*>(ctrl)) {
                                 player->dock(md.toNumber<e172::Entity::id_t>());
+                                stack->pop();
+                                stack->pop();
+                                stack->push(dockingView);
                             }
                         }));
 
                         radarMenu->setRowElement(radarRowElement);
                     } mainMenu->addMenuElement(radarMenu);
                 }
+
 
                 GUIContainer *testMenu = new GUIContainer("for developers"); {
                     testMenu->addMenuElement(new GUIMenuElement(std::string("other players:")));

@@ -4,6 +4,10 @@
 #include <src/engine/math/vector.h>
 #include <list>
 
+namespace e172 {
+class AbstractRenderer;
+}
+
 class DockingNodePool {
 public:
     struct Node {
@@ -12,11 +16,12 @@ public:
         double m_angle;
         bool m_locked = false;
         bool m_isValid = false;
-        size_t m_nodeId = ++nextNodeId;
+        size_t m_nodeId = nextNodeId++;
     public:
         e172::Vector offset() const;
         double angle() const;
         bool isValid() const;
+        size_t nodeId() const;
     };
 private:
     std::list<Node> m_nodes;
@@ -27,6 +32,7 @@ public:
 
     Node nextFreeNode();
     bool returnToPool(const Node& node);
+
 };
 
 #endif // DOCKINGNODEPULL_H

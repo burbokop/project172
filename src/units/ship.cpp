@@ -4,6 +4,7 @@
 #include <src/capabilities/modules/engine.h>
 #include <src/capabilities/modules/warpdrive.h>
 #include <src/capabilities/modulehandler.h>
+#include <src/engine/math/math.h>
 
 
 double Ship::thrustForce() const {
@@ -48,10 +49,10 @@ void Ship::setMaxManeuverVelocity(double maxManeuverVelocity) {
 
 Ship::Ship() {
     registerInitFunction([this]() {
-        m_thrustForce = asset<double>("thrust_force", 2);
+        m_thrustForce = asset<double>("thrust_force", 120);
         m_maxVelocity = asset<double>("max_velocity", 120);
         m_releaseVelocity = asset<double>("release_velocity", 1);
-        m_maneuverForce = asset<double>("maneuver_force", 1);
+        m_maneuverForce = asset<double>("maneuver_force", 4);
         m_maxManeuverVelocity = asset<double>("maneuver_velocity", 4);
     });
 }
@@ -107,7 +108,7 @@ void Ship::maneuverRight() {
     addLimitedRotationForce(m_maneuverForce, m_maxManeuverVelocity);
 }
 
-WarpDrive *Ship::firstWarp() {
+WarpDrive *Ship::firstWarp() const {
     ModuleHandler *modules = moduleHandler();
     if(modules) {
         const auto drives = modules->modulesOfClass("WarpDrive");
@@ -118,6 +119,14 @@ WarpDrive *Ship::firstWarp() {
     return nullptr;
 }
 
+bool Ship::inWarp() const {
+    if(const auto driveUnit = firstWarp()) {
+        return driveUnit->getState() == WarpDrive::WARP_EXECUTING;
+    }
+    return false;
+}
+
+#include <iostream>
 void Ship::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
     ModuleHandler *modules = moduleHandler();
     if(modules) {
@@ -127,6 +136,11 @@ void Ship::proceed(e172::Context *context, e172::AbstractEventHandler *eventHand
             if(driveUnit) {
                 if(driveUnit->getState() == WarpDrive::WARP_EXECUTING) {
                     addLimitedForwardForce(m_thrustForce, OneWarpPoint);
+                    blockFrictionPerTick();
+                    //addForwardForce(m_thrustForce);
+                    std::cout << "ef: " << e172::eFunction(velocity().module(), OneWarpPoint) << " : " << m_thrustForce << " : " << e172::Math::topLimitedFunction(velocity().module()) << "\n";
+                    addDistanceRelatedRotationForce(velocity().angle(), [](double x, double){ return x * x; }, 0, 100);
+                    //addRotationRestoringForce(velocity().angle(), 10);
                 }
             }
         }

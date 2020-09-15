@@ -180,3 +180,11 @@ double e172::Math::degreesDifference(double angle1, double angle2) {
 double e172::Math::map(double value, double inMin, double inMax, double outMin, double outMax) {
     return (value - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
 }
+
+double e172::Math::topLimitedFunction(double x) {
+    const auto xPlus1 = x + 1;
+    if(xPlus1 != null) {
+        return 1 - 1 / xPlus1;
+    }
+    return 0;
+}

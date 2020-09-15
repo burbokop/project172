@@ -272,6 +272,8 @@ add_executable(project172
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/guistringlistview.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/guibutton.h
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/guibutton.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/gui/guidockingview.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/gui/guidockingview.cpp
 
     ${CMAKE_CURRENT_LIST_DIR}/src/units/camera.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/units/camera.h
@@ -321,3 +323,4 @@ endif (UNIX)
 if (WIN32)
     target_link_libraries(project172 ws2_32)
 endif (WIN32)
+

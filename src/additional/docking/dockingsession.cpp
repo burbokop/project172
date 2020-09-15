@@ -6,6 +6,8 @@
 
 #include <src/engine/graphics/abstractrenderer.h>
 
+#include <src/units/unit.h>
+
 
 void DockingSession::release() {
     --m_usagesCount;
@@ -16,11 +18,24 @@ DockingSession::DockingSession() {
     physicalDockingAttractor.setDockedRequiredProximity({ 2, e172::Math::Pi / 64 });
 }
 
+std::array<Unit *, 2> DockingSession::units() const {
+    return { item0.unit, item1.unit };
+}
+
+Unit *DockingSession::oppositeUnit(Unit *unit) const {
+    if(item0.unit == unit) {
+        return item1.unit;
+    } else if(item1.unit == unit) {
+        return item0.unit;
+    }
+    return nullptr;
+}
+
 PhysicalDockingAttractor::State DockingSession::state() const {
     return physicalDockingAttractor.state();
 }
 
-DockingSession *DockingSession::createSession(DockingNodePool *pull0, DockingNodePool *pull1, e172::PhysicalObject *object0, e172::PhysicalObject *object1) {
+DockingSession *DockingSession::createSession(DockingNodePool *pull0, DockingNodePool *pull1, Unit *unit0, Unit *unit1) {
     const auto node0 = pull0->nextFreeNode();
     const auto node1 = pull1->nextFreeNode();
     if(node0.isValid() && node1.isValid()) {
@@ -29,8 +44,10 @@ DockingSession *DockingSession::createSession(DockingNodePool *pull0, DockingNod
         result->item1.pool = pull1;
         result->item0.node = node0;
         result->item1.node = node1;
-        result->item0.physicalNode = object0->connectionNode(node0.offset(), node0.angle());
-        result->item1.physicalNode = object1->connectionNode(node1.offset(), node1.angle());
+        result->item0.physicalNode = unit0->connectionNode(node0.offset(), node0.angle());
+        result->item1.physicalNode = unit1->connectionNode(node1.offset(), node1.angle());
+        result->item0.unit = unit0;
+        result->item1.unit = unit1;
         return result;
     }
     return nullptr;
