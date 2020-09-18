@@ -119,3 +119,21 @@ std::string e172::Additional::cutPath(std::string string, unsigned level) {
     }
     return result;
 }
+
+size_t e172::Additional::countOfFiles(std::string path, std::string suffix) {
+    if(path[path.length() - 1] == '/') path.pop_back();
+    std::vector<std::string> items = e172::Additional::directoryContent(path);
+    size_t sum_count = 0;
+    for(unsigned long long i = 0, L = items.size(); i < L; i++) {
+        std::string item = items[i];
+        std::string file = path + '/' + item;
+        if(e172::Additional::isDirectory(file)) {
+            sum_count += countOfFiles(file, suffix);
+        } else {
+            if(e172::Additional::fileSufix(file) == suffix) {
+                ++sum_count;
+            }
+        }
+    }
+    return sum_count;
+}

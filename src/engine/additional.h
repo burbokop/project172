@@ -25,6 +25,9 @@ struct Additional {
     static std::string fileSufix(std::string string);
     static std::string concatenatePaths(std::string prefix, std::string string);
     static std::string cutPath(std::string string, unsigned level);
+
+    static size_t countOfFiles(std::string path, std::string suffix);
+
 };
 
 }

@@ -5,6 +5,7 @@ cmake_minimum_required(VERSION 3.0)
 
 project(project172)
 
+
 add_compile_options(-no-pie)
 
 set(CMAKE_CXX_STANDARD 17)
@@ -188,6 +189,8 @@ add_executable(project172
     ${CMAKE_CURRENT_LIST_DIR}/src/additional/docking/dockingnodepool.h
     ${CMAKE_CURRENT_LIST_DIR}/src/additional/docking/dockingsession.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/additional/docking/dockingsession.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/additional/segmentpaiter.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/additional/segmentpaiter.h
 
     ${CMAKE_CURRENT_LIST_DIR}/src/assetexecutors/animatorassetexecutor.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/assetexecutors/animatorassetexecutor.h

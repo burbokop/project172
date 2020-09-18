@@ -12,7 +12,10 @@ class TypePrivate {
 };
 
 template <typename T>
-struct Type { static inline const std::string name = TypePrivate::demangle(typeid (T).name()); };
+struct Type {
+    static inline const std::string name = TypePrivate::demangle(typeid (T).name());
+    static inline const size_t hash = typeid (T).hash_code();
+};
 
 
 }

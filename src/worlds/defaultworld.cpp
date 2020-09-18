@@ -10,6 +10,7 @@
 #include <src/engine/math/math.h>
 #include <src/units/ship.h>
 #include <src/units/unit.h>
+#include <src/additional/segmentpaiter.h>
 
 #include <src/engine/context.h>
 #include <src/engine/physicalobject.h>
@@ -66,6 +67,10 @@ WorldPreset::GenerationResult DefaultWorld::generate(e172::Context *context) {
     delete ffo;
 
     std::cout << "l2: " << ll2.operator bool() << "\n";
+
+    SegmentPaiter *segmentPaiter = new SegmentPaiter();
+    segmentPaiter->resetPhysicsProperties({ 100, 0 }, 0);
+    result.entities.push_back(segmentPaiter);
 
     //result.entities.push_back(ffo);
     //auto sfo = new FTestObject(ffo);

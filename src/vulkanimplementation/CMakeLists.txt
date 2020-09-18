@@ -61,7 +61,7 @@ add_library(vulkan_impl SHARED
 
 
 find_package(Vulkan REQUIRED)
-find_package(glfw3 REQUIRED)
+#find_package(glfw3 REQUIRED)
 
 target_link_libraries(vulkan_impl PRIVATE
     Vulkan::Vulkan
