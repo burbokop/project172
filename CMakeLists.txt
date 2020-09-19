@@ -5,7 +5,6 @@ cmake_minimum_required(VERSION 3.0)
 
 project(project172)
 
-
 add_compile_options(-no-pie)
 
 set(CMAKE_CXX_STANDARD 17)

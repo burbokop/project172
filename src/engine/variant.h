@@ -122,8 +122,9 @@ class Variant;
 
 template <typename T>
 class VariantRTTITable {
-    friend Variant;
-    static inline VariantRTTIObject *object = nullptr;
+    static inline VariantRTTIObject *m_object = new VariantRTTIObject(T());
+public:
+    static VariantRTTIObject *object() { return m_object; }
 };
 
 
@@ -221,15 +222,12 @@ public:
 #ifdef E172_USE_VARIANT_RTTI_OBJECT
     template<typename T>
     void assign(const T& value) {
-        if(!VariantRTTITable<T>::object) {
-            VariantRTTITable<T>::object = new VariantRTTIObject(T());
-        }
-
-        if(m_rttiObject != VariantRTTITable<T>::object) {
+        if(m_rttiObject != VariantRTTITable<T>::object()) {
             if(m_data)
                 m_rttiObject->destruct(m_data);
 
             m_data = new VariantHandle<T>();
+            m_rttiObject = VariantRTTITable<T>::object();
         }
         dynamic_cast<VariantHandle<T>*>(m_data)->value = value;
     }
@@ -306,7 +304,7 @@ public:
 #ifdef E172_USE_VARIANT_RTTI_OBJECT
     std::string typeName() const { return m_rttiObject ? m_rttiObject->typeName() : ""; }
     template<typename T>
-    bool containsType() const { return m_rttiObject == VariantRTTITable<T>::object; }
+    bool containsType() const { return m_rttiObject == VariantRTTITable<T>::object(); }
 #else
     std::string typeName() const { return m_typeName; }
     template<typename T>
