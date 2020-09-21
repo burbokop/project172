@@ -1,3 +1,4 @@
+#include "font.h"
 #include "pipeline.h"
 #include "presentationobject.h"
 
@@ -36,6 +37,10 @@ e172vp::PresentationObject::PresentationObject(const GraphicsObjectCreateInfo &g
 
 e172vp::PresentationObject::~PresentationObject() {
     delete m_graphicsObject;
+}
+
+void e172vp::PresentationObject::updateUiImage(size_t w, size_t h, void *data) {
+    e172vp::Font::updateTextureImage(m_graphicsObject->logicalDevice(), m_graphicsObject->physicalDevice(), m_graphicsObject->commandPool(), m_graphicsObject->graphicsQueue(), data, w, h, vk::Format::eR8G8B8A8Srgb, m_uiImage);
 }
 
 void e172vp::PresentationObject::present() {
@@ -138,8 +143,11 @@ bool e172vp::PresentationObject::isValid() const {
     return true;
 }
 
+void e172vp::PresentationObject::setUiImage(const vk::Image &uiImage) {
+    m_uiImage = uiImage;
+}
 
-void e172vp::PresentationObject::proceedCommandBuffers() {    
+void e172vp::PresentationObject::proceedCommandBuffers() {
     for (size_t i = 0; i < m_graphicsObject->commandPool().commandBufferCount(); i++) {
         const auto commandBuffer = m_graphicsObject->commandPool().commandBuffer(i);
         const auto extent = m_graphicsObject->swapChainSettings().extent;
@@ -201,18 +209,8 @@ void e172vp::PresentationObject::proceedCommandBuffers() {
             }
         }
 
-        //pipeline2
-        //commandBuffer.bindPipeline(vk::PipelineBindPoint::eGraphics, pipeline2->handle());
-        //for(auto object : pl2objects) {
-        //    if(object->visible()) {
-        //        vk::Buffer vb[] = { object->vertexBuffer() };
-        //        vk::DeviceSize offsets[] = { 0 };
-        //        commandBuffer.bindVertexBuffers(0, 1, vb, offsets);
-        //        commandBuffer.bindIndexBuffer(object->indexBuffer(), 0, vk::IndexType::eUint32);
-        //        commandBuffer.drawIndexed(object->indexCount(), 1, 0, 0, 0);
-        //    }
-        //}
-
+        vk::ImageBlit region;
+        commandBuffer.blitImage(m_uiImage, vk::ImageLayout::eTransferSrcOptimal, m_graphicsObject->swapChain().image(i), vk::ImageLayout::eTransferDstOptimal, { region }, vk::Filter::eLinear);
 
         commandBuffer.endRenderPass();
 

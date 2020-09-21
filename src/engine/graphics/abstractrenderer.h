@@ -6,9 +6,8 @@
 
 #include <inttypes.h>
 
-
-
 #include <src/engine/textformat.h>
+#include <src/engine/variant.h>
 
 
 namespace e172 {
@@ -81,6 +80,11 @@ protected:
     AbstractGraphicsProvider *provider() const;
 public:
     virtual ~AbstractRenderer();
+
+    virtual size_t presentEffectCount() const = 0;
+    virtual std::string presentEffectName(size_t index) const = 0;
+    virtual void drawEffect(size_t index, const e172::VariantVector &args = e172::VariantVector()) = 0;
+
 
     virtual void fill(uint32_t color) = 0;
     virtual void drawPixel(const Vector &point, uint32_t color) = 0;

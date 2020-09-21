@@ -48,6 +48,11 @@ private:
     static void __applyLensEffect(SDL_Surface * surface, const e172::Vector point0, const e172::Vector point1, double coef);
 public:
 
+    virtual size_t presentEffectCount() const override;
+    virtual std::string presentEffectName(size_t index) const override;
+    virtual void drawEffect(size_t index, const e172::VariantVector &args) override;
+
+
     void fill(uint32_t color) override;
     void drawPixel(const e172::Vector &point, uint32_t color) override;
     void drawLine(const e172::Vector &point1, const e172::Vector &point2, uint32_t color) override;
@@ -76,6 +81,7 @@ public:
     // AbstractRenderer interface
 protected:
     virtual bool update() override;
+
 };
 
 

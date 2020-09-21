@@ -13,6 +13,7 @@ namespace e172vp {
     class AbstractVertexObject;
 }
 
+class SDL_Surface;
 class VulkanRenderer : public e172::AbstractRenderer {
     e172vp::BootstrapObject *m_bootstrapObject = nullptr;
     e172vp::Mesh *m_mesh0 = nullptr;
@@ -21,7 +22,7 @@ class VulkanRenderer : public e172::AbstractRenderer {
     e172vp::Mesh *m_lineMesh = nullptr;
     e172vp::Mesh *m_rectMesh = nullptr;
     e172vp::Mesh *m_circleMesh = nullptr;
-
+    SDL_Surface *uiSurface = nullptr;
 
     struct Reciept {
         bool modifyVertexBuffer = false;
@@ -55,6 +56,11 @@ protected:
 public:
     bool isValid() const;
 
+
+    virtual size_t presentEffectCount() const override;
+    virtual std::string presentEffectName(size_t index) const override;
+    virtual void drawEffect(size_t index, const e172::VariantVector &args) override;
+
     virtual void fill(uint32_t color) override;
     virtual void drawPixel(const e172::Vector &point, uint32_t color) override;
     virtual void drawLine(const e172::Vector &point0, const e172::Vector &point1, uint32_t color) override;
@@ -72,6 +78,7 @@ public:
     virtual void setResolution(e172::Vector value) override;
     virtual e172::Vector resolution() const override;
     virtual e172::Vector screenSize() const override;
+
 };
 
 #endif // VULKANRENDERER_H

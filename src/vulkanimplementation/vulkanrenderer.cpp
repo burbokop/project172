@@ -6,6 +6,9 @@
 
 #include "e172vp/tools/mesh.h"
 #include <glm/gtc/matrix_transform.hpp>
+#include <SDL2/SDL_image.h>
+#include "e172vp/font.h"
+#include <iostream>
 
 VulkanRenderer::VulkanRenderer(const std::vector<std::string> &args) {
     if(args.size() > 0) {
@@ -42,6 +45,10 @@ VulkanRenderer::VulkanRenderer(const std::vector<std::string> &args) {
         //    0, 1
         //};
 
+
+        uiSurface = IMG_Load(e172::Additional::absolutePath("../rewiev.png", args[0]).c_str());
+
+
     }
 }
 
@@ -52,6 +59,8 @@ VulkanRenderer::~VulkanRenderer() {
 
 bool VulkanRenderer::update() {
     if(m_bootstrapObject) {
+
+
 
 
         //GET OBJECTS FROM POOL
@@ -134,6 +143,9 @@ bool VulkanRenderer::update() {
                 o->setVisible(false);
         }
 
+        //std::cout << "ptr: " << uiSurface << "\n";
+        //m_bootstrapObject->presentationObject()->updateUiImage(uiSurface->w, uiSurface->h, uiSurface->pixels);
+
 
         //PRESENT
         m_reciepts.clear();
@@ -156,6 +168,18 @@ bool VulkanRenderer::isValid() const {
         return m_bootstrapObject->isValid();
 
     return false;
+}
+
+size_t VulkanRenderer::presentEffectCount() const {
+    return 0;
+}
+
+std::string VulkanRenderer::presentEffectName(size_t index) const {
+    return "";
+}
+
+void VulkanRenderer::drawEffect(size_t index, const e172::VariantVector &args) {
+
 }
 
 void VulkanRenderer::fill(uint32_t color) {

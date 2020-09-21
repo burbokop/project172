@@ -28,6 +28,9 @@ class PresentationObject {
     std::vector<vk::DeviceMemory> uniformBuffersMemory;
     std::vector<vk::DescriptorSet> uniformDescriptorSets;
 
+    vk::Image m_uiImage;
+    vk::DeviceMemory m_uiImageMemory;
+
     glm::mat4 m_globalScale = glm::mat4(1.);
 
     struct GlobalUniformBufferObject {
@@ -76,6 +79,9 @@ public:
     bool isValid() const;
     GraphicsObject *graphicsObject() const;
     ~PresentationObject();
+
+    void updateUiImage(size_t w, size_t h, void *data);
+    void setUiImage(const vk::Image &uiImage);
 };
 
 }

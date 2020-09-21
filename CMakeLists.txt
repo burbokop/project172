@@ -10,6 +10,7 @@ add_compile_options(-no-pie)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+
 include_directories(${CMAKE_CURRENT_LIST_DIR})
 
 add_library(e172 SHARED
@@ -287,8 +288,6 @@ add_executable(project172
     ${CMAKE_CURRENT_LIST_DIR}/src/units/station.h
     ${CMAKE_CURRENT_LIST_DIR}/src/units/unit.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/units/unit.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/injectableentity.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/injectableentity.h
 
     ${CMAKE_CURRENT_LIST_DIR}/src/worlds/arenaworld.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/worlds/arenaworld.h

@@ -127,6 +127,18 @@ void SDLRenderer::__applyLensEffect(SDL_Surface *surface, const e172::Vector poi
     //SPM::Square(surface, center.x(), center.y(), 3, 0xff0000);
 }
 
+size_t SDLRenderer::presentEffectCount() const {
+    return 0;
+}
+
+std::string SDLRenderer::presentEffectName(size_t index) const {
+    return "";
+}
+
+void SDLRenderer::drawEffect(size_t index, const e172::VariantVector &args) {
+
+}
+
 void SDLRenderer::fill(uint32_t color) {
     SDL_FillRect(surface, nullptr, color);
 }

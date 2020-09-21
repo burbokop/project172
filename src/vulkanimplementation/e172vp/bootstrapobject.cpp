@@ -119,6 +119,7 @@ e172vp::BootstrapObject::BootstrapObject(const std::string &assetFolder) {
                 128
                 );
 
+    m_presentationObject->setUiImage(font->character('a').image());
 }
 
 e172vp::BootstrapObject::~BootstrapObject() {
