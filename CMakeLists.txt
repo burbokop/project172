@@ -103,6 +103,8 @@ add_library(e172 SHARED
 
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/math/matrix.h
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/math/matrix.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/engine/testprovider.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/engine/testprovider.cpp
     )
 
 include(${CMAKE_CURRENT_LIST_DIR}/src/json/CMakeLists.txt)
@@ -191,6 +193,9 @@ add_executable(project172
     ${CMAKE_CURRENT_LIST_DIR}/src/additional/docking/dockingsession.h
     ${CMAKE_CURRENT_LIST_DIR}/src/additional/segmentpaiter.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/additional/segmentpaiter.h
+
+    ${CMAKE_CURRENT_LIST_DIR}/src/additional/warecontainer.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/additional/warecontainer.h
 
     ${CMAKE_CURRENT_LIST_DIR}/src/assetexecutors/animatorassetexecutor.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/assetexecutors/animatorassetexecutor.h
@@ -308,12 +313,14 @@ add_executable(project172
 
 
 include(${CMAKE_CURRENT_LIST_DIR}/src/vulkanimplementation/CMakeLists.txt)
+include(${CMAKE_CURRENT_LIST_DIR}/tests/CMakeLists.txt)
 
 
 target_link_libraries(project172
     sdl_impl
     vulkan_impl
     e172
+    project172_tests
     )
 
 

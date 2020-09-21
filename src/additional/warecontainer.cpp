@@ -16,7 +16,7 @@ size_t WareContainer::addWare(std::string ware, size_t count) {
         bool found = false;
         for(size_t i = 0; i < m_data.size(); ++i) {
             if(m_data[i].first == ware) {
-                m_data[i].second = count;
+                m_data[i].second += count;
                 found = true;
                 break;
             }
@@ -43,7 +43,13 @@ size_t WareContainer::removeWare(size_t index, size_t count) {
 }
 
 size_t WareContainer::transferWareTo(size_t index, WareContainer *container, size_t count) {
-    return container->addWare(wareInfo(index).wareName(), removeWare(index, count));
+    if(index < wareInfoCount() && count > 0) {
+        const auto wareName = wareInfo(index).wareName();
+        count = std::min(m_capacity - amount(), count);
+        count = removeWare(index, count);
+        return container->addWare(wareName, count);
+    }
+    return 0;
 }
 
 

@@ -19,7 +19,6 @@ class WareContainer {
     std::vector<std::pair<std::string, size_t>> m_data;
     size_t m_capacity = 0;
 
-    size_t amount() const;
 protected:
     size_t addWare(std::string ware, size_t count);
     size_t removeWare(size_t index, size_t count);
@@ -29,9 +28,11 @@ public:
     size_t wareInfoCount() const;
     WareInfo wareInfo(size_t index) const;
 
+    size_t amount() const;
     size_t capacity() const;
 
-    size_t transferWareTo(size_t index, WareContainer *container, size_t count = 1);
+    size_t transferWareTo(size_t index, WareContainer *container, size_t count = std::numeric_limits<size_t>::max());
+
 };
 
 #endif // WARECONTAINER_H

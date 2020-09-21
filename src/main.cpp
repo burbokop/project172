@@ -5,6 +5,7 @@
 #include <src/engine/context.h>
 #include <src/engine/debug.h>
 #include <src/engine/additional.h>
+#include <src/engine/testprovider.h>
 
 #include <src/sdlimplementation/sdlaudioprovider.h>
 #include <src/sdlimplementation/sdleventhandler.h>
@@ -43,20 +44,12 @@
 #include <iostream>
 
 
-
+#include <tests/waretest.h>
 
 
 int main(int argc, char *argv[]) {
 
-
-
-    //std::cout << "int vrtti: " << M<int>::object << "\n";
-    //M<int>::object = new VRTTI_Object();
-    //std::cout << "int vrtti: " << M<int>::object << "\n";
-    //std::cout << "double vrtti: " << M<double>::object << "\n";
-    //std::cout << "int vrtti: " << M<int>::object << "\n";
-
-
+    TestProvider::runAllTests();
 
     std::cout << "count of .cpp files: " << e172::Additional::countOfFiles(e172::Additional::absolutePath("../src", argv[0]), ".cpp") << "\n";
 
