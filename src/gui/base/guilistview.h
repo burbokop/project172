@@ -10,6 +10,8 @@ class GUIListView : public GUIMenuElement {
     GUIStack *m_stack = nullptr;
     int m_selectedIndex = 0;
     int m_verticalInterval = 24;
+    std::vector<double> xOffsets;
+    double titleXOffset = 0;
 public:
     GUIListView() {}
     GUIListView(const std::string &title);

@@ -12,6 +12,7 @@
 #include <src/gui/guiradar.h>
 #include <src/gui/guistringlistview.h>
 #include <src/gui/guiswitch.h>
+#include <src/gui/guiwareview.h>
 
 #include <src/engine/context.h>
 #include <src/engine/debug.h>
@@ -137,7 +138,15 @@ GUIMaker::GUIMaker(e172::Context *context, Near *radarNear) {
                 } mainMenu->addMenuElement(stationMenu);
 
             } stack->push(mainMenu);
-        } m_gui->setMenu(stack);
+        } m_gui->addStack(stack);
+
+
+        GUIStack *wareViewStack = new GUIStack(); {
+            GUIWareView *wareView = new GUIWareView("storage"); {
+                wareView->setTextFormat(e172::TextFormat::AlignTop | e172::TextFormat::AlignRight);
+
+            } wareViewStack->push(wareView);
+        } m_gui->addStack(wareViewStack);
         m_gui->setMiniMap(new GUIMiniMap());
         m_gui->setDebugValueInfo(new GUIDebugValueInfo());
     }

@@ -30,6 +30,16 @@ public:
     void addCapability(Capability *capability);
     void removeCapability(Capability *capability);
 
+    template<typename T>
+    T *capability() {
+        for(auto c : m_capabilities) {
+            const auto cc = dynamic_cast<T*>(c);
+            if(cc)
+                return cc;
+        }
+        return nullptr;
+    }
+
     virtual void hit(e172::Context *context, int value);
 
     ModuleHandler *moduleHandler() const;

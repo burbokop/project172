@@ -32,6 +32,15 @@ class AssetProvider {
     void processFile(std::string file, std::string path);
 public:
     Loadable *createLoadable(std::string templateId);
+    template<typename T>
+    T *createLoadable(std::string templateId) {
+        const auto l = dynamic_cast<T*>(createLoadable(templateId));
+        if(l)
+            return l;
+
+        delete l;
+        return nullptr;
+    }
     AssetProvider();
     void searchInFolder(std::string path);
     std::vector<std::string> loadableNames();

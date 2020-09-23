@@ -113,8 +113,8 @@ public:
             };
         }
 
-        m_typeName = Type<T>::name;
-        m_typeHash = Type<T>::hash;
+        m_typeName = Type<T>::name();
+        m_typeHash = Type<T>::hash();
     }
 };
 
@@ -204,7 +204,7 @@ public:
     template<typename T>
     T value() const {
         if(!containsType<T>()) {
-            throw std::runtime_error("Variant does not contain type: " + Type<T>::name);
+            throw std::runtime_error("Variant does not contain type: " + Type<T>::name());
         }
         if(m_data)
             return dynamic_cast<VariantHandle<T>*>(m_data)->value;
@@ -382,9 +382,9 @@ public:
 
 
     [[deprecated("Will be added in future")]]
-    ByteArray toJson() const;
+    std::string toJson() const;
     [[deprecated("Will be added in future")]]
-    static Variant fromJson(const ByteArray &json);
+    static Variant fromJson(const std::string &json);
 
 
 

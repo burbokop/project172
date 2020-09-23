@@ -12,12 +12,21 @@ class AbstractRenderer;
 class Context;
 
 class Entity : public Object {
+    friend class GameApplication;
 public:
     typedef uintptr_t id_t;
 private:
     static inline id_t nextId = 0;
     id_t m_entityId = ++nextId;
     StringSet m_tags;
+
+    //[EXPERIMENTAL] extended update functions
+    typedef std::pair<void(*)(Entity*, Context*, AbstractEventHandler*), void(*)(Entity*, AbstractRenderer*)> __euf_t;
+    std::list<__euf_t> __euf;
+protected:
+    void __installEUF(const __euf_t &euf) {
+        __euf.push_back(euf);
+    }
 public:
     Entity();
     void virtual proceed(e172::Context *context, AbstractEventHandler *eventHandler) = 0;

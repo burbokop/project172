@@ -1,7 +1,7 @@
 #ifndef WARETEST_H
 #define WARETEST_H
 
-#include <src/additional/warecontainer.h>
+#include <src/additional/ware/warecontainer.h>
 
 #include <src/engine/testprovider.h>
 

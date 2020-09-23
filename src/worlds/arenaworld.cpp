@@ -43,9 +43,9 @@ WorldPreset::GenerationResult ArenaWorld::generate(e172::Context *context) {
     playerShip->resetPhysicsProperties({ 100, 100 }, -0.7);
     playerShip->addCapability(player1);
     ModuleHandler *playerModuleHandler = new ModuleHandler();
-    playerModuleHandler->addModule(static_cast<Module*>(context->assetProvider()->createLoadable("pistol")));
-    playerModuleHandler->addModule(static_cast<Module*>(context->assetProvider()->createLoadable("engine2")));
-    playerModuleHandler->addModule(static_cast<Module*>(context->assetProvider()->createLoadable("warp-drive1")));
+    playerModuleHandler->addModule(dynamic_cast<Module*>(context->assetProvider()->createLoadable("pistol")));
+    playerModuleHandler->addModule(dynamic_cast<Module*>(context->assetProvider()->createLoadable("engine2")));
+    playerModuleHandler->addModule(dynamic_cast<Module*>(context->assetProvider()->createLoadable("warp-drive1")));
     playerShip->addCapability(playerModuleHandler);
     result.entities.push_back(playerShip);
 
@@ -53,9 +53,9 @@ WorldPreset::GenerationResult ArenaWorld::generate(e172::Context *context) {
     Unit *player2ship = static_cast<Unit*>(context->assetProvider()->createLoadable("sh2"));
     player2ship->resetPhysicsProperties(e172::Vector(0, 100), -0.7);
     ModuleHandler *player2ModuleHandler = new ModuleHandler();
-    player2ModuleHandler->addModule(static_cast<Module*>(context->assetProvider()->createLoadable("plasma-launcher")));
-    player2ModuleHandler->addModule(static_cast<Module*>(context->assetProvider()->createLoadable("engine1")));
-    player2ModuleHandler->addModule(static_cast<Module*>(context->assetProvider()->createLoadable("warp-drive1")));
+    player2ModuleHandler->addModule(dynamic_cast<Module*>(context->assetProvider()->createLoadable("plasma-launcher")));
+    player2ModuleHandler->addModule(dynamic_cast<Module*>(context->assetProvider()->createLoadable("engine1")));
+    player2ModuleHandler->addModule(dynamic_cast<Module*>(context->assetProvider()->createLoadable("warp-drive1")));
     player2ship->addCapability(player2ModuleHandler);
     player2ship->addCapability(player2);
     result.entities.push_back(player2ship);

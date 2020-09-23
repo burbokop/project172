@@ -20,7 +20,7 @@ class Loadable {
 protected:
     void registerInitFunction(const std::function<void(void)> &function);
     template<typename C>
-    void registerInitFunction(C *obj, void(C::*f)()) { registerInitFunction(obj->*f); }
+    void registerInitFunction(C *obj, void(C::*f)()) { registerInitFunction([obj, f]() { (obj->*f)(); }); }
 public:
     Loadable();
 

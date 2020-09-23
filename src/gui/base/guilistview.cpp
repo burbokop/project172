@@ -51,18 +51,41 @@ void GUIListView::proceed(e172::Context *, e172::AbstractEventHandler *eventHand
 }
 
 void GUIListView::render(e172::AbstractRenderer *renderer) {
-    e172::Vector pointer = e172::Vector(margin(), margin());
-    auto textSize = renderer->drawString(title(), pointer, DefaultColor);
+    const auto row_c = rowCount();
+    e172::Vector pointer;
+
+    if(textFormat().alignment() & e172::TextFormat::AlignLeft) {
+        pointer += e172::Vector(margin(), 0);
+    } else if(textFormat().alignment() & e172::TextFormat::AlignRight) {
+        pointer += e172::Vector(renderer->resolution().x() - margin(), 0);
+        xOffsets.resize(row_c);
+    }
+
+    if(textFormat().alignment() & e172::TextFormat::AlignTop) {
+        pointer += e172::Vector(0, margin());
+    } else if(textFormat().alignment() & e172::TextFormat::AlignBottom) {
+        pointer += e172::Vector(0, renderer->resolution().y() - margin());
+    }
+
+    auto textSize = renderer->drawString(title(), textFormat().alignment() & e172::TextFormat::AlignRight ? pointer - e172::Vector(titleXOffset, 0) : pointer, DefaultColor);
+    titleXOffset = textSize.x();
     pointer += e172::Vector(0, textSize.intY() * 2);
-    renderer->drawLine(pointer, pointer + e172::Vector(textSize.intX(), 0.0), DefaultColor);
+    if(textFormat().alignment() & e172::TextFormat::AlignRight) {
+        renderer->drawLine(pointer - e172::Vector(titleXOffset, 0.0), pointer, DefaultColor);
+    } else {
+        renderer->drawLine(pointer, pointer + e172::Vector(titleXOffset, 0.0), DefaultColor);
+    }
     pointer += e172::Vector(0, textSize.intY());
 
-    for(auto i = 0, count = rowCount(); i < count; ++i) {
+    for(auto i = 0; i < row_c; ++i) {
         const auto text = rowText(i);
         if(i == m_selectedIndex)
             renderer->enableEffect(0);
 
-        renderer->drawString(text, pointer, (i == m_selectedIndex) ? SelectedColor : DefaultColor);
+        const auto xOffset = renderer->drawString(text, textFormat().alignment() & e172::TextFormat::AlignRight ? pointer - e172::Vector(xOffsets[i], 0) : pointer, (i == m_selectedIndex) ? SelectedColor : DefaultColor).x();
+        if(textFormat().alignment() & e172::TextFormat::AlignRight) {
+            xOffsets[i] = xOffset;
+        }
         renderer->disableEffect(0);
         pointer += e172::Vector(4, m_verticalInterval);
     }

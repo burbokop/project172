@@ -4,16 +4,10 @@
 
 #include "../capability.h"
 #include <src/iinformative.h>
-
-#include <src/engine/assettools/loadable.h>
-
 #include <src/animator.h>
-
 #include <src/audio/audioplayer.h>
 
-
-
-class Module : public Capability, public e172::Loadable, public IInformative {
+class Module : public Capability, public IInformative {
 protected:
     Animator animator;
     AudioPlayer audioPlayer;

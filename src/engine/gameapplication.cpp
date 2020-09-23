@@ -150,6 +150,9 @@ int GameApplication::exec() {
 
         for(auto e : m_entities) {
             e->proceed(m_context, m_eventHandler);
+            for(auto euf : e->__euf) {
+                euf.first(e, m_context, m_eventHandler);
+            }
         }
 
         if(m_graphicsProvider && m_renderTimer.check()) {
@@ -162,6 +165,9 @@ int GameApplication::exec() {
                 }
                 for(auto e : m_entities) {
                     e->render(r);
+                    for(auto euf : e->__euf) {
+                        euf.second(e, r);
+                    }
                 }
                 r->m_locked = true;
                 if(!r->update()) {

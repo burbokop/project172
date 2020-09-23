@@ -82,7 +82,7 @@ KeyType AbstractFactory<KeyType, BaseClass>::type(BaseClass *object) const {
 template<typename KeyType, typename BaseClass>
 template<typename T>
 KeyType AbstractFactory<KeyType, BaseClass>::registerType() {
-    return registerType<T>(Type<T>::name);
+    return registerType<T>(Type<T>::name());
 }
 
 template<typename KeyType, typename BaseClass>

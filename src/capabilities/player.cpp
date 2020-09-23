@@ -41,7 +41,7 @@ bool Player::personalKey(e172::AbstractEventHandler *eventHandler, std::string i
     return false;
 }
 
-Player::Player() : Controller(), Loadable() {
+Player::Player() {
     registerInitFunction([this]() {
         auto keymap = asset<e172::VariantMap>("keymap");
         for(auto it = keymap.begin(); it != keymap.end(); ++it) {

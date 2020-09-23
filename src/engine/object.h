@@ -20,26 +20,23 @@ public:
     Object();
 
 
+    template <typename Type>
+    inline bool instanceOf() const { return cast<Type>(); }
 
     template <typename Type>
-    [[deprecated("Use instanceOf instead")]]
-    bool is() {
-        return dynamic_cast<Type>(this) != nullptr;
-    }
+    inline bool instanceOf() { return cast<Type>(); }
 
     template <typename Type>
-    bool instanceOf() {
+    inline typename std::remove_pointer<Type>::type *cast() const {
         typedef typename std::remove_pointer<Type>::type no_ptr_t;
-        return dynamic_cast<no_ptr_t*>(this) != nullptr;
+        return dynamic_cast<const no_ptr_t*>(this);
     }
-
 
     template <typename Type>
-    [[deprecated("Use !instanceOf instead")]]
-    bool isNot() {
-        return dynamic_cast<Type>(this) == nullptr;
+    inline typename std::remove_pointer<Type>::type *cast() {
+        typedef typename std::remove_pointer<Type>::type no_ptr_t;
+        return dynamic_cast<no_ptr_t*>(this);
     }
-
 
     virtual ~Object();
     bool liveInHeap() const;

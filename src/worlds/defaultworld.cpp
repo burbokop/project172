@@ -90,7 +90,7 @@ WorldPreset::GenerationResult DefaultWorld::generate(e172::Context *context) {
     playerDocker->addNode({ 0, -20 }, -e172::Math::Pi / 2);
     playerDocker->addNode({ 0, 20 }, e172::Math::Pi / 2);
     playerShip->addCapability(playerDocker);
-
+    playerShip->addCapability(context->assetProvider()->createLoadable<Capability>("ore_reciept"));
 
     playerShip->addCapability(player1);
     ModuleHandler *playerModuleHandler = new ModuleHandler();

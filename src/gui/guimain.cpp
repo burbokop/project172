@@ -14,11 +14,6 @@ void GUIMain::setMessage(GUICentralMessage *value) {
     addChildElement(value);
 }
 
-void GUIMain::setMenu(GUIStack *value) {
-    menu = value;
-    addChildElement(value);
-}
-
 void GUIMain::addFloatingMessage(Unit *unit, std::string message) {
     floatingMessage = new GUIFloatingMessage(unit, message);
     floatingMessageLifeTimer.reset();
@@ -46,6 +41,11 @@ void GUIMain::addBlushingFloatingMessage(e172::Context *context, const e172::Var
     }
 }
 
+void GUIMain::addStack(GUIStack *value) {
+    m_stacks.push_back(value);
+    addChildElement(value);
+}
+
 void GUIMain::setMiniMap(GUIMiniMap *value) {
     miniMap = value;
     addChildElement(value);
@@ -65,7 +65,9 @@ void GUIMain::proceed(e172::Context *context, e172::AbstractEventHandler *eventH
         floatingMessage = nullptr;
     }
 
-    if(menu) menu->proceed(context, eventHandler);
+    for(auto s : m_stacks) {
+        s->proceed(context, eventHandler);
+    }
     if(centralMessage) centralMessage->proceed(context, eventHandler);
     if(floatingMessage) floatingMessage->proceed(context, eventHandler);
     if(miniMap) miniMap->proceed(context, eventHandler);
@@ -73,7 +75,9 @@ void GUIMain::proceed(e172::Context *context, e172::AbstractEventHandler *eventH
 }
 
 void GUIMain::render(e172::AbstractRenderer *renderer) {
-    if(menu) menu->render(renderer);
+    for(auto s : m_stacks) {
+        s->render(renderer);
+    }
     if(centralMessage) centralMessage->render(renderer);
     if(floatingMessage) floatingMessage->render(renderer);
     if(miniMap) miniMap->render(renderer);

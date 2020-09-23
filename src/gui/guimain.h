@@ -16,7 +16,8 @@ class GUIMain : public GUIElement {
 private:
     static const unsigned FLOATING_LIFE_TIME;
 
-    GUIStack *menu = nullptr;
+    std::vector<GUIStack*> m_stacks;
+
     GUICentralMessage *centralMessage = nullptr;
     GUIFloatingMessage *floatingMessage = nullptr;
     GUIDebugValueInfo *debugValueInfo = nullptr;
@@ -31,7 +32,7 @@ public:
     void addBlushingFloatingMessage(Unit *unit, int value);
     void addBlushingFloatingMessage(e172::Context *context, const e172::Variant &value);
 
-    void setMenu(GUIStack *value);
+    void addStack(GUIStack *value);
     void setMessage(GUICentralMessage *value);
     void setMiniMap(GUIMiniMap *value);
     void setDebugValueInfo(GUIDebugValueInfo *value);

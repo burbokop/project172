@@ -14,6 +14,7 @@
 
 #include <src/assetexecutors/animatorassetexecutor.h>
 #include <src/assetexecutors/audioassetexecutor.h>
+#include <src/assetexecutors/factoryassetexecutor.h>
 #include <src/assetexecutors/mapassetexecutor.h>
 #include <src/assetexecutors/numberassetexecutor.h>
 #include <src/assetexecutors/spriteassetexecutor.h>
@@ -25,6 +26,7 @@
 #include <src/units/ship.h>
 #include <src/units/station.h>
 
+#include <src/capabilities/factory.h>
 #include <src/capabilities/player.h>
 
 #include <src/capabilities/modules/engine.h>
@@ -48,6 +50,15 @@
 
 
 int main(int argc, char *argv[]) {
+    const auto a = e172::Variant::fromJson(e172::Additional::readFile("/home/viktor/projects/project172/assets/templates/reciepts/ore_reciept.json"));
+
+
+    e172::Variant v = std::string("gogadoda");
+
+    std::string type = e172::Type<int>::name();
+
+    std::cout << type << " : " << a.typeName() << " : " << a << "\n";
+
 
     TestProvider::runAllTests();
 
@@ -95,7 +106,7 @@ int main(int argc, char *argv[]) {
         menu.addMenuElement(new GUIChoice(std::string("SDL2"), SDL, f));
         menu.addMenuElement(new GUIChoice(std::string("Vulkan"), Vulkan, f));
         stack.push(&menu);
-        gui.setMenu(&stack);
+        gui.addStack(&stack);
 
         gprovider.loadFont(std::string(), chooseGraphicsProviderApp.context()->absolutePath("../assets/fonts/ZCOOL.ttf"));
 
@@ -153,6 +164,8 @@ int main(int argc, char *argv[]) {
     app.assetProvider()->installExecutor("damage", std::make_shared<NumberAssetExecutor>());
     app.assetProvider()->installExecutor("zoom", std::make_shared<NumberAssetExecutor>());
     app.assetProvider()->installExecutor("mass", std::make_shared<NumberAssetExecutor>());
+    app.assetProvider()->installExecutor("input", std::make_shared<RecieptAssetExecutor>());
+    app.assetProvider()->installExecutor("output", std::make_shared<RecieptAssetExecutor>());
 
     app.assetProvider()->registerType<Unit>();
     app.assetProvider()->registerType<Ship>();
@@ -163,6 +176,7 @@ int main(int argc, char *argv[]) {
     app.assetProvider()->registerType<Weapon>();
     app.assetProvider()->registerType<WarpDrive>();
     app.assetProvider()->registerType<Thruster>();
+    app.assetProvider()->registerType<Factory>();
 
 
     app.assetProvider()->searchInFolder(app.context()->absolutePath("../assets"));

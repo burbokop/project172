@@ -4,6 +4,7 @@
 #include "guielement.h"
 
 #include <src/iinformative.h>
+#include <src/engine/textformat.h>
 #include <src/engine/variant.h>
 
 
@@ -11,6 +12,8 @@ class GUIMenuElement : public GUIElement {
 protected:
     std::string label = "[no data]";
     IInformative *m_informative = nullptr;
+
+    e172::TextFormat m_textFormat = e172::TextFormat::AlignTop | e172::TextFormat::AlignLeft;
 
     e172::Variant m_modelData;
 public:
@@ -30,6 +33,8 @@ public:
 public:
     void proceed(e172::Context *, e172::AbstractEventHandler *);
     void render(e172::AbstractRenderer *);
+    e172::TextFormat textFormat() const;
+    void setTextFormat(const e172::TextFormat &textFormat);
 };
 
 #endif // GUILABEL_H

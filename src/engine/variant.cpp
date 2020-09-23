@@ -1,3 +1,4 @@
+#include "additional.h"
 #include "variant.h"
 
 #include <src/engine/time/elapsedtimer.h>
@@ -170,13 +171,38 @@ std::string Variant::toString() const {
 }
 
 
-ByteArray Variant::toJson() const {
-    return ByteArray();
+std::string Variant::toJson() const {
+
 }
 
 
-Variant Variant::fromJson(const ByteArray &json) {
-    (void)json;
+Variant Variant::fromJson(const std::string &json) {
+    if(json.size() > 0) {
+        if(json[0] == '{' && json.back() == '}') {
+            VariantMap map;
+            const auto ss = Additional::split(json.substr(1, json.size() - 2), ',');
+            for(const auto& s : ss) {
+                const auto recored = Additional::split(s, ':');
+                if(recored.size() > 1) {
+                    map[recored[0]] = fromJson(recored[1]);
+                }
+            }
+            return map;
+        } else if(json[0] == '[' && json.back() == '}') {
+            VariantList list;
+            const auto ss = Additional::split(json.substr(1, json.size() - 2), ',');
+            for(const auto& s : ss) {
+                list.push_back(fromJson(s));
+            }
+            return list;
+        } else {
+            try {
+                return std::stod(json);
+            } catch (std::invalid_argument) {
+                return json;
+            }
+        }
+    }
     return Variant();
 }
 

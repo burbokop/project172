@@ -144,7 +144,13 @@ target_link_libraries(sdl_impl
     )
 
 
+
 add_executable(project172
+    ${CMAKE_CURRENT_LIST_DIR}/src/additional/experimental/injectableentity.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/additional/experimental/injectableentity.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/additional/experimental/__capability.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/additional/experimental/__capability.h
+
     ${CMAKE_CURRENT_LIST_DIR}/src/appextensions/screensettingsextension.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/appextensions/screensettingsextension.h
     ${CMAKE_CURRENT_LIST_DIR}/src/animator.cpp
@@ -194,8 +200,13 @@ add_executable(project172
     ${CMAKE_CURRENT_LIST_DIR}/src/additional/segmentpaiter.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/additional/segmentpaiter.h
 
-    ${CMAKE_CURRENT_LIST_DIR}/src/additional/warecontainer.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/additional/warecontainer.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/additional/ware/warecontainer.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/additional/ware/warecontainer.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/additional/ware/waremultibaycontainer.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/additional/ware/waremultibaycontainer.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/additional/ware/abstractwarecontainer.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/additional/ware/abstractwarecontainer.h
+
 
     ${CMAKE_CURRENT_LIST_DIR}/src/assetexecutors/animatorassetexecutor.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/assetexecutors/animatorassetexecutor.h
@@ -211,6 +222,8 @@ add_executable(project172
     ${CMAKE_CURRENT_LIST_DIR}/src/assetexecutors/stringassetexecutor.h
     ${CMAKE_CURRENT_LIST_DIR}/src/assetexecutors/vectorassetexecutor.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/assetexecutors/vectorassetexecutor.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/assetexecutors/factoryassetexecutor.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/assetexecutors/factoryassetexecutor.h
 
     ${CMAKE_CURRENT_LIST_DIR}/src/audio/audioplayer.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/audio/audioplayer.h
@@ -240,6 +253,10 @@ add_executable(project172
     ${CMAKE_CURRENT_LIST_DIR}/src/capabilities/modulehandler.h
     ${CMAKE_CURRENT_LIST_DIR}/src/capabilities/player.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/capabilities/player.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/capabilities/warestorage.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/capabilities/warestorage.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/capabilities/factory.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/capabilities/factory.h
 
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/base/guibaseelement.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/base/guibaseelement.h
@@ -282,6 +299,8 @@ add_executable(project172
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/guibutton.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/guidockingview.h
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/guidockingview.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/gui/guiwareview.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/gui/guiwareview.h
 
     ${CMAKE_CURRENT_LIST_DIR}/src/units/camera.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/units/camera.h

@@ -17,7 +17,6 @@ protected:
     void setMargin(int margin);
 public:
     GUIElement();
-
     int margin() const;
 };
 

@@ -9,7 +9,7 @@
 #include <src/engine/assettools/loadable.h>
 
 
-class Player : public Controller, public e172::Loadable {
+class Player : public Controller {
 private:
     static const std::map<std::string, e172::Scancode> scancode;
 
