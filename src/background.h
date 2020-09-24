@@ -21,6 +21,7 @@ class Background : public e172::Entity {
     static const long DEFAULT_FLASHING_INTERVAL;
 
 
+
     uint32_t mainColor = DEFAULT_MAIN_COLOR;
     std::vector<Star> stars;
     unsigned int amount;

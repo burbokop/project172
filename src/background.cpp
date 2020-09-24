@@ -40,6 +40,7 @@ void Background::onResolutionChanged(const e172::Vector &resolution) {
         stars.push_back(star);
     }
 }
+
 void Background::proceed(e172::Context *context, e172::AbstractEventHandler *) {
     context->popMessage(e172::Context::BACKGROUND_FLASHING, this, &Background::flashing);
 }

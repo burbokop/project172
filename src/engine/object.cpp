@@ -11,6 +11,7 @@ bool e172::Object::liveInHeap() const {
 
 int *heap_example = new int();
 
+
 e172::Object::Object() {
     int stack_example;
 

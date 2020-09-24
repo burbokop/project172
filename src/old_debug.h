@@ -1,5 +1,5 @@
-#ifndef DEBUG_H
-#define DEBUG_H
+#ifndef OLD_DEBUG_H
+#define OLD_DEBUG_H
 
 #include <string>
 #include <fstream>
@@ -43,6 +43,16 @@ private:
     static void onSegSignal [[ noreturn ]] (int signum);
 public:
 
+    struct ProcessStat {
+        size_t uid;
+        size_t page_size;
+        size_t sc;
+        size_t vsize_origin;
+        double vm;
+        double rss;
+    };
+
+    static ProcessStat proc_stat();
 
     static void log(std::string message);
     static void out(std::string message);
@@ -53,6 +63,7 @@ public:
     static double getRuntimeRSS();
 
 
+    static int get_memory_usage_kb(long *vmrss_kb, long *vmsize_kb);
 };
 
 }

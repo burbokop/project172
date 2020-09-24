@@ -48,6 +48,8 @@
 
 #include <tests/waretest.h>
 
+#include <src/additional/memstatearner.h>
+
 
 int main(int argc, char *argv[]) {
     const auto a = e172::Variant::fromJson(e172::Additional::readFile("/home/viktor/projects/project172/assets/templates/reciepts/ore_reciept.json"));
@@ -182,11 +184,15 @@ int main(int argc, char *argv[]) {
     app.assetProvider()->searchInFolder(app.context()->absolutePath("../assets"));
     graphicsProvider->loadFont(std::string(), app.context()->absolutePath("../assets/fonts/ZCOOL.ttf"));
 
-    //INITIALIZATION CONMPLEATED
+    //APP INITIALIZATION CONMPLEATED
 
     //initialization background
     Background background = 128;
     app.addEntity(&background);
+
+    //mem stat
+    MemStatEarner memStat;
+    app.addEntity(&memStat);
 
     //setup radar near
     Near radarNear;

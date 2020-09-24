@@ -42,7 +42,10 @@ add_library(e172 SHARED
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/math/vector.h
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/math/kinematics.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/math/kinematics.h
-
+    ${CMAKE_CURRENT_LIST_DIR}/src/engine/math/differentiator.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/engine/math/differentiator.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/engine/math/averagecalculator.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/engine/math/averagecalculator.h
 
 
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/memcontrol/abstractfactory.cpp
@@ -177,6 +180,8 @@ add_executable(project172
     ${CMAKE_CURRENT_LIST_DIR}/src/additional/informative/registryinfo.h
     ${CMAKE_CURRENT_LIST_DIR}/src/additional/informative/unitsamountinfo.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/additional/informative/unitsamountinfo.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/additional/memstatearner.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/additional/memstatearner.h
 
     ${CMAKE_CURRENT_LIST_DIR}/src/additional/net/framebuilder.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/additional/net/framebuilder.h
