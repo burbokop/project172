@@ -11,6 +11,13 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 
+
+
+
+
+
+
+
 include_directories(${CMAKE_CURRENT_LIST_DIR})
 
 add_library(e172 SHARED
@@ -46,7 +53,8 @@ add_library(e172 SHARED
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/math/differentiator.h
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/math/averagecalculator.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/math/averagecalculator.h
-
+    ${CMAKE_CURRENT_LIST_DIR}/src/engine/math/colider.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/engine/math/colider.h
 
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/memcontrol/abstractfactory.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/memcontrol/abstractfactory.h
@@ -148,11 +156,42 @@ target_link_libraries(sdl_impl
 
 
 
+function(add_go_library TARGET_LIB GO_SRCS)
+    set(GO_LIBNAME lib${TARGET_LIB}.so)
+    message("TARGET_LIB: " ${TARGET_LIB})
+    message("GO_LIBNAME: " ${GO_LIBNAME})
+    message("GO_SRCS: " ${GO_SRCS})
+    add_custom_command(OUTPUT ${GO_LIBNAME}
+        DEPENDS ${GO_SRCS}
+        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+        COMMAND env go build -buildmode=c-shared -o "${CMAKE_CURRENT_BINARY_DIR}/${GO_LIBNAME}" ${CMAKE_GO_FLAGS} ${GO_SRCS}
+        COMMENT "Building Go library"
+        )
+
+    add_custom_target(${TARGET_LIB}.lib DEPENDS ${GO_LIBNAME})
+endfunction()
+
+#add_library(go_test SHARED
+#    ${CMAKE_CURRENT_LIST_DIR}/src/test.go
+#    )
+
+
+add_go_library(go_net
+    ${CMAKE_CURRENT_LIST_DIR}/src/additional/go/netservice.go
+    ${CMAKE_CURRENT_LIST_DIR}/src/additional/go/netclient.go
+    )
+
+
+
+
+
 add_executable(project172
     ${CMAKE_CURRENT_LIST_DIR}/src/additional/experimental/injectableentity.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/additional/experimental/injectableentity.h
     ${CMAKE_CURRENT_LIST_DIR}/src/additional/experimental/__capability.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/additional/experimental/__capability.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/additional/chartview.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/additional/chartview.h
 
     ${CMAKE_CURRENT_LIST_DIR}/src/appextensions/screensettingsextension.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/appextensions/screensettingsextension.h
@@ -339,12 +378,17 @@ add_executable(project172
 include(${CMAKE_CURRENT_LIST_DIR}/src/vulkanimplementation/CMakeLists.txt)
 include(${CMAKE_CURRENT_LIST_DIR}/tests/CMakeLists.txt)
 
+add_dependencies(project172 go_net.lib)
+
+link_directories(${CMAKE_CURRENT_BINARY_DIR})
 
 target_link_libraries(project172
     sdl_impl
     vulkan_impl
     e172
     project172_tests
+    ${CMAKE_CURRENT_BINARY_DIR}/libgo_net.so
+    #libgo_net
     )
 
 

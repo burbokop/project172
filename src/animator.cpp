@@ -7,8 +7,7 @@ void Animator::setDefaultMode(unsigned value) {
     defaultMode = value;
 }
 
-bool Animator::isValid() const
-{
+bool Animator::isValid() const {
     return m_isValid;
 }
 

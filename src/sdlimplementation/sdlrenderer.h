@@ -55,8 +55,8 @@ public:
 
     void fill(uint32_t color) override;
     void drawPixel(const e172::Vector &point, uint32_t color) override;
-    void drawLine(const e172::Vector &point1, const e172::Vector &point2, uint32_t color) override;
-    void drawRect(const e172::Vector &point1, const e172::Vector &point2, uint32_t color) override;
+    void drawLine(const e172::Vector &point0, const e172::Vector &point1, uint32_t color) override;
+    void drawRect(const e172::Vector &point0, const e172::Vector &point1, uint32_t color) override;
     void drawSquare(const e172::Vector &point, int radius, uint32_t color) override;
     void drawCircle(const e172::Vector &point, int radius, uint32_t color) override;
     void drawDiagonalGrid(const e172::Vector &point1, const e172::Vector &point2, int interval, uint32_t color) override;

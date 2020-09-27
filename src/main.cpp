@@ -22,6 +22,7 @@
 #include <src/assetexecutors/vectorassetexecutor.h>
 
 
+
 #include <src/units/projectile.h>
 #include <src/units/ship.h>
 #include <src/units/station.h>
@@ -44,25 +45,42 @@
 #include <src/vulkanimplementation/vulkangraphicsprovider.h>
 
 #include <iostream>
-
+#include <math.h>
 
 #include <tests/waretest.h>
 
+#include <src/additional/chartview.h>
 #include <src/additional/memstatearner.h>
 
+extern "C" {
+int go_run_server();
+void go_stop_service(int);
+void go_http_get();
+}
+
+void foo(int x){
+    std::cout << __PRETTY_FUNCTION__ << " " << x << "\n";
+}
 
 int main(int argc, char *argv[]) {
-    const auto a = e172::Variant::fromJson(e172::Additional::readFile("/home/viktor/projects/project172/assets/templates/reciepts/ore_reciept.json"));
+    //const auto a = e172::Variant::fromJson(e172::Additional::readFile("/home/viktor/projects/project172/assets/templates/reciepts/ore_reciept.json"));
+
+    int desc = go_run_server();
+
+    std::cout << "desc: " << desc << "\n";
+
+    go_stop_service(desc);
+
+    go_http_get();
+
+    //e172::Variant v = std::string("gogadoda");
+
+    //std::string type = e172::Type<int>::name();
+
+    //std::cout << type << " : " << a.typeName() << " : " << a << "\n";
 
 
-    e172::Variant v = std::string("gogadoda");
-
-    std::string type = e172::Type<int>::name();
-
-    std::cout << type << " : " << a.typeName() << " : " << a << "\n";
-
-
-    TestProvider::runAllTests();
+    //TestProvider::runAllTests();
 
     std::cout << "count of .cpp files: " << e172::Additional::countOfFiles(e172::Additional::absolutePath("../src", argv[0]), ".cpp") << "\n";
 
@@ -231,9 +249,6 @@ int main(int argc, char *argv[]) {
     guiMaker.setWorldPresetStrategy(&worldPresetStrategy);
 
 
-
-
-
     //independent services initialization
 
     ExplosiveSpawner explosiveSpawner;
@@ -241,6 +256,36 @@ int main(int argc, char *argv[]) {
 
     ScreenSettingsExtension screenSettingsExtension;
     app.addApplicationExtension(&screenSettingsExtension);
+
+
+    //debug utitlity
+    ChartView chartView;
+
+    //const auto f = [](double x, double x0){
+    //    return std::sqrt(x) * x * 0.5;
+    //};
+
+
+    const auto f = [](double x, double x0) {
+        if(x0 != e172::Math::null) {
+            const auto a = (1 - x / x0);
+            if(a != e172::Math::null) {
+                return x * std::abs(1 / a - 1) * 2;
+            }
+        }
+        return 0.;
+    };
+
+    //const auto f = [](double x, double x0){
+    //    return std::pow(2, x) - 1;
+    //};
+
+
+    chartView.setOffset({ 100, 500 });
+    chartView.setFunction(f);
+    chartView.setCoeficient(200);
+    chartView.setPointCount(300);
+    app.addEntity(&chartView);
 
     //start application
 

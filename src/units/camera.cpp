@@ -4,6 +4,7 @@
 #include <src/engine/objectregistry.h>
 #include <src/units/unit.h>
 #include <math.h>
+#include <src/engine/math/math.h>
 
 const double Camera::STOP_DISTANCE = 4;
 const double Camera::MAX_SPEED_MULTIPLIER = 0.002 * 1000;
@@ -27,12 +28,30 @@ void Camera::proceed(e172::Context *context, e172::AbstractEventHandler *) {
             if(targetUnit == e172::Alive) {
                 //addRestoringForce(targetUnit->position());
 
-                const auto f = [](double x, double x0){
-                    return std::sqrt(x) * x * 0.5;
+                const auto f = [](double x, double x0) {
+                    if(x0 != e172::Math::null) {
+                        const auto a = (1 - x / x0);
+                        if(a != e172::Math::null) {
+                            return x * std::abs(1 / a - 1) * 2;
+                        }
+                    }
+                    return 0.;
                 };
 
+                //const auto f = [](double x, double x0){
+                //    return std::sqrt(x) * x * 0.5;
+                //};
 
-                addDistanceRelatedForce(targetUnit->position(), f, 0);
+                //const auto f = [](double x, double x0){
+                //    return std::pow(2, x) - 1;
+                //};
+
+
+                if((targetUnit->position() - position()).cheapModule() * 2 > 200) {
+                    resetPhysicsProperties(targetUnit->position(), 0);
+                } else {
+                    addDistanceRelatedForce(targetUnit->position(), f, 200);
+                }
                 //addFollowForce(targetUnit->position(), 200);
                 //relativisticPursuit(context, targetUnit);
             }
@@ -58,5 +77,9 @@ void Camera::render(e172::AbstractRenderer *renderer) {
         renderer->drawCircle(position() + offset, 2, color);
     } else {
         renderer->drawSquare(position() + offset, 2, color);
+    }
+    if(target()) {
+        renderer->drawString(std::to_string((position() - target()->parentUnit()->position()).x()), position() + offset + e172::Vector(20, 20), color);
+        renderer->drawString(std::to_string((position() - target()->parentUnit()->position()).y()), position() + offset + e172::Vector(20, 40), color);
     }
 }

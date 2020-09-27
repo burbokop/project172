@@ -177,15 +177,49 @@ void SDLRenderer::drawPixel(const e172::Vector &point, Uint32 color) {
     SPM::FillPixel(surface, point.intX(), point.intY(), color);
 }
 
-void SDLRenderer::drawLine(const e172::Vector &point1, const e172::Vector &point2, Uint32 color) {
+void SDLRenderer::drawLine(const e172::Vector &point0, const e172::Vector &point1, Uint32 color) {
     SDL_LockSurface(surface);
-    SPM::Line(surface, point1.intX(), point1.intY(), point2.intX(), point2.intY(), color);
+    int x0 = point0.intX();
+    int y0 = point0.intY();
+    int x1 = point1.intX();
+    int y1 = point1.intY();
+    if(x0 == x1) {
+        if(y0 < 0) {
+            y0 = 0;
+        } else if(y0 > m_resolution.intY()) {
+            y0 = m_resolution.intY();
+        }
+        if(y1 < 0) {
+            y1 = 0;
+        } else if(y1 > m_resolution.intY()) {
+            y1 = m_resolution.intY();
+        }
+    } else {
+        double k = static_cast<double>(y1 - y0) / static_cast<double>(x1 - x0);
+        double b = y0 - k * x0;
+
+        if(x0 < 0) {
+            x0 = 0;
+            y0 = k * x0 + b;
+        } else if(x0 > m_resolution.intX()) {
+            x0 = m_resolution.intX();
+            y0 = k * x0 + b;
+        }
+        if(x1 < 0) {
+            x1 = 0;
+            y1 = k * x1 + b;
+        } else if(x1 > m_resolution.intX()) {
+            x1 = m_resolution.intX();
+            y1 = k * x1 + b;
+        }
+    }
+    SPM::Line(surface, x0, y0, x1, y1, color);
     SDL_UnlockSurface(surface);
 }
 
-void SDLRenderer::drawRect(const e172::Vector &point1, const e172::Vector &point2, Uint32 color) {
+void SDLRenderer::drawRect(const e172::Vector &point0, const e172::Vector &point1, Uint32 color) {
     SDL_LockSurface(surface);
-    SPM::Rect(surface, point1.intX(), point1.intY(), point2.intX(), point2.intY(), color);
+    SPM::Rect(surface, point0.intX(), point0.intY(), point1.intX(), point1.intY(), color);
     SDL_UnlockSurface(surface);
 }
 

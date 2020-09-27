@@ -96,6 +96,23 @@ Vector Vector::normalized() const {
     }
 }
 
+Vector Vector::projection(const Vector &b) const {
+    const auto bm2 = b * b;
+    if(bm2 != e172::Math::null) {
+        const auto k = (*this * b) / bm2;
+        return { k * b.x(), k * b.y() };
+    }
+    return {};
+}
+
+Vector Vector::leftNormal() const {
+    return { m_y, -m_x };
+}
+
+Vector Vector::rightNormal() const {
+    return { -m_y, m_x };
+}
+
 double Vector::angle() const {
     double cos = this->normalized() * Vector(1, 0);
     if(this->m_y >= 0) return e172::Math::acos(cos);

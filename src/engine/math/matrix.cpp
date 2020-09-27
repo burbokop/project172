@@ -4,7 +4,7 @@
 
 e172::Matrix::Matrix(double value) {
     m_a11 = value;
-    m_a21 = value;
+    m_a22 = value;
 }
 
 e172::Vector e172::Matrix::operator*(const e172::Vector &vector) const {

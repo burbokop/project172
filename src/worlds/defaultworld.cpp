@@ -11,6 +11,7 @@
 #include <src/units/ship.h>
 #include <src/units/unit.h>
 #include <src/additional/segmentpaiter.h>
+#include <src/capabilities/modules/weapon.h>
 
 #include <src/engine/context.h>
 #include <src/engine/physicalobject.h>
@@ -46,41 +47,28 @@ WorldPreset::GenerationResult DefaultWorld::generate(e172::Context *context) {
     result.controllers.push_back(player2);
 
 
-    auto ffo = new FTestObject();
 
 
-    std::shared_ptr<e172::ltd> sss = std::make_shared<e172::ltd>([](){});
-    e172::ltd* ltd = sss.operator->();
-
-    {
-        const auto ll = ffo->someData();
-        std::cout << "l0: " << ll.operator bool() << "\n";
-
-        ll->foo();
-
-
-    }
-
-    const auto ll2 = ffo->someData();
-    std::cout << "l1: " << ll2.operator bool() << "\n";
-
-    delete ffo;
-
-    std::cout << "l2: " << ll2.operator bool() << "\n";
 
     SegmentPaiter *segmentPaiter = new SegmentPaiter();
     segmentPaiter->resetPhysicsProperties({ 100, 0 }, 0);
     result.entities.push_back(segmentPaiter);
 
-    //result.entities.push_back(ffo);
-    //auto sfo = new FTestObject(ffo);
-    //result.entities.push_back(sfo);
-    //
-    //ffo->setCOffset({ 0, -20 });
-    //ffo->setCAngle(-e172::Math::Pi / 2);
-    //
-    //sfo->setCOffset({ 0, 20 });
-    //sfo->setCAngle(e172::Math::Pi / 2);
+
+    auto ffo = new FTestObject();
+    result.entities.push_back(ffo);
+    auto sfo = new FTestObject(ffo);
+    result.entities.push_back(sfo);
+
+    ffo->setCOffset({ 0, -20 });
+    ffo->setCAngle(-e172::Math::Pi / 2);
+    ffo->setColiderVertices({ { -100, 50 }, { 0, -50 }, { 100, 50 } });
+
+    sfo->setCOffset({ 0, 20 });
+    sfo->setCAngle(e172::Math::Pi / 2);
+    sfo->setColiderVertices({ { -100, 50 }, { 0, -50 }, { 100, 50 } });
+
+
 
 
     Unit *playerShip = static_cast<Unit*>(context->assetProvider()->createLoadable("sh1"));
@@ -94,10 +82,15 @@ WorldPreset::GenerationResult DefaultWorld::generate(e172::Context *context) {
 
     playerShip->addCapability(player1);
     ModuleHandler *playerModuleHandler = new ModuleHandler();
-    playerModuleHandler->addModule(static_cast<Module*>(context->assetProvider()->createLoadable("pistol")));
-    playerModuleHandler->addModule(static_cast<Module*>(context->assetProvider()->createLoadable("engine2")));
-    playerModuleHandler->addModule(static_cast<Module*>(context->assetProvider()->createLoadable("warp-drive1")));
-    playerModuleHandler->addModule(static_cast<Module*>(context->assetProvider()->createLoadable("thruster1")));
+    playerModuleHandler->addModule(context->assetProvider()->createLoadable<Module>("engine2"));
+    playerModuleHandler->addModule(context->assetProvider()->createLoadable<Module>("warp-drive1"));
+    playerModuleHandler->addModule(context->assetProvider()->createLoadable<Module>("thruster1"));
+    const auto pp0 = context->assetProvider()->createLoadable<Weapon>("pistol");
+    const auto pp1 = context->assetProvider()->createLoadable<Weapon>("pistol");
+    pp0->setOffset({ 0, -4 });
+    pp1->setOffset({ 0, 4 });
+    playerModuleHandler->addModule(pp0);
+    playerModuleHandler->addModule(pp1);
 
     playerShip->addCapability(playerModuleHandler);
 

@@ -13,6 +13,14 @@ double Weapon::getProjectileSpead() const {
     return projectileVelocity;
 }
 
+e172::Vector Weapon::offset() const {
+    return m_offset;
+}
+
+void Weapon::setOffset(const e172::Vector &offset) {
+    m_offset = offset;
+}
+
 Weapon::Weapon() {
     timer.reset();
     registerInitFunction([this](){
@@ -37,13 +45,12 @@ void Weapon::proceed(e172::Context *context, e172::AbstractEventHandler *eventHa
     this->Module::proceed(context, eventHandler);
     if(timer.check(firing)) {
         if(projectileName.size() > 0) {
-            Projectile *object = static_cast<Projectile*>(context->assetProvider()->createLoadable(projectileName));
-            object->setMother(parentUnit());
-            object->resetPhysicsProperties(parentUnit()->position(), parentUnit()->rotation(), parentUnit()->velocity() + e172::Vector::createByAngle(getProjectileSpead(), parentUnit()->rotation()));
+            auto object = context->assetProvider()->createLoadable<Projectile>(projectileName);
+            const auto p = parentUnit();
+            object->setMother(p);
+            object->resetPhysicsProperties(p->position() + p->rotationMatrix() * m_offset, p->rotation(), p->velocity() + e172::Vector::createByAngle(getProjectileSpead(), p->rotation()));
             context->addEntity(object);
-
             audioPlayer.play();
-            //this.parent.audioPlayer.play(this, 14);
         }
     }
 }

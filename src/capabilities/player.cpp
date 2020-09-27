@@ -5,6 +5,7 @@
 #include <src/capabilities/modulehandler.h>
 #include <src/engine/context.h>
 #include <src/capabilities/docker.h>
+#include <src/engine/args.h>
 
 const std::map<std::string, e172::Scancode> Player::scancode = {
     { "q", e172::ScancodeQ },
@@ -59,9 +60,7 @@ void Player::setArmor(Ship *armor) {
 void Player::dock(e172::Entity::id_t entity) {
     dockRequestedQueue.push(entity);
 }
-#include <iostream>
 
-#include <src/engine/args.h>
 void Player::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
     if(auto ship = dynamic_cast<Ship*>(parentUnit())) {
         if(personalKey(eventHandler, "left")) {
@@ -69,7 +68,6 @@ void Player::proceed(e172::Context *context, e172::AbstractEventHandler *eventHa
         } else if(personalKey(eventHandler, "right")) {
             ship->maneuverRight();
         }
-
 
         while(dockRequestedQueue.size() > 0) {
             const auto targetUnit = context->entityById<Unit>(dockRequestedQueue.front());

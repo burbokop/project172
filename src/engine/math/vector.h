@@ -45,6 +45,10 @@ public:
     double cheapModule() const;
     Vector normalized() const;
 
+    Vector projection(const Vector &b) const;
+    Vector leftNormal() const;
+    Vector rightNormal() const;
+
     double angle() const; //checkpoint
 
     Vector relativisticAddition(Vector term, double c) const;

@@ -4,6 +4,8 @@
 #include <src/engine/entity.h>
 #include <src/engine/physicalobject.h>
 #include <memory>
+#include <iostream>
+#include <src/engine/math/colider.h>
 
 namespace e172 {
 
@@ -60,7 +62,7 @@ public:
 };
 
 }
-#include <iostream>
+
 class FTestObject : public e172::Entity, public e172::PhysicalObject {
     FTestObject *m_targetObject = nullptr;
 
@@ -69,6 +71,7 @@ class FTestObject : public e172::Entity, public e172::PhysicalObject {
 
     double ra = 0;
 
+    e172::Colider colider;
 
     e172::destroyeble_ptr<e172::ltd> m_someData = e172::destroyeble_ptr<e172::ltd>::create_ptr([](){ std::cout << "ltd dead\n"; });
 
@@ -83,6 +86,7 @@ public:
     void setCOffset(const e172::Vector &cOffset);
     double cAngle() const;
     void setCAngle(double cAngle);
+    void setColiderVertices(const std::vector<e172::Vector> &vertices);
 
 
     e172::ptr<e172::ltd> someData() const;

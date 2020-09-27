@@ -12,6 +12,7 @@ private:
 
     std::string projectileName;
     double projectileVelocity;
+    e172::Vector m_offset;
 protected:
     bool firing = false;
 
@@ -24,6 +25,8 @@ public:
     // Entity interface
 public:
     void proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) override;
+    e172::Vector offset() const;
+    void setOffset(const e172::Vector &offset);
 };
 
 #endif // WEAPON_H
