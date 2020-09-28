@@ -54,6 +54,7 @@ public:
     struct PositionalVector {
         Vector position;
         Vector vector;
+        bool colided = false;
         PositionalVector leftNormal() const;
         PositionalVector rightNormal() const;
     };
@@ -63,6 +64,7 @@ private:
     std::vector<PositionalVector> m_edges;
     std::vector<PositionalVector> m_projections;
     Matrix m_matrix;
+    Vector m_position;
 
 public:
     template<typename T>
@@ -81,20 +83,29 @@ public:
             return v0.x() < v1.x();
         });
         if(it0 != tmp_proj.end() && it1 != tmp_proj.end()) {
-            return { *it0, *it1 - *it0 };
+            if(vector.vector.x() < 0) {
+                return { *it0, (*it1 - *it0) };
+            } else {
+                return { *it1, (*it0 - *it1) };
+            }
         }
         return {};
     }
     static std::vector<PositionalVector> makeEdges(const std::vector<Vector> &vertices);
     static std::vector<PositionalVector> transformed(const std::vector<PositionalVector> &vector, const e172::Matrix &matrix);
+    static Vector perpendecularProjection(const e172::Vector &p0, const e172::Vector &p1, const Vector &v);
+    static bool penetration(double x0, double w0, double x1, double w1);
+
     Colider();
     std::vector<Vector> vertices() const;
     void setVertices(const std::vector<Vector> &vertices);
     std::vector<PositionalVector> projections() const;
 
-    void narrowCollision(Colider *colider);
+    static std::pair<Vector, Vector> narrowCollision(Colider *c0, Colider *c1);
+
     std::vector<PositionalVector> edges() const;
     void setMatrix(const Matrix &matrix);
+    void setPosition(const Vector &position);
 };
 
 }

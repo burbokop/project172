@@ -61,6 +61,10 @@ Vector AbstractRenderer::Camera::position() const {
     return Vector();
 }
 
+Color randomColor(unsigned int seed) {
+    return rand_r(&seed) % static_cast<uint32_t>(std::pow(2, 24));
+}
+
 Color randomColor() {
     return rand() % static_cast<uint32_t>(std::pow(2, 24));
 }

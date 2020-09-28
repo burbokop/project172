@@ -60,11 +60,11 @@ WorldPreset::GenerationResult DefaultWorld::generate(e172::Context *context) {
     auto sfo = new FTestObject(ffo);
     result.entities.push_back(sfo);
 
-    ffo->setCOffset({ 0, -20 });
+    ffo->setCOffset({ 0, -50 });
     ffo->setCAngle(-e172::Math::Pi / 2);
     ffo->setColiderVertices({ { -100, 50 }, { 0, -50 }, { 100, 50 } });
 
-    sfo->setCOffset({ 0, 20 });
+    sfo->setCOffset({ 0, 50 });
     sfo->setCAngle(e172::Math::Pi / 2);
     sfo->setColiderVertices({ { -100, 50 }, { 0, -50 }, { 100, 50 } });
 

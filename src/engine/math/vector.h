@@ -59,6 +59,7 @@ public:
     Vector operator+(double term) const;
     Vector operator-(double subtrahend) const;
 
+    Vector operator-() const;
 
     inline float float32X() const { return static_cast<float>(this->m_x); }
     inline float float32Y() const { return static_cast<float>(this->m_y); }

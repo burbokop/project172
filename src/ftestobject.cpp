@@ -64,9 +64,16 @@ void FTestObject::proceed(e172::Context *context, e172::AbstractEventHandler *ev
             e172::PhysicalObject::dockNodes(node0, node1, 20, 2);
         }
         m_targetObject->colider.setMatrix(m_targetObject->rotationMatrix());
+        m_targetObject->colider.setPosition(m_targetObject->position());
         colider.setMatrix(rotationMatrix());
-        m_targetObject->colider.narrowCollision(&colider);
+        colider.setPosition(position());
+        const auto vp = e172::Colider::narrowCollision(&colider, &m_targetObject->colider);
+        escapeVector = vp.first;
+        m_targetObject->escapeVector = vp.second;
     }
+
+    resetPhysicsProperties(position() + escapeVector, rotation(), velocity(), rotationVelocity());
+    escapeVector = {};
 
     proceedPhysics(context->deltaTime());
 }
@@ -114,8 +121,13 @@ void FTestObject::render(e172::AbstractRenderer *renderer) {
     }
 
     const auto projections = colider.projections();
+    int i = 0;
     for(auto p : projections) {
-        renderer->drawLineShifted(p.position + position(), p.position + p.vector + position(), 0xff88ff);
-        renderer->drawCircleShifted(p.position + p.vector + position(), 2, 0xff88ff);
+        renderer->drawLineShifted(p.position, p.position + p.vector, p.colided ? 0x888888 : 0xff00ff);
+        renderer->drawCircleShifted(p.position + p.vector, 2, p.colided ? 0x888888 : 0xff00ff);
+        ++i;
     }
+    renderer->drawStringShifted(std::to_string(coll_count), position(), e172::randomColor(i));
+
+    renderer->drawLineShifted(position(), position() + escapeVector, 0x00ffff);
 }

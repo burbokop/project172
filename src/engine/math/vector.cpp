@@ -194,6 +194,10 @@ Vector Vector::operator-(double subtrahend) const  {
     return Vector();
 }
 
+Vector Vector::operator-() const {
+    return { -m_x, -m_y };
+}
+
 std::ostream &operator<<(std::ostream &os, const e172::Vector &dt) {
     os << "Vector(" << std::to_string(dt.x()).c_str() << ", " << std::to_string(dt.y()).c_str() << ")";
     return os;

@@ -43,6 +43,7 @@ inline Color rgb(uint8_t r, uint8_t g, uint8_t b) {
 }
 
 Color randomColor();
+Color randomColor(unsigned int seed);
 
 class AbstractGraphicsProvider;
 class AbstractRenderer {
