@@ -22,12 +22,14 @@ class MemStatEarner : public e172::Entity {
     double rss_d;
     double vm_d_average;
     double rss_d_average;
+
+    bool enabled = false;
 public:
     MemStatEarner();
 
     // Entity interface
 public:
-    virtual void proceed(e172::Context *, e172::AbstractEventHandler *) override;
+    virtual void proceed(e172::Context *, e172::AbstractEventHandler *e) override;
     virtual void render(e172::AbstractRenderer *renderer) override;
 };
 

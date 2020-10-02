@@ -1,5 +1,7 @@
 #include "colider.h"
+#include "math.h"
 #include <list>
+#include <src/engine/utility/vectorproxy.h>
 
 std::vector<e172::Colider::PositionalVector> e172::Colider::edges() const {
     return m_edges;
@@ -11,6 +13,22 @@ void e172::Colider::setMatrix(const Matrix &matrix) {
 
 void e172::Colider::setPosition(const Vector &position) {
     m_position = position;
+}
+
+size_t e172::Colider::collisionCount() const {
+    return m_collisionCount;
+}
+
+size_t e172::Colider::significantNormalCount() const {
+    return m_significantNormalCount;
+}
+
+std::vector<e172::Colider::PositionalVector> e172::Colider::escapeVectors() const {
+    return m_escapeVectors;
+}
+
+e172::Vector e172::Colider::collisionPoint() const {
+    return m_collisionPoint;
 }
 
 std::vector<e172::Colider::PositionalVector> e172::Colider::makeEdges(const std::vector<e172::Vector> &vertices) {
@@ -69,7 +87,7 @@ std::vector<e172::Colider::PositionalVector> e172::Colider::projections() const 
     return m_projections;
 }
 
-std::pair<e172::Vector, e172::Vector> e172::Colider::narrowCollision(e172::Colider *c0, Colider *c1) {
+std::pair<e172::Colider::PositionalVector, e172::Colider::PositionalVector> e172::Colider::narrowCollision(e172::Colider *c0, Colider *c1) {
     auto e0 = transformed(c0->m_edges, c0->m_matrix);
     auto e1 = transformed(c1->m_edges, c1->m_matrix);
     VectorProxy<PositionalVector> edgesProxy({ &e0, &e1 });
@@ -80,8 +98,14 @@ std::pair<e172::Vector, e172::Vector> e172::Colider::narrowCollision(e172::Colid
     size_t coll_count = 0;
     size_t fv_count = 0;
 
-    typedef std::pair<e172::Vector, e172::Vector> vp;
-    std::list<vp> escapeVectors;
+    if(c0->m_escapeVectors.size() != edgesProxy.size())
+        c0->m_escapeVectors.resize(edgesProxy.size());
+    if(c1->m_escapeVectors.size() != edgesProxy.size())
+        c1->m_escapeVectors.resize(edgesProxy.size());
+
+    std::list<PositionalVector> ev;
+
+    e172::Vector averagePosition;
     for(size_t i = 0, count = edgesProxy.size(); i < count; ++i) {
         const auto normal = edgesProxy[i].leftNormal();
         c0->m_projections[i] = objectProjection(e0, normal);
@@ -102,22 +126,43 @@ std::pair<e172::Vector, e172::Vector> e172::Colider::narrowCollision(e172::Colid
             c1->m_projections[i].colided = true;
             coll_count++;
 
-            e172::Vector v
-                    = 0.5
-                    * ((c0->m_projections[i].position.x() < c1->m_projections[i].position.x())
-                    ? (c0->m_projections[i].vector - c1->m_projections[i].position + c0->m_projections[i].position)
-                    : (c1->m_projections[i].vector - c0->m_projections[i].position + c1->m_projections[i].position));
+            if(c0->m_projections[i].position.x() < c1->m_projections[i].position.x()) {
+                c0->m_escapeVectors[i] = { (c1->m_projections[i].position + c1->m_projections[i].vector + c0->m_projections[i].position) / 2, (c0->m_projections[i].vector - c1->m_projections[i].position + c0->m_projections[i].position) };
+                c0->m_escapeVectors[i].vector = -c0->m_escapeVectors[i].vector;
+            } else {
+                c0->m_escapeVectors[i] = { (c1->m_projections[i].position + c1->m_projections[i].vector + c0->m_projections[i].position) / 2, (c1->m_projections[i].vector - c0->m_projections[i].position + c1->m_projections[i].position) };
+            }
+            c1->m_escapeVectors[i] = { c0->m_escapeVectors[i].position, -c0->m_escapeVectors[i].vector };
 
-            escapeVectors.push_back({ v, -v });
+            c0->m_escapeVectors[i].vector /= 2;
+            c1->m_escapeVectors[i].vector /= 2;
+
+            ev.push_back(c0->m_escapeVectors[i]);
+        } else {
+            c0->m_escapeVectors[i] = {};
+            c1->m_escapeVectors[i] = {};
         }
+
+
+        averagePosition += c0->m_projections[i].position;
+        averagePosition += c1->m_projections[i].position;
     }
-    if(coll_count == fv_count) {
-        const auto it = std::min_element(escapeVectors.begin(), escapeVectors.end(), [](const vp& a0, const vp& a1){
-            return a0.first.module() < a1.first.module() && a0.second.module() < a1.second.module();
-        });
-        if(it != escapeVectors.end()) {
-            return *it;
+    c0->m_collisionCount = coll_count;
+    c1->m_collisionCount = coll_count;
+    c0->m_significantNormalCount = fv_count;
+    c1->m_significantNormalCount = fv_count;
+
+    if(coll_count >= fv_count) {
+        const auto it = std::min_element(ev.begin(), ev.end(), &PositionalVector::moduleLessComparator);
+        if(it != ev.end()) {
+
+            if(ev.begin() != ev.end()) {
+                it->position = PositionalVector::linesIntersection(ev.front().leftNormal().line(), ev.back().leftNormal().line());
+            }
+
+            return { *it, -*it };
         }
+        return {};
     }
     return {};
 }
@@ -128,4 +173,30 @@ e172::Colider::PositionalVector e172::Colider::PositionalVector::leftNormal() co
 
 e172::Colider::PositionalVector e172::Colider::PositionalVector::rightNormal() const {
     return { position, vector.rightNormal() };
+}
+
+e172::Colider::PositionalVector e172::Colider::PositionalVector::operator-() const {
+    return { position, -vector };
+}
+
+bool e172::Colider::PositionalVector::moduleLessComparator(const e172::Colider::PositionalVector &v0, const e172::Colider::PositionalVector &v1) {
+    return v0.vector.module() < v1.vector.module();
+}
+
+e172::Vector e172::Colider::PositionalVector::line() const {
+    if(vector.x() != e172::Math::null) {
+        const auto k = vector.y() / vector.x();
+        return { k, position.y() - k * position.x() };
+    }
+    return { std::numeric_limits<double>::max(), position.x() };
+}
+
+e172::Vector e172::Colider::PositionalVector::linesIntersection(const e172::Vector &line0, const e172::Vector &line1) {
+    const double kk = line1.x() - line0.x();
+    if(kk != e172::Math::null) {
+        const auto x = (line0.y() - line1.y()) / kk;
+        const auto y = line0.x() * x + line0.y();
+        return { x, y };
+    }
+    return { 0, 0 };
 }

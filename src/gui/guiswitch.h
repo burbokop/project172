@@ -20,7 +20,7 @@ public:
     // GUILabel interface
 public:
     bool isSelectable() override;
-    void enter() override;
+    void enter(e172::Context *) override;
 };
 
 #endif // GUISWITCH_H

@@ -75,8 +75,7 @@ class FTestObject : public e172::Entity, public e172::PhysicalObject {
 
     e172::destroyeble_ptr<e172::ltd> m_someData = e172::destroyeble_ptr<e172::ltd>::create_ptr([](){ std::cout << "ltd dead\n"; });
 
-    int coll_count = 0;
-    e172::Vector escapeVector;
+    e172::Colider::PositionalVector escapeVector;
 public:
     FTestObject(FTestObject *object = nullptr);
 

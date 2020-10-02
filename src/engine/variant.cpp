@@ -3,6 +3,7 @@
 
 #include <src/engine/time/elapsedtimer.h>
 
+#include <iostream>
 
 namespace e172 {
 
@@ -175,31 +176,47 @@ std::string Variant::toJson() const {
 
 }
 
-
 Variant Variant::fromJson(const std::string &json) {
-    if(json.size() > 0) {
-        if(json[0] == '{' && json.back() == '}') {
+    std::string trimed = Additional::removeSymbols(json, { ' ', '\n', '\t' });
+    std::cout << "call: " << trimed << "\n";
+
+    if(trimed.size() > 0) {
+        std::cout << "json: " << trimed.front() << " : " << trimed.back() << "\n";
+        if(trimed.front() == '{' && trimed.back() == '}') {
+            std::cout << "obj : " << trimed << "\n";
             VariantMap map;
-            const auto ss = Additional::split(json.substr(1, json.size() - 2), ',');
+            const auto ss = Additional::split(trimed.substr(1, trimed.size() - 2), ',');
             for(const auto& s : ss) {
                 const auto recored = Additional::split(s, ':');
                 if(recored.size() > 1) {
-                    map[recored[0]] = fromJson(recored[1]);
+                    if(recored[1].size() > 0) {
+                        if(recored[1][0] == '{') {
+                            map[recored[0]] = fromJson(Additional::fencedArea(s, Additional::CurlyBraces));
+                        } else if(recored[1][0] == '[') {
+                            map[recored[0]] = fromJson(Additional::fencedArea(s, Additional::Brackets));
+                        } else {
+                            map[recored[0]] = fromJson(recored[1]);
+                        }
+                    }
                 }
             }
+            std::cout << "obj result: " << map << "\n";
             return map;
-        } else if(json[0] == '[' && json.back() == '}') {
+        } else if(trimed.front() == '[' && trimed.back() == ']') {
+            std::cout << "list: " << trimed << "\n";
             VariantList list;
-            const auto ss = Additional::split(json.substr(1, json.size() - 2), ',');
+            const auto ss = Additional::split(trimed.substr(1, trimed.size() - 2), ',');
             for(const auto& s : ss) {
                 list.push_back(fromJson(s));
             }
+            std::cout << "list result: " << list << "\n";
             return list;
         } else {
+            std::cout << "else: " << trimed << "\n";
             try {
-                return std::stod(json);
+                return std::stod(trimed);
             } catch (std::invalid_argument) {
-                return json;
+                return trimed;
             }
         }
     }

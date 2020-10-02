@@ -17,7 +17,17 @@ struct Additional {
 
     static std::string constrainPath(const std::string &path);
     static std::vector<std::string> split(const std::string& s, char delimiter);
+    static std::string trim(const std::string& str, char symbol = ' ');
+    static std::string trim(const std::string& str, const std::vector<char> &symbols);
+    static std::string removeSymbols(const std::string &string, const std::vector<char> &symbols);
     static std::string absolutePath(const std::string &path, const std::string &exe_path);
+
+    enum Fence {
+        Brackets,
+        Parentheses,
+        CurlyBraces
+    };
+    static std::string fencedArea(const std::string &string, Fence fence);
 
     static std::string readFile(std::string path);
     static std::vector<std::string> directoryContent(std::string path);

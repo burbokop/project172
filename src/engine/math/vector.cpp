@@ -198,6 +198,10 @@ Vector Vector::operator-() const {
     return { -m_x, -m_y };
 }
 
+bool Vector::moduleLessComparator(const Vector &v0, const Vector &v1) {
+    return v0.module() < v1.module();
+}
+
 std::ostream &operator<<(std::ostream &os, const e172::Vector &dt) {
     os << "Vector(" << std::to_string(dt.x()).c_str() << ", " << std::to_string(dt.y()).c_str() << ")";
     return os;

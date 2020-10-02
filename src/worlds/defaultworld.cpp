@@ -50,6 +50,7 @@ WorldPreset::GenerationResult DefaultWorld::generate(e172::Context *context) {
 
 
 
+    /*
     SegmentPaiter *segmentPaiter = new SegmentPaiter();
     segmentPaiter->resetPhysicsProperties({ 100, 0 }, 0);
     result.entities.push_back(segmentPaiter);
@@ -67,7 +68,7 @@ WorldPreset::GenerationResult DefaultWorld::generate(e172::Context *context) {
     sfo->setCOffset({ 0, 50 });
     sfo->setCAngle(e172::Math::Pi / 2);
     sfo->setColiderVertices({ { -100, 50 }, { 0, -50 }, { 100, 50 } });
-
+    */
 
 
 

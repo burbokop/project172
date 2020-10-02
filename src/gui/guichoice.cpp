@@ -20,6 +20,6 @@ bool GUIChoice::isSelectable() {
     return true;
 }
 
-void GUIChoice::enter() {
+void GUIChoice::enter(e172::Context *) {
     set(value);
 }

@@ -42,7 +42,7 @@ bool GUIMenuElement::hasSubElements() {
     return false;
 }
 
-void GUIMenuElement::enter() {}
+void GUIMenuElement::enter(e172::Context *context) { (void)context; }
 
 void GUIMenuElement::proceed(e172::Context *, e172::AbstractEventHandler *) {}
 void GUIMenuElement::render(e172::AbstractRenderer *) {}

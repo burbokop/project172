@@ -15,6 +15,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 
 
+message("CMAKE_CXX_COMPILER: " ${CMAKE_CXX_COMPILER} " " ${CMAKE_CXX_COMPILER_VERSION})
+
+
 
 
 
@@ -67,6 +70,9 @@ add_library(e172 SHARED
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/time/elapsedtimer.h
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/time/time.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/time/time.h
+
+    ${CMAKE_CURRENT_LIST_DIR}/src/engine/utility/vectorproxy.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/engine/utility/vectorproxy.h
 
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/abstracteventhandler.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/abstracteventhandler.h

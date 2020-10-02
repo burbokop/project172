@@ -11,44 +11,6 @@
 namespace e172 {
 
 
-template<typename T>
-class VectorProxy {
-    std::vector<std::vector<T>*> m_pointers;
-public:
-    VectorProxy(const std::vector<std::vector<T>*> &pointers) {
-        m_pointers = pointers;
-    }
-
-    size_t size() const {
-        size_t sum = 0;
-        for(auto p : m_pointers) {
-            sum += p->size();
-        }
-        return sum;
-    }
-
-    T &operator[](size_t index) {
-        size_t pi = 0;
-        while(index >= m_pointers[pi]->size()) {
-            index -= m_pointers[pi]->size();
-            ++pi;
-        }
-        return (*m_pointers[pi])[index];
-    }
-
-    T operator[](size_t index) const {
-        size_t pi = 0;
-        while(index >= m_pointers[pi]->size()) {
-            index -= m_pointers[pi]->size();
-            ++pi;
-        }
-        return (*m_pointers[pi])[index];
-    }
-
-};
-
-
-
 class Colider {
 public:
     struct PositionalVector {
@@ -57,15 +19,24 @@ public:
         bool colided = false;
         PositionalVector leftNormal() const;
         PositionalVector rightNormal() const;
+
+        PositionalVector operator-() const;
+        static bool moduleLessComparator(const PositionalVector &v0, const PositionalVector &v1);
+        Vector line() const;
+        static Vector linesIntersection(const Vector& line0, const Vector& line1);
     };
 private:
 
     std::vector<Vector> m_vertices;
     std::vector<PositionalVector> m_edges;
     std::vector<PositionalVector> m_projections;
+    std::vector<PositionalVector> m_escapeVectors;
+    Vector m_collisionPoint;
     Matrix m_matrix;
     Vector m_position;
 
+    size_t m_collisionCount = 0;
+    size_t m_significantNormalCount = 0;
 public:
     template<typename T>
     static PositionalVector objectProjection(const T &edges, const PositionalVector& vector) {
@@ -83,11 +54,11 @@ public:
             return v0.x() < v1.x();
         });
         if(it0 != tmp_proj.end() && it1 != tmp_proj.end()) {
-            if(vector.vector.x() < 0) {
+            //if(vector.vector.x() < 0) {
                 return { *it0, (*it1 - *it0) };
-            } else {
-                return { *it1, (*it0 - *it1) };
-            }
+            //} else {
+            //    return { *it1, (*it0 - *it1) };
+            //}
         }
         return {};
     }
@@ -101,11 +72,15 @@ public:
     void setVertices(const std::vector<Vector> &vertices);
     std::vector<PositionalVector> projections() const;
 
-    static std::pair<Vector, Vector> narrowCollision(Colider *c0, Colider *c1);
+    static std::pair<PositionalVector, PositionalVector> narrowCollision(Colider *c0, Colider *c1);
 
     std::vector<PositionalVector> edges() const;
     void setMatrix(const Matrix &matrix);
     void setPosition(const Vector &position);
+    size_t collisionCount() const;
+    size_t significantNormalCount() const;
+    std::vector<PositionalVector> escapeVectors() const;
+    Vector collisionPoint() const;
 };
 
 }

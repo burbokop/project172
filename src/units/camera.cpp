@@ -47,7 +47,7 @@ void Camera::proceed(e172::Context *context, e172::AbstractEventHandler *) {
                 //};
 
 
-                if((targetUnit->position() - position()).cheapModule() * 2 > 200) {
+                if((targetUnit->position() - position()).cheapModule() / 2 > 200) {
                     resetPhysicsProperties(targetUnit->position(), 0);
                 } else {
                     addDistanceRelatedForce(targetUnit->position(), f, 200);
@@ -78,8 +78,9 @@ void Camera::render(e172::AbstractRenderer *renderer) {
     } else {
         renderer->drawSquare(position() + offset, 2, color);
     }
-    if(target()) {
-        renderer->drawString(std::to_string((position() - target()->parentUnit()->position()).x()), position() + offset + e172::Vector(20, 20), color);
-        renderer->drawString(std::to_string((position() - target()->parentUnit()->position()).y()), position() + offset + e172::Vector(20, 40), color);
-    }
+
+    //if(target()) {
+    //    renderer->drawString(std::to_string((position() - target()->parentUnit()->position()).x()), position() + offset + e172::Vector(20, 20), color);
+    //    renderer->drawString(std::to_string((position() - target()->parentUnit()->position()).y()), position() + offset + e172::Vector(20, 40), color);
+    //}
 }

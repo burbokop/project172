@@ -7,6 +7,7 @@
 #include <dirent.h>
 #include <sys/stat.h>
 #include <fstream>
+#include <algorithm>
 
 
 
@@ -49,6 +50,34 @@ std::vector<std::string> e172::Additional::split(const std::string &s, char deli
     return tokens;
 }
 
+std::string e172::Additional::trim(const std::string &str, char symbol) {
+    size_t first = str.find_first_not_of(symbol);
+    if (std::string::npos == first) {
+        return str;
+    }
+    size_t last = str.find_last_not_of(symbol);
+    return str.substr(first, (last - first + 1));
+}
+
+std::string e172::Additional::trim(const std::string &str, const std::vector<char> &symbols) {
+    std::string result = str;
+    for(auto s : symbols) {
+        result = trim(result, s);
+    }
+    return result;
+}
+
+std::string e172::Additional::removeSymbols(const std::string &string, const std::vector<char> &symbols) {
+    std::string result;
+    result.reserve(string.size());
+    for(auto c : string) {
+        if(std::find(symbols.begin(), symbols.end(), c) == symbols.end()) {
+            result.push_back(c);
+        }
+    }
+    return result;
+}
+
 std::string e172::Additional::absolutePath(const std::string &path, const std::string &exe_path) {
     if(exe_path.size() <= 0) return "";
     if(path.size() <= 0) return "";
@@ -60,6 +89,42 @@ std::string e172::Additional::absolutePath(const std::string &path, const std::s
 #endif
 
     return constrainPath(exe_path + separatorString + ".." + separatorString + path);
+}
+
+std::string e172::Additional::fencedArea(const std::string &string, e172::Additional::Fence fence) {
+    char beginFence;
+    char endFence;
+    if(fence == Brackets) {
+        beginFence = '[';
+        endFence = ']';
+    } else if(fence == Parentheses) {
+        beginFence = '(';
+        endFence = ')';
+    } else if(fence == CurlyBraces) {
+        beginFence = '{';
+        endFence = '}';
+    } else {
+        return string;
+    }
+
+    size_t fenceCount = 0;
+    size_t begin = 0;
+    bool beginFound;
+    for(size_t i = 0; i < string.size(); ++i) {
+        if(string[i] == beginFence) {
+            fenceCount++;
+            if(!beginFound) {
+                begin = i;
+                beginFound = true;
+            }
+        } else if(string[i] == endFence) {
+            fenceCount--;
+            if(fenceCount == 0 && beginFound) {
+                return string.substr(begin, i - begin + 1);
+            }
+        }
+    }
+    return string;
 }
 
 

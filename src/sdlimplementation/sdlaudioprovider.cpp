@@ -29,7 +29,6 @@ e172::AudioChannel SDLAudioProvider::reserveChannel() {
         m_reservedChannelCount = Mix_AllocateChannels(m_reservedChannelCount + ReserveStep);
         if (m_currentChannelCount > m_reservedChannelCount){
             std::cout << "Audio channel can not be created, created: " << m_reservedChannelCount << " required : " << m_currentChannelCount << std::endl;
-
         }
     }
     int channel = 0;

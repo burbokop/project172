@@ -44,13 +44,13 @@
 
 #include <src/vulkanimplementation/vulkangraphicsprovider.h>
 
-#include <iostream>
 #include <math.h>
 
 #include <tests/waretest.h>
 
 #include <src/additional/chartview.h>
 #include <src/additional/memstatearner.h>
+#include <iostream>
 
 extern "C" {
 int go_run_server();
@@ -58,26 +58,16 @@ void go_stop_service(int);
 void go_http_get();
 }
 
-void foo(int x){
-    std::cout << __PRETTY_FUNCTION__ << " " << x << "\n";
-}
-
 int main(int argc, char *argv[]) {
-    //const auto a = e172::Variant::fromJson(e172::Additional::readFile("/home/viktor/projects/project172/assets/templates/reciepts/ore_reciept.json"));
+    const auto a = e172::Variant::fromJson(e172::Additional::readFile("/home/viktor/projects/project172/assets/templates/reciepts/ore_reciept.json"));
 
     int desc = go_run_server();
-
-    std::cout << "desc: " << desc << "\n";
-
     go_stop_service(desc);
-
     go_http_get();
 
-    //e172::Variant v = std::string("gogadoda");
+    std::cout << "fa: " << e172::Additional::fencedArea("\"abs\":[ { a }, { b } ]", e172::Additional::Brackets) << "\n";
 
-    //std::string type = e172::Type<int>::name();
-
-    //std::cout << type << " : " << a.typeName() << " : " << a << "\n";
+    std::cout << " : " << a << "\n";
 
 
     //TestProvider::runAllTests();
@@ -285,7 +275,7 @@ int main(int argc, char *argv[]) {
     chartView.setFunction(f);
     chartView.setCoeficient(200);
     chartView.setPointCount(300);
-    app.addEntity(&chartView);
+    //app.addEntity(&chartView);
 
     //start application
 

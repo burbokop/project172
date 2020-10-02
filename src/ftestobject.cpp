@@ -40,7 +40,7 @@ e172::ptr<e172::ltd> FTestObject::someData() const {
 FTestObject::FTestObject(FTestObject *object){
     m_targetObject = object;
 }
-#include <iostream>
+
 void FTestObject::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
     static id_t ee = entityId();
 
@@ -72,8 +72,11 @@ void FTestObject::proceed(e172::Context *context, e172::AbstractEventHandler *ev
         m_targetObject->escapeVector = vp.second;
     }
 
-    resetPhysicsProperties(position() + escapeVector, rotation(), velocity(), rotationVelocity());
-    escapeVector = {};
+    if(escapeVector.vector.cheapModule()) {
+        //resetPhysicsProperties(position(), rotation(), velocity() + escapeVector.vector, rotationVelocity());
+        addForce(escapeVector.vector);
+        escapeVector = {};
+    }
 
     proceedPhysics(context->deltaTime());
 }
@@ -127,7 +130,18 @@ void FTestObject::render(e172::AbstractRenderer *renderer) {
         renderer->drawCircleShifted(p.position + p.vector, 2, p.colided ? 0x888888 : 0xff00ff);
         ++i;
     }
-    renderer->drawStringShifted(std::to_string(coll_count), position(), e172::randomColor(i));
+    renderer->drawStringShifted(std::to_string(colider.significantNormalCount()) + " : " + std::to_string(colider.collisionCount()), position(), e172::randomColor(i));
 
-    renderer->drawLineShifted(position(), position() + escapeVector, 0x00ffff);
+    const auto rc = e172::randomColor(reinterpret_cast<uintptr_t>(this));
+
+    const auto escape = colider.escapeVectors();
+    for(auto p : escape) {
+        renderer->drawLineShifted(p.position, p.position + p.vector, rc);
+        renderer->drawCircleShifted(p.position + p.vector, 2, 0x000000);
+    }
+
+    renderer->drawCircleShifted(position(), 4, rc);
+    renderer->drawCircleShifted(escapeVector.position, 8, 0x000000);
+
+    renderer->drawLineShifted(escapeVector.position, escapeVector.position + escapeVector.vector, rc);
 }

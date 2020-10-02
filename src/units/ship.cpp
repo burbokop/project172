@@ -126,7 +126,6 @@ bool Ship::inWarp() const {
     return false;
 }
 
-#include <iostream>
 void Ship::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
     ModuleHandler *modules = moduleHandler();
     if(modules) {
@@ -138,7 +137,6 @@ void Ship::proceed(e172::Context *context, e172::AbstractEventHandler *eventHand
                     addLimitedForwardForce(m_thrustForce, OneWarpPoint);
                     blockFrictionPerTick();
                     //addForwardForce(m_thrustForce);
-                    std::cout << "ef: " << e172::eFunction(velocity().module(), OneWarpPoint) << " : " << m_thrustForce << " : " << e172::Math::topLimitedFunction(velocity().module()) << "\n";
                     addDistanceRelatedRotationForce(velocity().angle(), [](double x, double){ return x * x; }, 0, 100);
                     //addRotationRestoringForce(velocity().angle(), 10);
                 }

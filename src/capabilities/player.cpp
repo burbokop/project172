@@ -61,6 +61,19 @@ void Player::dock(e172::Entity::id_t entity) {
     dockRequestedQueue.push(entity);
 }
 
+bool Player::dockImmediately(e172::Context *context, e172::Entity::id_t entity) {
+    const auto targetUnit = context->entityById<Unit>(entity);
+    const auto docker = parentUnit()->docker();
+    if(docker && targetUnit) {
+        if(docker->createDockingSessionWithUnit(context, targetUnit)) {
+            return true;
+        } else {
+            context->emitMessage(e172::Context::FLOATING_MESSAGE, e172::Args(parentUnit()->entityId(), "no awailable nodes"));
+        }
+    }
+    return false;
+}
+
 void Player::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
     if(auto ship = dynamic_cast<Ship*>(parentUnit())) {
         if(personalKey(eventHandler, "left")) {

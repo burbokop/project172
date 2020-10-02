@@ -70,6 +70,9 @@ public:
 
 
     friend std::ostream &operator<<(std::ostream &os, const e172::Vector &dt);
+
+
+    static bool moduleLessComparator(const Vector& v0, const Vector& v1);
 };
 
 }

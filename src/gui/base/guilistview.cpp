@@ -22,8 +22,7 @@ void GUIListView::setVerticalInterval(int verticalInterval) {
 
 GUIListView::GUIListView(const std::string &title) : GUIMenuElement(title) {}
 
-
-void GUIListView::proceed(e172::Context *, e172::AbstractEventHandler *eventHandler) {
+void GUIListView::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
     if(eventHandler->keySinglePressed(e172::ScancodeDown)) {
         if(++m_selectedIndex >= rowCount()) {
             m_selectedIndex = 0;
@@ -39,7 +38,7 @@ void GUIListView::proceed(e172::Context *, e172::AbstractEventHandler *eventHand
                 if(md.isNull())
                     md = modelData();
                 element->setModelData(md);
-                element->enter();
+                element->enter(context);
                 if(element->hasSubElements() && m_stack) {
                     m_stack->push(element);
                 }

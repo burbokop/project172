@@ -27,7 +27,7 @@ public:
     virtual std::string title();
     virtual bool isSelectable();
     virtual bool hasSubElements();
-    virtual void enter();
+    virtual void enter(e172::Context *context);
 
     // Entity interface
 public:

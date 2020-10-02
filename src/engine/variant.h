@@ -348,7 +348,7 @@ public:
     bool isNumber() const;
 
 #ifdef E172_USE_VARIANT_RTTI_OBJECT
-    inline bool isNull() const { return m_rttiObject; }
+    inline bool isNull() const { return m_rttiObject == nullptr; }
 #else
     inline bool isNull() const { return m_typeName.size() <= 0; }
 #endif
