@@ -43,11 +43,18 @@ std::vector<std::string> e172::Additional::split(const std::string &s, char deli
     std::vector<std::string> tokens;
     std::string token;
     std::istringstream tokenStream(s);
-    while (std::getline(tokenStream, token, delimiter))
-    {
+    while (std::getline(tokenStream, token, delimiter)) {
         tokens.push_back(token);
     }
     return tokens;
+}
+
+std::pair<std::string, std::string> e172::Additional::splitIntoPair(const std::string &s, char delimiter) {
+    const auto index = s.find_first_of(delimiter);
+    if(index >= 0 && index < s.size())
+        return { s.substr(0, index), s.substr(index + 1, s.size() - index) };
+
+    return {};
 }
 
 std::string e172::Additional::trim(const std::string &str, char symbol) {
@@ -109,7 +116,7 @@ std::string e172::Additional::fencedArea(const std::string &string, e172::Additi
 
     size_t fenceCount = 0;
     size_t begin = 0;
-    bool beginFound;
+    bool beginFound = false;
     for(size_t i = 0; i < string.size(); ++i) {
         if(string[i] == beginFence) {
             fenceCount++;
@@ -127,7 +134,118 @@ std::string e172::Additional::fencedArea(const std::string &string, e172::Additi
     return string;
 }
 
+std::string e172::Additional::fencedArea(const std::string &string, size_t beginIndex, size_t *nextIndexPtr) {
+    if(beginIndex >= string.size())
+        return std::string();
 
+    char endFence;
+    char beginFance;
+
+    size_t fenceCount = 0;
+    size_t begin = 0;
+    bool beginFound = false;
+    for(size_t i = beginIndex; i < string.size(); ++i) {
+        if(beginFound) {
+            if(string[i] == beginFance) {
+                ++fenceCount;
+            } else if(string[i] == endFence) {
+                if(--fenceCount == 0) {
+                    if(nextIndexPtr)
+                        *nextIndexPtr = i + 1;
+                    return string.substr(begin, i - begin + 1);
+                }
+            }
+        } else if(string[i] == '{' || string[i] == '[' || string[i] == '(') {
+            begin = i;
+            beginFound = true;
+            beginFance = string[i];
+            endFence = reversedFence(beginFance);
+            ++fenceCount;
+        }
+    }
+    return std::string();
+}
+
+std::string e172::Additional::jsonTopLevelField(const std::string &string, size_t beginIndex, size_t *nextIndexPtr) {
+    if(beginIndex >= string.size())
+        return std::string();
+
+    char endFence;
+    char beginFance;
+
+    size_t fenceCount = 0;
+    size_t begin = 0;
+    bool beginFound = false;
+    for(size_t i = beginIndex; i < string.size(); ++i) {
+        if(beginFound) {
+            if(string[i] == beginFance) {
+                ++fenceCount;
+            } else if(string[i] == endFence) {
+                if(--fenceCount == 0) {
+                    beginFound = false;
+                    //if(endIndexPtr)
+                    //    *endIndexPtr = i + 1;
+                    //return string.substr(begin, i - begin + 1);
+                }
+            }
+        } else {
+            if(string[i] == ',') {
+                if(nextIndexPtr)
+                    *nextIndexPtr = i + 1;
+                return string.substr(beginIndex, i - beginIndex);
+            } else if(string[i] == '{' || string[i] == '[' || string[i] == '(') {
+                begin = i;
+                beginFound = true;
+                beginFance = string[i];
+                endFence = reversedFence(beginFance);
+                ++fenceCount;
+            }
+        }
+    }
+    if(nextIndexPtr)
+        *nextIndexPtr = string.size();
+    return string.substr(beginIndex, string.size() - beginIndex);
+}
+
+std::vector<std::string> e172::Additional::fencedAreas(const std::string &string) {
+    size_t begin = 0;
+    std::vector<std::string> result;
+    while (true) {
+         const auto r = fencedArea(string, begin, &begin);
+         if(r.size() > 0) {
+             result.push_back(r);
+         } else {
+             return result;
+         }
+    }
+}
+
+std::vector<std::string> e172::Additional::jsonTopLevelFields(const std::string &string) {
+    size_t begin = 0;
+    std::vector<std::string> result;
+    while (true) {
+         const auto r = jsonTopLevelField(string, begin, &begin);
+         if(r.size() > 0) {
+             result.push_back(r);
+         } else {
+             return result;
+         }
+    }
+}
+
+char e172::Additional::reversedFence(char symbol) {
+    switch (symbol) {
+    case '{': return '}';
+    case '[': return ']';
+    case '(': return ')';
+    case '<': return '>';
+    case '}': return '{';
+    case ']': return '[';
+    case ')': return '(';
+    case '>': return '<';
+    default: return symbol;
+    }
+}
 
 std::string e172::Additional::readFile(std::string path) {
     std::ifstream ifile(path);

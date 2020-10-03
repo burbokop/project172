@@ -1,6 +1,7 @@
 #include "aggressive.h"
 
 
+#include <src/engine/context.h>
 #include <src/engine/objectregistry.h>
 #include <src/units/projectile.h>
 #include <src/units/camera.h>
@@ -12,32 +13,18 @@
 #include <src/units/ship.h>
 
 
-Unit *Aggressive::chooseTarget() {
-    if(targets.size() <= 0)
-        return nullptr;
-
-    Entity *target = targets.front();
-
+Unit *Aggressive::chooseTarget(e172::Context *context) {
+    Entity *target = context->autoIteratingEntity();
     if(target == e172::Alive) {
-        Camera *camera = dynamic_cast<Camera*>(target);
-        LightParticle *lightParticle = dynamic_cast<LightParticle*>(target);
-        Projectile *projectile = dynamic_cast<Projectile*>(target);
-
-        return camera || lightParticle || projectile ? nullptr : dynamic_cast<Unit*>(target);
-    } else {
-        old::Debug::err(old::Debug::Code::APPEAL_TO_REMOVED, __PRETTY_FUNCTION__);
-        return nullptr;
-    }
-}
-
-Aggressive::Aggressive(std::list<Entity *> units) {
-    for(auto u : units) {
-        if(u->instanceOf<Unit>()) {
-            targets.push_back(u);
+        const auto unit = target->cast<Unit>();
+        if(unit && !unit->instanceOf<Camera>() && !unit->instanceOf<Projectile>()) {
+            return unit;
         }
     }
-    target = chooseTarget();
+    return nullptr;
 }
+
+Aggressive::Aggressive() {}
 
 void Aggressive::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
      if(target == e172::Alive) {
@@ -91,12 +78,12 @@ void Aggressive::proceed(e172::Context *context, e172::AbstractEventHandler *eve
             }
     */
         } else {
-            target = chooseTarget();
+            target = chooseTarget(context);
         }
     } else {
         old::Debug::err(old::Debug::Code::APPEAL_TO_REMOVED, __PRETTY_FUNCTION__);
         targeted = false;
-        target = chooseTarget();
+        target = chooseTarget(context);
     }
     this->Controller::proceed(context, eventHandler);
 }

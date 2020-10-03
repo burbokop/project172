@@ -2,15 +2,14 @@
 
 #include <src/capabilities/factory.h>
 
-RecieptAssetExecutor::RecieptAssetExecutor()
-{
+RecieptAssetExecutor::RecieptAssetExecutor() {}
 
-}
-
-e172::Variant RecieptAssetExecutor::proceed(const Json::Value &value, e172::AbstractGraphicsProvider *graphicsProvider, e172::AbstractAudioProvider *audioProvider) {
+e172::Variant RecieptAssetExecutor::proceed(const e172::Variant &value, e172::AbstractGraphicsProvider *, e172::AbstractAudioProvider *) {
+    const auto list = value.toList();
     std::vector<FactoryWareTemplate> result;
-    for(auto v : value) {
-        result.push_back(FactoryWareTemplate (v["ware"].asString(), v["capacity"].asUInt(), v["amount"].asUInt()));
+    for(auto v : list) {
+        const auto object = v.toMap();
+        result.push_back(FactoryWareTemplate (object.at("ware").toString(), object.at("capacity").toUInt(), object.at("amount").toUInt()));
     }
     return e172::Variant::fromValue(result);
 }

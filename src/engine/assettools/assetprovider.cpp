@@ -67,40 +67,42 @@ void AssetProvider::installExecutor(const std::string &id, const std::shared_ptr
 void AssetProvider::processFile(std::string file, std::string path) {
     std::string sufix = Additional::fileSufix(file);
     if(sufix == ".json") {
-        const std::string content = Additional::readFile(file);
-        Json::Reader reader;
-        Json::Value root;
-        reader.parse(content, root);
-        const auto id = root["id"];
-        const auto className = root["class"];
+        const auto root = Variant::fromJson(Additional::readFile(file)).toMap();
+        if(root.size() == 0) {
+            Debug::warning("Empty json object detected or parsing error. file:", file);
+            return;
+        }
+
+        const auto id = Additional::value(root, "id");
+        const auto className = Additional::value(root, "class");
         if(id.isNull() || className.isNull()) {
             if(id.isNull()) {
-                Debug::warning("Template id missing. path:", path);
+                Debug::warning("Template id missing. file:", file);
             } else {
-                Debug::warning("Template class name missing. path:", path);
+                Debug::warning("Template class name missing. file:", file);
             }
             return;
         }
 
         LoadableTemplate newTemplate;
-        newTemplate.className = className.asString();
+        newTemplate.className = className.toString();
         for(auto item = root.begin(); item != root.end(); ++item) {
-            const std::string assetId = item.key().asString();
+            const auto& assetId = item->first;
             if(assetId != "class" && assetId != "id") {
-                auto it = executors.find(assetId);
-                if(it != executors.end() && it->second){
-                    if(item->isNull()) {
-                        Debug::warning("Asset is null. Id:", assetId, "path: ", path);
-                    } else {
-                        it->second->executor_path = m_context->absolutePath(path);
-                        newTemplate.assets[assetId] = it->second->proceed(*item, m_graphicsProvider, m_audioProvider);
-                    }
+                if(item->second.isNull()) {
+                    Debug::warning("Asset is null. Id:", assetId, "file:", file);
                 } else {
-                    Debug::warning("Executor not installed for asset:", assetId, "path: ", path);
+                    auto it = executors.find(assetId);
+                    if(it != executors.end() && it->second) {
+                        it->second->executor_path = m_context->absolutePath(path);
+                        newTemplate.assets[assetId] = it->second->proceed(item->second, m_graphicsProvider, m_audioProvider);
+                    } else {
+                        newTemplate.assets[assetId] = item->second;
+                    }
                 }
             }
         }
-        templates[id.asString()] = newTemplate;
+        templates[id.toString()] = newTemplate;
     }
 };
 

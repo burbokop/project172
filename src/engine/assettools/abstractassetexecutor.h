@@ -3,10 +3,6 @@
 
 #include <src/engine/variant.h>
 
-#include <src/json/json.h>
-
-
-
 namespace e172 {
 class AbstractGraphicsProvider;
 class AbstractAudioProvider;
@@ -18,8 +14,9 @@ public:
     std::string fullPath(const std::string &path);
     AbstractAssetExecutor();
     virtual ~AbstractAssetExecutor();
-    virtual Variant proceed(const Json::Value &value, AbstractGraphicsProvider *graphicsProvider, AbstractAudioProvider *audioProvider) = 0;
+    virtual Variant proceed(const Variant &value, AbstractGraphicsProvider *graphicsProvider, AbstractAudioProvider *audioProvider) = 0;
 };
+
 
 }
 

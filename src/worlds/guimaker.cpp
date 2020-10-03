@@ -5,7 +5,6 @@
 #include <src/capabilities/player.h>
 
 #include <src/gui/guibutton.h>
-#include <src/gui/guichoice.h>
 #include <src/gui/guidockingview.h>
 #include <src/gui/guimain.h>
 #include <src/gui/guimoduleview.h>
@@ -112,24 +111,23 @@ GUIMaker::GUIMaker(e172::Context *context, Near *radarNear) {
                             //context->appliation()->renderer()->enableEffect(1);
                         }, [context]() {
                             context->emitMessage(e172::Context::CHANGE_ANAGLYPH, false);
-                            //context->appliation()->renderer()->disableEffect(1);
                         }));
                     } optionsMenu->addMenuElement(effectsMenu);
                     GUIContainer *resolutionMenu = new GUIContainer(std::string("resolution")); {
-                        const auto f = [context](e172::Variant value) {
+                        const auto setResolution = [context](e172::Vector value) {
                             context->emitMessage(e172::Context::CHANGE_RESOLUTION, value);
                         };
-                        resolutionMenu->addMenuElement(new GUIChoice(std::string("600x300"), e172::Vector(600, 300), f));
-                        resolutionMenu->addMenuElement(new GUIChoice(std::string("1360x768"), e172::Vector(1360, 768), f));
-                        resolutionMenu->addMenuElement(new GUIChoice(std::string("1920x1080"), e172::Vector(1920, 1080), f));
+                        resolutionMenu->addMenuElement(new GUIButton(std::string("600x300"), [setResolution](auto){ setResolution({ 600, 300 }); }));
+                        resolutionMenu->addMenuElement(new GUIButton(std::string("1360x768"), [setResolution](auto){ setResolution({ 1360, 768 }); }));
+                        resolutionMenu->addMenuElement(new GUIButton(std::string("1920x1080"), [setResolution](auto){ setResolution({ 1920, 1080 }); }));
                     } optionsMenu->addMenuElement(resolutionMenu);
 
                     GUIContainer *fullscreenMenu = new GUIContainer(std::string("fullscreen")); {
-                        const auto f = [context](e172::Variant value) {
+                        const auto setFullscreen = [context](e172::Variant value) {
                             context->emitMessage(e172::Context::CHANGE_FULLSCREEN, value);
                         };
-                        fullscreenMenu->addMenuElement(new GUIChoice(std::string("yes"), 1, f));
-                        fullscreenMenu->addMenuElement(new GUIChoice(std::string("no"), 0, f));
+                        fullscreenMenu->addMenuElement(new GUIButton(std::string("yes"), [setFullscreen](auto) { setFullscreen(1); }));
+                        fullscreenMenu->addMenuElement(new GUIButton(std::string("no"), [setFullscreen](auto) { setFullscreen(0); }));
                     } optionsMenu->addMenuElement(fullscreenMenu);
 
                 } mainMenu->addMenuElement(optionsMenu);

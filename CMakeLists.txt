@@ -124,14 +124,7 @@ add_library(e172 SHARED
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/testprovider.cpp
     )
 
-include(${CMAKE_CURRENT_LIST_DIR}/src/json/CMakeLists.txt)
-target_link_libraries(e172
-    json
-    )
-
-
 add_library(sdl_impl SHARED
-
     ${CMAKE_CURRENT_LIST_DIR}/src/sdlimplementation/effects/anaglyph.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/sdlimplementation/effects/anaglyph.h
     ${CMAKE_CURRENT_LIST_DIR}/src/sdlimplementation/effects/visualeffect.cpp
@@ -262,14 +255,8 @@ add_executable(project172
     ${CMAKE_CURRENT_LIST_DIR}/src/assetexecutors/animatorassetexecutor.h
     ${CMAKE_CURRENT_LIST_DIR}/src/assetexecutors/audioassetexecutor.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/assetexecutors/audioassetexecutor.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/assetexecutors/mapassetexecutor.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/assetexecutors/mapassetexecutor.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/assetexecutors/numberassetexecutor.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/assetexecutors/numberassetexecutor.h
     ${CMAKE_CURRENT_LIST_DIR}/src/assetexecutors/spriteassetexecutor.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/assetexecutors/spriteassetexecutor.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/assetexecutors/stringassetexecutor.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/assetexecutors/stringassetexecutor.h
     ${CMAKE_CURRENT_LIST_DIR}/src/assetexecutors/vectorassetexecutor.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/assetexecutors/vectorassetexecutor.h
     ${CMAKE_CURRENT_LIST_DIR}/src/assetexecutors/factoryassetexecutor.cpp
@@ -323,8 +310,6 @@ add_executable(project172
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/guiblushingfloatingmessage.h
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/guicentralmessage.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/guicentralmessage.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/gui/guichoice.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/gui/guichoice.h
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/guidebugvalueinfo.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/guidebugvalueinfo.h
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/guifloatingmessage.cpp

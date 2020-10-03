@@ -12,7 +12,6 @@ public:
     // World interface
 public:
     virtual GenerationResult generate(e172::Context *context) override;
-    std::string getName();
 };
 
 #endif // HEAPWORLD_H

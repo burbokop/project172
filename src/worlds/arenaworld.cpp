@@ -64,7 +64,7 @@ WorldPreset::GenerationResult ArenaWorld::generate(e172::Context *context) {
 
     Unit *unit = dynamic_cast<Unit*>(context->assetProvider()->createLoadable("sh1"));
     unit->resetPhysicsProperties({}, 0);
-    unit->addCapability(new Aggressive(context->entities()));
+    unit->addCapability(new Aggressive());
     ModuleHandler *mh = new ModuleHandler();
     mh->addModule(static_cast<Module*>(context->assetProvider()->createLoadable("pistol")));
     mh->addModule(static_cast<Module*>(context->assetProvider()->createLoadable("engine1")));

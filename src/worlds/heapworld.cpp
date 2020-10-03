@@ -45,7 +45,7 @@ WorldPreset::GenerationResult HeapWorld::generate(e172::Context *context) {
             if(unit) {
                 unit->resetPhysicsProperties(e172::Vector::createByAngle(10000, rand()), 0);
 
-                unit->addCapability(new Aggressive(context->entities()));
+                unit->addCapability(new Aggressive());
                 ModuleHandler *playerModuleHandler = new ModuleHandler();
                 int mul = static_cast<int>(i) * j;
                 if(mul % 2 == 0) {
@@ -67,8 +67,4 @@ WorldPreset::GenerationResult HeapWorld::generate(e172::Context *context) {
     }
 
     return result;
-}
-
-std::string HeapWorld::getName() {
-    return "heap world";
 }

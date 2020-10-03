@@ -7,7 +7,6 @@
 
 class Aggressive : public Controller {
 private:
-    std::list<Entity*> targets;
     Unit *target = nullptr;
     bool targeted = false;
     bool inWarp = false;
@@ -15,10 +14,10 @@ private:
     e172::ElapsedTimer warpFatigueTimer = e172::ElapsedTimer(10000);
 
 
-    Unit *chooseTarget();
+    Unit *chooseTarget(e172::Context *context);
 
 public:
-    Aggressive(std::list<Entity*> units);
+    Aggressive();
 
     // Entity interface
 public:

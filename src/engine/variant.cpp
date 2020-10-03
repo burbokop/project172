@@ -3,7 +3,6 @@
 
 #include <src/engine/time/elapsedtimer.h>
 
-#include <iostream>
 
 namespace e172 {
 
@@ -29,9 +28,9 @@ std::ostream &operator<<(std::ostream &stream, const Variant &arg) {
     return stream;
 }
 
-std::ostream &operator<<(std::ostream &stream, const std::vector<Variant> &vector) {
+std::ostream &operator<<(std::ostream &stream, const VariantVector &vector) {
     stream << "[";
-    std::vector<Variant>::size_type i = 0;
+    VariantVector::size_type i = 0;
     for(auto v : vector) {
         stream << v;
         if(i < vector.size() - 1) {
@@ -43,9 +42,9 @@ std::ostream &operator<<(std::ostream &stream, const std::vector<Variant> &vecto
     return stream;
 }
 
-std::ostream &operator<<(std::ostream &stream, const std::list<Variant> &list) {
+std::ostream &operator<<(std::ostream &stream, const VariantList &list) {
     stream << "[";
-    std::vector<Variant>::size_type i = 0;
+    VariantList::size_type i = 0;
     for(auto v : list) {
         stream << v;
         if(i < list.size() - 1) {
@@ -54,6 +53,20 @@ std::ostream &operator<<(std::ostream &stream, const std::list<Variant> &list) {
         ++i;
     }
     stream << "]";
+    return stream;
+}
+
+std::ostream &operator<<(std::ostream &stream, const VariantMap &map) {
+    stream << "{";
+    VariantList::size_type i = 0;
+    for(auto v : map) {
+        stream << v.first << ": " << v.second;
+        if(i < map.size() - 1) {
+            stream << ", ";
+        }
+        ++i;
+    }
+    stream << "}";
     return stream;
 }
 
@@ -158,6 +171,11 @@ bool Variant::isNumber() const {
     return 0;
 }
 
+bool Variant::isString() const {
+    return containsType<std::string>();
+}
+
+
 std::string Variant::toString() const {
     if(containsType<std::string>())
         return value_fast<std::string>();
@@ -173,46 +191,56 @@ std::string Variant::toString() const {
 
 
 std::string Variant::toJson() const {
-
+    std::string result;
+    if(containsType<VariantMap>()) {
+        result += "{";
+        const auto c = value_fast<VariantMap>();
+        size_t i = 0;
+        for(auto cc : c) {
+            result += "\"" + cc.first + "\" : " + cc.second.toJson();
+            if(i < c.size() - 1) {
+                result += ", ";
+            }
+            ++i;
+        }
+        result += "}";
+        return result;
+    } else if(containsType<VariantList>()) {
+        return containerToJson(value_fast<VariantList>());
+    } else if(containsType<VariantVector>()) {
+        return containerToJson(value_fast<VariantVector>());
+    } else if(isNumber()) {
+        return std::to_string(toDouble());
+    } else {
+        return "\"" + toString() + "\"";
+    }
 }
 
 Variant Variant::fromJson(const std::string &json) {
-    std::string trimed = Additional::removeSymbols(json, { ' ', '\n', '\t' });
-    std::cout << "call: " << trimed << "\n";
-
+    const auto trimed = Additional::removeSymbols(json, { ' ', '\n', '\t', '\r' });
     if(trimed.size() > 0) {
-        std::cout << "json: " << trimed.front() << " : " << trimed.back() << "\n";
         if(trimed.front() == '{' && trimed.back() == '}') {
-            std::cout << "obj : " << trimed << "\n";
             VariantMap map;
-            const auto ss = Additional::split(trimed.substr(1, trimed.size() - 2), ',');
+            const auto ss = Additional::jsonTopLevelFields(trimed.substr(1, trimed.size() - 2));
             for(const auto& s : ss) {
-                const auto recored = Additional::split(s, ':');
-                if(recored.size() > 1) {
-                    if(recored[1].size() > 0) {
-                        if(recored[1][0] == '{') {
-                            map[recored[0]] = fromJson(Additional::fencedArea(s, Additional::CurlyBraces));
-                        } else if(recored[1][0] == '[') {
-                            map[recored[0]] = fromJson(Additional::fencedArea(s, Additional::Brackets));
-                        } else {
-                            map[recored[0]] = fromJson(recored[1]);
-                        }
+                const auto record = Additional::splitIntoPair(s, ':');
+                if(record.first.size() > 1 && record.second.size() > 0) {
+                    if(record.first.front() == '\"' && record.first.back() == '\"') {
+                        map[record.first.substr(1, record.first.size() - 2)] = fromJson(record.second);
                     }
                 }
             }
-            std::cout << "obj result: " << map << "\n";
             return map;
         } else if(trimed.front() == '[' && trimed.back() == ']') {
-            std::cout << "list: " << trimed << "\n";
             VariantList list;
-            const auto ss = Additional::split(trimed.substr(1, trimed.size() - 2), ',');
+            const auto ss = Additional::jsonTopLevelFields(trimed.substr(1, trimed.size() - 2));
             for(const auto& s : ss) {
                 list.push_back(fromJson(s));
             }
-            std::cout << "list result: " << list << "\n";
             return list;
+        } else if(trimed.size() > 1 && trimed.front() == '\"' && trimed.back() == '\"') {
+            return trimed.substr(1, trimed.size() - 2);
         } else {
-            std::cout << "else: " << trimed << "\n";
             try {
                 return std::stod(trimed);
             } catch (std::invalid_argument) {
@@ -264,6 +292,9 @@ int64_t e172::Variant::testSpeed() {
     }
 }
 
+
+
 }
+
 
 

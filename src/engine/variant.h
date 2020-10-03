@@ -134,7 +134,8 @@ typedef std::list<Variant> VariantList;
 typedef std::map<std::string, Variant> VariantMap;
 
 std::ostream &operator<<(std::ostream &stream, const VariantVector &vector);
-std::ostream &operator<<(std::ostream &stream, const VariantList &vector);
+std::ostream &operator<<(std::ostream &stream, const VariantList &list);
+std::ostream &operator<<(std::ostream &stream, const VariantMap &map);
 
 class Variant {
     friend std::ostream &operator<<(std::ostream &stream, const Variant &arg);
@@ -159,6 +160,21 @@ class Variant {
     template<typename T>
     T value_fast() const { return dynamic_cast<VariantHandle<T>*>(m_data)->value; }
 
+    template<typename T>
+    static std::string containerToJson(const T& container) {
+        std::string result;
+        result += "[";
+        size_t i = 0;
+        for(auto cc : container) {
+            result += cc.toJson();
+            if(i < container.size() - 1) {
+                result += ", ";
+            }
+            ++i;
+        }
+        result += "]";
+        return result;
+    }
 public:
 
     // Variant base functional
@@ -346,6 +362,7 @@ public:
     VariantVector constrained() const;
 
     bool isNumber() const;
+    bool isString() const;
 
 #ifdef E172_USE_VARIANT_RTTI_OBJECT
     inline bool isNull() const { return m_rttiObject == nullptr; }
@@ -380,13 +397,8 @@ public:
 
     std::string toString() const;
 
-
-    [[deprecated("Will be added in future")]]
     std::string toJson() const;
-    [[deprecated("Will be added in future")]]
     static Variant fromJson(const std::string &json);
-
-
 
     static std::pair<int64_t, int64_t> testSpeed(size_t count);
     static int64_t testSpeed();

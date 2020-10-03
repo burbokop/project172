@@ -8,23 +8,26 @@
 
 AnimatorAssetExecutor::AnimatorAssetExecutor() {}
 
-e172::Variant AnimatorAssetExecutor::proceed(const Json::Value &value, e172::AbstractGraphicsProvider *graphicsProvider, e172::AbstractAudioProvider *) {
-    Json::Value spritesheet = value["spritesheet"];
-    Json::Value frames = value["frames"];
-    Json::Value tracks = value["tracks"];
-    Json::Value play = value["play"];
-    if(!spritesheet.isNull()) {
-        Animator anim(graphicsProvider->loadImage(fullPath(spritesheet.asString())), frames.isNull() ? 1 : frames.asInt(), tracks.isNull() ? 1 : tracks.asInt());
-        if(play.isString()) {
-            if(play == "loop") {
-                anim.play(Animator::Loop);
+e172::Variant AnimatorAssetExecutor::proceed(const e172::Variant &value, e172::AbstractGraphicsProvider *graphicsProvider, e172::AbstractAudioProvider *) {
+    const auto object = value.toMap();
+    if(object.size() > 0) {
+        const auto spritesheet = object.at("spritesheet");
+        const auto frames = object.at("frames");
+        const auto tracks = object.at("tracks");
+        const auto play = object.at("play");
+        if(!spritesheet.isNull()) {
+            Animator anim(graphicsProvider->loadImage(fullPath(spritesheet.toString())), frames.isNull() ? 1 : frames.toInt(), tracks.isNull() ? 1 : tracks.toInt());
+            if(!play.isNull()) {
+                if(play == "loop") {
+                    anim.play(Animator::Loop);
+                } else {
+                    anim.play(Animator::NotRender);
+                }
             } else {
-                anim.play(Animator::NotRender);
+                anim.play(Animator::Loop);
             }
-        } else {
-            anim.play(Animator::Loop);
+            return e172::Variant::fromValue(anim);
         }
-        return e172::Variant::fromValue(anim);
     }
     return e172::Variant();
 }

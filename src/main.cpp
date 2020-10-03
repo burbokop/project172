@@ -15,10 +15,7 @@
 #include <src/assetexecutors/animatorassetexecutor.h>
 #include <src/assetexecutors/audioassetexecutor.h>
 #include <src/assetexecutors/factoryassetexecutor.h>
-#include <src/assetexecutors/mapassetexecutor.h>
-#include <src/assetexecutors/numberassetexecutor.h>
 #include <src/assetexecutors/spriteassetexecutor.h>
-#include <src/assetexecutors/stringassetexecutor.h>
 #include <src/assetexecutors/vectorassetexecutor.h>
 
 
@@ -51,6 +48,8 @@
 #include <src/additional/chartview.h>
 #include <src/additional/memstatearner.h>
 #include <iostream>
+#include <src/gui/guibutton.h>
+#include <src/gui/base/guicontainer.h>
 
 extern "C" {
 int go_run_server();
@@ -59,15 +58,17 @@ void go_http_get();
 }
 
 int main(int argc, char *argv[]) {
-    const auto a = e172::Variant::fromJson(e172::Additional::readFile("/home/viktor/projects/project172/assets/templates/reciepts/ore_reciept.json"));
+    const auto jsonString = e172::Additional::readFile("/home/viktor/projects/project172/assets/templates/reciepts/ore_reciept.json");
+    const auto a = e172::Variant::fromJson(jsonString);
 
     int desc = go_run_server();
     go_stop_service(desc);
     go_http_get();
 
-    std::cout << "fa: " << e172::Additional::fencedArea("\"abs\":[ { a }, { b } ]", e172::Additional::Brackets) << "\n";
 
-    std::cout << " : " << a << "\n";
+    std::cout << "variant: " << a << "\n";
+    std::cout << "toJson: " << a.toJson() << "\n";
+
 
 
     //TestProvider::runAllTests();
@@ -109,12 +110,12 @@ int main(int argc, char *argv[]) {
         GUIMain gui;
         GUIStack stack;
         GUIContainer menu("renderer");
-        const auto f = [&rendererUsing, &chooseGraphicsProviderApp](e172::Variant value) {
+        const auto apply = [&rendererUsing, &chooseGraphicsProviderApp](e172::Variant value) {
             rendererUsing = static_cast<RendererUsing>(value.toInt());
             chooseGraphicsProviderApp.quit();
         };
-        menu.addMenuElement(new GUIChoice(std::string("SDL2"), SDL, f));
-        menu.addMenuElement(new GUIChoice(std::string("Vulkan"), Vulkan, f));
+        menu.addMenuElement(new GUIButton(std::string("SDL2"), [apply](auto) { apply(SDL); }));
+        menu.addMenuElement(new GUIButton(std::string("Vulkan"), [apply](auto) { apply(Vulkan); }));
         stack.push(&menu);
         gui.addStack(&stack);
 
@@ -156,24 +157,6 @@ int main(int argc, char *argv[]) {
     app.assetProvider()->installExecutor("sprite", std::make_shared<SpriteAssetExecutor>());
     app.assetProvider()->installExecutor("audio", std::make_shared<AudioAssetExecutor>());
     app.assetProvider()->installExecutor("offset", std::make_shared<VectorAssetExecutor>());
-
-    app.assetProvider()->installExecutor("rate", std::make_shared<NumberAssetExecutor>());
-    app.assetProvider()->installExecutor("interval", std::make_shared<NumberAssetExecutor>());
-    app.assetProvider()->installExecutor("health", std::make_shared<NumberAssetExecutor>());
-    app.assetProvider()->installExecutor("explosive", std::make_shared<NumberAssetExecutor>());
-    app.assetProvider()->installExecutor("max-speed", std::make_shared<NumberAssetExecutor>());
-    app.assetProvider()->installExecutor("acceleration", std::make_shared<NumberAssetExecutor>());
-    app.assetProvider()->installExecutor("release-spead", std::make_shared<NumberAssetExecutor>());
-
-    app.assetProvider()->installExecutor("projectile", std::make_shared<StringAssetExecutor>());
-
-    app.assetProvider()->installExecutor("left-thrust", std::make_shared<NumberAssetExecutor>());
-    app.assetProvider()->installExecutor("right-thrust", std::make_shared<NumberAssetExecutor>());
-    app.assetProvider()->installExecutor("warp-speed", std::make_shared<NumberAssetExecutor>());
-    app.assetProvider()->installExecutor("keymap", std::make_shared<MapAssetExecutor>());
-    app.assetProvider()->installExecutor("damage", std::make_shared<NumberAssetExecutor>());
-    app.assetProvider()->installExecutor("zoom", std::make_shared<NumberAssetExecutor>());
-    app.assetProvider()->installExecutor("mass", std::make_shared<NumberAssetExecutor>());
     app.assetProvider()->installExecutor("input", std::make_shared<RecieptAssetExecutor>());
     app.assetProvider()->installExecutor("output", std::make_shared<RecieptAssetExecutor>());
 

@@ -5,14 +5,13 @@
 
 
 
-class RecieptAssetExecutor : public e172::AbstractAssetExecutor
-{
+class RecieptAssetExecutor : public e172::AbstractAssetExecutor {
 public:
     RecieptAssetExecutor();
 
     // AbstractAssetExecutor interface
 public:
-    virtual e172::Variant proceed(const Json::Value &value, e172::AbstractGraphicsProvider *graphicsProvider, e172::AbstractAudioProvider *audioProvider) override;
+    virtual e172::Variant proceed(const e172::Variant &value, e172::AbstractGraphicsProvider *, e172::AbstractAudioProvider *) override;
 };
 
 #endif // RECIEPTASSETEXECUTOR_H
