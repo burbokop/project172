@@ -4,29 +4,27 @@
 #include <src/units/camera.h>
 #include <src/engine/math/math.h>
 
-
-
-void AudioPlayer::setWaitStopPlaing(bool waitStopPlaing) {
+void e172::AudioPlayer::setWaitStopPlaing(bool waitStopPlaing) {
     m_waitStopPlaing = waitStopPlaing;
 }
 
-e172::AudioSample AudioPlayer::beginningSample() const {
+e172::AudioSample e172::AudioPlayer::beginningSample() const {
     return m_beginningSample;
 }
 
-e172::AudioSample AudioPlayer::loopSample() const {
+e172::AudioSample e172::AudioPlayer::loopSample() const {
     return m_loopSample;
 }
 
-e172::AudioSample AudioPlayer::endingSample() const {
+e172::AudioSample e172::AudioPlayer::endingSample() const {
     return m_endingSample;
 }
 
-e172::AudioChannel AudioPlayer::channel() const {
+e172::AudioChannel e172::AudioPlayer::channel() const {
     return m_channel;
 }
 
-AudioPlayer::AudioPlayer(const e172::AudioChannel channel, const e172::AudioSample &start, const e172::AudioSample &loop, const e172::AudioSample &stop) {
+e172::AudioPlayer::AudioPlayer(const e172::AudioChannel channel, const e172::AudioSample &start, const e172::AudioSample &loop, const e172::AudioSample &stop) {
     m_channel = channel;
     m_beginningSample = start;
     m_loopSample = loop;
@@ -34,7 +32,7 @@ AudioPlayer::AudioPlayer(const e172::AudioChannel channel, const e172::AudioSamp
 }
 
 
-bool AudioPlayer::play() {
+bool e172::AudioPlayer::play() {
     if(state == Idle || !m_waitStopPlaing) {
         m_channel.play(m_beginningSample, 1);
         state = Beginning;
@@ -43,7 +41,7 @@ bool AudioPlayer::play() {
     return false;
 }
 
-bool AudioPlayer::stop() {
+bool e172::AudioPlayer::stop() {
     if(state == Beginning || state == Loop) {
         m_channel.play(m_endingSample, 1);
         state = Ending;
@@ -52,7 +50,7 @@ bool AudioPlayer::stop() {
     return false;
 }
 
-void AudioPlayer::proceed() {
+void e172::AudioPlayer::proceed() {
     if(state == Beginning) {
         if(!m_channel.isPlaying()) {
             if(m_loopSample.isValid()) {
@@ -69,14 +67,16 @@ void AudioPlayer::proceed() {
     }
 }
 
-void AudioPlayer::setVolume(double volume) {
+void e172::AudioPlayer::setVolume(double volume) {
     m_channel.setVolume(volume);
 }
 
-void AudioPlayer::setDistance(double distance) {
+void e172::AudioPlayer::setDistance(double distance) {
     m_channel.setDistance(distance);
 }
 
-bool operator ==(const AudioPlayer &ap0, const AudioPlayer &ap1) {
+namespace e172 {
+bool operator ==(const e172::AudioPlayer &ap0, const e172::AudioPlayer &ap1) {
     return ap0.id == ap1.id;
+}
 }

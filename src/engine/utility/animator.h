@@ -7,8 +7,9 @@
 #include <src/engine/time/elapsedtimer.h>
 #include <src/engine/graphics/image.h>
 
-namespace e172 { class AbstractRenderer; };
+namespace e172 {
 
+class AbstractRenderer;
 class Animator {
 public:
     enum {
@@ -59,5 +60,6 @@ public:
     int trackCount() const;
 };
 
+}
 
 #endif // ANIMATOR_H

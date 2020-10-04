@@ -2,6 +2,7 @@
 
 #include <src/engine/graphics/abstractrenderer.h>
 
+namespace e172 {
 
 void Animator::setDefaultMode(unsigned value) {
     defaultMode = value;
@@ -11,19 +12,15 @@ bool Animator::isValid() const {
     return m_isValid;
 }
 
-int Animator::frameCount() const
-{
+int Animator::frameCount() const {
     return m_frameCount;
 }
 
-int Animator::trackCount() const
-{
+int Animator::trackCount() const {
     return m_trackCount;
 }
 
-Animator::Animator() {
-    
-}
+Animator::Animator() {}
 
 Animator::Animator(const e172::Image &origin, int frames, int tracks) {
     this->angle = 0;
@@ -80,4 +77,5 @@ void Animator::render(e172::AbstractRenderer *renderer) {
 
 bool operator ==(const Animator &anim0, const Animator &anim1) {
     return anim0.id == anim1.id;
+}
 }

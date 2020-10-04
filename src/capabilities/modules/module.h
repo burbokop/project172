@@ -4,18 +4,18 @@
 
 #include "../capability.h"
 #include <src/iinformative.h>
-#include <src/animator.h>
-#include <src/audio/audioplayer.h>
+#include <src/engine/utility/animator.h>
+#include <src/engine/audio/audioplayer.h>
 
 class Module : public Capability, public IInformative {
 protected:
-    Animator animator;
-    AudioPlayer audioPlayer;
+    e172::Animator animator;
+    e172::AudioPlayer audioPlayer;
     e172::Vector attachOffset;
     e172::ElapsedTimer timer = e172::ElapsedTimer(100);
 public:
     Module();
-    void animate(unsigned mode, unsigned def = Animator::Inactive);
+    void animate(unsigned mode, unsigned def = e172::Animator::Inactive);
 
     // Entity interface
 public:

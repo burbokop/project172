@@ -6,7 +6,6 @@
 #include <src/units/projectile.h>
 #include <src/units/camera.h>
 #include <src/additional/lightparticle.h>
-#include <src/old_debug.h>
 #include <src/capabilities/modules/weapon.h>
 #include <src/capabilities/modulehandler.h>
 #include <src/engine/math/math.h>
@@ -81,7 +80,6 @@ void Aggressive::proceed(e172::Context *context, e172::AbstractEventHandler *eve
             target = chooseTarget(context);
         }
     } else {
-        old::Debug::err(old::Debug::Code::APPEAL_TO_REMOVED, __PRETTY_FUNCTION__);
         targeted = false;
         target = chooseTarget(context);
     }

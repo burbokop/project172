@@ -97,7 +97,7 @@ bool WarpDrive::warp() {
     if(warpState == WARP_READY) {
         warpState = WARP_EXECUTING;
         audioPlayer.play();
-        animator.play(Animator::Loop);
+        animator.play(e172::Animator::Loop);
         return true;
     }
     return false;
@@ -109,7 +109,7 @@ uint8_t WarpDrive::abortWarp(e172::Context* context) {
         const e172::Args args(parentUnit()->position(), parentUnit()->velocity() * 0.8, 16);
         context->emitMessage(e172::Context::SPAWN_EXPLOSIVE, args);
         audioPlayer.stop();
-        animator.play(Animator::NotRender);
+        animator.play(e172::Animator::NotRender);
     }
     if(warpState == WARP_EXECUTING || warpState == WARP_READY || warpState == WARP_LOADING) warpState = WARP_RECHARGING;
     return result;

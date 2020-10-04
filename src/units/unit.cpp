@@ -55,9 +55,9 @@ Unit::Unit() {
         m_health = asset<double>("health");
         m_explosiveRadius = asset<double>("explosive");
 
-        m_animator = asset<Animator>("sprite");
+        m_animator = asset<e172::Animator>("sprite");
         if(!m_animator.isValid()) {
-            m_animator = asset<Animator>("animator");
+            m_animator = asset<e172::Animator>("animator");
         }
 
         setMass(asset<double>("mass", 1));
@@ -101,7 +101,7 @@ void Unit::hit(e172::Context *context, int value) {
                 const auto modules = mh->modules();
                 for(Module* module : modules) {
                     if(module) {
-                        module->animate(Animator::NotRender, Animator::NotRender);
+                        module->animate(e172::Animator::NotRender, e172::Animator::NotRender);
                     }
                 }
             }

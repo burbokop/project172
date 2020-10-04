@@ -18,19 +18,8 @@
 #include <src/assetexecutors/spriteassetexecutor.h>
 #include <src/assetexecutors/vectorassetexecutor.h>
 
-
-
-#include <src/units/projectile.h>
-#include <src/units/ship.h>
-#include <src/units/station.h>
-
 #include <src/capabilities/factory.h>
 #include <src/capabilities/player.h>
-
-#include <src/capabilities/modules/engine.h>
-#include <src/capabilities/modules/thruster.h>
-#include <src/capabilities/modules/warpdrive.h>
-#include <src/capabilities/modules/weapon.h>
 
 #include <src/worlds/arenaworld.h>
 #include <src/worlds/defaultworld.h>
@@ -41,15 +30,18 @@
 
 #include <src/vulkanimplementation/vulkangraphicsprovider.h>
 
-#include <math.h>
-
 #include <tests/waretest.h>
-
 #include <src/additional/chartview.h>
 #include <src/additional/memstatearner.h>
-#include <iostream>
 #include <src/gui/guibutton.h>
 #include <src/gui/base/guicontainer.h>
+#include <src/units/projectile.h>
+#include <src/units/ship.h>
+#include <src/units/station.h>
+#include <src/capabilities/modules/engine.h>
+#include <src/capabilities/modules/thruster.h>
+#include <src/capabilities/modules/warpdrive.h>
+#include <src/capabilities/modules/weapon.h>
 
 extern "C" {
 int go_run_server();
@@ -58,37 +50,25 @@ void go_http_get();
 }
 
 int main(int argc, char *argv[]) {
-    const auto jsonString = e172::Additional::readFile("/home/viktor/projects/project172/assets/templates/reciepts/ore_reciept.json");
-    const auto a = e172::Variant::fromJson(jsonString);
-
-    int desc = go_run_server();
+    const int desc = go_run_server();
     go_stop_service(desc);
     go_http_get();
 
-
-    std::cout << "variant: " << a << "\n";
-    std::cout << "toJson: " << a.toJson() << "\n";
-
-
-
     //TestProvider::runAllTests();
 
-    std::cout << "count of .cpp files: " << e172::Additional::countOfFiles(e172::Additional::absolutePath("../src", argv[0]), ".cpp") << "\n";
-
-
-    if(false) {
-        size_t sum = 0;
-        for(size_t i = 0; i < 100; ++i) {
-            const auto s = e172::Variant::testSpeed();
-            std::cout << "[" << i << "%] e172::Variant::testSpeed: " << s << "\n";
-            sum += s;
-        }
-        std::cout << "e172::Variant::testSpeed (average): " << sum / 100 << "\n";
-        for(size_t i = 0; i < 10; ++i) {
-            const auto a = e172::Variant::testSpeed(1000000);
-            std::cout << "[" << (i * 10) << "%] e172::Variant::testSpeed(1000000): " << a.first << " : " << a.second << "\n";
-        }
-    }
+    //if constexpr(false) {
+    //    size_t sum = 0;
+    //    for(size_t i = 0; i < 100; ++i) {
+    //        const auto s = e172::Variant::testSpeed();
+    //        std::cout << "[" << i << "%] e172::Variant::testSpeed: " << s << "\n";
+    //        sum += s;
+    //    }
+    //    std::cout << "e172::Variant::testSpeed (average): " << sum / 100 << "\n";
+    //    for(size_t i = 0; i < 10; ++i) {
+    //        const auto a = e172::Variant::testSpeed(1000000);
+    //        std::cout << "[" << (i * 10) << "%] e172::Variant::testSpeed(1000000): " << a.first << " : " << a.second << "\n";
+    //    }
+    //}
 
 
     enum RendererUsing {

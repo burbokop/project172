@@ -4,8 +4,8 @@
 #include <src/engine/entity.h>
 #include <src/engine/physicalobject.h>
 #include <src/engine/assettools/loadable.h>
-#include <src/animator.h>
 #include <src/iinformative.h>
+#include <src/engine/utility/animator.h>
 
 class ModuleHandler;
 class Docker;
@@ -16,14 +16,12 @@ public:
 private:
     double m_health = 0;
     double m_explosiveRadius = 0;
-    Animator m_animator;
+    e172::Animator m_animator;
     std::vector<Capability*> m_capabilities;
 
     bool m_selected = false;
     uint32_t m_selectedColor;
     e172::ElapsedTimer m_selectedAnimationTimer;
-
-
 public:
     Unit();
 

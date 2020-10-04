@@ -4,6 +4,8 @@
 
 #include <src/engine/audio/audiochannel.h>
 
+namespace e172 {
+
 
 class AudioPlayer {
 public:
@@ -57,4 +59,5 @@ public:
     e172::AudioChannel channel() const;
 };
 
+}
 #endif // AUDIOPLAYER_H

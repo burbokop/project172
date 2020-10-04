@@ -1,11 +1,9 @@
 #include "memstatearner.h"
 
-#include <src/old_debug.h>
-
 #include <src/engine/abstracteventhandler.h>
 #include <src/engine/debug.h>
-
 #include <src/engine/graphics/abstractrenderer.h>
+#include <src/engine/utility/systeminfo.h>
 
 MemStatEarner::MemStatEarner() {
     vm_diff_ac.setEnableAutoReset(true);
@@ -20,7 +18,9 @@ void MemStatEarner::proceed(e172::Context *, e172::AbstractEventHandler *e) {
     enabled = e->keyHolded(e172::ScancodeF3);
 
     if(enabled) {
-        old::Debug::get_memory_usage_kb(&rss, &vm);
+        const auto memUsage = e172::SystemInfo::memoryUsageKb();
+        vm = memUsage.vm;
+        rss = memUsage.rss;
         vm_d = vm_size_differentiator.proceed(vm) * 0.001;
         rss_d = rss_differentiator.proceed(rss) * 0.001;
         vm_d_average = vm_diff_ac.proceed(vm_d);

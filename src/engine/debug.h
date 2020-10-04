@@ -56,6 +56,9 @@ public:
         emitMessage(FatalMessage, arg, args...);
     }
 
+    static int functionName(void *addr, std::string *fname, std::string *sname);
+    static std::vector<std::string> stackTrace();
+    static void installSigsegvHandler(void(*function)(int));
 };
 
 }

@@ -7,8 +7,8 @@
 
 Module::Module() {
     registerInitFunction([this](){
-        animator = asset<Animator>("animation");
-        audioPlayer = asset<AudioPlayer>("audio");
+        animator = asset<e172::Animator>("animation");
+        audioPlayer = asset<e172::AudioPlayer>("audio");
         attachOffset = asset<e172::Vector>("offset");
 
         bool ok;
@@ -27,7 +27,7 @@ void Module::animate(unsigned mode, unsigned def) {
     animator.setDefaultMode(def);
     animator.play(mode);
 
-    if(mode == Animator::Loop) audioPlayer.play();
+    if(mode == e172::Animator::Loop) audioPlayer.play();
     else audioPlayer.stop();
 }
 

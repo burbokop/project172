@@ -1,16 +1,13 @@
 #include "audioassetexecutor.h"
-
-#include <src/audio/audioplayer.h>
-
 #include <src/engine/audio/abstractaudioprovider.h>
-
+#include <src/engine/audio/audioplayer.h>
 #include <src/engine/additional.h>
 
 AudioAssetExecutor::AudioAssetExecutor() {}
 
 e172::Variant AudioAssetExecutor::proceed(const e172::Variant &value, e172::AbstractGraphicsProvider*, e172::AbstractAudioProvider *audioProvider) {
     if (value.isString()) {
-        return e172::Variant::fromValue(AudioPlayer(
+        return e172::Variant::fromValue(e172::AudioPlayer(
                                             audioProvider->reserveChannel(),
                                             audioProvider->loadAudioSample(fullPath(value.toString()).c_str())
                                             ));
@@ -24,7 +21,7 @@ e172::Variant AudioAssetExecutor::proceed(const e172::Variant &value, e172::Abst
 
             if(audioStart.isString()) {
                 if(audioLoop.isString() && audioStop.isString()) {
-                    AudioPlayer p(
+                    e172::AudioPlayer p(
                                 audioProvider->reserveChannel(),
                                 audioProvider->loadAudioSample(fullPath(audioStart.toString())),
                                 audioProvider->loadAudioSample(fullPath(audioLoop.toString())),
@@ -34,7 +31,7 @@ e172::Variant AudioAssetExecutor::proceed(const e172::Variant &value, e172::Abst
                     p.setVolume(volume);
                     return e172::Variant::fromValue(p);
                 } else {
-                    AudioPlayer p(
+                    e172::AudioPlayer p(
                                 audioProvider->reserveChannel(),
                                 audioProvider->loadAudioSample(fullPath(audioStart.toString()))
                                 );

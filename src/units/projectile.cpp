@@ -4,13 +4,10 @@
 
 #include <src/additional/lightparticle.h>
 #include <src/engine/objectregistry.h>
-#include <src/old_debug.h>
-
 #include <src/engine/context.h>
 
 const double Projectile::DEFAULT_HIT_RADIUS = 16.0;
 const int Projectile::DEFAULT_DAMAGE = 4;
-
 
 const int Projectile::DEFAULT_AVERAGE_LIFE_TIME = 6000;
 const int Projectile::DEFAULT_LIFE_TIME_DELTA = 4000;
@@ -50,7 +47,8 @@ void Projectile::proceed(e172::Context *context, e172::AbstractEventHandler *eve
         context->emitMessage(e172::Context::DESTROY_ENTITY, entityId());
     }
 
-    for(Entity *e : context->entities()) {
+    const auto entities = context->entities();
+    for(Entity *e : entities) {
         if(e == e172::Alive) {
             Unit *unit = dynamic_cast<Unit*>(e);
             if(unit != nullptr && unit != this) {
@@ -58,8 +56,6 @@ void Projectile::proceed(e172::Context *context, e172::AbstractEventHandler *eve
                     collision(context, unit);
                 }
             }
-        } else {
-            old::Debug::err(old::Debug::Code::APPEAL_TO_REMOVED, __PRETTY_FUNCTION__);
         }
     }
     Unit::proceed(context, eventHandler);

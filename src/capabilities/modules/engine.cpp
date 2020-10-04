@@ -11,9 +11,9 @@ bool Engine::forward() {
 void Engine::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
     if(m_running != m_lastRunning) {
         if(m_running) {
-            animate(Animator::Loop);
+            animate(e172::Animator::Loop);
         } else {
-            animate(Animator::NotRender);
+            animate(e172::Animator::NotRender);
         }
     }
 
@@ -24,5 +24,5 @@ void Engine::proceed(e172::Context *context, e172::AbstractEventHandler *eventHa
 }
 
 std::string Engine::info() const {
-    return "EG";
+    return m_running ? "EG running" : "EG stoped";
 }

@@ -1,3 +1,4 @@
+#include "debug.h"
 #include "gameapplication.h"
 
 #include <src/engine/context.h>
@@ -10,6 +11,20 @@
 
 namespace e172 {
 
+
+
+
+size_t GameApplication::static_constructor() {
+    e172::Debug::installSigsegvHandler([](auto){
+        const auto st = e172::Debug::stackTrace();
+        e172::Debug::warning("Segmentation Fault");
+        e172::Debug::warning("Stack trace info:");
+        for(auto s : st) {
+            e172::Debug::print("\t", s);
+        }
+    });
+    return 0;
+}
 
 std::vector<std::string> GameApplication::coverArgs(int argc, char *argv[]) {
     std::vector<std::string> result;

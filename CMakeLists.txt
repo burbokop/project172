@@ -38,6 +38,9 @@ add_library(e172 SHARED
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/audio/audiochannel.h
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/audio/audiosample.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/audio/audiosample.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/engine/audio/audioplayer.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/engine/audio/audioplayer.h
+
 
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/graphics/abstractgraphicsprovider.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/graphics/abstractgraphicsprovider.h
@@ -73,6 +76,11 @@ add_library(e172 SHARED
 
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/utility/vectorproxy.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/utility/vectorproxy.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/engine/utility/systeminfo.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/engine/utility/systeminfo.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/engine/utility/animator.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/engine/utility/animator.h
+
 
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/abstracteventhandler.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/abstracteventhandler.h
@@ -194,19 +202,13 @@ add_executable(project172
 
     ${CMAKE_CURRENT_LIST_DIR}/src/appextensions/screensettingsextension.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/appextensions/screensettingsextension.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/animator.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/animator.h
     ${CMAKE_CURRENT_LIST_DIR}/src/background.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/background.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/old_debug.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/old_debug.h
     ${CMAKE_CURRENT_LIST_DIR}/src/iinformative.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/iinformative.h
     ${CMAKE_CURRENT_LIST_DIR}/src/main.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/near.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/near.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/netlistener.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/netlistener.h
     ${CMAKE_CURRENT_LIST_DIR}/src/worldpresetstrategy.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/worldpresetstrategy.h
 
@@ -262,8 +264,6 @@ add_executable(project172
     ${CMAKE_CURRENT_LIST_DIR}/src/assetexecutors/factoryassetexecutor.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/assetexecutors/factoryassetexecutor.h
 
-    ${CMAKE_CURRENT_LIST_DIR}/src/audio/audioplayer.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/audio/audioplayer.h
 
     ${CMAKE_CURRENT_LIST_DIR}/src/capabilities/modules/engine.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/capabilities/modules/engine.h

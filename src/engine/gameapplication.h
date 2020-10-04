@@ -38,6 +38,9 @@ public:
 
 
 class GameApplication {
+    static size_t static_constructor();
+    static const inline size_t static_call = static_constructor();
+
     std::vector<std::string> coverArgs(int argc, char *argv[]);
     std::vector<std::string> m_arguments;
 

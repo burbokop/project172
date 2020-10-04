@@ -2,8 +2,7 @@
 
 #include <src/engine/graphics/abstractgraphicsprovider.h>
 
-#include <src/animator.h>
-
+#include <src/engine/utility/animator.h>
 
 
 AnimatorAssetExecutor::AnimatorAssetExecutor() {}
@@ -16,15 +15,15 @@ e172::Variant AnimatorAssetExecutor::proceed(const e172::Variant &value, e172::A
         const auto tracks = object.at("tracks");
         const auto play = object.at("play");
         if(!spritesheet.isNull()) {
-            Animator anim(graphicsProvider->loadImage(fullPath(spritesheet.toString())), frames.isNull() ? 1 : frames.toInt(), tracks.isNull() ? 1 : tracks.toInt());
+            e172::Animator anim(graphicsProvider->loadImage(fullPath(spritesheet.toString())), frames.isNull() ? 1 : frames.toInt(), tracks.isNull() ? 1 : tracks.toInt());
             if(!play.isNull()) {
                 if(play == "loop") {
-                    anim.play(Animator::Loop);
+                    anim.play(e172::Animator::Loop);
                 } else {
-                    anim.play(Animator::NotRender);
+                    anim.play(e172::Animator::NotRender);
                 }
             } else {
-                anim.play(Animator::Loop);
+                anim.play(e172::Animator::Loop);
             }
             return e172::Variant::fromValue(anim);
         }

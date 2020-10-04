@@ -6,7 +6,6 @@
 #include <src/capabilities/docker.h>
 #include <src/capabilities/modulehandler.h>
 #include <src/ftestobject.h>
-#include <src/old_debug.h>
 #include <src/engine/math/math.h>
 #include <src/units/ship.h>
 #include <src/units/unit.h>
@@ -157,7 +156,6 @@ WorldPreset::GenerationResult DefaultWorld::generate(e172::Context *context) {
         std::vector<std::string> assetKeys = context->assetProvider()->loadableNames();
         unsigned int i = 0;
         for (std::string key : assetKeys) {
-            old::Debug::out("DefaultWorld::generate(assets, units): loading key ( key" + key + " )");
             auto unit = dynamic_cast<Unit*>(context->assetProvider()->createLoadable(key));
             if(unit) {
                 unit->resetPhysicsProperties(e172::Vector(static_cast<int>((i + 4) * 64), -200), 0);
