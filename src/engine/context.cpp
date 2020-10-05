@@ -24,6 +24,27 @@ void Context::setProperty(const std::string &propertyId, const Variant &value) {
     m_properties[propertyId] = value;
 }
 
+Observer<Variant> Context::settingValue(const std::string &id) const {
+    auto it = m_settings.find(id);
+    if(it == m_settings.end())
+        it = const_cast<Context*>(this)->m_settings.insert(it, { id, Variant::fromString(Additional::readVof(absolutePath(SettingsFilePath), id)) });
+
+    return it->second;
+}
+
+void Context::setSettingValue(const std::string &id, const Variant &value) {
+    const auto it = m_settings.find(id);
+    if(it == m_settings.end()) {
+        Additional::writeVof(SettingsFilePath, id, value.toString());
+        m_settings.insert(it, { id, value });
+    } else {
+        if(it->second != value) {
+            Additional::writeVof(SettingsFilePath, id, value.toString());
+            it->second = value;
+        }
+    }
+}
+
 AssetProvider *Context::assetProvider() const {
     if(m_application)
         return m_application->assetProvider();
@@ -44,6 +65,7 @@ Context::Context(GameApplication *application) {
     m_application = application;
     m_messageQueue.setExceptionHandlingMode(decltype (m_messageQueue)::WarningException);
     m_messageQueue.setMessageLifeTime(1);
+    //m_settings = e172::toObserverMap(Variant::fromString(Additional::readAllVof(absolutePath(SettingsFilePath))));
 }
 
 std::string Context::absolutePath(const std::string &path) const {
@@ -62,7 +84,7 @@ std::vector<std::string> Context::arguments() const {
     return std::vector<std::string>();
 }
 
-Promice *Context::emitMessage(const MessageId &messageId, const Variant &value) {
+std::shared_ptr<Promice> Context::emitMessage(const MessageId &messageId, const Variant &value) {
     return m_messageQueue.emitMessage(messageId, value);
 }
 

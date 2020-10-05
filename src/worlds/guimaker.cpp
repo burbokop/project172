@@ -130,6 +130,17 @@ GUIMaker::GUIMaker(e172::Context *context, Near *radarNear) {
                         fullscreenMenu->addMenuElement(new GUIButton(std::string("no"), [setFullscreen](auto) { setFullscreen(0); }));
                     } optionsMenu->addMenuElement(fullscreenMenu);
 
+                    GUIContainer *volumeMenu = new GUIContainer(std::string("volume")); {
+                        const auto setVolume = [context](double value) {
+                            context->setSettingValue("general_volume", value);
+                        };
+                        volumeMenu->addMenuElement(new GUIButton(std::string("000%"), [setVolume](auto) { setVolume(0); }));
+                        volumeMenu->addMenuElement(new GUIButton(std::string("025%"), [setVolume](auto) { setVolume(0.25); }));
+                        volumeMenu->addMenuElement(new GUIButton(std::string("050%"), [setVolume](auto) { setVolume(0.5); }));
+                        volumeMenu->addMenuElement(new GUIButton(std::string("075%"), [setVolume](auto) { setVolume(0.75); }));
+                        volumeMenu->addMenuElement(new GUIButton(std::string("100%"), [setVolume](auto) { setVolume(1); }));
+                    } optionsMenu->addMenuElement(volumeMenu);
+
                 } mainMenu->addMenuElement(optionsMenu);
 
                 GUIContainer *stationMenu = new GUIContainer("station"); {

@@ -3,16 +3,25 @@
 
 #include "variant.h"
 #include <queue>
+#include <memory>
 
 namespace e172 {
 
 class Promice {
+public:
+    enum State {
+        InProcess,
+        Done,
+        Failed
+    };
 protected:
     std::function<void()> m_done;
     std::function<void()> m_fail;
+    State m_state = InProcess;
 public:
-    void onDone(const std::function<void()> &callback) { m_done = callback; }
-    void onFail(const std::function<void()> &callback) { m_fail = callback; }
+    void onDone(const std::function<void()> &callback) { m_done = callback; if(Done) { callback(); } }
+    void onFail(const std::function<void()> &callback) { m_fail = callback; if(Failed) { callback(); } }
+    State state() const { return m_state; }
 };
 
 class MessageQueuePromice : public Promice {
@@ -33,7 +42,7 @@ class MessageQueue {
     struct MessageType {
         ValueType value;
         int loop_count = 0;
-        MessageQueuePromice *promice = nullptr;
+        std::shared_ptr<MessageQueuePromice> promice;
     };
 
     struct IdentifiedData {
@@ -80,7 +89,7 @@ private:
                 if(message.promice) {
                     if(message.promice->m_fail)
                         message.promice->m_fail();
-                    delete message.promice;
+                    message.promice->m_state = Promice::Failed;
                 }
 
                 if(exceptionHandlingMode != IgnoreException) {
@@ -123,7 +132,8 @@ public:
             if(message.promice) {
                 if(message.promice->m_done)
                     message.promice->m_done();
-                delete message.promice;
+
+                message.promice->m_state = Promice::State::Done;
             }
         }
     }
@@ -133,8 +143,8 @@ public:
         popMessage(id, [object, callback](auto v) { (object->*callback)(v); });
     }
 
-    Promice *emitMessage(const IdType &id, const ValueType &value) {
-        const auto p = new MessageQueuePromice();
+    std::shared_ptr<Promice> emitMessage(const IdType &id, const ValueType &value) {
+        const auto p = std::make_shared<MessageQueuePromice>();
         m_data[id].queue.push_back(MessageType { value, m_messageLifeTime, p });
         return p;
     }
@@ -154,7 +164,7 @@ public:
                     }
                     if(message.promice) {
                         message.promice->m_done();
-                        delete message.promice;
+                        message.promice->m_state = Promice::Done;
                     }
 
                     d.second.queue.pop_front();

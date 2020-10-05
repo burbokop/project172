@@ -52,9 +52,9 @@ e172::AudioChannel SDLAudioProvider::reserveChannel() {
         freeChannel.push(c->c);
         delete c;
     },
-    [](e172::AudioChannel::data_ptr data , double volume){
+    [this](e172::AudioChannel::data_ptr data , double volume){
     auto c = e172::AudioChannel::handle_cast<int>(data);
-    Mix_Volume(c->c, static_cast<int>(MIX_MAX_VOLUME*volume));
+    Mix_Volume(c->c, static_cast<int>(MIX_MAX_VOLUME * volume * generalVolume()));
 },
 [](e172::AudioChannel::data_ptr data, const e172::AudioSample& sample, int loops){
     const auto c = e172::AudioChannel::handle_cast<int>(data);

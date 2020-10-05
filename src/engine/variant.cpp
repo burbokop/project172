@@ -189,6 +189,25 @@ std::string Variant::toString() const {
     return std::string();
 }
 
+Variant Variant::fromString(const std::string &string) {
+    try {
+        return std::stod(string);
+    } catch (std::invalid_argument) {
+        try {
+            return std::stoi(string);
+        } catch (std::invalid_argument) {
+            return string;
+        }
+    }
+}
+
+VariantMap Variant::fromString(const std::map<std::string, std::string> &map) {
+    VariantMap result;
+    for(auto m : map) {
+        result[m.first] = m.second;
+    }
+    return result;
+}
 
 std::string Variant::toJson() const {
     std::string result;

@@ -327,6 +327,7 @@ public:
     bool containsType() const { return m_typeHash == Type<T>::hash; }
 #endif
     friend bool operator==(const Variant &varian0, const Variant &varian1);
+    inline friend bool operator!=(const Variant &varian0, const Variant &varian1) { return !(varian0 == varian1); };
     friend bool operator<(const Variant &varian0, const Variant &varian1);
 
     template<typename T>
@@ -396,6 +397,8 @@ public:
     inline auto toMathVector() const { return value_default<Vector>();};
 
     std::string toString() const;
+    static Variant fromString(const std::string &string);
+    static VariantMap fromString(const std::map<std::string, std::string> &map);
 
     std::string toJson() const;
     static Variant fromJson(const std::string &json);

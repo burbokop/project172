@@ -154,6 +154,10 @@ void GameApplication::quit() {
 }
 
 int GameApplication::exec() {
+    for(auto m : m_applicationExtensions) {
+        if(m.second->extensionType() == GameApplicationExtension::InitExtension)
+            m.second->proceed(this);
+    }
     while (1) {
         m_deltaTimeCalculator.update();
 
@@ -163,6 +167,10 @@ int GameApplication::exec() {
                 break;
         }
 
+        for(auto m : m_applicationExtensions) {
+            if(m.second->extensionType() == GameApplicationExtension::PreProceedExtension)
+                m.second->proceed(this);
+        }
         for(auto e : m_entities) {
             e->proceed(m_context, m_eventHandler);
             for(auto euf : e->__euf) {
@@ -175,8 +183,8 @@ int GameApplication::exec() {
             if(r) {
                 r->m_locked = false;
                 for(auto m : m_applicationExtensions) {
-                    if(m->extensionType() == GameApplicationExtension::PreRenderExtension)
-                        m->proceed(this);
+                    if(m.second->extensionType() == GameApplicationExtension::PreRenderExtension)
+                        m.second->proceed(this);
                 }
                 for(auto e : m_entities) {
                     e->render(r);

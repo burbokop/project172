@@ -3,6 +3,8 @@
 
 #include <queue>
 
+#include <src/engine/utility/observer.h>
+
 
 #include "entity.h"
 #include "messagequeue.h"
@@ -19,7 +21,10 @@ class Context : public Object {
     GameApplication *m_application = nullptr;
 
     e172::VariantMap m_properties;
+    std::map<std::string, Observer<Variant>> m_settings;
 public:
+    static inline std::string SettingsFilePath = "./settings.vof";
+
     typedef Variant MessageId;
 
     enum {
@@ -51,10 +56,13 @@ public:
     e172::Variant property(const std::string &propertyId) const;
     void setProperty(const std::string &propertyId, const e172::Variant &value);
 
+    Observer<Variant> settingValue(const std::string &id) const;
+    void setSettingValue(const std::string &id, const e172::Variant &value);
+
     AssetProvider *assetProvider() const;
     std::list<Entity *> entities() const;
     void addEntity(Entity *entity);
-    Promice *emitMessage(const MessageId &messageId, const Variant &value = Variant());
+    std::shared_ptr<Promice> emitMessage(const MessageId &messageId, const Variant &value = Variant());
 
     inline void popMessage(const MessageId &messageId, const std::function<void(Context *, const Variant&)>& callback) {
         m_messageQueue.popMessage(messageId, [this, callback](const auto& value) { callback(this, value); });

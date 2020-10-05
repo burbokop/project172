@@ -6,8 +6,8 @@
 
 #include <string>
 namespace e172 {
-class AbstractAudioProvider
-{
+class AbstractAudioProvider {
+    double m_generalVolume = 1;
 protected:
     static AudioSample __newAudioSample(AudioSample::data_ptr data, AudioSample::ptr id, AudioSample::destructor_t destructor);
     static AudioChannel __newAudioChannel(
@@ -28,6 +28,8 @@ public:
     virtual AudioSample loadAudioSample(const std::string &path) = 0;
     virtual AudioChannel reserveChannel() = 0;
     virtual ~AbstractAudioProvider();
+    double generalVolume() const;
+    void setGeneralVolume(double generalVolume);
 };
 }
 #endif // AUDIOPROVIDER_H

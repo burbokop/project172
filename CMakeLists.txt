@@ -1,13 +1,13 @@
 
 
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.18)
 #set(CMAKE_TRY_COMPILE_TARGET_TYPE "STATIC_LIBRARY")
 
 project(project172)
 
 add_compile_options(-no-pie)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 
@@ -15,7 +15,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 
 
+
+
 message("CMAKE_CXX_COMPILER: " ${CMAKE_CXX_COMPILER} " " ${CMAKE_CXX_COMPILER_VERSION})
+
 
 
 
@@ -80,7 +83,8 @@ add_library(e172 SHARED
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/utility/systeminfo.h
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/utility/animator.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/utility/animator.h
-
+    ${CMAKE_CURRENT_LIST_DIR}/src/engine/utility/observer.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/engine/utility/observer.h
 
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/abstracteventhandler.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/abstracteventhandler.h
@@ -202,6 +206,9 @@ add_executable(project172
 
     ${CMAKE_CURRENT_LIST_DIR}/src/appextensions/screensettingsextension.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/appextensions/screensettingsextension.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/appextensions/volumeobserverextension.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/appextensions/volumeobserverextension.h
+
     ${CMAKE_CURRENT_LIST_DIR}/src/background.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/background.h
     ${CMAKE_CURRENT_LIST_DIR}/src/iinformative.cpp
@@ -363,6 +370,7 @@ add_executable(project172
     ${CMAKE_CURRENT_LIST_DIR}/src/explosivespawner.h
     ${CMAKE_CURRENT_LIST_DIR}/src/ftestobject.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/ftestobject.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/testmodule.cppm
     )
 
 

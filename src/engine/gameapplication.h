@@ -10,7 +10,7 @@
 #include <src/engine/time/deltatimecalculator.h>
 #include <src/engine/time/elapsedtimer.h>
 #include <list>
-
+#include <src/engine/type.h>
 
 namespace e172 {
 class AbstractAudioProvider;
@@ -24,6 +24,8 @@ class GameApplicationExtension {
 public:
     enum ExtensionType {
         UndefinedExtension,
+        InitExtension,
+        PreProceedExtension,
         PreRenderExtension
     };
     ExtensionType extensionType() const;
@@ -48,7 +50,7 @@ class GameApplication {
     ElapsedTimer m_renderTimer;
 
     std::list<Entity*> m_entities;
-    std::list<GameApplicationExtension*> m_applicationExtensions;
+    std::map<size_t, GameApplicationExtension*> m_applicationExtensions;
 
     AbstractEventHandler *m_eventHandler = nullptr;
     AbstractGraphicsProvider *m_graphicsProvider = nullptr;
@@ -73,8 +75,21 @@ public:
     std::vector<std::string> arguments() const;
 
     inline void addEntity(Entity *entity) { m_entities.push_back(entity); }
-    inline void addApplicationExtension(GameApplicationExtension *extension) { m_applicationExtensions.push_back(extension); }
-    inline void removeApplicationExtension(GameApplicationExtension *extension) { m_applicationExtensions.remove(extension); }
+    template<typename T>
+    inline void addApplicationExtension() {
+        const auto it = m_applicationExtensions.find(Type<T>::hash());
+        if(it == m_applicationExtensions.end())
+            m_applicationExtensions[Type<T>::hash()] = new T();
+    }
+    template<typename T>
+    inline void removeApplicationExtension() {
+        removeApplicationExtension(Type<T>::hash());
+    }
+    inline void removeApplicationExtension(size_t hash) {
+        const auto it = m_applicationExtensions.find(hash);
+        if(it != m_applicationExtensions.end())
+            m_applicationExtensions.erase(it);
+    }
 
     AssetProvider *assetProvider() const;
     e172::Context *context() const;

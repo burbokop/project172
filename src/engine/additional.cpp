@@ -320,3 +320,90 @@ size_t e172::Additional::countOfFiles(std::string path, std::string suffix) {
     }
     return sum_count;
 }
+
+std::map<std::string, std::string> e172::Additional::readAllVof(const std::string &path, char delimiter) {
+    std::map<std::string, std::string> result;
+    std::ifstream fin;
+    fin.open(path, std::ios::in);
+    if (fin.is_open()) {
+        while(!fin.eof()) {
+            std::string line;
+            std::getline(fin, line);
+            const auto lv = e172::Additional::split(line, delimiter);
+            if(lv.size() > 1) {
+                result[lv[0]] = lv[1];
+            }
+        }
+        fin.close();
+    }
+    return result;
+}
+
+std::string e172::Additional::readVof(const std::string &path, const std::string &id, char delimiter) {
+    std::ifstream fin;
+    fin.open(path, std::ios::in);
+    if (fin.is_open()) {
+        while(!fin.eof()) {
+            std::string line;
+            std::getline(fin, line);
+            const auto lv = e172::Additional::split(line, delimiter);
+            if(lv.size() > 1) {
+                if (lv[0] == id) {
+                    fin.close();
+                    return e172::Additional::trim(lv[1]);
+                }
+            }
+        }
+        fin.close();
+    }
+    return std::string();
+}
+
+void e172::Additional::writeVof(const std::string &path, const std::string &id, const std::string &value, char delimiter) {
+    bool found = false;
+    bool endsWithEndline = false;
+    std::ifstream fin;
+    std::ofstream fout;
+    std::list<std::string> tmp;
+    fin.open(path, std::ios::in);
+    if (fin.is_open() == false) {
+        fout.open(path, std::ios::out);
+        fout << id << delimiter << value;
+        fout.close();
+    } else {
+        while(!fin.eof()) {
+            std::string line;
+            std::getline(fin, line);
+            const auto lv = e172::Additional::split(line, delimiter);
+            if(lv.size() > 1) {
+                if (lv[0] == id) {
+                    found = true;
+                    tmp.push_back(lv[0] + delimiter + value);
+                } else {
+                    tmp.push_back(lv[0] + delimiter + lv[1]);
+                }
+            }
+        }
+        fin.close();
+        if(tmp.size() > 0) {
+            const auto back = tmp.back();
+            if(back.size() > 0) {
+                endsWithEndline = (back.back() == '\n');
+            }
+        }
+        if (!found) {
+            fout.open(path, std::ios::app);
+            if(!endsWithEndline) {
+                fout << '\n';
+            }
+            fout << id + delimiter + value << '\n';
+            fout.close();
+        } else {
+            fout.open(path, std::ios::out);
+            for(const auto& line : tmp) {
+                fout << line << '\n';
+            }
+            fout.close();
+        }
+    }
+}

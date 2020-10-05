@@ -42,6 +42,7 @@
 #include <src/capabilities/modules/thruster.h>
 #include <src/capabilities/modules/warpdrive.h>
 #include <src/capabilities/modules/weapon.h>
+#include <src/appextensions/volumeobserverextension.h>
 
 extern "C" {
 int go_run_server();
@@ -49,7 +50,12 @@ void go_stop_service(int);
 void go_http_get();
 }
 
+//import test_module;  // import declaration
+
 int main(int argc, char *argv[]) {
+    //hello();
+
+
     const int desc = go_run_server();
     go_stop_service(desc);
     go_http_get();
@@ -207,9 +213,8 @@ int main(int argc, char *argv[]) {
     ExplosiveSpawner explosiveSpawner;
     app.addEntity(&explosiveSpawner);
 
-    ScreenSettingsExtension screenSettingsExtension;
-    app.addApplicationExtension(&screenSettingsExtension);
-
+    app.addApplicationExtension<ScreenSettingsExtension>();
+    app.addApplicationExtension<VolumeObserverExtension>();
 
     //debug utitlity
     ChartView chartView;

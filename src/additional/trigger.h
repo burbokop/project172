@@ -10,6 +10,7 @@ public:
     void enable();
     void disanable();
 
+
     bool check();
 };
 

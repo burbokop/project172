@@ -3,6 +3,16 @@
 namespace e172 {
 
 
+double AbstractAudioProvider::generalVolume() const
+{
+    return m_generalVolume;
+}
+
+void AbstractAudioProvider::setGeneralVolume(double generalVolume)
+{
+    m_generalVolume = generalVolume;
+}
+
 AudioSample AbstractAudioProvider::__newAudioSample(AudioSample::data_ptr data, AudioSample::ptr id, AudioSample::destructor_t destructor) {
     return AudioSample::newAudioSample(data, id, destructor);
 }

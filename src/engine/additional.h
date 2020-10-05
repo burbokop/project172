@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <list>
 
 namespace e172 {
 
@@ -54,6 +55,9 @@ struct Additional {
 
     static size_t countOfFiles(std::string path, std::string suffix);
 
+    static std::map<std::string, std::string> readAllVof(const std::string &path, char delimiter = '=');
+    static std::string readVof(const std::string &path, const std::string &id, char delimiter = '=');
+    static void writeVof(const std::string &path, const std::string &id, const std::string &value, char delimiter = '=');
 };
 
 }
