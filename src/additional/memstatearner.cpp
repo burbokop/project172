@@ -15,7 +15,9 @@ MemStatEarner::MemStatEarner() {
 
 
 void MemStatEarner::proceed(e172::Context *, e172::AbstractEventHandler *e) {
-    enabled = e->keyHolded(e172::ScancodeF3);
+    if(e->keySinglePressed(e172::ScancodeF3)) {
+        enabled = !enabled;
+    }
 
     if(enabled) {
         const auto memUsage = e172::SystemInfo::memoryUsageKb();

@@ -83,7 +83,7 @@ void e172::PhysicalObject::addRotationRestoringForce(double destiantionRotation,
 }
 
 void e172::PhysicalObject::addTargetRotationForse(double destinationAngle, double rotationForceModule, double maxRotationVelocity) {
-    addLimitedRotationForce(static_cast<double>(Math::radiansDirection(destinationAngle, rotation())) * rotationForceModule, maxRotationVelocity);
+    addLimitedRotationForce((static_cast<double>(Math::radiansDirection(destinationAngle, rotation())) * -2 + 1) * rotationForceModule, maxRotationVelocity);
 }
 
 void e172::PhysicalObject::addForce(const Vector& value) {

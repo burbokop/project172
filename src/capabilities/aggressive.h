@@ -10,9 +10,9 @@ private:
     Unit *target = nullptr;
     bool targeted = false;
     bool inWarp = false;
-    Trigger stopWarpTrigger = Trigger();
     e172::ElapsedTimer warpFatigueTimer = e172::ElapsedTimer(10000);
 
+    e172::ElapsedTimer chooseTargetTimer = e172::ElapsedTimer((clock() + rand()) % 9000 + 1000);
 
     Unit *chooseTarget(e172::Context *context);
 

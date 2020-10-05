@@ -15,13 +15,14 @@ namespace e172 {
 
 
 size_t GameApplication::static_constructor() {
-    e172::Debug::installSigsegvHandler([](auto){
+    e172::Debug::installSigsegvHandler([](auto s){
         const auto st = e172::Debug::stackTrace();
-        e172::Debug::warning("Segmentation Fault");
-        e172::Debug::warning("Stack trace info:");
+        Debug::warning("Segmentation Fault");
+        Debug::warning("Stack trace info:");
         for(auto s : st) {
-            e172::Debug::print("\t", s);
+            Debug::print('\t', s);
         }
+        exit(s);
     });
     return 0;
 }
@@ -42,9 +43,9 @@ void GameApplication::destroyAllEntities(Context *, const Variant &) {
             delete *it;
             it = m_entities.erase(it);
 
-            if(m_autoIterator == m_entities.end()) {
-                m_autoIterator = m_entities.begin();
-            }
+            //if(m_autoIterator == m_entities.end()) {
+            //    m_autoIterator = m_entities.begin();
+            //}
         } else {
             ++it;
         }
@@ -55,12 +56,12 @@ void GameApplication::destroyEntity(Context* context, const Variant &value) {
     if(const auto e = context->entityById(value.toNumber<Entity::id_t>())) {
         if(e->liveInHeap()) {
             m_entities.remove(e);
-            if(m_autoIterator != m_entities.begin())
-                --m_autoIterator;
-
-            if(m_autoIterator == m_entities.end()) {
-                m_autoIterator = m_entities.begin();
-            }
+            //if(m_autoIterator != m_entities.begin())
+            //    --m_autoIterator;
+            //
+            //if(m_autoIterator == m_entities.end()) {
+            //    m_autoIterator = m_entities.begin();
+            //}
 
             delete e;
         }
@@ -76,9 +77,9 @@ void GameApplication::destroyEntitiesWithTag(Context *, const Variant &value) {
             delete *it;
             it = m_entities.erase(it);
 
-            if(m_autoIterator == m_entities.end()) {
-                m_autoIterator = m_entities.begin();
-            }
+            //if(m_autoIterator == m_entities.end()) {
+            //    m_autoIterator = m_entities.begin();
+            //}
         } else {
             ++it;
         }
@@ -86,16 +87,16 @@ void GameApplication::destroyEntitiesWithTag(Context *, const Variant &value) {
 }
 
 
-std::list<Entity *> GameApplication::entities() const
-{
+std::list<Entity *> GameApplication::entities() const {
     return m_entities;
 }
 
 Entity *GameApplication::autoIteratingEntity() const {
-    if(m_autoIterator != m_entities.end()) {
-        return m_autoIterator.operator*();
-    }
-    return nullptr;
+    //if(m_autoIterator != m_entities.end()) {
+    //    return m_autoIterator.operator*();
+    //}
+    //return nullptr;
+    return m_entities.cyclicValue(nullptr);
 }
 
 AbstractGraphicsProvider *GameApplication::graphicsProvider() const {
@@ -200,9 +201,10 @@ int GameApplication::exec() {
         }
 
         //AUTO ITERATOR RESET MUST BE BEFORE DESTRUCTION HANDLING
-        if(++m_autoIterator == m_entities.end()) {
-            m_autoIterator = m_entities.begin();
-        }
+        //if(++m_autoIterator == m_entities.end()) {
+        //    m_autoIterator = m_entities.begin();
+        //}
+        m_entities.nextCycle();
 
         if(m_context) {
             m_context->popMessage(Context::DESTROY_ENTITY, this, &GameApplication::destroyEntity);

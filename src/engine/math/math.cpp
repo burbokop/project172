@@ -93,6 +93,8 @@ double e172::Math::constrainRadians(double value) {
 
 
 bool e172::Math::radiansDirection(double dstAngle, double angle) {
+    dstAngle = constrainRadians(dstAngle);
+    angle = constrainRadians(angle);
     if((dstAngle - angle) < 0) {
         if(std::abs(dstAngle - angle) < M_PI) {
             return 1; // //

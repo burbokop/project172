@@ -42,7 +42,7 @@ int Debug::functionName(void *addr, std::string *fname, std::string *sname) {
 std::vector<std::string> Debug::stackTrace() {
     std::vector<std::string> result;
 #ifdef __unix__
-    void *addrlist[10];
+    void *addrlist[64];
     int addrlen = backtrace(addrlist, sizeof(addrlist) / sizeof(void*));
     char **symbollist = backtrace_symbols(addrlist, addrlen);
 

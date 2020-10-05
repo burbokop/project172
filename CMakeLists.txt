@@ -85,6 +85,8 @@ add_library(e172 SHARED
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/utility/animator.h
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/utility/observer.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/utility/observer.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/engine/utility/cycliciterator.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/engine/utility/cycliciterator.h
 
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/abstracteventhandler.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/abstracteventhandler.h

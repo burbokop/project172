@@ -11,6 +11,7 @@
 #include <src/engine/time/elapsedtimer.h>
 #include <list>
 #include <src/engine/type.h>
+#include <src/engine/utility/cycliciterator.h>
 
 namespace e172 {
 class AbstractAudioProvider;
@@ -49,7 +50,7 @@ class GameApplication {
     DeltaTimeCalculator m_deltaTimeCalculator;
     ElapsedTimer m_renderTimer;
 
-    std::list<Entity*> m_entities;
+    CyclicList<Entity*> m_entities;
     std::map<size_t, GameApplicationExtension*> m_applicationExtensions;
 
     AbstractEventHandler *m_eventHandler = nullptr;
@@ -65,7 +66,7 @@ class GameApplication {
 
     bool mustQuit = false;
 
-    std::list<Entity*>::iterator m_autoIterator = m_entities.begin();
+    //std::list<Entity*>::iterator m_autoIterator = m_entities.begin();
 public:
     GameApplication(int argc, char *argv[]);
 
