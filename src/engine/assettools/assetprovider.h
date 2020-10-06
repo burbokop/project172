@@ -2,7 +2,6 @@
 #define ASSETPROVIDER_H
 
 #include <src/engine/memcontrol/abstractfactory.h>
-#include <src/engine/context.h>
 #include <memory>
 #include "loadable.h"
 
@@ -12,6 +11,7 @@ namespace e172 {
 class AbstractAssetExecutor;
 class AbstractGraphicsProvider;
 class AbstractAudioProvider;
+class Context;
 
 class AssetProvider {
     friend class GameApplication;
@@ -32,11 +32,12 @@ public:
     Loadable *createLoadable(std::string templateId);
     template<typename T>
     T *createLoadable(std::string templateId) {
-        const auto l = dynamic_cast<T*>(createLoadable(templateId));
+        const auto o = createLoadable(templateId);
+        const auto l = dynamic_cast<T*>(o);
         if(l)
             return l;
 
-        delete l;
+        delete o;
         return nullptr;
     }
     AssetProvider();

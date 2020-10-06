@@ -5,6 +5,8 @@
 
 #include <src/engine/utility/observer.h>
 
+#include <src/engine/time/elapsedtimer.h>
+
 
 #include "entity.h"
 #include "messagequeue.h"
@@ -77,6 +79,9 @@ public:
     Entity *entityById(const Entity::id_t &id) const;
 
     Entity *autoIteratingEntity() const;
+    ElapsedTimer::time_t proceedDelay() const;
+    ElapsedTimer::time_t renderDelay() const;
+
 
     template<typename T>
     T *entityById(const Entity::id_t &id) const {

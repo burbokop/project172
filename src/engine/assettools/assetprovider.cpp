@@ -3,6 +3,7 @@
 #include <src/engine/debug.h>
 #include <src/engine/graphics/abstractgraphicsprovider.h>
 #include <src/engine/additional.h>
+#include <src/engine/context.h>
 #include "abstractassetexecutor.h"
 
 namespace e172 {

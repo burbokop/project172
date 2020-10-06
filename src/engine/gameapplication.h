@@ -49,6 +49,8 @@ class GameApplication {
 
     DeltaTimeCalculator m_deltaTimeCalculator;
     ElapsedTimer m_renderTimer;
+    ElapsedTimer::time_t m_proceedDelay = 0;
+    ElapsedTimer::time_t m_renderDelay = 0;
 
     CyclicList<Entity*> m_entities;
     std::map<size_t, GameApplicationExtension*> m_applicationExtensions;
@@ -69,12 +71,10 @@ class GameApplication {
     //std::list<Entity*>::iterator m_autoIterator = m_entities.begin();
 public:
     GameApplication(int argc, char *argv[]);
-
     void quit();
-
     int exec();
     std::vector<std::string> arguments() const;
-
+    void setRenderInterval(ElapsedTimer::time_t interval);
     inline void addEntity(Entity *entity) { m_entities.push_back(entity); }
     template<typename T>
     inline void addApplicationExtension() {
@@ -86,28 +86,23 @@ public:
     inline void removeApplicationExtension() {
         removeApplicationExtension(Type<T>::hash());
     }
-    inline void removeApplicationExtension(size_t hash) {
-        const auto it = m_applicationExtensions.find(hash);
-        if(it != m_applicationExtensions.end())
-            m_applicationExtensions.erase(it);
-    }
+    void removeApplicationExtension(size_t hash);
 
     AssetProvider *assetProvider() const;
     e172::Context *context() const;
     AbstractEventHandler *eventHandler() const;
-
-    [[deprecated]]
-    AbstractRenderer *renderer() const;
     AbstractAudioProvider *audioProvider() const;
     AbstractGraphicsProvider *graphicsProvider() const;
 
     void setEventHandler(AbstractEventHandler *eventHandler);
     void setAudioProvider(AbstractAudioProvider *audioProvider);
     void setGraphicsProvider(AbstractGraphicsProvider *graphicsProvider);
-    std::list<Entity *> entities() const;
 
+    std::list<Entity *> entities() const;
     Entity *autoIteratingEntity() const;
 
+    ElapsedTimer::time_t proceedDelay() const;
+    ElapsedTimer::time_t renderDelay() const;
 };
 
 }

@@ -9,6 +9,8 @@
 
 #include <src/units/ship.h>
 
+#include <src/capabilities/modules/weapon.h>
+
 
 HeapWorld::HeapWorld() {}
 
@@ -30,9 +32,16 @@ WorldPreset::GenerationResult HeapWorld::generate(e172::Context *context) {
     playerShip->resetPhysicsProperties(e172::Vector(), -0.7);
     playerShip->addCapability(player1);
     ModuleHandler *playerModuleHandler = new ModuleHandler();
-    playerModuleHandler->addModule(static_cast<Module*>(context->assetProvider()->createLoadable("pistol")));
-    playerModuleHandler->addModule(static_cast<Module*>(context->assetProvider()->createLoadable("engine2")));
-    playerModuleHandler->addModule(static_cast<Module*>(context->assetProvider()->createLoadable("warp-drive1")));
+    playerModuleHandler->addModule(context->assetProvider()->createLoadable<Module>("pistol"));
+    playerModuleHandler->addModule(context->assetProvider()->createLoadable<Module>("engine2"));
+    playerModuleHandler->addModule(context->assetProvider()->createLoadable<Module>("warp-drive1"));
+    const auto pp0 = context->assetProvider()->createLoadable<Weapon>("pistol");
+    const auto pp1 = context->assetProvider()->createLoadable<Weapon>("pistol");
+    pp0->setOffset({ -4, -6 });
+    pp1->setOffset({ -4, 6 });
+    playerModuleHandler->addModule(pp0);
+    playerModuleHandler->addModule(pp1);
+
     playerShip->addCapability(playerModuleHandler);
     result.entities.push_back(playerShip);
 

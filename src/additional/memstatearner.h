@@ -16,6 +16,11 @@ class MemStatEarner : public e172::Entity {
     AverageCalculator vm_diff_ac;
     AverageCalculator rss_diff_ac;
 
+    AverageCalculator proceed_delay_ac;
+    AverageCalculator render_delay_ac;
+    double proceed_delay;
+    double render_delay;
+
     long vm;
     long rss;
     double vm_d;
@@ -29,7 +34,7 @@ public:
 
     // Entity interface
 public:
-    virtual void proceed(e172::Context *, e172::AbstractEventHandler *e) override;
+    virtual void proceed(e172::Context *context, e172::AbstractEventHandler *e) override;
     virtual void render(e172::AbstractRenderer *renderer) override;
 };
 

@@ -104,5 +104,19 @@ Entity *Context::autoIteratingEntity() const {
     return nullptr;
 }
 
+ElapsedTimer::time_t Context::proceedDelay() const {
+    if(m_application) {
+        return m_application->proceedDelay();
+    }
+    return 0;
+}
+
+ElapsedTimer::time_t Context::renderDelay() const {
+    if(m_application) {
+        return m_application->renderDelay();
+    }
+    return 0;
+}
+
 
 }

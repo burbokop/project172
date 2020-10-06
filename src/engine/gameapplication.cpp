@@ -35,6 +35,16 @@ std::vector<std::string> GameApplication::coverArgs(int argc, char *argv[]) {
     return result;
 }
 
+ElapsedTimer::time_t GameApplication::renderDelay() const
+{
+    return m_renderDelay;
+}
+
+ElapsedTimer::time_t GameApplication::proceedDelay() const
+{
+    return m_proceedDelay;
+}
+
 
 void GameApplication::destroyAllEntities(Context *, const Variant &) {
     auto it = m_entities.begin();
@@ -125,12 +135,6 @@ AbstractEventHandler *GameApplication::eventHandler() const {
     return m_eventHandler;
 }
 
-AbstractRenderer *GameApplication::renderer() const {
-    if(m_graphicsProvider)
-        return m_graphicsProvider->renderer();
-    return nullptr;
-}
-
 Context *GameApplication::context() const {
     return m_context;
 }
@@ -141,6 +145,16 @@ AssetProvider *GameApplication::assetProvider() const {
 
 std::vector<std::string> GameApplication::arguments() const {
     return m_arguments;
+}
+
+void GameApplication::setRenderInterval(ElapsedTimer::time_t interval) {
+    m_renderTimer = ElapsedTimer(interval);
+}
+
+void GameApplication::removeApplicationExtension(size_t hash) {
+    const auto it = m_applicationExtensions.find(hash);
+    if(it != m_applicationExtensions.end())
+        m_applicationExtensions.erase(it);
 }
 
 GameApplication::GameApplication(int argc, char *argv[]) {
@@ -168,6 +182,7 @@ int GameApplication::exec() {
                 break;
         }
 
+        e172::ElapsedTimer measureTimer;
         for(auto m : m_applicationExtensions) {
             if(m.second->extensionType() == GameApplicationExtension::PreProceedExtension)
                 m.second->proceed(this);
@@ -178,8 +193,9 @@ int GameApplication::exec() {
                 euf.first(e, m_context, m_eventHandler);
             }
         }
-
+        m_proceedDelay = measureTimer.elapsed();
         if(m_graphicsProvider && m_renderTimer.check()) {
+            measureTimer.reset();
             auto r = m_graphicsProvider->renderer();
             if(r) {
                 r->m_locked = false;
@@ -198,6 +214,7 @@ int GameApplication::exec() {
                     break;
                 }
             }
+            m_renderDelay = measureTimer.elapsed();
         }
 
         //AUTO ITERATOR RESET MUST BE BEFORE DESTRUCTION HANDLING
