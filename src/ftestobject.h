@@ -23,7 +23,7 @@ public:
 
 
 template <typename T>
-class ptr {
+class ptr2 {
 protected:
     T* m_data = nullptr;
     std::shared_ptr<bool> m_alive;
@@ -35,7 +35,7 @@ public:
 };
 
 template<typename T>
-class destroyeble_ptr : public ptr<T> {
+class destroyeble_ptr : public ptr2<T> {
 public:
 
 
@@ -47,7 +47,7 @@ public:
         return p;
     }
 
-    operator ptr<T>() {
+    operator ptr2<T>() {
         return { this->m_data, this->m_alive };
     }
 
@@ -90,7 +90,7 @@ public:
     void setColiderVertices(const std::vector<e172::Vector> &vertices);
 
 
-    e172::ptr<e172::ltd> someData() const;
+    e172::ptr2<e172::ltd> someData() const;
 };
 
 #endif // FTESTOBJECT_H

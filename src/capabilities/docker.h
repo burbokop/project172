@@ -21,7 +21,7 @@ public:
 
     Docker();
     ~Docker();
-    bool createDockingSessionWithUnit(e172::Context *context, Unit *unit);
+    bool createDockingSessionWithUnit(e172::Context *context, const e172::ptr<Unit> &unit);
     void closeAllSessions();
     size_t sessionCount() const;
     std::string sessionInfo(size_t index) const;

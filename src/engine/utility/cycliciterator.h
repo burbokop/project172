@@ -18,6 +18,7 @@ public:
     auto begin() { return m_container.begin(); }
     auto end() const { return m_container.end(); }
     auto end() { return m_container.end(); }
+    auto size() const { return m_container.size(); }
 
     void nextCycle() {
         if(m_auto_it == m_container.end()) {
@@ -45,7 +46,7 @@ public:
     }
 
     template<typename Value>
-    void remove(Value value) {
+    void remove(const Value &value) {
         const auto it = std::find(m_container.begin(), m_container.end(), value);
         if(it != m_container.end())
             erase(it);

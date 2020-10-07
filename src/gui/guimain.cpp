@@ -14,12 +14,12 @@ void GUIMain::setMessage(GUICentralMessage *value) {
     addChildElement(value);
 }
 
-void GUIMain::addFloatingMessage(Unit *unit, std::string message) {
+void GUIMain::addFloatingMessage(const e172::ptr<Unit> &unit, std::string message) {
     floatingMessage = new GUIFloatingMessage(unit, message);
     floatingMessageLifeTimer.reset();
 }
 
-void GUIMain::addBlushingFloatingMessage(Unit *unit, int value) {
+void GUIMain::addBlushingFloatingMessage(const e172::ptr<Unit> &unit, int value) {
     floatingMessage = new GUIBlushingFloatingMessage(unit, value);
     floatingMessageLifeTimer.reset();
 }
@@ -28,7 +28,7 @@ void GUIMain::addBlushingFloatingMessage(e172::Context *context, const e172::Var
     const auto list = value.toVector();
     if(list.size() > 1) {
         const auto entity = context->entityById(list[0].toNumber<Entity::id_t>());
-        if(auto target = dynamic_cast<Unit*>(entity)) {
+        if(auto target = e172::smart_cast<Unit>(entity)) {
             bool ok = false;
             const auto i = list[1].toInt(&ok);
             if(ok) {

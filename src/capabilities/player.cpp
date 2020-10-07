@@ -1,6 +1,5 @@
 #include "player.h"
 #include <src/units/ship.h>
-#include <src/engine/objectregistry.h>
 #include <src/capabilities/modules/weapon.h>
 #include <src/capabilities/modulehandler.h>
 #include <src/engine/context.h>
@@ -53,10 +52,6 @@ Player::Player() {
     });
 }
 
-void Player::setArmor(Ship *armor) {
-    this->armor = armor;
-}
-
 void Player::dock(e172::Entity::id_t entity) {
     dockRequestedQueue.push(entity);
 }
@@ -75,7 +70,7 @@ bool Player::dockImmediately(e172::Context *context, e172::Entity::id_t entity) 
 }
 
 void Player::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
-    if(auto ship = dynamic_cast<Ship*>(parentUnit())) {
+    if(auto ship = e172::smart_cast<Ship>(parentUnit())) {
         if(personalKey(eventHandler, "left")) {
             ship->maneuverLeft();
         } else if(personalKey(eventHandler, "right")) {
@@ -93,12 +88,10 @@ void Player::proceed(e172::Context *context, e172::AbstractEventHandler *eventHa
             dockRequestedQueue.pop();
         }
 
-        ModuleHandler *modules = parentUnit()->moduleHandler();
-        if(modules) {
+        if(const auto modules = parentUnit()->moduleHandler()) {
             const auto weapons = modules->modulesOfClass("Weapon");
-            for(Module *module : weapons) {
-                Weapon *weapon = dynamic_cast<Weapon*>(module);
-                if(weapon) {
+            for(const auto module : weapons) {
+                if(const auto weapon = e172::smart_cast<Weapon>(module)) {
                     weapon->setFiring(personalKey(eventHandler, "action"));
                 }
             }

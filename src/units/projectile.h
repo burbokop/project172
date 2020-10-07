@@ -3,6 +3,8 @@
 
 #include "unit.h"
 
+#include <src/engine/utility/ptr.h>
+
 
 
 class Projectile : public Unit {
@@ -14,19 +16,19 @@ class Projectile : public Unit {
 
     e172::ElapsedTimer *destroyTimer = nullptr;
 
-    bool collision(e172::Context *context, Unit *collider);
+    bool collision(e172::Context *context, const e172::ptr<Unit> &collider);
     double damage;
     int lifetimeDelta;
     int averageLifetime;
 public:
     Projectile();
 
-    Unit *mother = nullptr;
+    e172::ptr<Unit> mother;
 
     // Entity interface
 public:
     void proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) override;
-    void setMother(Unit *value);
+    void setMother(const e172::ptr<Unit> &value);
 };
 
 #endif // PROJECTILE_H

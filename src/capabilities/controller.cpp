@@ -6,18 +6,18 @@
 const long Controller::ARMOR_RELEASE_DELAY = 1000;
 const std::string Controller::ARMOR_RELEASE_MESSAGE = "emergency catapult";
 
-e172::Entity::id_t Controller::selectedEntity() const {
-    return m_selectedEntity;
+e172::ptr<Ship> Controller::armor() const {
+    return m_armor;
 }
 
-void Controller::setSelectedEntity(const Entity::id_t &selectedEntity) {
-    m_selectedEntity = selectedEntity;
+void Controller::setArmor(const e172::ptr<Ship> &armor) {
+    m_armor = armor;
 }
 
 void Controller::releaseArmor() {
-    if(armor && parentUnit() && armor != parentUnit()) {
-        armorReleaseTimer = new e172::ElapsedTimer(ARMOR_RELEASE_DELAY);
-        armorReleaseTimer->reset();
+    if(m_armor && parentUnit() && m_armor != parentUnit()) {
+        armorReleaseTimer.reset();
+        releaseState = true;
         armorReleaseMessageTrigger.enable();
     }
 }
@@ -25,8 +25,8 @@ void Controller::releaseArmor() {
 Controller::Controller() {
 }
 
-Controller::Controller(Ship *armor) {
-    this->armor = armor;
+Controller::Controller(const e172::ptr<Ship> &armor) {
+    m_armor = armor;
 }
 
 void Controller::onHit(e172::Context *context, int health) {
@@ -40,12 +40,12 @@ void Controller::proceed(e172::Context *context, e172::AbstractEventHandler *eve
         context->emitMessage(e172::Context::EMERGENCY_MESSAGE, ARMOR_RELEASE_MESSAGE);
     }
 
-    if(armorReleaseTimer && armorReleaseTimer->check()) {
-        if(armor && parentUnit()) {
+    if(releaseState && armorReleaseTimer.check()) {
+        if(m_armor && parentUnit()) {
             context->emitMessage(e172::Context::REMOVE_CAPABILITY, e172::VariantVector { parentUnit()->entityId(), entityId() });
-            context->emitMessage(e172::Context::ADD_CAPABILITY, e172::VariantVector { armor->entityId(), entityId() });
-            context->emitMessage(e172::Context::SPAWN_UNIT, e172::VariantVector { parentUnit()->entityId(), armor->entityId() });
-            armorReleaseTimer = nullptr;
+            context->emitMessage(e172::Context::ADD_CAPABILITY, e172::VariantVector { m_armor->entityId(), entityId() });
+            context->emitMessage(e172::Context::SPAWN_UNIT, e172::VariantVector { parentUnit()->entityId(), m_armor->entityId() });
+            releaseState = false;
         }
     }
 }

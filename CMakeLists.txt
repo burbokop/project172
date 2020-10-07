@@ -87,6 +87,8 @@ add_library(e172 SHARED
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/utility/observer.h
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/utility/cycliciterator.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/utility/cycliciterator.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/engine/utility/ptr.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/engine/utility/ptr.h
 
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/abstracteventhandler.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/abstracteventhandler.h
@@ -111,27 +113,18 @@ add_library(e172 SHARED
 
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/smartenum.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/smartenum.h
-
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/object.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/object.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/objectregistry.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/objectregistry.h
-
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/messagequeue.h
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/messagequeue.cpp
-
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/functional/metafunction.h
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/functional/metafunction.cpp
-
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/debug.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/debug.h
-
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/sfinae.h
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/typedefs.h
-
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/args.h
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/args.cpp
-
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/math/matrix.h
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/math/matrix.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/engine/testprovider.h
@@ -223,10 +216,6 @@ add_executable(project172
 
     ${CMAKE_CURRENT_LIST_DIR}/src/additional/informative/controllerfinder.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/additional/informative/controllerfinder.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/additional/informative/fpsmonitor.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/additional/informative/fpsmonitor.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/additional/informative/registryinfo.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/additional/informative/registryinfo.h
     ${CMAKE_CURRENT_LIST_DIR}/src/additional/informative/unitsamountinfo.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/additional/informative/unitsamountinfo.h
     ${CMAKE_CURRENT_LIST_DIR}/src/additional/memstatearner.cpp

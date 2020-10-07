@@ -1,12 +1,12 @@
 #include "capability.h"
 
-Unit *Capability::parentUnit() const {
+e172::ptr<Unit> Capability::parentUnit() const {
     return m_parentUnit;
 }
 
-bool Capability::setParentUnit(Unit *parent) {
-    if(parent != nullptr) {
-        if(m_parentUnit == nullptr) {
+bool Capability::setParentUnit(const e172::ptr<Unit> &parent) {
+    if(parent) {
+        if(!m_parentUnit) {
             m_parentUnit = parent;
             return true;
         }

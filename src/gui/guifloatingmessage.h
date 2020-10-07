@@ -15,12 +15,12 @@ protected:
     static const double DEFAULT_FLOATING_SPEED;
 
 
-    Unit *parent = nullptr;
+    e172::ptr<Unit> parent;
 
 public:
-    GUIFloatingMessage(Unit *parent);
-    GUIFloatingMessage(Unit *parent, std::string label);
-    GUIFloatingMessage(Unit *parent, IInformative *informative);
+    GUIFloatingMessage(const e172::ptr<Unit> &parent);
+    GUIFloatingMessage(const e172::ptr<Unit> &parent, std::string label);
+    GUIFloatingMessage(const e172::ptr<Unit> &parent, IInformative *informative);
 
 
     // GUIElement interface

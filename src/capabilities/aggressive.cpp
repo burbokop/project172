@@ -2,7 +2,6 @@
 
 
 #include <src/engine/context.h>
-#include <src/engine/objectregistry.h>
 #include <src/units/projectile.h>
 #include <src/units/camera.h>
 #include <src/additional/lightparticle.h>
@@ -13,14 +12,14 @@
 
 #include <iostream>
 
-Unit *Aggressive::chooseTarget(e172::Context *context) {
-    if(chooseTargetTimer.check()) {
-        Entity *target = context->autoIteratingEntity();
-        if(target == e172::Alive) {
-            const auto unit = target->cast<Unit>();
+e172::ptr<Unit> Aggressive::chooseTarget(e172::Context *context) {
+    if(const auto target = context->autoIteratingEntity()) {
+        if(target != parentUnit()) {
+            const auto unit = e172::smart_cast<Unit>(target);
             if(unit && !unit->instanceOf<Camera>() && !unit->instanceOf<Projectile>()) {
-                //std::cout << __PRETTY_FUNCTION__ << " " << unit << "\n";
-                return unit;
+                if(chooseTargetTimer.check()) {
+                    return unit;
+                }
             }
         }
     }
@@ -30,60 +29,48 @@ Unit *Aggressive::chooseTarget(e172::Context *context) {
 Aggressive::Aggressive() {}
 
 void Aggressive::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
-     if(target == e172::Alive) {
-        if(target && parentUnit() && target->instanceOf<Ship>() && target != parentUnit()) {
-            e172::Vector dst = target->position() - parentUnit()->position();
-            const double dstAngle = dst.angle();
-            const double dstModule = dst.module();
+    if(m_target && parentUnit()) {
+        e172::Vector dst = m_target->position() - parentUnit()->position();
+        const double dstAngle = dst.angle();
+        const double dstModule = dst.module();
 
-            //std::cout << e172::Math::radiansDirection(dstAngle, parentUnit()->rotation()) << " : " << dstAngle << " : " << parentUnit()->rotation() << "\n";
-            parentUnit()->addTargetRotationForse(dstAngle, 1, 1);
+        //std::cout << e172::Math::radiansDirection(dstAngle, parentUnit()->rotation()) << " : " << dstAngle << " : " << parentUnit()->rotation() << "\n";
+        parentUnit()->addTargetRotationForse(dstAngle, 1, 1);
 
-            targeted = (e172::Math::radiansDistance(dstAngle, parentUnit()->rotation()) < e172::Math::Pi / 32) && !inWarp && dstModule < 400;
-            Ship *ship = dynamic_cast<Ship*>(parentUnit());
+        targeted = (e172::Math::radiansDistance(dstAngle, parentUnit()->rotation()) < e172::Math::Pi / 32) && !inWarp && dstModule < 400;
+        const auto ship = e172::smart_cast<Ship>(parentUnit());
 
-            ModuleHandler *modules = parentUnit()->moduleHandler();
-            if(modules) {
-                auto weapons = modules->modulesOfClass("Weapon");
-
-                for(Module *module : weapons) {
-                    Weapon *weapon = dynamic_cast<Weapon*>(module);
-                    if(weapon) {
-                        weapon->setFiring(targeted);
-                    }
+        if(const auto modules = parentUnit()->moduleHandler()) {
+            const auto weapons = modules->modulesOfClass("Weapon");
+            for(const auto module : weapons) {
+                if(const auto weapon = e172::smart_cast<Weapon>(module)) {
+                    weapon->setFiring(targeted);
                 }
-                if(ship) {
-                    if(dstModule > 5000.0 && targeted) {
-                        if(!ship->warp()) {
-                            if(!ship->prepareWarp()) {
-                                warpFatigueTimer.reset();
-                            }
-                        } else {
-                            inWarp = true;
+            }
+            if(ship) {
+                if(dstModule > 5000.0 && targeted) {
+                    if(!ship->warp()) {
+                        if(!ship->prepareWarp()) {
+                            warpFatigueTimer.reset();
                         }
-                    } else if((dstModule < 1000 || warpFatigueTimer.check() || !targeted)) {
-                        if(ship->abortWarp(context)) {
-                            inWarp = false;
-                        }
+                    } else {
+                        inWarp = true;
+                    }
+                } else if((dstModule < 1000 || warpFatigueTimer.check() || !targeted)) {
+                    if(ship->abortWarp(context)) {
+                        inWarp = false;
                     }
                 }
             }
+        }
 
 
-            if(!inWarp && ship && dstModule > 200) {
-                ship->thrustForward();
-            }
-    /*
-            if(getPersonalKey(event, "armor")) {
-                releaseArmor();
-            }
-    */
-        } else {
-            target = chooseTarget(context);
+        if(!inWarp && ship && dstModule > 200) {
+            ship->thrustForward();
         }
     } else {
         targeted = false;
-        target = chooseTarget(context);
+        m_target = chooseTarget(context);
     }
     this->Controller::proceed(context, eventHandler);
 }

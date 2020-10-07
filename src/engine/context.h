@@ -10,7 +10,7 @@
 
 #include "entity.h"
 #include "messagequeue.h"
-
+#include "utility/ptr.h"
 
 
 namespace e172 {
@@ -62,8 +62,8 @@ public:
     void setSettingValue(const std::string &id, const e172::Variant &value);
 
     AssetProvider *assetProvider() const;
-    std::list<Entity *> entities() const;
-    void addEntity(Entity *entity);
+    std::list<ptr<Entity> > entities() const;
+    void addEntity(const ptr<Entity> &entity);
     std::shared_ptr<Promice> emitMessage(const MessageId &messageId, const Variant &value = Variant());
 
     inline void popMessage(const MessageId &messageId, const std::function<void(Context *, const Variant&)>& callback) {
@@ -76,16 +76,16 @@ public:
 
 
 
-    Entity *entityById(const Entity::id_t &id) const;
+    ptr<Entity> entityById(const Entity::id_t &id) const;
 
-    Entity *autoIteratingEntity() const;
+    ptr<Entity> autoIteratingEntity() const;
     ElapsedTimer::time_t proceedDelay() const;
     ElapsedTimer::time_t renderDelay() const;
 
 
     template<typename T>
-    T *entityById(const Entity::id_t &id) const {
-        return dynamic_cast<T*>(entityById(id));
+    auto entityById(const Entity::id_t &id) const {
+        return e172::smart_cast<T>(entityById(id));
     }
 
     void registerMessageHandler(const MessageId &messageId, const std::function<void(const Vector&)> &callback);

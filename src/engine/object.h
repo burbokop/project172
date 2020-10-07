@@ -2,6 +2,7 @@
 #define OBJECT_H
 
 #include <type_traits>
+#include <memory>
 
 #define UNUSED(expr) do { (void)(expr); } while (0)
 
@@ -14,11 +15,18 @@ inline P verbatim_cast(T value) { return reinterpret_cast<P*>(&value)[0]; }
 
 class Object {
     bool m_liveInHeap = false;
-protected:
-
+    std::shared_ptr<bool> m_lifeInfoData = std::make_shared<bool>(true);
 public:
     Object();
 
+    class LifeInfo {
+        friend Object;
+        std::shared_ptr<bool> m_data;
+    public:
+        inline LifeInfo() {};
+        inline operator bool() const { return m_data ? *m_data : false; }
+    };
+    LifeInfo lifeInfo() const;
 
     template <typename Type>
     inline bool instanceOf() const { return cast<Type>(); }
@@ -41,16 +49,6 @@ public:
     virtual ~Object();
     bool liveInHeap() const;
 };
-
-struct alive_t {};
-
-static const inline alive_t Alive;
-
-bool operator ==(Object *object, const alive_t&);
-bool operator ==(const alive_t&, Object *object);
-bool operator !=(Object *object, const alive_t&);
-bool operator !=(const alive_t&, Object *object);
-
 
 }
 #endif // OBJECT_H

@@ -85,7 +85,7 @@ bool Ship::thrustForward() {
         bool ok = false;
         if(engines.size() > 0) {
             for(auto module : engines) {
-                Engine *engine = dynamic_cast<Engine*>(module);
+                const auto engine = e172::smart_cast<Engine>(module);
                 if(engine && engine->forward()) {
                     ok = true;
                 }
@@ -108,12 +108,11 @@ void Ship::maneuverRight() {
     addLimitedRotationForce(m_maneuverForce, m_maxManeuverVelocity);
 }
 
-WarpDrive *Ship::firstWarp() const {
-    ModuleHandler *modules = moduleHandler();
-    if(modules) {
+e172::ptr<WarpDrive> Ship::firstWarp() const {
+    if(const auto modules = moduleHandler()) {
         const auto drives = modules->modulesOfClass("WarpDrive");
         if(drives.size() > 0) {
-            return dynamic_cast<WarpDrive*>(drives.at(0));
+            return e172::smart_cast<WarpDrive>(drives.at(0));
         }
     }
     return nullptr;
@@ -127,12 +126,10 @@ bool Ship::inWarp() const {
 }
 
 void Ship::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
-    ModuleHandler *modules = moduleHandler();
-    if(modules) {
+    if(const auto modules = moduleHandler()) {
         const auto drives = modules->modulesOfClass("WarpDrive");
         if(drives.size() > 0) {
-            WarpDrive *driveUnit = dynamic_cast<WarpDrive*>(drives.at(0));
-            if(driveUnit) {
+            if(const auto driveUnit = e172::smart_cast<WarpDrive>(drives.at(0))) {
                 if(driveUnit->getState() == WarpDrive::WARP_EXECUTING) {
                     addLimitedForwardForce(m_thrustForce, OneWarpPoint);
                     blockFrictionPerTick();

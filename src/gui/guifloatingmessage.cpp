@@ -13,15 +13,15 @@ double GUIFloatingMessage::horisontalOffset() const
     return m_horisontalOffset;
 }
 
-GUIFloatingMessage::GUIFloatingMessage(Unit *parent) : GUIMenuElement(nullptr) {
+GUIFloatingMessage::GUIFloatingMessage(const e172::ptr<Unit> &parent) : GUIMenuElement(nullptr) {
     this->parent = parent;
 }
 
-GUIFloatingMessage::GUIFloatingMessage(Unit *parent, std::string label) : GUIMenuElement (label) {
+GUIFloatingMessage::GUIFloatingMessage(const e172::ptr<Unit> &parent, std::string label) : GUIMenuElement (label) {
     this->parent = parent;
 }
 
-GUIFloatingMessage::GUIFloatingMessage(Unit *parent, IInformative *informative) : GUIMenuElement (informative) {
+GUIFloatingMessage::GUIFloatingMessage(const e172::ptr<Unit> &parent, IInformative *informative) : GUIMenuElement (informative) {
     this->parent = parent;
 }
 

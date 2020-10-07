@@ -5,7 +5,6 @@
 #include "gui/guimain.h"
 #include "near.h"
 #include "worlds/world.h"
-#include "additional/informative/fpsmonitor.h"
 
 #include <src/units/camera.h>
 

@@ -5,14 +5,14 @@
 #include <src/engine/graphics/abstractrenderer.h>
 #include <src/units/unit.h>
 
-GUIBlushingFloatingMessage::GUIBlushingFloatingMessage(Unit *parent) : GUIFloatingMessage (parent) {
+GUIBlushingFloatingMessage::GUIBlushingFloatingMessage(const e172::ptr<Unit> &parent) : GUIFloatingMessage (parent) {
 }
 
-GUIBlushingFloatingMessage::GUIBlushingFloatingMessage(Unit *parent, int value) : GUIFloatingMessage (parent, std::to_string(value)) {
+GUIBlushingFloatingMessage::GUIBlushingFloatingMessage(const e172::ptr<Unit> &parent, int value) : GUIFloatingMessage (parent, std::to_string(value)) {
     this->value = value;
 }
 
-GUIBlushingFloatingMessage::GUIBlushingFloatingMessage(Unit *parent, IInformative *informative) : GUIFloatingMessage(parent, informative) {
+GUIBlushingFloatingMessage::GUIBlushingFloatingMessage(const e172::ptr<Unit> &parent, IInformative *informative) : GUIFloatingMessage(parent, informative) {
 }
 
 

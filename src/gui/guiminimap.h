@@ -10,7 +10,7 @@ private:
     unsigned sizeRelation = 6;
     unsigned range = 4098;
 
-    std::list<e172::Entity*> m_entities;
+    std::list<e172::ptr<e172::Entity>> m_entities;
 
 public:
     GUIMiniMap();

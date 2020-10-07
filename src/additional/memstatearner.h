@@ -18,15 +18,17 @@ class MemStatEarner : public e172::Entity {
 
     AverageCalculator proceed_delay_ac;
     AverageCalculator render_delay_ac;
-    double proceed_delay;
-    double render_delay;
+    double proceed_delay = 0;
+    double render_delay = 0;
+    double proceed_delay_avrg = 0;
+    double render_delay_avrg = 0;
 
-    long vm;
-    long rss;
-    double vm_d;
-    double rss_d;
-    double vm_d_average;
-    double rss_d_average;
+    long vm = 0;
+    long rss = 0;
+    double vm_d = 0;
+    double rss_d = 0;
+    double vm_d_average = 0;
+    double rss_d_average = 0;
 
     bool enabled = false;
 public:

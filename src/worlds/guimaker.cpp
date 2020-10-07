@@ -18,7 +18,6 @@
 #include <src/engine/gameapplication.h>
 
 #include <src/additional/informative/controllerfinder.h>
-#include <src/additional/informative/registryinfo.h>
 #include <src/additional/informative/unitsamountinfo.h>
 
 #include <src/gui/base/guicontainer.h>
@@ -88,10 +87,7 @@ GUIMaker::GUIMaker(e172::Context *context, Near *radarNear) {
 
                     } testMenu->addMenuElement(m_worldComboBox);
 
-
                     testMenu->addMenuElement(new GUIStringListView("test static list", { "gog", "kilk", "kilk2", "end" }));
-
-                    testMenu->addMenuElement(new GUIMenuElement(new RegistryInfo()));
                     testMenu->addMenuElement(new GUIMenuElement(new UnitsAmountInfo(context)));
 
                     //if (fps){

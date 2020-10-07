@@ -10,9 +10,9 @@ private:
     int value;
 
 public:
-    GUIBlushingFloatingMessage(Unit *parent);
-    GUIBlushingFloatingMessage(Unit *parent, int value);
-    GUIBlushingFloatingMessage(Unit *parent, IInformative *informative);
+    GUIBlushingFloatingMessage(const e172::ptr<Unit> &parent);
+    GUIBlushingFloatingMessage(const e172::ptr<Unit> &parent, int value);
+    GUIBlushingFloatingMessage(const e172::ptr<Unit> &parent, IInformative *informative);
 
 
     // GUIElement interface

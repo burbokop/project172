@@ -6,6 +6,7 @@
 #include <src/engine/assettools/loadable.h>
 #include <src/iinformative.h>
 #include <src/engine/utility/animator.h>
+#include <src/engine/utility/ptr.h>
 
 class ModuleHandler;
 class Docker;
@@ -17,7 +18,7 @@ private:
     double m_health = 0;
     double m_explosiveRadius = 0;
     e172::Animator m_animator;
-    std::vector<Capability*> m_capabilities;
+    std::vector<e172::ptr<Capability>> m_capabilities;
 
     bool m_selected = false;
     uint32_t m_selectedColor;
@@ -25,23 +26,22 @@ private:
 public:
     Unit();
 
-    void addCapability(Capability *capability);
-    void removeCapability(Capability *capability);
+    void addCapability(const e172::ptr<Capability> &capability);
+    void removeCapability(const e172::ptr<Capability> &capability);
 
     template<typename T>
-    T *capability() {
+    e172::ptr<T> capability() {
         for(auto c : m_capabilities) {
-            const auto cc = dynamic_cast<T*>(c);
-            if(cc)
-                return cc;
+            if(const auto result = e172::smart_cast<T>(c))
+                return result;
         }
         return nullptr;
     }
 
     virtual void hit(e172::Context *context, int value);
 
-    ModuleHandler *moduleHandler() const;
-    Docker *docker() const;
+    e172::ptr<ModuleHandler> moduleHandler() const;
+    e172::ptr<Docker> docker() const;
     bool selected() const;
     double health() const;
 

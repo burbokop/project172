@@ -3,6 +3,7 @@
 
 
 #include <src/engine/entity.h>
+#include <src/engine/utility/ptr.h>
 
 class Capability;
 class Unit;
@@ -12,7 +13,7 @@ private:
     static const double DEFAULT_RADIUS;
     static const double WARP_RADIUS_MILTIPLIER;
 
-    std::vector<e172::Entity*> m_entitiesInFocus;
+    std::vector<e172::ptr<e172::Entity>> m_entitiesInFocus;
     Capability *m_center = nullptr;
 
     size_t removingIterator = 0;
@@ -23,7 +24,7 @@ private:
     void removeEntities(e172::Context *);
     void addEntities(e172::Context *context);
 
-    double localRadius(Unit *center);
+    double localRadius(const e172::ptr<Unit> &center);
 
 public:
 
@@ -32,8 +33,8 @@ public:
 
 
     int entityInFocusCount() const;
-    e172::Entity* entityInFocus(int index) const;
-    bool containsEntity(e172::Entity* entity) const;
+    e172::ptr<Entity> entityInFocus(int index) const;
+    bool containsEntity(const e172::ptr<Entity> &entity) const;
 
     // Entity interface
 public:

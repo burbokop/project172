@@ -25,11 +25,9 @@ std::string Unit::info() const {
 
 void Unit::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
     m_selected = context->property("SU").toNumber<e172::Entity::id_t>() == entityId();
-
-    for(Capability *cap : m_capabilities) {
+    for(const auto cap : m_capabilities) {
         cap->proceed(context, eventHandler);
     }
-
     proceedPhysics(context->deltaTime());
 }
 
@@ -43,7 +41,7 @@ void Unit::render(e172::AbstractRenderer *renderer) {
         renderer->drawSquareShifted(position(), (m_selectedAnimationTimer.elapsed() / 50) % 24, m_selectedColor);
     }
 
-    for(Capability *cap : m_capabilities) {
+    for(const auto cap : m_capabilities) {
         cap->render(renderer);
     }
 }
@@ -64,13 +62,13 @@ Unit::Unit() {
     });
 }
 
-void Unit::addCapability(Capability *capability) {
+void Unit::addCapability(const e172::ptr<Capability> &capability) {
     if(capability->setParentUnit(this)) {
         m_capabilities.push_back(capability);
     }
 }
 
-void Unit::removeCapability(Capability *capability) {
+void Unit::removeCapability(const e172::ptr<Capability> &capability) {
     const auto it = std::find(m_capabilities.begin(), m_capabilities.end(), capability);
     if(it != m_capabilities.end()) {
         if(capability->setParentUnit(nullptr)) {
@@ -83,9 +81,8 @@ void Unit::hit(e172::Context *context, int value) {
     if(value != 0) {
         m_health -= value;
 
-        for(Capability *capability : m_capabilities) {
-            Controller *controller = dynamic_cast<Controller*>(capability);
-            if(controller) {
+        for(const auto capability : m_capabilities) {
+            if(const auto controller = e172::smart_cast<Controller>(capability)) {
                 controller->onHit(context, static_cast<int>(m_health));
             }
         }
@@ -95,11 +92,10 @@ void Unit::hit(e172::Context *context, int value) {
         }
 
         if(m_health < 0) {
-            context->emitMessage(e172::Context::SPAWN_EXPLOSIVE, e172::Args(position(), velocity(), m_explosiveRadius));
-            ModuleHandler *mh = moduleHandler();
-            if(mh) {
+            context->emitMessage(e172::Context::SPAWN_EXPLOSIVE, e172::Args(position(), velocity(), m_explosiveRadius));           
+            if(const auto mh = moduleHandler()) {
                 const auto modules = mh->modules();
-                for(Module* module : modules) {
+                for(const auto module : modules) {
                     if(module) {
                         module->animate(e172::Animator::NotRender, e172::Animator::NotRender);
                     }
@@ -114,21 +110,19 @@ void Unit::hit(e172::Context *context, int value) {
     }
 }
 
-ModuleHandler *Unit::moduleHandler() const {
+e172::ptr<ModuleHandler> Unit::moduleHandler() const {
     for(const auto& c : m_capabilities) {
-        ModuleHandler* mh = dynamic_cast<ModuleHandler*>(c);
-        if(mh != nullptr) {
-            return  mh;
+        if(const auto mh = e172::smart_cast<ModuleHandler>(c)) {
+            return mh;
         }
     }
     return nullptr;
 }
 
-Docker *Unit::docker() const {
+e172::ptr<Docker> Unit::docker() const {
     for(const auto& c : m_capabilities) {
-        Docker* docker = dynamic_cast<Docker*>(c);
-        if(docker != nullptr) {
-            return  docker;
+        if(const auto docker = e172::smart_cast<Docker>(c)) {
+            return docker;
         }
     }
     return nullptr;

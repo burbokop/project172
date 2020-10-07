@@ -1,7 +1,6 @@
 #include "camera.h"
 
 #include <src/engine/context.h>
-#include <src/engine/objectregistry.h>
 #include <src/units/unit.h>
 #include <math.h>
 #include <src/engine/math/math.h>
@@ -24,37 +23,35 @@ void Camera::setTarget(Controller *target) {
 
 void Camera::proceed(e172::Context *context, e172::AbstractEventHandler *) {
     if(m_target) {
-        if(Unit *targetUnit = m_target->parentUnit()) {
-            if(targetUnit == e172::Alive) {
-                //addRestoringForce(targetUnit->position());
+        if(const auto targetUnit = m_target->parentUnit()) {
+            //addRestoringForce(targetUnit->position());
 
-                const auto f = [](double x, double x0) {
-                    if(x0 != e172::Math::null) {
-                        const auto a = (1 - x / x0);
-                        if(a != e172::Math::null) {
-                            return x * std::abs(1 / a - 1) * 2;
-                        }
+            const auto f = [](double x, double x0) {
+                if(x0 != e172::Math::null) {
+                    const auto a = (1 - x / x0);
+                    if(a != e172::Math::null) {
+                        return x * std::abs(1 / a - 1) * 2;
                     }
-                    return 0.;
-                };
-
-                //const auto f = [](double x, double x0){
-                //    return std::sqrt(x) * x * 0.5;
-                //};
-
-                //const auto f = [](double x, double x0){
-                //    return std::pow(2, x) - 1;
-                //};
-
-
-                if((targetUnit->position() - position()).cheapModule() / 2 > 200) {
-                    resetPhysicsProperties(targetUnit->position(), 0);
-                } else {
-                    addDistanceRelatedForce(targetUnit->position(), f, 200);
                 }
-                //addFollowForce(targetUnit->position(), 200);
-                //relativisticPursuit(context, targetUnit);
+                return 0.;
+            };
+
+            //const auto f = [](double x, double x0){
+            //    return std::sqrt(x) * x * 0.5;
+            //};
+
+            //const auto f = [](double x, double x0){
+            //    return std::pow(2, x) - 1;
+            //};
+
+
+            if((targetUnit->position() - position()).cheapModule() / 2 > 200) {
+                resetPhysicsProperties(targetUnit->position(), 0);
+            } else {
+                addDistanceRelatedForce(targetUnit->position(), f, 200);
             }
+            //addFollowForce(targetUnit->position(), 200);
+            //relativisticPursuit(context, targetUnit);
         }
     }
     proceedPhysics(context->deltaTime());

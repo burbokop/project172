@@ -2,7 +2,6 @@
 #include "context.h"
 
 
-#include "objectregistry.h"
 #include "gameapplication.h"
 
 namespace e172 {
@@ -51,13 +50,13 @@ AssetProvider *Context::assetProvider() const {
     return nullptr;
 }
 
-std::list<Entity*> Context::entities() const {
+std::list<ptr<Entity>> Context::entities() const {
     if(m_application)
         return m_application->entities();
-    return std::list<Entity*>();
+    return std::list<ptr<Entity>>();
 }
 
-void Context::addEntity(Entity *entity) {
+void Context::addEntity(const ptr<Entity> &entity) {
     m_application->addEntity(entity);
 }
 
@@ -65,7 +64,6 @@ Context::Context(GameApplication *application) {
     m_application = application;
     m_messageQueue.setExceptionHandlingMode(decltype (m_messageQueue)::WarningException);
     m_messageQueue.setMessageLifeTime(1);
-    //m_settings = e172::toObserverMap(Variant::fromString(Additional::readAllVof(absolutePath(SettingsFilePath))));
 }
 
 std::string Context::absolutePath(const std::string &path) const {
@@ -88,7 +86,7 @@ std::shared_ptr<Promice> Context::emitMessage(const MessageId &messageId, const 
     return m_messageQueue.emitMessage(messageId, value);
 }
 
-Entity *Context::entityById(const Entity::id_t &id) const {
+ptr<Entity> Context::entityById(const Entity::id_t &id) const {
     const auto e = m_application->entities();
     for(auto a : e) {
         if(a && a->entityId() == id)
@@ -97,7 +95,7 @@ Entity *Context::entityById(const Entity::id_t &id) const {
     return nullptr;
 }
 
-Entity *Context::autoIteratingEntity() const {
+ptr<Entity> Context::autoIteratingEntity() const {
     if(m_application) {
         return m_application->autoIteratingEntity();
     }

@@ -13,7 +13,7 @@ Docker::~Docker() {
     closeAllSessions();
 }
 
-bool Docker::createDockingSessionWithUnit(e172::Context* context, Unit *unit) {
+bool Docker::createDockingSessionWithUnit(e172::Context* context, const e172::ptr<Unit> &unit) {
     auto docker = unit->docker();
     if(docker && parentUnit()) {
         const auto session = DockingSession::createSession(&m_nodePool, &docker->m_nodePool, parentUnit(), unit);

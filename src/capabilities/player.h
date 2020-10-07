@@ -20,8 +20,6 @@ private:
     std::queue<e172::Entity::id_t> dockRequestedQueue;
 public:
     Player();
-    Player(Loadable* tmp);
-    void setArmor(Ship *armor);
 
     void dock(e172::Entity::id_t entity);
     bool dockImmediately(e172::Context *context, e172::Entity::id_t entity);

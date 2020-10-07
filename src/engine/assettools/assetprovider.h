@@ -4,7 +4,7 @@
 #include <src/engine/memcontrol/abstractfactory.h>
 #include <memory>
 #include "loadable.h"
-
+#include <src/engine/utility/ptr.h>
 
 namespace e172 {
 
@@ -31,14 +31,8 @@ class AssetProvider {
 public:
     Loadable *createLoadable(std::string templateId);
     template<typename T>
-    T *createLoadable(std::string templateId) {
-        const auto o = createLoadable(templateId);
-        const auto l = dynamic_cast<T*>(o);
-        if(l)
-            return l;
-
-        delete o;
-        return nullptr;
+    auto createLoadable(std::string templateId) {
+        return e172::smart_cast<T>(createLoadable(templateId));
     }
     AssetProvider();
     void searchInFolder(std::string path);

@@ -5,6 +5,7 @@
 #include "physicaldockingattractor.h"
 #include <src/engine/entity.h>
 #include <src/engine/physicalobject.h>
+#include <src/engine/utility/ptr.h>
 
 class Unit;
 class DockingSession : public e172::Entity {
@@ -12,7 +13,7 @@ class DockingSession : public e172::Entity {
         DockingNodePool *pool = nullptr;
         DockingNodePool::Node node;
         e172::PhysicalObject::ConnectionNode physicalNode;
-        Unit *unit = nullptr;
+        e172::ptr<Unit> unit;
     };
     Item item0;
     Item item1;
@@ -21,14 +22,14 @@ class DockingSession : public e172::Entity {
     PhysicalDockingAttractor physicalDockingAttractor;
     DockingSession();
 public:
-    std::array<Unit*, 2> units() const;
-    Unit *oppositeUnit(Unit *unit) const;
+    std::array<e172::ptr<Unit>, 2> units() const;
+    e172::ptr<Unit> oppositeUnit(const e172::ptr<Unit> &unit) const;
     PhysicalDockingAttractor::State state() const;
 
     bool fullUsageCount() const;
     void release();
 
-    static DockingSession *createSession(DockingNodePool *pull0, DockingNodePool *pull1, Unit *unit0, Unit *unit1);
+    static DockingSession *createSession(DockingNodePool *pull0, DockingNodePool *pull1, const e172::ptr<Unit> &unit0, const e172::ptr<Unit> &unit1);
 
     ~DockingSession();
 

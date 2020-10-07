@@ -49,7 +49,7 @@ WorldPreset::GenerationResult HeapWorld::generate(e172::Context *context) {
     std::vector<std::string> assetKeys = context->assetProvider()->loadableNames();
     unsigned int i = 0;
     for (std::string key : assetKeys) {
-        for(int j = 0; j < 32; j++) {
+        for(int j = 0; j < 8; j++) {
             auto unit = dynamic_cast<Unit*>(context->assetProvider()->createLoadable(key));
             if(unit) {
                 unit->resetPhysicsProperties(e172::Vector::createByAngle(10000, rand()), 0);

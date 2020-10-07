@@ -12,8 +12,6 @@
 namespace e172 {
 
 
-
-
 size_t GameApplication::static_constructor() {
     e172::Debug::installSigsegvHandler([](auto s){
         const auto st = e172::Debug::stackTrace();
@@ -35,13 +33,11 @@ std::vector<std::string> GameApplication::coverArgs(int argc, char *argv[]) {
     return result;
 }
 
-ElapsedTimer::time_t GameApplication::renderDelay() const
-{
+ElapsedTimer::time_t GameApplication::renderDelay() const {
     return m_renderDelay;
 }
 
-ElapsedTimer::time_t GameApplication::proceedDelay() const
-{
+ElapsedTimer::time_t GameApplication::proceedDelay() const {
     return m_proceedDelay;
 }
 
@@ -50,30 +46,20 @@ void GameApplication::destroyAllEntities(Context *, const Variant &) {
     auto it = m_entities.begin();
     while (it != m_entities.end()) {
         if((*it)->liveInHeap()) {
-            delete *it;
+            destroy(*it);
             it = m_entities.erase(it);
-
-            //if(m_autoIterator == m_entities.end()) {
-            //    m_autoIterator = m_entities.begin();
-            //}
         } else {
             ++it;
         }
     }
 }
 
-void GameApplication::destroyEntity(Context* context, const Variant &value) {
-    if(const auto e = context->entityById(value.toNumber<Entity::id_t>())) {
-        if(e->liveInHeap()) {
-            m_entities.remove(e);
-            //if(m_autoIterator != m_entities.begin())
-            //    --m_autoIterator;
-            //
-            //if(m_autoIterator == m_entities.end()) {
-            //    m_autoIterator = m_entities.begin();
-            //}
-
-            delete e;
+void GameApplication::destroyEntity(Context*, const Variant &value) {
+    for(auto it = m_entities.begin(); it != m_entities.end(); ++it) {
+        if((*it)->entityId() == value.toNumber<Entity::id_t>()) {
+            destroy(*it);
+            m_entities.erase(it);
+            return;
         }
     }
 }
@@ -84,12 +70,8 @@ void GameApplication::destroyEntitiesWithTag(Context *, const Variant &value) {
     auto it = m_entities.begin();
     while (it != m_entities.end()) {
         if((*it)->liveInHeap() && (*it)->containsTag(tag)) {
-            delete *it;
+            destroy(*it);
             it = m_entities.erase(it);
-
-            //if(m_autoIterator == m_entities.end()) {
-            //    m_autoIterator = m_entities.begin();
-            //}
         } else {
             ++it;
         }
@@ -97,15 +79,11 @@ void GameApplication::destroyEntitiesWithTag(Context *, const Variant &value) {
 }
 
 
-std::list<Entity *> GameApplication::entities() const {
+std::list<ptr<Entity> > GameApplication::entities() const {
     return m_entities;
 }
 
-Entity *GameApplication::autoIteratingEntity() const {
-    //if(m_autoIterator != m_entities.end()) {
-    //    return m_autoIterator.operator*();
-    //}
-    //return nullptr;
+ptr<Entity> GameApplication::autoIteratingEntity() const {
     return m_entities.cyclicValue(nullptr);
 }
 
@@ -190,7 +168,7 @@ int GameApplication::exec() {
         for(auto e : m_entities) {
             e->proceed(m_context, m_eventHandler);
             for(auto euf : e->__euf) {
-                euf.first(e, m_context, m_eventHandler);
+                euf.first(e.data(), m_context, m_eventHandler);
             }
         }
         m_proceedDelay = measureTimer.elapsed();
@@ -206,7 +184,7 @@ int GameApplication::exec() {
                 for(auto e : m_entities) {
                     e->render(r);
                     for(auto euf : e->__euf) {
-                        euf.second(e, r);
+                        euf.second(e.data(), r);
                     }
                 }
                 r->m_locked = true;

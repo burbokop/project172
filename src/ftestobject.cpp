@@ -8,7 +8,7 @@
 #include <src/engine/math/math.h>
 #include <src/engine/math/matrix.h>
 
-
+#include <src/engine/utility/ptr.h>
 
 
 
@@ -33,11 +33,11 @@ void FTestObject::setColiderVertices(const std::vector<e172::Vector> &vertices) 
     colider.setVertices(vertices);
 }
 
-e172::ptr<e172::ltd> FTestObject::someData() const {
+e172::ptr2<e172::ltd> FTestObject::someData() const {
     return m_someData;
 }
 
-FTestObject::FTestObject(FTestObject *object){
+FTestObject::FTestObject(FTestObject *object) {
     m_targetObject = object;
 }
 

@@ -26,7 +26,7 @@ public:
     bool prepareWarp();
     bool warp();
     uint8_t abortWarp(e172::Context *context);
-    WarpDrive *firstWarp() const;
+    e172::ptr<WarpDrive> firstWarp() const;
     bool inWarp() const;
 
     bool thrustForward();

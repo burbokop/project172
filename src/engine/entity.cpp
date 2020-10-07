@@ -1,7 +1,6 @@
 #include "entity.h"
 
 #include "context.h"
-#include "objectregistry.h"
 
 namespace e172 {
 
@@ -30,13 +29,9 @@ bool Entity::containsTag(const String &tag) {
     return m_tags.find(tag) != m_tags.end();
 }
 
-Entity::Entity() {
-    ObjectRegistry::registerObject(this);
-}
+Entity::Entity() {}
 
-Entity::~Entity() {
-    ObjectRegistry::markAsDeleted(this);
-}
+Entity::~Entity() {}
 
 
 }

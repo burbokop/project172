@@ -3,14 +3,15 @@
 
 #include <src/engine/entity.h>
 #include <src/engine/assettools/loadable.h>
+#include <src/engine/utility/ptr.h>
 
 class Unit;
 
 class Capability : public e172::Entity, public e172::Loadable {
-    Unit *m_parentUnit = nullptr;
+    e172::ptr<Unit> m_parentUnit;
 public:
-    virtual bool setParentUnit(Unit *parent);
-    Unit *parentUnit() const;
+    virtual bool setParentUnit(const e172::ptr<Unit> &parent);
+    e172::ptr<Unit> parentUnit() const;
 };
 
 #endif // COMPONENTS_H

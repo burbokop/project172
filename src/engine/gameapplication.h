@@ -6,7 +6,7 @@
 #include <vector>
 #include <string>
 
-
+#include "utility/ptr.h"
 #include <src/engine/time/deltatimecalculator.h>
 #include <src/engine/time/elapsedtimer.h>
 #include <list>
@@ -52,7 +52,7 @@ class GameApplication {
     ElapsedTimer::time_t m_proceedDelay = 0;
     ElapsedTimer::time_t m_renderDelay = 0;
 
-    CyclicList<Entity*> m_entities;
+    CyclicList<ptr<Entity>> m_entities;
     std::map<size_t, GameApplicationExtension*> m_applicationExtensions;
 
     AbstractEventHandler *m_eventHandler = nullptr;
@@ -63,7 +63,7 @@ class GameApplication {
     Context *m_context = nullptr;
 
     void destroyAllEntities(Context*, const Variant&);
-    void destroyEntity(Context*context, const Variant& value);
+    void destroyEntity(Context*, const Variant& value);
     void destroyEntitiesWithTag(Context*, const Variant& value);
 
     bool mustQuit = false;
@@ -75,7 +75,7 @@ public:
     int exec();
     std::vector<std::string> arguments() const;
     void setRenderInterval(ElapsedTimer::time_t interval);
-    inline void addEntity(Entity *entity) { m_entities.push_back(entity); }
+    inline void addEntity(const ptr<Entity> &entity) { m_entities.push_back(entity); }
     template<typename T>
     inline void addApplicationExtension() {
         const auto it = m_applicationExtensions.find(Type<T>::hash());
@@ -98,8 +98,8 @@ public:
     void setAudioProvider(AbstractAudioProvider *audioProvider);
     void setGraphicsProvider(AbstractGraphicsProvider *graphicsProvider);
 
-    std::list<Entity *> entities() const;
-    Entity *autoIteratingEntity() const;
+    std::list<ptr<Entity>> entities() const;
+    ptr<Entity> autoIteratingEntity() const;
 
     ElapsedTimer::time_t proceedDelay() const;
     ElapsedTimer::time_t renderDelay() const;

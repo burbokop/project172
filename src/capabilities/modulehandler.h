@@ -9,19 +9,19 @@
 
 
 class ModuleHandler : public Capability {
-    std::vector<Module*> m_modules;
+    std::vector<e172::ptr<Module>> m_modules;
 protected:
 
-    bool setParentUnit(Unit *parent) override;
+    bool setParentUnit(const e172::ptr<Unit> &parent) override;
 public:
     ModuleHandler();
 
 
-    void addModule(Module *module);
-    void removeModule(Module *module);
+    void addModule(const e172::ptr<Module> &module);
+    void removeModule(const e172::ptr<Module> &module);
 
-    std::vector<Module*> modules();
-    std::vector<Module*> modulesOfClass(std::string moduleClass);
+    std::vector<e172::ptr<Module>> modules();
+    std::vector<e172::ptr<Module>> modulesOfClass(std::string moduleClass);
     bool hasModuleOfClass(std::string moduleClass);
 
     // Entity interface

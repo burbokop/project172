@@ -28,8 +28,8 @@ public:
     GUIMain();
 
 
-    void addFloatingMessage(Unit *unit, std::string message);
-    void addBlushingFloatingMessage(Unit *unit, int value);
+    void addFloatingMessage(const e172::ptr<Unit> &unit, std::string message);
+    void addBlushingFloatingMessage(const e172::ptr<Unit> &unit, int value);
     void addBlushingFloatingMessage(e172::Context *context, const e172::Variant &value);
 
     void addStack(GUIStack *value);

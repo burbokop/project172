@@ -29,8 +29,8 @@ void GUIMiniMap::render(e172::AbstractRenderer *renderer) {
         renderer->drawRect(point1, point2, DefaultColor);
 
         e172::Vector playerShipPosOnMap;
-        for(Entity *entity : m_entities) {
-            Unit *unit = dynamic_cast<Unit*>(entity);
+        for(const auto& entity : m_entities) {
+            const auto unit = e172::smart_cast<Unit>(entity);
             if(unit) {
                 e172::Vector posOnMap = ((unit->position() - renderer->cameraPosition()) / range * size.module()) + (size / 2);
 

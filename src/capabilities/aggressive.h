@@ -7,14 +7,14 @@
 
 class Aggressive : public Controller {
 private:
-    Unit *target = nullptr;
+    e172::ptr<Unit> m_target = nullptr;
     bool targeted = false;
     bool inWarp = false;
     e172::ElapsedTimer warpFatigueTimer = e172::ElapsedTimer(10000);
 
-    e172::ElapsedTimer chooseTargetTimer = e172::ElapsedTimer((clock() + rand()) % 9000 + 1000);
+    e172::ElapsedTimer chooseTargetTimer = e172::ElapsedTimer((clock() + rand()) % 5000 + 1000);
 
-    Unit *chooseTarget(e172::Context *context);
+    e172::ptr<Unit> chooseTarget(e172::Context *context);
 
 public:
     Aggressive();

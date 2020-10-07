@@ -10,21 +10,18 @@
 
 class Ship;
 class Controller : public Capability {    
+    e172::ElapsedTimer armorReleaseTimer = e172::ElapsedTimer(ARMOR_RELEASE_DELAY);
+    e172::ptr<Ship> m_armor;
+    bool releaseState = false;
+    Trigger armorReleaseMessageTrigger;
 protected:
     static const long ARMOR_RELEASE_DELAY;
     static const std::string ARMOR_RELEASE_MESSAGE;
 
-
-    Ship *armor = nullptr;
-    e172::ElapsedTimer *armorReleaseTimer = nullptr;
-    Trigger armorReleaseMessageTrigger;
-
-    e172::Entity::id_t m_selectedEntity = 0;
-
     void releaseArmor();
 public:
     Controller();
-    Controller(Ship *armor);
+    Controller(const e172::ptr<Ship> &armor);
 
     virtual void onHit(e172::Context* context, int health);
 
@@ -32,8 +29,9 @@ public:
 public:
     void proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler);
     void render(e172::AbstractRenderer *renderer);
-    e172::Entity::id_t selectedEntity() const;
-    void setSelectedEntity(const e172::Entity::id_t &selectedEntity);
+
+    e172::ptr<Ship> armor() const;
+    void setArmor(const e172::ptr<Ship> &armor);
 };
 
 #endif // CONTROLLER_H

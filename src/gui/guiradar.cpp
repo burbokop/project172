@@ -1,9 +1,7 @@
 #include "guiradar.h"
 
 #include <src/near.h>
-#include <src/engine/objectregistry.h>
 #include <src/engine/assettools/loadable.h>
-
 
 Near *GUIRadar::near() const {
     return m_near;
@@ -31,8 +29,8 @@ int GUIRadar::rowCount() const {
 std::string GUIRadar::rowText(int index) const {
     if(m_near) {
         const auto e = m_near->entityInFocus(index);
-        if(e == e172::Alive) {
-            const auto u = dynamic_cast<e172::Loadable*>(e);
+        if(e) {
+            const auto u = e172::smart_cast<e172::Loadable>(e);
             if(u) {
                 const auto lid = u->loadableId();
                 if(lid.size() > 0)
@@ -54,7 +52,7 @@ GUIMenuElement *GUIRadar::rowElement(int) const {
 e172::Variant GUIRadar::rowModelData(int index) const {
     if(m_near) {
         const auto e = m_near->entityInFocus(index);
-        if(e == e172::Alive) {
+        if(e) {
             return e->entityId();
         }
     }
