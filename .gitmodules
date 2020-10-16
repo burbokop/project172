@@ -1,3 +1,6 @@
 [submodule "e172"]
 	path = e172
 	url = https://github.com/burbokop/e172.git
+[submodule "sdl_implementation"]
+	path = sdl_implementation
+	url = https://github.com/burbokop/sdl_implementation.git

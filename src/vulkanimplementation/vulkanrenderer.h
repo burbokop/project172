@@ -1,7 +1,7 @@
 #ifndef VULKANRENDERER_H
 #define VULKANRENDERER_H
 
-#include "../engine/graphics/abstractrenderer.h"
+#include <src/graphics/abstractrenderer.h>
 #include <src/math/math.h>
 
 #include <list>

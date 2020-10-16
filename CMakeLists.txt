@@ -9,39 +9,8 @@ message("CMAKE_CXX_COMPILER: " ${CMAKE_CXX_COMPILER} " " ${CMAKE_CXX_COMPILER_VE
 
 include_directories(${CMAKE_CURRENT_LIST_DIR})
 
-
-add_library(sdl_impl SHARED
-    ${CMAKE_CURRENT_LIST_DIR}/src/sdlimplementation/effects/anaglyph.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/sdlimplementation/effects/anaglyph.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/sdlimplementation/effects/visualeffect.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/sdlimplementation/effects/visualeffect.h
-
-    ${CMAKE_CURRENT_LIST_DIR}/src/sdlimplementation/rotozoom.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/sdlimplementation/rotozoom.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/sdlimplementation/sdlaudioprovider.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/sdlimplementation/sdlaudioprovider.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/sdlimplementation/sdleventhandler.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/sdlimplementation/sdleventhandler.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/sdlimplementation/sdlgraphicsprovider.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/sdlimplementation/sdlgraphicsprovider.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/sdlimplementation/sdlrenderer.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/sdlimplementation/sdlrenderer.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/sdlimplementation/spm.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/sdlimplementation/spm.h
-
-    )
-
-
 include(e172/e172.cmake)
-
-target_link_libraries(sdl_impl
-    SDL2
-    SDL2_image
-    SDL2_ttf
-    SDL2_mixer
-    e172
-    )
-
+include(sdl_implementation/sdl_implementation.cmake)
 
 
 function(add_go_library TARGET_LIB GO_SRCS)

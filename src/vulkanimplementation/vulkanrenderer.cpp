@@ -2,7 +2,7 @@
 
 #include "e172vp/bootstrapobject.h"
 
-#include "../engine/additional.h"
+#include <src/additional.h>
 
 #include "e172vp/tools/mesh.h"
 #include <glm/gtc/matrix_transform.hpp>
