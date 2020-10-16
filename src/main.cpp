@@ -7,9 +7,9 @@
 #include <src/additional.h>
 #include <src/testprovider.h>
 
-#include <src/sdlimplementation/sdlaudioprovider.h>
-#include <src/sdlimplementation/sdleventhandler.h>
-#include <src/sdlimplementation/sdlgraphicsprovider.h>
+#include <src/sdlaudioprovider.h>
+#include <src/sdleventhandler.h>
+#include <src/sdlgraphicsprovider.h>
 
 
 #include <src/assetexecutors/animatorassetexecutor.h>
