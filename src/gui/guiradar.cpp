@@ -1,7 +1,7 @@
 #include "guiradar.h"
 
 #include <src/near.h>
-#include <src/engine/assettools/loadable.h>
+#include <src/assettools/loadable.h>
 
 Near *GUIRadar::near() const {
     return m_near;

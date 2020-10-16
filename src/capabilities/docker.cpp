@@ -1,7 +1,7 @@
 #include "docker.h"
-#include <src/engine/math/math.h>
+#include <src/math/math.h>
 #include <src/units/unit.h>
-#include <src/engine/context.h>
+#include <src/context.h>
 
 void Docker::addNode(const e172::Vector &offset, double angle) {
     m_nodePool.addNode(offset, angle);

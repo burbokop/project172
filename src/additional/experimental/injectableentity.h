@@ -5,7 +5,7 @@
 
 #include <list>
 
-#include <src/engine/entity.h>
+#include <src/entity.h>
 
 
 class InjectableEntity : public e172::Entity {

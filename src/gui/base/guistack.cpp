@@ -2,7 +2,7 @@
 #include "guicontainer.h"
 #include "guilistview.h"
 
-#include <src/engine/abstracteventhandler.h>
+#include <src/abstracteventhandler.h>
 
 GUIStack::GUIStack() : GUIElement () {}
 

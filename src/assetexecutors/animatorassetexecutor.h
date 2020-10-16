@@ -1,7 +1,7 @@
 #ifndef ANIMATORASSETEXECUTOR_H
 #define ANIMATORASSETEXECUTOR_H
 
-#include <src/engine/assettools/abstractassetexecutor.h>
+#include <src/assettools/abstractassetexecutor.h>
 
 
 

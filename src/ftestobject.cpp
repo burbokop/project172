@@ -1,14 +1,14 @@
 #include "ftestobject.h"
 
-#include <src/engine/abstracteventhandler.h>
-#include <src/engine/context.h>
+#include <src/abstracteventhandler.h>
+#include <src/context.h>
 
-#include <src/engine/graphics/abstractrenderer.h>
+#include <src/graphics/abstractrenderer.h>
 
-#include <src/engine/math/math.h>
-#include <src/engine/math/matrix.h>
+#include <src/math/math.h>
+#include <src/math/matrix.h>
 
-#include <src/engine/utility/ptr.h>
+#include <src/utility/ptr.h>
 
 
 

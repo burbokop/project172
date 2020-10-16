@@ -1,7 +1,7 @@
 #ifndef SCREENSETTINGSEXTENSION_H
 #define SCREENSETTINGSEXTENSION_H
 
-#include <src/engine/gameapplication.h>
+#include <src/gameapplication.h>
 
 
 

@@ -5,7 +5,7 @@
 #include <src/sdlimplementation/effects/anaglyph.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
-#include <src/engine/math/math.h>
+#include <src/math/math.h>
 
 const int SDLRenderer::DefaultFontSize = 20;
 

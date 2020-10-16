@@ -1,8 +1,8 @@
 #include "spriteassetexecutor.h"
 
-#include <src/engine/graphics/abstractgraphicsprovider.h>
+#include <src/graphics/abstractgraphicsprovider.h>
 
-#include <src/engine/utility/animator.h>
+#include <src/utility/animator.h>
 
 SpriteAssetExecutor::SpriteAssetExecutor() {}
 

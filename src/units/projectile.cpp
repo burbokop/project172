@@ -3,7 +3,7 @@
 #include "camera.h"
 
 #include <src/additional/lightparticle.h>
-#include <src/engine/context.h>
+#include <src/context.h>
 
 const double Projectile::DEFAULT_HIT_RADIUS = 16.0;
 const int Projectile::DEFAULT_DAMAGE = 4;

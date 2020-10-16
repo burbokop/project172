@@ -1,6 +1,6 @@
 #include "vectorassetexecutor.h"
 
-#include <src/engine/math/vector.h>
+#include <src/math/vector.h>
 
 VectorAssetExecutor::VectorAssetExecutor() {}
 

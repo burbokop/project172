@@ -1,9 +1,9 @@
 #include "camera.h"
 
-#include <src/engine/context.h>
+#include <src/context.h>
 #include <src/units/unit.h>
 #include <math.h>
-#include <src/engine/math/math.h>
+#include <src/math/math.h>
 
 const double Camera::STOP_DISTANCE = 4;
 const double Camera::MAX_SPEED_MULTIPLIER = 0.002 * 1000;

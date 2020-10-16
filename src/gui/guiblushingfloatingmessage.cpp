@@ -1,8 +1,8 @@
 #include "guiblushingfloatingmessage.h"
 
-#include <src/engine/math/math.h>
+#include <src/math/math.h>
 
-#include <src/engine/graphics/abstractrenderer.h>
+#include <src/graphics/abstractrenderer.h>
 #include <src/units/unit.h>
 
 GUIBlushingFloatingMessage::GUIBlushingFloatingMessage(const e172::ptr<Unit> &parent) : GUIFloatingMessage (parent) {

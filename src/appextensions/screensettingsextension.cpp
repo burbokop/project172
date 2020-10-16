@@ -1,7 +1,7 @@
 #include "screensettingsextension.h"
 
-#include <src/engine/context.h>
-#include <src/engine/graphics/abstractgraphicsprovider.h>
+#include <src/context.h>
+#include <src/graphics/abstractgraphicsprovider.h>
 
 ScreenSettingsExtension::ScreenSettingsExtension()
     : e172::GameApplicationExtension(PreRenderExtension) {}

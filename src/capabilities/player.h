@@ -4,9 +4,9 @@
 
 #include "controller.h"
 
-#include <src/engine/abstracteventhandler.h>
+#include <src/abstracteventhandler.h>
 #include <queue>
-#include <src/engine/assettools/loadable.h>
+#include <src/assettools/loadable.h>
 
 
 class Player : public Controller {

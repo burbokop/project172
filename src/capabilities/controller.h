@@ -6,7 +6,7 @@
 
 #include <src/additional/trigger.h>
 
-#include <src/engine/time/elapsedtimer.h>
+#include <src/time/elapsedtimer.h>
 
 class Ship;
 class Controller : public Capability {    

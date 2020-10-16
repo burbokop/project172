@@ -4,8 +4,8 @@
 #include <src/units/projectile.h>
 #include <src/additional/lightparticle.h>
 
-#include <src/engine/abstracteventhandler.h>
-#include <src/engine/context.h>
+#include <src/abstracteventhandler.h>
+#include <src/context.h>
 
 GUIMiniMap::GUIMiniMap() {}
 

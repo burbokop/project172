@@ -1,8 +1,8 @@
 #include "guidebugvalueinfo.h"
 
 #include <math.h>
-#include <src/engine/abstracteventhandler.h>
-#include <src/engine/graphics/abstractrenderer.h>
+#include <src/abstracteventhandler.h>
+#include <src/graphics/abstractrenderer.h>
 #include <src/units/unit.h>
 
 GUIDebugValueInfo::GUIDebugValueInfo() {

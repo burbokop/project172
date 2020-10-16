@@ -3,8 +3,8 @@
 
 
 #include <src/capabilities/controller.h>
-#include <src/engine/graphics/abstractrenderer.h>
-#include <src/engine/physicalobject.h>
+#include <src/graphics/abstractrenderer.h>
+#include <src/physicalobject.h>
 
 
 class Camera : public e172::Entity, public e172::PhysicalObject {

@@ -1,8 +1,8 @@
 #include "worldpresetstrategy.h"
 
 
-#include <src/engine/context.h>
-#include <src/engine/gameapplication.h>
+#include <src/context.h>
+#include <src/gameapplication.h>
 
 WorldPresetStrategy::WorldPresetStrategy() {}
 

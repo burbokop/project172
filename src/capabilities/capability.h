@@ -1,9 +1,9 @@
 #ifndef COMPONENTS_H
 #define COMPONENTS_H
 
-#include <src/engine/entity.h>
-#include <src/engine/assettools/loadable.h>
-#include <src/engine/utility/ptr.h>
+#include <src/entity.h>
+#include <src/assettools/loadable.h>
+#include <src/utility/ptr.h>
 
 class Unit;
 

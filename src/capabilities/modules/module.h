@@ -4,8 +4,8 @@
 
 #include "../capability.h"
 #include <src/iinformative.h>
-#include <src/engine/utility/animator.h>
-#include <src/engine/audio/audioplayer.h>
+#include <src/utility/animator.h>
+#include <src/audio/audioplayer.h>
 
 class Module : public Capability, public IInformative {
 protected:

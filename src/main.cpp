@@ -1,11 +1,11 @@
 #include "explosivespawner.h"
 #include "appextensions/screensettingsextension.h"
 
-#include <src/engine/gameapplication.h>
-#include <src/engine/context.h>
-#include <src/engine/debug.h>
-#include <src/engine/additional.h>
-#include <src/engine/testprovider.h>
+#include <src/gameapplication.h>
+#include <src/context.h>
+#include <src/debug.h>
+#include <src/additional.h>
+#include <src/testprovider.h>
 
 #include <src/sdlimplementation/sdlaudioprovider.h>
 #include <src/sdlimplementation/sdleventhandler.h>

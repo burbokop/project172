@@ -6,7 +6,7 @@
 
 #include <src/near.h>
 
-#include <src/engine/math/vector.h>
+#include <src/math/vector.h>
 
 #include <src/additional/docking/dockingnodepool.h>
 #include <src/additional/docking/dockingsession.h>

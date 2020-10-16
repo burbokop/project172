@@ -1,10 +1,10 @@
 #ifndef BACKGROUND_H
 #define BACKGROUND_H
 
-#include <src/engine/entity.h>
-#include <src/engine/physicalobject.h>
-#include <src/engine/time/elapsedtimer.h>
-#include <src/engine/math/vector.h>
+#include <src/entity.h>
+#include <src/physicalobject.h>
+#include <src/time/elapsedtimer.h>
+#include <src/math/vector.h>
 #include <vector>
 
 

@@ -3,7 +3,7 @@
 
 #include <functional>
 
-#include <src/engine/assettools/assetprovider.h>
+#include <src/assettools/assetprovider.h>
 
 #include "../capabilities/controller.h"
 

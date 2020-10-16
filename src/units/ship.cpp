@@ -4,7 +4,7 @@
 #include <src/capabilities/modules/engine.h>
 #include <src/capabilities/modules/warpdrive.h>
 #include <src/capabilities/modulehandler.h>
-#include <src/engine/math/math.h>
+#include <src/math/math.h>
 
 
 double Ship::thrustForce() const {

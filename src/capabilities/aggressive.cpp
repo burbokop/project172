@@ -1,13 +1,13 @@
 #include "aggressive.h"
 
 
-#include <src/engine/context.h>
+#include <src/context.h>
 #include <src/units/projectile.h>
 #include <src/units/camera.h>
 #include <src/additional/lightparticle.h>
 #include <src/capabilities/modules/weapon.h>
 #include <src/capabilities/modulehandler.h>
-#include <src/engine/math/math.h>
+#include <src/math/math.h>
 #include <src/units/ship.h>
 
 #include <iostream>

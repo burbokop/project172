@@ -6,15 +6,15 @@
 #include <src/capabilities/docker.h>
 #include <src/capabilities/modulehandler.h>
 #include <src/ftestobject.h>
-#include <src/engine/math/math.h>
+#include <src/math/math.h>
 #include <src/units/ship.h>
 #include <src/units/unit.h>
 #include <src/additional/segmentpaiter.h>
 #include <src/capabilities/modules/weapon.h>
 
-#include <src/engine/context.h>
-#include <src/engine/physicalobject.h>
-#include <src/engine/physicalobject.h>
+#include <src/context.h>
+#include <src/physicalobject.h>
+#include <src/physicalobject.h>
 
 
 DefaultWorld::DefaultWorld() {

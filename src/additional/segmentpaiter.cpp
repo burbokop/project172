@@ -1,9 +1,9 @@
 #include "segmentpaiter.h"
 
-#include <src/engine/context.h>
+#include <src/context.h>
 #include <math.h>
-#include <src/engine/graphics/abstractrenderer.h>
-#include <src/engine/math/math.h>
+#include <src/graphics/abstractrenderer.h>
+#include <src/math/math.h>
 
 SegmentPaiter::SegmentPaiter()
 {

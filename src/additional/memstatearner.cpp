@@ -1,10 +1,10 @@
 #include "memstatearner.h"
 
-#include <src/engine/abstracteventhandler.h>
-#include <src/engine/context.h>
-#include <src/engine/debug.h>
-#include <src/engine/graphics/abstractrenderer.h>
-#include <src/engine/utility/systeminfo.h>
+#include <src/abstracteventhandler.h>
+#include <src/context.h>
+#include <src/debug.h>
+#include <src/graphics/abstractrenderer.h>
+#include <src/utility/systeminfo.h>
 
 MemStatEarner::MemStatEarner() {
     vm_diff_ac.setEnableAutoReset(true);

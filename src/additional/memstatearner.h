@@ -1,12 +1,12 @@
 #ifndef MEMSTATEARNER_H
 #define MEMSTATEARNER_H
 
-#include <src/engine/entity.h>
+#include <src/entity.h>
 
-#include <src/engine/math/averagecalculator.h>
-#include <src/engine/math/differentiator.h>
+#include <src/math/averagecalculator.h>
+#include <src/math/differentiator.h>
 
-#include <src/engine/time/elapsedtimer.h>
+#include <src/time/elapsedtimer.h>
 
 
 

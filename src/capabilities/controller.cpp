@@ -1,6 +1,6 @@
 #include "controller.h"
 
-#include <src/engine/context.h>
+#include <src/context.h>
 #include <src/units/ship.h>
 
 const long Controller::ARMOR_RELEASE_DELAY = 1000;

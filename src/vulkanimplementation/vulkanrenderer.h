@@ -2,7 +2,7 @@
 #define VULKANRENDERER_H
 
 #include "../engine/graphics/abstractrenderer.h"
-#include <src/engine/math/math.h>
+#include <src/math/math.h>
 
 #include <list>
 #include <map>

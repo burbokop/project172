@@ -2,9 +2,9 @@
 
 #include <inttypes.h>
 
-#include <src/engine/context.h>
+#include <src/context.h>
 
-#include <src/engine/graphics/abstractrenderer.h>
+#include <src/graphics/abstractrenderer.h>
 
 //#include <vulkan/vulkan_intel.h>
 

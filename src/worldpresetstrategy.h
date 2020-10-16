@@ -8,7 +8,7 @@
 
 #include <src/units/camera.h>
 
-#include <src/engine/memcontrol/abstractstrategy.h>
+#include <src/memcontrol/abstractstrategy.h>
 
 
 

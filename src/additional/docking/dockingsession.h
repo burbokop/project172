@@ -3,9 +3,9 @@
 
 #include "dockingnodepool.h"
 #include "physicaldockingattractor.h"
-#include <src/engine/entity.h>
-#include <src/engine/physicalobject.h>
-#include <src/engine/utility/ptr.h>
+#include <src/entity.h>
+#include <src/physicalobject.h>
+#include <src/utility/ptr.h>
 
 class Unit;
 class DockingSession : public e172::Entity {

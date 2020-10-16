@@ -1,135 +1,14 @@
-
-
 cmake_minimum_required(VERSION 3.18)
 #set(CMAKE_TRY_COMPILE_TARGET_TYPE "STATIC_LIBRARY")
-
 project(project172)
-
 add_compile_options(-no-pie)
-
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
-
-
-
-
-
-
-
 message("CMAKE_CXX_COMPILER: " ${CMAKE_CXX_COMPILER} " " ${CMAKE_CXX_COMPILER_VERSION})
-
-
-
-
 
 
 include_directories(${CMAKE_CURRENT_LIST_DIR})
 
-add_library(e172 SHARED
-
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/assettools/abstractassetexecutor.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/assettools/abstractassetexecutor.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/assettools/assetprovider.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/assettools/assetprovider.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/assettools/loadable.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/assettools/loadable.h
-
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/audio/abstractaudioprovider.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/audio/abstractaudioprovider.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/audio/audiochannel.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/audio/audiochannel.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/audio/audiosample.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/audio/audiosample.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/audio/audioplayer.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/audio/audioplayer.h
-
-
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/graphics/abstractgraphicsprovider.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/graphics/abstractgraphicsprovider.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/graphics/abstractrenderer.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/graphics/abstractrenderer.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/graphics/image.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/graphics/image.h
-
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/math/math.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/math/math.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/math/vector.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/math/vector.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/math/kinematics.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/math/kinematics.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/math/differentiator.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/math/differentiator.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/math/averagecalculator.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/math/averagecalculator.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/math/colider.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/math/colider.h
-
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/memcontrol/abstractfactory.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/memcontrol/abstractfactory.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/memcontrol/abstractstrategy.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/memcontrol/abstractstrategy.h
-
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/time/deltatimecalculator.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/time/deltatimecalculator.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/time/elapsedtimer.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/time/elapsedtimer.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/time/time.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/time/time.h
-
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/utility/vectorproxy.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/utility/vectorproxy.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/utility/systeminfo.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/utility/systeminfo.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/utility/animator.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/utility/animator.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/utility/observer.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/utility/observer.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/utility/cycliciterator.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/utility/cycliciterator.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/utility/ptr.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/utility/ptr.h
-
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/abstracteventhandler.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/abstracteventhandler.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/additional.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/additional.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/context.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/context.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/entity.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/entity.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/gameapplication.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/gameapplication.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/sharedcontainer.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/sharedcontainer.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/textformat.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/textformat.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/type.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/type.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/variant.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/variant.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/physicalobject.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/physicalobject.h
-
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/smartenum.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/smartenum.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/object.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/object.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/messagequeue.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/messagequeue.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/functional/metafunction.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/functional/metafunction.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/debug.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/debug.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/sfinae.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/typedefs.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/args.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/args.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/math/matrix.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/math/matrix.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/testprovider.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/engine/testprovider.cpp
-    )
 
 add_library(sdl_impl SHARED
     ${CMAKE_CURRENT_LIST_DIR}/src/sdlimplementation/effects/anaglyph.cpp
@@ -151,6 +30,9 @@ add_library(sdl_impl SHARED
     ${CMAKE_CURRENT_LIST_DIR}/src/sdlimplementation/spm.h
 
     )
+
+
+include(e172/e172.cmake)
 
 target_link_libraries(sdl_impl
     SDL2
@@ -186,10 +68,6 @@ add_go_library(go_net
     ${CMAKE_CURRENT_LIST_DIR}/src/additional/go/netservice.go
     ${CMAKE_CURRENT_LIST_DIR}/src/additional/go/netclient.go
     )
-
-
-
-
 
 add_executable(project172
     ${CMAKE_CURRENT_LIST_DIR}/src/additional/experimental/injectableentity.cpp

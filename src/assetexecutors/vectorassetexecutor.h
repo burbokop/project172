@@ -1,7 +1,7 @@
 #ifndef VECTORASSETEXECUTOR_H
 #define VECTORASSETEXECUTOR_H
 
-#include <src/engine/assettools/abstractassetexecutor.h>
+#include <src/assettools/abstractassetexecutor.h>
 
 
 

@@ -1,6 +1,6 @@
 #include "physicaldockingattractor.h"
 
-#include <src/engine/math/math.h>
+#include <src/math/math.h>
 
 PhysicalDockingAttractor::State PhysicalDockingAttractor::state() const {
     return m_state;

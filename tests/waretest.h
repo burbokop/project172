@@ -3,7 +3,7 @@
 
 #include <src/additional/ware/warecontainer.h>
 
-#include <src/engine/testprovider.h>
+#include <src/testprovider.h>
 
 class TestWareContainer : public WareContainer {
 public:

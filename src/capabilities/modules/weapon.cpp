@@ -3,9 +3,9 @@
 #include <src/additional/stringformer.h>
 #include <src/units/projectile.h>
 
-#include <src/engine/context.h>
-#include <src/engine/assettools/assetprovider.h>
-#include <src/engine/gameapplication.h>
+#include <src/context.h>
+#include <src/assettools/assetprovider.h>
+#include <src/gameapplication.h>
 
 
 const double Weapon::DEFAULT_PROJECTILE_SPEED = 200.0;

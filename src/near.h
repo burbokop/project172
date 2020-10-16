@@ -2,8 +2,8 @@
 #define NEAR_H
 
 
-#include <src/engine/entity.h>
-#include <src/engine/utility/ptr.h>
+#include <src/entity.h>
+#include <src/utility/ptr.h>
 
 class Capability;
 class Unit;

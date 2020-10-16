@@ -1,11 +1,11 @@
 #ifndef FTESTOBJECT_H
 #define FTESTOBJECT_H
 
-#include <src/engine/entity.h>
-#include <src/engine/physicalobject.h>
+#include <src/entity.h>
+#include <src/physicalobject.h>
 #include <memory>
 #include <iostream>
-#include <src/engine/math/colider.h>
+#include <src/math/colider.h>
 
 namespace e172 {
 

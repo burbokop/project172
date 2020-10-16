@@ -1,7 +1,7 @@
 #ifndef VULKANGRAPHICSPROVIDER_H
 #define VULKANGRAPHICSPROVIDER_H
 
-#include <src/engine/graphics/abstractgraphicsprovider.h>
+#include <src/graphics/abstractgraphicsprovider.h>
 
 #include "vulkanrenderer.h"
 

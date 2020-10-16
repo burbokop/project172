@@ -5,7 +5,7 @@
 #include <string>
 #include <vector>
 
-#include <src/engine/object.h>
+#include <src/object.h>
 
 
 class WareInfo {

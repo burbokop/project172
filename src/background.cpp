@@ -1,8 +1,8 @@
 #include "background.h"
 
-#include <src/engine/time/elapsedtimer.h>
-#include <src/engine/graphics/abstractrenderer.h>
-#include <src/engine/context.h>
+#include <src/time/elapsedtimer.h>
+#include <src/graphics/abstractrenderer.h>
+#include <src/context.h>
 
 
 

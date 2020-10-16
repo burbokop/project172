@@ -5,7 +5,7 @@
 #include <src/capabilities/aggressive.h>
 #include <src/capabilities/modulehandler.h>
 
-#include <src/engine/context.h>
+#include <src/context.h>
 
 #include <src/units/ship.h>
 

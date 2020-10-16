@@ -1,10 +1,10 @@
 #ifndef SDLRENDERER_H
 #define SDLRENDERER_H
 
-#include <src/engine/graphics/abstractrenderer.h>
+#include <src/graphics/abstractrenderer.h>
 #include <map>
 
-#include <src/engine/math/vector.h>
+#include <src/math/vector.h>
 #include <queue>
 
 struct SDL_Window;

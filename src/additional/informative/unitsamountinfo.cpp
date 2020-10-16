@@ -1,6 +1,6 @@
 #include "unitsamountinfo.h"
 #include <list>
-#include <src/engine/context.h>
+#include <src/context.h>
 
 UnitsAmountInfo::UnitsAmountInfo(e172::Context *context) {
     m_context = context;

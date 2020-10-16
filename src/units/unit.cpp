@@ -6,10 +6,10 @@
 #include <src/capabilities/docker.h>
 #include <src/capabilities/modulehandler.h>
 
-#include <src/engine/args.h>
-#include <src/engine/context.h>
+#include <src/args.h>
+#include <src/context.h>
 
-#include <src/engine/graphics/abstractrenderer.h>
+#include <src/graphics/abstractrenderer.h>
 
 bool Unit::selected() const {
     return m_selected;

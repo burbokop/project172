@@ -1,7 +1,7 @@
 #ifndef SPEEDINDICATOR_H
 #define SPEEDINDICATOR_H
 
-#include <src/engine/graphics/abstractrenderer.h>
+#include <src/graphics/abstractrenderer.h>
 
 class SpeedIndicator {
     int number = 0;

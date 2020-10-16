@@ -1,10 +1,10 @@
 #ifndef SEGMENTPAITER_H
 #define SEGMENTPAITER_H
 
-#include <src/engine/entity.h>
-#include <src/engine/physicalobject.h>
+#include <src/entity.h>
+#include <src/physicalobject.h>
 
-#include <src/engine/time/elapsedtimer.h>
+#include <src/time/elapsedtimer.h>
 
 
 

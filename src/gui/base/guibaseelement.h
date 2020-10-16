@@ -1,7 +1,7 @@
 #ifndef GUIBASEELEMENT_H
 #define GUIBASEELEMENT_H
 
-#include <src/engine/entity.h>
+#include <src/entity.h>
 
 class Controller;
 class GUIBaseElement : public e172::Entity {

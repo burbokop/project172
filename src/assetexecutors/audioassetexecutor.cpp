@@ -1,7 +1,7 @@
 #include "audioassetexecutor.h"
-#include <src/engine/audio/abstractaudioprovider.h>
-#include <src/engine/audio/audioplayer.h>
-#include <src/engine/additional.h>
+#include <src/audio/abstractaudioprovider.h>
+#include <src/audio/audioplayer.h>
+#include <src/additional.h>
 
 AudioAssetExecutor::AudioAssetExecutor() {}
 

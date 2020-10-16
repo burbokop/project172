@@ -1,12 +1,12 @@
 #ifndef UNIT_H
 #define UNIT_H
 
-#include <src/engine/entity.h>
-#include <src/engine/physicalobject.h>
-#include <src/engine/assettools/loadable.h>
+#include <src/entity.h>
+#include <src/physicalobject.h>
+#include <src/assettools/loadable.h>
 #include <src/iinformative.h>
-#include <src/engine/utility/animator.h>
-#include <src/engine/utility/ptr.h>
+#include <src/utility/animator.h>
+#include <src/utility/ptr.h>
 
 class ModuleHandler;
 class Docker;

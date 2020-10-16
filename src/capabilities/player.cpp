@@ -2,9 +2,9 @@
 #include <src/units/ship.h>
 #include <src/capabilities/modules/weapon.h>
 #include <src/capabilities/modulehandler.h>
-#include <src/engine/context.h>
+#include <src/context.h>
 #include <src/capabilities/docker.h>
-#include <src/engine/args.h>
+#include <src/args.h>
 
 const std::map<std::string, e172::Scancode> Player::scancode = {
     { "q", e172::ScancodeQ },

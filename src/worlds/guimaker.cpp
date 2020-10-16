@@ -13,9 +13,9 @@
 #include <src/gui/guiswitch.h>
 #include <src/gui/guiwareview.h>
 
-#include <src/engine/context.h>
-#include <src/engine/debug.h>
-#include <src/engine/gameapplication.h>
+#include <src/context.h>
+#include <src/debug.h>
+#include <src/gameapplication.h>
 
 #include <src/additional/informative/controllerfinder.h>
 #include <src/additional/informative/unitsamountinfo.h>

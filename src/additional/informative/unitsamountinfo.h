@@ -3,7 +3,7 @@
 
 #include <list>
 
-#include <src/engine/entity.h>
+#include <src/entity.h>
 
 #include <src/iinformative.h>
 
