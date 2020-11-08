@@ -7,7 +7,6 @@ import (
 	"fmt"
 	"net"
 	"strings"
-
 	"github.com/opesun/goquery"
 )
 
