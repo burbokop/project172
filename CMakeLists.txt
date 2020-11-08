@@ -21,7 +21,7 @@ function(add_go_library TARGET_LIB GO_SRCS)
     add_custom_command(OUTPUT ${GO_LIBNAME}
         DEPENDS ${GO_SRCS}
         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-        COMMAND env go build -buildmode=c-shared -o "${CMAKE_CURRENT_BINARY_DIR}/${GO_LIBNAME}" ${CMAKE_GO_FLAGS} ${GO_SRCS}
+        COMMAND go get github.com/opesun/goquery && env go build -buildmode=c-shared -o "${CMAKE_CURRENT_BINARY_DIR}/${GO_LIBNAME}" ${CMAKE_GO_FLAGS} ${GO_SRCS}
         COMMENT "Building Go library"
         )
 
