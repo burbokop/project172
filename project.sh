@@ -48,7 +48,7 @@ function __help {
     printf "\tbuild-debug        - first build, than debug\n"
     printf "\tsolve-dependencies - install all libraries\n"
     printf "\thelp               - help\n"
-    printf "\nTo enable auto completion type: source ./completion.sh"
+    printf "\nTo enable auto completion type: source ./completion.sh\n"
 }
 
 
