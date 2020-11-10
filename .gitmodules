@@ -4,3 +4,6 @@
 [submodule "sdl_implementation"]
 	path = sdl_implementation
 	url = https://github.com/burbokop/sdl_implementation.git
+[submodule "vulkan_implementation"]
+	path = vulkan_implementation
+	url = https://github.com/burbokop/vulkan_implementation.git

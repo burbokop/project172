@@ -212,7 +212,7 @@ add_executable(project172
     )
 
 
-include(${CMAKE_CURRENT_LIST_DIR}/src/vulkanimplementation/CMakeLists.txt)
+include(${CMAKE_CURRENT_LIST_DIR}/vulkan_implementation/CMakeLists.txt)
 include(${CMAKE_CURRENT_LIST_DIR}/tests/CMakeLists.txt)
 
 add_dependencies(project172 go_net.lib)
