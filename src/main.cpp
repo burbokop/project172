@@ -56,9 +56,9 @@ int main(int argc, char *argv[]) {
     //hello();
 
 
-    const int desc = go_run_server();
-    go_stop_service(desc);
-    go_http_get();
+    //const int desc = go_run_server();
+    //go_stop_service(desc);
+    //go_http_get();
 
     //TestProvider::runAllTests();
 
