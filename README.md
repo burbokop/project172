@@ -17,15 +17,13 @@ sudo apt-get install libsdl2-2.0-0 libsdl2-dev libsdl2-image-2.0-0 libsdl2-image
 
 git clone https://github.com/burbokop/project172.git
 cd ./project172
-sudo apt-get install qt4-qmake
-./build.run
-
+./project.sh build-run
 ```
 
 
 #### run:
 ```bash
-./project172.run
+./project.sh run
 ```
 
 
