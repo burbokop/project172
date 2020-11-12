@@ -28,7 +28,7 @@
 
 #include <src/background.h>
 
-#include <src/vulkanimplementation/vulkangraphicsprovider.h>
+#include <vulkan_implementation/src/vulkangraphicsprovider.h>
 
 #include <tests/waretest.h>
 #include <src/additional/chartview.h>
