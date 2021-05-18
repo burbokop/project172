@@ -1,5 +1,6 @@
 #include "guiradar.h"
 
+#include <src/debug.h>
 #include <src/near.h>
 #include <src/assettools/loadable.h>
 

@@ -5,6 +5,7 @@
 #include <src/capabilities/player.h>
 
 #include <src/gui/guibutton.h>
+#include <src/gui/guidevconsole.h>
 #include <src/gui/guidockingview.h>
 #include <src/gui/guimain.h>
 #include <src/gui/guimoduleview.h>
@@ -153,6 +154,12 @@ GUIMaker::GUIMaker(e172::Context *context, Near *radarNear) {
 
             } wareViewStack->push(wareView);
         } m_gui->addStack(wareViewStack);
+
+        m_gui->addChildElement(new GuiDevConsole([](const std::string &cmd, std::list<std::string> *lines){
+            if(cmd == "ok") {
+                lines->push_back("OK-OK");
+            }
+        }));
         m_gui->setMiniMap(new GUIMiniMap());
         m_gui->setDebugValueInfo(new GUIDebugValueInfo());
     }

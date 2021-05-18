@@ -65,6 +65,7 @@ void GUIMain::proceed(e172::Context *context, e172::AbstractEventHandler *eventH
         floatingMessage = nullptr;
     }
 
+    /*
     for(auto s : m_stacks) {
         s->proceed(context, eventHandler);
     }
@@ -72,9 +73,17 @@ void GUIMain::proceed(e172::Context *context, e172::AbstractEventHandler *eventH
     if(floatingMessage) floatingMessage->proceed(context, eventHandler);
     if(miniMap) miniMap->proceed(context, eventHandler);
     if(debugValueInfo) debugValueInfo->proceed(context, eventHandler);
+    */
+    for(const auto& c : children()) {
+        c->proceed(context, eventHandler);
+    }
 }
 
 void GUIMain::render(e172::AbstractRenderer *renderer) {
+    for(const auto& c : children()) {
+        c->render(renderer);
+    }
+    /*
     for(auto s : m_stacks) {
         s->render(renderer);
     }
@@ -82,4 +91,5 @@ void GUIMain::render(e172::AbstractRenderer *renderer) {
     if(floatingMessage) floatingMessage->render(renderer);
     if(miniMap) miniMap->render(renderer);
     if(debugValueInfo) debugValueInfo->render(renderer);
+    */
 }

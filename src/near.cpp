@@ -2,6 +2,7 @@
 
 
 #include <src/context.h>
+#include <src/debug.h>
 #include <src/units/ship.h>
 #include <src/capabilities/capability.h>
 #include <src/capabilities/modules/warpdrive.h>
@@ -36,7 +37,6 @@ bool Near::containsEntity(const e172::ptr<e172::Entity> &entity) const {
 
 void Near::addEntities(e172::Context *context) {
     const auto current = context->autoIteratingEntity();
-
     if(current) {
         const auto currentUnit = e172::smart_cast<Unit>(current);
         const auto centerUnit = m_center->parentUnit();
@@ -44,11 +44,13 @@ void Near::addEntities(e172::Context *context) {
         if(
                 currentUnit &&
                 centerUnit &&
-                currentUnit != centerUnit &&
-                std::find(m_entitiesInFocus.begin(), m_entitiesInFocus.end(), current) == m_entitiesInFocus.end() &&
-                (currentUnit->position() - centerUnit->position()).module() <= localRadius(centerUnit)
+                currentUnit != centerUnit
                 ) {
-            m_entitiesInFocus.push_back(current);
+            if(
+                    findEntityInFocus(current) == m_entitiesInFocus.end() &&
+                    (currentUnit->position() - centerUnit->position()).module() <= localRadius(centerUnit)
+                    )
+                m_entitiesInFocus.push_back(current);
         }
     }
 }
@@ -85,12 +87,12 @@ void Near::removeEntities(e172::Context *) {
             const auto centerUnit = m_center->parentUnit();
             if(currentUnit && centerUnit) {
                 if((currentUnit->position() - centerUnit->position()).module() > (localRadius(centerUnit) + m_delta)) {
-                    const auto it = std::find(m_entitiesInFocus.begin(), m_entitiesInFocus.end(), current);
+                    const auto it = findEntityInFocus(current);
                     m_entitiesInFocus.erase(it);
                 }
             }
         } else {
-            const auto it = std::find(m_entitiesInFocus.begin(), m_entitiesInFocus.end(), current);
+            const auto it = findEntityInFocus(current);
             m_entitiesInFocus.erase(it);
         }
     }

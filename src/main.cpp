@@ -98,7 +98,7 @@ int main(int argc, char *argv[]) {
         GUIContainer menu("renderer");
         const auto apply = [&rendererUsing, &chooseGraphicsProviderApp](e172::Variant value) {
             rendererUsing = static_cast<RendererUsing>(value.toInt());
-            chooseGraphicsProviderApp.quit();
+            chooseGraphicsProviderApp.quitLater();
         };
         menu.addMenuElement(new GUIButton(std::string("SDL2"), [apply](auto) { apply(SDL); }));
         menu.addMenuElement(new GUIButton(std::string("Vulkan"), [apply](auto) { apply(Vulkan); }));

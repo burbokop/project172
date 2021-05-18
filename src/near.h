@@ -26,6 +26,11 @@ private:
 
     double localRadius(const e172::ptr<Unit> &center);
 
+    auto findEntityInFocus(const e172::ptr<e172::Entity>& entity) {
+        return std::find_if(m_entitiesInFocus.begin(), m_entitiesInFocus.end(), [entity](auto a){
+            return a == entity;
+        });
+    }
 public:
 
     Near(double radius = DEFAULT_RADIUS, double delta = DEFAULT_RADIUS_DELTA);

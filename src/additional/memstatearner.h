@@ -11,8 +11,8 @@
 
 
 class MemStatEarner : public e172::Entity {
-    Differentiator vm_size_differentiator;
-    Differentiator rss_differentiator;
+    e172::Differentiator vm_size_differentiator;
+    e172::Differentiator rss_differentiator;
     AverageCalculator vm_diff_ac;
     AverageCalculator rss_diff_ac;
 
