@@ -22,7 +22,7 @@
 #include <src/additional/informative/unitsamountinfo.h>
 
 #include <src/gui/base/guicontainer.h>
-
+#include <e172/src/functional/metafunction.h>
 
 GUIMain *GUIMaker::gui() const {
     return m_gui;
@@ -37,7 +37,7 @@ void GUIMaker::setWorldPresetStrategy(WorldPresetStrategy *worldPresetStrategy) 
     }
 }
 
-GUIMaker::GUIMaker(e172::Context *context, Near *radarNear) {
+GUIMaker::GUIMaker(e172::Context *context, Near *radarNear, DevConsole *console) {
     m_gui = new GUIMain(); {
         GUIStack *stack = new GUIStack(); {
             GUIContainer *mainMenu = new GUIContainer("main menu"); {
@@ -155,11 +155,9 @@ GUIMaker::GUIMaker(e172::Context *context, Near *radarNear) {
             } wareViewStack->push(wareView);
         } m_gui->addStack(wareViewStack);
 
-        m_gui->addChildElement(new GuiDevConsole([](const std::string &cmd, std::list<std::string> *lines){
-            if(cmd == "ok") {
-                lines->push_back("OK-OK");
-            }
-        }));
+        if (console) {
+            m_gui->addChildElement(new GuiDevConsole(e172::bind(console, &DevConsole::executeCommand)));
+        }
         m_gui->setMiniMap(new GUIMiniMap());
         m_gui->setDebugValueInfo(new GUIDebugValueInfo());
     }

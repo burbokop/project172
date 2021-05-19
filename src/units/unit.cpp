@@ -25,14 +25,13 @@ std::string Unit::info() const {
 
 void Unit::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
     m_selected = context->property("SU").toNumber<e172::Entity::id_t>() == entityId();
-    for(const auto cap : m_capabilities) {
+    for(const auto& cap : m_capabilities) {
         cap->proceed(context, eventHandler);
     }
     proceedPhysics(context->deltaTime());
 }
 
 void Unit::render(e172::AbstractRenderer *renderer) {
-    renderer->resolution();
     m_animator.setAngle(rotation());
     m_animator.setPosition(position());
     m_animator.render(renderer);
@@ -41,7 +40,7 @@ void Unit::render(e172::AbstractRenderer *renderer) {
         renderer->drawSquareShifted(position(), (m_selectedAnimationTimer.elapsed() / 50) % 24, m_selectedColor);
     }
 
-    for(const auto cap : m_capabilities) {
+    for(const auto& cap : m_capabilities) {
         cap->render(renderer);
     }
 }

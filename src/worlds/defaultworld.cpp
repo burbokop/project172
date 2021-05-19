@@ -103,6 +103,11 @@ WorldPreset::GenerationResult DefaultWorld::generate(e172::Context *context) {
         someShipDocker->addNode({ 0, -20 }, -e172::Math::Pi / 2);
         someShipDocker->addNode({ 0, 20 }, e172::Math::Pi / 2);
         someShip->addCapability(someShipDocker);
+        someShip->addCapability(new AI());
+
+        ModuleHandler *someShipModules = new ModuleHandler();
+        someShipModules->addModule(context->assetProvider()->createLoadable<Module>("engine2"));
+        someShip->addCapability(someShipModules);
 
         someShip->resetPhysicsProperties(e172::Vector(-200, -100), -0.7);
         result.entities.push_back(someShip);

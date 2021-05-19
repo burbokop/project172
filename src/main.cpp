@@ -18,6 +18,7 @@
 #include <src/assetexecutors/spriteassetexecutor.h>
 #include <src/assetexecutors/vectorassetexecutor.h>
 
+#include <src/capabilities/ai.h>
 #include <src/capabilities/factory.h>
 #include <src/capabilities/player.h>
 
@@ -32,6 +33,7 @@
 
 #include <tests/waretest.h>
 #include <src/additional/chartview.h>
+#include <src/additional/devconsole.h>
 #include <src/additional/memstatearner.h>
 #include <src/gui/guibutton.h>
 #include <src/gui/base/guicontainer.h>
@@ -175,8 +177,40 @@ int main(int argc, char *argv[]) {
     Near radarNear;
     app.addEntity(&radarNear);
 
+    //create dev console
+    DevConsole devConsole;
+
+    devConsole.addCommand("dock", [&app](const std::vector<std::string>& args, std::list<std::string> *lines){
+        if (args.size() > 3) {
+            if(args[2] == "->") {
+                auto subjectName = args[1];
+                auto subject = app.context()->findEntity<Unit>([subjectName](const e172::ptr<Unit>& unit){
+                    return unit->loadableId() == subjectName && unit->capability<AI>();
+                });
+                auto objectName = args[3];
+                auto object = app.context()->findEntity<Unit>([objectName](const e172::ptr<Unit>& unit){
+                    return unit->loadableId() == objectName;
+                });
+                if(subject && object) {
+                    const auto ai = subject->capability<AI>();
+                    if(ai) {
+                        ai->executeDocking(object);
+                    } else {
+                        lines->push_back("error: ai not found in subject");
+                    }
+                } else {
+                    lines->push_back("error: subject or object not found: subject: " + std::to_string(subject) + ", object: " + std::to_string(subject));
+                }
+            } else {
+                lines->push_back("error: undefined direction \"" + args[2] + "\"");
+            }
+        } else {
+            lines->push_back("error: should have 3 args");
+        }
+    });
+
     //setup gui
-    GUIMaker guiMaker(app.context(), &radarNear);
+    GUIMaker guiMaker(app.context(), &radarNear, &devConsole);
     app.addEntity(guiMaker.gui());
 
     //setup camera

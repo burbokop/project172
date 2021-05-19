@@ -15,15 +15,21 @@ void GuiDevConsole::proceed(e172::Context *context, e172::AbstractEventHandler *
     if (eventHandler->keySinglePressed(e172::ScancodeGrave)) {
         consoleEnabled = !consoleEnabled;
         eventHandler->pullText();
-    } else if(eventHandler->keySinglePressed(e172::ScancodeReturn)) {
-        lines.push_back(cmdPreffix + currentLine);
-        if (m_commandHandlerFunc) {
-            m_commandHandlerFunc(currentLine, &lines);
-        }
-        currentLine.clear();
-        eventHandler->pullText();
     }
     if (consoleEnabled) {
+        if(eventHandler->keySinglePressed(e172::ScancodeReturn)) {
+            lines.push_back(cmdPreffix + currentLine);
+            if (m_commandHandlerFunc) {
+                m_commandHandlerFunc(currentLine, &lines);
+            }
+            currentLine.clear();
+            eventHandler->pullText();
+        } else if(eventHandler->keySinglePressed(e172::ScancodeBackSpace)) {
+            if (!currentLine.empty()) {
+                currentLine.pop_back();
+            }
+            eventHandler->pullText();
+        }
         currentLine += eventHandler->pullText();
     }
 }

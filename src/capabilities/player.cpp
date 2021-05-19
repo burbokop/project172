@@ -5,6 +5,7 @@
 #include <src/context.h>
 #include <src/capabilities/docker.h>
 #include <src/args.h>
+#include <src/debug.h>
 
 const std::map<std::string, e172::Scancode> Player::scancode = {
     { "q", e172::ScancodeQ },

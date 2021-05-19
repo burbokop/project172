@@ -69,6 +69,8 @@ add_executable(project172
     ${CMAKE_CURRENT_LIST_DIR}/src/additional/informative/unitsamountinfo.h
     ${CMAKE_CURRENT_LIST_DIR}/src/additional/memstatearner.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/additional/memstatearner.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/additional/devconsole.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/additional/devconsole.h
 
     ${CMAKE_CURRENT_LIST_DIR}/src/additional/net/framebuilder.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/additional/net/framebuilder.h

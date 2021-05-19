@@ -11,6 +11,8 @@
 #include <src/gui/guicombobox.h>
 #include <src/gui/guimain.h>
 
+#include <src/additional/devconsole.h>
+
 
 
 class GUIMaker {
@@ -34,7 +36,7 @@ class GUIMaker {
     GUIMain *m_gui = nullptr;
     GUIComboBox<std::string> *m_worldComboBox = nullptr;
 public:
-    GUIMaker(e172::Context *context, Near *radarNear = nullptr);
+    GUIMaker(e172::Context *context, Near *radarNear = nullptr, DevConsole *console = nullptr);
     GUIMain *gui() const;
     void setWorldPresetStrategy(WorldPresetStrategy *worldPresetStrategy);
 };
