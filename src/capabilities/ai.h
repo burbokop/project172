@@ -3,6 +3,7 @@
 
 
 #include "controller.h"
+#include "docker.h"
 
 
 class AI : public Controller {
@@ -14,11 +15,14 @@ public:
 private:
     e172::ptr<Unit> m_targetUnit;
     Status m_status;
+    std::string statusString;
+    e172::ptr<Docker> docker = nullptr;
+    e172::ptr<DockingSession> session = nullptr;
 public:
 
     AI();
 
-    void executeDocking(const e172::ptr<Unit>& targetUnit);
+    bool executeDocking(const e172::ptr<Unit>& targetUnit);
 
     // Entity interface
 public:

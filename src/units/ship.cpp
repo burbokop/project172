@@ -5,7 +5,7 @@
 #include <src/capabilities/modules/warpdrive.h>
 #include <src/capabilities/modulehandler.h>
 #include <src/math/math.h>
-
+#include <math.h>
 
 double Ship::thrustForce() const {
     return m_thrustForce;
@@ -78,7 +78,7 @@ uint8_t Ship::abortWarp(e172::Context *context) {
     return false;
 }
 
-bool Ship::thrustForward() {
+bool Ship::thrustForward(double throtle) {
     const auto mh = moduleHandler();
     if(mh) {
         const auto engines = mh->modulesOfClass("Engine");
@@ -92,7 +92,8 @@ bool Ship::thrustForward() {
             }
 
             if(ok) {
-                addLimitedForwardForce(m_thrustForce, m_maxVelocity);
+                throtle = std::min(throtle, 1.);
+                addLimitedForwardForce(m_thrustForce * throtle, m_maxVelocity * throtle);
                 return true;
             }
         }

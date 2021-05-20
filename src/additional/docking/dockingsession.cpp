@@ -22,6 +22,10 @@ std::array<e172::ptr<Unit>, 2> DockingSession::units() const {
     return { item0.unit, item1.unit };
 }
 
+std::map<e172::ptr<Unit>, DockingNodePool::Node> DockingSession::nodes() const {
+    return { { item0.unit, item0.node }, { item1.unit, item1.node } };
+}
+
 e172::ptr<Unit> DockingSession::oppositeUnit(const e172::ptr<Unit> &unit) const {
     if(item0.unit == unit) {
         return item1.unit;
@@ -35,7 +39,7 @@ PhysicalDockingAttractor::State DockingSession::state() const {
     return physicalDockingAttractor.state();
 }
 
-DockingSession *DockingSession::createSession(DockingNodePool *pull0, DockingNodePool *pull1, const e172::ptr<Unit> &unit0, const e172::ptr<Unit> &unit1) {
+e172::ptr<DockingSession> DockingSession::createSession(DockingNodePool *pull0, DockingNodePool *pull1, const e172::ptr<Unit> &unit0, const e172::ptr<Unit> &unit1) {
     const auto node0 = pull0->nextFreeNode();
     const auto node1 = pull1->nextFreeNode();
     if(node0.isValid() && node1.isValid()) {

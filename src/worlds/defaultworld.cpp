@@ -117,15 +117,15 @@ WorldPreset::GenerationResult DefaultWorld::generate(e172::Context *context) {
         for(int i = 0; i < 3; i++) {
             Unit *s = nullptr;
             switch (i) {
-                case 0:
-                    s = static_cast<Unit*>(context->assetProvider()->createLoadable("sh1"));
-                    break;
-                case 1:
-                    s = static_cast<Unit*>(context->assetProvider()->createLoadable("sh2"));
-                    break;
-                case 2:
-                    s = static_cast<Unit*>(context->assetProvider()->createLoadable("sh3"));
-                    break;
+            case 0:
+                s = static_cast<Unit*>(context->assetProvider()->createLoadable("sh1"));
+                break;
+            case 1:
+                s = static_cast<Unit*>(context->assetProvider()->createLoadable("sh2"));
+                break;
+            case 2:
+                s = static_cast<Unit*>(context->assetProvider()->createLoadable("sh3"));
+                break;
             }
 
             s->resetPhysicsProperties(e172::Vector(-50 + i * 50, 100), -0.7);
@@ -161,21 +161,23 @@ WorldPreset::GenerationResult DefaultWorld::generate(e172::Context *context) {
         std::vector<std::string> assetKeys = context->assetProvider()->loadableNames();
         unsigned int i = 0;
         for (std::string key : assetKeys) {
-            auto unit = dynamic_cast<Unit*>(context->assetProvider()->createLoadable(key));
-            if(unit) {
-                unit->resetPhysicsProperties(e172::Vector(static_cast<int>((i + 4) * 64), -200), 0);
+            if(key != "st1") {
+                auto unit = dynamic_cast<Unit*>(context->assetProvider()->createLoadable(key));
+                if(unit) {
+                    unit->resetPhysicsProperties(e172::Vector(static_cast<int>((i + 4) * 64), -200), 0);
 
-                unit->addCapability(new AI());
-                ModuleHandler *mhx = new ModuleHandler();
-                mhx->addModule(static_cast<Module*>(context->assetProvider()->createLoadable((i == 1) ? "plasma-launcher" : "pistol")));
-                mhx->addModule(static_cast<Module*>(context->assetProvider()->createLoadable("engine1")));
-                mhx->addModule(static_cast<Module*>(context->assetProvider()->createLoadable("warp-drive1")));
+                    unit->addCapability(new AI());
+                    ModuleHandler *mhx = new ModuleHandler();
+                    mhx->addModule(static_cast<Module*>(context->assetProvider()->createLoadable((i == 1) ? "plasma-launcher" : "pistol")));
+                    mhx->addModule(static_cast<Module*>(context->assetProvider()->createLoadable("engine1")));
+                    mhx->addModule(static_cast<Module*>(context->assetProvider()->createLoadable("warp-drive1")));
 
-                unit->addCapability(mhx);
-                //unit->addCapability(new Docker());
+                    unit->addCapability(mhx);
+                    unit->addCapability(new Docker());
 
-                result.entities.push_back(unit);
-                i++;
+                    result.entities.push_back(unit);
+                    i++;
+                }
             }
         }
     }
@@ -188,7 +190,7 @@ WorldPreset::GenerationResult DefaultWorld::generate(e172::Context *context) {
         docker->addNode({ 0, 50 }, 0);
         s->addCapability(docker);
 
-        s->resetPhysicsProperties(e172::Vector(50, -150), 0);
+        s->resetPhysicsProperties(e172::Vector(450, -150), 0);
         result.entities.push_back(s);
     }
 

@@ -23,13 +23,14 @@ class DockingSession : public e172::Entity {
     DockingSession();
 public:
     std::array<e172::ptr<Unit>, 2> units() const;
+    std::map<e172::ptr<Unit>, DockingNodePool::Node> nodes() const;
     e172::ptr<Unit> oppositeUnit(const e172::ptr<Unit> &unit) const;
     PhysicalDockingAttractor::State state() const;
 
     bool fullUsageCount() const;
     void release();
 
-    static DockingSession *createSession(DockingNodePool *pull0, DockingNodePool *pull1, const e172::ptr<Unit> &unit0, const e172::ptr<Unit> &unit1);
+    static e172::ptr<DockingSession> createSession(DockingNodePool *pull0, DockingNodePool *pull1, const e172::ptr<Unit> &unit0, const e172::ptr<Unit> &unit1);
 
     ~DockingSession();
 

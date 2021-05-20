@@ -11,17 +11,19 @@
 #include <src/additional/docking/dockingnodepool.h>
 #include <src/additional/docking/dockingsession.h>
 #include <src/additional/docking/physicaldockingattractor.h>
-
+#include <e172/src/smartenum.h>
 
 class Docker : public Capability {
     DockingNodePool m_nodePool;
-    std::vector<DockingSession*> m_sessions;
+    std::vector<e172::ptr<DockingSession>> m_sessions;
 public:
     void addNode(const e172::Vector &offset, double angle);
 
     Docker();
     ~Docker();
-    bool createDockingSessionWithUnit(e172::Context *context, const e172::ptr<Unit> &unit);
+
+
+    e172::ptr<DockingSession> createDockingSessionWithUnit(e172::Context *context, const e172::ptr<Unit> &unit);
     void closeAllSessions();
     size_t sessionCount() const;
     std::string sessionInfo(size_t index) const;

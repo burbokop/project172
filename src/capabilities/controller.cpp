@@ -1,7 +1,9 @@
 #include "controller.h"
 
+#include <src/args.h>
 #include <src/context.h>
 #include <src/units/ship.h>
+#include <src/capabilities/docker.h>
 
 const long Controller::ARMOR_RELEASE_DELAY = 1000;
 const std::string Controller::ARMOR_RELEASE_MESSAGE = "emergency catapult";

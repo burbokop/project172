@@ -62,7 +62,7 @@ GUIMaker::GUIMaker(e172::Context *context, Near *radarNear, DevConsole *console)
                         radarRowElement->addMenuElement(new GUIButton("dock", [stack, dockingView](e172::Context *context, Controller* ctrl, const e172::Variant &md) {
                             e172::Debug::print("DOCK: ", md, ctrl);
                             if(const auto player = dynamic_cast<Player*>(ctrl)) {
-                                if(player->dockImmediately(context, md.toNumber<e172::Entity::id_t>())) {
+                                if(player->createDockingSessionWithUnit(context, md.toNumber<e172::Entity::id_t>())) {
                                     stack->pop();
                                     stack->pop();
                                     stack->push(dockingView);

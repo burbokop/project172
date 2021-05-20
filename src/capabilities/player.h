@@ -21,8 +21,9 @@ private:
 public:
     Player();
 
-    void dock(e172::Entity::id_t entity);
-    bool dockImmediately(e172::Context *context, e172::Entity::id_t entity);
+    void scheduleDocking(e172::Entity::id_t entity);
+    bool createDockingSessionWithUnit(e172::Context *context, e172::Entity::id_t entity);
+
 
     // Entity interface
 public:

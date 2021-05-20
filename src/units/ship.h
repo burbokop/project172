@@ -29,7 +29,7 @@ public:
     e172::ptr<WarpDrive> firstWarp() const;
     bool inWarp() const;
 
-    bool thrustForward();
+    bool thrustForward(double throtle = 1);
     void maneuverLeft();
     void maneuverRight();
 

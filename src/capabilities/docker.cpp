@@ -13,18 +13,23 @@ Docker::~Docker() {
     closeAllSessions();
 }
 
-bool Docker::createDockingSessionWithUnit(e172::Context* context, const e172::ptr<Unit> &unit) {
+e172::ptr<DockingSession> Docker::createDockingSessionWithUnit(e172::Context* context, const e172::ptr<Unit> &unit) {
     auto docker = unit->docker();
-    if(docker && parentUnit()) {
-        const auto session = DockingSession::createSession(&m_nodePool, &docker->m_nodePool, parentUnit(), unit);
-        if(session) {
-            m_sessions.push_back(session);
-            docker->m_sessions.push_back(session);
-            context->addEntity(session);
-            return true;
-        }
+    if(!docker) {
+        return nullptr;
     }
-    return false;
+    if(!parentUnit()) {
+        return nullptr;
+    }
+    const auto session = DockingSession::createSession(&m_nodePool, &docker->m_nodePool, parentUnit(), unit);
+    if(session) {
+        m_sessions.push_back(session);
+        docker->m_sessions.push_back(session);
+        context->addEntity(session);
+        return session;
+    } else {
+        return nullptr;
+    }
 }
 
 void Docker::closeAllSessions() {

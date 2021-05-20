@@ -53,11 +53,11 @@ Player::Player() {
     });
 }
 
-void Player::dock(e172::Entity::id_t entity) {
+void Player::scheduleDocking(e172::Entity::id_t entity) {
     dockRequestedQueue.push(entity);
 }
 
-bool Player::dockImmediately(e172::Context *context, e172::Entity::id_t entity) {
+bool Player::createDockingSessionWithUnit(e172::Context *context, e172::Entity::id_t entity) {
     const auto targetUnit = context->entityById<Unit>(entity);
     const auto docker = parentUnit()->docker();
     if(docker && targetUnit) {
@@ -69,6 +69,7 @@ bool Player::dockImmediately(e172::Context *context, e172::Entity::id_t entity) 
     }
     return false;
 }
+
 
 void Player::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
     if(auto ship = e172::smart_cast<Ship>(parentUnit())) {
