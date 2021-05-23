@@ -13,8 +13,7 @@
 #include <src/capabilities/modules/weapon.h>
 
 #include <src/context.h>
-#include <src/physicalobject.h>
-#include <src/physicalobject.h>
+#include <src/math/physicalobject.h>
 
 
 DefaultWorld::DefaultWorld() {

@@ -5,6 +5,10 @@
 #include <src/units/unit.h>
 #include <e172/src/math/math.h>
 #include <src/debug.h>
+#include <src/math/line2d.h>
+#include <src/math/math.h>
+#include <iostream>
+
 AI::Status AI::status() const {
     return m_status;
 }
@@ -54,19 +58,25 @@ void AI::proceed(e172::Context *context, e172::AbstractEventHandler *) {
                     const auto thisNode = nodes.at(thisShip);
                     const auto targetNode = nodes.at(m_targetUnit);
 
-                    const auto thisNodeGlobalOffset = thisShip->rotationMatrix() * thisNode.offset();
-                    const auto targetNodeGlobalOffset = m_targetUnit->rotationMatrix() * targetNode.offset();
+                    const auto thisNodeGlobalPosition = thisShip->position() + thisShip->rotationMatrix() * thisNode.offset();
+                    const auto targetNodeGlobalPosition = m_targetUnit->position() + m_targetUnit->rotationMatrix() * targetNode.offset();
 
-                    auto nodeDirection = m_targetUnit->position() - thisShip->position() + targetNodeGlobalOffset - thisNodeGlobalOffset;
+                    _vec = targetNodeGlobalPosition;
+                    _line = e172::Line2d::fromAngle(targetNode.angle() + m_targetUnit->rotation() + e172::Math::Pi / 2, targetNodeGlobalPosition);
+                    _dist = _line.distanceToPoint(thisNodeGlobalPosition);
+
+                    auto angl = e172::Math::topLimitedFunction(_dist) * e172::Math::Pi / 2;
+
+                    auto nodeDirection = targetNodeGlobalPosition - thisNodeGlobalPosition;
                     auto nodeDiractionAngle = nodeDirection.angle();
                     auto nodeDistance = nodeDirection.module();
 
                     if (nodeDistance > 32) {
                         auto targeted = (e172::Math::radiansDistance(nodeDiractionAngle, parentUnit()->rotation()) < e172::Math::Pi / 32);
                         if(targeted) {
-                            thisShip->thrustForward(0.4);
+                            thisShip->thrustForward(0.1);
                         } else {
-                            thisShip->addTargetRotationForse(diractionAngle, 1, 1);
+                            thisShip->addTargetRotationForse(targetNode.angle() + m_targetUnit->rotation() + angl, 1, 1);
                         }
                     } else {
                         thisShip->maneuverLeft();
@@ -83,6 +93,8 @@ void AI::proceed(e172::Context *context, e172::AbstractEventHandler *) {
 void AI::render(e172::AbstractRenderer *renderer) {
     if(m_status == DockingExecution && parentUnit()) {
         const auto format = e172::TextFormat(e172::TextFormat::AlignHCenter | e172::TextFormat::AlignTop, 10);
-        renderer->drawStringShifted(statusString, parentUnit()->position() + e172::Vector(0, -32), 0xffaaaa, format);
+        renderer->drawStringShifted(statusString + " " + std::to_string(_dist), parentUnit()->position() + e172::Vector(0, -32), 0xffaaaa, format);
+        renderer->drawLineShifted(_line, 0xffaaff);
+        renderer->drawCircleShifted(_vec, 8, 0xffaaff);
     }
 }

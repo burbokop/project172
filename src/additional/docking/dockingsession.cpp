@@ -23,7 +23,7 @@ std::array<e172::ptr<Unit>, 2> DockingSession::units() const {
 }
 
 std::map<e172::ptr<Unit>, DockingNodePool::Node> DockingSession::nodes() const {
-    return { { item0.unit, item0.node }, { item1.unit, item1.node } };
+    return { { item0.unit, item1.node }, { item1.unit, item0.node } };
 }
 
 e172::ptr<Unit> DockingSession::oppositeUnit(const e172::ptr<Unit> &unit) const {

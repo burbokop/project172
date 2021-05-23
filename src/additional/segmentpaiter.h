@@ -2,7 +2,7 @@
 #define SEGMENTPAITER_H
 
 #include <src/entity.h>
-#include <src/physicalobject.h>
+#include <src/math/physicalobject.h>
 
 #include <src/time/elapsedtimer.h>
 

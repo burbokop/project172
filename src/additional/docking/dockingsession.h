@@ -4,7 +4,7 @@
 #include "dockingnodepool.h"
 #include "physicaldockingattractor.h"
 #include <src/entity.h>
-#include <src/physicalobject.h>
+#include <src/math/physicalobject.h>
 #include <src/utility/ptr.h>
 
 class Unit;

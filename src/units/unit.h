@@ -2,7 +2,7 @@
 #define UNIT_H
 
 #include <src/entity.h>
-#include <src/physicalobject.h>
+#include <src/math/physicalobject.h>
 #include <src/assettools/loadable.h>
 #include <src/iinformative.h>
 #include <src/utility/animator.h>

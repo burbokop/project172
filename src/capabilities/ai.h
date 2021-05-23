@@ -5,6 +5,8 @@
 #include "controller.h"
 #include "docker.h"
 
+#include <src/math/line2d.h>
+
 
 class AI : public Controller {
 public:
@@ -18,6 +20,11 @@ private:
     std::string statusString;
     e172::ptr<Docker> docker = nullptr;
     e172::ptr<DockingSession> session = nullptr;
+
+    e172::Line2d _line;
+    double __ = 0;
+    e172::Vector _vec;
+    double _dist = 0;
 public:
 
     AI();

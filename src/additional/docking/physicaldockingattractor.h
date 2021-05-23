@@ -1,7 +1,7 @@
 #ifndef PHYSICALDOCKINGATTRACTOR_H
 #define PHYSICALDOCKINGATTRACTOR_H
 
-#include <src/physicalobject.h>
+#include <src/math/physicalobject.h>
 
 
 

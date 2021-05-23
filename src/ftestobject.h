@@ -2,7 +2,7 @@
 #define FTESTOBJECT_H
 
 #include <src/entity.h>
-#include <src/physicalobject.h>
+#include <src/math/physicalobject.h>
 #include <memory>
 #include <iostream>
 #include <src/math/colider.h>

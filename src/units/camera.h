@@ -4,7 +4,7 @@
 
 #include <src/capabilities/controller.h>
 #include <src/graphics/abstractrenderer.h>
-#include <src/physicalobject.h>
+#include <src/math/physicalobject.h>
 
 
 class Camera : public e172::Entity, public e172::PhysicalObject {

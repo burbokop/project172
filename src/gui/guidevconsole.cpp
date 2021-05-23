@@ -8,7 +8,7 @@
 
 GuiDevConsole::GuiDevConsole(const GuiDevConsole::CommandHandlerFunc &commandHandlerFunc) {
     setMargin(32);
-    m_commandHandlerFunc = commandHandlerFunc;
+    m_commandHandlerFunc = commandHandlerFunc;    
 }
 
 void GuiDevConsole::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
@@ -22,11 +22,29 @@ void GuiDevConsole::proceed(e172::Context *context, e172::AbstractEventHandler *
             if (m_commandHandlerFunc) {
                 m_commandHandlerFunc(currentLine, &lines);
             }
+            history.push_back(currentLine);
             currentLine.clear();
             eventHandler->pullText();
         } else if(eventHandler->keySinglePressed(e172::ScancodeBackSpace)) {
             if (!currentLine.empty()) {
                 currentLine.pop_back();
+            }
+            eventHandler->pullText();
+        } else if(eventHandler->keySinglePressed(e172::ScancodeUp)) {
+            if (historyIndex > 1) {
+                historyIndex--;
+            }
+            if (historyIndex < history.size()) {
+                currentLine = history[historyIndex];
+            }
+            eventHandler->pullText();
+        } else if(eventHandler->keySinglePressed(e172::ScancodeDown)) {
+            if (historyIndex < history.size()) {
+                historyIndex++;
+            }
+            if (historyIndex < history.size()) {
+                currentLineBackup = currentLine;
+                currentLine = history[historyIndex];
             }
             eventHandler->pullText();
         }

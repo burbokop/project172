@@ -13,6 +13,9 @@ class GuiDevConsole : public GUIElement {
 
     const std::string cmdPreffix = ": ";
 
+    std::vector <std::string> history;
+    size_t historyIndex = 0;
+    std::string currentLineBackup;
 public:
     typedef std::function<void(const std::string &, std::list<std::string> *)> CommandHandlerFunc;
 private:
