@@ -16,6 +16,8 @@ public:
     DevConsole();
     void addCommand(const std::string &commandName, const CommandHandlerFunc& hf);
     void executeCommand(const std::string &commandLine, std::list<std::string> *lines);
+
+    void executeCommandToStream(const std::string &commandLine, std::ostream& stream);
 };
 
 #endif // DEVCONSOLE_H

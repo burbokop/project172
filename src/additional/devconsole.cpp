@@ -19,3 +19,12 @@ void DevConsole::executeCommand(const std::string &commandLine, std::list<std::s
         }
     }
 }
+
+void DevConsole::executeCommandToStream(const std::string &commandLine, std::ostream &stream) {
+    std::list<std::string> list;
+    executeCommand(commandLine, &list);
+    for(const auto& l : list) {
+        stream << l << "\n";
+    }
+}
+

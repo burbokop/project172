@@ -10,7 +10,7 @@
 #include <src/sdlaudioprovider.h>
 #include <src/sdleventhandler.h>
 #include <src/sdlgraphicsprovider.h>
-
+#include <iostream>
 
 #include <src/assetexecutors/animatorassetexecutor.h>
 #include <src/assetexecutors/audioassetexecutor.h>
@@ -278,6 +278,10 @@ int main(int argc, char *argv[]) {
     chartView.setCoeficient(200);
     chartView.setPointCount(300);
     //app.addEntity(&chartView);
+
+    app.schedule(5000, [&devConsole](){
+        devConsole.executeCommandToStream("dock sh1 -> st1", std::cout);
+    });
 
     //start application
 
