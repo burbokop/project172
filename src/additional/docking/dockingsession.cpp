@@ -13,6 +13,10 @@ void DockingSession::release() {
     --m_usagesCount;
 }
 
+bool DockingSession::docked() {
+    return physicalDockingAttractor.state() == PhysicalDockingAttractor::Docked;
+}
+
 DockingSession::DockingSession() {
     physicalDockingAttractor.setInterceptionRequiredProximity({ 64, e172::Math::Pi / 8 });
     physicalDockingAttractor.setDockedRequiredProximity({ 2, e172::Math::Pi / 64 });
@@ -23,7 +27,7 @@ std::array<e172::ptr<Unit>, 2> DockingSession::units() const {
 }
 
 std::map<e172::ptr<Unit>, DockingNodePool::Node> DockingSession::nodes() const {
-    return { { item0.unit, item1.node }, { item1.unit, item0.node } };
+    return { { item0.unit, item0.node }, { item1.unit, item1.node } };
 }
 
 e172::ptr<Unit> DockingSession::oppositeUnit(const e172::ptr<Unit> &unit) const {
@@ -64,7 +68,7 @@ DockingSession::~DockingSession() {
 
 void DockingSession::proceed(e172::Context *context, e172::AbstractEventHandler *) {
     const auto lastState = physicalDockingAttractor.state();
-    physicalDockingAttractor.proceed(item0.physicalNode, item1.physicalNode);
+    physicalDockingAttractor.proceed(item0.physicalNode, item1.physicalNode);    
     if(physicalDockingAttractor.state() == PhysicalDockingAttractor::NotDocked && lastState == PhysicalDockingAttractor::Docked) {
         if(!selfReleased) {
             release();

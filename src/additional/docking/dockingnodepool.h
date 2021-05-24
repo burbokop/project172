@@ -4,7 +4,9 @@
 #include <src/math/vector.h>
 #include <list>
 
+
 namespace e172 {
+class PhysicalObject;
 class AbstractRenderer;
 }
 
@@ -19,6 +21,8 @@ public:
         size_t m_nodeId = nextNodeId++;
     public:
         e172::Vector offset() const;
+        e172::Vector globalPosition(const e172::PhysicalObject *object) const;
+
         double angle() const;
         bool isValid() const;
         size_t nodeId() const;

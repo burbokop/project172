@@ -2,6 +2,8 @@
 
 #include <src/graphics/abstractrenderer.h>
 
+#include <src/math/physicalobject.h>
+
 DockingNodePool::DockingNodePool() {
 
 }
@@ -45,6 +47,14 @@ size_t DockingNodePool::Node::nodeId() const {
 
 e172::Vector DockingNodePool::Node::offset() const {
     return m_offset;
+}
+
+e172::Vector DockingNodePool::Node::globalPosition(const e172::PhysicalObject *object) const {
+    if (object) {
+        return object->position() + object->rotationMatrix() * offset();
+    } else {
+        return e172::Vector();
+    }
 }
 
 double DockingNodePool::Node::angle() const {

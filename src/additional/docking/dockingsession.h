@@ -30,6 +30,8 @@ public:
     bool fullUsageCount() const;
     void release();
 
+    bool docked();
+
     static e172::ptr<DockingSession> createSession(DockingNodePool *pull0, DockingNodePool *pull1, const e172::ptr<Unit> &unit0, const e172::ptr<Unit> &unit1);
 
     ~DockingSession();

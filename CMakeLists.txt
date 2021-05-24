@@ -144,6 +144,9 @@ add_executable(project172
     ${CMAKE_CURRENT_LIST_DIR}/src/capabilities/factory.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/capabilities/factory.h
 
+    ${CMAKE_CURRENT_LIST_DIR}/src/taskexecutors/dockingtaskexecutor.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/taskexecutors/dockingtaskexecutor.h
+
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/base/guibaseelement.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/base/guibaseelement.h
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/base/guielement.cpp
