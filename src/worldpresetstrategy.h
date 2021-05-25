@@ -2,7 +2,7 @@
 #define WORLDPRESETSTRATEGY_H
 
 
-#include "gui/guimain.h"
+#include "gui/base/guimenu.h"
 #include "near.h"
 #include "worlds/world.h"
 

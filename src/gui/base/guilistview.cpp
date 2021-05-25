@@ -4,11 +4,11 @@
 
 #include <src/graphics/abstractrenderer.h>
 
-GUIStack *GUIListView::stack() const {
+e172::ptr<GUIStack> GUIListView::stack() const {
     return m_stack;
 }
 
-void GUIListView::setStack(GUIStack *stack) {
+void GUIListView::setStack(const e172::ptr<GUIStack> &stack) {
     m_stack = stack;
 }
 
@@ -78,10 +78,11 @@ void GUIListView::render(e172::AbstractRenderer *renderer) {
 
     for(auto i = 0; i < row_c; ++i) {
         const auto text = rowText(i);
-        if(i == m_selectedIndex)
+        bool highlite = i == m_selectedIndex && inFocus();
+        if(highlite)
             renderer->enableEffect(0);
 
-        const auto xOffset = renderer->drawString(text, textFormat().alignment() & e172::TextFormat::AlignRight ? pointer - e172::Vector(xOffsets[i], 0) : pointer, (i == m_selectedIndex) ? SelectedColor : DefaultColor).x();
+        const auto xOffset = renderer->drawString(text, textFormat().alignment() & e172::TextFormat::AlignRight ? pointer - e172::Vector(xOffsets[i], 0) : pointer, highlite ? SelectedColor : DefaultColor).x();
         if(textFormat().alignment() & e172::TextFormat::AlignRight) {
             xOffsets[i] = xOffset;
         }

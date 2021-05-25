@@ -3,7 +3,11 @@
 
 #include <src/gui/base/guielement.h>
 
+#include <src/utility/ptr.h>
 
+namespace e172 {
+    class Entity;
+}
 
 class GUIMiniMap : public GUIElement {
 private:

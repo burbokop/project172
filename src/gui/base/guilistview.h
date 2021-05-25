@@ -7,7 +7,7 @@
 
 
 class GUIListView : public GUIMenuElement {
-    GUIStack *m_stack = nullptr;
+    e172::ptr<GUIStack> m_stack = nullptr;
     int m_selectedIndex = 0;
     int m_verticalInterval = 24;
     std::vector<double> xOffsets;
@@ -16,14 +16,14 @@ public:
     GUIListView() {}
     GUIListView(const std::string &title);
 
-    GUIStack *stack() const;
-    void setStack(GUIStack *stack);
+    e172::ptr<GUIStack> stack() const;
+    void setStack(const e172::ptr<GUIStack> &stack);
     int verticalInterval() const;
     void setVerticalInterval(int verticalInterval);
 
     virtual int rowCount() const = 0;
     virtual std::string rowText(int index) const = 0;
-    virtual GUIMenuElement *rowElement(int index) const = 0;
+    virtual e172::ptr<GUIMenuElement> rowElement(int index) const = 0;
     virtual e172::Variant rowModelData(int index) const = 0;
 
     // Entity interface

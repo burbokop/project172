@@ -8,8 +8,8 @@
 class GUIButton : public GUIMenuElement {
 public:
     typedef std::function<void (const e172::Variant &)> f0;
-    typedef std::function<void (Controller*, const e172::Variant &)> f1;
-    typedef std::function<void (e172::Context *, Controller*, const e172::Variant &)> f2;
+    typedef std::function<void (const e172::ptr<Controller>&, const e172::Variant &)> f1;
+    typedef std::function<void (e172::Context *, const e172::ptr<Controller>&, const e172::Variant &)> f2;
 private:
     f0 m_f0;
     f1 m_f1;

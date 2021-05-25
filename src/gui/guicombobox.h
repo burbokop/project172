@@ -30,7 +30,7 @@ public:
 public:
     virtual int rowCount() const override { return m_data.size(); }
     virtual std::string rowText(int index) const override { return m_data[index]; };
-    virtual GUIMenuElement *rowElement(int) const override { return button; };
+    virtual e172::ptr<GUIMenuElement> rowElement(int) const override { return button; };
     virtual e172::Variant rowModelData(int index) const override { return index; };
 };
 

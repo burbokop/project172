@@ -2,6 +2,7 @@
 
 #include <src/capabilities/modulehandler.h>
 #include <src/units/unit.h>
+#include <src/capabilities/controller.h>
 
 GUIModuleView::GUIModuleView(const std::string &label) : GUIListView(label) {
 
@@ -36,7 +37,7 @@ std::string GUIModuleView::rowText(int index) const {
     return "[error]";
 }
 
-GUIMenuElement *GUIModuleView::rowElement(int) const {
+e172::ptr<GUIMenuElement> GUIModuleView::rowElement(int) const {
     return nullptr;
 }
 

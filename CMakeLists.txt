@@ -147,16 +147,18 @@ add_executable(project172
     ${CMAKE_CURRENT_LIST_DIR}/src/taskexecutors/dockingtaskexecutor.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/taskexecutors/dockingtaskexecutor.h
 
-    ${CMAKE_CURRENT_LIST_DIR}/src/gui/base/guibaseelement.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/gui/base/guibaseelement.h
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/base/guielement.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/base/guielement.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/gui/base/guicontainer.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/gui/base/guicontainer.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/gui/base/guimenu.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/gui/base/guimenu.h
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/base/guimenuelement.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/base/guimenuelement.h
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/base/guistack.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/base/guistack.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/gui/base/guifocusswitch.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/gui/base/guifocusswitch.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/gui/base/guicontainer.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/gui/base/guicontainer.h
 
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/guiblushingfloatingmessage.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/guiblushingfloatingmessage.h
@@ -166,8 +168,8 @@ add_executable(project172
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/guidebugvalueinfo.h
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/guifloatingmessage.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/guifloatingmessage.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/gui/guimain.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/gui/guimain.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/gui/guifloatingmessagecontainer.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/gui/guifloatingmessagecontainer.h
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/guiminimap.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/guiminimap.h
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/guiradar.cpp

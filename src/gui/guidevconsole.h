@@ -2,7 +2,7 @@
 #define GUIDEVCONSOLE_H
 
 #include <src/gui/base/guielement.h>
-
+#include <functional>
 
 
 class GuiDevConsole : public GUIElement {

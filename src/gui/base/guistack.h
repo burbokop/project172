@@ -7,16 +7,17 @@
 
 class GUIStack : public GUIElement {
 private:
-    std::vector<GUIElement*> elements;
-    GUIElement* reserved = nullptr;
-    GUIElement* current = nullptr;
+    std::vector<e172::ptr<GUIElement>> m_elements;
+    e172::ptr<GUIElement> m_reserved = nullptr;
+    e172::ptr<GUIElement> m_current = nullptr;
 
 public:
     GUIStack();
 
-    void push(GUIElement *element);
+    void push(const e172::ptr<GUIElement> &element);
     void pop();
 
+    e172::ptr<GUIStack> withFirstElement(const e172::ptr<GUIElement> &element);
 
     // Entity interface
 public:

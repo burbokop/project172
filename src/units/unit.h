@@ -31,12 +31,23 @@ public:
 
     template<typename T>
     e172::ptr<T> capability() {
-        for(auto c : m_capabilities) {
+        for(const auto& c : m_capabilities) {
             if(const auto result = e172::smart_cast<T>(c))
                 return result;
         }
         return nullptr;
     }
+
+    template<typename T>
+    std::vector<e172::ptr<Capability> > capabilities() const {
+        std::vector<e172::ptr<Capability> > result;
+        for(const auto& c : m_capabilities) {
+            if(const auto cc = e172::smart_cast<T>(c))
+                result.push_back(cc);
+        }
+        return result;
+    }
+
 
     virtual void hit(e172::Context *context, int value);
 

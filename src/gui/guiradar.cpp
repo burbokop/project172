@@ -46,7 +46,7 @@ std::string GUIRadar::rowText(int index) const {
     return "[error]";
 }
 
-GUIMenuElement *GUIRadar::rowElement(int) const {
+e172::ptr<GUIMenuElement> GUIRadar::rowElement(int) const {
     return m_rowElement;
 }
 

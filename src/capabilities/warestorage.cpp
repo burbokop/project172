@@ -2,64 +2,90 @@
 
 #include <src/additional/ware/warecontainer.h>
 
-void WareStorage::setWareContainer(AbstractWareContainer *wareContainer) {
-    m_wareContainer = wareContainer;
-}
 
-AbstractWareContainer *WareStorage::wareContainer() const {
+e172::ptr<AbstractWareContainer> WareStorage::wareContainer() const {
+    if(!m_wareContainer.data()) {
+        m_wareContainer = createWareContainer();
+    }
     return m_wareContainer;
 }
 
 WareStorage::WareStorage() {}
 
 WareStorage::~WareStorage() {
-    if(m_wareContainer) {
-        if(m_wareContainer->liveInHeap())
-            delete m_wareContainer;
+    if(wareContainer()) {
+        if(wareContainer()->liveInHeap())
+            delete wareContainer().data();
     }
 }
 
 size_t WareStorage::wareInfoCount() const {
-    if(m_wareContainer)
-        return m_wareContainer->wareInfoCount();
+    if(wareContainer())
+        return wareContainer()->wareInfoCount();
 
     return 0;
 }
 
 WareInfo WareStorage::wareInfo(size_t index) const {
-    if(m_wareContainer)
-        return m_wareContainer->wareInfo(index);
+    if(wareContainer())
+        return wareContainer()->wareInfo(index);
 
     return WareInfo("", 0);
 }
 
 size_t WareStorage::amount() const {
-    if(m_wareContainer)
-        return m_wareContainer->amount();
+    if(wareContainer())
+        return wareContainer()->amount();
 
     return 0;
 }
 
 size_t WareStorage::capacity() const {
-    if(m_wareContainer)
-        return m_wareContainer->capacity();
+    if(wareContainer())
+        return wareContainer()->capacity();
 
     return 0;
 }
 
 size_t WareStorage::transferWareTo(size_t index, WareStorage *storage, size_t count) {
-    if(m_wareContainer && storage->m_wareContainer) {
-        return m_wareContainer->transferWareTo(index, storage->m_wareContainer, count);
+    if(wareContainer() && storage->wareContainer()) {
+        return wareContainer()->transferWareTo(index, storage->wareContainer(), count);
     }
     return 0;
 }
 
 TransportWareStorage::TransportWareStorage(size_t capacity) {
-    auto wc = new WareContainer(capacity);
-    wc->setAllowedInput(WareContainer::AllAllowed);
-    setWareContainer(wc);
+    m_initialCapacity = capacity;
 }
 
 size_t TransportWareStorage::setCapacity(size_t capacity) {
-    return dynamic_cast<WareContainer*>(wareContainer())->setCapacity(capacity);
+    return e172::smart_cast<WareContainer>(wareContainer())->setCapacity(capacity);
+}
+
+e172::ptr<AbstractWareContainer> TransportWareStorage::createWareContainer() const {
+    auto wc = new WareContainer(m_initialCapacity);
+    wc->setAllowedInput(WareContainer::AllAllowed);
+    return wc;
+}
+
+DebugTransportWareStorage::DebugTransportWareStorage(size_t capacity, const std::map<std::string, size_t> &initialWares) {
+    m_initialCapacity = capacity;
+    m_initialWares = initialWares;
+}
+
+size_t DebugTransportWareStorage::setCapacity(size_t capacity) {
+    return e172::smart_cast<WareContainer>(wareContainer())->setCapacity(capacity);
+}
+
+e172::ptr<AbstractWareContainer> DebugTransportWareStorage::__wareContainer() const {
+    return wareContainer();
+}
+
+e172::ptr<AbstractWareContainer> DebugTransportWareStorage::createWareContainer() const {
+    auto wc = new WareContainer(m_initialCapacity);
+    wc->setAllowedInput(WareContainer::AllAllowed);
+    for(const auto& w : m_initialWares) {
+        wc->addWare(w.first, w.second);
+    }
+    return wc;
 }

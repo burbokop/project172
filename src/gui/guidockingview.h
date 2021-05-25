@@ -13,7 +13,7 @@ public:
 public:
     virtual int rowCount() const override;
     virtual std::string rowText(int index) const override;
-    virtual GUIMenuElement *rowElement(int) const override;
+    virtual e172::ptr<GUIMenuElement> rowElement(int) const override;
     virtual e172::Variant rowModelData(int) const override;
 };
 

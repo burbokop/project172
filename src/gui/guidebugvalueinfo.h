@@ -3,6 +3,8 @@
 
 #include <src/gui/base/guielement.h>
 
+#include <src/time/elapsedtimer.h>
+
 
 class GUIDebugValueInfo : public GUIElement {
     double coef = 6;

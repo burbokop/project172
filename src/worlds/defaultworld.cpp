@@ -5,6 +5,7 @@
 #include <src/capabilities/ai.h>
 #include <src/capabilities/docker.h>
 #include <src/capabilities/modulehandler.h>
+#include <src/capabilities/warestorage.h>
 #include <src/ftestobject.h>
 #include <src/math/math.h>
 #include <src/units/ship.h>
@@ -77,7 +78,6 @@ WorldPreset::GenerationResult DefaultWorld::generate(e172::Context *context) {
     playerDocker->addNode({ 0, -20 }, -e172::Math::Pi / 2);
     playerDocker->addNode({ 0, 20 }, e172::Math::Pi / 2);
     playerShip->addCapability(playerDocker);
-    playerShip->addCapability(context->assetProvider()->createLoadable<Capability>("ore_reciept"));
 
     playerShip->addCapability(player1);
     ModuleHandler *playerModuleHandler = new ModuleHandler();
@@ -92,6 +92,7 @@ WorldPreset::GenerationResult DefaultWorld::generate(e172::Context *context) {
     playerModuleHandler->addModule(pp1);
 
     playerShip->addCapability(playerModuleHandler);
+    playerShip->addCapability(new DebugTransportWareStorage(100, { { "goga", 12 }, { "aaa", 32 } }));
 
     result.entities.push_back(playerShip);
 

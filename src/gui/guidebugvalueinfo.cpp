@@ -4,6 +4,7 @@
 #include <src/abstracteventhandler.h>
 #include <src/graphics/abstractrenderer.h>
 #include <src/units/unit.h>
+#include <src/capabilities/controller.h>
 
 GUIDebugValueInfo::GUIDebugValueInfo() {
     timer.reset();

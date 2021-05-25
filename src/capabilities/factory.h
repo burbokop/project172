@@ -22,7 +22,6 @@ public:
 
 
 class Factory : public WareStorage {
-    WareMultiBayContainer m_container;
     e172::ElapsedTimer timer;
     std::vector<FactoryWareTemplate> m_templates;
     void initializeTemplates();
@@ -34,6 +33,10 @@ public:
     virtual void proceed(e172::Context *, e172::AbstractEventHandler *) override;
 
     virtual void render(e172::AbstractRenderer*) override {};
+
+    // WareStorage interface
+protected:
+    virtual e172::ptr<AbstractWareContainer> createWareContainer() const override;
 };
 
 #endif // FACTORY_H

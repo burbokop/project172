@@ -1,36 +1,16 @@
 #ifndef GUICONTAINER_H
 #define GUICONTAINER_H
 
-#include "guilistview.h"
+#include "guielement.h"
 
-#include <vector>
-#include <functional>
-
-
-class GUIContainer : public GUIListView {
-protected:
-
-    //GUIMenuElement *selectDown();
-    //GUIMenuElement *selectUp();
-
-private:
-    std::vector<GUIMenuElement*> m_menuElements;
-
+class GUIContainer : public GUIElement {
 public:
-    GUIContainer() {};
-    GUIContainer(std::string label);
+    GUIContainer();
 
-    void addMenuElement(GUIMenuElement *element);
-    void removeMenuElement(GUIMenuElement *element);
-    void clearElements();
-    void terminateElements();
-
-    // GUIListView interface
+    // Entity interface
 public:
-    virtual int rowCount() const override;
-    virtual std::string rowText(int index) const override;
-    virtual GUIMenuElement *rowElement(int index) const override;    
-    virtual e172::Variant rowModelData(int) const override;
+    virtual void proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) override;
+    virtual void render(e172::AbstractRenderer *renderer) override;
 };
 
 #endif // GUICONTAINER_H

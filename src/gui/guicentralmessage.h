@@ -3,6 +3,8 @@
 
 #include <src/gui/base/guimenuelement.h>
 
+#include <src/time/elapsedtimer.h>
+
 
 
 

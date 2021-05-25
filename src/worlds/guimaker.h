@@ -9,7 +9,6 @@
 #include <src/worldpresetstrategy.h>
 
 #include <src/gui/guicombobox.h>
-#include <src/gui/guimain.h>
 
 #include <src/additional/devconsole.h>
 
@@ -33,12 +32,12 @@ class GUIMaker {
             \n      F = warp drive\
             ";
 
-    GUIMain *m_gui = nullptr;
+    e172::ptr<GUIElement> m_rootElement = nullptr;
     GUIComboBox<std::string> *m_worldComboBox = nullptr;
 public:
     GUIMaker(e172::Context *context, Near *radarNear = nullptr, DevConsole *console = nullptr);
-    GUIMain *gui() const;
     void setWorldPresetStrategy(WorldPresetStrategy *worldPresetStrategy);
+    e172::ptr<GUIElement> rootElement() const;
 };
 
 #endif // GUIMAKER_H

@@ -24,7 +24,7 @@ void GUIBlushingFloatingMessage::render(e172::AbstractRenderer *renderer) {
 
     renderer->drawString(
                 title(),
-                parent->position() + renderer->offset() + e172::Vector(0.0, horisontalOffset()),
+                m_parent->position() + renderer->offset() + e172::Vector(0.0, horisontalOffset()),
                 color,
                 e172::TextFormat(e172::TextFormat::AlignDefault, DEFAULT_FONT_SIZE)
                 );

@@ -6,42 +6,47 @@
 
 GUIStack::GUIStack() : GUIElement () {}
 
-void GUIStack::push(GUIElement *element) {
+void GUIStack::push(const e172::ptr<GUIElement> &element) {
     addChildElement(element);
-    if(auto listView = dynamic_cast<GUIListView*>(element))
+    if(auto listView = e172::smart_cast<GUIListView>(element))
         listView->setStack(this);
 
-    elements.push_back(element);
+    m_elements.push_back(element);
 }
 
 void GUIStack::pop() {
-    if(elements.size() > 0) {
-        if(elements.size() == 1) {
-            reserved = elements[0];
+    if(m_elements.size() > 0) {
+        if(m_elements.size() == 1) {
+            m_reserved = m_elements[0];
         }
-        removeChildElement(elements.front());
-        elements.pop_back();
+        removeChildElement(m_elements.front());
+        m_elements.pop_back();
     }
+}
+
+e172::ptr<GUIStack> GUIStack::withFirstElement(const e172::ptr<GUIElement> &element) {
+    push(element);
+    return this;
 }
 
 void GUIStack::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
     UNUSED(context);
-    if(elements.size() > 0) {
-        current = elements[elements.size() - 1];
+    if(m_elements.size() > 0) {
+        m_current = m_elements[m_elements.size() - 1];
     } else {
-        current = nullptr;
-        if(eventHandler->keySinglePressed(e172::ScancodeReturn) && reserved) {
-            push(reserved);
+        m_current = nullptr;
+        if(eventHandler->keySinglePressed(e172::ScancodeReturn) && m_reserved) {
+            push(m_reserved);
         }
     }
 
-    if(current) {
-        current->proceed(context, eventHandler);
+    if(m_current) {
+        m_current->proceed(context, eventHandler);
     }
 }
 
 void GUIStack::render(e172::AbstractRenderer *renderer) {
-    if(current) {
-        current->render(renderer);
+    if(m_current) {
+        m_current->render(renderer);
     }
 }

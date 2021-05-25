@@ -3,15 +3,15 @@
 #include <src/units/unit.h>
 
 #include <src/capabilities/warestorage.h>
+#include <src/capabilities/controller.h>
+
 
 GUIWareView::GUIWareView(const std::string &title) : GUIListView(title) {}
 
 int GUIWareView::rowCount() const {
     if(controller() && controller()->parentUnit()) {
         if(const auto storage = controller()->parentUnit()->capability<WareStorage>()) {
-            const auto c = storage->wareInfoCount();
-
-            return c;
+            return storage->wareInfoCount();
         }
     }
     return 0;
@@ -20,15 +20,13 @@ int GUIWareView::rowCount() const {
 std::string GUIWareView::rowText(int index) const {
     if(controller() && controller()->parentUnit()) {
         if(const auto storage = controller()->parentUnit()->capability<WareStorage>()) {
-            const auto wi = storage->wareInfo(index);
-
-            return wi;
+            return storage->wareInfo(index);
         }
     }
     return 0;
 }
 
-GUIMenuElement *GUIWareView::rowElement(int) const {
+e172::ptr<GUIMenuElement> GUIWareView::rowElement(int) const {
     return nullptr;
 }
 

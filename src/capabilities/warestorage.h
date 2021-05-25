@@ -7,10 +7,10 @@
 
 
 class WareStorage : public Capability {
-    AbstractWareContainer *m_wareContainer = nullptr;
+    mutable e172::ptr<AbstractWareContainer> m_wareContainer;
 protected:
-    AbstractWareContainer *wareContainer() const;
-    void setWareContainer(AbstractWareContainer *wareContainer);
+    e172::ptr<AbstractWareContainer> wareContainer() const;
+    virtual e172::ptr<AbstractWareContainer> createWareContainer() const = 0;
 public:
     WareStorage();
     ~WareStorage();
@@ -27,13 +27,39 @@ public:
 };
 
 class TransportWareStorage : public WareStorage {
-    // Entity interface
+    size_t m_initialCapacity = 0;
 public:
     TransportWareStorage(size_t capacity = 0);
+    size_t setCapacity(size_t capacity);
+
+    // Entity interface
+public:
     virtual void proceed(e172::Context *, e172::AbstractEventHandler *) override {};
     virtual void render(e172::AbstractRenderer *) override {};
 
+    // WareStorage interface
+protected:
+    virtual e172::ptr<AbstractWareContainer> createWareContainer() const override;
+};
+
+
+
+class DebugTransportWareStorage : public WareStorage {
+    size_t m_initialCapacity = 0;
+    std::map<std::string, size_t> m_initialWares;
+public:
+    DebugTransportWareStorage(size_t capacity = 0, const std::map<std::string, size_t> &initialWares = {});
     size_t setCapacity(size_t capacity);
+    e172::ptr<AbstractWareContainer> __wareContainer() const;
+
+    // Entity interface
+public:
+    virtual void proceed(e172::Context *, e172::AbstractEventHandler *) override {};
+    virtual void render(e172::AbstractRenderer *) override {};
+
+    // WareStorage interface
+protected:
+    virtual e172::ptr<AbstractWareContainer> createWareContainer() const override;
 };
 
 

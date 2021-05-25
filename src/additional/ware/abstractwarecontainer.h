@@ -7,6 +7,8 @@
 
 #include <src/object.h>
 
+#include <src/utility/ptr.h>
+
 
 class WareInfo {
     std::string m_wareName;
@@ -36,7 +38,7 @@ public:
     virtual size_t amount() const = 0;
     virtual size_t capacity() const = 0;
 
-    size_t transferWareTo(size_t index, AbstractWareContainer *container, size_t count = std::numeric_limits<size_t>::max());
+    size_t transferWareTo(size_t index, const e172::ptr<AbstractWareContainer>& container, size_t count = std::numeric_limits<size_t>::max());
 
     virtual ~AbstractWareContainer() {}
 };

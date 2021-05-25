@@ -2,6 +2,7 @@
 
 #include <src/units/unit.h>
 #include <src/capabilities/docker.h>
+#include <src/capabilities/controller.h>
 
 GUIDockingView::GUIDockingView(const std::string &title) : GUIListView(title) {}
 
@@ -27,7 +28,7 @@ std::string GUIDockingView::rowText(int index) const {
     return "[error]";
 }
 
-GUIMenuElement *GUIDockingView::rowElement(int) const {
+e172::ptr<GUIMenuElement> GUIDockingView::rowElement(int) const {
     return nullptr;
 }
 

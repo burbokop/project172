@@ -37,6 +37,7 @@
 #include <src/additional/memstatearner.h>
 #include <src/gui/guibutton.h>
 #include <src/gui/base/guicontainer.h>
+#include <src/gui/base/guimenu.h>
 #include <src/units/projectile.h>
 #include <src/units/ship.h>
 #include <src/units/station.h>
@@ -95,9 +96,9 @@ int main(int argc, char *argv[]) {
         Background background = 32;
         chooseGraphicsProviderApp.addEntity(&background);
 
-        GUIMain gui;
+        GUIContainer rootElement;
         GUIStack stack;
-        GUIContainer menu("renderer");
+        GUIMenu menu("renderer");
         const auto apply = [&rendererUsing, &chooseGraphicsProviderApp](e172::Variant value) {
             rendererUsing = static_cast<RendererUsing>(value.toInt());
             chooseGraphicsProviderApp.quitLater();
@@ -105,11 +106,11 @@ int main(int argc, char *argv[]) {
         menu.addMenuElement(new GUIButton(std::string("SDL2"), [apply](auto) { apply(SDL); }));
         menu.addMenuElement(new GUIButton(std::string("Vulkan"), [apply](auto) { apply(Vulkan); }));
         stack.push(&menu);
-        gui.addStack(&stack);
+        rootElement.addChildElement(&stack);
 
         gprovider.loadFont(std::string(), chooseGraphicsProviderApp.context()->absolutePath("../assets/fonts/ZCOOL.ttf"));
 
-        chooseGraphicsProviderApp.addEntity(&gui);
+        chooseGraphicsProviderApp.addEntity(&rootElement);
         chooseGraphicsProviderApp.exec();
     }
 
@@ -211,7 +212,7 @@ int main(int argc, char *argv[]) {
 
     //setup gui
     GUIMaker guiMaker(app.context(), &radarNear, &devConsole);
-    app.addEntity(guiMaker.gui());
+    app.addEntity(guiMaker.rootElement());
 
     //setup camera
     Camera camera;
@@ -229,7 +230,7 @@ int main(int argc, char *argv[]) {
         if(c.size() > 0) {
             const auto controller = c.front();
             camera.setTarget(controller);
-            guiMaker.gui()->setController(controller);
+            guiMaker.rootElement()->setController(controller);
             radarNear.setCenter(controller);
         }
     });

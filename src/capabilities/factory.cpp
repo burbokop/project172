@@ -5,66 +5,68 @@ void Factory::initializeTemplates() {
     const auto outputTemplates = asset<std::vector<FactoryWareTemplate>>("output");
     timer = e172::ElapsedTimer(asset<double>("interval"));
 
-    m_container.setBayCount(inputTemplates.size() + outputTemplates.size());
+    auto container = e172::smart_cast<WareMultiBayContainer>(wareContainer());
+
+    container->setBayCount(inputTemplates.size() + outputTemplates.size());
     m_templates.resize(inputTemplates.size() + outputTemplates.size());
     for(size_t i = 0, count = inputTemplates.size(); i < count; ++i) {
-        m_container[i].setCapacity(inputTemplates[i].capacity());
-        m_container[i].setAllowedInput(std::vector<std::string> { inputTemplates[i].ware() });
+        container->operator[](i).setCapacity(inputTemplates[i].capacity());
+        container->operator[](i).setAllowedInput(std::vector<std::string> { inputTemplates[i].ware() });
         m_templates[i] = inputTemplates[i];
     }
     for(size_t i = 0, count = outputTemplates.size(); i < count; ++i) {
-        m_container[inputTemplates.size() + i].setCapacity(outputTemplates[i].capacity());
-        m_container[inputTemplates.size() + i].setAllowedOutput(std::vector<std::string> { outputTemplates[i].ware() });
+        container->operator[](inputTemplates.size() + i).setCapacity(outputTemplates[i].capacity());
+        container->operator[](inputTemplates.size() + i).setAllowedOutput(std::vector<std::string> { outputTemplates[i].ware() });
         m_templates[inputTemplates.size() + i] = outputTemplates[i];
     }
 }
 
 Factory::Factory() {
     registerInitFunction(this, &Factory::initializeTemplates);
-    setWareContainer(&m_container);
 }
 
 void Factory::proceed(e172::Context *, e172::AbstractEventHandler *) {
     if(timer.check()) {
-        for(size_t i = 0; i < m_container.size(); ++i) {
+        auto container = e172::smart_cast<WareMultiBayContainer>(wareContainer());
+        for(size_t i = 0; i < container->size(); ++i) {
             const auto templ = m_templates[i];
-            const auto ao = m_container[i].allowedOutput();
+            const auto ao = container->operator[](i).allowedOutput();
 
             bool accepted = false;
             if(const auto ao_ptr = std::get_if<std::vector<std::string>>(&ao)) {
                 if(ao_ptr->size() > 0) {
                     accepted = true;
-                    if(m_container[i].wareAwailableAdditingAmount(templ.ware(), templ.amount(), true) != templ.amount())
+                    if(container->operator[](i).wareAwailableAdditingAmount(templ.ware(), templ.amount(), true) != templ.amount())
                         return;
 
                 }
             }
 
             if(!accepted) {
-                const auto ai = m_container[i].allowedInput();
+                const auto ai = container->operator[](i).allowedInput();
                 if(const auto ai_ptr = std::get_if<std::vector<std::string>>(&ai)) {
                     if(ai_ptr->size() > 0) {
-                        if(m_container[i].wareInfoCount() == 0)
+                        if(container->operator[](i).wareInfoCount() == 0)
                             return;
 
-                        if(m_container[i].wareAwailableRemovingAmount(0, templ.amount(), true) != templ.amount())
+                        if(container->operator[](i).wareAwailableRemovingAmount(0, templ.amount(), true) != templ.amount())
                             return;
                     }
                 }
             }
         }
 
-        for(size_t i = 0; i < m_container.size(); ++i) {
+        for(size_t i = 0; i < container->size(); ++i) {
             const auto templ = m_templates[i];
-            const auto ao = m_container[i].allowedOutput();
+            const auto ao = container->operator[](i).allowedOutput();
             if(const auto ao_ptr = std::get_if<std::vector<std::string>>(&ao)) {
                 if(ao_ptr->size() > 0)
-                    m_container[i].addWare(templ.ware(), templ.amount(), true);
+                    container->operator[](i).addWare(templ.ware(), templ.amount(), true);
             }
-            const auto ai = m_container[i].allowedInput();
+            const auto ai = container->operator[](i).allowedInput();
             if(const auto ai_ptr = std::get_if<std::vector<std::string>>(&ai)) {
-                if(ai_ptr->size() > 0 && m_container[i].wareInfoCount() > 0)
-                    m_container[i].removeWare(0, templ.amount(), true);
+                if(ai_ptr->size() > 0 && container->operator[](i).wareInfoCount() > 0)
+                    container->operator[](i).removeWare(0, templ.amount(), true);
             }
         }
     }
@@ -88,11 +90,14 @@ FactoryWareTemplate::FactoryWareTemplate(const std::string &ware, size_t capacit
     m_amount = amount;
 }
 
-std::string FactoryWareTemplate::ware() const
-{
+std::string FactoryWareTemplate::ware() const {
     return m_ware;
 }
 
 bool operator==(const FactoryWareTemplate &t0, const FactoryWareTemplate &t1) {
     return t0.m_ware == t1.m_ware && t0.m_amount == t1.m_amount && t0.m_capacity == t1.m_capacity;
+}
+
+e172::ptr<AbstractWareContainer> Factory::createWareContainer() const {
+    return new WareMultiBayContainer();
 }

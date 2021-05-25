@@ -17,7 +17,7 @@ std::string GUIStringListView::rowText(int index) const {
     return m_data[index];
 }
 
-GUIMenuElement *GUIStringListView::rowElement(int) const {
+e172::ptr<GUIMenuElement> GUIStringListView::rowElement(int) const {
     return nullptr;
 }
 

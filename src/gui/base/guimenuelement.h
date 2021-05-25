@@ -1,5 +1,5 @@
-#ifndef GUILABEL_H
-#define GUILABEL_H
+#ifndef GUIMENUELEMENT_H
+#define GUIMENUELEMENT_H
 
 #include "guielement.h"
 
@@ -37,4 +37,4 @@ public:
     void setTextFormat(const e172::TextFormat &textFormat);
 };
 
-#endif // GUILABEL_H
+#endif // GUIMENUELEMENT_H
