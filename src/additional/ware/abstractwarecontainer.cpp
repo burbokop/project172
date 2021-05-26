@@ -1,5 +1,6 @@
 #include "abstractwarecontainer.h"
 
+
 size_t WareInfo::count() const {
     return m_count;
 }

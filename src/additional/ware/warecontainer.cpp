@@ -32,19 +32,19 @@ bool WareContainer::containsAllowedOutput(const std::string &wareName) const {
     return false;
 }
 
-std::variant<std::vector<std::string>, WareContainer::all_allowed_t> WareContainer::allowedInput() const {
+WareContainer::Allowed WareContainer::allowedInput() const {
     return m_allowedInput;
 }
 
-void WareContainer::setAllowedInput(const std::variant<std::vector<std::string>, all_allowed_t> &allowedInput) {
+void WareContainer::setAllowedInput(const Allowed &allowedInput) {
     m_allowedInput = allowedInput;
 }
 
-std::variant<std::vector<std::string>, WareContainer::all_allowed_t> WareContainer::allowedOutput() const {
+WareContainer::Allowed WareContainer::allowedOutput() const {
     return m_allowedOutput;
 }
 
-void WareContainer::setAllowedOutput(const std::variant<std::vector<std::string>, all_allowed_t> &allowedOutput) {
+void WareContainer::setAllowedOutput(const Allowed &allowedOutput) {
     m_allowedOutput = allowedOutput;
 }
 
@@ -141,4 +141,24 @@ size_t WareContainer::capacity() const {
 
 size_t WareContainer::setCapacity(const size_t &capacity) {
     return m_capacity = std::max(capacity, amount());
+}
+
+std::ostream &operator<<(std::ostream &stream, const WareContainer::Allowed &allowed) {
+    if(std::get_if<WareContainer::all_allowed_t>(&allowed)) {
+        stream << "AllAllowed";
+    } else {
+        if(const auto ptr = std::get_if<std::vector<std::string>>(&allowed)) {
+            size_t i = 0;
+            stream << "[";
+            for(const auto& a : *ptr) {
+                stream << a;
+                if(i < ptr->size() - 1) {
+                    stream << ", ";
+                }
+                ++i;
+            }
+            stream << "]";
+        }
+    }
+    return stream;
 }

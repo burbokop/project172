@@ -14,9 +14,10 @@ class WareContainer : public AbstractWareContainer {
 public:
     struct all_allowed_t {};
     static inline all_allowed_t AllAllowed;
+    typedef std::variant<std::vector<std::string>, all_allowed_t> Allowed;
 private:
-    std::variant<std::vector<std::string>, all_allowed_t> m_allowedInput = std::vector<std::string>();
-    std::variant<std::vector<std::string>, all_allowed_t> m_allowedOutput = std::vector<std::string>();
+    Allowed m_allowedInput = std::vector<std::string>();
+    Allowed m_allowedOutput = std::vector<std::string>();
 public:
     virtual size_t wareAwailableAdditingAmount(std::string ware, size_t count, bool ignoreAllowed) override;
     virtual size_t wareAwailableRemovingAmount(size_t index, size_t count, bool ignoreAllowed = false) override;
@@ -32,10 +33,10 @@ public:
 
     bool containsAllowedInput(const std::string &wareName) const;
     bool containsAllowedOutput(const std::string &wareName) const;
-    std::variant<std::vector<std::string>, all_allowed_t> allowedInput() const;
-    void setAllowedInput(const std::variant<std::vector<std::string>, all_allowed_t> &allowedInput);
-    std::variant<std::vector<std::string>, all_allowed_t> allowedOutput() const;
-    void setAllowedOutput(const std::variant<std::vector<std::string>, all_allowed_t> &allowedOutput);
+    Allowed allowedInput() const;
+    void setAllowedInput(const Allowed &allowedInput);
+    Allowed allowedOutput() const;
+    void setAllowedOutput(const Allowed &allowedOutput);
 
     bool isAllInputAllowed() const;
     bool isAllOutputAllowed() const;
@@ -43,5 +44,6 @@ public:
     bool isNoOutputAllowed() const;
 };
 
+std::ostream &operator<<(std::ostream &stream, const WareContainer::Allowed& allowed);
 
 #endif // WARECONTAINER_H

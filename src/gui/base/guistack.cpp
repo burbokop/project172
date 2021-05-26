@@ -7,6 +7,10 @@
 GUIStack::GUIStack() : GUIElement () {}
 
 void GUIStack::push(const e172::ptr<GUIElement> &element) {
+    if(m_elements.size() > 0) {
+        removeChildElement(m_elements.front());
+    }
+
     addChildElement(element);
     if(auto listView = e172::smart_cast<GUIListView>(element))
         listView->setStack(this);
@@ -21,6 +25,9 @@ void GUIStack::pop() {
         }
         removeChildElement(m_elements.front());
         m_elements.pop_back();
+        if(m_elements.size() > 0) {
+            addChildElement(m_elements.front());
+        }
     }
 }
 

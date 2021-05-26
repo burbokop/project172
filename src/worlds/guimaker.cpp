@@ -57,19 +57,24 @@ GUIMaker::GUIMaker(e172::Context *context, Near *radarNear, DevConsole *console)
                     auto dockingView = new GUIDockingView("docking sessions"); {
                         auto dockingViewRowElement = new GUIMenu(); {
                             auto dockingWareView = new GUIWareView("storage"); {
-                                dockingWareView->setUnitProvider([](const e172::ptr<Controller>& controller, const e172::Variant &modelData){
+                                dockingWareView->setUnitProvider([this](const e172::ptr<Controller>& controller, const e172::Variant &modelData){
                                     if(auto parent = controller->parentUnit()) {
                                         if(auto docker = parent->capability<Docker>()) {
                                             if(docker->docked(modelData.toSize_t())) {
-                                                return docker->oppositeUnit(modelData.toSize_t());
+                                                m_currentOppositeUnit = docker->oppositeUnit(modelData.toSize_t());
+                                                return m_currentOppositeUnit;
                                             }
                                         }
                                     }
                                     return e172::ptr<Unit>();
                                 });
-                                auto dockingWareViewButton = new GUIButton("", [](e172::Context *context, const e172::ptr<Controller> &ctrl, const e172::Variant &md) {
-                                    md.fold<WareStorage::WareRef>([](const WareStorage::WareRef& ref){
-                                        e172::Debug::print("transfer:", ref.storage()->wareInfo(ref.index()));
+                                auto dockingWareViewButton = new GUIButton("", [](const e172::ptr<Controller> &ctrl, const e172::Variant &md) {
+                                    md.fold<WareStorage::WareRef>([ctrl](const WareStorage::WareRef& ref){
+                                        if(auto parent = ctrl->parentUnit()) {
+                                            if(auto parentStorage = parent->capability<WareStorage>()) {
+                                                auto c = ref.storage()->transferWareTo(ref.index(), parentStorage, 1);
+                                            }
+                                        }
                                     });
                                 }); {
 
@@ -180,7 +185,17 @@ GUIMaker::GUIMaker(e172::Context *context, Near *radarNear, DevConsole *console)
             GUIStack *wareViewStack = new GUIStack(); {
                 GUIWareView *wareView = new GUIWareView("storage"); {
                     wareView->setTextFormat(e172::TextFormat::AlignTop | e172::TextFormat::AlignRight);
+                    auto wareViewButton = new GUIButton("", [this](const e172::ptr<Controller> &ctrl, const e172::Variant &md) {
+                        md.fold<WareStorage::WareRef>([ctrl, this](const WareStorage::WareRef& ref){
+                            if(m_currentOppositeUnit) {
+                                if(auto oppositeStorage = m_currentOppositeUnit->capability<WareStorage>()) {
+                                    ref.storage()->transferWareTo(ref.index(), oppositeStorage, 1);
+                                }
+                            }
+                        });
+                    }); {
 
+                    } wareView->setRowElement(wareViewButton);
                 } wareViewStack->push(wareView);
             } menuFocusSwitch->addChildElement(wareViewStack);
         } m_rootElement->addChildElement(menuFocusSwitch);

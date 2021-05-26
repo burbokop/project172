@@ -34,6 +34,8 @@ class GUIMaker {
 
     e172::ptr<GUIElement> m_rootElement = nullptr;
     GUIComboBox<std::string> *m_worldComboBox = nullptr;
+
+    e172::ptr<Unit> m_currentOppositeUnit;
 public:
     GUIMaker(e172::Context *context, Near *radarNear = nullptr, DevConsole *console = nullptr);
     void setWorldPresetStrategy(WorldPresetStrategy *worldPresetStrategy);

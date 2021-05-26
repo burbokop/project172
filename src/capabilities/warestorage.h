@@ -33,7 +33,7 @@ public:
     size_t amount() const;
     size_t capacity() const;
 
-    size_t transferWareTo(size_t index, WareStorage *storage, size_t count = std::numeric_limits<size_t>::max());
+    size_t transferWareTo(size_t index, const e172::ptr<WareStorage> &storage, size_t count = std::numeric_limits<size_t>::max());
 };
 
 class TransportWareStorage : public WareStorage {

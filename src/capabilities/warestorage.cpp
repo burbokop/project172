@@ -3,6 +3,7 @@
 #include <src/additional/ware/warecontainer.h>
 
 
+
 e172::ptr<AbstractWareContainer> WareStorage::wareContainer() const {
     if(!m_wareContainer.data()) {
         m_wareContainer = createWareContainer();
@@ -47,7 +48,7 @@ size_t WareStorage::capacity() const {
     return 0;
 }
 
-size_t WareStorage::transferWareTo(size_t index, WareStorage *storage, size_t count) {
+size_t WareStorage::transferWareTo(size_t index, const e172::ptr<WareStorage>& storage, size_t count) {
     if(wareContainer() && storage->wareContainer()) {
         return wareContainer()->transferWareTo(index, storage->wareContainer(), count);
     }
@@ -65,6 +66,7 @@ size_t TransportWareStorage::setCapacity(size_t capacity) {
 e172::ptr<AbstractWareContainer> TransportWareStorage::createWareContainer() const {
     auto wc = new WareContainer(m_initialCapacity);
     wc->setAllowedInput(WareContainer::AllAllowed);
+    wc->setAllowedOutput(WareContainer::AllAllowed);
     return wc;
 }
 
@@ -84,6 +86,7 @@ e172::ptr<AbstractWareContainer> DebugTransportWareStorage::__wareContainer() co
 e172::ptr<AbstractWareContainer> DebugTransportWareStorage::createWareContainer() const {
     auto wc = new WareContainer(m_initialCapacity);
     wc->setAllowedInput(WareContainer::AllAllowed);
+    wc->setAllowedOutput(WareContainer::AllAllowed);
     for(const auto& w : m_initialWares) {
         wc->addWare(w.first, w.second);
     }
