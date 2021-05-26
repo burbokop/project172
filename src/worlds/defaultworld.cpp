@@ -26,27 +26,24 @@ WorldPreset::GenerationResult DefaultWorld::generate(e172::Context *context) {
 
 
     //player1
-    Player *player1 = dynamic_cast<Player*>(context->assetProvider()->createLoadable("player1"));
-    Ship *playerArmor = dynamic_cast<Ship*>(context->assetProvider()->createLoadable("astro"));
+    auto player1 = context->assetProvider()->createLoadable<Player>("player1");
+    auto playerArmor = context->assetProvider()->createLoadable<Ship>("astro");
     ModuleHandler *playerArmorModules = new ModuleHandler();
-    playerArmorModules->addModule(dynamic_cast<Module*>(context->assetProvider()->createLoadable("mini-engine")));
-    playerArmorModules->addModule(dynamic_cast<Module*>(context->assetProvider()->createLoadable("repair-laser")));
+    playerArmorModules->addModule(context->assetProvider()->createLoadable<Module>("mini-engine"));
+    playerArmorModules->addModule(context->assetProvider()->createLoadable<Module>("repair-laser"));
     playerArmor->addCapability(playerArmorModules);
-    static_cast<Player*>(player1)->setArmor(playerArmor);
+    player1->setArmor(playerArmor);
     result.controllers.push_back(player1);
 
     //player2
-    Player *player2 = dynamic_cast<Player*>(context->assetProvider()->createLoadable("player2"));
-    Ship *playerArmor2 = dynamic_cast<Ship*>(context->assetProvider()->createLoadable("astro"));
+    auto player2 = context->assetProvider()->createLoadable<Player>("player2");
+    auto playerArmor2 = context->assetProvider()->createLoadable<Ship>("astro");
     ModuleHandler *playerArmorModules2 = new ModuleHandler();
-    playerArmorModules2->addModule(dynamic_cast<Module*>(context->assetProvider()->createLoadable("mini-engine")));
-    playerArmorModules2->addModule(dynamic_cast<Module*>(context->assetProvider()->createLoadable("repair-laser")));
+    playerArmorModules2->addModule(context->assetProvider()->createLoadable<Module>("mini-engine"));
+    playerArmorModules2->addModule(context->assetProvider()->createLoadable<Module>("repair-laser"));
     playerArmor2->addCapability(playerArmorModules2);
     player2->setArmor(playerArmor2);
     result.controllers.push_back(player2);
-
-
-
 
 
     /*
@@ -71,7 +68,7 @@ WorldPreset::GenerationResult DefaultWorld::generate(e172::Context *context) {
 
 
 
-    Unit *playerShip = static_cast<Unit*>(context->assetProvider()->createLoadable("sh1"));
+    auto playerShip = context->assetProvider()->createLoadable<Unit>("sh1");
     playerShip->resetPhysicsProperties(e172::Vector(100, 100), -0.7);
 
     auto playerDocker = new Docker();
@@ -97,7 +94,7 @@ WorldPreset::GenerationResult DefaultWorld::generate(e172::Context *context) {
     result.entities.push_back(playerShip);
 
     /*empty ship*/{
-        Unit *someShip = static_cast<Unit*>(context->assetProvider()->createLoadable("sh1"));
+        auto someShip = context->assetProvider()->createLoadable<Unit>("sh1");
 
         auto someShipDocker = new Docker();
         someShipDocker->addNode({ 0, -20 }, -e172::Math::Pi / 2);
@@ -115,16 +112,16 @@ WorldPreset::GenerationResult DefaultWorld::generate(e172::Context *context) {
 
     /*ships with ai type 1*/ {
         for(int i = 0; i < 3; i++) {
-            Unit *s = nullptr;
+            e172::ptr<Unit> s;
             switch (i) {
             case 0:
-                s = static_cast<Unit*>(context->assetProvider()->createLoadable("sh1"));
+                s = context->assetProvider()->createLoadable<Unit>("sh1");
                 break;
             case 1:
-                s = static_cast<Unit*>(context->assetProvider()->createLoadable("sh2"));
+                s = context->assetProvider()->createLoadable<Unit>("sh2");
                 break;
             case 2:
-                s = static_cast<Unit*>(context->assetProvider()->createLoadable("sh3"));
+                s = context->assetProvider()->createLoadable<Unit>("sh3");
                 break;
             }
 
@@ -141,13 +138,13 @@ WorldPreset::GenerationResult DefaultWorld::generate(e172::Context *context) {
 
             ModuleHandler *mx = new ModuleHandler();
             if(i == 1) {
-                mx->addModule(static_cast<Module*>(context->assetProvider()->createLoadable("pistol")));
-                mx->addModule(static_cast<Module*>(context->assetProvider()->createLoadable("mega-launcher")));
+                mx->addModule(context->assetProvider()->createLoadable<Module>("pistol"));
+                mx->addModule(context->assetProvider()->createLoadable<Module>("mega-launcher"));
             } else {
-                mx->addModule(static_cast<Module*>(context->assetProvider()->createLoadable("pistol")));
+                mx->addModule(context->assetProvider()->createLoadable<Module>("pistol"));
             }
-            mx->addModule(static_cast<Module*>(context->assetProvider()->createLoadable("engine1")));
-            mx->addModule(static_cast<Module*>(context->assetProvider()->createLoadable("warp-drive1")));
+            mx->addModule(context->assetProvider()->createLoadable<Module>("engine1"));
+            mx->addModule(context->assetProvider()->createLoadable<Module>("warp-drive1"));
 
             s->addCapability(mx);
 
@@ -164,15 +161,15 @@ WorldPreset::GenerationResult DefaultWorld::generate(e172::Context *context) {
         unsigned int i = 0;
         for (std::string key : assetKeys) {
             if(key != "st1") {
-                auto unit = dynamic_cast<Unit*>(context->assetProvider()->createLoadable(key));
+                auto unit = context->assetProvider()->createLoadable<Unit>(key);
                 if(unit) {
                     unit->resetPhysicsProperties(e172::Vector(static_cast<int>((i + 4) * 64), -200), 0);
 
                     unit->addCapability(new AI());
                     ModuleHandler *mhx = new ModuleHandler();
-                    mhx->addModule(static_cast<Module*>(context->assetProvider()->createLoadable((i == 1) ? "plasma-launcher" : "pistol")));
-                    mhx->addModule(static_cast<Module*>(context->assetProvider()->createLoadable("engine1")));
-                    mhx->addModule(static_cast<Module*>(context->assetProvider()->createLoadable("warp-drive1")));
+                    mhx->addModule(context->assetProvider()->createLoadable<Module>((i == 1) ? "plasma-launcher" : "pistol"));
+                    mhx->addModule(context->assetProvider()->createLoadable<Module>("engine1"));
+                    mhx->addModule(context->assetProvider()->createLoadable<Module>("warp-drive1"));
 
                     unit->addCapability(mhx);
                     unit->addCapability(new Docker());
@@ -186,7 +183,7 @@ WorldPreset::GenerationResult DefaultWorld::generate(e172::Context *context) {
     }
 
     /* station 1 */{
-        Unit *s = static_cast<Unit*>(context->assetProvider()->createLoadable("st1"));
+        auto s = context->assetProvider()->createLoadable<Unit>("st1");
 
         auto docker = new Docker();
         docker->addNode({ -50, 0 }, -e172::Math::Pi);
@@ -199,7 +196,7 @@ WorldPreset::GenerationResult DefaultWorld::generate(e172::Context *context) {
     }
 
     /* station 2 */{
-        Unit *s = static_cast<Unit*>(context->assetProvider()->createLoadable("st2"));
+        auto s = context->assetProvider()->createLoadable<Unit>("st2");
 
         auto docker = new Docker();
         docker->addNode({ -40, 0 }, -e172::Math::Pi);

@@ -5,7 +5,7 @@
 #include <src/math/physicalobject.h>
 #include <src/assettools/loadable.h>
 #include <src/iinformative.h>
-#include <src/person.h>
+#include <src/persons/person.h>
 #include <src/utility/animator.h>
 #include <src/utility/ptr.h>
 

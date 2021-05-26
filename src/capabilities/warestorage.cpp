@@ -2,10 +2,25 @@
 
 #include <src/additional/ware/warecontainer.h>
 
+e172::ptr<PriceTable> WareStorage::priceTable() const {
+    return m_priceTable;
+}
 
+std::optional<size_t> WareStorage::indexOf(const std::string &wareName) const {
+    if(wareName.empty())
+        return std::nullopt;
+
+    const auto c = wareContainer();
+    for(size_t i = 0, count = c->wareInfoCount(); i < count; ++i) {
+        if (wareName == c->wareInfo(i).wareName()) {
+            return i;
+        }
+    }
+    return std::nullopt;
+}
 
 e172::ptr<AbstractWareContainer> WareStorage::wareContainer() const {
-    if(!m_wareContainer.data()) {
+    if(!m_wareContainer) {
         m_wareContainer = createWareContainer();
     }
     return m_wareContainer;
@@ -14,10 +29,8 @@ e172::ptr<AbstractWareContainer> WareStorage::wareContainer() const {
 WareStorage::WareStorage() {}
 
 WareStorage::~WareStorage() {
-    if(wareContainer()) {
-        if(wareContainer()->liveInHeap())
-            delete wareContainer().data();
-    }
+    safeDestroy(m_wareContainer);
+    safeDestroy(m_priceTable);
 }
 
 size_t WareStorage::wareInfoCount() const {
@@ -48,9 +61,9 @@ size_t WareStorage::capacity() const {
     return 0;
 }
 
-size_t WareStorage::transferWareTo(size_t index, const e172::ptr<WareStorage>& storage, size_t count) {
-    if(wareContainer() && storage->wareContainer()) {
-        return wareContainer()->transferWareTo(index, storage->wareContainer(), count);
+size_t WareStorage::transferWareTo(size_t index, const e172::ptr<WareStorage>& destination, size_t count) {
+    if(wareContainer() && destination->wareContainer()) {
+        return wareContainer()->transferWareTo(index, destination->wareContainer(), count);
     }
     return 0;
 }

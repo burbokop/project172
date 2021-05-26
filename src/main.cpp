@@ -226,7 +226,7 @@ int main(int argc, char *argv[]) {
     worldPresetStrategy.registerType<HeapWorld>();
     app.addEntity(&worldPresetStrategy);
 
-    worldPresetStrategy.controllersChanged([&guiMaker, &camera, &radarNear](auto c){
+    worldPresetStrategy.controllersChanged([&guiMaker, &camera, &radarNear](const std::list<e172::ptr<Controller>> &c){
         if(c.size() > 0) {
             const auto controller = c.front();
             camera.setTarget(controller);

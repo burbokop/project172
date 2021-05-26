@@ -11,8 +11,8 @@
 class WorldPreset {
 public:
     struct GenerationResult {
-        std::list<e172::Entity*> entities;
-        std::list<Controller*> controllers;
+        std::list<e172::ptr<e172::Entity>> entities;
+        std::list<e172::ptr<Controller>> controllers;
     };
 
     WorldPreset();

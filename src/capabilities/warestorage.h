@@ -5,9 +5,12 @@
 
 #include <src/additional/ware/abstractwarecontainer.h>
 
+#include <src/additional/pricetable.h>
+
 
 class WareStorage : public Capability {
     mutable e172::ptr<AbstractWareContainer> m_wareContainer;
+    e172::ptr<PriceTable> m_priceTable = new PriceTable();
 protected:
     e172::ptr<AbstractWareContainer> wareContainer() const;
     virtual e172::ptr<AbstractWareContainer> createWareContainer() const = 0;
@@ -33,7 +36,10 @@ public:
     size_t amount() const;
     size_t capacity() const;
 
-    size_t transferWareTo(size_t index, const e172::ptr<WareStorage> &storage, size_t count = std::numeric_limits<size_t>::max());
+    size_t transferWareTo(size_t index, const e172::ptr<WareStorage> &destination, size_t count = std::numeric_limits<size_t>::max());
+    e172::ptr<PriceTable> priceTable() const;
+
+    std::optional<size_t> indexOf(const std::string& wareName) const;
 };
 
 class TransportWareStorage : public WareStorage {

@@ -8,6 +8,7 @@
 class TestWareContainer : public WareContainer {
 public:
     TestWareContainer(size_t capacity);
+
 };
 
 class WareTest {

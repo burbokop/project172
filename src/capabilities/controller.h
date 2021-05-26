@@ -8,7 +8,7 @@
 
 #include <src/time/elapsedtimer.h>
 
-#include <src/person.h>
+#include <src/persons/person.h>
 
 class Ship;
 class Controller : public Capability {    

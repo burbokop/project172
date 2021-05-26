@@ -14,12 +14,12 @@ protected:
     static const double STOP_DISTANCE;
     static const double MAX_SPEED_MULTIPLIER;
 
-    Controller *m_target = nullptr;
+    e172::ptr<Controller> m_target = nullptr;
 
 public:
-    Camera(Controller *target = nullptr);
-    void setTarget(Controller *target);
-    Controller *target() const;
+    Camera(const e172::ptr<Controller>& target = nullptr);
+    void setTarget(const e172::ptr<Controller>& target);
+    e172::ptr<Controller> target() const;
 
     // Entity interface
 public:

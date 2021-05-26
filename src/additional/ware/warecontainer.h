@@ -9,7 +9,7 @@
 #include <variant>
 
 class WareContainer : public AbstractWareContainer {
-    std::vector<std::pair<std::string, size_t>> m_data;
+    std::vector<std::tuple<std::string, size_t>> m_data;
     size_t m_capacity = 0;
 public:
     struct all_allowed_t {};
@@ -42,6 +42,7 @@ public:
     bool isAllOutputAllowed() const;
     bool isNoInputAllowed() const;
     bool isNoOutputAllowed() const;
+
 };
 
 std::ostream &operator<<(std::ostream &stream, const WareContainer::Allowed& allowed);

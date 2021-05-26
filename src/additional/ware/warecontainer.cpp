@@ -5,7 +5,7 @@
 size_t WareContainer::amount() const {
     size_t sum = 0;
     for(auto s : m_data) {
-        sum += s.second;
+        sum += std::get<1>(s);
     }
     return sum;
 }
@@ -80,8 +80,8 @@ size_t WareContainer::wareAwailableAdditingAmount(std::string ware, size_t count
 size_t WareContainer::wareAwailableRemovingAmount(size_t index, size_t count, bool ignoreAllowed) {
     if(index < m_data.size()) {
         auto& w = m_data[index];
-        if(ignoreAllowed || containsAllowedOutput(w.first)) {
-            return std::min(w.second, count);
+        if(ignoreAllowed || containsAllowedOutput(std::get<0>(w))) {
+            return std::min(std::get<1>(w), count);
         }
     }
     return 0;
@@ -92,8 +92,8 @@ size_t WareContainer::addWare(std::string ware, size_t count, bool ignoreAllowed
     if(count > 0) {
         bool found = false;
         for(size_t i = 0; i < m_data.size(); ++i) {
-            if(m_data[i].first == ware) {
-                m_data[i].second += count;
+            if(std::get<0>(m_data[i]) == ware) {
+                std::get<1>(m_data[i]) += count;
                 found = true;
                 break;
             }
@@ -112,10 +112,10 @@ size_t WareContainer::removeWare(size_t index, size_t count, bool ignoreAllowed)
     count = wareAwailableRemovingAmount(index, count, ignoreAllowed);
     if(count > 0) {
         auto& w = m_data[index];
-        count = std::min(w.second, count);
-        w.second -= count;
+        count = std::min(std::get<1>(w), count);
+        std::get<1>(w) -= count;
 
-        if(w.second == 0)
+        if(std::get<1>(w) == 0)
             m_data.erase(m_data.begin() + index);
 
         return count;
@@ -132,7 +132,7 @@ size_t WareContainer::wareInfoCount() const {
 }
 
 WareInfo WareContainer::wareInfo(size_t index) const {
-    return WareInfo(m_data[index].first, m_data[index].second);
+    return WareInfo(std::get<0>(m_data[index]), std::get<1>(m_data[index]));
 }
 
 size_t WareContainer::capacity() const {

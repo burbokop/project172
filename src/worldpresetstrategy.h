@@ -16,7 +16,7 @@ class WorldPresetStrategy : public e172::Entity {
     e172::AbstractStrategy<std::string, WorldPreset> m_strategy;
     WorldPreset *m_last = nullptr;
 
-    std::function<void(const std::list<Controller*>&)> controllersChangedCallback;
+    std::function<void(const std::list<e172::ptr<Controller>>&)> controllersChangedCallback;
 public:
     static inline const std::string WORLD_TAG = "W";
 
@@ -28,7 +28,7 @@ public:
 
     void activatePreset(const std::string &preset);
 
-    void controllersChanged(const std::function<void(const std::list<Controller*>&)>& callback);
+    void controllersChanged(const std::function<void (const std::list<e172::ptr<Controller> > &)> &callback);
 
     // Entity interface
 public:

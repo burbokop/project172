@@ -14,7 +14,7 @@ void WorldPresetStrategy::activatePreset(const std::string &preset) {
     m_strategy.activate(preset);
 }
 
-void WorldPresetStrategy::controllersChanged(const std::function<void (const std::list<Controller *> &)> &callback) {
+void WorldPresetStrategy::controllersChanged(const std::function<void (const std::list<e172::ptr<Controller>> &)> &callback) {
     controllersChangedCallback = callback;
 }
 

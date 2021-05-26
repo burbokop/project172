@@ -8,16 +8,16 @@
 const double Camera::STOP_DISTANCE = 4;
 const double Camera::MAX_SPEED_MULTIPLIER = 0.002 * 1000;
 
-Controller *Camera::target() const {
+e172::ptr<Controller> Camera::target() const {
     return m_target;
 }
 
-Camera::Camera(Controller *target) {
+Camera::Camera(const e172::ptr<Controller> &target) {
     m_target = target;
     addTag("C");
 }
 
-void Camera::setTarget(Controller *target) {
+void Camera::setTarget(const e172::ptr<Controller> &target) {
     m_target = target;
 }
 

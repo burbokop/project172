@@ -9,7 +9,6 @@ WareInfo::operator std::string() const {
     return m_wareName + " [" + std::to_string(m_count) + "]";
 }
 
-
 WareInfo::WareInfo(const std::string &name, size_t count) {
     m_wareName = name;
     m_count = count;
@@ -18,7 +17,6 @@ WareInfo::WareInfo(const std::string &name, size_t count) {
 std::string WareInfo::wareName() const {
     return m_wareName;
 }
-
 
 AbstractWareContainer::AbstractWareContainer() {}
 

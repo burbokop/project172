@@ -71,11 +71,11 @@ Near::Near(double radius, double delta) {
     m_delta = delta;
 }
 
-Capability *Near::center() const {
+e172::ptr<Capability> Near::center() const {
     return m_center;
 }
 
-void Near::setCenter(Capability *center) {
+void Near::setCenter(const e172::ptr<Capability> &center) {
     m_center = center;
 }
 

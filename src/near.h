@@ -14,7 +14,7 @@ private:
     static const double WARP_RADIUS_MILTIPLIER;
 
     std::vector<e172::ptr<e172::Entity>> m_entitiesInFocus;
-    Capability *m_center = nullptr;
+    e172::ptr<Capability> m_center;
 
     size_t removingIterator = 0;
 
@@ -45,8 +45,8 @@ public:
 public:
     virtual void proceed(e172::Context *context, e172::AbstractEventHandler *) override;
     virtual void render(e172::AbstractRenderer *) override {};
-    Capability *center() const;
-    void setCenter(Capability *center);
+    e172::ptr<Capability> center() const;
+    void setCenter(const e172::ptr<Capability> &center);
 };
 
 #endif // NEAR_H

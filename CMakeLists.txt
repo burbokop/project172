@@ -100,7 +100,8 @@ add_executable(project172
     ${CMAKE_CURRENT_LIST_DIR}/src/additional/ware/waremultibaycontainer.h
     ${CMAKE_CURRENT_LIST_DIR}/src/additional/ware/abstractwarecontainer.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/additional/ware/abstractwarecontainer.h
-
+    ${CMAKE_CURRENT_LIST_DIR}/src/additional/pricetable.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/additional/pricetable.h
 
     ${CMAKE_CURRENT_LIST_DIR}/src/assetexecutors/animatorassetexecutor.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/assetexecutors/animatorassetexecutor.h
@@ -206,8 +207,10 @@ add_executable(project172
     ${CMAKE_CURRENT_LIST_DIR}/src/units/unit.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/units/unit.h
 
-    ${CMAKE_CURRENT_LIST_DIR}/src/person.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/person.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/persons/person.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/persons/person.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/persons/faction.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/persons/faction.h
 
     ${CMAKE_CURRENT_LIST_DIR}/src/worlds/arenaworld.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/worlds/arenaworld.h
