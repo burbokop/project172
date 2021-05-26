@@ -11,7 +11,7 @@ public:
 
     // AbstractAssetExecutor interface
 public:
-    virtual e172::Variant proceed(const e172::Variant &value, e172::AbstractGraphicsProvider *, e172::AbstractAudioProvider *) override;
+    virtual e172::Variant proceed(const e172::Variant &value) override;
 };
 
 #endif // RECIEPTASSETEXECUTOR_H

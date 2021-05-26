@@ -71,11 +71,6 @@ WorldPreset::GenerationResult DefaultWorld::generate(e172::Context *context) {
     auto playerShip = context->assetProvider()->createLoadable<Unit>("sh1");
     playerShip->resetPhysicsProperties(e172::Vector(100, 100), -0.7);
 
-    auto playerDocker = new Docker();
-    playerDocker->addNode({ 0, -20 }, -e172::Math::Pi / 2);
-    playerDocker->addNode({ 0, 20 }, e172::Math::Pi / 2);
-    playerShip->addCapability(playerDocker);
-
     playerShip->addCapability(player1);
     ModuleHandler *playerModuleHandler = new ModuleHandler();
     playerModuleHandler->addModule(context->assetProvider()->createLoadable<Module>("engine2"));
@@ -96,15 +91,13 @@ WorldPreset::GenerationResult DefaultWorld::generate(e172::Context *context) {
     /*empty ship*/{
         auto someShip = context->assetProvider()->createLoadable<Unit>("sh1");
 
-        auto someShipDocker = new Docker();
-        someShipDocker->addNode({ 0, -20 }, -e172::Math::Pi / 2);
-        someShipDocker->addNode({ 0, 20 }, e172::Math::Pi / 2);
-        someShip->addCapability(someShipDocker);
         someShip->addCapability(new AI());
 
         ModuleHandler *someShipModules = new ModuleHandler();
         someShipModules->addModule(context->assetProvider()->createLoadable<Module>("engine2"));
         someShip->addCapability(someShipModules);
+
+        context->assetProvider()->createLoadable("aaa");
 
         someShip->resetPhysicsProperties(e172::Vector(-200, -100), -0.7);
         result.entities.push_back(someShip);

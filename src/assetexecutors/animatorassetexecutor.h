@@ -11,7 +11,7 @@ public:
 
     // AssetExecutor interface
 public:
-    e172::Variant proceed(const e172::Variant &value, e172::AbstractGraphicsProvider *graphicsProvider, e172::AbstractAudioProvider *) override;
+    e172::Variant proceed(const e172::Variant &value) override;
 };
 
 #endif // ANIMATORASSETEXECUTOR_H

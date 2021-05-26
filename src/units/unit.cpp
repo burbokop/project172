@@ -64,13 +64,11 @@ void Unit::render(e172::AbstractRenderer *renderer) {
     }
 }
 
-e172::ptr<Person> Unit::ownerPerson() const
-{
+e172::ptr<Person> Unit::ownerPerson() const {
     return m_ownerPerson;
 }
 
-void Unit::setOwnerPerson(const e172::ptr<Person> &ownerPerson)
-{
+void Unit::setOwnerPerson(const e172::ptr<Person> &ownerPerson) {
     m_ownerPerson = ownerPerson;
 }
 
@@ -86,6 +84,9 @@ Unit::Unit() {
             m_animator = asset<e172::Animator>("animator");
         }
 
+        if(m_capabilities.empty()) {
+            m_capabilities = asset<std::vector<e172::ptr<Capability>>>("capabilities");
+        }
         setMass(asset<double>("mass", 1));
     });
 }

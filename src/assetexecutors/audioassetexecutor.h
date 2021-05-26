@@ -11,7 +11,7 @@ public:
 
     // AssetExecutor interface
 public:
-    e172::Variant proceed(const e172::Variant &value, e172::AbstractGraphicsProvider*, e172::AbstractAudioProvider *audioProvider) override;
+    e172::Variant proceed(const e172::Variant &value) override;
 };
 
 #endif // AUDIOASSETEXECUTOR_H

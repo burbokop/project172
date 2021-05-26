@@ -3,5 +3,27 @@
 	"class": "Ship",
 	"sprite": "./sh1.png",
 	"health": 80,
-	"explosive": 10
+	"explosive": 10,
+	"capabilities": [
+		{
+			"id": "docker",
+			"class": "Docker",
+			"nodes": [ 
+				{    
+					"offset": {
+						"x": 0,
+						"y": -20
+					},
+					"angle": "-Pi/2"
+				},
+				{
+					"offset": {
+						"x": 0,
+						"y": 20
+					},
+					"angle": "Pi/2"
+				}
+			]
+		}
+	]
 }

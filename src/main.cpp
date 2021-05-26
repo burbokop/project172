@@ -14,7 +14,9 @@
 
 #include <src/assetexecutors/animatorassetexecutor.h>
 #include <src/assetexecutors/audioassetexecutor.h>
+#include <src/assetexecutors/capabilitiesassetexecutor.h>
 #include <src/assetexecutors/factoryassetexecutor.h>
+#include <src/assetexecutors/nodesassetexecutor.h>
 #include <src/assetexecutors/spriteassetexecutor.h>
 #include <src/assetexecutors/vectorassetexecutor.h>
 
@@ -148,6 +150,10 @@ int main(int argc, char *argv[]) {
     app.assetProvider()->installExecutor("offset", std::make_shared<VectorAssetExecutor>());
     app.assetProvider()->installExecutor("input", std::make_shared<RecieptAssetExecutor>());
     app.assetProvider()->installExecutor("output", std::make_shared<RecieptAssetExecutor>());
+    app.assetProvider()->installExecutor("capabilities", std::make_shared<CapabilitiesAssetExecutor>());
+    app.assetProvider()->installExecutor("nodes", std::make_shared<NodesAssetExecutor>());
+
+
 
     app.assetProvider()->registerType<Unit>();
     app.assetProvider()->registerType<Ship>();

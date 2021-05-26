@@ -5,11 +5,11 @@
 
 AudioAssetExecutor::AudioAssetExecutor() {}
 
-e172::Variant AudioAssetExecutor::proceed(const e172::Variant &value, e172::AbstractGraphicsProvider*, e172::AbstractAudioProvider *audioProvider) {
+e172::Variant AudioAssetExecutor::proceed(const e172::Variant &value) {
     if (value.isString()) {
         return e172::Variant::fromValue(e172::AudioPlayer(
-                                            audioProvider->reserveChannel(),
-                                            audioProvider->loadAudioSample(fullPath(value.toString()).c_str())
+                                            audioProvider()->reserveChannel(),
+                                            audioProvider()->loadAudioSample(fullPath(value.toString()).c_str())
                                             ));
     } else {
         const auto object = value.toMap();
@@ -22,18 +22,18 @@ e172::Variant AudioAssetExecutor::proceed(const e172::Variant &value, e172::Abst
             if(audioStart.isString()) {
                 if(audioLoop.isString() && audioStop.isString()) {
                     e172::AudioPlayer p(
-                                audioProvider->reserveChannel(),
-                                audioProvider->loadAudioSample(fullPath(audioStart.toString())),
-                                audioProvider->loadAudioSample(fullPath(audioLoop.toString())),
-                                audioProvider->loadAudioSample(fullPath(audioStop.toString()))
+                                audioProvider()->reserveChannel(),
+                                audioProvider()->loadAudioSample(fullPath(audioStart.toString())),
+                                audioProvider()->loadAudioSample(fullPath(audioLoop.toString())),
+                                audioProvider()->loadAudioSample(fullPath(audioStop.toString()))
                                 );
 
                     p.setVolume(volume);
                     return e172::Variant::fromValue(p);
                 } else {
                     e172::AudioPlayer p(
-                                audioProvider->reserveChannel(),
-                                audioProvider->loadAudioSample(fullPath(audioStart.toString()))
+                                audioProvider()->reserveChannel(),
+                                audioProvider()->loadAudioSample(fullPath(audioStart.toString()))
                                 );
                     p.setVolume(volume);
                     return e172::Variant::fromValue(p);

@@ -4,7 +4,7 @@
 
 RecieptAssetExecutor::RecieptAssetExecutor() {}
 
-e172::Variant RecieptAssetExecutor::proceed(const e172::Variant &value, e172::AbstractGraphicsProvider *, e172::AbstractAudioProvider *) {
+e172::Variant RecieptAssetExecutor::proceed(const e172::Variant &value) {
     const auto list = value.toList();
     std::vector<FactoryWareTemplate> result;
     for(auto v : list) {
