@@ -159,6 +159,8 @@ add_executable(project172
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/base/guifocusswitch.h
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/base/guicontainer.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/base/guicontainer.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/gui/base/guisingleelementlistview.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/gui/base/guisingleelementlistview.h
 
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/guiblushingfloatingmessage.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/guiblushingfloatingmessage.h

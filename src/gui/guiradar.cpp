@@ -12,13 +12,7 @@ void GUIRadar::setNear(Near *near) {
     m_near = near;
 }
 
-void GUIRadar::setRowElement(GUIMenuElement *rowElement) {
-    removeChildElement(m_rowElement);
-    m_rowElement = rowElement;
-    addChildElement(rowElement);
-}
-
-GUIRadar::GUIRadar(const std::string &title) : GUIListView(title) {}
+GUIRadar::GUIRadar(const std::string &title) : GUISingleElementListView(title) {}
 
 int GUIRadar::rowCount() const {
     if(m_near) {
@@ -44,10 +38,6 @@ std::string GUIRadar::rowText(int index) const {
         }
     }
     return "[error]";
-}
-
-e172::ptr<GUIMenuElement> GUIRadar::rowElement(int) const {
-    return m_rowElement;
 }
 
 e172::Variant GUIRadar::rowModelData(int index) const {

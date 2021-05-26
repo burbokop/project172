@@ -29,7 +29,8 @@ public:
 
     // Entity interface
 public:
-    void proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler);
+    virtual void proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) override;
+    virtual void render(e172::AbstractRenderer *) override {}
 };
 
 #endif // GUIFLOATINGMESSAGECONTAINER_H

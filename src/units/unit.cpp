@@ -111,9 +111,9 @@ void Unit::hit(e172::Context *context, int value) {
 
         if(m_health < 0) {
             context->emitMessage(e172::Context::SPAWN_EXPLOSIVE, e172::Args(position(), velocity(), m_explosiveRadius));
-            if(const auto mh = moduleHandler()) {
+            if(const auto mh = capability<ModuleHandler>()) {
                 const auto modules = mh->modules();
-                for(const auto module : modules) {
+                for(const auto& module : modules) {
                     if(module) {
                         module->animate(e172::Animator::NotRender, e172::Animator::NotRender);
                     }
@@ -126,23 +126,5 @@ void Unit::hit(e172::Context *context, int value) {
             context->emitMessage(e172::Context::FLOATING_MESSAGE, e172::VariantVector { entityId(), "no damage" });
         }
     }
-}
-
-e172::ptr<ModuleHandler> Unit::moduleHandler() const {
-    for(const auto& c : m_capabilities) {
-        if(const auto mh = e172::smart_cast<ModuleHandler>(c)) {
-            return mh;
-        }
-    }
-    return nullptr;
-}
-
-e172::ptr<Docker> Unit::docker() const {
-    for(const auto& c : m_capabilities) {
-        if(const auto docker = e172::smart_cast<Docker>(c)) {
-            return docker;
-        }
-    }
-    return nullptr;
 }
 

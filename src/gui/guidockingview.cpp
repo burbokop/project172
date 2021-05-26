@@ -4,12 +4,12 @@
 #include <src/capabilities/docker.h>
 #include <src/capabilities/controller.h>
 
-GUIDockingView::GUIDockingView(const std::string &title) : GUIListView(title) {}
+GUIDockingView::GUIDockingView(const std::string &title) : GUISingleElementListView(title) {}
 
 int GUIDockingView::rowCount() const {
     if(controller()) {
         if(const auto pu = controller()->parentUnit()) {
-            if(const auto docker = pu->docker()) {
+            if(const auto docker = pu->capability<Docker>()) {
                 return docker->sessionCount();
             }
         }
@@ -20,7 +20,7 @@ int GUIDockingView::rowCount() const {
 std::string GUIDockingView::rowText(int index) const {
     if(controller()) {
         if(const auto pu = controller()->parentUnit()) {
-            if(const auto docker = pu->docker()) {
+            if(const auto docker = pu->capability<Docker>()) {
                 return docker->sessionInfo(index);
             }
         }
@@ -28,10 +28,6 @@ std::string GUIDockingView::rowText(int index) const {
     return "[error]";
 }
 
-e172::ptr<GUIMenuElement> GUIDockingView::rowElement(int) const {
-    return nullptr;
-}
-
-e172::Variant GUIDockingView::rowModelData(int) const {
-    return e172::Variant();
+e172::Variant GUIDockingView::rowModelData(int index) const {
+    return index;
 }

@@ -2,12 +2,15 @@
 
 
 #include <src/capabilities/controller.h>
+#include <src/capabilities/docker.h>
 #include <src/capabilities/player.h>
+#include <src/capabilities/warestorage.h>
 
 #include <src/gui/guibutton.h>
 #include <src/gui/guidebugvalueinfo.h>
 #include <src/gui/guidevconsole.h>
 #include <src/gui/guidockingview.h>
+#include <src/gui/guifloatingmessagecontainer.h>
 #include <src/gui/guiminimap.h>
 #include <src/gui/guimoduleview.h>
 #include <src/gui/guiradar.h>
@@ -15,10 +18,11 @@
 #include <src/gui/guiswitch.h>
 #include <src/gui/guiwareview.h>
 
+#include <src/units/unit.h>
 #include <src/context.h>
 #include <src/debug.h>
 #include <src/gameapplication.h>
-
+#include <src/capabilities/docker.h>
 #include <src/additional/informative/controllerfinder.h>
 #include <src/additional/informative/unitsamountinfo.h>
 
@@ -50,8 +54,29 @@ GUIMaker::GUIMaker(e172::Context *context, Near *radarNear, DevConsole *console)
                     } mainMenu->addMenuElement(infoMenu);
                     mainMenu->addMenuElement(new GUIModuleView("modules"));
 
-                    auto dockingView = new GUIDockingView("docking sessions");
-                    mainMenu->addMenuElement(dockingView);
+                    auto dockingView = new GUIDockingView("docking sessions"); {
+                        auto dockingViewRowElement = new GUIMenu(); {
+                            auto dockingWareView = new GUIWareView("storage"); {
+                                dockingWareView->setUnitProvider([](const e172::ptr<Controller>& controller, const e172::Variant &modelData){
+                                    if(auto parent = controller->parentUnit()) {
+                                        if(auto docker = parent->capability<Docker>()) {
+                                            if(docker->docked(modelData.toSize_t())) {
+                                                return docker->oppositeUnit(modelData.toSize_t());
+                                            }
+                                        }
+                                    }
+                                    return e172::ptr<Unit>();
+                                });
+                                auto dockingWareViewButton = new GUIButton("", [](e172::Context *context, const e172::ptr<Controller> &ctrl, const e172::Variant &md) {
+                                    md.fold<WareStorage::WareRef>([](const WareStorage::WareRef& ref){
+                                        e172::Debug::print("transfer:", ref.storage()->wareInfo(ref.index()));
+                                    });
+                                }); {
+
+                                } dockingWareView->setRowElement(dockingWareViewButton);
+                            } dockingViewRowElement->addMenuElement(dockingWareView);
+                        } dockingView->setRowElement(dockingViewRowElement);
+                    } mainMenu->addMenuElement(dockingView);
 
                     if(radarNear) {
                         GUIRadar *radarMenu = new GUIRadar("radar"); {
@@ -165,5 +190,7 @@ GUIMaker::GUIMaker(e172::Context *context, Near *radarNear, DevConsole *console)
         }
         m_rootElement->addChildElement(new GUIMiniMap());
         m_rootElement->addChildElement(new GUIDebugValueInfo());
+
+        m_rootElement->addChildElement(new GUIFloatingMessageContainer());
     }
 }

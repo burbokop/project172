@@ -11,7 +11,7 @@ GUIModuleView::GUIModuleView(const std::string &label) : GUIListView(label) {
 int GUIModuleView::rowCount() const {
     if(controller()) {
         if(const auto unit = controller()->parentUnit()) {
-            if(const auto moduleHandler = unit->moduleHandler()) {
+            if(const auto moduleHandler = unit->capability<ModuleHandler>()) {
                 return moduleHandler->modules().size();
             }
         }
@@ -22,9 +22,9 @@ int GUIModuleView::rowCount() const {
 std::string GUIModuleView::rowText(int index) const {
     if(controller()) {
         if(const auto unit = controller()->parentUnit()) {
-            if(const auto moduleHandler = unit->moduleHandler()) {
+            if(const auto& moduleHandler = unit->capability<ModuleHandler>()) {
                 const auto modules = moduleHandler->modules();
-                if(const auto module = modules.at(index)) {
+                if(const auto& module = modules.at(index)) {
                     const auto info = module->info();
                     if(info.size() > 0)
                         return info;

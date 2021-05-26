@@ -30,7 +30,7 @@ public:
     void removeCapability(const e172::ptr<Capability> &capability);
 
     template<typename T>
-    e172::ptr<T> capability() {
+    e172::ptr<T> capability() const {
         for(const auto& c : m_capabilities) {
             if(const auto result = e172::smart_cast<T>(c))
                 return result;
@@ -51,8 +51,6 @@ public:
 
     virtual void hit(e172::Context *context, int value);
 
-    e172::ptr<ModuleHandler> moduleHandler() const;
-    e172::ptr<Docker> docker() const;
     bool selected() const;
     double health() const;
 

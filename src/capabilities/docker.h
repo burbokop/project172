@@ -27,6 +27,8 @@ public:
     void closeAllSessions();
     size_t sessionCount() const;
     std::string sessionInfo(size_t index) const;
+    e172::ptr<Unit> oppositeUnit(size_t index) const;
+    bool docked(size_t index) const;
 
     // Entity interface
 public:

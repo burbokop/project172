@@ -79,8 +79,7 @@ uint8_t Ship::abortWarp(e172::Context *context) {
 }
 
 bool Ship::thrustForward(double throtle) {
-    const auto mh = moduleHandler();
-    if(mh) {
+    if(const auto mh = capability<ModuleHandler>()) {
         const auto engines = mh->modulesOfClass("Engine");
         bool ok = false;
         if(engines.size() > 0) {
@@ -110,7 +109,7 @@ void Ship::maneuverRight() {
 }
 
 e172::ptr<WarpDrive> Ship::firstWarp() const {
-    if(const auto modules = moduleHandler()) {
+    if(const auto modules = capability<ModuleHandler>()) {
         const auto drives = modules->modulesOfClass("WarpDrive");
         if(drives.size() > 0) {
             return e172::smart_cast<WarpDrive>(drives.at(0));
@@ -127,7 +126,7 @@ bool Ship::inWarp() const {
 }
 
 void Ship::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
-    if(const auto modules = moduleHandler()) {
+    if(const auto modules = capability<ModuleHandler>()) {
         const auto drives = modules->modulesOfClass("WarpDrive");
         if(drives.size() > 0) {
             if(const auto driveUnit = e172::smart_cast<WarpDrive>(drives.at(0))) {

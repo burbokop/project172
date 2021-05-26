@@ -89,3 +89,16 @@ e172::ptr<AbstractWareContainer> DebugTransportWareStorage::createWareContainer(
     }
     return wc;
 }
+
+size_t WareStorage::WareRef::index() const {
+    return m_index;
+}
+
+e172::ptr<WareStorage> WareStorage::WareRef::storage() const {
+    return m_storage;
+}
+
+WareStorage::WareRef::WareRef(const e172::ptr<WareStorage> &storage, size_t index) {
+    m_storage = storage;
+    m_index = index;
+}

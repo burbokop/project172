@@ -50,3 +50,4 @@ void GUIFloatingMessageContainer::proceed(e172::Context *context, e172::Abstract
         floatingMessage = nullptr;
     }
 }
+

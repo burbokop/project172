@@ -12,7 +12,7 @@ e172::Line2d DockingTaskExecutor::landingStrip() const {
 bool DockingTaskExecutor::start(const e172::ptr<Unit> &targetUnit) {
     return m_capability.fold<bool>([this, targetUnit](Capability *capability){
         return capability->parentUnit().fold<bool>([this, targetUnit](Unit* unit){
-            return unit->docker().fold<bool>([this, targetUnit](Docker *docker){
+            return unit->capability<Docker>().fold<bool>([this, targetUnit](Docker *docker){
                 m_docker = docker;
                 m_targetUnit = targetUnit;
                 m_status = ApproachingToTarget;

@@ -136,6 +136,8 @@ WorldPreset::GenerationResult DefaultWorld::generate(e172::Context *context) {
             docker->addNode({ 0, -20 }, -e172::Math::Pi / 2);
             docker->addNode({ 0, 20 }, e172::Math::Pi / 2);
             s->addCapability(docker);
+            s->addCapability(new DebugTransportWareStorage(100, { { "abab", 41 }, { "<>", 14 } }));
+
 
             ModuleHandler *mx = new ModuleHandler();
             if(i == 1) {

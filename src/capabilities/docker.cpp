@@ -14,7 +14,7 @@ Docker::~Docker() {
 }
 
 e172::ptr<DockingSession> Docker::createDockingSessionWithUnit(e172::Context* context, const e172::ptr<Unit> &unit) {
-    auto docker = unit->docker();
+    auto docker = unit->capability<Docker>();
     if(!docker) {
         return nullptr;
     }
@@ -58,6 +58,22 @@ std::string Docker::sessionInfo(size_t index) const {
         }
     }
     return "[session info error]";
+}
+
+e172::ptr<Unit> Docker::oppositeUnit(size_t index) const {
+    const auto session = m_sessions[index];
+    if(session) {
+        return session->oppositeUnit(parentUnit());
+    }
+    return nullptr;
+}
+
+bool Docker::docked(size_t index) const {
+    const auto session = m_sessions[index];
+    if(session) {
+        return session->docked();
+    }
+    return false;
 }
 
 void Docker::proceed(e172::Context *, e172::AbstractEventHandler *) {

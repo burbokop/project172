@@ -22,6 +22,8 @@ public:
     operator std::string() const;
 };
 
+std::ostream &operator<<(std::ostream& stream, const WareInfo& info);
+
 class AbstractWareContainer : public e172::Object {
 public:
     AbstractWareContainer();

@@ -40,9 +40,9 @@ void Aggressive::proceed(e172::Context *context, e172::AbstractEventHandler *eve
         targeted = (e172::Math::radiansDistance(dstAngle, parentUnit()->rotation()) < e172::Math::Pi / 32) && !inWarp && dstModule < 400;
         const auto ship = e172::smart_cast<Ship>(parentUnit());
 
-        if(const auto modules = parentUnit()->moduleHandler()) {
+        if(const auto modules = parentUnit()->capability<ModuleHandler>()) {
             const auto weapons = modules->modulesOfClass("Weapon");
-            for(const auto module : weapons) {
+            for(const auto& module : weapons) {
                 if(const auto weapon = e172::smart_cast<Weapon>(module)) {
                     weapon->setFiring(targeted);
                 }

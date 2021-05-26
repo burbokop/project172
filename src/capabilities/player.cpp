@@ -59,7 +59,7 @@ void Player::scheduleDocking(e172::Entity::id_t entity) {
 
 bool Player::createDockingSessionWithUnit(e172::Context *context, e172::Entity::id_t entity) {
     const auto targetUnit = context->entityById<Unit>(entity);
-    const auto docker = parentUnit()->docker();
+    const auto docker = parentUnit()->capability<Docker>();
     if(docker && targetUnit) {
         if(docker->createDockingSessionWithUnit(context, targetUnit)) {
             return true;
@@ -81,7 +81,7 @@ void Player::proceed(e172::Context *context, e172::AbstractEventHandler *eventHa
 
         while(dockRequestedQueue.size() > 0) {
             const auto targetUnit = context->entityById<Unit>(dockRequestedQueue.front());
-            const auto docker = parentUnit()->docker();
+            const auto docker = parentUnit()->capability<Docker>();
             if(docker && targetUnit) {
                 if(!docker->createDockingSessionWithUnit(context, targetUnit)) {
                     context->emitMessage(e172::Context::FLOATING_MESSAGE, e172::Args(parentUnit()->entityId(), "no awailable nodes"));
@@ -90,9 +90,9 @@ void Player::proceed(e172::Context *context, e172::AbstractEventHandler *eventHa
             dockRequestedQueue.pop();
         }
 
-        if(const auto modules = parentUnit()->moduleHandler()) {
+        if(const auto modules = parentUnit()->capability<ModuleHandler>()) {
             const auto weapons = modules->modulesOfClass("Weapon");
-            for(const auto module : weapons) {
+            for(const auto& module : weapons) {
                 if(const auto weapon = e172::smart_cast<Weapon>(module)) {
                     weapon->setFiring(personalKey(eventHandler, "action"));
                 }

@@ -30,3 +30,7 @@ size_t AbstractWareContainer::transferWareTo(size_t index, const e172::ptr<Abstr
     }
     return 0;
 }
+
+std::ostream &operator<<(std::ostream &stream, const WareInfo &info) {
+    return stream << info.wareName() << " [" << info.count() << "]";
+}

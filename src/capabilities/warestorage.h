@@ -12,6 +12,16 @@ protected:
     e172::ptr<AbstractWareContainer> wareContainer() const;
     virtual e172::ptr<AbstractWareContainer> createWareContainer() const = 0;
 public:
+    class WareRef {
+        e172::ptr<WareStorage> m_storage;
+        size_t m_index = 0;
+    public:
+        WareRef(const e172::ptr<WareStorage>& storage, size_t index);
+        WareRef() {}
+        size_t index() const;
+        e172::ptr<WareStorage> storage() const;
+    };
+
     WareStorage();
     ~WareStorage();
 
