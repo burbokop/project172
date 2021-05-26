@@ -132,7 +132,6 @@ GUIMaker::GUIMaker(e172::Context *context, Near *radarNear, DevConsole *console)
                         //    testMenu->addMenuElement(new GUIMenuElement(tps));
                         //}
 
-
                     } mainMenu->addMenuElement(testMenu);
 
                     auto optionsMenu = new GUIMenu("options"); {

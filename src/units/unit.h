@@ -5,6 +5,7 @@
 #include <src/math/physicalobject.h>
 #include <src/assettools/loadable.h>
 #include <src/iinformative.h>
+#include <src/person.h>
 #include <src/utility/animator.h>
 #include <src/utility/ptr.h>
 
@@ -12,9 +13,6 @@ class ModuleHandler;
 class Docker;
 class Capability;
 class Unit : public e172::Entity, public e172::Loadable, public e172::PhysicalObject, public IInformative {
-public:
-
-private:
     double m_health = 0;
     double m_explosiveRadius = 0;
     e172::Animator m_animator;
@@ -23,6 +21,8 @@ private:
     bool m_selected = false;
     uint32_t m_selectedColor;
     e172::ElapsedTimer m_selectedAnimationTimer;
+
+    e172::ptr<Person> m_ownerPerson;
 public:
     Unit();
 
@@ -53,6 +53,9 @@ public:
 
     bool selected() const;
     double health() const;
+
+    e172::ptr<Person> ownerPerson() const;
+    void setOwnerPerson(const e172::ptr<Person> &ownerPerson);
 
     // IInformative interface
 public:

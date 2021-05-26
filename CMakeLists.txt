@@ -206,6 +206,9 @@ add_executable(project172
     ${CMAKE_CURRENT_LIST_DIR}/src/units/unit.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/units/unit.h
 
+    ${CMAKE_CURRENT_LIST_DIR}/src/person.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/person.h
+
     ${CMAKE_CURRENT_LIST_DIR}/src/worlds/arenaworld.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/worlds/arenaworld.h
     ${CMAKE_CURRENT_LIST_DIR}/src/worlds/defaultworld.cpp

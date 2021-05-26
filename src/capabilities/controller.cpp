@@ -16,6 +16,16 @@ void Controller::setArmor(const e172::ptr<Ship> &armor) {
     m_armor = armor;
 }
 
+e172::ptr<Person> Controller::person() const
+{
+    return m_person;
+}
+
+void Controller::setPerson(const e172::ptr<Person> &person)
+{
+    m_person = person;
+}
+
 void Controller::releaseArmor() {
     if(m_armor && parentUnit() && m_armor != parentUnit()) {
         armorReleaseTimer.reset();

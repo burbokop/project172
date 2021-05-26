@@ -64,6 +64,16 @@ void Unit::render(e172::AbstractRenderer *renderer) {
     }
 }
 
+e172::ptr<Person> Unit::ownerPerson() const
+{
+    return m_ownerPerson;
+}
+
+void Unit::setOwnerPerson(const e172::ptr<Person> &ownerPerson)
+{
+    m_ownerPerson = ownerPerson;
+}
+
 Unit::Unit() {
     std::srand(clock());
     m_selectedColor = e172::randomColor();
