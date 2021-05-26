@@ -1,9 +1,9 @@
 [submodule "e172"]
 	path = e172
-	url = https://github.com/burbokop/e172.git
+	url = git@github.com:burbokop/e172.git
 [submodule "sdl_implementation"]
 	path = sdl_implementation
-	url = https://github.com/burbokop/sdl_implementation.git
+	url = git@github.com:burbokop/sdl_implementation.git
 [submodule "vulkan_implementation"]
 	path = vulkan_implementation
-	url = https://github.com/burbokop/vulkan_implementation.git
+	url = git@github.com:burbokop/vulkan_implementation.git
