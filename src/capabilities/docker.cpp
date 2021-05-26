@@ -7,7 +7,14 @@ void Docker::addNode(const e172::Vector &offset, double angle) {
     m_nodePool.addNode(offset, angle);
 }
 
-Docker::Docker() {}
+Docker::Docker() {
+    registerInitFunction([this](){
+        const auto nodes = asset<std::list<std::pair<e172::Vector, double>>>("nodes");
+        for(const auto& node : nodes) {
+            addNode(node.first, node.second);
+        }
+    });
+}
 
 Docker::~Docker() {
     closeAllSessions();
