@@ -14,6 +14,7 @@
 #include <src/capabilities/modules/weapon.h>
 
 #include <src/context.h>
+#include <src/debug.h>
 #include <src/math/physicalobject.h>
 
 
@@ -90,17 +91,16 @@ WorldPreset::GenerationResult DefaultWorld::generate(e172::Context *context) {
 
     /*empty ship*/{
         auto someShip = context->assetProvider()->createLoadable<Unit>("sh1");
-
         someShip->addCapability(new AI());
-
         ModuleHandler *someShipModules = new ModuleHandler();
         someShipModules->addModule(context->assetProvider()->createLoadable<Module>("engine2"));
         someShip->addCapability(someShipModules);
-
-        context->assetProvider()->createLoadable("aaa");
-
         someShip->resetPhysicsProperties(e172::Vector(-200, -100), -0.7);
         result.entities.push_back(someShip);
+
+        for(const auto& a : someShip->capabilities<Docker>()) {
+            e172::Debug::print("a:", a->className());
+        }
     }
 
     /*ships with ai type 1*/ {
@@ -119,15 +119,8 @@ WorldPreset::GenerationResult DefaultWorld::generate(e172::Context *context) {
             }
 
             s->resetPhysicsProperties(e172::Vector(-50 + i * 50, 100), -0.7);
-
             s->addCapability(new AI());
-
-            auto docker = new Docker();
-            docker->addNode({ 0, -20 }, -e172::Math::Pi / 2);
-            docker->addNode({ 0, 20 }, e172::Math::Pi / 2);
-            s->addCapability(docker);
             s->addCapability(new DebugTransportWareStorage(100, { { "abab", 41 }, { "<>", 14 } }));
-
 
             ModuleHandler *mx = new ModuleHandler();
             if(i == 1) {
@@ -138,16 +131,12 @@ WorldPreset::GenerationResult DefaultWorld::generate(e172::Context *context) {
             }
             mx->addModule(context->assetProvider()->createLoadable<Module>("engine1"));
             mx->addModule(context->assetProvider()->createLoadable<Module>("warp-drive1"));
-
             s->addCapability(mx);
-
-            //s->addCapability(new Docker());
 
             if(i == 1) s->addCapability(player2);
             result.entities.push_back(s);
         }
     }
-
 
     /*all units 1*/ {
         std::vector<std::string> assetKeys = context->assetProvider()->loadableNames();
@@ -165,7 +154,6 @@ WorldPreset::GenerationResult DefaultWorld::generate(e172::Context *context) {
                     mhx->addModule(context->assetProvider()->createLoadable<Module>("warp-drive1"));
 
                     unit->addCapability(mhx);
-                    unit->addCapability(new Docker());
                     unit->addCapability(new TransportWareStorage(100));
 
                     result.entities.push_back(unit);
@@ -177,30 +165,17 @@ WorldPreset::GenerationResult DefaultWorld::generate(e172::Context *context) {
 
     /* station 1 */{
         auto s = context->assetProvider()->createLoadable<Unit>("st1");
-
-        auto docker = new Docker();
-        docker->addNode({ -50, 0 }, -e172::Math::Pi);
-        docker->addNode({ 0, 50 }, 0);
-        s->addCapability(docker);
         s->addCapability(context->assetProvider()->createLoadable<Capability>("ore_reciept"));
-
         s->resetPhysicsProperties(e172::Vector(450, -150), 0);
         result.entities.push_back(s);
     }
 
     /* station 2 */{
         auto s = context->assetProvider()->createLoadable<Unit>("st2");
-
-        auto docker = new Docker();
-        docker->addNode({ -40, 0 }, -e172::Math::Pi);
-        docker->addNode({ 0, 40 }, 0);
-        s->addCapability(docker);
         s->addCapability(context->assetProvider()->createLoadable<Capability>("ore_reciept"));
-
         s->resetPhysicsProperties(e172::Vector(50, 150), 0);
         result.entities.push_back(s);
     }
-
 
     return result;
 }

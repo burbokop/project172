@@ -11,6 +11,8 @@
 #include <src/context.h>
 
 #include <src/graphics/abstractrenderer.h>
+#include <src/assettools/assetprovider.h>
+#include <src/assettools/loadabletemplate.h>
 
 bool Unit::selected() const {
     return m_selected;
@@ -84,8 +86,9 @@ Unit::Unit() {
             m_animator = asset<e172::Animator>("animator");
         }
 
-        if(m_capabilities.empty()) {
-            m_capabilities = asset<std::vector<e172::ptr<Capability>>>("capabilities");
+        const auto capabilityTemplates = asset<std::vector<e172::LoadableTemplate>>("capabilities");
+        for(const auto& tmpl : capabilityTemplates) {
+            addCapability(assetProvider()->createLoadable<Capability>(tmpl));
         }
         setMass(asset<double>("mass", 1));
     });
@@ -110,7 +113,7 @@ void Unit::hit(e172::Context *context, int value) {
     if(value != 0) {
         m_health -= value;
 
-        for(const auto capability : m_capabilities) {
+        for(const auto& capability : m_capabilities) {
             if(const auto controller = e172::smart_cast<Controller>(capability)) {
                 controller->onHit(context, static_cast<int>(m_health));
             }

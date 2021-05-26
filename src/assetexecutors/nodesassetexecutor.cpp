@@ -15,9 +15,19 @@ std::optional<double> NodesAssetExecutor::parseAngle(const std::string &str) {
             if(divider != e172::Math::null) {
                 return e172::Math::Pi / divider;
             }
+        } else if(angleParts[0] == "-Pi") {
+            const auto divider = std::stod(angleParts[1]);
+            if(divider != e172::Math::null) {
+                return -e172::Math::Pi / divider;
+            }
         }
     } else if(angleParts.size() > 1) {
         return std::stod(angleParts[1]);
+    }
+    if(str == "Pi") {
+        return e172::Math::Pi;
+    } else if(str == "-Pi") {
+        return -e172::Math::Pi;
     }
     return std::nullopt;
 }

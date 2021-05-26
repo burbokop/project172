@@ -113,8 +113,8 @@ add_executable(project172
     ${CMAKE_CURRENT_LIST_DIR}/src/assetexecutors/vectorassetexecutor.h
     ${CMAKE_CURRENT_LIST_DIR}/src/assetexecutors/factoryassetexecutor.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/assetexecutors/factoryassetexecutor.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/assetexecutors/capabilitiesassetexecutor.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/assetexecutors/capabilitiesassetexecutor.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/assetexecutors/templatevectorassetexecutor.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/assetexecutors/templatevectorassetexecutor.h
     ${CMAKE_CURRENT_LIST_DIR}/src/assetexecutors/nodesassetexecutor.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/assetexecutors/nodesassetexecutor.h
 

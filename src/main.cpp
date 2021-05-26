@@ -14,10 +14,10 @@
 
 #include <src/assetexecutors/animatorassetexecutor.h>
 #include <src/assetexecutors/audioassetexecutor.h>
-#include <src/assetexecutors/capabilitiesassetexecutor.h>
 #include <src/assetexecutors/factoryassetexecutor.h>
 #include <src/assetexecutors/nodesassetexecutor.h>
 #include <src/assetexecutors/spriteassetexecutor.h>
+#include <src/assetexecutors/templatevectorassetexecutor.h>
 #include <src/assetexecutors/vectorassetexecutor.h>
 
 #include <src/capabilities/ai.h>
@@ -150,7 +150,7 @@ int main(int argc, char *argv[]) {
     app.assetProvider()->installExecutor("offset", std::make_shared<VectorAssetExecutor>());
     app.assetProvider()->installExecutor("input", std::make_shared<RecieptAssetExecutor>());
     app.assetProvider()->installExecutor("output", std::make_shared<RecieptAssetExecutor>());
-    app.assetProvider()->installExecutor("capabilities", std::make_shared<CapabilitiesAssetExecutor>());
+    app.assetProvider()->installExecutor("capabilities", std::make_shared<TemplateVectorAssetExecutor>());
     app.assetProvider()->installExecutor("nodes", std::make_shared<NodesAssetExecutor>());
 
 
@@ -165,6 +165,7 @@ int main(int argc, char *argv[]) {
     app.assetProvider()->registerType<WarpDrive>();
     app.assetProvider()->registerType<Thruster>();
     app.assetProvider()->registerType<Factory>();
+    app.assetProvider()->registerType<Docker>();
 
 
     app.assetProvider()->searchInFolder(app.context()->absolutePath("../assets"));
