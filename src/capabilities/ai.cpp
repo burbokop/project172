@@ -1,4 +1,5 @@
 #include "ai.h"
+#include "warestorage.h"
 
 #include <src/graphics/abstractrenderer.h>
 #include <src/units/ship.h>
@@ -27,5 +28,5 @@ void AI::render(e172::AbstractRenderer *renderer) {
         renderer->drawStringShifted(dockingTaskExecutor.statusString(), parentUnit()->position() + e172::Vector(0, -32), 0xffaaaa, format);
         renderer->drawLineShifted(dockingTaskExecutor.landingStrip(), 0xffaaff);
         renderer->drawCircleShifted(dockingTaskExecutor.targetPoint(), 4, 0xffaaff);
-    }
+    }    
 }

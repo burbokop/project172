@@ -174,6 +174,7 @@ WorldPreset::GenerationResult DefaultWorld::generate(e172::Context *context) {
 
                     unit->addCapability(mhx);
                     unit->addCapability(new Docker());
+                    unit->addCapability(new TransportWareStorage(100));
 
                     result.entities.push_back(unit);
                     i++;
@@ -189,18 +190,20 @@ WorldPreset::GenerationResult DefaultWorld::generate(e172::Context *context) {
         docker->addNode({ -50, 0 }, -e172::Math::Pi);
         docker->addNode({ 0, 50 }, 0);
         s->addCapability(docker);
+        s->addCapability(context->assetProvider()->createLoadable<Capability>("ore_reciept"));
 
         s->resetPhysicsProperties(e172::Vector(450, -150), 0);
         result.entities.push_back(s);
     }
 
-    /* station 1 */{
+    /* station 2 */{
         Unit *s = static_cast<Unit*>(context->assetProvider()->createLoadable("st2"));
 
         auto docker = new Docker();
         docker->addNode({ -40, 0 }, -e172::Math::Pi);
         docker->addNode({ 0, 40 }, 0);
         s->addCapability(docker);
+        s->addCapability(context->assetProvider()->createLoadable<Capability>("ore_reciept"));
 
         s->resetPhysicsProperties(e172::Vector(50, 150), 0);
         result.entities.push_back(s);

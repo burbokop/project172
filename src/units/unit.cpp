@@ -5,6 +5,7 @@
 #include <src/capabilities/controller.h>
 #include <src/capabilities/docker.h>
 #include <src/capabilities/modulehandler.h>
+#include <src/capabilities/warestorage.h>
 
 #include <src/args.h>
 #include <src/context.h>
@@ -34,14 +35,32 @@ void Unit::proceed(e172::Context *context, e172::AbstractEventHandler *eventHand
 void Unit::render(e172::AbstractRenderer *renderer) {
     m_animator.setAngle(rotation());
     m_animator.setPosition(position());
-    m_animator.render(renderer);
+    const auto spriteSize = m_animator.render(renderer);
 
     if(m_selected) {
-        renderer->drawSquareShifted(position(), (m_selectedAnimationTimer.elapsed() / 50) % 24, m_selectedColor);
+        renderer->drawSquareShifted(position(), (m_selectedAnimationTimer.elapsed() / 50) % int(spriteSize.max()), m_selectedColor);
     }
 
     for(const auto& cap : m_capabilities) {
         cap->render(renderer);
+    }
+
+    {
+        double yOffset = 0;
+        const auto format = e172::TextFormat(e172::TextFormat::AlignHCenter | e172::TextFormat::AlignBottom, 10);
+        for(const auto& c : m_capabilities) {
+            auto offset = renderer->drawStringShifted(c->className(), position() + e172::Vector(50, spriteSize.y() * 0.5 + 8 + yOffset), 0xffaaff, format);
+            yOffset += offset.y();
+        }
+    }
+    if(auto storage = capability<WareStorage>()) {
+        const auto format = e172::TextFormat(e172::TextFormat::AlignHCenter | e172::TextFormat::AlignBottom, 10);
+        double yOffset = 0;
+        for(size_t count = storage->wareInfoCount(), i = 0; i < count; ++i) {
+            const auto info = storage->wareInfo(i);
+            auto offset = renderer->drawStringShifted(info, position() + e172::Vector(0, spriteSize.y() * 0.5 + 8 + yOffset), 0xaaffaa, format);
+            yOffset += offset.y();
+        }
     }
 }
 
@@ -91,7 +110,7 @@ void Unit::hit(e172::Context *context, int value) {
         }
 
         if(m_health < 0) {
-            context->emitMessage(e172::Context::SPAWN_EXPLOSIVE, e172::Args(position(), velocity(), m_explosiveRadius));           
+            context->emitMessage(e172::Context::SPAWN_EXPLOSIVE, e172::Args(position(), velocity(), m_explosiveRadius));
             if(const auto mh = moduleHandler()) {
                 const auto modules = mh->modules();
                 for(const auto module : modules) {

@@ -1,24 +1,24 @@
 {
-    	"id": "ore_reciept",
-    	"class": "Factory",
+	"id": "ore_reciept",
+	"class": "Factory",
 	"interval": 200,
-    	"input": [
-        	{
-        		"ware": "ore",
-       	 		"capacity": 400,
+	"input": [
+    	{
+			"ware": "ore",
+			"capacity": 400,
 			"amount": 8
-        	}
-    	],
-    	"output": [
-        	{
-            		"ware": "metal",
-            		"capacity": 100,
-            		"amount": 2
-        	},
-        	{
-            		"ware": "scrap",
-            		"capacity": 300,
-            		"amount": 6
-        	}
-    	]
+		}
+	],
+	"output": [
+		{
+			"ware": "metal",
+			"capacity": 100,
+			"amount": 2
+		},
+		{
+			"ware": "scrap",
+			"capacity": 300,
+			"amount": 6
+		}
+	]
 }
