@@ -60,7 +60,8 @@ void Unit::render(e172::AbstractRenderer *renderer) {
         double yOffset = 0;
         for(size_t count = storage->wareInfoCount(), i = 0; i < count; ++i) {
             const auto info = storage->wareInfo(i);
-            auto offset = renderer->drawStringShifted(info, position() + e172::Vector(0, spriteSize.y() * 0.5 + 8 + yOffset), 0xaaffaa, format);
+            const auto price = storage->priceTable()->price(i);
+            auto offset = renderer->drawStringShifted(info.toString() + " : " + price.toString(), position() + e172::Vector(0, spriteSize.y() * 0.5 + 8 + yOffset), 0xaaffaa, format);
             yOffset += offset.y();
         }
     }

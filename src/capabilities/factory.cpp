@@ -1,5 +1,9 @@
 #include "factory.h"
 
+#include <src/math/math.h>
+
+#include <src/debug.h>
+
 void Factory::initializeTemplates() {
     const auto inputTemplates = asset<std::vector<FactoryWareTemplate>>("input");
     const auto outputTemplates = asset<std::vector<FactoryWareTemplate>>("output");
@@ -18,6 +22,26 @@ void Factory::initializeTemplates() {
         container->operator[](inputTemplates.size() + i).setCapacity(outputTemplates[i].capacity());
         container->operator[](inputTemplates.size() + i).setAllowedOutput(std::vector<std::string> { outputTemplates[i].ware() });
         m_templates[inputTemplates.size() + i] = outputTemplates[i];
+    }
+}
+
+void Factory::updatePriceTable() {
+    const auto& container = e172::smart_cast<WareMultiBayContainer>(wareContainer());
+    double wareDefaultPrice = 10;
+    for(size_t i = 0; i < container->size(); ++i) {
+        const auto& subContainer = container->operator[](i);
+        const auto& tmpl = m_templates[i];
+        const auto& full = subContainer.full();
+        if(subContainer.isOutputAllowed(tmpl.ware())) {
+            priceTable()->setBuyPrice(i, wareDefaultPrice * full);
+        } else {
+            priceTable()->removeBuyPrice(i);
+        }
+        if(subContainer.isInputAllowed(tmpl.ware())) {
+            priceTable()->setSellPrice(i, wareDefaultPrice * (1 - full));
+        } else {
+            priceTable()->removeSellPrice(i);
+        }
     }
 }
 
@@ -69,6 +93,7 @@ void Factory::proceed(e172::Context *, e172::AbstractEventHandler *) {
                     container->operator[](i).removeWare(0, templ.amount(), true);
             }
         }
+        updatePriceTable();
     }
 }
 

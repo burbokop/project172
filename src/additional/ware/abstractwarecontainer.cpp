@@ -24,8 +24,9 @@ size_t AbstractWareContainer::transferWareTo(size_t index, const e172::ptr<Abstr
     if(index < wareInfoCount() && count > 0) {
         const auto wareName = wareInfo(index).wareName();
         count = std::min(capacity() - amount(), count);
-        count = removeWare(index, count);
-        return container->addWare(wareName, count);
+        count = wareAwailableRemovingAmount(index, count);
+        count = container->addWare(wareName, count);
+        return removeWare(index, count);
     }
     return 0;
 }

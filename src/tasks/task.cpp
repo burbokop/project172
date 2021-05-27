@@ -54,11 +54,6 @@ e172::ptr<Controller> Task::parentController() const {
 
 void Task::completeTask() {
     m_running = false;
-    for(const auto& c : m_onCompleatedSignal) {
-        if(c) {
-            c();
-        }
-    }
     m_onCompleatedSignal.clear();
     if(m_parentTask) {
         if(m_parentTask->m_children.erase(this)) {
@@ -69,6 +64,11 @@ void Task::completeTask() {
     } else if (m_parentController) {
         m_parentController->m_rootTask = nullptr;
         m_parentController->m_trash.push_back(this);
+    }
+    for(const auto& c : m_onCompleatedSignal) {
+        if(c) {
+            c();
+        }
     }
 }
 

@@ -10,7 +10,7 @@ size_t WareContainer::amount() const {
     return sum;
 }
 
-bool WareContainer::containsAllowedInput(const std::string &wareName) const {
+bool WareContainer::isInputAllowed(const std::string &wareName) const {
     if(std::get_if<all_allowed_t>(&m_allowedInput)) {
         return true;
     } else {
@@ -21,7 +21,7 @@ bool WareContainer::containsAllowedInput(const std::string &wareName) const {
     return false;
 }
 
-bool WareContainer::containsAllowedOutput(const std::string &wareName) const {
+bool WareContainer::isOutputAllowed(const std::string &wareName) const {
     if(std::get_if<all_allowed_t>(&m_allowedOutput)) {
         return true;
     } else {
@@ -71,7 +71,7 @@ bool WareContainer::isNoOutputAllowed() const {
 }
 
 size_t WareContainer::wareAwailableAdditingAmount(std::string ware, size_t count, bool ignoreAllowed) {
-    if(count > 0 && (ignoreAllowed || containsAllowedInput(ware))) {
+    if(count > 0 && (ignoreAllowed || isInputAllowed(ware))) {
         return std::min(m_capacity - amount(), count);
     }
     return 0;
@@ -80,7 +80,7 @@ size_t WareContainer::wareAwailableAdditingAmount(std::string ware, size_t count
 size_t WareContainer::wareAwailableRemovingAmount(size_t index, size_t count, bool ignoreAllowed) {
     if(index < m_data.size()) {
         auto& w = m_data[index];
-        if(ignoreAllowed || containsAllowedOutput(std::get<0>(w))) {
+        if(ignoreAllowed || isOutputAllowed(std::get<0>(w))) {
             return std::min(std::get<1>(w), count);
         }
     }
@@ -137,6 +137,14 @@ WareInfo WareContainer::wareInfo(size_t index) const {
 
 size_t WareContainer::capacity() const {
     return m_capacity;
+}
+
+double WareContainer::full() const {
+    if(const auto c = capacity()) {
+        return double(amount()) / double(c);
+    } else {
+        return 0;
+    }
 }
 
 size_t WareContainer::setCapacity(const size_t &capacity) {

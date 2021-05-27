@@ -69,7 +69,7 @@ WorldPreset::GenerationResult DefaultWorld::generatePlayer(e172::Context *contex
     playerModuleHandler->addModule(pp1);
 
     playerShip->addCapability(playerModuleHandler);
-    playerShip->addCapability(new DebugTransportWareStorage(100, { { "goga", 12 }, { "aaa", 32 } }));
+    playerShip->addCapability(new DebugTransportWareStorage(500, { { "ore", 400 }, { "aaa", 32 } }));
 
     result.entities.push_back(playerShip);
     return result;

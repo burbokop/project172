@@ -20,6 +20,7 @@ public:
     size_t count() const;
 
     operator std::string() const;
+    inline std::string toString() const { return *this; }
 };
 
 std::ostream &operator<<(std::ostream& stream, const WareInfo& info);

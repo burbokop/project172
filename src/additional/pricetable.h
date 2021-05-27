@@ -16,6 +16,8 @@ struct PriceTable : public e172::Object {
         Price(std::optional<int64_t> buyPrice, std::optional<int64_t> sellPrice);
         std::optional<int64_t> buyPrice() const;
         std::optional<int64_t> sellPrice() const;
+        operator std::string() const;
+        inline std::string toString() const { return *this; }
     };
 private:
     std::vector<std::pair<std::optional<int64_t>, std::optional<int64_t>>> m_data;

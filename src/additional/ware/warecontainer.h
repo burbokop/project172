@@ -28,11 +28,13 @@ public:
     virtual size_t amount() const override;
     virtual size_t capacity() const override;
 
+    double full() const;
+
     WareContainer(size_t capacity = 0);
     size_t setCapacity(const size_t &capacity);
 
-    bool containsAllowedInput(const std::string &wareName) const;
-    bool containsAllowedOutput(const std::string &wareName) const;
+    bool isInputAllowed(const std::string &wareName) const;
+    bool isOutputAllowed(const std::string &wareName) const;
     Allowed allowedInput() const;
     void setAllowedInput(const Allowed &allowedInput);
     Allowed allowedOutput() const;

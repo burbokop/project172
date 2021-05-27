@@ -19,7 +19,7 @@ void WareMultiBayContainer::setBayCount(size_t count) {
 
 size_t WareMultiBayContainer::wareAwailableAdditingAmount(std::string ware, size_t count, bool ignoreAllowed) {
     for(auto& d : m_data) {
-        if(d.containsAllowedInput(ware)) {
+        if(d.isInputAllowed(ware)) {
             size_t c = d.wareAwailableAdditingAmount(ware, count, ignoreAllowed);
             if(c > 0)
                 return c;
@@ -44,7 +44,7 @@ size_t WareMultiBayContainer::wareAwailableRemovingAmount(size_t index, size_t c
 
 size_t WareMultiBayContainer::addWare(std::string ware, size_t count, bool ignoreAllowed) {
     for(auto& d : m_data) {
-        if(d.containsAllowedInput(ware)) {
+        if(d.isInputAllowed(ware)) {
             const auto c = d.addWare(ware, count, ignoreAllowed);
             if(c > 0)
                 return c;

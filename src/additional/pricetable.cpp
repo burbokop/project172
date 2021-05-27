@@ -49,3 +49,7 @@ std::optional<int64_t> PriceTable::Price::buyPrice() const {
 std::optional<int64_t> PriceTable::Price::sellPrice() const {
     return m_sellPrice;
 }
+
+PriceTable::Price::operator std::string() const {
+    return (m_buyPrice.has_value() ? std::to_string(m_buyPrice.value()) : "nl") + ", " + (m_sellPrice.has_value() ? std::to_string(m_sellPrice.value()) : "nl");
+}
