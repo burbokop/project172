@@ -9,6 +9,7 @@
 #include <src/ftestobject.h>
 #include <src/math/math.h>
 #include <src/units/ship.h>
+#include <src/units/station.h>
 #include <src/units/unit.h>
 #include <src/additional/segmentpaiter.h>
 #include <src/capabilities/modules/weapon.h>
@@ -18,61 +19,44 @@
 #include <src/math/physicalobject.h>
 
 
-DefaultWorld::DefaultWorld() {
-
-}
+DefaultWorld::DefaultWorld() {}
 
 WorldPreset::GenerationResult DefaultWorld::generate(e172::Context *context) {
     GenerationResult result;
 
+    result += generatePlayer(context, "player1", new Person("burbokop"));
 
-    //player1
-    auto player1 = context->assetProvider()->createLoadable<Player>("player1");
+    auto corp = new Person("corp");
+    corp->setIsJuridicalPerson(true);
+    result += generateSomeShips(context, 10, corp);
+    result += generateSomeStations(context, 10, corp);
+
+
+    auto merchantGuild = new Person("merchant guild");
+    merchantGuild->setIsJuridicalPerson(true);
+    result += generateSomeShips(context, 10, merchantGuild);
+    result += generateSomeStations(context, 10, merchantGuild);
+
+
+    return result;
+}
+
+WorldPreset::GenerationResult DefaultWorld::generatePlayer(e172::Context *context, const std::string &templateId, const e172::ptr<Person> &person) {
+    GenerationResult result;
+    auto player = context->assetProvider()->createLoadable<Player>(templateId);
+    player->setPerson(person);
     auto playerArmor = context->assetProvider()->createLoadable<Ship>("astro");
     ModuleHandler *playerArmorModules = new ModuleHandler();
     playerArmorModules->addModule(context->assetProvider()->createLoadable<Module>("mini-engine"));
     playerArmorModules->addModule(context->assetProvider()->createLoadable<Module>("repair-laser"));
     playerArmor->addCapability(playerArmorModules);
-    player1->setArmor(playerArmor);
-    result.controllers.push_back(player1);
-
-    //player2
-    auto player2 = context->assetProvider()->createLoadable<Player>("player2");
-    auto playerArmor2 = context->assetProvider()->createLoadable<Ship>("astro");
-    ModuleHandler *playerArmorModules2 = new ModuleHandler();
-    playerArmorModules2->addModule(context->assetProvider()->createLoadable<Module>("mini-engine"));
-    playerArmorModules2->addModule(context->assetProvider()->createLoadable<Module>("repair-laser"));
-    playerArmor2->addCapability(playerArmorModules2);
-    player2->setArmor(playerArmor2);
-    result.controllers.push_back(player2);
-
-
-    /*
-    SegmentPaiter *segmentPaiter = new SegmentPaiter();
-    segmentPaiter->resetPhysicsProperties({ 100, 0 }, 0);
-    result.entities.push_back(segmentPaiter);
-
-
-    auto ffo = new FTestObject();
-    result.entities.push_back(ffo);
-    auto sfo = new FTestObject(ffo);
-    result.entities.push_back(sfo);
-
-    ffo->setCOffset({ 0, -50 });
-    ffo->setCAngle(-e172::Math::Pi / 2);
-    ffo->setColiderVertices({ { -100, 50 }, { 0, -50 }, { 100, 50 } });
-
-    sfo->setCOffset({ 0, 50 });
-    sfo->setCAngle(e172::Math::Pi / 2);
-    sfo->setColiderVertices({ { -100, 50 }, { 0, -50 }, { 100, 50 } });
-    */
-
-
+    player->setArmor(playerArmor);
+    result.controllers.push_back(player);
 
     auto playerShip = context->assetProvider()->createLoadable<Unit>("sh1");
-    playerShip->resetPhysicsProperties(e172::Vector(100, 100), -0.7);
-
-    playerShip->addCapability(player1);
+    playerShip->resetPhysicsProperties(e172::Vector::createRandom(500), e172::Math::randDouble() * e172::Math::Pi * 2);
+    playerShip->setOwnerPerson(person);
+    playerShip->addCapability(player);
     ModuleHandler *playerModuleHandler = new ModuleHandler();
     playerModuleHandler->addModule(context->assetProvider()->createLoadable<Module>("engine2"));
     playerModuleHandler->addModule(context->assetProvider()->createLoadable<Module>("warp-drive1"));
@@ -88,95 +72,50 @@ WorldPreset::GenerationResult DefaultWorld::generate(e172::Context *context) {
     playerShip->addCapability(new DebugTransportWareStorage(100, { { "goga", 12 }, { "aaa", 32 } }));
 
     result.entities.push_back(playerShip);
+    return result;
+}
 
-    /*empty ship*/{
-        auto someShip = context->assetProvider()->createLoadable<Unit>("sh1");
-        someShip->addCapability(new AI());
-        ModuleHandler *someShipModules = new ModuleHandler();
-        someShipModules->addModule(context->assetProvider()->createLoadable<Module>("engine2"));
-        someShip->addCapability(someShipModules);
-        someShip->resetPhysicsProperties(e172::Vector(-200, -100), -0.7);
-        result.entities.push_back(someShip);
+WorldPreset::GenerationResult DefaultWorld::generateSomeShips(e172::Context *context, size_t cnt, const e172::ptr<Person> &person) {
+    GenerationResult result;
+    const auto names = context->assetProvider()->loadableNames();
+    size_t i = 0;
+    for(const auto& id : names) {
+        if(i >= cnt)
+            return result;
 
-        for(const auto& a : someShip->capabilities<Docker>()) {
-            e172::Debug::print("a:", a->className());
+        if(const auto ship = context->assetProvider()->createLoadable<Ship>(id)) {
+            auto controller = new AI();
+            controller->setPerson(person);
+            ship->setOwnerPerson(person);
+            ship->addCapability(controller);
+            ModuleHandler *someShipModules = new ModuleHandler();
+            someShipModules->addModule(context->assetProvider()->createLoadable<Module>("engine2"));
+            ship->addCapability(someShipModules);
+            ship->resetPhysicsProperties(e172::Vector::createRandom(500), e172::Math::randDouble() * e172::Math::Pi * 2);
+            result.entities.push_back(ship);
+            ++i;
         }
     }
+    return result;
+}
 
-    /*ships with ai type 1*/ {
-        for(int i = 0; i < 3; i++) {
-            e172::ptr<Unit> s;
-            switch (i) {
-            case 0:
-                s = context->assetProvider()->createLoadable<Unit>("sh1");
-                break;
-            case 1:
-                s = context->assetProvider()->createLoadable<Unit>("sh2");
-                break;
-            case 2:
-                s = context->assetProvider()->createLoadable<Unit>("sh3");
-                break;
-            }
+WorldPreset::GenerationResult DefaultWorld::generateSomeStations(e172::Context *context, size_t cnt, const e172::ptr<Person> &person) {
+    GenerationResult result;
+    const auto names = context->assetProvider()->loadableNames();
+    size_t i = 0;
+    for(const auto& id : names) {
+        if(i >= cnt)
+            return result;
 
-            s->resetPhysicsProperties(e172::Vector(-50 + i * 50, 100), -0.7);
-            s->addCapability(new AI());
-            s->addCapability(new DebugTransportWareStorage(100, { { "abab", 41 }, { "<>", 14 } }));
-
-            ModuleHandler *mx = new ModuleHandler();
-            if(i == 1) {
-                mx->addModule(context->assetProvider()->createLoadable<Module>("pistol"));
-                mx->addModule(context->assetProvider()->createLoadable<Module>("mega-launcher"));
-            } else {
-                mx->addModule(context->assetProvider()->createLoadable<Module>("pistol"));
-            }
-            mx->addModule(context->assetProvider()->createLoadable<Module>("engine1"));
-            mx->addModule(context->assetProvider()->createLoadable<Module>("warp-drive1"));
-            s->addCapability(mx);
-
-            if(i == 1) s->addCapability(player2);
-            result.entities.push_back(s);
+        auto station = context->assetProvider()->createLoadable<Station>(id);
+        if(station) {
+            station->setOwnerPerson(person);
+            station->addCapability(context->assetProvider()->createLoadable<Capability>("ore_reciept"));
+            station->resetPhysicsProperties(e172::Vector::createRandom(500), e172::Math::randDouble() * e172::Math::Pi * 2);
+            result.entities.push_back(station);
+            ++i;
         }
     }
-
-    /*all units 1*/ {
-        std::vector<std::string> assetKeys = context->assetProvider()->loadableNames();
-        unsigned int i = 0;
-        for (std::string key : assetKeys) {
-            if(key != "st1") {
-                auto unit = context->assetProvider()->createLoadable<Unit>(key);
-                if(unit) {
-                    unit->resetPhysicsProperties(e172::Vector(static_cast<int>((i + 4) * 64), -200), 0);
-
-                    unit->addCapability(new AI());
-                    ModuleHandler *mhx = new ModuleHandler();
-                    mhx->addModule(context->assetProvider()->createLoadable<Module>((i == 1) ? "plasma-launcher" : "pistol"));
-                    mhx->addModule(context->assetProvider()->createLoadable<Module>("engine1"));
-                    mhx->addModule(context->assetProvider()->createLoadable<Module>("warp-drive1"));
-
-                    unit->addCapability(mhx);
-                    unit->addCapability(new TransportWareStorage(100));
-
-                    result.entities.push_back(unit);
-                    i++;
-                }
-            }
-        }
-    }
-
-    /* station 1 */{
-        auto s = context->assetProvider()->createLoadable<Unit>("st1");
-        s->addCapability(context->assetProvider()->createLoadable<Capability>("ore_reciept"));
-        s->resetPhysicsProperties(e172::Vector(450, -150), 0);
-        result.entities.push_back(s);
-    }
-
-    /* station 2 */{
-        auto s = context->assetProvider()->createLoadable<Unit>("st2");
-        s->addCapability(context->assetProvider()->createLoadable<Capability>("ore_reciept"));
-        s->resetPhysicsProperties(e172::Vector(50, 150), 0);
-        result.entities.push_back(s);
-    }
-
     return result;
 }
 

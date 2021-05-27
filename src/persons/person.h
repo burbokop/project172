@@ -42,7 +42,7 @@ class Person : public e172::Object {
                            )
 
 public:
-    Person();
+    Person(const std::string& name = std::string());
     std::string name() const;
     void setName(const std::string &name);
     e172::ptr<Person> hostPerson() const;

@@ -21,4 +21,6 @@ public:
     virtual ~WorldPreset();
 };
 
+WorldPreset::GenerationResult &operator+=(WorldPreset::GenerationResult &r0, const WorldPreset::GenerationResult& r1);
+
 #endif // WORLD_H

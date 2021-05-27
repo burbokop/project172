@@ -137,4 +137,6 @@ Person::SellStatus Person::sellWare(const WareStorage::WareRef &wareRef, const e
     }, []{ return BuyerStorageIsNull; });
 }
 
-Person::Person() {}
+Person::Person(const std::string &name) {
+    m_name = name;
+}
