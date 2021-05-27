@@ -202,7 +202,7 @@ int main(int argc, char *argv[]) {
                 if(subject && object) {
                     const auto ai = subject->capability<AI>();
                     if(ai) {
-                        ai->executeDocking(object);
+                        ai->executeDocking(object, app.context());
                     } else {
                         lines->push_back("error: ai not found in subject");
                     }

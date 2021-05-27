@@ -10,8 +10,12 @@
 
 #include <src/persons/person.h>
 
+#include <src/tasks/task.h>
+
 class Ship;
+
 class Controller : public Capability {    
+    friend Task;
     e172::ElapsedTimer armorReleaseTimer = e172::ElapsedTimer(ARMOR_RELEASE_DELAY);
     e172::ptr<Ship> m_armor;
     bool releaseState = false;
@@ -19,6 +23,8 @@ class Controller : public Capability {
 
     e172::ptr<Person> m_person;
 
+    e172::ptr<Task> m_rootTask;
+    std::list<e172::ptr<Task>> m_trash;
 protected:
     static const long ARMOR_RELEASE_DELAY;
     static const std::string ARMOR_RELEASE_MESSAGE;
@@ -34,6 +40,11 @@ public:
     void setArmor(const e172::ptr<Ship> &armor);
     e172::ptr<Person> person() const;
     void setPerson(const e172::ptr<Person> &person);
+
+    bool executeRootTask(const e172::ptr<Task> &task, e172::Context *context);
+    e172::ptr<Task> rootTask() const;
+
+    virtual ~Controller();
 
     // Entity interface
 public:

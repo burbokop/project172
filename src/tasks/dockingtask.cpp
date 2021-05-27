@@ -1,28 +1,15 @@
-#include "dockingtaskexecutor.h"
+#include "dockingtask.h"
 
-#include <src/capabilities/capability.h>
+#include <src/capabilities/controller.h>
 #include <src/math/math.h>
 #include <src/capabilities/docker.h>
 
 
-e172::Line2d DockingTaskExecutor::landingStrip() const {
+e172::Line2d DockingTask::landingStrip() const {
     return m_landingStrip;
 }
 
-bool DockingTaskExecutor::start(const e172::ptr<Unit> &targetUnit) {
-    return m_capability.fold<bool>([this, targetUnit](Capability *capability){
-        return capability->parentUnit().fold<bool>([this, targetUnit](Unit* unit){
-            return unit->capability<Docker>().fold<bool>([this, targetUnit](Docker *docker){
-                m_docker = docker;
-                m_targetUnit = targetUnit;
-                m_status = ApproachingToTarget;
-                return true;
-            });
-        });
-    });
-}
-
-bool DockingTaskExecutor::undock() {
+bool DockingTask::undock() {
     if(m_status == Docked) {
         m_status = Idle;
         return true;
@@ -30,9 +17,9 @@ bool DockingTaskExecutor::undock() {
     return false;
 }
 
-bool DockingTaskExecutor::approachToPoint(const e172::Vector &point, double cryticalDistance, double speed) {
-    if(m_capability) {
-        if (auto parentShip = e172::smart_cast<Ship>(m_capability->parentUnit())) {
+bool DockingTask::approachToPoint(const e172::Vector &point, double cryticalDistance, double speed) {
+    if(parentController()) {
+        if (auto parentShip = e172::smart_cast<Ship>(parentController()->parentUnit())) {
             auto direction = point - parentShip->position();
             auto distance = direction.module();
             auto diractionAngle = direction.angle();
@@ -56,9 +43,9 @@ bool DockingTaskExecutor::approachToPoint(const e172::Vector &point, double cryt
     return false;
 }
 
-void DockingTaskExecutor::proceed(e172::Context *context) {
-    if(m_capability && m_targetUnit) {
-        if (auto parentShip = e172::smart_cast<Ship>(m_capability->parentUnit())) {
+void DockingTask::proceed(e172::Context *context) {
+    if(parentController() && m_targetUnit) {
+        if (auto parentShip = e172::smart_cast<Ship>(parentController()->parentUnit())) {
             if(m_status == ApproachingToTarget) {
                 if (approachToPoint(m_targetUnit->position(), 500)) {
                     m_session = m_docker->createDockingSessionWithUnit(context, m_targetUnit);
@@ -119,10 +106,23 @@ void DockingTaskExecutor::proceed(e172::Context *context) {
 }
 
 
-e172::Vector DockingTaskExecutor::targetPoint() const {
+e172::Vector DockingTask::targetPoint() const {
     return m_targetPoint;
 }
 
-DockingTaskExecutor::DockingTaskExecutor(const e172::ptr<Capability> &capability) {
-    m_capability = capability;
+DockingTask::DockingTask(const e172::ptr<Unit> &targetUnit) {
+    m_targetUnit = targetUnit;
+}
+
+
+bool DockingTask::start(e172::Context *) {
+    return parentController().fold<bool>([this](Controller *controller) {
+        return controller->parentUnit().fold<bool>([this](Unit* unit) {
+            return unit->capability<Docker>().fold<bool>([this](Docker *docker){
+                m_docker = docker;
+                m_status = ApproachingToTarget;
+                return true;
+            });
+        });
+    });
 }
