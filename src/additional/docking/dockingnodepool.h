@@ -26,6 +26,8 @@ public:
         double angle() const;
         bool isValid() const;
         size_t nodeId() const;
+
+        friend std::ostream &operator<< (std::ostream& stream, const Node& node);
     };
 private:
     std::list<Node> m_nodes;

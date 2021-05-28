@@ -45,6 +45,10 @@ size_t DockingNodePool::Node::nodeId() const {
     return m_nodeId;
 }
 
+std::ostream &operator<<(std::ostream &stream, const DockingNodePool::Node &node) {
+    return stream << "{ offset: " << node.m_offset << ", angle: " << node.m_angle << " }";
+}
+
 e172::Vector DockingNodePool::Node::offset() const {
     return m_offset;
 }
