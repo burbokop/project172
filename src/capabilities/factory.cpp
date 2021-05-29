@@ -21,7 +21,57 @@ void Factory::initializeTemplates() {
     for(size_t i = 0, count = outputTemplates.size(); i < count; ++i) {
         container->operator[](inputTemplates.size() + i).setCapacity(outputTemplates[i].capacity());
         container->operator[](inputTemplates.size() + i).setAllowedOutput(std::vector<std::string> { outputTemplates[i].ware() });
+
+        //FOR DEBUG
+        container->operator[](inputTemplates.size() + i).addWare(outputTemplates[i].ware(), outputTemplates[i].capacity() * e172::Math::randDouble(), true);
+        //--- -----
+
         m_templates[inputTemplates.size() + i] = outputTemplates[i];
+    }
+}
+
+void Factory::updateContainers() {
+    auto container = e172::smart_cast<WareMultiBayContainer>(wareContainer());
+    for(size_t i = 0; i < container->size(); ++i) {
+        const auto templ = m_templates[i];
+        const auto ao = container->operator[](i).allowedOutput();
+
+        bool accepted = false;
+        if(const auto ao_ptr = std::get_if<std::vector<std::string>>(&ao)) {
+            if(ao_ptr->size() > 0) {
+                accepted = true;
+                if(container->operator[](i).wareAwailableAdditingAmount(templ.ware(), templ.amount(), true) != templ.amount())
+                    return;
+
+            }
+        }
+
+        if(!accepted) {
+            const auto ai = container->operator[](i).allowedInput();
+            if(const auto ai_ptr = std::get_if<std::vector<std::string>>(&ai)) {
+                if(ai_ptr->size() > 0) {
+                    if(container->operator[](i).wareInfoCount() == 0)
+                        return;
+
+                    if(container->operator[](i).wareAwailableRemovingAmount(0, templ.amount(), true) != templ.amount())
+                        return;
+                }
+            }
+        }
+    }
+
+    for(size_t i = 0; i < container->size(); ++i) {
+        const auto templ = m_templates[i];
+        const auto ao = container->operator[](i).allowedOutput();
+        if(const auto ao_ptr = std::get_if<std::vector<std::string>>(&ao)) {
+            if(ao_ptr->size() > 0)
+                container->operator[](i).addWare(templ.ware(), templ.amount(), true);
+        }
+        const auto ai = container->operator[](i).allowedInput();
+        if(const auto ai_ptr = std::get_if<std::vector<std::string>>(&ai)) {
+            if(ai_ptr->size() > 0 && container->operator[](i).wareInfoCount() > 0)
+                container->operator[](i).removeWare(0, templ.amount(), true);
+        }
     }
 }
 
@@ -51,48 +101,7 @@ Factory::Factory() {
 
 void Factory::proceed(e172::Context *, e172::AbstractEventHandler *) {
     if(timer.check()) {
-        auto container = e172::smart_cast<WareMultiBayContainer>(wareContainer());
-        for(size_t i = 0; i < container->size(); ++i) {
-            const auto templ = m_templates[i];
-            const auto ao = container->operator[](i).allowedOutput();
-
-            bool accepted = false;
-            if(const auto ao_ptr = std::get_if<std::vector<std::string>>(&ao)) {
-                if(ao_ptr->size() > 0) {
-                    accepted = true;
-                    if(container->operator[](i).wareAwailableAdditingAmount(templ.ware(), templ.amount(), true) != templ.amount())
-                        return;
-
-                }
-            }
-
-            if(!accepted) {
-                const auto ai = container->operator[](i).allowedInput();
-                if(const auto ai_ptr = std::get_if<std::vector<std::string>>(&ai)) {
-                    if(ai_ptr->size() > 0) {
-                        if(container->operator[](i).wareInfoCount() == 0)
-                            return;
-
-                        if(container->operator[](i).wareAwailableRemovingAmount(0, templ.amount(), true) != templ.amount())
-                            return;
-                    }
-                }
-            }
-        }
-
-        for(size_t i = 0; i < container->size(); ++i) {
-            const auto templ = m_templates[i];
-            const auto ao = container->operator[](i).allowedOutput();
-            if(const auto ao_ptr = std::get_if<std::vector<std::string>>(&ao)) {
-                if(ao_ptr->size() > 0)
-                    container->operator[](i).addWare(templ.ware(), templ.amount(), true);
-            }
-            const auto ai = container->operator[](i).allowedInput();
-            if(const auto ai_ptr = std::get_if<std::vector<std::string>>(&ai)) {
-                if(ai_ptr->size() > 0 && container->operator[](i).wareInfoCount() > 0)
-                    container->operator[](i).removeWare(0, templ.amount(), true);
-            }
-        }
+        updateContainers();
         updatePriceTable();
     }
 }

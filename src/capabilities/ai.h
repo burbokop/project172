@@ -15,9 +15,6 @@ public:
 
     AI();
 
-    bool executeDocking(const e172::ptr<Unit>& targetUnit, e172::Context *context);
-
-
     // Entity interface
 public:
     virtual void render(e172::AbstractRenderer *renderer) override;

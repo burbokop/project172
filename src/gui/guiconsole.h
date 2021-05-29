@@ -1,11 +1,11 @@
-#ifndef GUIDEVCONSOLE_H
-#define GUIDEVCONSOLE_H
+#ifndef GUICONSOLE_H
+#define GUICONSOLE_H
 
 #include <src/gui/base/guielement.h>
 #include <functional>
 
 
-class GuiDevConsole : public GUIElement {
+class GuiConsole : public GUIElement {
     bool consoleEnabled = false;
     std::string currentLine;
     std::list<std::string> lines;
@@ -13,16 +13,21 @@ class GuiDevConsole : public GUIElement {
 
     const std::string cmdPreffix = ": ";
 
+    std::string m_historyPath = "~/.project172/console/history";
+
     std::vector <std::string> history;
     size_t historyIndex = 0;
     std::string currentLineBackup;
 public:
-    typedef std::function<void(const std::string &, std::list<std::string> *)> CommandHandlerFunc;
+    typedef std::function<void(const std::string &, std::list<std::string> *, e172::Context*)> CommandHandlerFunc;
 private:
     CommandHandlerFunc m_commandHandlerFunc;
-public:
-    GuiDevConsole(const CommandHandlerFunc& commandHandlerFunc);
 
+    void loadHistory();
+    void saveHistory();
+public:
+    GuiConsole(const CommandHandlerFunc& commandHandlerFunc);
+    virtual ~GuiConsole();
 
     // Entity interface
 public:
@@ -30,4 +35,4 @@ public:
     virtual void render(e172::AbstractRenderer *renderer) override;
 };
 
-#endif // GUIDEVCONSOLE_H
+#endif // GUICONSOLE_H

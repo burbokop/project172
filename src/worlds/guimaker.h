@@ -10,7 +10,7 @@
 
 #include <src/gui/guicombobox.h>
 
-#include <src/additional/devconsole.h>
+#include <src/additional/taskconsole.h>
 
 
 
@@ -37,7 +37,7 @@ class GUIMaker {
 
     e172::ptr<Unit> m_currentOppositeUnit;
 public:
-    GUIMaker(e172::Context *context, Near *radarNear = nullptr, DevConsole *console = nullptr);
+    GUIMaker(e172::Context *context, Near *radarNear = nullptr, TaskConsole *console = nullptr);
     void setWorldPresetStrategy(WorldPresetStrategy *worldPresetStrategy);
     e172::ptr<GUIElement> rootElement() const;
 };

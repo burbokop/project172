@@ -25,6 +25,8 @@ class Factory : public WareStorage {
     e172::ElapsedTimer timer;
     std::vector<FactoryWareTemplate> m_templates;
     void initializeTemplates();
+
+    void updateContainers();
     void updatePriceTable();
 public:
     Factory();

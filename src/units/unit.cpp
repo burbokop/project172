@@ -65,6 +65,8 @@ void Unit::render(e172::AbstractRenderer *renderer) {
             yOffset += offset.y();
         }
     }
+
+    renderer->drawStringShifted(std::to_string(entityId()), position() + e172::Vector(0, -spriteSize.y() * 0.5 - 16), 0x00B358, e172::TextFormat::fromFontSize(11));
 }
 
 e172::ptr<Person> Unit::ownerPerson() const {

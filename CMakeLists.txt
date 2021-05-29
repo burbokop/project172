@@ -69,8 +69,8 @@ add_executable(project172
     ${CMAKE_CURRENT_LIST_DIR}/src/additional/informative/unitsamountinfo.h
     ${CMAKE_CURRENT_LIST_DIR}/src/additional/memstatearner.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/additional/memstatearner.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/additional/devconsole.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/additional/devconsole.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/additional/taskconsole.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/additional/taskconsole.h
 
     ${CMAKE_CURRENT_LIST_DIR}/src/additional/net/framebuilder.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/additional/net/framebuilder.h
@@ -200,8 +200,8 @@ add_executable(project172
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/guidockingview.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/guiwareview.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/guiwareview.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/gui/guidevconsole.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/gui/guidevconsole.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/gui/guiconsole.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/gui/guiconsole.h
 
     ${CMAKE_CURRENT_LIST_DIR}/src/units/camera.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/units/camera.h

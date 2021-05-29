@@ -3,18 +3,12 @@
 #include <src/capabilities/controller.h>
 #include <src/math/math.h>
 #include <src/capabilities/docker.h>
+#include <src/context.h>
+#include <src/units/unit.h>
 
 
 e172::Line2d DockingTask::landingStrip() const {
     return m_landingStrip;
-}
-
-bool DockingTask::undock() {
-    if(m_status == Docked) {
-        m_status = Idle;
-        return true;
-    }
-    return false;
 }
 
 bool DockingTask::approachToPoint(const e172::Vector &point, double cryticalDistance, double speed) {
@@ -93,7 +87,7 @@ void DockingTask::proceed(e172::Context *context) {
             } else if(m_status == WaitForDocked) {
                 if(m_session) {
                     if(m_session->docked()) {
-                        m_status = Docked;
+                        completeTask();
                     }
                 } else {
                     m_status = Idle;
@@ -125,4 +119,23 @@ bool DockingTask::start(e172::Context *) {
             });
         });
     });
+}
+
+
+void DockingTask::initFromCommand(const std::vector<std::string> &args, std::list<std::string> *lines, e172::Context *context) {
+    if (args.size() > 1) {
+        bool ok;
+        auto targetId = e172::Variant(args[1]).toNumber<e172::Entity::id_t>(&ok);
+        if(ok) {
+            if(auto target = context->entityById<Unit>(targetId)){
+                m_targetUnit = target;
+            } else {
+                lines->push_back("error: target with id: " + std::to_string(targetId) + " not found");
+            }
+        } else {
+            lines->push_back("error: " + args[1] + " invlid target id");
+        }
+    } else {
+        lines->push_back("error: must have 2 arguments");
+    }
 }

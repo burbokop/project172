@@ -2,6 +2,7 @@
 #include "dockingtask.h"
 #include <src/capabilities/controller.h>
 #include <src/context.h>
+#include <src/debug.h>
 
 BuyWareTask::BuyWareTask(const std::string &ware) {
     m_targetWare = ware;
@@ -37,8 +38,18 @@ bool BuyWareTask::start(e172::Context *context) {
         }
     }
     if(targetUnit) {
-        return executeChildTask(new DockingTask(targetUnit), context);
+        return executeChildTask(new DockingTask(targetUnit), context, [](){
+            e172::Debug::print(__PRETTY_FUNCTION__);
+        });
     } else {
         return false;
+    }
+}
+
+void BuyWareTask::initFromCommand(const std::vector<std::string> &args, std::list<std::string> *lines, e172::Context *context) {
+    if (args.size() > 1) {
+        m_targetWare = args[1];
+    } else {
+        lines->push_back("error: must have 2 arguments");
     }
 }

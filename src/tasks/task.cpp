@@ -2,6 +2,8 @@
 
 #include <src/capabilities/controller.h>
 
+#include <src/debug.h>
+
 bool Task::running() const {
     return m_running;
 }
@@ -17,7 +19,9 @@ bool Task::executeChildTask(const e172::ptr<Task> &task, e172::Context *context,
             task->m_parentController = this->m_parentController;
             this->m_running = false;
             task->m_running = true;
-            task->m_onCompleatedSignal.push_back(onCompleated);
+            if(onCompleated) {
+                task->m_onCompleatedSignal.push_back(onCompleated);
+            }
             task->start(context);
             return true;
         }
@@ -30,7 +34,8 @@ void Task::proceedBranch(e172::Context *context) {
         t.safeDestroy();
     }
     m_trash.clear();
-
+    e172::Debug::print(__PRETTY_FUNCTION__, this);
+    e172::Debug::print("m_children:", m_children, this);
     for(const auto &c : m_children) {
         c->proceedBranch(context);
     }
@@ -53,22 +58,28 @@ e172::ptr<Controller> Task::parentController() const {
 }
 
 void Task::completeTask() {
-    m_running = false;
-    m_onCompleatedSignal.clear();
-    if(m_parentTask) {
-        if(m_parentTask->m_children.erase(this)) {
-            m_parentTask->m_trash.push_back(this);
-            m_parentTask->m_running = true;
-            m_parentTask = nullptr;
+    if(m_running) {
+        e172::Debug::print("compleate:", this);
+        m_running = false;
+        if(m_parentTask) {
+            e172::Debug::print("has parent task:", m_parentTask->m_children, this);
+            if(m_parentTask->m_children.erase(this)) {
+                e172::Debug::print("child erased:", m_parentTask->m_children, this);
+                m_parentTask->m_trash.push_back(this);
+                m_parentTask->m_running = true;
+                m_parentTask = nullptr;
+            }
+        } else if (m_parentController) {
+            e172::Debug::print("has parent controller:", this);
+            m_parentController->m_rootTask = nullptr;
+            m_parentController->m_trash.push_back(this);
         }
-    } else if (m_parentController) {
-        m_parentController->m_rootTask = nullptr;
-        m_parentController->m_trash.push_back(this);
-    }
-    for(const auto& c : m_onCompleatedSignal) {
-        if(c) {
-            c();
+        for(const auto& c : m_onCompleatedSignal) {
+            if(c) {
+                c();
+            }
         }
+        m_onCompleatedSignal.clear();
     }
 }
 

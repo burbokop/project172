@@ -18,8 +18,7 @@ class DockingTask : public Task {
                            ApproachingToTarget,
                            Manuevering,
                            ApproachingToNode,
-                           WaitForDocked,
-                           Docked,
+                           WaitForDocked
                            )
 
     e172::Vector m_targetPoint;
@@ -28,7 +27,7 @@ class DockingTask : public Task {
     e172::ptr<Docker> m_docker;
     e172::ptr<DockingSession> m_session;
 public:
-    DockingTask(const e172::ptr<Unit> &targetUnit);
+    DockingTask(const e172::ptr<Unit> &targetUnit = nullptr);
 
     bool undock();
 
@@ -42,6 +41,7 @@ public:
 public:
     virtual bool start(e172::Context *) override;
     virtual void proceed(e172::Context *context) override;
+    virtual void initFromCommand(const std::vector<std::string> &args, std::list<std::string> *lines, e172::Context *context) override;
 };
 
 #endif // DOCKINGTASK_H

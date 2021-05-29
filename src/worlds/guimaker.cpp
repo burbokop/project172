@@ -8,7 +8,7 @@
 
 #include <src/gui/guibutton.h>
 #include <src/gui/guidebugvalueinfo.h>
-#include <src/gui/guidevconsole.h>
+#include <src/gui/guiconsole.h>
 #include <src/gui/guidockingview.h>
 #include <src/gui/guifloatingmessagecontainer.h>
 #include <src/gui/guiminimap.h>
@@ -44,7 +44,7 @@ e172::ptr<GUIElement> GUIMaker::rootElement() const {
     return m_rootElement;
 }
 
-GUIMaker::GUIMaker(e172::Context *context, Near *radarNear, DevConsole *console) {
+GUIMaker::GUIMaker(e172::Context *context, Near *radarNear, TaskConsole *console) {
     m_rootElement = new GUIContainer(); {
         auto menuFocusSwitch = new GUIFocusSwitch(e172::ScancodeLeft, e172::ScancodeRight); {
             auto stack = new GUIStack(); {
@@ -200,7 +200,7 @@ GUIMaker::GUIMaker(e172::Context *context, Near *radarNear, DevConsole *console)
         } m_rootElement->addChildElement(menuFocusSwitch);
 
         if (console) {
-            m_rootElement->addChildElement(new GuiDevConsole(e172::bind(console, &DevConsole::executeCommand)));
+            m_rootElement->addChildElement(new GuiConsole(e172::bind(console, &TaskConsole::executeCommand)));
         }
         m_rootElement->addChildElement(new GUIMiniMap());
         m_rootElement->addChildElement(new GUIDebugValueInfo());

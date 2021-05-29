@@ -35,7 +35,7 @@
 
 #include <tests/waretest.h>
 #include <src/additional/chartview.h>
-#include <src/additional/devconsole.h>
+#include <src/additional/taskconsole.h>
 #include <src/additional/memstatearner.h>
 #include <src/gui/guibutton.h>
 #include <src/gui/base/guicontainer.h>
@@ -48,6 +48,7 @@
 #include <src/capabilities/modules/warpdrive.h>
 #include <src/capabilities/modules/weapon.h>
 #include <src/appextensions/volumeobserverextension.h>
+#include <src/tasks/buywaretask.h>
 
 extern "C" {
 int go_run_server();
@@ -185,40 +186,14 @@ int main(int argc, char *argv[]) {
     Near radarNear;
     app.addEntity(&radarNear);
 
-    //create dev console
-    DevConsole devConsole;
+    //create task console
+    TaskConsole taskConsole;
 
-    devConsole.addCommand("dock", [&app](const std::vector<std::string>& args, std::list<std::string> *lines){
-        if (args.size() > 3) {
-            if(args[2] == "->") {
-                auto subjectName = args[1];
-                auto subject = app.context()->findEntity<Unit>([subjectName](const e172::ptr<Unit>& unit){
-                    return unit->loadableId() == subjectName && unit->capability<AI>();
-                });
-                auto objectName = args[3];
-                auto object = app.context()->findEntity<Unit>([objectName](const e172::ptr<Unit>& unit){
-                    return unit->loadableId() == objectName;
-                });
-                if(subject && object) {
-                    const auto ai = subject->capability<AI>();
-                    if(ai) {
-                        ai->executeDocking(object, app.context());
-                    } else {
-                        lines->push_back("error: ai not found in subject");
-                    }
-                } else {
-                    lines->push_back("error: subject or object not found: subject: " + std::to_string(subject) + ", object: " + std::to_string(subject));
-                }
-            } else {
-                lines->push_back("error: undefined direction \"" + args[2] + "\"");
-            }
-        } else {
-            lines->push_back("error: should have 3 args");
-        }
-    });
+    taskConsole.registerTask<DockingTask>();
+    taskConsole.registerTask<BuyWareTask>();
 
     //setup gui
-    GUIMaker guiMaker(app.context(), &radarNear, &devConsole);
+    GUIMaker guiMaker(app.context(), &radarNear, &taskConsole);
     app.addEntity(guiMaker.rootElement());
 
     //setup camera
@@ -286,10 +261,6 @@ int main(int argc, char *argv[]) {
     chartView.setCoeficient(200);
     chartView.setPointCount(300);
     //app.addEntity(&chartView);
-
-    app.schedule(5000, [&devConsole](){
-        devConsole.executeCommandToStream("dock sh1 -> st1", std::cout);
-    });
 
     //start application
 

@@ -13,10 +13,6 @@
 
 AI::AI() : Controller () {}
 
-bool AI::executeDocking(const e172::ptr<Unit> &targetUnit, e172::Context *context) {
-    return executeRootTask(new DockingTask(targetUnit), context);
-}
-
 
 void AI::render(e172::AbstractRenderer *renderer) {
     /*

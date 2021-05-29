@@ -1,17 +1,41 @@
-#include "guidevconsole.h"
+#include "guiconsole.h"
 
 #include <src/abstracteventhandler.h>
+#include <src/additional.h>
 #include <src/debug.h>
 
 #include <src/graphics/abstractrenderer.h>
 
+#include <src/conversion.h>
 
-GuiDevConsole::GuiDevConsole(const GuiDevConsole::CommandHandlerFunc &commandHandlerFunc) {
-    setMargin(32);
-    m_commandHandlerFunc = commandHandlerFunc;    
+void GuiConsole::loadHistory() {
+    const auto path = e172::Additional::absolutePath(m_historyPath, std::string());
+    history = e172::convert_to<std::vector<std::string>>(e172::Variant::fromJson(e172::Additional::readFile(path)));
+    e172::Debug::print("load:", path);
+    for(auto& h : history) {
+        e172::Debug::print("\t", h);
+    }
 }
 
-void GuiDevConsole::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
+void GuiConsole::saveHistory() {
+    const auto path = e172::Additional::absolutePath(m_historyPath, std::string());
+    e172::Debug::print("save:", path);
+    for(auto& h : history) {
+        e172::Debug::print("\t", h);
+    }
+    e172::Additional::writeFile(path, e172::convert_to<e172::Variant>(history).toJson());
+}
+
+GuiConsole::GuiConsole(const GuiConsole::CommandHandlerFunc &commandHandlerFunc) {
+    setMargin(32);
+    m_commandHandlerFunc = commandHandlerFunc;    
+
+    loadHistory();
+}
+
+GuiConsole::~GuiConsole() {}
+
+void GuiConsole::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
     if (eventHandler->keySinglePressed(e172::ScancodeGrave)) {
         consoleEnabled = !consoleEnabled;
         eventHandler->pullText();
@@ -20,9 +44,10 @@ void GuiDevConsole::proceed(e172::Context *context, e172::AbstractEventHandler *
         if(eventHandler->keySinglePressed(e172::ScancodeReturn)) {
             lines.push_back(cmdPreffix + currentLine);
             if (m_commandHandlerFunc) {
-                m_commandHandlerFunc(currentLine, &lines);
+                m_commandHandlerFunc(currentLine, &lines, context);
             }
             history.push_back(currentLine);
+            saveHistory();
             currentLine.clear();
             eventHandler->pullText();
         } else if(eventHandler->keySinglePressed(e172::ScancodeBackSpace)) {
@@ -52,7 +77,7 @@ void GuiDevConsole::proceed(e172::Context *context, e172::AbstractEventHandler *
     }
 }
 
-void GuiDevConsole::render(e172::AbstractRenderer *renderer) {
+void GuiConsole::render(e172::AbstractRenderer *renderer) {
     if(consoleEnabled) {
         double offset = 0;
         for(const auto& l : lines) {

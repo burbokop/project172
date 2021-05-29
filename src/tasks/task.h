@@ -34,6 +34,7 @@ public:
     void proceedBranch(e172::Context *context);
     virtual void proceed(e172::Context *context) = 0;
     virtual bool start(e172::Context *context) = 0;
+    virtual void initFromCommand(const std::vector<std::string>&args, std::list<std::string> *lines, e172::Context *context) = 0;
 
     virtual ~Task();
     e172::ptr<Controller> parentController() const;
