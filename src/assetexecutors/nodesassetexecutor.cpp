@@ -3,34 +3,11 @@
 #include <src/additional.h>
 
 #include <src/math/math.h>
+#include <src/additional.h>
 
 
 NodesAssetExecutor::NodesAssetExecutor() {}
 
-std::optional<double> NodesAssetExecutor::parseAngle(const std::string &str) {
-    const auto angleParts = e172::Additional::split(str, '/');
-    if(angleParts.size() > 1) {
-        if(angleParts[0] == "Pi") {
-            const auto divider = std::stod(angleParts[1]);
-            if(divider != e172::Math::null) {
-                return e172::Math::Pi / divider;
-            }
-        } else if(angleParts[0] == "-Pi") {
-            const auto divider = std::stod(angleParts[1]);
-            if(divider != e172::Math::null) {
-                return -e172::Math::Pi / divider;
-            }
-        }
-    } else if(angleParts.size() > 1) {
-        return std::stod(angleParts[1]);
-    }
-    if(str == "Pi") {
-        return e172::Math::Pi;
-    } else if(str == "-Pi") {
-        return -e172::Math::Pi;
-    }
-    return std::nullopt;
-}
 
 
 e172::Variant NodesAssetExecutor::proceed(const e172::Variant &value) {
@@ -55,8 +32,8 @@ e172::Variant NodesAssetExecutor::proceed(const e172::Variant &value) {
         if(angle.isNull()) {
             continue;
         }
-        const auto angleValue = parseAngle(angle.toString());
-        if(!angleValue.has_value()) {
+        const auto angleValue = e172::Additional::parseRadians(angle.toString());
+        if(angleValue.isEmpty()) {
             continue;
         }
         result.push_back({ e172::Vector(x.toDouble(), y.toDouble()), angleValue.value() });

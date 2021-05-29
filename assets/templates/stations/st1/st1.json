@@ -15,14 +15,14 @@
 						"x": -50,
 						"y": 0
 					},
-					"angle": "-Pi"
+					"angle": "Pi"
 				},
 				{
 					"offset": {
 						"x": 50,
 						"y": 0
 					},
-					"angle": "Pi"
+					"angle": "0"
 				}
 			]
 		}

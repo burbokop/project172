@@ -19,10 +19,7 @@ void PhysicalDockingAttractor::setInterceptionRequiredProximity(const e172::Phys
 PhysicalDockingAttractor::PhysicalDockingAttractor() {}
 
 void PhysicalDockingAttractor::proceed(e172::PhysicalObject::ConnectionNode node0, e172::PhysicalObject::ConnectionNode node1) {
-    // TO DO add condition
-    bool invert = !node0.offset().sameDirection(node1.offset());
-
-    const auto proximity = e172::PhysicalObject::nodesProximity(node0, node1, invert);
+    const auto proximity = e172::PhysicalObject::nodesProximity(node0, node1);
     if(m_state == NotDocked) {
         if(
                 proximity.distance < m_interceptionRequiredProximity.distance
@@ -31,8 +28,7 @@ void PhysicalDockingAttractor::proceed(e172::PhysicalObject::ConnectionNode node
             m_state = InInterception;
         }
     } else if(m_state == InInterception) {
-        //e172::Debug::print("node0:", node0, "node1:", node1);
-        e172::PhysicalObject::dockNodes(node0, node1, 20, 2, invert);
+        e172::PhysicalObject::dockNodes(node0, node1, 20, 2);
         if(
                 proximity.distance < m_dockedRequiredProximity.distance
                 && proximity.angle < m_dockedRequiredProximity.angle
@@ -47,7 +43,7 @@ void PhysicalDockingAttractor::proceed(e172::PhysicalObject::ConnectionNode node
             m_state = NotDocked;
         }
     } else if(m_state == Docked) {
-        e172::PhysicalObject::dockNodes(node0, node1, 20, 2, invert);
+        e172::PhysicalObject::dockNodes(node0, node1, 20, 2);
         if(
                 proximity.distance > m_interceptionRequiredProximity.distance
                 || proximity.angle > m_interceptionRequiredProximity.angle
