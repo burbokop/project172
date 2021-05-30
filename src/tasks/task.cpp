@@ -31,11 +31,10 @@ bool Task::executeChildTask(const e172::ptr<Task> &task, e172::Context *context,
 
 void Task::proceedBranch(e172::Context *context) {
     for(const auto &t : m_trash) {
+        m_children.erase(t);
         t.safeDestroy();
     }
     m_trash.clear();
-    e172::Debug::print(__PRETTY_FUNCTION__, this);
-    e172::Debug::print("m_children:", m_children, this);
     for(const auto &c : m_children) {
         c->proceedBranch(context);
     }
@@ -57,21 +56,14 @@ e172::ptr<Controller> Task::parentController() const {
     return m_parentController;
 }
 
+
 void Task::completeTask() {
     if(m_running) {
-        e172::Debug::print("compleate:", this);
         m_running = false;
         if(m_parentTask) {
-            e172::Debug::print("has parent task:", m_parentTask->m_children, this);
-            if(m_parentTask->m_children.erase(this)) {
-                e172::Debug::print("child erased:", m_parentTask->m_children, this);
-                m_parentTask->m_trash.push_back(this);
-                m_parentTask->m_running = true;
-                m_parentTask = nullptr;
-            }
+            m_parentTask->m_trash.push_back(this);
+            m_parentTask->m_running = true;
         } else if (m_parentController) {
-            e172::Debug::print("has parent controller:", this);
-            m_parentController->m_rootTask = nullptr;
             m_parentController->m_trash.push_back(this);
         }
         for(const auto& c : m_onCompleatedSignal) {

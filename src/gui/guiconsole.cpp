@@ -12,18 +12,10 @@
 void GuiConsole::loadHistory() {
     const auto path = e172::Additional::absolutePath(m_historyPath, std::string());
     history = e172::convert_to<std::vector<std::string>>(e172::Variant::fromJson(e172::Additional::readFile(path)));
-    e172::Debug::print("load:", path);
-    for(auto& h : history) {
-        e172::Debug::print("\t", h);
-    }
 }
 
 void GuiConsole::saveHistory() {
     const auto path = e172::Additional::absolutePath(m_historyPath, std::string());
-    e172::Debug::print("save:", path);
-    for(auto& h : history) {
-        e172::Debug::print("\t", h);
-    }
     e172::Additional::writeFile(path, e172::convert_to<e172::Variant>(history).toJson());
 }
 

@@ -44,6 +44,9 @@ e172::ptr<Task> Controller::rootTask() const {
 
 Controller::~Controller() {
     for(const auto &t : m_trash) {
+        if(t == m_rootTask) {
+            m_rootTask = nullptr;
+        }
         t.safeDestroy();
     }
     m_trash.clear();

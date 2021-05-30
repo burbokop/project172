@@ -53,7 +53,6 @@ e172::ptr<DockingSession> DockingSession::createSession(DockingNodePool *pull0, 
         result->item1.pool = pull1;
         result->item0.node = node0;
         result->item1.node = node1;
-        e172::Debug::print("nodes:", node0, node1);
         result->item0.physicalNode = unit0->connectionNode(node0.offset(), node0.angle());
         result->item1.physicalNode = unit1->connectionNode(node1.offset(), node1.angle());
         result->item0.unit = unit0;

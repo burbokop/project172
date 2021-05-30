@@ -46,7 +46,7 @@ bool BuyWareTask::start(e172::Context *context) {
     }
 }
 
-void BuyWareTask::initFromCommand(const std::vector<std::string> &args, std::list<std::string> *lines, e172::Context *context) {
+void BuyWareTask::initFromCommand(const std::vector<std::string> &args, std::list<std::string> *lines, e172::Context *) {
     if (args.size() > 1) {
         m_targetWare = args[1];
     } else {
