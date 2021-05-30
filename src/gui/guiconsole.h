@@ -16,7 +16,7 @@ class GuiConsole : public GUIElement {
     std::string m_historyPath = "~/.project172/console/history";
 
     std::vector <std::string> history;
-    size_t historyIndex = 0;
+    int64_t historyIndex = -1;
     std::string currentLineBackup;
 public:
     typedef std::function<void(const std::string &, std::list<std::string> *, e172::Context*)> CommandHandlerFunc;

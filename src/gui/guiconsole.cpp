@@ -2,6 +2,7 @@
 
 #include <src/abstracteventhandler.h>
 #include <src/additional.h>
+#include <src/context.h>
 #include <src/debug.h>
 
 #include <src/graphics/abstractrenderer.h>
@@ -39,6 +40,11 @@ void GuiConsole::proceed(e172::Context *context, e172::AbstractEventHandler *eve
     if (eventHandler->keySinglePressed(e172::ScancodeGrave)) {
         consoleEnabled = !consoleEnabled;
         eventHandler->pullText();
+        if(consoleEnabled) {
+            context->setEntityInFocus(this);
+        } else {
+            context->setEntityInFocus(nullptr);
+        }
     }
     if (consoleEnabled) {
         if(eventHandler->keySinglePressed(e172::ScancodeReturn)) {
@@ -56,20 +62,26 @@ void GuiConsole::proceed(e172::Context *context, e172::AbstractEventHandler *eve
             }
             eventHandler->pullText();
         } else if(eventHandler->keySinglePressed(e172::ScancodeUp)) {
-            if (historyIndex > 1) {
-                historyIndex--;
+            if(historyIndex == -1) {
+                currentLineBackup = currentLine;
             }
-            if (historyIndex < history.size()) {
-                currentLine = history[historyIndex];
+            if (historyIndex < int64_t(history.size())) {
+                historyIndex++;
+            }
+            if (history.size() - historyIndex - 1 < history.size()) {
+                currentLine = history[history.size() - historyIndex - 1];
             }
             eventHandler->pullText();
         } else if(eventHandler->keySinglePressed(e172::ScancodeDown)) {
-            if (historyIndex < history.size()) {
-                historyIndex++;
+            if (historyIndex >= 0) {
+                historyIndex--;
             }
-            if (historyIndex < history.size()) {
-                currentLineBackup = currentLine;
-                currentLine = history[historyIndex];
+            e172::Debug::print("historyIndex:", historyIndex);
+
+            if (history.size() - historyIndex - 1 < history.size()) {
+                currentLine = history[history.size() - historyIndex - 1];
+            } else if(historyIndex < 0) {
+                currentLine = currentLineBackup;
             }
             eventHandler->pullText();
         }
