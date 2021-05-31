@@ -19,6 +19,25 @@ std::optional<size_t> WareStorage::indexOf(const std::string &wareName) const {
     return std::nullopt;
 }
 
+std::list<std::string> WareStorage::prettyInfo() const {
+    std::list<std::string> result;
+
+    std::set<std::string> usedWares;
+    for(size_t count = wareInfoCount(), i = 0; i < count; ++i) {
+        const auto info = wareInfo(i);
+        const auto price = priceTable()->price(info.wareName());
+        result.push_back(info.toString() + " : " + price.toString());
+        usedWares.insert(info.wareName());
+    }
+
+    for(const auto& wn : priceTable()->priceMap()) {
+        if(!usedWares.contains(wn.first)) {
+            result.push_back(wn.first + "[null] : " + wn.second.toString());
+        }
+    }
+    return result;
+}
+
 e172::ptr<AbstractWareContainer> WareStorage::wareContainer() const {
     if(!m_wareContainer) {
         m_wareContainer = createWareContainer();
@@ -44,7 +63,7 @@ WareInfo WareStorage::wareInfo(size_t index) const {
     if(wareContainer())
         return wareContainer()->wareInfo(index);
 
-    return WareInfo("", 0);
+    return WareInfo(std::string(), 0, false);
 }
 
 size_t WareStorage::amount() const {

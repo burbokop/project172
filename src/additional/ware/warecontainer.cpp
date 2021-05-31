@@ -132,7 +132,10 @@ size_t WareContainer::wareInfoCount() const {
 }
 
 WareInfo WareContainer::wareInfo(size_t index) const {
-    return WareInfo(std::get<0>(m_data[index]), std::get<1>(m_data[index]));
+    if(index < m_data.size()) {
+        return WareInfo(std::get<0>(m_data[index]), std::get<1>(m_data[index]), true);
+    }
+    return WareInfo(std::string(), 0, false);
 }
 
 size_t WareContainer::capacity() const {

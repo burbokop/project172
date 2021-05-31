@@ -13,14 +13,16 @@
 class WareInfo {
     std::string m_wareName;
     size_t m_count = 0;
+    bool m_isValid = false;
 public:
-    WareInfo(const std::string &name, size_t count);
+    WareInfo(const std::string &name, size_t count, bool isValid);
 
     std::string wareName() const;
     size_t count() const;
 
     operator std::string() const;
     inline std::string toString() const { return *this; }
+    bool isValid() const;
 };
 
 std::ostream &operator<<(std::ostream& stream, const WareInfo& info);

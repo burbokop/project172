@@ -1,11 +1,9 @@
 #ifndef PRICETABLE_H
 #define PRICETABLE_H
 
+#include <map>
 #include <optional>
-#include <vector>
-
 #include <src/object.h>
-
 
 
 struct PriceTable : public e172::Object {
@@ -20,15 +18,16 @@ struct PriceTable : public e172::Object {
         inline std::string toString() const { return *this; }
     };
 private:
-    std::vector<std::pair<std::optional<int64_t>, std::optional<int64_t>>> m_data;
+    std::map<std::string, std::pair<std::optional<int64_t>, std::optional<int64_t>>> m_data;
 public:
     PriceTable();
-    void setBuyPrice(size_t index, int64_t price);
-    void setSellPrice(size_t index, int64_t price);
-    void removeBuyPrice(size_t index);
-    void removeSellPrice(size_t index);
+    void setBuyPrice(const std::string& ware, int64_t price);
+    void setSellPrice(const std::string& ware, int64_t price);
+    void removeBuyPrice(const std::string& ware);
+    void removeSellPrice(const std::string& ware);
 
-    Price price(size_t index) const;
+    Price price(const std::string& ware) const;
+    std::map<std::string, Price> priceMap() const;
 };
 
 #endif // PRICETABLE_H

@@ -2,39 +2,36 @@
 
 PriceTable::PriceTable() {}
 
-void PriceTable::setBuyPrice(size_t index, int64_t price) {
-    if(index >= m_data.size()) {
-        m_data.resize(index + 1);
-    }
-    std::get<0>(m_data[index]) = price;
+void PriceTable::setBuyPrice(const std::string &ware, int64_t price) {
+    std::get<0>(m_data[ware]) = price;
 }
 
-void PriceTable::setSellPrice(size_t index, int64_t price) {
-    if(index >= m_data.size()) {
-        m_data.resize(index + 1);
-    }
-    std::get<1>(m_data[index]) = price;
+void PriceTable::setSellPrice(const std::string &ware, int64_t price) {
+    std::get<1>(m_data[ware]) = price;
 }
 
-void PriceTable::removeBuyPrice(size_t index) {
-    if(index >= m_data.size()) {
-        m_data.resize(index + 1);
-    }
-    std::get<0>(m_data[index]) = std::nullopt;
+void PriceTable::removeBuyPrice(const std::string &ware) {
+    std::get<0>(m_data[ware]) = std::nullopt;
 }
 
-void PriceTable::removeSellPrice(size_t index) {
-    if(index >= m_data.size()) {
-        m_data.resize(index + 1);
-    }
-    std::get<1>(m_data[index]) = std::nullopt;
+void PriceTable::removeSellPrice(const std::string &ware) {
+    std::get<1>(m_data[ware]) = std::nullopt;
 }
 
-PriceTable::Price PriceTable::price(size_t index) const {
-    if(index < m_data.size()) {
-        return Price(std::get<0>(m_data[index]), std::get<1>(m_data[index]));
+PriceTable::Price PriceTable::price(const std::string& ware) const {
+    const auto it = m_data.find(ware);
+    if(it != m_data.end()) {
+        return Price(std::get<0>(it->second), std::get<1>(it->second));
     }
     return Price(std::nullopt, std::nullopt);
+}
+
+std::map<std::string, PriceTable::Price> PriceTable::priceMap() const {
+    std::map<std::string, PriceTable::Price> result;
+    for(const auto& a : m_data) {
+        result.insert({ a.first, Price(std::get<0>(a.second), std::get<1>(a.second)) });
+    }
+    return result;
 }
 
 PriceTable::Price::Price(std::optional<int64_t> buyPrice, std::optional<int64_t> sellPrice) {
@@ -51,5 +48,5 @@ std::optional<int64_t> PriceTable::Price::sellPrice() const {
 }
 
 PriceTable::Price::operator std::string() const {
-    return (m_buyPrice.has_value() ? std::to_string(m_buyPrice.value()) : "nl") + ", " + (m_sellPrice.has_value() ? std::to_string(m_sellPrice.value()) : "nl");
+    return "bp: " + (m_buyPrice.has_value() ? std::to_string(m_buyPrice.value()) : "nl") + ", sp: " + (m_sellPrice.has_value() ? std::to_string(m_sellPrice.value()) : "nl");
 }

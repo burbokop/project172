@@ -24,7 +24,7 @@ GuiConsole::GuiConsole(const GuiConsole::CommandHandlerFunc &commandHandlerFunc)
     m_commandHandlerFunc = commandHandlerFunc;    
 
     loadHistory();
-    setDepth(20);
+    setDepth(1000);
 }
 
 GuiConsole::~GuiConsole() {}

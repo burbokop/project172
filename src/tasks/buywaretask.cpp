@@ -25,12 +25,14 @@ bool BuyWareTask::start(e172::Context *context) {
             if(const auto& storage = unit->capability<WareStorage>()) {
                 const auto index = storage->indexOf(m_targetWare);
                 if(index.has_value()) {
-                    const auto price = storage->priceTable()->price(index.value());
-                    if(price.buyPrice().has_value()) {
-                        const auto buyPrice = price.buyPrice().value();
-                        if(buyPrice < minPrice) {
-                            minPrice = buyPrice;
-                            targetUnit = unit;
+                    if(storage->wareInfo(index.value()).count() > 0) {
+                        const auto price = storage->priceTable()->price(m_targetWare);
+                        if(price.buyPrice().has_value()) {
+                            const auto buyPrice = price.buyPrice().value();
+                            if(buyPrice < minPrice) {
+                                minPrice = buyPrice;
+                                targetUnit = unit;
+                            }
                         }
                     }
                 }

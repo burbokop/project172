@@ -51,17 +51,15 @@ void Unit::render(e172::AbstractRenderer *renderer) {
         double yOffset = 0;
         const auto format = e172::TextFormat(e172::TextFormat::AlignHCenter | e172::TextFormat::AlignBottom, 10);
         for(const auto& c : m_capabilities) {
-            auto offset = renderer->drawStringShifted(c->className(), position() + e172::Vector(50, spriteSize.y() * 0.5 + 8 + yOffset), 0xffaaff, format);
+            auto offset = renderer->drawStringShifted(c->className(), position() + e172::Vector(60, spriteSize.y() * 0.5 + 8 + yOffset), 0xffaaff, format);
             yOffset += offset.y();
         }
     }
     if(auto storage = capability<WareStorage>()) {
         const auto format = e172::TextFormat(e172::TextFormat::AlignHCenter | e172::TextFormat::AlignBottom, 10);
         double yOffset = 0;
-        for(size_t count = storage->wareInfoCount(), i = 0; i < count; ++i) {
-            const auto info = storage->wareInfo(i);
-            const auto price = storage->priceTable()->price(i);
-            auto offset = renderer->drawStringShifted(info.toString() + " : " + price.toString(), position() + e172::Vector(0, spriteSize.y() * 0.5 + 8 + yOffset), 0xaaffaa, format);
+        for(const auto& info : storage->prettyInfo()) {
+            auto offset = renderer->drawStringShifted(info, position() + e172::Vector(0, spriteSize.y() * 0.5 + 8 + yOffset), 0xaaffaa, format);
             yOffset += offset.y();
         }
     }

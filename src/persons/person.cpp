@@ -72,21 +72,26 @@ Person::BuyStatus Person::buyWare(const WareStorage::WareRef &wareRef, const e17
             return sellerUnit->capability<Controller>().fold<BuyStatus>([&](Controller* sellerController){
                 return sellerController->person().fold<BuyStatus>([&](Person* seller){
                     if(seller != this) {
-                        const auto price = sellerStorage->priceTable()->price(wareRef.index()).buyPrice();
-                        if(price.has_value()) {
-                            if(price.value() != 0) {
-                                auto totalPrice = std::min(m_money, count * price.value());
-                                const size_t finalCount = totalPrice / price.value();
-                                totalPrice = totalPrice * finalCount;
-                                wareRef.storage()->transferWareTo(wareRef.index(), destination, finalCount);
-                                m_money -= totalPrice;
-                                seller->m_money += totalPrice;
-                                return BuyingSuccess;
+                        const auto wareInfo = sellerStorage->wareInfo(wareRef.index());
+                        if(wareInfo.isValid()) {
+                        const auto price = sellerStorage->priceTable()->price(wareInfo.wareName()).buyPrice();
+                            if(price.has_value()) {
+                                if(price.value() != 0) {
+                                    auto totalPrice = std::min(m_money, count * price.value());
+                                    const size_t finalCount = totalPrice / price.value();
+                                    totalPrice = totalPrice * finalCount;
+                                    wareRef.storage()->transferWareTo(wareRef.index(), destination, finalCount);
+                                    m_money -= totalPrice;
+                                    seller->m_money += totalPrice;
+                                    return BuyingSuccess;
+                                } else {
+                                    return PriceIsZero;
+                                }
                             } else {
-                                return PriceIsZero;
+                                return BuePriceNotDefined;
                             }
                         } else {
-                            return BuePriceNotDefined;
+                            return SellerDoNotHaveWare;
                         }
                     } else {
                         return CanNotBuyOwnWare;
@@ -104,9 +109,9 @@ Person::SellStatus Person::sellWare(const WareStorage::WareRef &wareRef, const e
                 return buyerController->person().fold<SellStatus>([&](Person* buyer){
                     if(buyer != this) {
                         if(isOwnerOfWare(wareRef)) {
-                            const auto index = buyerStorage->indexOf(wareRef.storage()->wareInfo(wareRef.index()));
-                            if(index.has_value()) {
-                                const auto price = buyerStorage->priceTable()->price(index.value()).sellPrice();
+                            const auto wareInfo = wareRef.storage()->wareInfo(wareRef.index());
+                            if(wareInfo.isValid()) {
+                                const auto price = buyerStorage->priceTable()->price(wareInfo.wareName()).sellPrice();
                                 if(price.has_value()) {
                                     if(price.value() != 0) {
                                         auto totalPrice = std::min(buyer->m_money, count * price.value());
@@ -123,7 +128,7 @@ Person::SellStatus Person::sellWare(const WareStorage::WareRef &wareRef, const e
                                     return SellPriceNotDefined;
                                 }
                             } else {
-                                return WareCanNotBeSold;
+                                return WareDoNotExist;
                             }
                         } else {
                             return WareNotBelongToSeller;

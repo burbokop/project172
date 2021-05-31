@@ -83,14 +83,14 @@ void Factory::updatePriceTable() {
         const auto& tmpl = m_templates[i];
         const auto& full = subContainer.full();
         if(subContainer.isOutputAllowed(tmpl.ware())) {
-            priceTable()->setBuyPrice(i, wareDefaultPrice * full);
+            priceTable()->setBuyPrice(tmpl.ware(), wareDefaultPrice * full);
         } else {
-            priceTable()->removeBuyPrice(i);
+            priceTable()->removeBuyPrice(tmpl.ware());
         }
         if(subContainer.isInputAllowed(tmpl.ware())) {
-            priceTable()->setSellPrice(i, wareDefaultPrice * (1 - full));
+            priceTable()->setSellPrice(tmpl.ware(), wareDefaultPrice * (1 - full));
         } else {
-            priceTable()->removeSellPrice(i);
+            priceTable()->removeSellPrice(tmpl.ware());
         }
     }
 }

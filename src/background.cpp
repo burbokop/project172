@@ -3,6 +3,7 @@
 #include <src/time/elapsedtimer.h>
 #include <src/graphics/abstractrenderer.h>
 #include <src/context.h>
+#include <src/debug.h>
 
 
 
@@ -27,6 +28,7 @@ void Background::flashing(e172::Context *, const e172::Variant &repeats) {
 Background::Background(unsigned int amount, double slidingStart) {
     this->slidingStart = slidingStart;
     this->amount = amount;
+    setDepth(-100);
 }
 
 void Background::onResolutionChanged(const e172::Vector &resolution) {

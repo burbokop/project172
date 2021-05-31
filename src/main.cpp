@@ -145,6 +145,8 @@ int main(int argc, char *argv[]) {
     app.setAudioProvider(&audioProvider);
     app.setGraphicsProvider(graphicsProvider);
 
+    app.graphicsProvider()->renderer()->setAutoClear(false);
+
     app.assetProvider()->installExecutor("animation", std::make_shared<AnimatorAssetExecutor>());
     app.assetProvider()->installExecutor("sprite", std::make_shared<SpriteAssetExecutor>());
     app.assetProvider()->installExecutor("audio", std::make_shared<AudioAssetExecutor>());

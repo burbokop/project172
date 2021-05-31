@@ -6,12 +6,17 @@ size_t WareInfo::count() const {
 }
 
 WareInfo::operator std::string() const {
-    return m_wareName + " [" + std::to_string(m_count) + "]";
+    return m_isValid ? (m_wareName + " [" + std::to_string(m_count) + "]") : "invalid";
 }
 
-WareInfo::WareInfo(const std::string &name, size_t count) {
+bool WareInfo::isValid() const {
+    return m_isValid;
+}
+
+WareInfo::WareInfo(const std::string &name, size_t count, bool isValid) {
     m_wareName = name;
     m_count = count;
+    m_isValid = isValid;
 }
 
 std::string WareInfo::wareName() const {

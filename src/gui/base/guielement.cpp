@@ -56,7 +56,9 @@ e172::ptr<GUIElement> GUIElement::withChildren(const std::list<e172::ptr<GUIElem
     return this;
 }
 
-GUIElement::GUIElement() {}
+GUIElement::GUIElement() {
+    setDepth(100);
+}
 
 bool GUIElement::addChildElement(const e172::ptr<GUIElement> &element) {
     if(element != this && !element->m_parentElement) {

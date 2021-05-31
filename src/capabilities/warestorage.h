@@ -40,6 +40,8 @@ public:
     e172::ptr<PriceTable> priceTable() const;
 
     std::optional<size_t> indexOf(const std::string& wareName) const;
+
+    std::list<std::string> prettyInfo() const;
 };
 
 class TransportWareStorage : public WareStorage {

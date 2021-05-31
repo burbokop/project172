@@ -86,7 +86,7 @@ WareInfo WareMultiBayContainer::wareInfo(size_t index) const {
             ++ci;
         }
     }
-    return WareInfo("", 0);
+    return WareInfo("", 0, false);
 }
 
 size_t WareMultiBayContainer::amount() const {
