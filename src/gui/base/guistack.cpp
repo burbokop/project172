@@ -3,6 +3,7 @@
 #include "guilistview.h"
 
 #include <src/abstracteventhandler.h>
+#include <src/gameapplication.h>
 
 GUIStack::GUIStack() : GUIElement () {}
 
@@ -47,13 +48,9 @@ void GUIStack::proceed(e172::Context *context, e172::AbstractEventHandler *event
         }
     }
 
-    if(m_current) {
-        m_current->proceed(context, eventHandler);
-    }
+    e172::GameApplication::proceed(m_current, context, eventHandler);
 }
 
 void GUIStack::render(e172::AbstractRenderer *renderer) {
-    if(m_current) {
-        m_current->render(renderer);
-    }
+    e172::GameApplication::render(m_current, renderer);
 }

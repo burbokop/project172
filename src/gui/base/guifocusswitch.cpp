@@ -1,5 +1,7 @@
 #include "guifocusswitch.h"
 
+#include <src/gameapplication.h>
+
 GUIFocusSwitch::GUIFocusSwitch(e172::Scancode keyLast, e172::Scancode keyNext) {
     m_keyLast = keyLast;
     m_keyNext = keyNext;
@@ -22,18 +24,13 @@ void GUIFocusSwitch::proceed(e172::Context *context, e172::AbstractEventHandler 
         } else {
             c->setInFocus(false);
         }
-
-        if(!c->keyboardEnabled()) {
-            eventHandler->disableKeyboard();
-        }
-        c->proceed(context, eventHandler);
-        eventHandler->enableKeyboard();
+        e172::GameApplication::proceed(c, context, eventHandler);
         ++i;
     }
 }
 
 void GUIFocusSwitch::render(e172::AbstractRenderer *renderer) {
     for(const auto& c : children()) {
-        c->render(renderer);
+        e172::GameApplication::render(c, renderer);
     }
 }

@@ -24,6 +24,7 @@ GuiConsole::GuiConsole(const GuiConsole::CommandHandlerFunc &commandHandlerFunc)
     m_commandHandlerFunc = commandHandlerFunc;    
 
     loadHistory();
+    setDepth(20);
 }
 
 GuiConsole::~GuiConsole() {}
@@ -68,8 +69,6 @@ void GuiConsole::proceed(e172::Context *context, e172::AbstractEventHandler *eve
             if (historyIndex >= 0) {
                 historyIndex--;
             }
-            e172::Debug::print("historyIndex:", historyIndex);
-
             if (history.size() - historyIndex - 1 < history.size()) {
                 currentLine = history[history.size() - historyIndex - 1];
             } else if(historyIndex < 0) {
@@ -83,6 +82,8 @@ void GuiConsole::proceed(e172::Context *context, e172::AbstractEventHandler *eve
 
 void GuiConsole::render(e172::AbstractRenderer *renderer) {
     if(consoleEnabled) {
+        renderer->drawRect(e172::Vector(), renderer->resolution(), 0x88888888, e172::ShapeFormat(true));
+
         double offset = 0;
         for(const auto& l : lines) {
             auto size = renderer->drawString(l, e172::Vector(margin() * 2, margin() * 2 + offset), color);

@@ -10,13 +10,11 @@ void GUIMenuElement::setModelData(const e172::Variant &modelData) {
     m_modelData = modelData;
 }
 
-e172::TextFormat GUIMenuElement::textFormat() const
-{
+e172::TextFormat GUIMenuElement::textFormat() const {
     return m_textFormat;
 }
 
-void GUIMenuElement::setTextFormat(const e172::TextFormat &textFormat)
-{
+void GUIMenuElement::setTextFormat(const e172::TextFormat &textFormat) {
     m_textFormat = textFormat;
 }
 

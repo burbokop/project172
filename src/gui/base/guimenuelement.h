@@ -4,8 +4,9 @@
 #include "guielement.h"
 
 #include <src/iinformative.h>
-#include <src/textformat.h>
 #include <src/variant.h>
+
+#include <src/graphics/textformat.h>
 
 
 class GUIMenuElement : public GUIElement {
