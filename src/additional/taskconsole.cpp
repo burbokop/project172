@@ -42,6 +42,10 @@ void TaskConsole::executeCommand(const std::string &commandLine, std::list<std::
     }
 }
 
+std::list<std::string> TaskConsole::compleateVariants() const {
+    return m_taskFactory.typeNames();
+}
+
 void TaskConsole::executeCommandToStream(const std::string &commandLine, std::ostream &stream, e172::Context* context) {
     std::list<std::string> list;
     executeCommand(commandLine, &list, context);

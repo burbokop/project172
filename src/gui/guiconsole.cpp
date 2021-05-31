@@ -19,9 +19,10 @@ void GuiConsole::saveHistory() {
     e172::Additional::writeFile(path, e172::convert_to<e172::Variant>(history).toJson());
 }
 
-GuiConsole::GuiConsole(const GuiConsole::CommandHandlerFunc &commandHandlerFunc) {
+GuiConsole::GuiConsole(const GuiConsole::CommandHandlerFunc &commandHandlerFunc, const CompletionFunc &completionFunc) {
     setMargin(32);
     m_commandHandlerFunc = commandHandlerFunc;    
+    m_completionFunc = completionFunc;
 
     loadHistory();
     setDepth(1000);
@@ -75,6 +76,10 @@ void GuiConsole::proceed(e172::Context *context, e172::AbstractEventHandler *eve
                 currentLine = currentLineBackup;
             }
             eventHandler->pullText();
+        } else if(eventHandler->keySinglePressed(e172::ScancodeTab)) {
+            if(m_completionFunc) {
+                currentLine = e172::Additional::compleateString(currentLine, m_completionFunc());
+            }
         }
         currentLine += eventHandler->pullText();
     }

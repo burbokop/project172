@@ -82,6 +82,8 @@ int main(int argc, char *argv[]) {
     //    }
     //}
 
+    e172::Debug::print("compiler:", e172::Debug::compilerInfo());
+
 
     enum RendererUsing {
         Undefined,

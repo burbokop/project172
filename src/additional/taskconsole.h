@@ -17,6 +17,8 @@ public:
     TaskConsole();
     void executeCommand(const std::string &commandLine, std::list<std::string> *lines, e172::Context *context);
 
+    std::list<std::string> compleateVariants() const;
+
     template<typename T>
     void registerTask() {
         m_taskFactory.registerType<T>();

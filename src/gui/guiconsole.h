@@ -20,13 +20,15 @@ class GuiConsole : public GUIElement {
     std::string currentLineBackup;
 public:
     typedef std::function<void(const std::string &, std::list<std::string> *, e172::Context*)> CommandHandlerFunc;
+    typedef std::function<std::list<std::string>()> CompletionFunc;
 private:
     CommandHandlerFunc m_commandHandlerFunc;
+    CompletionFunc m_completionFunc;
 
     void loadHistory();
     void saveHistory();
 public:
-    GuiConsole(const CommandHandlerFunc& commandHandlerFunc);
+    GuiConsole(const CommandHandlerFunc& commandHandlerFunc, const CompletionFunc& completionFunc = nullptr);
     virtual ~GuiConsole();
 
     // Entity interface
