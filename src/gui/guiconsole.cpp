@@ -82,7 +82,7 @@ void GuiConsole::proceed(e172::Context *context, e172::AbstractEventHandler *eve
 
 void GuiConsole::render(e172::AbstractRenderer *renderer) {
     if(consoleEnabled) {
-        renderer->drawRect(e172::Vector(), renderer->resolution(), 0x88888888, e172::ShapeFormat(true));
+        renderer->drawRect(e172::Vector(), renderer->resolution(), 0xaa000000, e172::ShapeFormat(true));
 
         double offset = 0;
         for(const auto& l : lines) {
