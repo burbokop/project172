@@ -13,6 +13,6 @@ bool SellWareTask::start(e172::Context *context)
 {
 }
 
-void SellWareTask::initFromCommand(const std::vector<std::string> &args, std::list<std::string> *lines, e172::Context *context)
+void SellWareTask::initFromCommand(const std::vector<std::string> &args, e172::ClosableOutputStream &stream, e172::Context *context)
 {
 }

@@ -122,7 +122,7 @@ bool DockingTask::start(e172::Context *) {
 }
 
 
-void DockingTask::initFromCommand(const std::vector<std::string> &args, std::list<std::string> *lines, e172::Context *context) {
+void DockingTask::initFromCommand(const std::vector<std::string> &args, e172::ClosableOutputStream &stream, e172::Context *context) {
     if (args.size() > 1) {
         bool ok;
         auto targetId = e172::Variant(args[1]).toNumber<e172::Entity::id_t>(&ok);
@@ -130,12 +130,13 @@ void DockingTask::initFromCommand(const std::vector<std::string> &args, std::lis
             if(auto target = context->entityById<Unit>(targetId)){
                 m_targetUnit = target;
             } else {
-                lines->push_back("error: target with id: " + std::to_string(targetId) + " not found");
+                stream << "error: target with id: " << targetId << " not found" << std::endl;
             }
         } else {
-            lines->push_back("error: " + args[1] + " invlid target id");
+            stream << "error: " << args[1] << " invlid target id" << std::endl;
         }
     } else {
-        lines->push_back("error: must have 2 arguments");
+        stream << "error: must have 2 arguments" << std::endl;
     }
+    stream.close();
 }

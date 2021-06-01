@@ -9,7 +9,8 @@
 
 TaskConsole::TaskConsole() {}
 
-void TaskConsole::executeCommand(const std::string &commandLine, std::list<std::string> *lines, e172::Context* context) {
+void TaskConsole::executeCommand(const std::string &commandLine, e172::ClosableOutputStream &stream, e172::Context* context) {
+    bool ok = false;
     auto args = e172::Additional::split(commandLine, ' ');
     if(!args.empty()) {
         const auto arg0parts = e172::Additional::split(args[0], '>');
@@ -20,37 +21,33 @@ void TaskConsole::executeCommand(const std::string &commandLine, std::list<std::
                 if(const auto& subject = context->entityById<Unit>(subjectId)) {
                     if(auto controller = subject->capability<Controller>()) {
                         if(auto task = m_taskFactory.create(arg0parts[0])) {
-                            task->initFromCommand(args, lines, context);
+                            task->initFromCommand(args, stream, context);
                             controller->executeRootTask(task, context);
+                            ok = true;
                         } else {
-                            lines->push_back("error: " + arg0parts[0] + " unknown task name");
+                            stream << "error: " << arg0parts[0] << " unknown task name" << std::endl;
                         }
                     } else {
-                        lines->push_back("error: missing controller in unit: " + std::to_string(subjectId));
+                        stream << "error: missing controller in unit: " << subjectId << std::endl;
                     }
                 } else {
-                    lines->push_back("error: unit with id: " + std::to_string(subjectId) + " not found");
+                    stream << "error: unit with id: " + std::to_string(subjectId) + " not found" << std::endl;
                 }
             } else {
-                lines->push_back("error: " + arg0parts[1] + " invalid id");
+                stream << "error: " << arg0parts[1] << " invalid id" << std::endl;
             }
         } else {
-            lines->push_back("error: first argument must be [taskClass]>[entityId] but entered: " + args[0]);
+            stream << "error: first argument must be [taskClass]>[entityId] but entered: " << args[0] << std::endl;
         }
     } else {
-        lines->push_back("error: empty args");
+        stream << "error: empty args" << std::endl;
+    }
+    if(!ok) {
+        stream.close();
     }
 }
 
 std::list<std::string> TaskConsole::compleateVariants() const {
     return m_taskFactory.typeNames();
-}
-
-void TaskConsole::executeCommandToStream(const std::string &commandLine, std::ostream &stream, e172::Context* context) {
-    std::list<std::string> list;
-    executeCommand(commandLine, &list, context);
-    for(const auto& l : list) {
-        stream << l << "\n";
-    }
 }
 

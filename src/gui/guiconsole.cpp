@@ -9,19 +9,22 @@
 
 #include <src/conversion.h>
 
-void GuiConsole::loadHistory() {
+
+
+
+void GuiConsole::loadHistory() {    
     const auto path = e172::Additional::absolutePath(m_historyPath, std::string());
-    history = e172::convert_to<std::vector<std::string>>(e172::Variant::fromJson(e172::Additional::readFile(path)));
+    m_history = e172::convert_to<std::vector<std::string>>(e172::Variant::fromJson(e172::Additional::readFile(path)));
 }
 
 void GuiConsole::saveHistory() {
     const auto path = e172::Additional::absolutePath(m_historyPath, std::string());
-    e172::Additional::writeFile(path, e172::convert_to<e172::Variant>(history).toJson());
+    e172::Additional::writeFile(path, e172::convert_to<e172::Variant>(m_history).toJson());
 }
 
 GuiConsole::GuiConsole(const GuiConsole::CommandHandlerFunc &commandHandlerFunc, const CompletionFunc &completionFunc) {
     setMargin(32);
-    m_commandHandlerFunc = commandHandlerFunc;    
+    m_commandHandlerFunc = commandHandlerFunc;
     m_completionFunc = completionFunc;
 
     loadHistory();
@@ -32,58 +35,68 @@ GuiConsole::~GuiConsole() {}
 
 void GuiConsole::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
     if (eventHandler->keySinglePressed(e172::ScancodeGrave)) {
-        consoleEnabled = !consoleEnabled;
+        m_consoleEnabled = !m_consoleEnabled;
         eventHandler->pullText();
-        if(consoleEnabled) {
+        if(m_consoleEnabled) {
             context->setEntityInFocus(this);
         } else {
             context->setEntityInFocus(nullptr);
         }
     }
-    if (consoleEnabled) {
+    if (m_consoleEnabled) {
         if(eventHandler->keySinglePressed(e172::ScancodeReturn)) {
-            lines.push_back(cmdPreffix + currentLine);
+            m_text += m_cmdPreffix + m_currentLine + "\n";
             if (m_commandHandlerFunc) {
-                m_commandHandlerFunc(currentLine, &lines, context);
+                if(!m_currentStream) {
+                    m_currentStream = new e172::CallbackOutputStream([this](const std::string& str){
+                        m_text += str;
+                    }, [this](){
+                        m_needDestroyStream = true;
+                        e172::Debug::print("L4");
+                    });
+                    m_commandHandlerFunc(m_currentLine, *m_currentStream, context);
+                } else {
+                    m_text += "stream busy\n";
+                }
             }
-            history.push_back(currentLine);
+            m_history.push_back(m_currentLine);
             saveHistory();
-            currentLine.clear();
+            m_currentLine.clear();
             m_caretteX = 0;
             eventHandler->pullText();
         } else if(eventHandler->keySinglePressed(e172::ScancodeBackSpace)) {
-            if (!currentLine.empty() && m_caretteX > 0 && m_caretteX <= currentLine.size()) {
-                currentLine.erase(--m_caretteX, 1);
+            if (!m_currentLine.empty() && m_caretteX > 0 && m_caretteX <= m_currentLine.size()) {
+                m_currentLine.erase(--m_caretteX, 1);
             }
             eventHandler->pullText();
         } else if(eventHandler->keySinglePressed(e172::ScancodeUp)) {
-            if(historyIndex == -1) {
-                currentLineBackup = currentLine;
+            if(m_historyIndex == -1) {
+                m_currentLineBackup = m_currentLine;
             }
-            if (historyIndex < int64_t(history.size())) {
-                historyIndex++;
+            if (m_historyIndex < int64_t(m_history.size())) {
+                m_historyIndex++;
             }
-            if (history.size() - historyIndex - 1 < history.size()) {
-                currentLine = history[history.size() - historyIndex - 1];
-                m_caretteX = currentLine.size();
+            if (m_history.size() - m_historyIndex - 1 < m_history.size()) {
+                m_currentLine = m_history[m_history.size() - m_historyIndex - 1];
+                m_caretteX = m_currentLine.size();
             }
             eventHandler->pullText();
         } else if(eventHandler->keySinglePressed(e172::ScancodeDown)) {
-            if (historyIndex >= 0) {
-                historyIndex--;
+            if (m_historyIndex >= 0) {
+                m_historyIndex--;
             }
-            if (history.size() - historyIndex - 1 < history.size()) {
-                currentLine = history[history.size() - historyIndex - 1];
-                m_caretteX = currentLine.size();
-            } else if(historyIndex < 0) {
-                currentLine = currentLineBackup;
-                m_caretteX = currentLine.size();
+            if (m_history.size() - m_historyIndex - 1 < m_history.size()) {
+                m_currentLine = m_history[m_history.size() - m_historyIndex - 1];
+                m_caretteX = m_currentLine.size();
+            } else if(m_historyIndex < 0) {
+                m_currentLine = m_currentLineBackup;
+                m_caretteX = m_currentLine.size();
             }
             eventHandler->pullText();
         } else if(eventHandler->keySinglePressed(e172::ScancodeTab)) {
             if(m_completionFunc) {
-                currentLine = e172::Additional::compleateString(currentLine, m_completionFunc());
-                m_caretteX = currentLine.size();
+                m_currentLine = e172::Additional::compleateString(m_currentLine, m_completionFunc());
+                m_caretteX = m_currentLine.size();
             }
             eventHandler->pullText();
         } else if(eventHandler->keySinglePressed(e172::ScancodeLeft)) {
@@ -92,39 +105,43 @@ void GuiConsole::proceed(e172::Context *context, e172::AbstractEventHandler *eve
             }
             eventHandler->pullText();
         } else if(eventHandler->keySinglePressed(e172::ScancodeRight)) {
-            if(m_caretteX < currentLine.size()) {
+            if(m_caretteX < m_currentLine.size()) {
                 m_caretteX++;
             }
             eventHandler->pullText();
         }
-        if(m_caretteX >= 0 && m_caretteX <= currentLine.size()) {
+        if(m_caretteX >= 0 && m_caretteX <= m_currentLine.size()) {
             const auto pendingText = eventHandler->pullText();
-            currentLine.insert(m_caretteX, pendingText);
+            m_currentLine.insert(m_caretteX, pendingText);
             m_caretteX += pendingText.size();
+        }
+
+        if(m_needDestroyStream) {
+            if(m_currentStream) {
+                e172::Debug::print("L5");
+                delete m_currentStream;
+                m_currentStream = nullptr;
+            }
+            m_needDestroyStream = false;
         }
     }
 }
 
 void GuiConsole::render(e172::AbstractRenderer *renderer) {
-    if(consoleEnabled) {
+    if(m_consoleEnabled) {
         renderer->drawRect(e172::Vector(), renderer->resolution(), 0xaa000000, e172::ShapeFormat(true));
         const auto textFormat = e172::TextFormat::fromFont(m_font, 20);
 
-        double offset = 0;
-        for(const auto& l : lines) {
-            auto size = renderer->drawString(l, e172::Vector(margin() * 2, margin() * 2 + offset), color, textFormat);
-            offset += size.y();
-        }
+        const auto offset = renderer->drawText(m_text, e172::Vector(margin() * 2, margin() * 2), renderer->resolution().x() - margin() * 4, m_color, textFormat);
 
-
-        const auto lineStart = e172::Vector(margin() * 2, margin() * 2 + offset);
-        renderer->drawString(cmdPreffix + currentLine, lineStart, color, textFormat);
-        renderer->drawRect(e172::Vector(margin(), margin()), renderer->resolution() - margin(), color);
+        const auto lineStart = e172::Vector(margin() * 2, margin() * 2 + offset.y());
+        renderer->drawString(m_cmdPreffix + m_currentLine, lineStart, m_color, textFormat);
+        renderer->drawRect(e172::Vector(margin(), margin()), renderer->resolution() - margin(), m_color);
 
         renderer->drawLine(
-                    lineStart + e172::Vector((cmdPreffix.size() + m_caretteX) * textFormat.fontWidth(), 0),
-                    lineStart + e172::Vector((cmdPreffix.size() + m_caretteX) * textFormat.fontWidth(), textFormat.fontHeight()),
-                    color
+                    lineStart + e172::Vector((m_cmdPreffix.size() + m_caretteX) * textFormat.fontWidth(), 0),
+                    lineStart + e172::Vector((m_cmdPreffix.size() + m_caretteX) * textFormat.fontWidth(), textFormat.fontHeight()),
+                    m_color
                     );
     }
 }
