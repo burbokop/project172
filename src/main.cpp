@@ -175,6 +175,7 @@ int main(int argc, char *argv[]) {
 
     app.assetProvider()->searchInFolder(app.context()->absolutePath("../assets"));
     graphicsProvider->loadFont(std::string(), app.context()->absolutePath("../assets/fonts/ZCOOL.ttf"));
+    graphicsProvider->loadFont("Consolas", app.context()->absolutePath("../assets/fonts/consolas.ttf"));
 
     //APP INITIALIZATION CONMPLEATED
 

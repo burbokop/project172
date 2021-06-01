@@ -3,10 +3,15 @@
 
 #include "task.h"
 
+#include <src/capabilities/warestorage.h>
+
+
 class BuyWareTask : public Task {
     std::string m_targetWare;
 public:
     BuyWareTask(const std::string &ware = "");
+
+    void dockingCompleated(const WareStorage::WareRef& wareRef);
 
     // Task interface
 public:

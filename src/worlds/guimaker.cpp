@@ -200,7 +200,7 @@ GUIMaker::GUIMaker(e172::Context *context, Near *radarNear, TaskConsole *console
         } m_rootElement->addChildElement(menuFocusSwitch);
 
         if (console) {
-            m_rootElement->addChildElement(new GuiConsole(e172::bind(console, &TaskConsole::executeCommand)));
+            m_rootElement->addChildElement(new GuiConsole(e172::bind(console, &TaskConsole::executeCommand), e172::bind(console, &TaskConsole::compleateVariants)));
         }
         m_rootElement->addChildElement(new GUIMiniMap());
         m_rootElement->addChildElement(new GUIDebugValueInfo());

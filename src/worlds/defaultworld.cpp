@@ -111,6 +111,9 @@ WorldPreset::GenerationResult DefaultWorld::generateSomeStations(e172::Context *
         if(station) {
             station->setOwnerPerson(person);
             station->addCapability(context->assetProvider()->createLoadable<Capability>("ore_reciept"));
+            const auto controller = new Controller();
+            controller->setPerson(person);
+            station->addCapability(controller);
             station->resetPhysicsProperties(e172::Vector::createRandom(500), e172::Math::randDouble() * e172::Math::Pi * 2);
             result.entities.push_back(station);
             ++i;

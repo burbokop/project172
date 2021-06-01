@@ -154,6 +154,8 @@ add_executable(project172
     ${CMAKE_CURRENT_LIST_DIR}/src/tasks/dockingtask.h
     ${CMAKE_CURRENT_LIST_DIR}/src/tasks/buywaretask.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/tasks/buywaretask.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/tasks/sellwaretask.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/tasks/sellwaretask.h
 
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/base/guielement.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/base/guielement.h

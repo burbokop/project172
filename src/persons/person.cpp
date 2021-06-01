@@ -80,10 +80,14 @@ Person::BuyStatus Person::buyWare(const WareStorage::WareRef &wareRef, const e17
                                     auto totalPrice = std::min(m_money, count * price.value());
                                     const size_t finalCount = totalPrice / price.value();
                                     totalPrice = totalPrice * finalCount;
-                                    wareRef.storage()->transferWareTo(wareRef.index(), destination, finalCount);
-                                    m_money -= totalPrice;
-                                    seller->m_money += totalPrice;
-                                    return BuyingSuccess;
+                                    if(finalCount != 0) {
+                                        wareRef.storage()->transferWareTo(wareRef.index(), destination, finalCount);
+                                        m_money -= totalPrice;
+                                        seller->m_money += totalPrice;
+                                        return BuyingSuccess;
+                                    } else {
+                                        return NotEnoughMoney;
+                                    }
                                 } else {
                                     return PriceIsZero;
                                 }

@@ -26,7 +26,8 @@ class Person : public e172::Object {
                            SellerIsNull,
                            SellerControllerIsNull,
                            SellerUnitIsNull,
-                           SellerStorageIsNull
+                           SellerStorageIsNull,
+                           NotEnoughMoney
                            )
 
     E172_SMART_ENUM_RESULT(SellStatus,
