@@ -48,11 +48,11 @@ void Person::setIsJuridicalPerson(bool isJuridicalPerson) {
     m_isJuridicalPerson = isJuridicalPerson;
 }
 
-size_t Person::money() const {
+int64_t Person::money() const {
     return m_money;
 }
 
-void Person::setMoney(const size_t &money) {
+void Person::setMoney(const int64_t &money) {
     m_money = money;
 }
 
@@ -72,14 +72,15 @@ Person::BuyStatus Person::buyWare(const WareStorage::WareRef &wareRef, const e17
             return sellerUnit->capability<Controller>().fold<BuyStatus>([&](Controller* sellerController){
                 return sellerController->person().fold<BuyStatus>([&](Person* seller){
                     if(seller != this) {
-                        const auto wareInfo = sellerStorage->wareInfo(wareRef.index());
+                        const auto wareInfo = wareRef.info();
                         if(wareInfo.isValid()) {
                         const auto price = sellerStorage->priceTable()->price(wareInfo.wareName()).buyPrice();
                             if(price.has_value()) {
-                                if(price.value() != 0) {
-                                    auto totalPrice = std::min(m_money, count * price.value());
+                                if(price.value() != 0) {                                    
+                                    count = std::min(count, wareInfo.count());
+                                    auto totalPrice = std::min(m_money, int64_t(count * price.value()));
                                     const size_t finalCount = totalPrice / price.value();
-                                    totalPrice = totalPrice * finalCount;
+                                    totalPrice = finalCount * price.value();
                                     if(finalCount != 0) {
                                         wareRef.storage()->transferWareTo(wareRef.index(), destination, finalCount);
                                         m_money -= totalPrice;
@@ -118,8 +119,8 @@ Person::SellStatus Person::sellWare(const WareStorage::WareRef &wareRef, const e
                                 const auto price = buyerStorage->priceTable()->price(wareInfo.wareName()).sellPrice();
                                 if(price.has_value()) {
                                     if(price.value() != 0) {
-                                        auto totalPrice = std::min(buyer->m_money, count * price.value());
-                                        const size_t finalCount = totalPrice / price.value();
+                                        auto totalPrice = std::min(buyer->m_money, int64_t(count * price.value()));
+                                        const int64_t finalCount = totalPrice / price.value();
                                         totalPrice = totalPrice * finalCount;
                                         wareRef.storage()->transferWareTo(wareRef.index(), buyerStorage, finalCount);
                                         buyer->m_money -= totalPrice;

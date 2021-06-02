@@ -48,15 +48,25 @@ void Unit::render(e172::AbstractRenderer *renderer) {
     }
 
     {
+        if(const auto controller = capability<Controller>()) {
+            if(const auto person =  controller->person()) {
+                const auto format = e172::TextFormat(e172::TextFormat::AlignHCenter | e172::TextFormat::AlignTop, 12);
+                renderer->drawStringShifted("person: " + person->name(), position() + e172::Vector(spriteSize.x() + 16, -spriteSize.y() * 0.5 - 32), 0xA668D5, format);
+                renderer->drawStringShifted("modey: " + std::to_string(person->money()), position() + e172::Vector(spriteSize.x() + 16, -spriteSize.y() * 0.5 - 18), 0xA668D5, format);
+            }
+        }
+    }
+
+    {
         double yOffset = 0;
-        const auto format = e172::TextFormat(e172::TextFormat::AlignHCenter | e172::TextFormat::AlignBottom, 10);
+        const auto format = e172::TextFormat(e172::TextFormat::AlignHCenter | e172::TextFormat::AlignBottom, 12);
         for(const auto& c : m_capabilities) {
             auto offset = renderer->drawStringShifted(c->className(), position() + e172::Vector(60, spriteSize.y() * 0.5 + 8 + yOffset), 0xffaaff, format);
             yOffset += offset.y();
         }
     }
     if(auto storage = capability<WareStorage>()) {
-        const auto format = e172::TextFormat(e172::TextFormat::AlignHCenter | e172::TextFormat::AlignBottom, 10);
+        const auto format = e172::TextFormat(e172::TextFormat::AlignHCenter | e172::TextFormat::AlignBottom, 12);
         double yOffset = 0;
         for(const auto& info : storage->prettyInfo()) {
             auto offset = renderer->drawStringShifted(info, position() + e172::Vector(0, spriteSize.y() * 0.5 + 8 + yOffset), 0xaaffaa, format);

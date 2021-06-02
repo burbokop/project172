@@ -133,6 +133,13 @@ e172::ptr<WareStorage> WareStorage::WareRef::storage() const {
     return m_storage;
 }
 
+WareInfo WareStorage::WareRef::info() const {
+    if(m_storage) {
+        return m_storage->wareInfo(m_index);
+    }
+    return WareInfo(std::string(), 0, false);
+}
+
 WareStorage::WareRef::WareRef(const e172::ptr<WareStorage> &storage, size_t index) {
     m_storage = storage;
     m_index = index;

@@ -14,8 +14,7 @@ class Person : public e172::Object {
     std::set<e172::ptr<Person>> m_employees;
 
     bool m_isJuridicalPerson = false;
-    size_t m_money = 0;
-
+    int64_t m_money = 0;
 
     E172_SMART_ENUM_RESULT(BuyStatus,
                            BuyingSuccess,
@@ -53,8 +52,8 @@ public:
     bool removeEmployee(const e172::ptr<Person>& employee);
     bool isJuridicalPerson() const;
     void setIsJuridicalPerson(bool isJuridicalPerson);
-    size_t money() const;
-    void setMoney(const size_t &money);
+    int64_t money() const;
+    void setMoney(const int64_t &money);
 
     bool isOwnerOfWare(const WareStorage::WareRef &wareRef);
 

@@ -24,15 +24,18 @@ DefaultWorld::DefaultWorld() {}
 WorldPreset::GenerationResult DefaultWorld::generate(e172::Context *context) {
     GenerationResult result;
 
-    result += generatePlayer(context, "player1", new Person("burbokop"));
+    auto burbokop = new Person("burbokop");
+    burbokop->setMoney(500);
+    result += generatePlayer(context, "player1", burbokop);
 
     auto corp = new Person("corp");
+    corp->setMoney(1000);
     corp->setIsJuridicalPerson(true);
     result += generateSomeShips(context, 10, corp);
     result += generateSomeStations(context, 10, corp);
 
-
     auto merchantGuild = new Person("merchant guild");
+    corp->setMoney(2000);
     merchantGuild->setIsJuridicalPerson(true);
     result += generateSomeShips(context, 10, merchantGuild);
     result += generateSomeStations(context, 10, merchantGuild);

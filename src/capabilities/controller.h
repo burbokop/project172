@@ -8,11 +8,11 @@
 
 #include <src/time/elapsedtimer.h>
 
-#include <src/persons/person.h>
 
 #include <src/tasks/task.h>
 
 class Ship;
+class Person;
 
 class Controller : public Capability {    
     friend Task;

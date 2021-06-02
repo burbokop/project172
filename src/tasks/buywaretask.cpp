@@ -13,8 +13,8 @@ void BuyWareTask::dockingCompleated(const WareStorage::WareRef &wareRef) {
     if(const auto& controller = parentController()) {
         if(const auto& unit = controller->parentUnit()) {
             if(const auto& storage = unit->capability<WareStorage>()) {
-                const auto status = controller->person()->buyWare(wareRef, storage);
-                out() << e172::Cyan << status << e172::Reset << std::endl;
+                const auto status = controller->person()->buyWare(wareRef, storage, out());
+                out() << status << std::endl;
             } else {
                 out() << "unit not have storage" << std::endl;
             }

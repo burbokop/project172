@@ -23,6 +23,7 @@ public:
         WareRef() {}
         size_t index() const;
         e172::ptr<WareStorage> storage() const;
+        WareInfo info() const;
     };
 
     WareStorage();

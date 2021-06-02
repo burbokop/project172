@@ -77,18 +77,20 @@ void Factory::updateContainers() {
 
 void Factory::updatePriceTable() {
     const auto& container = e172::smart_cast<WareMultiBayContainer>(wareContainer());
-    double wareDefaultPrice = 10;
-    for(size_t i = 0; i < container->size(); ++i) {
+    double wareDefaultPrice = 12;
+    double wareDefaultPriceDelta = 8;
+
+    for(size_t i = 0; i < container->size(); ++i) {        
         const auto& subContainer = container->operator[](i);
         const auto& tmpl = m_templates[i];
         const auto& full = subContainer.full();
         if(subContainer.isOutputAllowed(tmpl.ware())) {
-            priceTable()->setBuyPrice(tmpl.ware(), wareDefaultPrice * full);
+            priceTable()->setBuyPrice(tmpl.ware(), e172::Math::map(full, 0, 1, wareDefaultPrice - wareDefaultPriceDelta, wareDefaultPrice + wareDefaultPriceDelta));
         } else {
             priceTable()->removeBuyPrice(tmpl.ware());
         }
         if(subContainer.isInputAllowed(tmpl.ware())) {
-            priceTable()->setSellPrice(tmpl.ware(), wareDefaultPrice * (1 - full));
+            priceTable()->setSellPrice(tmpl.ware(), e172::Math::map(full, 0, 1, wareDefaultPrice + wareDefaultPriceDelta, wareDefaultPrice - wareDefaultPriceDelta));
         } else {
             priceTable()->removeSellPrice(tmpl.ware());
         }
