@@ -30,11 +30,7 @@ bool Task::executeChildTask(const e172::ptr<Task> &task, e172::Context *context,
 }
 
 void Task::proceedBranch(e172::Context *context) {
-    for(const auto &t : m_trash) {
-        m_children.erase(t);
-        t.safeDestroy();
-    }
-    m_trash.clear();
+    clearTrash();
     for(const auto &c : m_children) {
         c->proceedBranch(context);
     }
@@ -44,9 +40,7 @@ void Task::proceedBranch(e172::Context *context) {
 }
 
 Task::~Task() {
-    for(const auto &t : m_trash) {
-        t.safeDestroy();
-    }
+    clearTrash();
     for(const auto &c : m_children) {
         c.safeDestroy();
     }
@@ -57,6 +51,20 @@ e172::ptr<Controller> Task::parentController() const {
 }
 
 
+void Task::clearTrash() {
+    for(const auto &t : m_trash) {
+        m_children.erase(t);
+        for(const auto& c : t->m_onCompleatedSignal) {
+            if(c) {
+                c();
+            }
+        }
+        t->m_onCompleatedSignal.clear();
+        t.safeDestroy();
+    }
+    m_trash.clear();
+}
+
 void Task::completeTask() {
     if(m_running) {
         m_running = false;
@@ -65,13 +73,7 @@ void Task::completeTask() {
             m_parentTask->m_running = true;
         } else if (m_parentController) {
             m_parentController->m_trash.push_back(this);
-        }
-        for(const auto& c : m_onCompleatedSignal) {
-            if(c) {
-                c();
-            }
-        }
-        m_onCompleatedSignal.clear();
+        }        
     }
 }
 

@@ -10,9 +10,7 @@
 #include <src/conversion.h>
 
 
-
-
-void GuiConsole::loadHistory() {    
+void GuiConsole::loadHistory() {
     const auto path = e172::Additional::absolutePath(m_historyPath, std::string());
     m_history = e172::convert_to<std::vector<std::string>>(e172::Variant::fromJson(e172::Additional::readFile(path)));
 }
@@ -29,6 +27,10 @@ GuiConsole::GuiConsole(const GuiConsole::CommandHandlerFunc &commandHandlerFunc,
 
     loadHistory();
     setDepth(1000);
+
+    m_streamPool = e172::CallbackOutputStream::SingleElementPool([this](const std::string& str){
+        m_text += str;
+    });
 }
 
 GuiConsole::~GuiConsole() {}
@@ -44,32 +46,22 @@ void GuiConsole::proceed(e172::Context *context, e172::AbstractEventHandler *eve
         }
     }
     if (m_consoleEnabled) {
-        if(eventHandler->keySinglePressed(e172::ScancodeReturn)) {
+        if(m_streamPool.available() && eventHandler->keySinglePressed(e172::ScancodeReturn)) {
             m_text += m_cmdPreffix + m_currentLine + "\n";
             if (m_commandHandlerFunc) {
-                if(!m_currentStream) {
-                    m_currentStream = new e172::CallbackOutputStream([this](const std::string& str){
-                        m_text += str;
-                    }, [this](){
-                        m_needDestroyStream = true;
-                        e172::Debug::print("L4");
-                    });
-                    m_commandHandlerFunc(m_currentLine, *m_currentStream, context);
-                } else {
-                    m_text += "stream busy\n";
-                }
+                m_commandHandlerFunc(m_currentLine, *m_streamPool.use(), context);
             }
             m_history.push_back(m_currentLine);
             saveHistory();
             m_currentLine.clear();
             m_caretteX = 0;
             eventHandler->pullText();
-        } else if(eventHandler->keySinglePressed(e172::ScancodeBackSpace)) {
+        } else if(m_streamPool.available() && eventHandler->keySinglePressed(e172::ScancodeBackSpace)) {
             if (!m_currentLine.empty() && m_caretteX > 0 && m_caretteX <= m_currentLine.size()) {
                 m_currentLine.erase(--m_caretteX, 1);
             }
             eventHandler->pullText();
-        } else if(eventHandler->keySinglePressed(e172::ScancodeUp)) {
+        } else if(m_streamPool.available() && eventHandler->keySinglePressed(e172::ScancodeUp)) {
             if(m_historyIndex == -1) {
                 m_currentLineBackup = m_currentLine;
             }
@@ -81,7 +73,7 @@ void GuiConsole::proceed(e172::Context *context, e172::AbstractEventHandler *eve
                 m_caretteX = m_currentLine.size();
             }
             eventHandler->pullText();
-        } else if(eventHandler->keySinglePressed(e172::ScancodeDown)) {
+        } else if(m_streamPool.available() && eventHandler->keySinglePressed(e172::ScancodeDown)) {
             if (m_historyIndex >= 0) {
                 m_historyIndex--;
             }
@@ -93,36 +85,31 @@ void GuiConsole::proceed(e172::Context *context, e172::AbstractEventHandler *eve
                 m_caretteX = m_currentLine.size();
             }
             eventHandler->pullText();
-        } else if(eventHandler->keySinglePressed(e172::ScancodeTab)) {
+        } else if(m_streamPool.available() && eventHandler->keySinglePressed(e172::ScancodeTab)) {
             if(m_completionFunc) {
                 m_currentLine = e172::Additional::compleateString(m_currentLine, m_completionFunc());
                 m_caretteX = m_currentLine.size();
             }
             eventHandler->pullText();
-        } else if(eventHandler->keySinglePressed(e172::ScancodeLeft)) {
+        } else if(m_streamPool.available() && eventHandler->keySinglePressed(e172::ScancodeLeft)) {
             if(m_caretteX > 0) {
                 m_caretteX--;
             }
             eventHandler->pullText();
-        } else if(eventHandler->keySinglePressed(e172::ScancodeRight)) {
+        } else if(m_streamPool.available() && eventHandler->keySinglePressed(e172::ScancodeRight)) {
             if(m_caretteX < m_currentLine.size()) {
                 m_caretteX++;
             }
             eventHandler->pullText();
         }
-        if(m_caretteX >= 0 && m_caretteX <= m_currentLine.size()) {
-            const auto pendingText = eventHandler->pullText();
-            m_currentLine.insert(m_caretteX, pendingText);
-            m_caretteX += pendingText.size();
-        }
-
-        if(m_needDestroyStream) {
-            if(m_currentStream) {
-                e172::Debug::print("L5");
-                delete m_currentStream;
-                m_currentStream = nullptr;
+        if(m_streamPool.available()) {
+            if(m_caretteX >= 0 && m_caretteX <= m_currentLine.size()) {
+                const auto pendingText = eventHandler->pullText();
+                m_currentLine.insert(m_caretteX, pendingText);
+                m_caretteX += pendingText.size();
             }
-            m_needDestroyStream = false;
+        } else {
+            eventHandler->pullText();
         }
     }
 }
@@ -135,13 +122,14 @@ void GuiConsole::render(e172::AbstractRenderer *renderer) {
         const auto offset = renderer->drawText(m_text, e172::Vector(margin() * 2, margin() * 2), renderer->resolution().x() - margin() * 4, m_color, textFormat);
 
         const auto lineStart = e172::Vector(margin() * 2, margin() * 2 + offset.y());
-        renderer->drawString(m_cmdPreffix + m_currentLine, lineStart, m_color, textFormat);
         renderer->drawRect(e172::Vector(margin(), margin()), renderer->resolution() - margin(), m_color);
-
-        renderer->drawLine(
-                    lineStart + e172::Vector((m_cmdPreffix.size() + m_caretteX) * textFormat.fontWidth(), 0),
-                    lineStart + e172::Vector((m_cmdPreffix.size() + m_caretteX) * textFormat.fontWidth(), textFormat.fontHeight()),
-                    m_color
-                    );
+        if(m_streamPool.available()) {
+            renderer->drawString(m_cmdPreffix + m_currentLine, lineStart, m_color, textFormat);
+            renderer->drawLine(
+                        lineStart + e172::Vector((m_cmdPreffix.size() + m_caretteX) * textFormat.fontWidth(), 0),
+                        lineStart + e172::Vector((m_cmdPreffix.size() + m_caretteX) * textFormat.fontWidth(), textFormat.fontHeight()),
+                        m_color
+                        );
+        }
     }
 }

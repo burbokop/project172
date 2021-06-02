@@ -21,8 +21,7 @@ class GuiConsole : public GUIElement {
     std::string m_currentLineBackup;
     size_t m_caretteX = 0;
 
-    e172::ClosableOutputStream *m_currentStream = nullptr;
-    bool m_needDestroyStream = false;
+    e172::CallbackOutputStream::SingleElementPool m_streamPool;
 public:
     typedef std::function<void(const std::string &, e172::ClosableOutputStream&, e172::Context*)> CommandHandlerFunc;
     typedef std::function<std::list<std::string>()> CompletionFunc;

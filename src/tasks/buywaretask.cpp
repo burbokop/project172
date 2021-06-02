@@ -66,11 +66,10 @@ bool BuyWareTask::start(e172::Context *context) {
     }
 }
 
-void BuyWareTask::initFromCommand(const std::vector<std::string> &args, e172::ClosableOutputStream &stream, e172::Context *) {
+void BuyWareTask::initFromCommand(const std::vector<std::string> &args, std::ostream &stream, e172::Context *) {
     if (args.size() > 1) {
         m_targetWare = args[1];
     } else {
         stream << "error: must have 2 arguments" << std::endl;
     }
-    stream.close();
 }

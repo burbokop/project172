@@ -23,6 +23,7 @@ class Task : public e172::Object {
     std::set<e172::ptr<Task>> m_children;
     std::list<e172::ptr<Task>> m_trash;
     std::list<std::function<void()>> m_onCompleatedSignal;
+    void clearTrash();
 public:
     void completeTask();
 
@@ -35,7 +36,7 @@ public:
     void proceedBranch(e172::Context *context);
     virtual void proceed(e172::Context *context) = 0;
     virtual bool start(e172::Context *context) = 0;
-    virtual void initFromCommand(const std::vector<std::string>&args, e172::ClosableOutputStream &stream, e172::Context *context) = 0;
+    virtual void initFromCommand(const std::vector<std::string>&args, std::ostream &stream, e172::Context *context) = 0;
 
     virtual ~Task();
     e172::ptr<Controller> parentController() const;

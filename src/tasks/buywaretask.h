@@ -17,7 +17,7 @@ public:
 public:
     virtual void proceed(e172::Context *context) override;
     virtual bool start(e172::Context *context) override;
-    virtual void initFromCommand(const std::vector<std::string> &args, e172::ClosableOutputStream &stream, e172::Context *) override;
+    virtual void initFromCommand(const std::vector<std::string> &args, std::ostream &stream, e172::Context *) override;
 };
 
 #endif // BUYWARETASK_H

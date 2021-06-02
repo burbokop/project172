@@ -10,7 +10,7 @@
 TaskConsole::TaskConsole() {}
 
 void TaskConsole::executeCommand(const std::string &commandLine, e172::ClosableOutputStream &stream, e172::Context* context) {
-    bool ok = false;
+    bool taskExecuted = false;
     auto args = e172::Additional::split(commandLine, ' ');
     if(!args.empty()) {
         const auto arg0parts = e172::Additional::split(args[0], '>');
@@ -22,8 +22,8 @@ void TaskConsole::executeCommand(const std::string &commandLine, e172::ClosableO
                     if(auto controller = subject->capability<Controller>()) {
                         if(auto task = m_taskFactory.create(arg0parts[0])) {
                             task->initFromCommand(args, stream, context);
-                            controller->executeRootTask(task, context);
-                            ok = true;
+                            controller->executeRootTask(task, context, [&stream](){ stream.close(); });
+                            taskExecuted = true;
                         } else {
                             stream << "error: " << arg0parts[0] << " unknown task name" << std::endl;
                         }
@@ -42,7 +42,7 @@ void TaskConsole::executeCommand(const std::string &commandLine, e172::ClosableO
     } else {
         stream << "error: empty args" << std::endl;
     }
-    if(!ok) {
+    if(!taskExecuted) {
         stream.close();
     }
 }

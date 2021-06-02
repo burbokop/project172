@@ -24,11 +24,14 @@ void Controller::setPerson(const e172::ptr<Person> &person) {
     m_person = person;
 }
 
-bool Controller::executeRootTask(const e172::ptr<Task> &task, e172::Context *context) {
+bool Controller::executeRootTask(const e172::ptr<Task> &task, e172::Context *context, const std::function<void ()> &onCompleated) {
     if(!m_rootTask) {
         m_rootTask = task;
         m_rootTask->m_running = true;
         task->m_parentController = this;
+        if(onCompleated) {
+            task->m_onCompleatedSignal.push_back(onCompleated);
+        }
         if(m_rootTask->start(context)) {
             return true;
         } else {
@@ -43,10 +46,20 @@ e172::ptr<Task> Controller::rootTask() const {
 }
 
 Controller::~Controller() {
+    clearTrash();
+}
+
+void Controller::clearTrash() {
     for(const auto &t : m_trash) {
         if(t == m_rootTask) {
             m_rootTask = nullptr;
         }
+        for(const auto& c : t->m_onCompleatedSignal) {
+            if(c) {
+                c();
+            }
+        }
+        t->m_onCompleatedSignal.clear();
         t.safeDestroy();
     }
     m_trash.clear();
@@ -86,10 +99,7 @@ void Controller::proceed(e172::Context *context, e172::AbstractEventHandler *eve
         }
     }
 
-    for(const auto &t : m_trash) {
-        t.safeDestroy();
-    }
-    m_trash.clear();
+    clearTrash();
 
     if(m_rootTask) {
         m_rootTask->proceedBranch(context);

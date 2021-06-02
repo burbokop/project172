@@ -25,6 +25,7 @@ class Controller : public Capability {
 
     e172::ptr<Task> m_rootTask;
     std::list<e172::ptr<Task>> m_trash;
+    void clearTrash();
 protected:
     static const long ARMOR_RELEASE_DELAY;
     static const std::string ARMOR_RELEASE_MESSAGE;
@@ -41,7 +42,7 @@ public:
     e172::ptr<Person> person() const;
     void setPerson(const e172::ptr<Person> &person);
 
-    bool executeRootTask(const e172::ptr<Task> &task, e172::Context *context);
+    bool executeRootTask(const e172::ptr<Task> &task, e172::Context *context, const std::function<void()>&onCompleated = nullptr);
     e172::ptr<Task> rootTask() const;
 
     virtual ~Controller();
