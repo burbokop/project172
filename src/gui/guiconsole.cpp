@@ -125,11 +125,16 @@ void GuiConsole::render(e172::AbstractRenderer *renderer) {
         renderer->drawRect(e172::Vector(margin(), margin()), renderer->resolution() - margin(), m_color);
         if(m_streamPool.available()) {
             renderer->drawString(m_cmdPreffix + m_currentLine, lineStart, m_color, textFormat);
-            renderer->drawLine(
-                        lineStart + e172::Vector((m_cmdPreffix.size() + m_caretteX) * textFormat.fontWidth(), 0),
-                        lineStart + e172::Vector((m_cmdPreffix.size() + m_caretteX) * textFormat.fontWidth(), textFormat.fontHeight()),
-                        m_color
-                        );
+            if(m_caretteDisplayTimer.check()) {
+                m_displayCarette = !m_displayCarette;
+            }
+            if(m_displayCarette) {
+                renderer->drawLine(
+                            lineStart + e172::Vector((m_cmdPreffix.size() + m_caretteX) * textFormat.fontWidth(), 0),
+                            lineStart + e172::Vector((m_cmdPreffix.size() + m_caretteX) * textFormat.fontWidth(), textFormat.fontHeight()),
+                            m_color
+                            );
+            }
         }
     }
 }

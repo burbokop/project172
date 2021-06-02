@@ -21,7 +21,8 @@ void TaskConsole::executeCommand(const std::string &commandLine, e172::ClosableO
                 if(const auto& subject = context->entityById<Unit>(subjectId)) {
                     if(auto controller = subject->capability<Controller>()) {
                         if(auto task = m_taskFactory.create(arg0parts[0])) {
-                            task->initFromCommand(args, stream, context);
+                            task->connectToOut(stream);
+                            task->initFromCommand(args, context);
                             controller->executeRootTask(task, context, [&stream](){ stream.close(); });
                             taskExecuted = true;
                         } else {

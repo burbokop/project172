@@ -49,7 +49,6 @@
 #include <src/capabilities/modules/weapon.h>
 #include <src/appextensions/volumeobserverextension.h>
 #include <src/tasks/buywaretask.h>
-
 extern "C" {
 int go_run_server();
 void go_stop_service(int);

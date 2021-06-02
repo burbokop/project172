@@ -26,8 +26,6 @@ class DockingTask : public Task {
     e172::ptr<Unit> m_targetUnit;
     e172::ptr<Docker> m_docker;
     e172::ptr<DockingSession> m_session;
-
-    std::ostream *m_stream = nullptr;
 public:
     DockingTask(const e172::ptr<Unit> &targetUnit = nullptr);
 
@@ -43,7 +41,7 @@ public:
 public:
     virtual bool start(e172::Context *) override;
     virtual void proceed(e172::Context *context) override;
-    virtual void initFromCommand(const std::vector<std::string> &args, std::ostream &stream, e172::Context *context) override;
+    virtual void initFromCommand(const std::vector<std::string> &args, e172::Context *context) override;
 };
 
 #endif // DOCKINGTASK_H

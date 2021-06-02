@@ -3,6 +3,7 @@
 #include <src/capabilities/controller.h>
 #include <src/context.h>
 #include <src/debug.h>
+#include <src/consolecolor.h>
 
 BuyWareTask::BuyWareTask(const std::string &ware) {
     m_targetWare = ware;
@@ -13,19 +14,20 @@ void BuyWareTask::dockingCompleated(const WareStorage::WareRef &wareRef) {
         if(const auto& unit = controller->parentUnit()) {
             if(const auto& storage = unit->capability<WareStorage>()) {
                 const auto status = controller->person()->buyWare(wareRef, storage);
-                e172::Debug::print("status:", status);
+                out() << e172::Cyan << status << e172::Reset << std::endl;
             } else {
-                e172::Debug::print("unit not have storage");
+                out() << "unit not have storage" << std::endl;
             }
         } else {
-            e172::Debug::print("controller do not have parent unit");
+            out() << "controller do not have parent unit" << std::endl;
         }
     } else {
-        e172::Debug::print("parent controller is null");
+        out() << "parent controller is null" << std::endl;
     }
+    completeTask();
 }
 
-void BuyWareTask::proceed(e172::Context *context) {}
+void BuyWareTask::proceed(e172::Context *) {}
 
 bool BuyWareTask::start(e172::Context *context) {
     if(const auto unit = parentController()->parentUnit()) {
@@ -62,14 +64,15 @@ bool BuyWareTask::start(e172::Context *context) {
             dockingCompleated(targetWareRef);
         });
     } else {
+        out() << "error: not found candidate for target unit" << std::endl;
         return false;
     }
 }
 
-void BuyWareTask::initFromCommand(const std::vector<std::string> &args, std::ostream &stream, e172::Context *) {
+void BuyWareTask::initFromCommand(const std::vector<std::string> &args, e172::Context *) {
     if (args.size() > 1) {
         m_targetWare = args[1];
     } else {
-        stream << "error: must have 2 arguments" << std::endl;
+        out() << "error: must have 2 arguments" << std::endl;
     }
 }

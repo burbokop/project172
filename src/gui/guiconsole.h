@@ -4,6 +4,7 @@
 #include <src/gui/base/guielement.h>
 #include <functional>
 #include <src/utility/closableoutputstream.h>
+#include <src/time/elapsedtimer.h>
 
 class GuiConsole : public GUIElement {
     bool m_consoleEnabled = false;
@@ -22,6 +23,9 @@ class GuiConsole : public GUIElement {
     size_t m_caretteX = 0;
 
     e172::CallbackOutputStream::SingleElementPool m_streamPool;
+
+    e172::ElapsedTimer m_caretteDisplayTimer = e172::ElapsedTimer(500);
+    bool m_displayCarette = true;
 public:
     typedef std::function<void(const std::string &, e172::ClosableOutputStream&, e172::Context*)> CommandHandlerFunc;
     typedef std::function<std::list<std::string>()> CompletionFunc;

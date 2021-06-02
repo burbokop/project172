@@ -16,6 +16,7 @@ bool Task::executeChildTask(const e172::ptr<Task> &task, e172::Context *context,
     if(!task->m_parentTask) {
         if(m_children.insert(task).second) {
             task->m_parentTask = this;
+            task->connectToOut(m_out);
             task->m_parentController = this->m_parentController;
             this->m_running = false;
             task->m_running = true;
@@ -63,6 +64,14 @@ void Task::clearTrash() {
         t.safeDestroy();
     }
     m_trash.clear();
+}
+
+void Task::connectToOut(const e172::SignalStreamBuffer::HandlerFunc &func) {
+    m_outBuffer.connect(func);
+}
+
+void Task::connectToOut(std::ostream &stream) {
+    m_outBuffer.connect(stream);
 }
 
 void Task::completeTask() {
