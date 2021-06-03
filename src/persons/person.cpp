@@ -119,9 +119,10 @@ Person::SellStatus Person::sellWare(const WareStorage::WareRef &wareRef, const e
                                 const auto price = buyerStorage->priceTable()->price(wareInfo.wareName()).sellPrice();
                                 if(price.has_value()) {
                                     if(price.value() != 0) {
+                                        count = std::min(count, wareInfo.count());
                                         auto totalPrice = std::min(buyer->m_money, int64_t(count * price.value()));
                                         const int64_t finalCount = totalPrice / price.value();
-                                        totalPrice = totalPrice * finalCount;
+                                        totalPrice = price.value() * finalCount;
                                         wareRef.storage()->transferWareTo(wareRef.index(), buyerStorage, finalCount);
                                         buyer->m_money -= totalPrice;
                                         m_money += totalPrice;

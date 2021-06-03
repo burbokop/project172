@@ -49,6 +49,7 @@
 #include <src/capabilities/modules/weapon.h>
 #include <src/appextensions/volumeobserverextension.h>
 #include <src/tasks/buywaretask.h>
+#include <src/tasks/sellwaretask.h>
 extern "C" {
 int go_run_server();
 void go_stop_service(int);
@@ -195,6 +196,7 @@ int main(int argc, char *argv[]) {
 
     taskConsole.registerTask<DockingTask>();
     taskConsole.registerTask<BuyWareTask>();
+    taskConsole.registerTask<SellWareTask>();
 
     //setup gui
     GUIMaker guiMaker(app.context(), &radarNear, &taskConsole);

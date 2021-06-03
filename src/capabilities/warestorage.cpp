@@ -66,6 +66,10 @@ WareInfo WareStorage::wareInfo(size_t index) const {
     return WareInfo(std::string(), 0, false);
 }
 
+WareStorage::WareRef WareStorage::ref(size_t index) const {
+    return WareRef(const_cast<WareStorage*>(this), index);
+}
+
 size_t WareStorage::amount() const {
     if(wareContainer())
         return wareContainer()->amount();

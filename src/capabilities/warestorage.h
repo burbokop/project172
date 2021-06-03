@@ -34,6 +34,8 @@ public:
     size_t wareInfoCount() const;
     WareInfo wareInfo(size_t index) const;
 
+    WareRef ref(size_t index) const;
+
     size_t amount() const;
     size_t capacity() const;
 

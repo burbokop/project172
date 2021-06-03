@@ -13,7 +13,7 @@ void BuyWareTask::dockingCompleated(const WareStorage::WareRef &wareRef) {
     if(const auto& controller = parentController()) {
         if(const auto& unit = controller->parentUnit()) {
             if(const auto& storage = unit->capability<WareStorage>()) {
-                const auto status = controller->person()->buyWare(wareRef, storage, out());
+                const auto status = controller->person()->buyWare(wareRef, storage);
                 out() << status << std::endl;
             } else {
                 out() << "unit not have storage" << std::endl;
@@ -65,6 +65,7 @@ bool BuyWareTask::start(e172::Context *context) {
         });
     } else {
         out() << "error: not found candidate for target unit" << std::endl;
+        completeTask();
         return false;
     }
 }
@@ -74,5 +75,6 @@ void BuyWareTask::initFromCommand(const std::vector<std::string> &args, e172::Co
         m_targetWare = args[1];
     } else {
         out() << "error: must have 2 arguments" << std::endl;
+        completeTask();
     }
 }
