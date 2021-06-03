@@ -42,7 +42,7 @@ public:
     e172::ptr<Person> person() const;
     void setPerson(const e172::ptr<Person> &person);
 
-    bool executeRootTask(const e172::ptr<Task> &task, e172::Context *context, const std::function<void()>&onCompleated = nullptr);
+    bool executeRootTask(const e172::ptr<Task> &task, e172::Context *context, const Task::ResultHandleFunc &onCompleated = nullptr);
     e172::ptr<Task> rootTask() const;
 
     virtual ~Controller();

@@ -13,7 +13,7 @@
 #include <src/smartenum.h>
 
 class DockingTask : public Task {
-    E172_SMART_ENUM_MEMBER(Status, status,
+    e172_enum_member(Status, status,
                            Idle,
                            ApproachingToTarget,
                            Manuevering,

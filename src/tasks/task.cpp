@@ -12,7 +12,7 @@ e172::ptr<Task> Task::parentTask() const {
     return m_parentTask;
 }
 
-bool Task::executeChildTask(const e172::ptr<Task> &task, e172::Context *context, const std::function<void ()> &onCompleated) {
+bool Task::executeChildTask(const e172::ptr<Task> &task, e172::Context *context, const ResultHandleFunc &onCompleated) {
     if(!task->m_parentTask) {
         if(m_children.insert(task).second) {
             task->m_parentTask = this;
@@ -52,12 +52,17 @@ e172::ptr<Controller> Task::parentController() const {
 }
 
 
+e172::Variant Task::resultValue() const
+{
+    return m_resultValue;
+}
+
 void Task::clearTrash() {
     for(const auto &t : m_trash) {
         m_children.erase(t);
         for(const auto& c : t->m_onCompleatedSignal) {
             if(c) {
-                c();
+                c(m_resultValue);
             }
         }
         t->m_onCompleatedSignal.clear();
@@ -74,9 +79,10 @@ void Task::connectToOut(std::ostream &stream) {
     m_outBuffer.connect(stream);
 }
 
-void Task::completeTask() {
+void Task::completeTask(const e172::Variant& resultValue) {
     if(m_running) {
         m_running = false;
+        m_resultValue = resultValue;
         if(m_parentTask) {
             m_parentTask->m_trash.push_back(this);
             m_parentTask->m_running = true;

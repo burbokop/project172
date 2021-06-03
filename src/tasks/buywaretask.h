@@ -5,11 +5,13 @@
 
 #include <src/capabilities/warestorage.h>
 
+#include <src/utility/option.h>
+
 
 class BuyWareTask : public Task {
-    std::string m_targetWare;
+    e172::Option<std::string> m_targetWare = e172::None;
 public:
-    BuyWareTask(const std::string &ware = "");
+    BuyWareTask(const e172::Option<std::string> &ware = e172::None);
 
     void dockingCompleated(const WareStorage::WareRef& wareRef);
 

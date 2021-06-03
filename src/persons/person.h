@@ -16,7 +16,7 @@ class Person : public e172::Object {
     bool m_isJuridicalPerson = false;
     int64_t m_money = 0;
 
-    E172_SMART_ENUM_RESULT(BuyStatus,
+    e172_enum(BuyStatus,
                            BuyingSuccess,
                            CanNotBuyOwnWare,
                            SellerDoNotHaveWare,
@@ -29,7 +29,7 @@ class Person : public e172::Object {
                            NotEnoughMoney
                            )
 
-    E172_SMART_ENUM_RESULT(SellStatus,
+    e172_enum(SellStatus,
                            SellingSuccess,
                            CanNotSellWareToSelf,
                            WareNotBelongToSeller,

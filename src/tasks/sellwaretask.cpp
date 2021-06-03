@@ -14,7 +14,7 @@ e172::ptr<WareStorage> SellWareTask::findBuyerStorage(e172::Context *context) {
                 if(const auto& controller = unit->capability<Controller>()) {
                     if(controller->person()) {
                         const auto currentSellPrice = storage->priceTable()->price(m_targetWare).sellPrice();
-                        if(currentSellPrice.has_value() && currentSellPrice.value() > maxPrice) {
+                        if(currentSellPrice.isDefined() && currentSellPrice.value() > maxPrice) {
                             maxPrice = currentSellPrice.value();
                             targetStorage = storage;
                         }
@@ -41,7 +41,7 @@ bool SellWareTask::start(e172::Context *context) {
                     if(wareIndex.has_value()) {
                         const auto wareRef = storage->ref(wareIndex.value());
                         if(auto buyerStorage = findBuyerStorage(context)) {
-                            executeChildTask(new DockingTask(buyerStorage->parentUnit()), context, [wareRef, buyerStorage, person, this](){
+                            executeChildTask(new DockingTask(buyerStorage->parentUnit()), context, [wareRef, buyerStorage, person, this](const auto&){
                                 const auto status = person->sellWare(wareRef, buyerStorage);
                                 out() << "status: " << status << std::endl;
                                 completeTask();

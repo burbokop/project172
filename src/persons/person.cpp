@@ -75,7 +75,7 @@ Person::BuyStatus Person::buyWare(const WareStorage::WareRef &wareRef, const e17
                         const auto wareInfo = wareRef.info();
                         if(wareInfo.isValid()) {
                         const auto price = sellerStorage->priceTable()->price(wareInfo.wareName()).buyPrice();
-                            if(price.has_value()) {
+                            if(price.isDefined()) {
                                 if(price.value() != 0) {                                    
                                     count = std::min(count, wareInfo.count());
                                     auto totalPrice = std::min(m_money, int64_t(count * price.value()));
@@ -117,7 +117,7 @@ Person::SellStatus Person::sellWare(const WareStorage::WareRef &wareRef, const e
                             const auto wareInfo = wareRef.storage()->wareInfo(wareRef.index());
                             if(wareInfo.isValid()) {
                                 const auto price = buyerStorage->priceTable()->price(wareInfo.wareName()).sellPrice();
-                                if(price.has_value()) {
+                                if(price.isDefined()) {
                                     if(price.value() != 0) {
                                         count = std::min(count, wareInfo.count());
                                         auto totalPrice = std::min(buyer->m_money, int64_t(count * price.value()));

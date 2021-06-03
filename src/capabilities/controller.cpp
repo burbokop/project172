@@ -24,7 +24,7 @@ void Controller::setPerson(const e172::ptr<Person> &person) {
     m_person = person;
 }
 
-bool Controller::executeRootTask(const e172::ptr<Task> &task, e172::Context *context, const std::function<void ()> &onCompleated) {
+bool Controller::executeRootTask(const e172::ptr<Task> &task, e172::Context *context, const Task::ResultHandleFunc &onCompleated) {
     if(!m_rootTask) {
         m_rootTask = task;
         m_rootTask->m_running = true;
@@ -56,7 +56,7 @@ void Controller::clearTrash() {
         }
         for(const auto& c : t->m_onCompleatedSignal) {
             if(c) {
-                c();
+                c(t->resultValue());
             }
         }
         t->m_onCompleatedSignal.clear();

@@ -23,7 +23,7 @@ void TaskConsole::executeCommand(const std::string &commandLine, e172::ClosableO
                         if(auto task = m_taskFactory.create(arg0parts[0])) {
                             task->connectToOut(stream);
                             task->initFromCommand(args, context);
-                            controller->executeRootTask(task, context, [&stream](){ stream.close(); });
+                            controller->executeRootTask(task, context, [&stream](const auto&){ stream.close(); });
                             taskExecuted = true;
                         } else {
                             stream << "error: " << arg0parts[0] << " unknown task name" << std::endl;
