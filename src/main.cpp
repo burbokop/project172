@@ -5,7 +5,6 @@
 #include <src/context.h>
 #include <src/debug.h>
 #include <src/additional.h>
-#include <src/testprovider.h>
 
 #include <src/sdlaudioprovider.h>
 #include <src/sdleventhandler.h>
@@ -33,7 +32,6 @@
 
 #include <vulkan_implementation/src/vulkangraphicsprovider.h>
 
-#include <tests/waretest.h>
 #include <src/additional/chartview.h>
 #include <src/additional/taskconsole.h>
 #include <src/additional/memstatearner.h>
@@ -51,41 +49,9 @@
 #include <src/tasks/buywaretask.h>
 #include <src/tasks/sellwaretask.h>
 #include <src/tasks/tradetask.h>
-extern "C" {
-int go_run_server();
-void go_stop_service(int);
-void go_http_get();
-}
-
-//import test_module;  // import declaration
 
 int main(int argc, char *argv[]) {
-    //hello();
-
-
-    //const int desc = go_run_server();
-    //go_stop_service(desc);
-    //go_http_get();
-
-    //TestProvider::runAllTests();
-
-    //if constexpr(false) {
-    //    size_t sum = 0;
-    //    for(size_t i = 0; i < 100; ++i) {
-    //        const auto s = e172::Variant::testSpeed();
-    //        std::cout << "[" << i << "%] e172::Variant::testSpeed: " << s << "\n";
-    //        sum += s;
-    //    }
-    //    std::cout << "e172::Variant::testSpeed (average): " << sum / 100 << "\n";
-    //    for(size_t i = 0; i < 10; ++i) {
-    //        const auto a = e172::Variant::testSpeed(1000000);
-    //        std::cout << "[" << (i * 10) << "%] e172::Variant::testSpeed(1000000): " << a.first << " : " << a.second << "\n";
-    //    }
-    //}
-
     e172::Debug::print("compiler:", e172::Debug::compilerInfo());
-
-
     enum RendererUsing {
         Undefined,
         SDL,

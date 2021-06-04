@@ -85,8 +85,8 @@ Socket *Socket::listen() {
         return new Socket(connection_socket, addr);
     }
     setError("<listen error>");
-    return nullptr;
 #endif
+    return nullptr;
 }
 
 bool burbokop::Socket::connect() {
@@ -97,6 +97,8 @@ bool burbokop::Socket::connect() {
         return false;
     }
     return true;
+#else
+    return false;
 #endif
 }
 
@@ -167,6 +169,8 @@ std::vector<char> Socket::receiveFrame() {
     return result;
 }
 
+
+/* TO DO rewrite using e172::GraphicsProvider
 void Socket::sendSurface(SDL_Surface *surface) {
     char *bitmap = reinterpret_cast<char*>(surface->pixels);
     size_t bitmapsize = sizeof (Uint32) * surface->w * surface->h;
@@ -202,4 +206,5 @@ SDL_Surface *Socket::receiveSurface() {
     //delete [] bitmap;
     return result;
 }
+*/
 

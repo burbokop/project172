@@ -21,7 +21,6 @@ typedef sockaddr_in CROSS_SOCKADDR_IN;
 #define MAXCONN 16
 
 #include <string>
-#include <SDL2/SDL.h>
 
 #include "framebuilder.h"
 
@@ -54,8 +53,10 @@ public:
     void sendFrame(std::vector<char> data);
     std::vector<char> receiveFrame();
 
+    /* TO DO rewrite using e172::GraphicsProvider
     void sendSurface(SDL_Surface *surface);
     SDL_Surface *receiveSurface();
+    */
 
     static std::string getError();
 };

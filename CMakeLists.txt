@@ -1,46 +1,20 @@
 cmake_minimum_required(VERSION 3.16)
-#set(CMAKE_TRY_COMPILE_TARGET_TYPE "STATIC_LIBRARY")
+
 project(project172)
+
 add_compile_options(-no-pie)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-message("CMAKE_CXX_COMPILER: " ${CMAKE_CXX_COMPILER} " " ${CMAKE_CXX_COMPILER_VERSION})
-
-#tell linker to search for .so in same folder as executable
 set(CMAKE_EXE_LINKER_FLAGS "-Wl,-rpath='${ORIGIN}'")
 
 include_directories(${CMAKE_CURRENT_LIST_DIR})
+link_directories(${CMAKE_CURRENT_BINARY_DIR})
 
-include(e172/e172.cmake)
-include(sdl_implementation/sdl_implementation.cmake)
+include(${CMAKE_CURRENT_LIST_DIR}/e172/e172.cmake)
+include(${CMAKE_CURRENT_LIST_DIR}/sdl_implementation/sdl_implementation.cmake)
+include(${CMAKE_CURRENT_LIST_DIR}/vulkan_implementation/vulkan_implementation.cmake)
 
-
-function(add_go_library TARGET_LIB GO_SRCS)
-    set(GO_LIBNAME lib${TARGET_LIB}.so)
-    message("TARGET_LIB: " ${TARGET_LIB})
-    message("GO_LIBNAME: " ${GO_LIBNAME})
-    message("GO_SRCS: " ${GO_SRCS})
-    add_custom_command(OUTPUT ${GO_LIBNAME}
-        DEPENDS ${GO_SRCS}
-        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-        COMMAND go get github.com/opesun/goquery && env go build -buildmode=c-shared -o "${CMAKE_CURRENT_BINARY_DIR}/${GO_LIBNAME}" ${CMAKE_GO_FLAGS} ${GO_SRCS}
-        COMMENT "Building Go library"
-        )
-
-    add_custom_target(${TARGET_LIB}.lib DEPENDS ${GO_LIBNAME})
-endfunction()
-
-#add_library(go_test SHARED
-#    ${CMAKE_CURRENT_LIST_DIR}/src/test.go
-#    )
-
-
-add_go_library(go_net
-    ${CMAKE_CURRENT_LIST_DIR}/src/additional/go/netservice.go
-    ${CMAKE_CURRENT_LIST_DIR}/src/additional/go/netclient.go
-    )
-
-add_executable(project172
+add_library(project172_core SHARED
     ${CMAKE_CURRENT_LIST_DIR}/src/additional/experimental/injectableentity.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/additional/experimental/injectableentity.h
     ${CMAKE_CURRENT_LIST_DIR}/src/additional/experimental/__capability.cpp
@@ -57,7 +31,6 @@ add_executable(project172
     ${CMAKE_CURRENT_LIST_DIR}/src/background.h
     ${CMAKE_CURRENT_LIST_DIR}/src/iinformative.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/iinformative.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/main.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/near.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/near.h
     ${CMAKE_CURRENT_LIST_DIR}/src/worldpresetstrategy.cpp
@@ -241,29 +214,48 @@ add_executable(project172
     ${CMAKE_CURRENT_LIST_DIR}/src/testmodule.cppm
     )
 
+target_link_libraries(project172_core
+    e172
+    )
 
-include(${CMAKE_CURRENT_LIST_DIR}/vulkan_implementation/vulkan_implementation.cmake)
-include(${CMAKE_CURRENT_LIST_DIR}/tests/CMakeLists.txt)
+if (UNIX)
+    target_link_libraries(project172_core dl X11 stdc++ stdc++fs)
+endif (UNIX)
 
-add_dependencies(project172 go_net.lib)
+if (WIN32)
+    target_link_libraries(project172_core ws2_32)
+endif (WIN32)
 
-link_directories(${CMAKE_CURRENT_BINARY_DIR})
+
+
+add_executable(project172
+    ${CMAKE_CURRENT_LIST_DIR}/src/main.cpp
+    )
 
 target_link_libraries(project172
     sdl_impl
     vulkan_impl
     e172
-    project172_tests
-    ${CMAKE_CURRENT_BINARY_DIR}/libgo_net.so
-    #libgo_net
+    project172_core
     )
 
+add_executable(project172_tests
+    ${CMAKE_CURRENT_LIST_DIR}/tests/main.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/tests/waretest.h
+    ${CMAKE_CURRENT_LIST_DIR}/tests/waretest.cpp
+    )
 
-if (UNIX)
-    target_link_libraries(project172 dl X11 stdc++ stdc++fs)
-endif (UNIX)
+target_link_libraries(project172_tests
+    e172
+    project172_core
+    )
 
-if (WIN32)
-    target_link_libraries(project172 ws2_32)
-endif (WIN32)
+enable_testing()
+add_test(project172_tests project172_tests)
+add_custom_command(
+     TARGET project172_tests
+     COMMENT "project172_tests"
+     POST_BUILD
+     COMMAND project172_tests
+)
 

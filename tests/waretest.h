@@ -3,7 +3,7 @@
 
 #include <src/additional/ware/warecontainer.h>
 
-#include <src/testprovider.h>
+#include <src/testing.h>
 
 class TestWareContainer : public WareContainer {
 public:
@@ -13,11 +13,7 @@ public:
 
 class WareTest {
     static void printContainer(const TestWareContainer &container, const std::string &coment);
-    static void test();
-    static inline const int static_call = [] {
-        TestProvider::addTest("WareTest", &WareTest::test);
-        return 0;
-    }();;
+    static void test0(); e172_test(test0)
 };
 
 #endif // WARETEST_H

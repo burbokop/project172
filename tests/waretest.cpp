@@ -2,9 +2,6 @@
 
 #include <iostream>
 
-#include <src/testprovider.h>
-
-
 
 TestWareContainer::TestWareContainer(size_t capacity) : WareContainer(capacity) {
     addWare("ware0", capacity / 4);
@@ -19,11 +16,10 @@ void WareTest::printContainer(const TestWareContainer &container, const std::str
     }
 }
 
-void WareTest::test() {
+void WareTest::test0() {
     TestWareContainer container0(4);
     TestWareContainer container1(8);
 
-    std::cout << __PRETTY_FUNCTION__ << "\n";
     printContainer(container0, "0");
     printContainer(container1, "1");
 
