@@ -211,7 +211,6 @@ add_library(project172_core SHARED
     ${CMAKE_CURRENT_LIST_DIR}/src/explosivespawner.h
     ${CMAKE_CURRENT_LIST_DIR}/src/ftestobject.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/ftestobject.h
-    ${CMAKE_CURRENT_LIST_DIR}/src/testmodule.cppm
     )
 
 target_link_libraries(project172_core
@@ -241,8 +240,10 @@ target_link_libraries(project172
 
 add_executable(project172_tests
     ${CMAKE_CURRENT_LIST_DIR}/tests/main.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/tests/waretest.h
-    ${CMAKE_CURRENT_LIST_DIR}/tests/waretest.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/tests/warecontainerspec.h
+    ${CMAKE_CURRENT_LIST_DIR}/tests/warecontainerspec.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/tests/personspec.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/tests/personspec.h
     )
 
 target_link_libraries(project172_tests

@@ -1,6 +1,5 @@
 #include "abstractwarecontainer.h"
 
-
 size_t WareInfo::count() const {
     return m_count;
 }
@@ -25,10 +24,22 @@ std::string WareInfo::wareName() const {
 
 AbstractWareContainer::AbstractWareContainer() {}
 
+e172::Option<size_t> AbstractWareContainer::indexOf(const std::string &wareName) const {
+    if(wareName.empty())
+        return e172::None;
+
+    for(size_t i = 0, count = wareInfoCount(); i < count; ++i) {
+        if (wareName == wareInfo(i).wareName()) {
+            return i;
+        }
+    }
+    return e172::None;
+}
+
 size_t AbstractWareContainer::transferWareTo(size_t index, const e172::ptr<AbstractWareContainer> &container, size_t count) {
-    if(index < wareInfoCount() && count > 0) {
+    if(index < wareInfoCount() && count > 0 && container) {
         const auto wareName = wareInfo(index).wareName();
-        count = std::min(capacity() - amount(), count);
+        count = std::min(container->capacity() - container->amount(), count);
         count = wareAwailableRemovingAmount(index, count);
         count = container->addWare(wareName, count);
         return removeWare(index, count);

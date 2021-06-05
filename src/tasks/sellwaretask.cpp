@@ -38,7 +38,7 @@ bool SellWareTask::start(e172::Context *context) {
             if(auto storage = parentUnit->capability<WareStorage>()) {
                 if(auto person = controller->person()) {
                     const auto wareIndex = storage->indexOf(m_targetWare);
-                    if(wareIndex.has_value()) {
+                    if(wareIndex.isDefined()) {
                         const auto wareRef = storage->ref(wareIndex.value());
                         if(auto buyerStorage = findBuyerStorage(context)) {
                             executeChildTask(new DockingTask(buyerStorage->parentUnit()), context, [wareRef, buyerStorage, person, this](const auto&){

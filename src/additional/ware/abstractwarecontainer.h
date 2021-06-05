@@ -7,6 +7,7 @@
 
 #include <src/object.h>
 
+#include <src/utility/option.h>
 #include <src/utility/ptr.h>
 
 
@@ -42,6 +43,8 @@ public:
 
     virtual size_t amount() const = 0;
     virtual size_t capacity() const = 0;
+
+    e172::Option<size_t> indexOf(const std::string& wareName) const;
 
     size_t transferWareTo(size_t index, const e172::ptr<AbstractWareContainer>& container, size_t count = std::numeric_limits<size_t>::max());
 

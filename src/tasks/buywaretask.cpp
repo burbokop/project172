@@ -56,7 +56,7 @@ bool BuyWareTask::start(e172::Context *context) {
 
                 if(m_targetWare.isDefined()) {
                     const auto index = storage->indexOf(m_targetWare.value());
-                    if(index.has_value()) {
+                    if(index.isDefined()) {
                         if(storage->wareInfo(index.value()).count() > 0) {
                             const auto price = storage->priceTable()->price(m_targetWare.value());
                             if(price.buyPrice().isDefined()) {

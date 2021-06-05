@@ -1,22 +1,17 @@
 #include "warestorage.h"
 
 #include <src/additional/ware/warecontainer.h>
+#include <src/functional/metafunction.h>
 
 e172::ptr<PriceTable> WareStorage::priceTable() const {
     return m_priceTable;
 }
 
-std::optional<size_t> WareStorage::indexOf(const std::string &wareName) const {
-    if(wareName.empty())
-        return std::nullopt;
-
-    const auto c = wareContainer();
-    for(size_t i = 0, count = c->wareInfoCount(); i < count; ++i) {
-        if (wareName == c->wareInfo(i).wareName()) {
-            return i;
-        }
+e172::Option<size_t> WareStorage::indexOf(const std::string &wareName) const {
+    if(const auto& c = wareContainer()) {
+        return c->indexOf(wareName);
     }
-    return std::nullopt;
+    return e172::None;
 }
 
 std::list<std::string> WareStorage::prettyInfo() const {
@@ -68,6 +63,10 @@ WareInfo WareStorage::wareInfo(size_t index) const {
 
 WareStorage::WareRef WareStorage::ref(size_t index) const {
     return WareRef(const_cast<WareStorage*>(this), index);
+}
+
+e172::Option<WareStorage::WareRef> WareStorage::findRef(const std::string &wareName) const {
+    return indexOf(wareName).map<WareRef>(e172::bind(this, &WareStorage::ref));
 }
 
 size_t WareStorage::amount() const {

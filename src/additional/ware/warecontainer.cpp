@@ -154,6 +154,7 @@ size_t WareContainer::setCapacity(const size_t &capacity) {
     return m_capacity = std::max(capacity, amount());
 }
 
+
 std::ostream &operator<<(std::ostream &stream, const WareContainer::Allowed &allowed) {
     if(std::get_if<WareContainer::all_allowed_t>(&allowed)) {
         stream << "AllAllowed";

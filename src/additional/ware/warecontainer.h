@@ -33,6 +33,7 @@ public:
     WareContainer(size_t capacity = 0);
     size_t setCapacity(const size_t &capacity);
 
+
     bool isInputAllowed(const std::string &wareName) const;
     bool isOutputAllowed(const std::string &wareName) const;
     Allowed allowedInput() const;
