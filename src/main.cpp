@@ -50,7 +50,38 @@
 #include <src/tasks/sellwaretask.h>
 #include <src/tasks/tradetask.h>
 
+#include <bitset>
+
+int f(int x) {
+    int count = 0;
+    std::cout << ":" << x << " - " << std::bitset<sizeof (int)>(x) << "\n";
+    while (x) {
+        count++;
+        x = x&(x - 1);
+        std::cout << ":" << x << " - " << std::bitset<sizeof (int)>(x) << "\n";
+    }
+    return count;
+}
+
+void aaa(const int& x) {
+    std::cout << __PRETTY_FUNCTION__ << std::endl;
+}
+
+void aaa(int&& x) {
+    std::cout << __PRETTY_FUNCTION__ << std::endl;
+}
+
 int main(int argc, char *argv[]) {
+    f(11);
+
+    int a = 0;
+
+    aaa(a);
+
+    aaa(f(11));
+
+    aaa(std::move(a));
+
     e172::Debug::print("compiler:", e172::Debug::compilerInfo());
     enum RendererUsing {
         Undefined,

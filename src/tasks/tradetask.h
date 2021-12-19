@@ -12,7 +12,8 @@ class TradeTask : public Task {
                      )
 
 
-    void changeState(const std::string& ware, e172::Context *context);
+    void resetState();
+    void updateState(const std::string& ware, e172::Context *context);
 public:
     TradeTask();
 

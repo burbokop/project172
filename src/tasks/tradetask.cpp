@@ -2,19 +2,29 @@
 #include "sellwaretask.h"
 #include "tradetask.h"
 
-void TradeTask::changeState(const std::string &ware, e172::Context *context) {
+#include <src/context.h>
+
+void TradeTask::resetState() {
+    m_status = Idle;
+}
+
+void TradeTask::updateState(const std::string &ware, e172::Context *context) {
     if(m_status == Idle || m_status == Selling) {
         m_status = Buying;
         executeChildTask(new BuyWareTask(), context, [this, context](const e172::Variant& ware){
-            changeState(ware.toString(), context);
+            context->later(1000, [this, ware, context](){
+                updateState(ware.toString(), context);
+            });
         });
     } else {
         m_status = Selling;
         executeChildTask(new SellWareTask(ware), context, [this, context](const auto&){
-            changeState(std::string(), context);
+            context->later(1000, [this, context](){
+                updateState(std::string(), context);
+            });
         });
     }
-    out() << "trade status changed: " << statusString() << std::endl;
+    out() << "TradeTask: trade status changed: " << statusString() << std::endl;
 }
 
 TradeTask::TradeTask() {}
@@ -22,8 +32,8 @@ TradeTask::TradeTask() {}
 void TradeTask::proceed(e172::Context *) {}
 
 bool TradeTask::start(e172::Context *context) {
-    m_status = Idle;
-    changeState(std::string(), context);
+    resetState();
+    updateState(std::string(), context);
     return true;
 }
 

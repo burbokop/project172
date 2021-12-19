@@ -11,25 +11,25 @@ BuyWareTask::BuyWareTask(const e172::Option<std::string> &ware) {
 }
 
 void BuyWareTask::dockingCompleated(const WareStorage::WareRef &wareRef) {
+    bool ok = false;
     if(const auto& controller = parentController()) {
         if(const auto& unit = controller->parentUnit()) {
             if(const auto& storage = unit->capability<WareStorage>()) {
                 const auto status = controller->person()->buyWare(wareRef, storage);
                 out() << status << std::endl;
+                if(status == Person::BuyingSuccess) {
+                    ok = true;
+                }
             } else {
-                out() << "unit not have storage" << std::endl;
+                out() << "BuyWareTask: unit not have storage" << std::endl;
             }
         } else {
-            out() << "controller do not have parent unit" << std::endl;
+            out() << "BuyWareTask: controller do not have parent unit" << std::endl;
         }
     } else {
-        out() << "parent controller is null" << std::endl;
+        out() << "BuyWareTask: parent controller is null" << std::endl;
     }
-    if(m_targetWare.isDefined()) {
-        completeTask(m_targetWare.value());
-    } else {
-        completeTask();
-    }
+    completeTask(Result(m_targetWare, ok).toVariant());
 }
 
 void BuyWareTask::proceed(e172::Context *) {}
@@ -50,7 +50,7 @@ bool BuyWareTask::start(e172::Context *context) {
                 if(m_targetWare.isEmpty()) {
                     storage->priceTable()->findWithBuyPrice().fold([this](const auto& w){
                         m_targetWare = w;
-                        out() << "ware choosed: " << w << std::endl;
+                        out() << "BuyWareTask: ware choosed: " << w << std::endl;
                     });
                 }
 
@@ -78,8 +78,8 @@ bool BuyWareTask::start(e172::Context *context) {
             dockingCompleated(targetWareRef);
         });
     } else {
-        out() << "error: not found candidate for target unit" << std::endl;
-        completeTask();
+        out() << "BuyWareTask: error: not found candidate for target unit" << std::endl;
+        completeTask(Result(m_targetWare, false).toVariant());
         return false;
     }
 }
@@ -92,7 +92,24 @@ void BuyWareTask::initFromCommand(const std::vector<std::string> &args, e172::Co
             m_targetWare = args[1];
         }
     } else {
-        out() << "error: missing argument." << std::endl << "using: BuyWareTask>unit [ware name|?=any]" << std::endl;
-        completeTask();
+        out() << "BuyWareTask: error: missing argument." << std::endl << "using: BuyWareTask>unit [ware name|?=any]" << std::endl;
+        completeTask(Result(m_targetWare, false).toVariant());
     }
+}
+
+bool BuyWareTask::Result::ok() const {
+    return m_ok;
+}
+
+e172::Option<std::string> BuyWareTask::Result::targetWare() const {
+    return m_targetWare;
+}
+
+e172::Variant BuyWareTask::Result::toVariant() const {
+    return e172::Variant::fromValue(*this);
+}
+
+BuyWareTask::Result::Result(e172::Option<std::string> targetWare, bool ok) {
+    m_targetWare = targetWare;
+    m_ok = ok;
 }

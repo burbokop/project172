@@ -45,10 +45,10 @@ void DockingTask::proceed(e172::Context *context) {
                     m_session = m_docker->createDockingSessionWithUnit(context, m_targetUnit);
                     if (m_session) {
                         m_status = Manuevering;
-                        out() << "status changed to: " << statusString() << std::endl;
+                        out() << "DockingTask: status changed to: " << statusString() << std::endl;
                     } else {
                         m_status = Idle;
-                        out() << "failed to create docking session." << std::endl;
+                        out() << "DockingTask: failed to create docking session." << std::endl;
                         completeTask();
                     }
                 }
@@ -68,11 +68,11 @@ void DockingTask::proceed(e172::Context *context) {
 
                     if(approachToPoint(n0, 64, 0.7)) {
                         m_status = ApproachingToNode;
-                        out() << "status changed to: " << statusString() << std::endl;
+                        out() << "DockingTask: status changed to: " << statusString() << std::endl;
                     }
                 } else {
                     m_status = Idle;
-                    out() << "session do not exist" << std::endl;
+                    out() << "DockingTask: session do not exist" << std::endl;
                     completeTask();
                 }
             } else if(m_status == ApproachingToNode) {
@@ -86,17 +86,17 @@ void DockingTask::proceed(e172::Context *context) {
                     const auto n1 = targetNodeGlobalPosition - parentShip->rotationMatrix() * parentNode.offset();
                     if(approachToPoint(n1, 32, 0.3)) {
                         m_status = WaitForDocked;
-                        out() << "status changed to: " << statusString() << std::endl;
+                        out() << "DockingTask: status changed to: " << statusString() << std::endl;
                     }
                 } else {
                     m_status = Idle;
-                    out() << "session do not exist." << std::endl;
+                    out() << "DockingTask: session do not exist." << std::endl;
                     completeTask();
                 }
             } else if(m_status == WaitForDocked) {
                 if(m_session) {
                     if(m_session->docked()) {
-                        out() << "docking compleated." << std::endl;
+                        out() << "DockingTask: docking compleated." << std::endl;
                         completeTask();
                     }
                 } else {
@@ -127,17 +127,17 @@ bool DockingTask::start(e172::Context *) {
                 m_status = ApproachingToTarget;
                 return true;
             }, [this](){
-                out() << "error: parent unit does not have docker" << std::endl;
+                out() << "DockingTask: error: parent unit does not have docker" << std::endl;
                 completeTask();
                 return false;
             });
         }, [this](){
-            out() << "error: controller do not have parent unit" << std::endl;
+            out() << "DockingTask: error: controller do not have parent unit" << std::endl;
             completeTask();
             return false;
         });
     }, [this](){
-        out() << "error: parent controller is null" << std::endl;
+        out() << "DockingTask: error: parent controller is null" << std::endl;
         completeTask();
         return false;
     });
@@ -152,15 +152,15 @@ void DockingTask::initFromCommand(const std::vector<std::string> &args, e172::Co
             if(auto target = context->entityById<Unit>(targetId)){
                 m_targetUnit = target;
             } else {
-                out() << "error: target with id: " << targetId << " not found" << std::endl;
+                out() << "DockingTask: error: target with id: " << targetId << " not found" << std::endl;
                 completeTask();
             }
         } else {
-            out() << "error: " << args[1] << " invlid target id" << std::endl;
+            out() << "DockingTask: error: " << args[1] << " invlid target id" << std::endl;
             completeTask();
         }
     } else {
-        out() << "error: must have 2 arguments" << std::endl;
+        out() << "DockingTask: error: must have 2 arguments" << std::endl;
         completeTask();
     }
 }

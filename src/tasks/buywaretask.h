@@ -15,6 +15,16 @@ public:
 
     void dockingCompleated(const WareStorage::WareRef& wareRef);
 
+    class Result {
+        e172::Option<std::string> m_targetWare;
+        bool m_ok = false;
+    public:
+        Result(e172::Option<std::string> targetWare = e172::None, bool ok = false);
+        bool ok() const;
+        e172::Option<std::string> targetWare() const;
+        e172::Variant toVariant() const;
+    };
+
     // Task interface
 public:
     virtual void proceed(e172::Context *) override;

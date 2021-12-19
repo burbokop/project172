@@ -43,37 +43,37 @@ bool SellWareTask::start(e172::Context *context) {
                         if(auto buyerStorage = findBuyerStorage(context)) {
                             executeChildTask(new DockingTask(buyerStorage->parentUnit()), context, [wareRef, buyerStorage, person, this](const auto&){
                                 const auto status = person->sellWare(wareRef, buyerStorage);
-                                out() << "status: " << status << std::endl;
-                                completeTask();
+                                out() << "SellWareTask: status: " << status << std::endl;
+                                completeTask(true);
                             });
                             return true;
                         } else {
-                            out() << "error: buyer not found" << std::endl;
+                            out() << "SellWareTask: error: buyer not found" << std::endl;
                         }
                     } else {
-                        out() << "error: target ware not found in storage" << std::endl;
+                        out() << "SellWareTask: error: target ware not found in storage" << std::endl;
                     }
                 } else {
-                    out() << "error: person missing" << std::endl;
+                    out() << "SellWareTask: error: person missing" << std::endl;
                 }
             } else {
-                out() << "error: ware storage missing" << std::endl;
+                out() << "SellWareTask: error: ware storage missing" << std::endl;
             }
         } else {
-            out() << "error: parent unit missing" << std::endl;
+            out() << "SellWareTask: error: parent unit missing" << std::endl;
         }
     } else {
-        out() << "error: parent controller missing" << std::endl;
+        out() << "SellWareTask: error: parent controller missing" << std::endl;
     }
-    completeTask();
+    completeTask(false);
     return false;
 }
 
-void SellWareTask::initFromCommand(const std::vector<std::string> &args, e172::Context *context) {
+void SellWareTask::initFromCommand(const std::vector<std::string> &args, e172::Context *) {
     if (args.size() > 1) {
         m_targetWare = args[1];
     } else {
-        out() << "error: must have 2 arguments" << std::endl;
-        completeTask();
+        out() << "SellWareTask: error: must have 2 arguments" << std::endl;
+        completeTask(false);
     }
 }
