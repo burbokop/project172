@@ -143,6 +143,7 @@ int main(int argc, char *argv[]) {
         return 0;
     }
 
+    app.setRenderInterval(1000 / 30);
 
 
     SDLEventHandler eventHandler;
