@@ -11,10 +11,6 @@ set(CMAKE_EXE_LINKER_FLAGS "-Wl,-rpath='${ORIGIN}'")
 include_directories(${CMAKE_CURRENT_LIST_DIR})
 link_directories(${CMAKE_CURRENT_BINARY_DIR})
 
-include(${CMAKE_CURRENT_LIST_DIR}/e172/e172.cmake)
-include(${CMAKE_CURRENT_LIST_DIR}/sdl_implementation/sdl_implementation.cmake)
-include(${CMAKE_CURRENT_LIST_DIR}/vulkan_implementation/vulkan_implementation.cmake)
-
 add_library(project172_core SHARED
     ${CMAKE_CURRENT_LIST_DIR}/src/additional/experimental/injectableentity.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/additional/experimental/injectableentity.h
@@ -214,6 +210,14 @@ add_library(project172_core SHARED
     ${CMAKE_CURRENT_LIST_DIR}/src/ftestobject.h
     )
 
+
+
+include(${CMAKE_CURRENT_LIST_DIR}/e172/e172.cmake)
+include(${CMAKE_CURRENT_LIST_DIR}/sdl_implementation/sdl_implementation.cmake)
+include(${CMAKE_CURRENT_LIST_DIR}/vulkan_implementation/vulkan_implementation.cmake)
+include(${CMAKE_CURRENT_LIST_DIR}/console_impl/console_impl.cmake)
+
+
 target_link_libraries(project172_core
     e172
     )
@@ -235,6 +239,7 @@ add_executable(project172
 target_link_libraries(project172
     sdl_impl
     vulkan_impl
+    console_impl
     e172
     project172_core
     )

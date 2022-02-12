@@ -49,6 +49,7 @@
 #include <src/tasks/buywaretask.h>
 #include <src/tasks/sellwaretask.h>
 #include <src/tasks/tradetask.h>
+#include <console_impl/src/consolegraphicsprovider.h>
 
 #include <bitset>
 
@@ -86,12 +87,13 @@ int main(int argc, char *argv[]) {
     enum RendererUsing {
         Undefined,
         SDL,
-        Vulkan
+        Vulkan,
+        Console
     };
     RendererUsing rendererUsing = Undefined;
     {
         e172::GameApplication chooseGraphicsProviderApp(argc, argv);
-        SDLGraphicsProvider gprovider(chooseGraphicsProviderApp.arguments(), "choose gprovider", 108, 148);
+        SDLGraphicsProvider gprovider(chooseGraphicsProviderApp.arguments(), "choose gprovider", 118, 168);
         SDLEventHandler eventHandler;
         chooseGraphicsProviderApp.setGraphicsProvider(&gprovider);
         chooseGraphicsProviderApp.setEventHandler(&eventHandler);
@@ -108,6 +110,8 @@ int main(int argc, char *argv[]) {
         };
         menu.addMenuElement(new GUIButton(std::string("SDL2"), [apply](auto) { apply(SDL); }));
         menu.addMenuElement(new GUIButton(std::string("Vulkan"), [apply](auto) { apply(Vulkan); }));
+        menu.addMenuElement(new GUIButton(std::string("Console"), [apply](auto) { apply(Console); }));
+
         stack.push(&menu);
         rootElement.addChildElement(&stack);
 
@@ -133,6 +137,8 @@ int main(int argc, char *argv[]) {
         }
     } else if(rendererUsing == SDL) {
         graphicsProvider = new SDLGraphicsProvider(app.arguments(), "project172", 900, 600);
+    } else if(rendererUsing == Console) {
+        graphicsProvider = new ConsoleGraphicsProvider(app.arguments(), std::cout);
     } else {
         return 0;
     }
