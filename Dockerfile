@@ -1,26 +1,19 @@
 # Build
 
-FROM gcc:latest as build
+FROM gcc:13.1.0-bookworm as build
 
 RUN apt-get update
 RUN apt-get install -y \
-        python-pip \
+        python3-pip \
         libsdl2-dev \
         libsdl2-image-dev \
         libsdl2-ttf-dev \
         libsdl2-mixer-dev \
-        libglm-dev
-        
-RUN pip install cmake
-RUN pip install golang
+        libglm-dev \
+        libvulkan-dev
 
-#RUN pip install vulcan-api
-
-WORKDIR /vulkan-installation
-RUN wget -qO - https://packages.lunarg.com/lunarg-signing-key-pub.asc | apt-key add -
-RUN wget -qO /etc/apt/sources.list.d/lunarg-vulkan-1.2.154-bionic.list https://packages.lunarg.com/vulkan/1.2.154/lunarg-vulkan-1.2.154-bionic.list
-RUN apt-get update
-RUN apt-get install -y vulkan-sdk
+RUN pip install cmake --break-system-packages
+RUN pip install golang --break-system-packages
 
 WORKDIR /app
 
@@ -29,14 +22,15 @@ ADD ./e172 ./e172
 ADD ./sdl_implementation ./sdl_implementation
 ADD ./vulkan_implementation ./vulkan_implementation
 ADD ./tests ./tests
-ADD ./CMakeLists.txt /app/CMakeLists.txt
+ADD ./CMakeLists.txt ./CMakeLists.txt
+ADD ./assets ./assets
 
-WORKDIR /app/build
-RUN cmake .. && make
+WORKDIR /app/build/default
+RUN cmake ../.. && make -j $(nproc)
 
 # Run
 
-FROM ubuntu:latest
+FROM debian:bookworm
 
 RUN apt-get update
 RUN apt-get install -y libx11-6
@@ -44,13 +38,12 @@ RUN apt-get install -y libsdl2-2.0-0
 RUN apt-get install -y libsdl2-image-2.0-0
 RUN apt-get install -y libsdl2-ttf-2.0-0
 RUN apt-get install -y libsdl2-mixer-2.0-0
-RUN apt-get install -y vulkan-utils
-RUN apt-get install -y libgo16
+RUN apt-get install -y vulkan-tools
+RUN apt-get install -y libgo21
 RUN apt-get install -y gdb
 
 WORKDIR /app
 
-ADD ./assets ./assets
 COPY --from=build /app/build/*.so ./bin/
 COPY --from=build /app/build/project172 ./bin/
 WORKDIR /app/bin

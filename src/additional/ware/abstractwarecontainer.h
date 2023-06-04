@@ -1,11 +1,10 @@
 #ifndef ABSTRACTWARECONTAINER_H
 #define ABSTRACTWARECONTAINER_H
 
-
+#include <limits>
+#include <src/object.h>
 #include <string>
 #include <vector>
-
-#include <src/object.h>
 
 #include <src/utility/option.h>
 #include <src/utility/ptr.h>

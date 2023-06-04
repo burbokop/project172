@@ -51,38 +51,7 @@
 #include <src/tasks/tradetask.h>
 #include <console_impl/src/consolegraphicsprovider.h>
 
-#include <bitset>
-
-int f(int x) {
-    int count = 0;
-    std::cout << ":" << x << " - " << std::bitset<sizeof (int)>(x) << "\n";
-    while (x) {
-        count++;
-        x = x&(x - 1);
-        std::cout << ":" << x << " - " << std::bitset<sizeof (int)>(x) << "\n";
-    }
-    return count;
-}
-
-void aaa(const int& x) {
-    std::cout << __PRETTY_FUNCTION__ << std::endl;
-}
-
-void aaa(int&& x) {
-    std::cout << __PRETTY_FUNCTION__ << std::endl;
-}
-
 int main(int argc, char *argv[]) {
-    f(11);
-
-    int a = 0;
-
-    aaa(a);
-
-    aaa(f(11));
-
-    aaa(std::move(a));
-
     e172::Debug::print("compiler:", e172::Debug::compilerInfo());
     enum RendererUsing {
         Undefined,
@@ -115,7 +84,9 @@ int main(int argc, char *argv[]) {
         stack.push(&menu);
         rootElement.addChildElement(&stack);
 
-        gprovider.loadFont(std::string(), chooseGraphicsProviderApp.context()->absolutePath("../assets/fonts/ZCOOL.ttf"));
+        gprovider.loadFont(std::string(),
+                           chooseGraphicsProviderApp.context()->absolutePath(
+                               "./assets/fonts/ZCOOL.ttf"));
 
         chooseGraphicsProviderApp.addEntity(&rootElement);
         chooseGraphicsProviderApp.exec();
@@ -177,10 +148,11 @@ int main(int argc, char *argv[]) {
     app.assetProvider()->registerType<Factory>();
     app.assetProvider()->registerType<Docker>();
 
-
-    app.assetProvider()->searchInFolder(app.context()->absolutePath("../assets"));
-    graphicsProvider->loadFont(std::string(), app.context()->absolutePath("../assets/fonts/ZCOOL.ttf"));
-    graphicsProvider->loadFont("Consolas", app.context()->absolutePath("../assets/fonts/consolas.ttf"));
+    app.assetProvider()->searchInFolder(app.context()->absolutePath("./assets"));
+    graphicsProvider->loadFont(std::string(),
+                               app.context()->absolutePath("./assets/fonts/ZCOOL.ttf"));
+    graphicsProvider->loadFont("Consolas",
+                               app.context()->absolutePath("./assets/fonts/consolas.ttf"));
 
     //APP INITIALIZATION CONMPLEATED
 

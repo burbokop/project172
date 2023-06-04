@@ -1,21 +1,21 @@
 #!/bin/bash
 
-BUILD_DIRECTORY=build
 DOCKER_IMAGE=project172
-
-
 
 #script begin
 
 REPO_ROOT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
+BUILD_DIRECTORY=$REPO_ROOT_DIR/build/default
+
 source $REPO_ROOT_DIR/completion.sh
 cd $REPO_ROOT_DIR
 
 function __build {
     mkdir -p $BUILD_DIRECTORY
     cd $BUILD_DIRECTORY
-    cmake ..
-    make
+    cmake $REPO_ROOT_DIR
+    make -j $(nproc)
     cd $REPO_ROOT_DIR
 }
 
