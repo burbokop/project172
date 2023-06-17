@@ -1,8 +1,6 @@
 #include "guisingleelementlistview.h"
 
-GUISingleElementListView::GUISingleElementListView() {}
-
-GUISingleElementListView::GUISingleElementListView(const std::string &title) : GUIListView(title) {}
+namespace proj172::core {
 
 void GUISingleElementListView::setRowElement(GUIMenuElement *rowElement) {
     removeChildElement(m_rowElement);
@@ -13,3 +11,5 @@ void GUISingleElementListView::setRowElement(GUIMenuElement *rowElement) {
 e172::ptr<GUIMenuElement> GUISingleElementListView::rowElement(int) const {
     return m_rowElement;
 }
+
+} // namespace proj172::core

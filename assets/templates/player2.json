@@ -1,12 +1,12 @@
 {
-	"id":"player2",
-	"class":"Player",
-	"keymap": {
-		"forward":"i",
-		"left":"j",
-		"right":"l",
-		"warp":"k",
-		"action":"h",
-		"armor":"o"
-	}
+    "id": "player2",
+    "class": "proj172::core::Player",
+    "keymap": {
+        "forward": "i",
+        "left": "j",
+        "right": "l",
+        "warp": "k",
+        "action": "h",
+        "armor": "o"
+    }
 }

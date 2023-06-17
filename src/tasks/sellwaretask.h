@@ -3,6 +3,8 @@
 
 #include "task.h"
 
+namespace proj172::core {
+
 class WareStorage;
 class Person;
 
@@ -19,5 +21,7 @@ public:
     virtual bool start(e172::Context *context) override;
     virtual void initFromCommand(const std::vector<std::string> &args, e172::Context *) override;
 };
+
+} // namespace proj172::core
 
 #endif // SELLWARETASK_H

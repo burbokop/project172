@@ -1,11 +1,11 @@
 #include "guielement.h"
+
 #include <algorithm>
 
-e172::ptr<GUIElement> GUIElement::parentElement() const {
-    return m_parentElement;
-}
+namespace proj172::core {
 
-e172::ptr<GUIElement> GUIElement::rootElement() const {
+e172::ptr<GUIElement> GUIElement::rootElement() const
+{
     const auto p = parentElement();
     if(!p)
         return const_cast<GUIElement*>(this);
@@ -13,34 +13,16 @@ e172::ptr<GUIElement> GUIElement::rootElement() const {
     return p->rootElement();
 }
 
-e172::ptr<Controller> GUIElement::controller() const {
-    return m_controller;
-}
-
-std::list<e172::ptr<GUIElement>> GUIElement::children() const {
-    return m_children;
-}
-
-void GUIElement::setController(const e172::ptr<Controller> &controller) {
+void GUIElement::setController(const e172::ptr<Controller> &controller)
+{
     m_controller = controller;
     for(auto c : m_children) {
         c->setController(controller);
     }
 }
 
-int GUIElement::margin() const {
-    return m_margin;
-}
-
-void GUIElement::setMargin(int margin) {
-    m_margin = margin;
-}
-
-bool GUIElement::inFocus() const {
-    return m_inFocus;
-}
-
-void GUIElement::setInFocus(bool inFocus) {
+void GUIElement::setInFocus(bool inFocus)
+{
     m_inFocus = inFocus;
     setKeyboardEnabled(inFocus);
     for(auto c : m_children) {
@@ -56,14 +38,17 @@ e172::ptr<GUIElement> GUIElement::withChildren(const std::list<e172::ptr<GUIElem
     return this;
 }
 
-GUIElement::GUIElement() {
+GUIElement::GUIElement(e172::FactoryMeta &&meta)
+    : e172::Entity(std::move(meta))
+{
     setDepth(100);
 }
 
-bool GUIElement::addChildElement(const e172::ptr<GUIElement> &element) {
-    if(element != this && !element->m_parentElement) {
+bool GUIElement::addChildElement(const e172::ptr<GUIElement> &element)
+{
+    if (element != this && !element->m_parentElement) {
         const auto it = std::find(m_children.begin(), m_children.end(), element);
-        if(it == m_children.end()) {
+        if (it == m_children.end()) {
             m_children.push_back(element);
             element->m_parentElement = this;
             element->m_controller = m_controller;
@@ -95,8 +80,10 @@ void GUIElement::clearChildren() {
 }
 
 void GUIElement::terminateChildren() {
-    for(auto c : m_children) {
-        delete c.data();
+    for (const auto &c : m_children) {
+        c.destroy();
     }
     m_children.clear();
 }
+
+} // namespace proj172::core

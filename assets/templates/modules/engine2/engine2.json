@@ -1,7 +1,6 @@
 {
-    "id":"engine2",
-    "class": "Engine",
-    
+    "id": "engine2",
+    "class": "proj172::core::Engine",
     "animation": { 
         "spritesheet": "./engine2.png",
         "frames": 4,
@@ -11,8 +10,7 @@
     "offset": {
         "x": -26,
         "y": 0
-    },
-    
+    },    
     "audio": {
         "start": "./engineStart-v.ogg",
         "loop": "./engineLoop-v.ogg",

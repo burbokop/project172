@@ -1,13 +1,12 @@
-#ifndef ENGINE_H
-#define ENGINE_H
+#pragma once
 
 #include "module.h"
 
+namespace proj172::core {
+
 class Engine : public Module {
-    bool m_running = false;
-    bool m_lastRunning = false;
 public:
-    Engine();
+    Engine(e172::FactoryMeta &&meta);
     Engine(Loadable *tmp);
 
 
@@ -15,11 +14,15 @@ public:
 public:
     bool forward();
 
-    void proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) override;
+    void proceed(e172::Context *context, e172::EventHandler *eventHandler) override;
 
     // IInformative interface
 public:
     std::string info() const override;
+
+private:
+    bool m_running = false;
+    bool m_lastRunning = false;
 };
 
-#endif // ENGINE_H
+} // namespace proj172::core

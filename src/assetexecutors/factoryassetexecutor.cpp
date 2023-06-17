@@ -2,6 +2,8 @@
 
 #include <src/capabilities/factory.h>
 
+namespace proj172::core {
+
 RecieptAssetExecutor::RecieptAssetExecutor() {}
 
 e172::Variant RecieptAssetExecutor::proceed(const e172::Variant &value) {
@@ -13,3 +15,5 @@ e172::Variant RecieptAssetExecutor::proceed(const e172::Variant &value) {
     }
     return e172::Variant::fromValue(result);
 }
+
+} // namespace proj172::core

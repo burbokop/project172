@@ -4,6 +4,8 @@
 #include <src/entity.h>
 #include <src/utility/ptr.h>
 
+namespace proj172::core {
+
 class Controller;
 class GUIElement : public e172::Entity {
     e172::ptr<GUIElement> m_parentElement;
@@ -20,22 +22,24 @@ public:
 
     e172::ptr<GUIElement> withChildren(const std::list<e172::ptr<GUIElement>>& children);
 
-    GUIElement();
+    GUIElement(e172::FactoryMeta &&meta);
     bool addChildElement(const e172::ptr<GUIElement> &element);
     bool removeChildElement(const e172::ptr<GUIElement> &element);
     void clearChildren();
     void terminateChildren();
     void setController(const e172::ptr<Controller> &controller);
 
-    e172::ptr<GUIElement> parentElement() const;
+    e172::ptr<GUIElement> parentElement() const { return m_parentElement; }
     e172::ptr<GUIElement> rootElement() const;
-    e172::ptr<Controller> controller() const;
-    std::list<e172::ptr<GUIElement>> children() const;
-    int margin() const;
-    void setMargin(int margin);
-    bool inFocus() const;
+    e172::ptr<Controller> controller() const { return m_controller; }
+    const std::list<e172::ptr<GUIElement>> &children() const { return m_children; }
+    int margin() const { return m_margin; }
+    void setMargin(int margin) { m_margin = margin; }
+    bool inFocus() const { return m_inFocus; }
     void setInFocus(bool inFocus);
 
 };
+
+} // namespace proj172::core
 
 #endif // GUIELEMENT_H

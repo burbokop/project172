@@ -1,12 +1,15 @@
 #include "modulehandler.h"
 
+namespace proj172::core {
 
-ModuleHandler::ModuleHandler() {}
+ModuleHandler::ModuleHandler(e172::FactoryMeta &&meta)
+    : Capability(std::move(meta))
+{}
 
 bool ModuleHandler::setParentUnit(const e172::ptr<Unit> &parent) {
     if(this->Capability::setParentUnit(parent)) {
         if(parent) {
-            for(const auto module : m_modules) {
+            for (const auto &module : m_modules) {
                 module->setParentUnit(parent);
             }
         }
@@ -30,39 +33,17 @@ void ModuleHandler::removeModule(const e172::ptr<Module> &module) {
     }
 }
 
-std::vector<e172::ptr<Module> > ModuleHandler::modules() {
-    return m_modules;
-}
-
-std::vector<e172::ptr<Module> > ModuleHandler::modulesOfClass(std::string moduleClass) {
-    std::vector<e172::ptr<Module>> result;
-    for(const auto module : m_modules) {
-        if(module->className() == moduleClass) {
-            result.push_back(module);
-        }
-    }
-    return result;
-}
-
-bool ModuleHandler::hasModuleOfClass(std::string moduleClass) {
-    for(const auto module : m_modules) {
-        if(module->className() == moduleClass) {
-            return true;
-        }
-    }
-    return false;
-}
-
-
-void ModuleHandler::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
-    for(const auto module : m_modules) {
+void ModuleHandler::proceed(e172::Context *context, e172::EventHandler *eventHandler)
+{
+    for (const auto &module : m_modules) {
         module->proceed(context, eventHandler);
     }
 }
 
 void ModuleHandler::render(e172::AbstractRenderer *renderer) {
-    for(const auto module : m_modules) {
+    for (const auto &module : m_modules) {
         module->render(renderer);
     }
 }
 
+} // namespace proj172::core

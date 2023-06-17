@@ -1,6 +1,6 @@
 #include "guimenuelement.h"
 
-
+namespace proj172::core {
 
 e172::Variant GUIMenuElement::modelData() const {
     return m_modelData;
@@ -18,29 +18,13 @@ void GUIMenuElement::setTextFormat(const e172::TextFormat &textFormat) {
     m_textFormat = textFormat;
 }
 
-GUIMenuElement::GUIMenuElement() {}
-
-GUIMenuElement::GUIMenuElement(std::string label) {
-    this->label = label;
-}
-
-GUIMenuElement::GUIMenuElement(IInformative *informative) {
-    m_informative = informative;
-}
-
 std::string GUIMenuElement::title() {
-    return m_informative ? m_informative->info() : label;
-}
-
-bool GUIMenuElement::isSelectable() {
-    return false;
-}
-
-bool GUIMenuElement::hasSubElements() {
-    return false;
+    return m_informative ? m_informative->info() : m_label;
 }
 
 void GUIMenuElement::enter(e172::Context *context) { (void)context; }
 
-void GUIMenuElement::proceed(e172::Context *, e172::AbstractEventHandler *) {}
+void GUIMenuElement::proceed(e172::Context *, e172::EventHandler *) {}
 void GUIMenuElement::render(e172::AbstractRenderer *) {}
+
+} // namespace proj172::core

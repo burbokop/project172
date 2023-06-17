@@ -1,15 +1,11 @@
-#ifndef CONTROLLER_H
-#define CONTROLLER_H
-
+#pragma once
 
 #include "capability.h"
-
 #include <src/additional/trigger.h>
-
 #include <src/time/elapsedtimer.h>
-
-
 #include <src/tasks/task.h>
+
+namespace proj172::core {
 
 class Ship;
 class Person;
@@ -32,8 +28,14 @@ protected:
 
     void releaseArmor();
 public:
-    Controller();
-    Controller(const e172::ptr<Ship> &armor);
+    Controller(e172::FactoryMeta &&meta)
+        : Capability(std::move(meta))
+    {}
+
+    Controller(e172::FactoryMeta &&meta, const e172::ptr<Ship> &armor)
+        : Capability(std::move(meta))
+        , m_armor(armor)
+    {}
 
     virtual void onHit(e172::Context* context, int health);
 
@@ -49,8 +51,8 @@ public:
 
     // Entity interface
 public:
-    void proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler);
+    void proceed(e172::Context *context, e172::EventHandler *eventHandler);
     void render(e172::AbstractRenderer *renderer);
 };
 
-#endif // CONTROLLER_H
+} // namespace proj172::core

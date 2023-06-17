@@ -2,6 +2,8 @@
 
 #include <src/units/unit.h>
 
+namespace proj172::core {
+
 ControllerFinder::ControllerFinder(Controller *p1, Controller *p2) {
     this->p1 = p1;
     this->p2 = p2;
@@ -18,3 +20,5 @@ std::string ControllerFinder::info() const {
         )
     );
 }
+
+} // namespace proj172::core

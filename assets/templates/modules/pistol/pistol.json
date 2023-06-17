@@ -1,10 +1,10 @@
 {
-	"id": "pistol",
-	"class": "Weapon",
-	"audio": { 
-		"start": "./shoot.wav",
-		"volume": 0.3
-	},
-	"rate": 160,
-	"projectile": "p-p"
+    "id": "pistol",
+    "class": "proj172::core::Weapon",
+    "audio": {
+        "start": "./shoot.wav",
+        "volume": 0.3
+    },
+    "rate": 160,
+    "projectile": "p-p"
 }

@@ -2,13 +2,12 @@ cmake_minimum_required(VERSION 3.16)
 
 project(project172)
 
-
 add_compile_options(-no-pie)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_EXE_LINKER_FLAGS "-Wl,-rpath='${ORIGIN}'")
 
-file(COPY ${CMAKE_CURRENT_LIST_DIR}/assets DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+set(ENABLE_E172_LINT ON)
 
 include_directories(${CMAKE_CURRENT_LIST_DIR})
 link_directories(${CMAKE_CURRENT_BINARY_DIR})
@@ -34,6 +33,7 @@ add_library(project172_core SHARED
     ${CMAKE_CURRENT_LIST_DIR}/src/near.h
     ${CMAKE_CURRENT_LIST_DIR}/src/worldpresetstrategy.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/worldpresetstrategy.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/messagetype.h
 
     ${CMAKE_CURRENT_LIST_DIR}/src/additional/informative/controllerfinder.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/additional/informative/controllerfinder.h
@@ -209,63 +209,53 @@ add_library(project172_core SHARED
     ${CMAKE_CURRENT_LIST_DIR}/src/explosivespawner.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/explosivespawner.h
     ${CMAKE_CURRENT_LIST_DIR}/src/ftestobject.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/ftestobject.h
-    )
-
-
+    ${CMAKE_CURRENT_LIST_DIR}/src/ftestobject.h)
 
 include(${CMAKE_CURRENT_LIST_DIR}/e172/e172.cmake)
 include(${CMAKE_CURRENT_LIST_DIR}/sdl_implementation/sdl_implementation.cmake)
 include(${CMAKE_CURRENT_LIST_DIR}/vulkan_implementation/vulkan_implementation.cmake)
 include(${CMAKE_CURRENT_LIST_DIR}/console_impl/console_impl.cmake)
 
+file(GLOB_RECURSE ASSETS_SRC "${CMAKE_CURRENT_LIST_DIR}/assets/*")
+add_custom_target(assets ALL SOURCES ${ASSETS_SRC})
+e172_copy_target(assets ${CMAKE_CURRENT_BINARY_DIR})
 
 target_link_libraries(project172_core
-    e172
-    )
+    e172)
 
 if (UNIX)
-    target_link_libraries(project172_core dl X11 stdc++ stdc++fs)
+    target_link_libraries(project172_core
+        dl
+        X11
+        stdc++
+        stdc++fs)
 endif (UNIX)
 
 if (WIN32)
     target_link_libraries(project172_core ws2_32)
 endif (WIN32)
 
-
-
 add_executable(project172
-    ${CMAKE_CURRENT_LIST_DIR}/src/main.cpp
-    )
+    ${CMAKE_CURRENT_LIST_DIR}/src/main.cpp)
 
 target_link_libraries(project172
     sdl_impl
     vulkan_impl
     console_impl
     e172
-    project172_core
-    )
+    project172_core)
 
 add_executable(project172_tests
     ${CMAKE_CURRENT_LIST_DIR}/tests/main.cpp
     ${CMAKE_CURRENT_LIST_DIR}/tests/warecontainerspec.h
     ${CMAKE_CURRENT_LIST_DIR}/tests/warecontainerspec.cpp
     ${CMAKE_CURRENT_LIST_DIR}/tests/personspec.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/tests/personspec.h
-    )
-
+    ${CMAKE_CURRENT_LIST_DIR}/tests/personspec.h)
 
 target_link_libraries(project172_tests
     e172
-    project172_core
-    )
+    project172_core)
 
 enable_testing()
-add_test(project172_tests project172_tests)
-add_custom_command(
-     TARGET project172_tests
-     COMMENT "project172_tests"
-     POST_BUILD
-     COMMAND project172_tests
-)
-
+include(CTest)
+e172_target_discover_tests(project172_tests)

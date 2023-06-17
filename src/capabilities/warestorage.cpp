@@ -3,6 +3,8 @@
 #include <src/additional/ware/warecontainer.h>
 #include <src/functional/metafunction.h>
 
+namespace proj172::core {
+
 e172::ptr<PriceTable> WareStorage::priceTable() const {
     return m_priceTable;
 }
@@ -40,11 +42,9 @@ e172::ptr<AbstractWareContainer> WareStorage::wareContainer() const {
     return m_wareContainer;
 }
 
-WareStorage::WareStorage() {}
-
 WareStorage::~WareStorage() {
-    safeDestroy(m_wareContainer);
-    safeDestroy(m_priceTable);
+    destroy(m_wareContainer);
+    destroy(m_priceTable);
 }
 
 size_t WareStorage::wareInfoCount() const {
@@ -90,10 +90,6 @@ size_t WareStorage::transferWareTo(size_t index, const e172::ptr<WareStorage>& d
     return 0;
 }
 
-TransportWareStorage::TransportWareStorage(size_t capacity) {
-    m_initialCapacity = capacity;
-}
-
 size_t TransportWareStorage::setCapacity(size_t capacity) {
     return e172::smart_cast<WareContainer>(wareContainer())->setCapacity(capacity);
 }
@@ -103,11 +99,6 @@ e172::ptr<AbstractWareContainer> TransportWareStorage::createWareContainer() con
     wc->setAllowedInput(WareContainer::AllAllowed);
     wc->setAllowedOutput(WareContainer::AllAllowed);
     return wc;
-}
-
-DebugTransportWareStorage::DebugTransportWareStorage(size_t capacity, const std::map<std::string, size_t> &initialWares) {
-    m_initialCapacity = capacity;
-    m_initialWares = initialWares;
 }
 
 size_t DebugTransportWareStorage::setCapacity(size_t capacity) {
@@ -147,3 +138,5 @@ WareStorage::WareRef::WareRef(const e172::ptr<WareStorage> &storage, size_t inde
     m_storage = storage;
     m_index = index;
 }
+
+} // namespace proj172::core

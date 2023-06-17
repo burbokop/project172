@@ -1,18 +1,19 @@
-#include "projectile.h"
 #include "unit.h"
 
+#include "projectile.h"
+#include "src/messagetype.h"
+#include <src/args.h>
+#include <src/assettools/assetprovider.h>
+#include <src/assettools/loadabletemplate.h>
 #include <src/capabilities/capability.h>
 #include <src/capabilities/controller.h>
 #include <src/capabilities/docker.h>
 #include <src/capabilities/modulehandler.h>
 #include <src/capabilities/warestorage.h>
-
-#include <src/args.h>
 #include <src/context.h>
-
 #include <src/graphics/abstractrenderer.h>
-#include <src/assettools/assetprovider.h>
-#include <src/assettools/loadabletemplate.h>
+
+namespace proj172::core {
 
 bool Unit::selected() const {
     return m_selected;
@@ -23,11 +24,11 @@ double Unit::health() const {
 }
 
 std::string Unit::info() const {
-    return loadableId();
+    return templateId();
 }
 
-void Unit::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
-    m_selected = context->property("SU").toNumber<e172::Entity::id_t>() == entityId();
+void Unit::proceed(e172::Context *context, e172::EventHandler *eventHandler) {
+    m_selected = context->property("SU").toNumber<e172::Entity::Id>() == entityId();
     for(const auto& cap : m_capabilities) {
         cap->proceed(context, eventHandler);
     }
@@ -61,7 +62,13 @@ void Unit::render(e172::AbstractRenderer *renderer) {
         double yOffset = 0;
         const auto format = e172::TextFormat(e172::TextFormat::AlignHCenter | e172::TextFormat::AlignBottom, 12);
         for(const auto& c : m_capabilities) {
-            auto offset = renderer->drawStringShifted(c->className(), position() + e172::Vector(60, spriteSize.y() * 0.5 + 8 + yOffset), 0xffaaff, format);
+            auto offset = renderer->drawStringShifted(c->className(),
+                                                      position()
+                                                          + e172::Vector<double>(60,
+                                                                                 spriteSize.y() * 0.5
+                                                                                     + 8 + yOffset),
+                                                      0xffaaff,
+                                                      format);
             yOffset += offset.y();
         }
     }
@@ -69,12 +76,21 @@ void Unit::render(e172::AbstractRenderer *renderer) {
         const auto format = e172::TextFormat(e172::TextFormat::AlignHCenter | e172::TextFormat::AlignBottom, 12);
         double yOffset = 0;
         for(const auto& info : storage->prettyInfo()) {
-            auto offset = renderer->drawStringShifted(info, position() + e172::Vector(0, spriteSize.y() * 0.5 + 8 + yOffset), 0xaaffaa, format);
+            auto offset = renderer->drawStringShifted(info,
+                                                      position()
+                                                          + e172::Vector<double>(0,
+                                                                                 spriteSize.y() * 0.5
+                                                                                     + 8 + yOffset),
+                                                      0xaaffaa,
+                                                      format);
             yOffset += offset.y();
         }
     }
 
-    renderer->drawStringShifted(std::to_string(entityId()), position() + e172::Vector(0, -spriteSize.y() * 0.5 - 16), 0x00B358, e172::TextFormat::fromFontSize(11));
+    renderer->drawStringShifted(std::to_string(entityId()),
+                                position() + e172::Vector<double>(0, -spriteSize.y() * 0.5 - 16),
+                                0x00B358,
+                                e172::TextFormat::fromFontSize(11));
 }
 
 e172::ptr<Person> Unit::ownerPerson() const {
@@ -85,9 +101,11 @@ void Unit::setOwnerPerson(const e172::ptr<Person> &ownerPerson) {
     m_ownerPerson = ownerPerson;
 }
 
-Unit::Unit() {
+Unit::Unit(e172::FactoryMeta &&meta)
+    : e172::Entity(std::move(meta))
+{
     std::srand(clock());
-    m_selectedColor = e172::randomColor();
+    m_selectedColor = e172::randomColor(e172::Random::uniq());
     registerInitFunction([this]() {
         m_health = asset<double>("health");
         m_explosiveRadius = asset<double>("explosive");
@@ -99,7 +117,7 @@ Unit::Unit() {
 
         const auto capabilityTemplates = asset<std::vector<e172::LoadableTemplate>>("capabilities");
         for(const auto& tmpl : capabilityTemplates) {
-            addCapability(assetProvider()->createLoadable<Capability>(tmpl));
+            addCapability(assetProvider()->createLoadable<Capability>(tmpl).unwrap());
         }
         setMass(asset<double>("mass", 1));
     });
@@ -131,11 +149,13 @@ void Unit::hit(e172::Context *context, int value) {
         }
 
         if(dynamic_cast<Projectile*>(this) == nullptr) {
-            context->emitMessage(e172::Context::FLOATING_MESSAGE, e172::VariantVector { entityId(), m_health });
+            context->emitMessage(~MessageType::FloatingMessage,
+                                 e172::VariantVector{entityId(), m_health});
         }
 
         if(m_health < 0) {
-            context->emitMessage(e172::Context::SPAWN_EXPLOSIVE, e172::Args(position(), velocity(), m_explosiveRadius));
+            context->emitMessage(~MessageType::SpawnExplosive,
+                                 e172::Args(position(), velocity(), m_explosiveRadius));
             if(const auto mh = capability<ModuleHandler>()) {
                 const auto modules = mh->modules();
                 for(const auto& module : modules) {
@@ -144,12 +164,14 @@ void Unit::hit(e172::Context *context, int value) {
                     }
                 }
             }
-            context->emitMessage(e172::Context::DESTROY_ENTITY, entityId());
+            context->emitMessage(e172::Context::DestroyEntity, entityId());
         }
     } else {
         if(dynamic_cast<Projectile*>(this) == nullptr) {
-            context->emitMessage(e172::Context::FLOATING_MESSAGE, e172::VariantVector { entityId(), "no damage" });
+            context->emitMessage(~MessageType::FloatingMessage,
+                                 e172::VariantVector{entityId(), "no damage"});
         }
     }
 }
 
+} // namespace proj172::core

@@ -5,12 +5,11 @@
 #include <src/graphics/abstractrenderer.h>
 #include <src/math/math.h>
 
-SegmentPaiter::SegmentPaiter()
-{
+SegmentPaiter::SegmentPaiter(e172::FactoryMeta &&meta)
+    : e172::Entity(std::move(meta))
+{}
 
-}
-
-void SegmentPaiter::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
+void SegmentPaiter::proceed(e172::Context *context, e172::EventHandler *eventHandler) {
     proceedPhysics(context->deltaTime());
 }
 
@@ -31,7 +30,11 @@ void SegmentPaiter::render(e172::AbstractRenderer *renderer) {
             const double rand2 = rand() / static_cast<double>(std::numeric_limits<decltype (rand())>::max()) * 2 - 1;
             const double beta = rand2 * std::sin(0.001 * time * coeficient + rand2);
 
-            renderer->drawLineShifted(position(), position() + e172::Vector::createByAngle(50, alpha + j * beta * e172::Math::Pi / 4), colors[i]);
+            renderer->drawLineShifted(position(),
+                                      position()
+                                          + e172::Vector<double>::createByAngle(
+                                              50, alpha + j * beta * e172::Math::Pi / 4),
+                                      colors[i]);
         }
     }
 }

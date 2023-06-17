@@ -1,11 +1,10 @@
-#ifndef CAMERA_H
-#define CAMERA_H
-
+#pragma once
 
 #include <src/capabilities/controller.h>
 #include <src/graphics/abstractrenderer.h>
 #include <src/math/physicalobject.h>
 
+namespace proj172::core {
 
 class Camera : public e172::Entity, public e172::PhysicalObject {
     e172::AbstractRenderer::Camera r_cam;
@@ -17,14 +16,14 @@ protected:
     e172::ptr<Controller> m_target = nullptr;
 
 public:
-    Camera(const e172::ptr<Controller>& target = nullptr);
+    Camera(e172::FactoryMeta &&meta, const e172::ptr<Controller> &target = nullptr);
     void setTarget(const e172::ptr<Controller>& target);
     e172::ptr<Controller> target() const;
 
     // Entity interface
 public:
-    void proceed(e172::Context *context, e172::AbstractEventHandler *);
+    void proceed(e172::Context *context, e172::EventHandler *);
     void render(e172::AbstractRenderer *renderer);
 };
 
-#endif // CAMERA_H
+} // namespace proj172::core

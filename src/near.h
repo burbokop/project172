@@ -1,12 +1,13 @@
-#ifndef NEAR_H
-#define NEAR_H
-
+#pragma once
 
 #include <src/entity.h>
 #include <src/utility/ptr.h>
 
+namespace proj172::core {
+
 class Capability;
 class Unit;
+
 class Near : public e172::Entity {
 private:
     static const double DEFAULT_RADIUS_DELTA;
@@ -31,11 +32,16 @@ private:
             return a == entity;
         });
     }
+
 public:
+    Near(e172::FactoryMeta &&meta,
+         double radius = DEFAULT_RADIUS,
+         double delta = DEFAULT_RADIUS_DELTA);
 
-    Near(double radius = DEFAULT_RADIUS, double delta = DEFAULT_RADIUS_DELTA);
-    Near(Capability *center, double radius = DEFAULT_RADIUS, double delta = DEFAULT_RADIUS_DELTA);
-
+    Near(e172::FactoryMeta &&meta,
+         Capability *center,
+         double radius = DEFAULT_RADIUS,
+         double delta = DEFAULT_RADIUS_DELTA);
 
     int entityInFocusCount() const;
     e172::ptr<Entity> entityInFocus(int index) const;
@@ -43,10 +49,10 @@ public:
 
     // Entity interface
 public:
-    virtual void proceed(e172::Context *context, e172::AbstractEventHandler *) override;
+    virtual void proceed(e172::Context *context, e172::EventHandler *) override;
     virtual void render(e172::AbstractRenderer *) override {};
-    e172::ptr<Capability> center() const;
-    void setCenter(const e172::ptr<Capability> &center);
+    e172::ptr<Capability> center() const { return m_center; }
+    void setCenter(const e172::ptr<Capability> &center) { m_center = center; }
 };
 
-#endif // NEAR_H
+} // namespace proj172::core

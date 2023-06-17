@@ -1,44 +1,44 @@
-#ifndef WARPDRIVE_H
-#define WARPDRIVE_H
+#pragma once
 
 #include "module.h"
 
+namespace proj172::core {
+
 class WarpDrive : public Module {
 public:
-    static const uint8_t WARP_DISABLED;
-    static const uint8_t WARP_LOADING;
-    static const uint8_t WARP_READY;
-    static const uint8_t WARP_EXECUTING;
-    static const uint8_t WARP_RECHARGING;
-private:
+    enum State { WarpDisabled, WarpLoading, WarpReady, WarpExecuting, WarpRecharging };
 
-    static const int DEFAULT_CYCLES_NUMBER = 12;
-
-    uint8_t warpState = WARP_DISABLED;
-    int currentChargindIteration = 0;
-    int chargindIterations = DEFAULT_CYCLES_NUMBER;
-    double warpVelocity = 0.1;
-
-    double charging() const;
-    std::string stateAsString() const;
-    std::string stateAsIcon() const;
 public:
-    WarpDrive();
-    WarpDrive(Loadable *tmp);
+    WarpDrive(e172::FactoryMeta &&meta);
+    WarpDrive(e172::FactoryMeta &&meta, Loadable *tmp);
 
-    int getState();
-
-    std::string info() const override;
-
-    double getSpeadUnit() const;
+    State warpState() const { return m_warpState; }
+    double warpVelocity() const { return m_warpVelocity; }
 
     bool prepareWarp();
     bool warp();
-    uint8_t abortWarp(e172::Context *context);
+    State abortWarp(e172::Context *context);
 
     // Entity interface
 public:
-    void proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) override;
+    void proceed(e172::Context *context, e172::EventHandler *eventHandler) override;
+
+    // IInformative interface
+public:
+    std::string info() const override;
+
+private:
+    double charging() const;
+    std::string stateAsString() const;
+    std::string stateAsIcon() const;
+
+private:
+    static const int DEFAULT_CYCLES_NUMBER = 12;
+
+    State m_warpState = WarpDisabled;
+    int m_currentChargindIteration = 0;
+    int m_chargindIterations = DEFAULT_CYCLES_NUMBER;
+    double m_warpVelocity = 0.1;
 };
 
-#endif // WARPDRIVE_H
+} // namespace proj172::core

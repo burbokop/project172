@@ -1,10 +1,8 @@
-#ifndef LIGHTPARTICLE_H
-#define LIGHTPARTICLE_H
+#pragma once
 
 #include <src/entity.h>
 #include <src/math/vector.h>
 #include <src/time/elapsedtimer.h>
-
 
 class LightParticle : public e172::Entity {
 public:
@@ -17,26 +15,25 @@ public:
 
     static const double STOP_MOVING_VELOCITY;
 
-
-private:
-    e172::Vector pos;
-    e172::Vector vel;
-
-    unsigned shape = PIXEL;
-    int radius = 2;
-    uint32_t color = 0xff00ff;
-    e172::ElapsedTimer *destroyTimer = nullptr;
-    double velocityMultiplier = 0;
-
-
 public:
-    LightParticle(unsigned shape = PIXEL, int averageLifeTime = DEFAULT_AVERAGE_LIFE_TIME, int lifeTimeDelta = DEFAULT_LIFE_TIME_DELTA);
-    void place(e172::Vector pos, e172::Vector vel);
+    LightParticle(e172::FactoryMeta &&meta,
+                  unsigned shape = PIXEL,
+                  int averageLifeTime = DEFAULT_AVERAGE_LIFE_TIME,
+                  int lifeTimeDelta = DEFAULT_LIFE_TIME_DELTA);
+    void place(e172::Vector<double> pos, e172::Vector<double> vel);
 
     // Entity interface
 public:
-    void proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler);
+    void proceed(e172::Context *context, e172::EventHandler *eventHandler);
     void render(e172::AbstractRenderer *renderer);
-};
 
-#endif // LIGHTPARTICLE_H
+private:
+    e172::Vector<double> m_pos;
+    e172::Vector<double> m_vel;
+
+    unsigned m_shape = PIXEL;
+    int m_radius = 2;
+    uint32_t m_color = 0xff00ff;
+    e172::ElapsedTimer *m_destroyTimer = nullptr;
+    double m_velocityMultiplier = 0;
+};

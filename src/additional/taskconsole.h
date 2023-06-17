@@ -1,17 +1,14 @@
-#ifndef TASKCONSOLE_H
-#define TASKCONSOLE_H
+#pragma once
 
 #include <list>
 #include <string>
 #include <functional>
 #include <map>
-
 #include <src/memcontrol/abstractfactory.h>
-
 #include <src/tasks/task.h>
-
 #include <src/utility/closableoutputstream.h>
 
+namespace proj172::core {
 
 class TaskConsole {
     e172::AbstractFactory<std::string, Task> m_taskFactory;
@@ -27,4 +24,4 @@ public:
     }
 };
 
-#endif // TASKCONSOLE_H
+} // namespace proj172::core

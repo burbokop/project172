@@ -1,12 +1,14 @@
-#ifndef GUIDOCKINGVIEW_H
-#define GUIDOCKINGVIEW_H
+#pragma once
 
 #include <src/gui/base/guisingleelementlistview.h>
 
+namespace proj172::core {
 
 class GUIDockingView : public GUISingleElementListView {
 public:
-    GUIDockingView(const std::string &title);
+    GUIDockingView(e172::FactoryMeta &&meta, const std::string &title)
+        : GUISingleElementListView(std::move(meta), title)
+    {}
 
     // GUIListView interface
 public:
@@ -15,4 +17,4 @@ public:
     virtual e172::Variant rowModelData(int index) const override;
 };
 
-#endif // GUIDOCKINGVIEW_H
+} // namespace proj172::core

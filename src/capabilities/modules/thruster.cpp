@@ -1,6 +1,10 @@
 #include "thruster.h"
 
-Thruster::Thruster() : Module () {
+namespace proj172::core {
+
+Thruster::Thruster(e172::FactoryMeta &&meta)
+    : Module(std::move(meta))
+{
     registerInitFunction([this](){
         leftThrust = asset<double>("left-thrust", false);
         leftThrust = asset<double>("right-thrust", false);
@@ -31,4 +35,4 @@ bool Thruster::isAcceleratingRight() {
     return state == EXECUTING && rightThrust;
 }
 
-
+} // namespace proj172::core

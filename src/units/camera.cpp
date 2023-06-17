@@ -5,6 +5,8 @@
 #include <math.h>
 #include <src/math/math.h>
 
+namespace proj172::core {
+
 const double Camera::STOP_DISTANCE = 4;
 const double Camera::MAX_SPEED_MULTIPLIER = 0.002 * 1000;
 
@@ -12,8 +14,10 @@ e172::ptr<Controller> Camera::target() const {
     return m_target;
 }
 
-Camera::Camera(const e172::ptr<Controller> &target) {
-    m_target = target;
+Camera::Camera(e172::FactoryMeta &&meta, const e172::ptr<Controller> &target)
+    : e172::Entity(std::move(meta))
+    , m_target(target)
+{
     addTag("C");
 }
 
@@ -21,7 +25,7 @@ void Camera::setTarget(const e172::ptr<Controller> &target) {
     m_target = target;
 }
 
-void Camera::proceed(e172::Context *context, e172::AbstractEventHandler *) {
+void Camera::proceed(e172::Context *context, e172::EventHandler *) {
     if(m_target) {
         if(const auto targetUnit = m_target->parentUnit()) {
             //addRestoringForce(targetUnit->position());
@@ -81,3 +85,5 @@ void Camera::render(e172::AbstractRenderer *renderer) {
     //    renderer->drawString(std::to_string((position() - target()->parentUnit()->position()).y()), position() + offset + e172::Vector(20, 40), color);
     //}
 }
+
+} // namespace proj172::core

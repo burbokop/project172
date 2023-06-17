@@ -9,6 +9,7 @@
 
 #include <src/units/ship.h>
 
+namespace proj172::core {
 
 ArenaWorld::ArenaWorld() {
 
@@ -18,61 +19,69 @@ WorldPreset::GenerationResult ArenaWorld::generate(e172::Context *context) {
     GenerationResult result;
 
     //player1
-    Player *player1 = static_cast<Player*>(context->assetProvider()->createLoadable("player1"));
-    Ship *playerArmor = static_cast<Ship*>(context->assetProvider()->createLoadable("bsh1"));
-    ModuleHandler *playerArmorModules = new ModuleHandler();
-    playerArmorModules->addModule(static_cast<Module*>(context->assetProvider()->createLoadable("engine2")));
-    playerArmorModules->addModule(static_cast<Module*>(context->assetProvider()->createLoadable("plasma-launcher")));
+    auto player1 = context->assetProvider()->createLoadable<Player>("player1").unwrap();
+    auto playerArmor = context->assetProvider()->createLoadable<Ship>("bsh1").unwrap();
+    ModuleHandler *playerArmorModules = e172::FactoryMeta::make<ModuleHandler>();
+    playerArmorModules->addModule(
+        context->assetProvider()->createLoadable<Module>("engine2").unwrap());
+    playerArmorModules->addModule(
+        context->assetProvider()->createLoadable<Module>("plasma-launcher").unwrap());
     playerArmor->addCapability(playerArmorModules);
-    static_cast<Player*>(player1)->setArmor(playerArmor);
+    player1->setArmor(playerArmor);
     result.controllers.push_back(player1);
 
     //player2
-    Player *player2 = static_cast<Player*>(context->assetProvider()->createLoadable("player2"));
-    Ship *playerArmor2 = static_cast<Ship*>(context->assetProvider()->createLoadable("bsh2"));
-    ModuleHandler *playerArmorModules2 = new ModuleHandler();
-    playerArmorModules2->addModule(static_cast<Module*>(context->assetProvider()->createLoadable("engine1")));
-    playerArmorModules2->addModule(static_cast<Module*>(context->assetProvider()->createLoadable("mega-launcher")));
+    auto player2 = context->assetProvider()->createLoadable<Player>("player2").unwrap();
+    auto playerArmor2 = context->assetProvider()->createLoadable<Ship>("bsh2").unwrap();
+    ModuleHandler *playerArmorModules2 = e172::FactoryMeta::make<ModuleHandler>();
+    playerArmorModules2->addModule(
+        context->assetProvider()->createLoadable<Module>("engine1").unwrap());
+    playerArmorModules2->addModule(
+        context->assetProvider()->createLoadable<Module>("mega-launcher").unwrap());
     playerArmor2->addCapability(playerArmorModules2);
     player2->setArmor(playerArmor2);
     result.controllers.push_back(player2);
 
 
     //player1 ship
-    Unit *playerShip = static_cast<Unit*>(context->assetProvider()->createLoadable("sh1"));
+    auto playerShip = context->assetProvider()->createLoadable<Unit>("sh1").unwrap();
     playerShip->resetPhysicsProperties({ 100, 100 }, -0.7);
     playerShip->addCapability(player1);
-    ModuleHandler *playerModuleHandler = new ModuleHandler();
-    playerModuleHandler->addModule(dynamic_cast<Module*>(context->assetProvider()->createLoadable("pistol")));
-    playerModuleHandler->addModule(dynamic_cast<Module*>(context->assetProvider()->createLoadable("engine2")));
-    playerModuleHandler->addModule(dynamic_cast<Module*>(context->assetProvider()->createLoadable("warp-drive1")));
+    ModuleHandler *playerModuleHandler = e172::FactoryMeta::make<ModuleHandler>();
+    playerModuleHandler->addModule(
+        context->assetProvider()->createLoadable<Module>("pistol").unwrap());
+    playerModuleHandler->addModule(
+        context->assetProvider()->createLoadable<Module>("engine2").unwrap());
+    playerModuleHandler->addModule(
+        context->assetProvider()->createLoadable<Module>("warp-drive1").unwrap());
     playerShip->addCapability(playerModuleHandler);
     result.entities.push_back(playerShip);
 
     //player2 ship
-    Unit *player2ship = static_cast<Unit*>(context->assetProvider()->createLoadable("sh2"));
-    player2ship->resetPhysicsProperties(e172::Vector(0, 100), -0.7);
-    ModuleHandler *player2ModuleHandler = new ModuleHandler();
-    player2ModuleHandler->addModule(dynamic_cast<Module*>(context->assetProvider()->createLoadable("plasma-launcher")));
-    player2ModuleHandler->addModule(dynamic_cast<Module*>(context->assetProvider()->createLoadable("engine1")));
-    player2ModuleHandler->addModule(dynamic_cast<Module*>(context->assetProvider()->createLoadable("warp-drive1")));
+    auto player2ship = context->assetProvider()->createLoadable<Unit>("sh2").unwrap();
+    player2ship->resetPhysicsProperties(e172::Vector<double>(0, 100), -0.7);
+    ModuleHandler *player2ModuleHandler = e172::FactoryMeta::make<ModuleHandler>();
+    player2ModuleHandler->addModule(
+        context->assetProvider()->createLoadable<Module>("plasma-launcher").unwrap());
+    player2ModuleHandler->addModule(
+        context->assetProvider()->createLoadable<Module>("engine1").unwrap());
+    player2ModuleHandler->addModule(
+        context->assetProvider()->createLoadable<Module>("warp-drive1").unwrap());
     player2ship->addCapability(player2ModuleHandler);
     player2ship->addCapability(player2);
     result.entities.push_back(player2ship);
 
-
-
-    Unit *unit = dynamic_cast<Unit*>(context->assetProvider()->createLoadable("sh1"));
+    auto unit = context->assetProvider()->createLoadable<Unit>("sh1").unwrap();
     unit->resetPhysicsProperties({}, 0);
-    unit->addCapability(new Aggressive());
-    ModuleHandler *mh = new ModuleHandler();
-    mh->addModule(static_cast<Module*>(context->assetProvider()->createLoadable("pistol")));
-    mh->addModule(static_cast<Module*>(context->assetProvider()->createLoadable("engine1")));
-    mh->addModule(static_cast<Module*>(context->assetProvider()->createLoadable("warp-drive1")));
+    unit->addCapability(e172::FactoryMeta::make<Aggressive>());
+    ModuleHandler *mh = e172::FactoryMeta::make<ModuleHandler>();
+    mh->addModule(context->assetProvider()->createLoadable<Module>("pistol").unwrap());
+    mh->addModule(context->assetProvider()->createLoadable<Module>("engine1").unwrap());
+    mh->addModule(context->assetProvider()->createLoadable<Module>("warp-drive1").unwrap());
     unit->addCapability(mh);
     result.entities.push_back(unit);
 
-
-
     return result;
 }
+
+} // namespace proj172::core

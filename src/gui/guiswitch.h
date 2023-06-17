@@ -5,22 +5,48 @@
 
 #include <src/gui/base/guimenuelement.h>
 
+namespace proj172::core {
 
 class GUISwitch : public GUIMenuElement {
-private:
-    std::function<void()> on;
-    std::function<void()> off;
-    bool enabled = false;
 
 public:
-    GUISwitch(std::function<void()> on = nullptr,  std::function<void()> off = nullptr);
-    GUISwitch(std::string label, std::function<void()> on = nullptr,  std::function<void()> off = nullptr);
-    GUISwitch(IInformative *informative, std::function<void()> on = nullptr,  std::function<void()> off = nullptr);
+    GUISwitch(e172::FactoryMeta &&meta,
+              std::function<void()> on = nullptr,
+              std::function<void()> off = nullptr)
+        : GUIMenuElement(std::move(meta))
+        , m_on(on)
+        , m_off(off)
+    {}
+
+    GUISwitch(e172::FactoryMeta &&meta,
+              const std::string &label,
+              std::function<void()> on = nullptr,
+              std::function<void()> off = nullptr)
+        : GUIMenuElement(std::move(meta), label)
+        , m_on(on)
+        , m_off(off)
+    {}
+
+    GUISwitch(e172::FactoryMeta &&meta,
+              IInformative *informative,
+              std::function<void()> on = nullptr,
+              std::function<void()> off = nullptr)
+        : GUIMenuElement(std::move(meta), informative)
+        , m_on(on)
+        , m_off(off)
+    {}
 
     // GUILabel interface
 public:
-    bool isSelectable() override;
+    bool isSelectable() override { return true; }
     void enter(e172::Context *) override;
+
+private:
+    std::function<void()> m_on;
+    std::function<void()> m_off;
+    bool m_enabled = false;
 };
+
+} // namespace proj172::core
 
 #endif // GUISWITCH_H

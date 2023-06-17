@@ -1,23 +1,23 @@
 #include "near.h"
 
-
 #include <src/context.h>
 #include <src/debug.h>
 #include <src/units/ship.h>
 #include <src/capabilities/capability.h>
 #include <src/capabilities/modules/warpdrive.h>
 
+namespace proj172::core {
 
 const double Near::DEFAULT_RADIUS_DELTA = 16;
 const double Near::DEFAULT_RADIUS = 512;
 const double Near::WARP_RADIUS_MILTIPLIER = 8;
 
-
-Near::Near(Capability *center, double radius, double delta) {
-    m_center = center;
-    m_radius = radius;
-    m_delta = delta;
-}
+Near::Near(e172::FactoryMeta &&meta, Capability *center, double radius, double delta)
+    : e172::Entity(std::move(meta))
+    , m_center(center)
+    , m_radius(radius)
+    , m_delta(delta)
+{}
 
 int Near::entityInFocusCount() const {
     return m_entitiesInFocus.size();
@@ -59,25 +59,18 @@ double Near::localRadius(const e172::ptr<Unit> &center) {
     double result = m_radius;
     if(const auto centerShip = e172::smart_cast<Ship>(center)) {
         const auto wd = centerShip->firstWarp();
-        if(wd && wd->getState() == WarpDrive::WARP_EXECUTING) {
+        if (wd && wd->warpState() == WarpDrive::WarpExecuting) {
             result *= WARP_RADIUS_MILTIPLIER;
         }
     }
     return result;
 }
 
-Near::Near(double radius, double delta) {
-    m_radius = radius;
-    m_delta = delta;
-}
-
-e172::ptr<Capability> Near::center() const {
-    return m_center;
-}
-
-void Near::setCenter(const e172::ptr<Capability> &center) {
-    m_center = center;
-}
+Near::Near(e172::FactoryMeta &&meta, double radius, double delta)
+    : e172::Entity(std::move(meta))
+    , m_radius(radius)
+    , m_delta(delta)
+{}
 
 void Near::removeEntities(e172::Context *) {
     if(removingIterator < m_entitiesInFocus.size()) {
@@ -99,9 +92,11 @@ void Near::removeEntities(e172::Context *) {
     if(++removingIterator >= m_entitiesInFocus.size()) removingIterator = 0;
 }
 
-void Near::proceed(e172::Context *context, e172::AbstractEventHandler *) {
-    if(m_center != nullptr) {
+void Near::proceed(e172::Context *context, e172::EventHandler *) {
+    if (m_center) {
         addEntities(context);
         removeEntities(context);
     }
 }
+
+} // namespace proj172::core

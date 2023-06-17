@@ -7,6 +7,8 @@
 
 #include <src/capabilities/controller.h>
 
+namespace proj172::core {
+
 TaskConsole::TaskConsole() {}
 
 void TaskConsole::executeCommand(const std::string &commandLine, e172::ClosableOutputStream &stream, e172::Context* context) {
@@ -16,7 +18,7 @@ void TaskConsole::executeCommand(const std::string &commandLine, e172::ClosableO
         const auto arg0parts = e172::Additional::split(args[0], '>');
         if(arg0parts.size() == 2) {
             bool ok = false;
-            auto subjectId = e172::Variant(arg0parts[1]).toNumber<e172::Entity::id_t>(&ok);
+            auto subjectId = e172::Variant(arg0parts[1]).toNumber<e172::Entity::Id>(&ok);
             if(ok) {
                 if(const auto& subject = context->entityById<Unit>(subjectId)) {
                     if(auto controller = subject->capability<Controller>()) {
@@ -52,3 +54,4 @@ std::list<std::string> TaskConsole::compleateVariants() const {
     return m_taskFactory.typeNames();
 }
 
+} // namespace proj172::core

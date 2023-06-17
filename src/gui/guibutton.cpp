@@ -1,20 +1,9 @@
 #include "guibutton.h"
 
+namespace proj172::core {
 
-GUIButton::GUIButton(const std::string &title, const GUIButton::f0 &f) : GUIMenuElement(title) {
-    m_f0 = f;
-}
-
-GUIButton::GUIButton(const std::string &title, const f1 &f) : GUIMenuElement(title) {
-    m_f1 = f;
-}
-
-GUIButton::GUIButton(const std::string &title, const GUIButton::f2 &f) : GUIMenuElement(title) {
-    m_f2 = f;
-}
-
-
-bool GUIButton::isSelectable() {
+bool GUIButton::isSelectable()
+{
     return true;
 }
 
@@ -27,3 +16,5 @@ void GUIButton::enter(e172::Context *context) {
         m_f2(context, controller(), modelData());
     }
 }
+
+} // namespace proj172::core

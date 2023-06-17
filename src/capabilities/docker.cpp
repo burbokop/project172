@@ -4,13 +4,17 @@
 #include <src/context.h>
 #include <src/debug.h>
 
-void Docker::addNode(const e172::Vector &offset, double angle) {
+namespace proj172::core {
+
+void Docker::addNode(const e172::Vector<double> &offset, double angle) {
     m_nodePool.addNode(offset, angle);
 }
 
-Docker::Docker() {
-    registerInitFunction([this](){
-        const auto nodes = asset<std::list<std::pair<e172::Vector, double>>>("nodes");
+Docker::Docker(e172::FactoryMeta &&meta)
+    : Capability(std::move(meta))
+{
+    registerInitFunction([this]() {
+        const auto nodes = asset<std::list<std::pair<e172::Vector<double>, double>>>("nodes");
         for(const auto& node : nodes) {
             addNode(node.first, node.second);
         }
@@ -84,7 +88,7 @@ bool Docker::docked(size_t index) const {
     return false;
 }
 
-void Docker::proceed(e172::Context *, e172::AbstractEventHandler *) {
+void Docker::proceed(e172::Context *, e172::EventHandler *) {
     auto it = m_sessions.begin();
     while (it != m_sessions.end()) {
         if(!(*it)->fullUsageCount()) {
@@ -97,3 +101,5 @@ void Docker::proceed(e172::Context *, e172::AbstractEventHandler *) {
 }
 
 void Docker::render(e172::AbstractRenderer *renderer) {}
+
+} // namespace proj172::core

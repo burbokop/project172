@@ -1,23 +1,34 @@
-#ifndef GUIBLUSHINGFLOATINGMESSAGE_H
-#define GUIBLUSHINGFLOATINGMESSAGE_H
-
+#pragma once
 
 #include <src/gui/guifloatingmessage.h>
 
+namespace proj172::core {
 
 class GUIBlushingFloatingMessage : public GUIFloatingMessage {
-private:
-    int value;
-
 public:
-    GUIBlushingFloatingMessage(const e172::ptr<Unit> &parent);
-    GUIBlushingFloatingMessage(const e172::ptr<Unit> &parent, int value);
-    GUIBlushingFloatingMessage(const e172::ptr<Unit> &parent, IInformative *informative);
+    GUIBlushingFloatingMessage(e172::FactoryMeta &&meta, const e172::ptr<Unit> &parent)
+        : GUIFloatingMessage(std::move(meta), parent)
+    {}
 
+    GUIBlushingFloatingMessage(e172::FactoryMeta &&meta,
+                               const e172::ptr<Unit> &parent,
+                               std::uint32_t value)
+        : GUIFloatingMessage(std::move(meta), parent, std::to_string(value))
+        , m_value(value)
+    {}
+
+    GUIBlushingFloatingMessage(e172::FactoryMeta &&meta,
+                               const e172::ptr<Unit> &parent,
+                               IInformative *informative)
+        : GUIFloatingMessage(std::move(meta), parent, informative)
+    {}
 
     // GUIElement interface
 public:
     void render(e172::AbstractRenderer *renderer);
+
+private:
+    std::uint32_t m_value = 0;
 };
 
-#endif // GUIBLUSHINGFLOATINGMESSAGE_H
+} // namespace proj172::core

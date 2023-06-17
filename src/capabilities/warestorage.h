@@ -1,12 +1,10 @@
-#ifndef WARESTORAGE_H
-#define WARESTORAGE_H
+#pragma once
 
 #include "capability.h"
-
 #include <src/additional/ware/abstractwarecontainer.h>
-
 #include <src/additional/pricetable.h>
 
+namespace proj172::core {
 
 class WareStorage : public Capability {
     mutable e172::ptr<AbstractWareContainer> m_wareContainer;
@@ -26,7 +24,10 @@ public:
         WareInfo info() const;
     };
 
-    WareStorage();
+    WareStorage(e172::FactoryMeta &&meta)
+        : Capability(std::move(meta))
+    {}
+
     ~WareStorage();
 
     // Entity interface
@@ -49,34 +50,46 @@ public:
 };
 
 class TransportWareStorage : public WareStorage {
-    size_t m_initialCapacity = 0;
 public:
-    TransportWareStorage(size_t capacity = 0);
+    TransportWareStorage(e172::FactoryMeta &&meta, size_t capacity = 0)
+        : WareStorage(std::move(meta))
+        , m_initialCapacity(capacity)
+    {}
+
     size_t setCapacity(size_t capacity);
 
     // Entity interface
 public:
-    virtual void proceed(e172::Context *, e172::AbstractEventHandler *) override {};
+    virtual void proceed(e172::Context *, e172::EventHandler *) override{};
     virtual void render(e172::AbstractRenderer *) override {};
 
     // WareStorage interface
 protected:
     virtual e172::ptr<AbstractWareContainer> createWareContainer() const override;
+
+private:
+    size_t m_initialCapacity = 0;
 };
-
-
 
 class DebugTransportWareStorage : public WareStorage {
     size_t m_initialCapacity = 0;
-    std::map<std::string, size_t> m_initialWares;
+    std::map<std::string, std::size_t> m_initialWares;
+
 public:
-    DebugTransportWareStorage(size_t capacity = 0, const std::map<std::string, size_t> &initialWares = {});
+    DebugTransportWareStorage(e172::FactoryMeta &&meta,
+                              size_t capacity = 0,
+                              const std::map<std::string, std::size_t> &initialWares = {})
+        : WareStorage(std::move(meta))
+        , m_initialCapacity(capacity)
+        , m_initialWares(initialWares)
+    {}
+
     size_t setCapacity(size_t capacity);
     e172::ptr<AbstractWareContainer> __wareContainer() const;
 
     // Entity interface
 public:
-    virtual void proceed(e172::Context *, e172::AbstractEventHandler *) override {};
+    virtual void proceed(e172::Context *, e172::EventHandler *) override{};
     virtual void render(e172::AbstractRenderer *) override {};
 
     // WareStorage interface
@@ -84,5 +97,4 @@ protected:
     virtual e172::ptr<AbstractWareContainer> createWareContainer() const override;
 };
 
-
-#endif // WARESTORAGE_H
+} // namespace proj172::core

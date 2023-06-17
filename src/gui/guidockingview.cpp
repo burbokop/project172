@@ -4,7 +4,7 @@
 #include <src/capabilities/docker.h>
 #include <src/capabilities/controller.h>
 
-GUIDockingView::GUIDockingView(const std::string &title) : GUISingleElementListView(title) {}
+namespace proj172::core {
 
 int GUIDockingView::rowCount() const {
     if(controller()) {
@@ -31,3 +31,5 @@ std::string GUIDockingView::rowText(int index) const {
 e172::Variant GUIDockingView::rowModelData(int index) const {
     return index;
 }
+
+} // namespace proj172::core

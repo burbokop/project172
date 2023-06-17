@@ -1,5 +1,4 @@
-#ifndef FTESTOBJECT_H
-#define FTESTOBJECT_H
+#pragma once
 
 #include <src/entity.h>
 #include <src/math/physicalobject.h>
@@ -20,8 +19,6 @@ public:
     void bar() const { }
 };
 
-
-
 template <typename T>
 class ptr2 {
 protected:
@@ -37,8 +34,6 @@ public:
 template<typename T>
 class destroyeble_ptr : public ptr2<T> {
 public:
-
-
     template<typename ...Args>
     static destroyeble_ptr<T> create_ptr(Args&&... args) {
         destroyeble_ptr<T> p;
@@ -63,34 +58,32 @@ public:
 
 }
 
-class FTestObject : public e172::Entity, public e172::PhysicalObject {
-    FTestObject *m_targetObject = nullptr;
-
-    e172::Vector m_cOffset;
-    double m_cAngle = 0;
-
-    double ra = 0;
-
-    e172::Colider colider;
-
-    e172::destroyeble_ptr<e172::ltd> m_someData = e172::destroyeble_ptr<e172::ltd>::create_ptr([](){ std::cout << "ltd dead\n"; });
-
-    e172::Colider::PositionalVector escapeVector;
+class FTestObject : public e172::Entity, public e172::PhysicalObject
+{
 public:
-    FTestObject(FTestObject *object = nullptr);
+    FTestObject(e172::FactoryMeta &&meta, FTestObject *object = nullptr)
+        : e172::Entity(std::move(meta))
+        , m_targetObject(object)
+    {}
 
     // Entity interface
 public:
-    virtual void proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) override;
+    virtual void proceed(e172::Context *context, e172::EventHandler *eventHandler) override;
     virtual void render(e172::AbstractRenderer *renderer) override;
-    e172::Vector cOffset() const;
-    void setCOffset(const e172::Vector &cOffset);
-    double cAngle() const;
+    e172::Vector<double> cOffset() const { return m_cOffset; }
+    void setCOffset(const e172::Vector<double> &cOffset);
+    double cAngle() const { return m_cAngle; }
     void setCAngle(double cAngle);
-    void setColiderVertices(const std::vector<e172::Vector> &vertices);
+    void setColiderVertices(const std::vector<e172::Vector<double>> &vertices);
+    e172::ptr2<e172::ltd> someData() const { return m_someData; }
 
-
-    e172::ptr2<e172::ltd> someData() const;
+private:
+    FTestObject *m_targetObject = nullptr;
+    e172::Vector<double> m_cOffset;
+    double m_cAngle = 0;
+    double ra = 0;
+    e172::Colider m_colider;
+    e172::destroyeble_ptr<e172::ltd> m_someData = e172::destroyeble_ptr<e172::ltd>::create_ptr(
+        []() { std::cout << "ltd dead\n"; });
+    e172::Colider::PositionalVector m_escapeVector;
 };
-
-#endif // FTESTOBJECT_H

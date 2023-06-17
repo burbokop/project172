@@ -1,20 +1,19 @@
-#ifndef GUILISTVIEW_H
-#define GUILISTVIEW_H
+#pragma once
 
 #include "guimenuelement.h"
 #include "guistack.h"
 
-
+namespace proj172::core {
 
 class GUIListView : public GUIMenuElement {
-    e172::ptr<GUIStack> m_stack = nullptr;
-    int m_selectedIndex = 0;
-    int m_verticalInterval = 24;
-    std::vector<double> xOffsets;
-    double titleXOffset = 0;
 public:
-    GUIListView() {}
-    GUIListView(const std::string &title);
+    GUIListView(e172::FactoryMeta &&meta)
+        : GUIMenuElement(std::move(meta))
+    {}
+
+    GUIListView(e172::FactoryMeta &&meta, const std::string &title)
+        : GUIMenuElement(std::move(meta), title)
+    {}
 
     e172::ptr<GUIStack> stack() const;
     void setStack(const e172::ptr<GUIStack> &stack);
@@ -28,7 +27,7 @@ public:
 
     // Entity interface
 public:
-    virtual void proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) override;
+    virtual void proceed(e172::Context *context, e172::EventHandler *eventHandler) override;
     virtual void render(e172::AbstractRenderer *renderer) override;
 
     // GUIMenuElement interface
@@ -36,7 +35,12 @@ public:
     virtual bool isSelectable() override;
     virtual bool hasSubElements() override;
 
-
+private:
+    e172::ptr<GUIStack> m_stack = nullptr;
+    int m_selectedIndex = 0;
+    int m_verticalInterval = 24;
+    std::vector<double> m_xOffsets;
+    double m_titleXOffset = 0;
 };
 
-#endif // GUILISTVIEW_H
+} // namespace proj172::core

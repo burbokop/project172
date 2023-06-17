@@ -1,23 +1,20 @@
-#ifndef AI_H
-#define AI_H
-
+#pragma once
 
 #include "controller.h"
-#include "docker.h"
-
 #include <src/math/line2d.h>
-
 #include <src/tasks/dockingtask.h>
 
+namespace proj172::core {
 
 class AI : public Controller {
 public:
-
-    AI();
+    AI(e172::FactoryMeta &&meta)
+        : Controller(std::move(meta))
+    {}
 
     // Entity interface
 public:
     virtual void render(e172::AbstractRenderer *renderer) override;
 };
 
-#endif // AI_H
+} // namespace proj172::core

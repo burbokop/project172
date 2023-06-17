@@ -1,6 +1,6 @@
 {
-	"id": "thruster1",
-	"class": "Thruster",
-	"left-thrust": true,
-	"right-thrust": true	
+    "id": "thruster1",
+    "class": "proj172::core::Thruster",
+    "left-thrust": true,
+    "right-thrust": true
 }

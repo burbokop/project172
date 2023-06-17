@@ -1,9 +1,8 @@
-#ifndef ARENAWORLD_H
-#define ARENAWORLD_H
-
+#pragma once
 
 #include "world.h"
 
+namespace proj172::core {
 
 class ArenaWorld : public WorldPreset {
 public:
@@ -14,4 +13,4 @@ public:
     virtual GenerationResult generate(e172::Context *context) override;
 };
 
-#endif // ARENAWORLD_H
+} // namespace proj172::core

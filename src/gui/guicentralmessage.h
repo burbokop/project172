@@ -2,13 +2,9 @@
 #define GUICENTRALMESSAGE_H
 
 #include <src/gui/base/guimenuelement.h>
-
 #include <src/time/elapsedtimer.h>
 
-
-
-
-
+namespace proj172::core {
 
 class GUICentralMessage : public GUIMenuElement {
 private:
@@ -19,8 +15,13 @@ private:
     int flashesRemains;
 
 public:
-    GUICentralMessage(std::string label);
-    GUICentralMessage(IInformative *informative);
+    GUICentralMessage(e172::FactoryMeta &&meta, std::string label)
+        : GUIMenuElement(std::move(meta), label)
+    {}
+
+    GUICentralMessage(e172::FactoryMeta &&meta, IInformative *informative)
+        : GUIMenuElement(std::move(meta), informative)
+    {}
 
     void start(int flashesRemains, unsigned interval = DEFAULT_FLASHING_INTERVAL);
 
@@ -28,5 +29,7 @@ public:
 public:
     void render(e172::AbstractRenderer *renderer);
 };
+
+} // namespace proj172::core
 
 #endif // GUICENTRALMESSAGE_H

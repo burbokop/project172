@@ -11,7 +11,7 @@
 class InjectableEntity : public e172::Entity {
     std::list<__Capability*> m_capabilities;
 public:
-    InjectableEntity();
+    InjectableEntity(e172::FactoryMeta &&meta);
     bool addCapability(__Capability *capability);
     bool removeCapability(__Capability *capability);
 

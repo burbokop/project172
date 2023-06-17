@@ -6,6 +6,8 @@
 #include <src/utility/closableoutputstream.h>
 #include <src/time/elapsedtimer.h>
 
+namespace proj172::core {
+
 class GuiConsole : public GUIElement {
     bool m_consoleEnabled = false;
     std::string m_currentLine;
@@ -36,13 +38,17 @@ private:
     void loadHistory();
     void saveHistory();
 public:
-    GuiConsole(const CommandHandlerFunc& commandHandlerFunc, const CompletionFunc& completionFunc = nullptr);
+    GuiConsole(e172::FactoryMeta &&meta,
+               const CommandHandlerFunc &commandHandlerFunc,
+               const CompletionFunc &completionFunc = nullptr);
     virtual ~GuiConsole();
 
     // Entity interface
 public:
-    virtual void proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) override;
+    virtual void proceed(e172::Context *context, e172::EventHandler *eventHandler) override;
     virtual void render(e172::AbstractRenderer *renderer) override;
 };
+
+} // namespace proj172::core
 
 #endif // GUICONSOLE_H

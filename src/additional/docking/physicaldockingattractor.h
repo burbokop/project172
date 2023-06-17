@@ -1,9 +1,8 @@
-#ifndef PHYSICALDOCKINGATTRACTOR_H
-#define PHYSICALDOCKINGATTRACTOR_H
+#pragma once
 
 #include <src/math/physicalobject.h>
 
-
+namespace proj172::core {
 
 class PhysicalDockingAttractor {
 public:
@@ -27,4 +26,4 @@ public:
     void setInterceptionRequiredProximity(const e172::PhysicalObject::Proximity &interceptionRequiredProximity);
 };
 
-#endif // PHYSICALDOCKINGATTRACTOR_H
+} // namespace proj172::core

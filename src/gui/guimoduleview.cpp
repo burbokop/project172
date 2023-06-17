@@ -4,9 +4,7 @@
 #include <src/units/unit.h>
 #include <src/capabilities/controller.h>
 
-GUIModuleView::GUIModuleView(const std::string &label) : GUIListView(label) {
-
-}
+namespace proj172::core {
 
 int GUIModuleView::rowCount() const {
     if(controller()) {
@@ -29,7 +27,7 @@ std::string GUIModuleView::rowText(int index) const {
                     if(info.size() > 0)
                         return info;
 
-                    return module->loadableId();
+                    return module->templateId();
                 }
             }
         }
@@ -44,3 +42,5 @@ e172::ptr<GUIMenuElement> GUIModuleView::rowElement(int) const {
 e172::Variant GUIModuleView::rowModelData(int) const {
     return e172::Variant();
 }
+
+} // namespace proj172::core

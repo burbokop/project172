@@ -1,30 +1,30 @@
 {
-	"id": "st2",
-	"class": "Station",
-	"sprite": "./st2.png",
-	"health": 340,
-	"explosive": 114,
-	"mass": 64,
-	"capabilities": [
-		{
-			"id": "docker",
-			"class": "Docker",
-			"nodes": [
-				{
-					"offset": {
-						"x": -50,
-						"y": 0
-					},
-					"angle": "Pi"
-				},
-				{
-					"offset": {
-						"x": 50,
-						"y": 0
-					},
-					"angle": "0"
-				}
-			]
-		}
-	]
+    "id": "st2",
+    "class": "proj172::core::Station",
+    "sprite": "./st2.png",
+    "health": 340,
+    "explosive": 114,
+    "mass": 64,
+    "capabilities": [
+        {
+            "id": "docker",
+            "class": "proj172::core::Docker",
+            "nodes": [
+                {
+                    "offset": {
+                        "x": -50,
+                        "y": 0
+                    },
+                    "angle": "Pi"
+                },
+                {
+                    "offset": {
+                        "x": 50,
+                        "y": 0
+                    },
+                    "angle": "0"
+                }
+            ]
+        }
+    ]
 }

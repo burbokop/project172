@@ -1,40 +1,43 @@
 #include "guiminimap.h"
 
+#include "src/abstracteventprovider.h"
+#include "src/eventhandler.h"
+#include <src/additional/lightparticle.h>
+#include <src/context.h>
 #include <src/units/camera.h>
 #include <src/units/projectile.h>
-#include <src/additional/lightparticle.h>
 
-#include <src/abstracteventhandler.h>
-#include <src/context.h>
+namespace proj172::core {
 
-GUIMiniMap::GUIMiniMap() {}
-
-void GUIMiniMap::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
+void GUIMiniMap::proceed(e172::Context *context, e172::EventHandler *eventHandler) {
     m_entities = context->entities();
 
     if(eventHandler->keySinglePressed(e172::ScancodeEquals) || eventHandler->keySinglePressed(e172::ScancodeKpPlus)) {
-        range /= 2;
+        m_range /= 2;
     }
     else if(eventHandler->keySinglePressed(e172::ScancodeMinus) || eventHandler->keySinglePressed(e172::ScancodeKpMinus)) {
-        range *= 2;
+        m_range *= 2;
     }
 }
 
 void GUIMiniMap::render(e172::AbstractRenderer *renderer) {
-    e172::Vector size = renderer->resolution() / sizeRelation;
+    e172::Vector size = renderer->resolution() / m_sizeRelation;
 
-    e172::Vector point2 = renderer->resolution() - e172::Vector(margin(), margin());
+    e172::Vector point2 = renderer->resolution() - e172::Vector<double>(margin(), margin());
     e172::Vector point1 = point2 - size;
-    if(point1.quarter() == e172::Vector::QUARTER_RIGHT_DOWN) {
+    if (point1.quarter() == e172::Vector<double>::Quarter::RightBottom) {
         renderer->drawRect(point1, point2, DefaultColor);
 
-        e172::Vector playerShipPosOnMap;
+        e172::Vector<double> playerShipPosOnMap;
         for(const auto& entity : m_entities) {
             const auto unit = e172::smart_cast<Unit>(entity);
             if(unit) {
-                e172::Vector posOnMap = ((unit->position() - renderer->cameraPosition()) / range * size.module()) + (size / 2);
+                e172::Vector posOnMap = ((unit->position() - renderer->cameraPosition()) / m_range
+                                         * size.module())
+                                        + (size / 2);
 
-                if(posOnMap.quarter() == e172::Vector::QUARTER_RIGHT_DOWN && (size - posOnMap).quarter() == e172::Vector::QUARTER_RIGHT_DOWN) {
+                if (posOnMap.quarter() == e172::Vector<double>::Quarter::RightBottom
+                    && (size - posOnMap).quarter() == e172::Vector<double>::Quarter::RightBottom) {
                     if(unit->instanceOf<Projectile>()) {
                         renderer->drawSquare(point1 + posOnMap, 1, SelectedColor);
                     } else if (!unit->instanceOf<LightParticle>()) {
@@ -53,3 +56,5 @@ void GUIMiniMap::render(e172::AbstractRenderer *renderer) {
         }
     }
 }
+
+} // namespace proj172::core

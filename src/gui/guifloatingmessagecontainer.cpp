@@ -1,33 +1,33 @@
 #include "guifloatingmessagecontainer.h"
 
-
+#include "../messagetype.h"
 #include "guiblushingfloatingmessage.h"
-
 #include <src/context.h>
 #include <src/units/unit.h>
 
+namespace proj172::core {
 
 const unsigned GUIFloatingMessageContainer::FLOATING_LIFE_TIME = 1000;
 
 void GUIFloatingMessageContainer::setMessage(GUICentralMessage *value) {
-    centralMessage = value;
+    m_centralMessage = value;
     addChildElement(value);
 }
 
 void GUIFloatingMessageContainer::addFloatingMessage(const e172::ptr<Unit> &unit, std::string message) {
-    floatingMessage = new GUIFloatingMessage(unit, message);
-    floatingMessageLifeTimer.reset();
+    m_floatingMessage = e172::FactoryMeta::make<GUIFloatingMessage>(unit, message);
+    m_floatingMessageLifeTimer.reset();
 }
 
 void GUIFloatingMessageContainer::addBlushingFloatingMessage(const e172::ptr<Unit> &unit, int value) {
-    floatingMessage = new GUIBlushingFloatingMessage(unit, value);
-    floatingMessageLifeTimer.reset();
+    m_floatingMessage = e172::FactoryMeta::make<GUIBlushingFloatingMessage>(unit, value);
+    m_floatingMessageLifeTimer.reset();
 }
 
 void GUIFloatingMessageContainer::addCommonFloatingMessage(e172::Context *context, const e172::Variant &value) {
     const auto list = value.toVector();
     if(list.size() > 1) {
-        const auto entity = context->entityById(list[0].toNumber<Entity::id_t>());
+        const auto entity = context->entityById(list[0].toNumber<Entity::Id>());
         if(auto target = e172::smart_cast<Unit>(entity)) {
             bool ok = false;
             const auto i = list[1].toInt(&ok);
@@ -41,13 +41,15 @@ void GUIFloatingMessageContainer::addCommonFloatingMessage(e172::Context *contex
     }
 }
 
-GUIFloatingMessageContainer::GUIFloatingMessageContainer() {}
+void GUIFloatingMessageContainer::proceed(e172::Context *context, e172::EventHandler *eventHandler)
+{
+    context->popMessage(~MessageType::FloatingMessage,
+                        this,
+                        &GUIFloatingMessageContainer::addCommonFloatingMessage);
 
-void GUIFloatingMessageContainer::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
-    context->popMessage(e172::Context::FLOATING_MESSAGE, this, &GUIFloatingMessageContainer::addCommonFloatingMessage);
-
-    if(floatingMessageLifeTimer.check()) {
-        floatingMessage = nullptr;
+    if (m_floatingMessageLifeTimer.check()) {
+        m_floatingMessage = nullptr;
     }
 }
 
+} // namespace proj172::core

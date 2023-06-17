@@ -1,12 +1,10 @@
-#ifndef WORLD_H
-#define WORLD_H
+#pragma once
 
 #include <functional>
-
 #include <src/assettools/assetprovider.h>
-
 #include "../capabilities/controller.h"
 
+namespace proj172::core {
 
 class WorldPreset {
 public:
@@ -23,4 +21,5 @@ public:
 
 WorldPreset::GenerationResult &operator+=(WorldPreset::GenerationResult &r0, const WorldPreset::GenerationResult& r1);
 
-#endif // WORLD_H
+} // namespace proj172::core
+

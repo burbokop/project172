@@ -1,6 +1,5 @@
 #include "aggressive.h"
 
-
 #include <src/context.h>
 #include <src/units/projectile.h>
 #include <src/units/camera.h>
@@ -10,14 +9,14 @@
 #include <src/math/math.h>
 #include <src/units/ship.h>
 
-#include <iostream>
+namespace proj172::core {
 
 e172::ptr<Unit> Aggressive::chooseTarget(e172::Context *context) {
     if(const auto target = context->autoIteratingEntity()) {
         if(target != parentUnit()) {
             const auto unit = e172::smart_cast<Unit>(target);
             if(unit && !unit->instanceOf<Camera>() && !unit->instanceOf<Projectile>()) {
-                if(chooseTargetTimer.check()) {
+                if (m_chooseTargetTimer.check()) {
                     return unit;
                 }
             }
@@ -26,9 +25,7 @@ e172::ptr<Unit> Aggressive::chooseTarget(e172::Context *context) {
     return nullptr;
 }
 
-Aggressive::Aggressive() {}
-
-void Aggressive::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
+void Aggressive::proceed(e172::Context *context, e172::EventHandler *eventHandler) {
     if(m_target && parentUnit()) {
         e172::Vector dst = m_target->position() - parentUnit()->position();
         const double dstAngle = dst.angle();
@@ -37,39 +34,37 @@ void Aggressive::proceed(e172::Context *context, e172::AbstractEventHandler *eve
         //std::cout << e172::Math::radiansDirection(dstAngle, parentUnit()->rotation()) << " : " << dstAngle << " : " << parentUnit()->rotation() << "\n";
         parentUnit()->addTargetRotationForse(dstAngle, 1, 1);
 
-        targeted = (e172::Math::radiansDistance(dstAngle, parentUnit()->rotation()) < e172::Math::Pi / 32) && !inWarp && dstModule < 400;
+        m_targeted = (e172::Math::radiansDistance(dstAngle, parentUnit()->rotation())
+                      < e172::Math::Pi / 32)
+                     && !m_inWarp && dstModule < 400;
         const auto ship = e172::smart_cast<Ship>(parentUnit());
 
         if(const auto modules = parentUnit()->capability<ModuleHandler>()) {
-            const auto weapons = modules->modulesOfClass("Weapon");
-            for(const auto& module : weapons) {
-                if(const auto weapon = e172::smart_cast<Weapon>(module)) {
-                    weapon->setFiring(targeted);
-                }
+            for (const auto &weapon : modules->modules<Weapon>()) {
+                weapon->setFiring(m_targeted);
             }
             if(ship) {
-                if(dstModule > 5000.0 && targeted) {
+                if (dstModule > 5000.0 && m_targeted) {
                     if(!ship->warp()) {
                         if(!ship->prepareWarp()) {
-                            warpFatigueTimer.reset();
+                            m_warpFatigueTimer.reset();
                         }
                     } else {
-                        inWarp = true;
+                        m_inWarp = true;
                     }
-                } else if((dstModule < 1000 || warpFatigueTimer.check() || !targeted)) {
+                } else if ((dstModule < 1000 || m_warpFatigueTimer.check() || !m_targeted)) {
                     if(ship->abortWarp(context)) {
-                        inWarp = false;
+                        m_inWarp = false;
                     }
                 }
             }
         }
 
-
-        if(!inWarp && ship && dstModule > 200) {
+        if (!m_inWarp && ship && dstModule > 200) {
             ship->thrustForward();
         }
     } else {
-        targeted = false;
+        m_targeted = false;
         m_target = chooseTarget(context);
     }
     this->Controller::proceed(context, eventHandler);
@@ -83,3 +78,5 @@ void Aggressive::onHit(e172::Context *context, int health) {
     UNUSED(context);
     UNUSED(health);
 }
+
+} // namespace proj172::core

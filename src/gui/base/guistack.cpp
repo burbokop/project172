@@ -1,11 +1,16 @@
 #include "guistack.h"
+
 #include "guicontainer.h"
 #include "guilistview.h"
-
-#include <src/abstracteventhandler.h>
+#include <src/abstracteventprovider.h>
+#include <src/eventhandler.h>
 #include <src/gameapplication.h>
 
-GUIStack::GUIStack() : GUIElement () {}
+namespace proj172::core {
+
+GUIStack::GUIStack(e172::FactoryMeta &&meta)
+    : GUIElement(std::move(meta))
+{}
 
 void GUIStack::push(const e172::ptr<GUIElement> &element) {
     if(m_elements.size() > 0) {
@@ -37,7 +42,8 @@ e172::ptr<GUIStack> GUIStack::withFirstElement(const e172::ptr<GUIElement> &elem
     return this;
 }
 
-void GUIStack::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
+void GUIStack::proceed(e172::Context *context, e172::EventHandler *eventHandler)
+{
     UNUSED(context);
     if(m_elements.size() > 0) {
         m_current = m_elements[m_elements.size() - 1];
@@ -54,3 +60,5 @@ void GUIStack::proceed(e172::Context *context, e172::AbstractEventHandler *event
 void GUIStack::render(e172::AbstractRenderer *renderer) {
     e172::GameApplication::render(m_current, renderer);
 }
+
+} // namespace proj172::core

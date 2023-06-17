@@ -4,15 +4,12 @@
 
 #include <src/debug.h>
 
-bool Task::running() const {
-    return m_running;
-}
+namespace proj172::core {
 
-e172::ptr<Task> Task::parentTask() const {
-    return m_parentTask;
-}
-
-bool Task::executeChildTask(const e172::ptr<Task> &task, e172::Context *context, const ResultHandleFunc &onCompleated) {
+bool Task::executeChildTask(const e172::ptr<Task> &task,
+                            e172::Context *context,
+                            const ResultHandleFunc &onCompleated)
+{
     if(!task->m_parentTask) {
         if(m_children.insert(task).second) {
             task->m_parentTask = this;
@@ -43,21 +40,12 @@ void Task::proceedBranch(e172::Context *context) {
 Task::~Task() {
     clearTrash();
     for(const auto &c : m_children) {
-        c.safeDestroy();
+        c.destroy();
     }
 }
 
-e172::ptr<Controller> Task::parentController() const {
-    return m_parentController;
-}
-
-
-e172::Variant Task::resultValue() const
+void Task::clearTrash()
 {
-    return m_resultValue;
-}
-
-void Task::clearTrash() {
     for(const auto &t : m_trash) {
         m_children.erase(t);
         for(const auto& c : t->m_onCompleatedSignal) {
@@ -66,7 +54,7 @@ void Task::clearTrash() {
             }
         }
         t->m_onCompleatedSignal.clear();
-        t.safeDestroy();
+        t.destroy();
     }
     m_trash.clear();
 }
@@ -92,4 +80,4 @@ void Task::completeTask(const e172::Variant& resultValue) {
     }
 }
 
-Task::Task() {}
+} // namespace proj172::core

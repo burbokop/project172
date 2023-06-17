@@ -1,26 +1,18 @@
-#ifndef WORLDPRESETSTRATEGY_H
-#define WORLDPRESETSTRATEGY_H
+#pragma once
 
-
-#include "gui/base/guimenu.h"
-#include "near.h"
 #include "worlds/world.h"
-
 #include <src/units/camera.h>
-
 #include <src/memcontrol/abstractstrategy.h>
 
-
+namespace proj172::core {
 
 class WorldPresetStrategy : public e172::Entity {
-    e172::AbstractStrategy<std::string, WorldPreset> m_strategy;
-    WorldPreset *m_last = nullptr;
-
-    std::function<void(const std::list<e172::ptr<Controller>>&)> controllersChangedCallback;
 public:
     static inline const std::string WORLD_TAG = "W";
 
-    WorldPresetStrategy();
+    WorldPresetStrategy(e172::FactoryMeta &&meta)
+        : e172::Entity(std::move(meta))
+    {}
 
     template<typename T>
     void registerType() { m_strategy.registerType<T>(); }
@@ -32,8 +24,13 @@ public:
 
     // Entity interface
 public:
-    virtual void proceed(e172::Context *context, e172::AbstractEventHandler *) override;
+    virtual void proceed(e172::Context *context, e172::EventHandler *) override;
     virtual void render(e172::AbstractRenderer *) override;
+
+private:
+    e172::AbstractStrategy<std::string, WorldPreset> m_strategy;
+    WorldPreset *m_last = nullptr;
+    std::function<void(const std::list<e172::ptr<Controller>> &)> m_controllersChangedCallback;
 };
 
-#endif // WORLDMANAGER_H
+} // namespace proj172::core

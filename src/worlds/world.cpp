@@ -1,5 +1,7 @@
 #include "world.h"
 
+namespace proj172::core {
+
 WorldPreset::WorldPreset() {}
 
 WorldPreset::~WorldPreset() {}
@@ -13,3 +15,5 @@ WorldPreset::GenerationResult &operator +=(WorldPreset::GenerationResult &r0, co
     }
     return r0;
 }
+
+} // namespace proj172::core

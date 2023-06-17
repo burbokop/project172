@@ -1,37 +1,21 @@
 #include "guiswitch.h"
 
-
-GUISwitch::GUISwitch(std::function<void()> on,  std::function<void()> off) {
-    this->on = on;
-    this->off = off;
-}
-
-GUISwitch::GUISwitch(std::string label, std::function<void()> on,  std::function<void()> off) : GUIMenuElement (label) {
-    this->on = on;
-    this->off = off;
-}
-
-GUISwitch::GUISwitch(IInformative *informative, std::function<void()> on,  std::function<void()> off) : GUIMenuElement (informative) {
-    this->on = on;
-    this->off = off;
-}
-
-bool GUISwitch::isSelectable() {
-    return true;
-}
+namespace proj172::core {
 
 void GUISwitch::enter(e172::Context *) {
-    if(on != nullptr) {
-        if(off != nullptr) {
-            if(!enabled) {
-                on();
-                enabled = true;
+    if (m_on != nullptr) {
+        if (m_off != nullptr) {
+            if (!m_enabled) {
+                m_on();
+                m_enabled = true;
             } else {
-                off();
-                enabled = false;
+                m_off();
+                m_enabled = false;
             }
         } else {
-            on();
+            m_on();
         }
     }
 }
+
+} // namespace proj172::core

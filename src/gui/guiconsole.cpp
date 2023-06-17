@@ -1,14 +1,14 @@
 #include "guiconsole.h"
+#include "src/abstracteventprovider.h"
+#include "src/eventhandler.h"
 
-#include <src/abstracteventhandler.h>
 #include <src/additional.h>
 #include <src/context.h>
 #include <src/debug.h>
-
 #include <src/graphics/abstractrenderer.h>
-
 #include <src/conversion.h>
 
+namespace proj172::core {
 
 void GuiConsole::loadHistory() {
     const auto path = e172::Additional::absolutePath(m_historyPath, std::string());
@@ -20,7 +20,11 @@ void GuiConsole::saveHistory() {
     e172::Additional::writeFile(path, e172::convert_to<e172::Variant>(m_history).toJson());
 }
 
-GuiConsole::GuiConsole(const GuiConsole::CommandHandlerFunc &commandHandlerFunc, const CompletionFunc &completionFunc) {
+GuiConsole::GuiConsole(e172::FactoryMeta &&meta,
+                       const GuiConsole::CommandHandlerFunc &commandHandlerFunc,
+                       const CompletionFunc &completionFunc)
+    : GUIElement(std::move(meta))
+{
     setMargin(32);
     m_commandHandlerFunc = commandHandlerFunc;
     m_completionFunc = completionFunc;
@@ -35,7 +39,7 @@ GuiConsole::GuiConsole(const GuiConsole::CommandHandlerFunc &commandHandlerFunc,
 
 GuiConsole::~GuiConsole() {}
 
-void GuiConsole::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
+void GuiConsole::proceed(e172::Context *context, e172::EventHandler *eventHandler) {
     if (eventHandler->keySinglePressed(e172::ScancodeGrave)) {
         m_consoleEnabled = !m_consoleEnabled;
         eventHandler->pullText();
@@ -116,25 +120,37 @@ void GuiConsole::proceed(e172::Context *context, e172::AbstractEventHandler *eve
 
 void GuiConsole::render(e172::AbstractRenderer *renderer) {
     if(m_consoleEnabled) {
-        renderer->drawRect(e172::Vector(), renderer->resolution(), 0xaa000000, e172::ShapeFormat(true));
+        renderer->drawRect({}, renderer->resolution(), 0xaa000000, e172::ShapeFormat(true));
         const auto textFormat = e172::TextFormat::fromFont(m_font, 20);
 
-        const auto offset = renderer->drawText(m_text, e172::Vector(margin() * 2, margin() * 2), renderer->resolution().x() - margin() * 4, m_color, textFormat);
+        const auto offset = renderer->drawText(m_text,
+                                               e172::Vector<double>(margin() * 2, margin() * 2),
+                                               renderer->resolution().x() - margin() * 4,
+                                               m_color,
+                                               textFormat);
 
-        const auto lineStart = e172::Vector(margin() * 2, margin() * 2 + offset.y());
-        renderer->drawRect(e172::Vector(margin(), margin()), renderer->resolution() - margin(), m_color);
+        const auto lineStart = e172::Vector<double>(margin() * 2, margin() * 2 + offset.y());
+        renderer->drawRect(e172::Vector<double>(margin(), margin()),
+                           renderer->resolution() - margin(),
+                           m_color);
         if(m_streamPool.available()) {
             renderer->drawString(m_cmdPreffix + m_currentLine, lineStart, m_color, textFormat);
             if(m_caretteDisplayTimer.check()) {
                 m_displayCarette = !m_displayCarette;
             }
             if(m_displayCarette) {
-                renderer->drawLine(
-                            lineStart + e172::Vector((m_cmdPreffix.size() + m_caretteX) * textFormat.fontWidth(), 0),
-                            lineStart + e172::Vector((m_cmdPreffix.size() + m_caretteX) * textFormat.fontWidth(), textFormat.fontHeight()),
-                            m_color
-                            );
+                renderer->drawLine(lineStart
+                                       + e172::Vector<double>((m_cmdPreffix.size() + m_caretteX)
+                                                                  * textFormat.fontWidth(),
+                                                              0),
+                                   lineStart
+                                       + e172::Vector<double>((m_cmdPreffix.size() + m_caretteX)
+                                                                  * textFormat.fontWidth(),
+                                                              textFormat.fontHeight()),
+                                   m_color);
             }
         }
     }
 }
+
+} // namespace proj172::core

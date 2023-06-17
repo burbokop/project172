@@ -5,6 +5,8 @@
 
 #include <functional>
 
+namespace proj172::core {
+
 class Unit;
 
 class GUIWareView : public GUISingleElementListView {
@@ -12,7 +14,12 @@ class GUIWareView : public GUISingleElementListView {
     static e172::ptr<Unit> provideDefaultUnit(const e172::ptr<Controller>& controller, const e172::Variant &);
     UnitProvider m_unitProvider;
 public:
-    GUIWareView(const std::string &title = std::string(), const UnitProvider& unitProvider = provideDefaultUnit);
+    GUIWareView(e172::FactoryMeta &&meta,
+                const std::string &title = std::string(),
+                const UnitProvider &unitProvider = provideDefaultUnit)
+        : GUISingleElementListView(std::move(meta), title)
+        , m_unitProvider(unitProvider)
+    {}
 
     // GUIListView interface
 public:
@@ -22,5 +29,7 @@ public:
     UnitProvider unitProvider() const;
     void setUnitProvider(const UnitProvider &unitProvider);
 };
+
+} // namespace proj172::core
 
 #endif // GUIWAREVIEW_H

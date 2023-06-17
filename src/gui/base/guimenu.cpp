@@ -1,6 +1,6 @@
 #include "guimenu.h"
 
-GUIMenu::GUIMenu(std::string label) : GUIListView(label) {}
+namespace proj172::core {
 
 void GUIMenu::addMenuElement(const e172::ptr<GUIMenuElement> &element){
     if(addChildElement(element)) {
@@ -35,7 +35,8 @@ e172::ptr<GUIMenu> GUIMenu::withMenuChildren(const std::list<e172::ptr<GUIMenuEl
     return this;
 }
 
-int GUIMenu::rowCount() const {
+int GUIMenu::rowCount() const
+{
     return m_menuElements.size();
 }
 
@@ -53,3 +54,5 @@ e172::ptr<GUIMenuElement> GUIMenu::rowElement(int index) const {
 e172::Variant GUIMenu::rowModelData(int) const {
     return e172::Variant();
 }
+
+} // namespace proj172::core

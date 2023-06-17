@@ -1,8 +1,11 @@
-#include "dockingtask.h"
 #include "sellwaretask.h"
+
+#include "dockingtask.h"
 #include <src/capabilities/controller.h>
 #include <src/context.h>
 #include <src/units/unit.h>
+
+namespace proj172::core {
 
 e172::ptr<WareStorage> SellWareTask::findBuyerStorage(e172::Context *context) {
     int64_t maxPrice = 0;
@@ -77,3 +80,5 @@ void SellWareTask::initFromCommand(const std::vector<std::string> &args, e172::C
         completeTask(false);
     }
 }
+
+} // namespace proj172::core

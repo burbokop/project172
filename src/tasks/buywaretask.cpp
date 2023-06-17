@@ -5,6 +5,7 @@
 #include <src/debug.h>
 #include <src/consolecolor.h>
 
+namespace proj172::core {
 
 BuyWareTask::BuyWareTask(const e172::Option<std::string> &ware) {
     m_targetWare = ware;
@@ -113,3 +114,5 @@ BuyWareTask::Result::Result(e172::Option<std::string> targetWare, bool ok) {
     m_targetWare = targetWare;
     m_ok = ok;
 }
+
+} // namespace proj172::core

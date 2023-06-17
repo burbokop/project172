@@ -1,11 +1,12 @@
 #include "ship.h"
 
-
 #include <src/capabilities/modules/engine.h>
 #include <src/capabilities/modules/warpdrive.h>
 #include <src/capabilities/modulehandler.h>
 #include <src/math/math.h>
 #include <math.h>
+
+namespace proj172::core {
 
 double Ship::thrustForce() const {
     return m_thrustForce;
@@ -47,7 +48,9 @@ void Ship::setMaxManeuverVelocity(double maxManeuverVelocity) {
     m_maxManeuverVelocity = maxManeuverVelocity;
 }
 
-Ship::Ship() {
+Ship::Ship(e172::FactoryMeta &&meta)
+    : Unit(std::move(meta))
+{
     registerInitFunction([this]() {
         m_thrustForce = asset<double>("thrust_force", 120);
         m_maxVelocity = asset<double>("max_velocity", 120);
@@ -80,10 +83,10 @@ uint8_t Ship::abortWarp(e172::Context *context) {
 
 bool Ship::thrustForward(double throtle) {
     if(const auto mh = capability<ModuleHandler>()) {
-        const auto engines = mh->modulesOfClass("Engine");
+        const auto engines = mh->modules<Engine>();
         bool ok = false;
         if(engines.size() > 0) {
-            for(auto module : engines) {
+            for (const auto &module : engines) {
                 const auto engine = e172::smart_cast<Engine>(module);
                 if(engine && engine->forward()) {
                     ok = true;
@@ -110,7 +113,7 @@ void Ship::maneuverRight() {
 
 e172::ptr<WarpDrive> Ship::firstWarp() const {
     if(const auto modules = capability<ModuleHandler>()) {
-        const auto drives = modules->modulesOfClass("WarpDrive");
+        const auto drives = modules->modules<WarpDrive>();
         if(drives.size() > 0) {
             return e172::smart_cast<WarpDrive>(drives.at(0));
         }
@@ -120,17 +123,17 @@ e172::ptr<WarpDrive> Ship::firstWarp() const {
 
 bool Ship::inWarp() const {
     if(const auto driveUnit = firstWarp()) {
-        return driveUnit->getState() == WarpDrive::WARP_EXECUTING;
+        return driveUnit->warpState() == WarpDrive::WarpExecuting;
     }
     return false;
 }
 
-void Ship::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
+void Ship::proceed(e172::Context *context, e172::EventHandler *eventHandler) {
     if(const auto modules = capability<ModuleHandler>()) {
-        const auto drives = modules->modulesOfClass("WarpDrive");
+        const auto drives = modules->modules<WarpDrive>();
         if(drives.size() > 0) {
-            if(const auto driveUnit = e172::smart_cast<WarpDrive>(drives.at(0))) {
-                if(driveUnit->getState() == WarpDrive::WARP_EXECUTING) {
+            if (const auto driveUnit = e172::smart_cast<WarpDrive>(drives.at(0))) {
+                if (driveUnit->warpState() == WarpDrive::WarpExecuting) {
                     addLimitedForwardForce(m_thrustForce, OneWarpPoint);
                     blockFrictionPerTick();
                     //addForwardForce(m_thrustForce);
@@ -151,3 +154,5 @@ void Ship::proceed(e172::Context *context, e172::AbstractEventHandler *eventHand
 //    }
 //    return true;
 //}
+
+} // namespace proj172::core

@@ -1,10 +1,10 @@
 #include "person.h"
 
 #include <src/units/unit.h>
-
 #include <src/capabilities/controller.h>
-
 #include <src/math/math.h>
+
+namespace proj172::core {
 
 std::string Person::name() const {
     return m_name;
@@ -151,3 +151,5 @@ Person::SellStatus Person::sellWare(const WareStorage::WareRef &wareRef, const e
 Person::Person(const std::string &name) {
     m_name = name;
 }
+
+} // namespace proj172::core

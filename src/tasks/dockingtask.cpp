@@ -6,12 +6,9 @@
 #include <src/context.h>
 #include <src/units/unit.h>
 
+namespace proj172::core {
 
-e172::Line2d DockingTask::landingStrip() const {
-    return m_landingStrip;
-}
-
-bool DockingTask::approachToPoint(const e172::Vector &point, double cryticalDistance, double speed) {
+bool DockingTask::approachToPoint(const e172::Vector<double> &point, double cryticalDistance, double speed) {
     if(parentController()) {
         if (auto parentShip = e172::smart_cast<Ship>(parentController()->parentUnit())) {
             auto direction = point - parentShip->position();
@@ -109,15 +106,9 @@ void DockingTask::proceed(e172::Context *context) {
     }
 }
 
-
-e172::Vector DockingTask::targetPoint() const {
-    return m_targetPoint;
-}
-
 DockingTask::DockingTask(const e172::ptr<Unit> &targetUnit) {
     m_targetUnit = targetUnit;
 }
-
 
 bool DockingTask::start(e172::Context *) {
     return parentController().fold<bool>([this](Controller *controller) {
@@ -147,7 +138,7 @@ bool DockingTask::start(e172::Context *) {
 void DockingTask::initFromCommand(const std::vector<std::string> &args, e172::Context *context) {
     if (args.size() > 1) {
         bool ok;
-        auto targetId = e172::Variant(args[1]).toNumber<e172::Entity::id_t>(&ok);
+        auto targetId = e172::Variant(args[1]).toNumber<e172::Entity::Id>(&ok);
         if(ok) {
             if(auto target = context->entityById<Unit>(targetId)){
                 m_targetUnit = target;
@@ -164,3 +155,5 @@ void DockingTask::initFromCommand(const std::vector<std::string> &args, e172::Co
         completeTask();
     }
 }
+
+} // namespace proj172::core

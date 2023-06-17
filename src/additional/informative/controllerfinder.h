@@ -4,6 +4,8 @@
 #include <src/iinformative.h>
 #include <src/capabilities/controller.h>
 
+namespace proj172::core {
+
 class ControllerFinder : public IInformative {
 
 private:
@@ -16,5 +18,7 @@ public:
 public:
     std::string info() const override;
 };
+
+} // namespace proj172::core
 
 #endif // PLAYER2FINDER_H

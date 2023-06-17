@@ -1,15 +1,15 @@
-#ifndef GUIMODULEVIEW_H
-#define GUIMODULEVIEW_H
+#pragma once
 
 #include "base/guilistview.h"
-
 #include <src/time/elapsedtimer.h>
 
-class GUIModuleView : public GUIListView {
+namespace proj172::core {
 
-    e172::ElapsedTimer updateTimer = e172::ElapsedTimer(2000);
+class GUIModuleView : public GUIListView {
 public:
-    GUIModuleView(const std::string &label);
+    GUIModuleView(e172::FactoryMeta &&meta, const std::string &label)
+        : GUIListView(std::move(meta), label)
+    {}
 
     // GUIListView interface
 public:
@@ -17,6 +17,9 @@ public:
     virtual std::string rowText(int index) const override;
     virtual e172::ptr<GUIMenuElement> rowElement(int) const override;
     virtual e172::Variant rowModelData(int) const override;
+
+private:
+    e172::ElapsedTimer m_updateTimer = e172::ElapsedTimer(2000);
 };
 
-#endif // GUIMODULEVIEW_H
+} // namespace proj172::core

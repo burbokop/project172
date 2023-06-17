@@ -1,6 +1,6 @@
 {
     "id": "proj-plasma",
-    "class": "Projectile",
+    "class": "proj172::core::Projectile",
     "sprite": "./plasma.png",
-	"health":40
+    "health": 40
 }

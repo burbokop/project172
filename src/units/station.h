@@ -1,13 +1,13 @@
-#ifndef STATION_H
-#define STATION_H
+#pragma once
 
 #include "unit.h"
 
+namespace proj172::core {
 
-
-class Station : public Unit {
+class Station : public Unit
+{
 public:
-    Station();
+    Station(e172::FactoryMeta &&meta);
 };
 
-#endif // STATION_H
+} // namespace proj172::core

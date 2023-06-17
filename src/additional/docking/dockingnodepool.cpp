@@ -12,7 +12,7 @@ void DockingNodePool::clearNodes() {
     m_nodes.clear();
 }
 
-void DockingNodePool::addNode(const e172::Vector &offset, double angle) {
+void DockingNodePool::addNode(const e172::Vector<double> &offset, double angle) {
     Node n;
     n.m_offset = offset;
     n.m_angle = angle;
@@ -49,15 +49,16 @@ std::ostream &operator<<(std::ostream &stream, const DockingNodePool::Node &node
     return stream << "{ offset: " << node.m_offset << ", angle: " << node.m_angle << " }";
 }
 
-e172::Vector DockingNodePool::Node::offset() const {
+e172::Vector<double> DockingNodePool::Node::offset() const {
     return m_offset;
 }
 
-e172::Vector DockingNodePool::Node::globalPosition(const e172::PhysicalObject *object) const {
+e172::Vector<double> DockingNodePool::Node::globalPosition(const e172::PhysicalObject *object) const
+{
     if (object) {
         return object->position() + object->rotationMatrix() * offset();
     } else {
-        return e172::Vector();
+        return {};
     }
 }
 

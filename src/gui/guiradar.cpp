@@ -4,17 +4,10 @@
 #include <src/near.h>
 #include <src/assettools/loadable.h>
 
-Near *GUIRadar::near() const {
-    return m_near;
-}
+namespace proj172::core {
 
-void GUIRadar::setNear(Near *near) {
-    m_near = near;
-}
-
-GUIRadar::GUIRadar(const std::string &title) : GUISingleElementListView(title) {}
-
-int GUIRadar::rowCount() const {
+int GUIRadar::rowCount() const
+{
     if(m_near) {
         return m_near->entityInFocusCount();
     }
@@ -27,7 +20,7 @@ std::string GUIRadar::rowText(int index) const {
         if(e) {
             const auto u = e172::smart_cast<e172::Loadable>(e);
             if(u) {
-                const auto lid = u->loadableId();
+                const auto lid = u->templateId();
                 if(lid.size() > 0)
                     return lid;
 
@@ -49,3 +42,5 @@ e172::Variant GUIRadar::rowModelData(int index) const {
     }
     return "[error]";
 }
+
+} // namespace proj172::core

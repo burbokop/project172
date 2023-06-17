@@ -1,5 +1,4 @@
-#ifndef PERSON_H
-#define PERSON_H
+#pragma once
 
 #include <set>
 #include <string>
@@ -7,6 +6,8 @@
 #include <src/utility/ptr.h>
 #include <src/capabilities/warestorage.h>
 #include <src/smartenum.h>
+
+namespace proj172::core {
 
 class Person : public e172::Object {
     std::string m_name;
@@ -70,4 +71,4 @@ public:
             );
 };
 
-#endif // PERSON_H
+} // namespace proj172::core

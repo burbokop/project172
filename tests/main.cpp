@@ -1,5 +1,6 @@
 #include <src/testing.h>
 
-int main() {
-    return e172::testing::exec();
+int main(int argc, const char **argv)
+{
+    return e172::testing::exec(argc, argv);
 }

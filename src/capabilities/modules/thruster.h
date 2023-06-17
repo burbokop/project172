@@ -3,6 +3,8 @@
 
 #include "module.h"
 
+namespace proj172::core {
+
 class Thruster : public Module {
     bool leftThrust = false;
     bool rightThrust = false;
@@ -15,7 +17,7 @@ private:
     } state = DISABLED;
 
 public:
-    Thruster();
+    Thruster(e172::FactoryMeta &&meta);
     Thruster(Loadable *tmp);
 
     bool accelerateLeft();
@@ -25,5 +27,7 @@ public:
     bool isAcceleratingRight();
 
 };
+
+} // namespace proj172::core
 
 #endif // THRUSTER_H

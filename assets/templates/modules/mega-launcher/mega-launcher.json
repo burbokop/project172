@@ -1,7 +1,7 @@
 {
     "id": "mega-launcher",
-    "class": "Weapon",
+    "class": "proj172::core::Weapon",
     "audio": { "start": "./mega-shoot.ogg" },
     "rate": 100,
-    "projectile":"mega"
+    "projectile": "mega"
 }

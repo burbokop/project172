@@ -10,9 +10,7 @@
 #include <src/math/math.h>
 #include <iostream>
 
-
-AI::AI() : Controller () {}
-
+namespace proj172::core {
 
 void AI::render(e172::AbstractRenderer *renderer) {
     /*
@@ -24,3 +22,5 @@ void AI::render(e172::AbstractRenderer *renderer) {
     }
     */
 }
+
+} // namespace proj172::core

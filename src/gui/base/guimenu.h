@@ -2,10 +2,10 @@
 #define GUIMENU_H
 
 #include "guilistview.h"
-
 #include <vector>
 #include <functional>
 
+namespace proj172::core {
 
 class GUIMenu : public GUIListView {
 protected:
@@ -17,8 +17,12 @@ private:
     std::vector<e172::ptr<GUIMenuElement>> m_menuElements;
 
 public:
-    GUIMenu() {};
-    GUIMenu(std::string label);
+    GUIMenu(e172::FactoryMeta &&meta)
+        : GUIListView(std::move(meta)){};
+
+    GUIMenu(e172::FactoryMeta &&meta, std::string label)
+        : GUIListView(std::move(meta), label)
+    {}
 
     void addMenuElement(const e172::ptr<GUIMenuElement> &element);
     void removeMenuElement(const e172::ptr<GUIMenuElement> &element);
@@ -34,5 +38,7 @@ public:
     virtual e172::ptr<GUIMenuElement> rowElement(int index) const override;
     virtual e172::Variant rowModelData(int) const override;
 };
+
+} // namespace proj172::core
 
 #endif // GUIMENU_H

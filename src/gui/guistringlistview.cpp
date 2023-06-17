@@ -1,5 +1,7 @@
 #include "guistringlistview.h"
 
+namespace proj172::core {
+
 std::vector<std::string> GUIStringListView::data() const {
     return m_data;
 }
@@ -7,7 +9,6 @@ std::vector<std::string> GUIStringListView::data() const {
 void GUIStringListView::setData(const std::vector<std::string> &data) {
     m_data = data;
 }
-
 
 int GUIStringListView::rowCount() const {
     return m_data.size();
@@ -24,3 +25,5 @@ e172::ptr<GUIMenuElement> GUIStringListView::rowElement(int) const {
 e172::Variant GUIStringListView::rowModelData(int) const {
     return e172::Variant();
 }
+
+} // namespace proj172::core

@@ -2,9 +2,9 @@
 
 #include <src/gameapplication.h>
 
-GUIContainer::GUIContainer() {}
+namespace proj172::core {
 
-void GUIContainer::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
+void GUIContainer::proceed(e172::Context *context, e172::EventHandler *eventHandler) {
     for(const auto& c : children()) {
         e172::GameApplication::proceed(c, context, eventHandler);
     }
@@ -15,3 +15,5 @@ void GUIContainer::render(e172::AbstractRenderer *renderer) {
         e172::GameApplication::render(c, renderer);
     }
 }
+
+} // namespace proj172::core

@@ -3,22 +3,21 @@
 
 #include <algorithm>
 
-
-InjectableEntity::InjectableEntity() {
-    __installEUF({
-                     [](e172::Entity* e, e172::Context* c, e172::AbstractEventHandler* h) {
-                         const auto capabilities = e->cast<InjectableEntity>()->m_capabilities;
-                         for(const auto& capability : capabilities) {
-                            capability->proceed(c, h);
-                         }
-                     },
-                     [](e172::Entity* e, e172::AbstractRenderer* r) {
-                         const auto capabilities = e->cast<InjectableEntity>()->m_capabilities;
-                         for(const auto& capability : capabilities) {
-                            capability->render(r);
-                         }
-                     }
-                 });
+InjectableEntity::InjectableEntity(e172::FactoryMeta &&meta)
+    : e172::Entity(std::move(meta))
+{
+    __installEUF({[](e172::Entity *e, e172::Context *c, e172::EventHandler *h) {
+                      const auto capabilities = e->cast<InjectableEntity>()->m_capabilities;
+                      for (const auto &capability : capabilities) {
+                          capability->proceed(c, h);
+                      }
+                  },
+                  [](e172::Entity *e, e172::AbstractRenderer *r) {
+                      const auto capabilities = e->cast<InjectableEntity>()->m_capabilities;
+                      for (const auto &capability : capabilities) {
+                          capability->render(r);
+                      }
+                  }});
 }
 
 bool InjectableEntity::addCapability(__Capability *capability) {

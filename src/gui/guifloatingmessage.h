@@ -1,34 +1,47 @@
-#ifndef GUIFLOATINGMESSAGE_H
-#define GUIFLOATINGMESSAGE_H
+#pragma once
 
 #include <src/gui/base/guimenuelement.h>
-
 #include <src/utility/ptr.h>
+
+namespace proj172::core {
 
 class Unit;
 
-
 class GUIFloatingMessage : public GUIMenuElement {
-    double m_horisontalOffset = 0;
+public:
+    GUIFloatingMessage(e172::FactoryMeta &&meta, const e172::ptr<Unit> &parent)
+        : GUIMenuElement(std::move(meta), nullptr)
+        , m_parent(parent)
+    {}
+
+    GUIFloatingMessage(e172::FactoryMeta &&meta, const e172::ptr<Unit> &parent, std::string label)
+        : GUIMenuElement(std::move(meta), label)
+        , m_parent(parent)
+    {}
+
+    GUIFloatingMessage(e172::FactoryMeta &&meta,
+                       const e172::ptr<Unit> &parent,
+                       IInformative *informative)
+        : GUIMenuElement(std::move(meta), informative)
+        , m_parent(parent)
+    {}
+
+    double horisontalOffset() const { return m_horisontalOffset; }
+
+    // GUIElement interface
+public:
+    virtual void render(e172::AbstractRenderer *renderer) override;
+    virtual void proceed(e172::Context *context, e172::EventHandler *eventHandler) override;
+
 protected:
     static const uint32_t DEFAULT_COLOR;
     static const int DEFAULT_FONT_SIZE;
     static const double DEFAULT_FLOATING_SPEED;
 
-
     e172::ptr<Unit> m_parent;
 
-public:
-    GUIFloatingMessage(const e172::ptr<Unit> &parent);
-    GUIFloatingMessage(const e172::ptr<Unit> &parent, std::string label);
-    GUIFloatingMessage(const e172::ptr<Unit> &parent, IInformative *informative);
-
-
-    // GUIElement interface
-public:
-    virtual void render(e172::AbstractRenderer *renderer) override;
-    virtual void proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) override;
-    double horisontalOffset() const;
+private:
+    double m_horisontalOffset = 0;
 };
 
-#endif // GUIFLOATINGMESSAGE_H
+} // namespace proj172::core

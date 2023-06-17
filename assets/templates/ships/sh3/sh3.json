@@ -1,7 +1,7 @@
 {
     "id": "sh3",
-    "class": "Ship",
+    "class": "proj172::core::Ship",
     "sprite": "./sh3.png",
-	"health": 80,
-	"explosive": 10
+    "health": 80,
+    "explosive": 10
 }

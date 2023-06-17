@@ -1,8 +1,6 @@
 #include "capability.h"
 
-e172::ptr<Unit> Capability::parentUnit() const {
-    return m_parentUnit;
-}
+namespace proj172::core {
 
 bool Capability::setParentUnit(const e172::ptr<Unit> &parent) {
     if(parent) {
@@ -16,3 +14,5 @@ bool Capability::setParentUnit(const e172::ptr<Unit> &parent) {
     }
     return false;
 }
+
+} // namespace proj172::core

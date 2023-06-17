@@ -1,18 +1,13 @@
-#ifndef GUIMAKER_H
-#define GUIMAKER_H
+#pragma once
 
 #include "world.h"
-
 #include <src/units/camera.h>
-
 #include <src/near.h>
 #include <src/worldpresetstrategy.h>
-
 #include <src/gui/guicombobox.h>
-
 #include <src/additional/taskconsole.h>
 
-
+namespace proj172::core {
 
 class GUIMaker {
     static inline const std::string manual = "\
@@ -42,4 +37,4 @@ public:
     e172::ptr<GUIElement> rootElement() const;
 };
 
-#endif // GUIMAKER_H
+} // namespace proj172::core

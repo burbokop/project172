@@ -1,21 +1,24 @@
-#ifndef GUIDEBUGVALUEINFO_H
-#define GUIDEBUGVALUEINFO_H
+#pragma once
 
 #include <src/gui/base/guielement.h>
-
 #include <src/time/elapsedtimer.h>
 
+namespace proj172::core {
 
 class GUIDebugValueInfo : public GUIElement {
-    double coef = 6;
-    e172::ElapsedTimer timer;
 public:
-    GUIDebugValueInfo();
+    GUIDebugValueInfo(e172::FactoryMeta &&meta)
+        : GUIElement(std::move(meta))
+    {}
 
     // Entity interface
 public:
-    virtual void proceed(e172::Context *, e172::AbstractEventHandler *eventHandler) override;
+    virtual void proceed(e172::Context *, e172::EventHandler *eventHandler) override;
     virtual void render(e172::AbstractRenderer *renderer) override;
+
+private:
+    double m_coef = 6;
+    e172::ElapsedTimer m_timer;
 };
 
-#endif // GUIDEBUGVALUEINFO_H
+} // namespace proj172::core

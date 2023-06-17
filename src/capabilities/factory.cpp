@@ -4,10 +4,12 @@
 
 #include <src/debug.h>
 
+namespace proj172::core {
+
 void Factory::initializeTemplates() {
     const auto inputTemplates = asset<std::vector<FactoryWareTemplate>>("input");
     const auto outputTemplates = asset<std::vector<FactoryWareTemplate>>("output");
-    timer = e172::ElapsedTimer(asset<double>("interval"));
+    m_timer = e172::ElapsedTimer(asset<double>("interval"));
 
     auto container = e172::smart_cast<WareMultiBayContainer>(wareContainer());
 
@@ -23,7 +25,10 @@ void Factory::initializeTemplates() {
         container->operator[](inputTemplates.size() + i).setAllowedOutput(std::vector<std::string> { outputTemplates[i].ware() });
 
         //FOR DEBUG
-        container->operator[](inputTemplates.size() + i).addWare(outputTemplates[i].ware(), outputTemplates[i].capacity() * e172::Math::randDouble(), true);
+        container->operator[](inputTemplates.size() + i)
+            .addWare(outputTemplates[i].ware(),
+                     outputTemplates[i].capacity() * e172::Random::uniq().nextNormalized<double>(),
+                     true);
         //--- -----
 
         m_templates[inputTemplates.size() + i] = outputTemplates[i];
@@ -85,24 +90,40 @@ void Factory::updatePriceTable() {
         const auto& tmpl = m_templates[i];
         const auto& full = subContainer.full();
         if(subContainer.isOutputAllowed(tmpl.ware())) {
-            priceTable()->setBuyPrice(tmpl.ware(), e172::Math::map(full, 0, 1, wareDefaultPrice - wareDefaultPriceDelta, wareDefaultPrice + wareDefaultPriceDelta));
+            priceTable()->setBuyPrice(tmpl.ware(),
+                                      e172::Math::map<double>(full,
+                                                              0,
+                                                              1,
+                                                              wareDefaultPrice
+                                                                  - wareDefaultPriceDelta,
+                                                              wareDefaultPrice
+                                                                  + wareDefaultPriceDelta));
         } else {
             priceTable()->removeBuyPrice(tmpl.ware());
         }
         if(subContainer.isInputAllowed(tmpl.ware())) {
-            priceTable()->setSellPrice(tmpl.ware(), e172::Math::map(full, 0, 1, wareDefaultPrice + wareDefaultPriceDelta, wareDefaultPrice - wareDefaultPriceDelta));
+            priceTable()->setSellPrice(tmpl.ware(),
+                                       e172::Math::map<double>(full,
+                                                               0,
+                                                               1,
+                                                               wareDefaultPrice
+                                                                   + wareDefaultPriceDelta,
+                                                               wareDefaultPrice
+                                                                   - wareDefaultPriceDelta));
         } else {
             priceTable()->removeSellPrice(tmpl.ware());
         }
     }
 }
 
-Factory::Factory() {
+Factory::Factory(e172::FactoryMeta &&meta)
+    : WareStorage(std::move(meta))
+{
     registerInitFunction(this, &Factory::initializeTemplates);
 }
 
-void Factory::proceed(e172::Context *, e172::AbstractEventHandler *) {
-    if(timer.check()) {
+void Factory::proceed(e172::Context *, e172::EventHandler *) {
+    if (m_timer.check()) {
         updateContainers();
         updatePriceTable();
     }
@@ -137,3 +158,5 @@ bool operator==(const FactoryWareTemplate &t0, const FactoryWareTemplate &t1) {
 e172::ptr<AbstractWareContainer> Factory::createWareContainer() const {
     return new WareMultiBayContainer();
 }
+
+} // namespace proj172::core

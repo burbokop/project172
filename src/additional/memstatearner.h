@@ -13,11 +13,11 @@
 class MemStatEarner : public e172::Entity {
     e172::Differentiator vm_size_differentiator;
     e172::Differentiator rss_differentiator;
-    AverageCalculator vm_diff_ac;
-    AverageCalculator rss_diff_ac;
+    e172::AverageCalculator vm_diff_ac;
+    e172::AverageCalculator rss_diff_ac;
 
-    AverageCalculator proceed_delay_ac;
-    AverageCalculator render_delay_ac;
+    e172::AverageCalculator proceed_delay_ac;
+    e172::AverageCalculator render_delay_ac;
     double proceed_delay = 0;
     double render_delay = 0;
     double proceed_delay_avrg = 0;
@@ -32,11 +32,11 @@ class MemStatEarner : public e172::Entity {
 
     bool enabled = false;
 public:
-    MemStatEarner();
+    MemStatEarner(e172::FactoryMeta &&meta);
 
     // Entity interface
 public:
-    virtual void proceed(e172::Context *context, e172::AbstractEventHandler *e) override;
+    virtual void proceed(e172::Context *context, e172::EventHandler *e) override;
     virtual void render(e172::AbstractRenderer *renderer) override;
 };
 

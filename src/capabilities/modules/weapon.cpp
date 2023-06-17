@@ -2,56 +2,61 @@
 
 #include <src/additional/stringformer.h>
 #include <src/units/projectile.h>
-
 #include <src/context.h>
 #include <src/assettools/assetprovider.h>
 #include <src/gameapplication.h>
 
+namespace proj172::core {
 
-const double Weapon::DEFAULT_PROJECTILE_SPEED = 200.0;
+const double Weapon::s_defaultProjectileSpeed = 200.0;
+
 double Weapon::getProjectileSpead() const {
     return projectileVelocity;
 }
 
-e172::Vector Weapon::offset() const {
-    return m_offset;
-}
-
-void Weapon::setOffset(const e172::Vector &offset) {
+void Weapon::setOffset(const e172::Vector<double> &offset) {
     m_offset = offset;
 }
 
-Weapon::Weapon() {
-    timer.reset();
+Weapon::Weapon(e172::FactoryMeta &&meta)
+    : Module(std::move(meta))
+{
+    m_timer.reset();
     registerInitFunction([this](){
         projectileName = asset<std::string>("projectile");
-        projectileVelocity = asset<double>("projectile-speed", DEFAULT_PROJECTILE_SPEED);
+        projectileVelocity = asset<double>("projectile-speed", s_defaultProjectileSpeed);
     });
 }
 
-
-void Weapon::setFiring(bool condition) {
-    firing = condition;
+void Weapon::setFiring(bool condition)
+{
+    m_firing = condition;
 }
 
 std::string Weapon::info() const {
     return "WP   |"
-            + StringFormer::line(static_cast<unsigned int>((timer.progress() * 4)), static_cast<unsigned int>(4))
-            + "|   "
-            + ((timer.progress() > 1) ? "ready" : "");
+           + StringFormer::line(static_cast<unsigned int>((m_timer.progress() * 4)),
+                                static_cast<unsigned int>(4))
+           + "|   " + ((m_timer.progress() > 1) ? "ready" : "");
 }
 
-void Weapon::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
+void Weapon::proceed(e172::Context *context, e172::EventHandler *eventHandler) {
     this->Module::proceed(context, eventHandler);
-    if(timer.check(firing)) {
+    if (m_timer.check(m_firing)) {
         if(projectileName.size() > 0) {
-            auto object = context->assetProvider()->createLoadable<Projectile>(projectileName);
+            auto object
+                = context->assetProvider()->createLoadable<Projectile>(projectileName).unwrap();
             const auto p = parentUnit();
             object->setMother(p);
-            object->resetPhysicsProperties(p->position() + p->rotationMatrix() * m_offset, p->rotation(), p->velocity() + e172::Vector::createByAngle(getProjectileSpead(), p->rotation()));
+            object->resetPhysicsProperties(
+                p->position() + p->rotationMatrix() * m_offset,
+                p->rotation(),
+                p->velocity()
+                    + e172::Vector<double>::createByAngle(getProjectileSpead(), p->rotation()));
             context->addEntity(object);
-            audioPlayer.play();
+            m_audioPlayer.play();
         }
     }
 }
 
+} // namespace proj172::core

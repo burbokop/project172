@@ -1,9 +1,8 @@
-#ifndef HEAPWORLD_H
-#define HEAPWORLD_H
-
+#pragma once
 
 #include "world.h"
 
+namespace proj172::core {
 
 class HeapWorld : public WorldPreset {
 public:
@@ -14,4 +13,4 @@ public:
     virtual GenerationResult generate(e172::Context *context) override;
 };
 
-#endif // HEAPWORLD_H
+} // namespace proj172::core

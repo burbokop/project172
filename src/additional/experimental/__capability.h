@@ -9,7 +9,7 @@ class __Capability : public e172::Entity {
     friend InjectableEntity;
     InjectableEntity *m_parentEntity = nullptr;
 public:
-    __Capability();
+    __Capability(e172::FactoryMeta &&meta);
 
     template<typename T = InjectableEntity>
     InjectableEntity *parentEntity() const {

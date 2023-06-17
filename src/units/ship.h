@@ -1,27 +1,19 @@
-#ifndef SHIP_H
-#define SHIP_H
+#pragma once
 
 #include "unit.h"
 
-
+namespace proj172::core {
 
 class WarpDrive;
+
 class Ship : public Unit {
 public:
     static constexpr double StopMovingVelocity = 1;
     static constexpr double DefaultIdleSpeed = -60;
     static constexpr double RelativisticPursuitCoefficient = 0.0025;
     static constexpr double OneWarpPoint = 9513.98639961;
-private:
-
-
-    double m_thrustForce = 0;
-    double m_maneuverForce = 0;
-    double m_maxVelocity = 0;
-    double m_releaseVelocity = 0;
-    double m_maxManeuverVelocity = 0;
 public:
-    Ship();
+    Ship(e172::FactoryMeta &&meta);
 
     bool prepareWarp();
     bool warp();
@@ -42,12 +34,19 @@ public:
     double maneuverForce() const;
     void setManeuverForce(double maneuverForce);
 
-    // Entity interface
-public:
-    void proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler);
-
     double getMaxManeuverVelocity() const;
     void setMaxManeuverVelocity(double maxManeuverVelocity);
+
+    // Entity interface
+public:
+    void proceed(e172::Context *context, e172::EventHandler *eventHandler) override;
+
+private:
+    double m_thrustForce = 0;
+    double m_maneuverForce = 0;
+    double m_maxVelocity = 0;
+    double m_releaseVelocity = 0;
+    double m_maxManeuverVelocity = 0;
 };
 
-#endif // SHIP_H
+} // namespace proj172::core

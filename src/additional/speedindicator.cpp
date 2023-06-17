@@ -1,16 +1,10 @@
 #include "speedindicator.h"
 
-SpeedIndicator::SpeedIndicator()
-{
-
-}
-
 void SpeedIndicator::render(e172::AbstractRenderer *renderer) {
+    if (m_lastNumber != m_number) {
+        auto top = std::to_string(m_number);
+        auto bottom = std::to_string(m_lastNumber);
 
-    if(lastNumber != number) {
-        auto top = std::to_string(number);
-        auto bottom = std::to_string(lastNumber);
-
-        renderer->drawString(top, e172::Vector(), 0);
+        renderer->drawString(top, e172::Vector<double>(), 0);
     }
 }

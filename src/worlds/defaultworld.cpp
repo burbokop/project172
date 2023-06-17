@@ -1,6 +1,5 @@
 #include "defaultworld.h"
 
-
 #include <src/capabilities/player.h>
 #include <src/capabilities/ai.h>
 #include <src/capabilities/docker.h>
@@ -13,13 +12,11 @@
 #include <src/units/unit.h>
 #include <src/additional/segmentpaiter.h>
 #include <src/capabilities/modules/weapon.h>
-
 #include <src/context.h>
 #include <src/debug.h>
 #include <src/math/physicalobject.h>
 
-
-DefaultWorld::DefaultWorld() {}
+namespace proj172::core {
 
 WorldPreset::GenerationResult DefaultWorld::generate(e172::Context *context) {
     GenerationResult result;
@@ -46,33 +43,40 @@ WorldPreset::GenerationResult DefaultWorld::generate(e172::Context *context) {
 
 WorldPreset::GenerationResult DefaultWorld::generatePlayer(e172::Context *context, const std::string &templateId, const e172::ptr<Person> &person) {
     GenerationResult result;
-    auto player = context->assetProvider()->createLoadable<Player>(templateId);
+    auto player = context->assetProvider()->createLoadable<Player>(templateId).unwrap();
     player->setPerson(person);
-    auto playerArmor = context->assetProvider()->createLoadable<Ship>("astro");
-    ModuleHandler *playerArmorModules = new ModuleHandler();
-    playerArmorModules->addModule(context->assetProvider()->createLoadable<Module>("mini-engine"));
-    playerArmorModules->addModule(context->assetProvider()->createLoadable<Module>("repair-laser"));
+    auto playerArmor = context->assetProvider()->createLoadable<Ship>("astro").unwrap();
+    ModuleHandler *playerArmorModules = e172::FactoryMeta::make<ModuleHandler>();
+    playerArmorModules->addModule(
+        context->assetProvider()->createLoadable<Module>("mini-engine").unwrap());
+    playerArmorModules->addModule(
+        context->assetProvider()->createLoadable<Module>("repair-laser").unwrap());
     playerArmor->addCapability(playerArmorModules);
     player->setArmor(playerArmor);
     result.controllers.push_back(player);
 
-    auto playerShip = context->assetProvider()->createLoadable<Unit>("sh1");
-    playerShip->resetPhysicsProperties(e172::Vector::createRandom(500), e172::Math::randDouble() * e172::Math::Pi * 2);
+    auto playerShip = context->assetProvider()->createLoadable<Unit>("sh1").unwrap();
+    playerShip->resetPhysicsProperties(e172::Vector<double>::createRandom(m_random, 500),
+                                       m_random.nextInRange(0., e172::Math::Pi * 2));
     playerShip->setOwnerPerson(person);
     playerShip->addCapability(player);
-    ModuleHandler *playerModuleHandler = new ModuleHandler();
-    playerModuleHandler->addModule(context->assetProvider()->createLoadable<Module>("engine2"));
-    playerModuleHandler->addModule(context->assetProvider()->createLoadable<Module>("warp-drive1"));
-    playerModuleHandler->addModule(context->assetProvider()->createLoadable<Module>("thruster1"));
-    const auto pp0 = context->assetProvider()->createLoadable<Weapon>("pistol");
-    const auto pp1 = context->assetProvider()->createLoadable<Weapon>("pistol");
+    ModuleHandler *playerModuleHandler = e172::FactoryMeta::make<ModuleHandler>();
+    playerModuleHandler->addModule(
+        context->assetProvider()->createLoadable<Module>("engine2").unwrap());
+    playerModuleHandler->addModule(
+        context->assetProvider()->createLoadable<Module>("warp-drive1").unwrap());
+    playerModuleHandler->addModule(
+        context->assetProvider()->createLoadable<Module>("thruster1").unwrap());
+    const auto pp0 = context->assetProvider()->createLoadable<Weapon>("pistol").unwrap();
+    const auto pp1 = context->assetProvider()->createLoadable<Weapon>("pistol").unwrap();
     pp0->setOffset({ 0, -4 });
     pp1->setOffset({ 0, 4 });
     playerModuleHandler->addModule(pp0);
     playerModuleHandler->addModule(pp1);
 
     playerShip->addCapability(playerModuleHandler);
-    playerShip->addCapability(new DebugTransportWareStorage(5000, { { "ore", 4000 }, { "aaa", 32 } }));
+    playerShip->addCapability(e172::FactoryMeta::make<DebugTransportWareStorage>(
+        5000, std::map<std::string, std::size_t>{{"ore", 4000}, {"aaa", 32}}));
 
     result.entities.push_back(playerShip);
     return result;
@@ -86,15 +90,18 @@ WorldPreset::GenerationResult DefaultWorld::generateSomeShips(e172::Context *con
         if(i >= cnt)
             return result;
 
-        if(const auto ship = context->assetProvider()->createLoadable<Ship>(id)) {
-            auto controller = new AI();
+        if (const auto ship = dynamic_cast<Ship *>(
+                context->assetProvider()->createLoadable(id).unwrap())) {
+            auto controller = e172::FactoryMeta::make<AI>();
             controller->setPerson(person);
             ship->setOwnerPerson(person);
             ship->addCapability(controller);
-            ModuleHandler *someShipModules = new ModuleHandler();
-            someShipModules->addModule(context->assetProvider()->createLoadable<Module>("engine2"));
+            ModuleHandler *someShipModules = e172::FactoryMeta::make<ModuleHandler>();
+            someShipModules->addModule(
+                context->assetProvider()->createLoadable<Module>("engine2").unwrap());
             ship->addCapability(someShipModules);
-            ship->resetPhysicsProperties(e172::Vector::createRandom(500), e172::Math::randDouble() * e172::Math::Pi * 2);
+            ship->resetPhysicsProperties(e172::Vector<double>::createRandom(m_random, 500),
+                                         m_random.nextInRange(0., e172::Math::Pi * 2));
             result.entities.push_back(ship);
             ++i;
         }
@@ -110,14 +117,16 @@ WorldPreset::GenerationResult DefaultWorld::generateSomeStations(e172::Context *
         if(i >= cnt)
             return result;
 
-        auto station = context->assetProvider()->createLoadable<Station>(id);
-        if(station) {
+        if (const auto station = dynamic_cast<Station *>(
+                context->assetProvider()->createLoadable(id).unwrap())) {
             station->setOwnerPerson(person);
-            station->addCapability(context->assetProvider()->createLoadable<Capability>("ore_reciept"));
-            const auto controller = new Controller();
+            station->addCapability(
+                context->assetProvider()->createLoadable<Capability>("ore_reciept").unwrap());
+            const auto controller = e172::FactoryMeta::make<Controller>();
             controller->setPerson(person);
             station->addCapability(controller);
-            station->resetPhysicsProperties(e172::Vector::createRandom(500), e172::Math::randDouble() * e172::Math::Pi * 2);
+            station->resetPhysicsProperties(e172::Vector<double>::createRandom(m_random, 500),
+                                            m_random.nextInRange(0., e172::Math::Pi * 2));
             result.entities.push_back(station);
             ++i;
         }
@@ -125,3 +134,4 @@ WorldPreset::GenerationResult DefaultWorld::generateSomeStations(e172::Context *
     return result;
 }
 
+} // namespace proj172::core

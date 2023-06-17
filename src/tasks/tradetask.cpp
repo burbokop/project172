@@ -4,6 +4,8 @@
 
 #include <src/context.h>
 
+namespace proj172::core {
+
 void TradeTask::resetState() {
     m_status = Idle;
 }
@@ -38,3 +40,5 @@ bool TradeTask::start(e172::Context *context) {
 }
 
 void TradeTask::initFromCommand(const std::vector<std::string> &args, e172::Context *context) {}
+
+} // namespace proj172::core

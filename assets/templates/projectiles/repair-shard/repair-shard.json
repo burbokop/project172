@@ -1,8 +1,8 @@
 {
     "id": "repair-shard",
-    "class": "Projectile",
+    "class": "proj172::core::Projectile",
     "sprite": "./repair-shard.png",
     "zoom": 1,
-	"health":9,
-	"damage":-1,
+    "health": 9,
+    "damage": -1,
 }

@@ -1,8 +1,8 @@
 {
-	"id": "p-p",
-    	"class": "Projectile",
-    	"sprite": "./projectile2.png",
-    	"zoom": 1,
-	"health": 10,
-	"explosive": 2
+    "id": "p-p",
+    "class": "proj172::core::Projectile",
+    "sprite": "./projectile2.png",
+    "zoom": 1,
+    "health": 10,
+    "explosive": 2
 }

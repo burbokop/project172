@@ -1,17 +1,11 @@
 #include "nodesassetexecutor.h"
 
 #include <src/additional.h>
-
 #include <src/math/math.h>
 #include <src/additional.h>
 
-
-NodesAssetExecutor::NodesAssetExecutor() {}
-
-
-
 e172::Variant NodesAssetExecutor::proceed(const e172::Variant &value) {
-    std::list<std::pair<e172::Vector, double>> result;
+    std::list<std::pair<e172::Vector<double>, double>> result;
     const auto nodes = value.toList();
     for(const auto& node : nodes) {
         const auto nodeObject = node.toMap();

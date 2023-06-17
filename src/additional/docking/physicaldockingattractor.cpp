@@ -4,6 +4,8 @@
 
 #include <src/debug.h>
 
+namespace proj172::core {
+
 PhysicalDockingAttractor::State PhysicalDockingAttractor::state() const {
     return m_state;
 }
@@ -52,3 +54,5 @@ void PhysicalDockingAttractor::proceed(e172::PhysicalObject::ConnectionNode node
         }
     }
 }
+
+} // namespace proj172::core

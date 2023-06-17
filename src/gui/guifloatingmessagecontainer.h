@@ -1,25 +1,17 @@
-#ifndef GUIFLOATINGMESSAGECONTAINER_H
-#define GUIFLOATINGMESSAGECONTAINER_H
+#pragma once
 
 #include "guicentralmessage.h"
 #include "guifloatingmessage.h"
-#include "guiminimap.h"
-#include "guidebugvalueinfo.h"
-
 #include <src/gui/base/guicontainer.h>
+
+namespace proj172::core {
 
 //DEPRECATED (use GUIContainer and create new Floating)
 class GUIFloatingMessageContainer : public GUIElement {
-private:
-    static const unsigned FLOATING_LIFE_TIME;
-
-    GUICentralMessage *centralMessage = nullptr;
-    GUIFloatingMessage *floatingMessage = nullptr;
-
-    e172::ElapsedTimer floatingMessageLifeTimer = e172::ElapsedTimer(FLOATING_LIFE_TIME);
-
 public:
-    GUIFloatingMessageContainer();
+    GUIFloatingMessageContainer(e172::FactoryMeta &&meta)
+        : GUIElement(std::move(meta))
+    {}
 
     void addFloatingMessage(const e172::ptr<Unit> &unit, std::string message);
     void addBlushingFloatingMessage(const e172::ptr<Unit> &unit, int value);
@@ -29,8 +21,15 @@ public:
 
     // Entity interface
 public:
-    virtual void proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) override;
+    virtual void proceed(e172::Context *context, e172::EventHandler *eventHandler) override;
     virtual void render(e172::AbstractRenderer *) override {}
+
+private:
+    static const unsigned FLOATING_LIFE_TIME;
+
+    GUICentralMessage *m_centralMessage = nullptr;
+    GUIFloatingMessage *m_floatingMessage = nullptr;
+    e172::ElapsedTimer m_floatingMessageLifeTimer = e172::ElapsedTimer(FLOATING_LIFE_TIME);
 };
 
-#endif // GUIFLOATINGMESSAGECONTAINER_H
+} // namespace proj172::core

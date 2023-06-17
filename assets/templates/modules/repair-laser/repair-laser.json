@@ -1,7 +1,7 @@
 {
     "id": "repair-laser",
-    "class": "Weapon",
+    "class": "proj172::core::Weapon",
     "audio": { "start": "./shoot.wav" },
-    "rate":160,
-    "projectile":"repair-shard"
+    "rate": 160,
+    "projectile": "repair-shard"
 }

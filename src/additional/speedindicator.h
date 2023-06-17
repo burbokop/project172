@@ -1,16 +1,15 @@
-#ifndef SPEEDINDICATOR_H
-#define SPEEDINDICATOR_H
+#pragma once
 
 #include <src/graphics/abstractrenderer.h>
 
 class SpeedIndicator {
-    int number = 0;
-    int lastNumber = 0;
-    int position = 0;
 public:
-    SpeedIndicator();
+    SpeedIndicator() = default;
 
     void render(e172::AbstractRenderer *renderer);
-};
 
-#endif // SPEEDINDICATOR_H
+private:
+    int m_number = 0;
+    int m_lastNumber = 0;
+    int m_position = 0;
+};

@@ -1,131 +1,117 @@
 #include "warpdrive.h"
 
-
 #include <src/additional/stringformer.h>
 #include <src/args.h>
 #include <src/context.h>
+#include <src/messagetype.h>
 #include <src/units/unit.h>
 
-const uint8_t WarpDrive::WARP_DISABLED = 0;
-const uint8_t WarpDrive::WARP_LOADING = 1;
-const uint8_t WarpDrive::WARP_READY = 2;
-const uint8_t WarpDrive::WARP_EXECUTING = 3;
-const uint8_t WarpDrive::WARP_RECHARGING = 4;
+namespace proj172::core {
 
-
-
-WarpDrive::WarpDrive() {
-    registerInitFunction([this](){
-        warpVelocity = asset<double>("warp-speed", 0.1);
-    });
-}
-
-int WarpDrive::getState() {
-    return warpState;
+WarpDrive::WarpDrive(e172::FactoryMeta &&meta)
+    : Module(std::move(meta))
+{
+    registerInitFunction([this]() { m_warpVelocity = asset<double>("warp-speed", 0.1); });
 }
 
 std::string WarpDrive::stateAsString() const {
-    switch (warpState) {
-    case WARP_DISABLED:
+    switch (m_warpState) {
+    case WarpDisabled:
         return "WARP_DISABLED";
-    case WARP_LOADING:
+    case WarpLoading:
         return "WARP_LOADING";
-    case WARP_READY:
+    case WarpReady:
         return "WARP_READY";
-    case WARP_EXECUTING:
+    case WarpExecuting:
         return "WARP_EXECUTING";
-    case WARP_RECHARGING:
+    case WarpRecharging:
         return "WARP_RECHARGING";
     default:
-        return std::to_string(warpState);
+        return std::to_string(m_warpState);
     }
 }
 
 std::string WarpDrive::stateAsIcon() const {
-    switch (warpState) {
-    case WARP_DISABLED:
+    switch (m_warpState) {
+    case WarpDisabled:
         return "disabled";
-    case WARP_LOADING:
+    case WarpLoading:
         return ">>";
-    case WARP_READY:
+    case WarpReady:
         return "ready";
-    case WARP_EXECUTING:
+    case WarpExecuting:
         return "=>";
-    case WARP_RECHARGING:
+    case WarpRecharging:
         return "<<";
     default:
-        return std::to_string(warpState);
+        return std::to_string(m_warpState);
     }
 }
 
 double WarpDrive::charging() const {
-    return (static_cast<double>(currentChargindIteration) / chargindIterations);
+    return (static_cast<double>(m_currentChargindIteration) / m_chargindIterations);
 }
 
 std::string WarpDrive::info() const {
     std::string chargingBar;
-    if(warpState == WarpDrive::WARP_RECHARGING) {
+    if (m_warpState == WarpDrive::WarpRecharging) {
         chargingBar = StringFormer::line(static_cast<unsigned int>((1 - charging()) * 4));
-    } else if (warpState == WarpDrive::WARP_LOADING) {
-        chargingBar = StringFormer::line(static_cast<unsigned int>((timer.progress() * 4)));
-    } else if (warpState == WarpDrive::WARP_DISABLED) {
+    } else if (m_warpState == WarpDrive::WarpLoading) {
+        chargingBar = StringFormer::line(static_cast<unsigned int>((m_timer.progress() * 4)));
+    } else if (m_warpState == WarpDrive::WarpDisabled) {
         chargingBar = "";
-    } else if (warpState == WarpDrive::WARP_EXECUTING) {
+    } else if (m_warpState == WarpDrive::WarpExecuting) {
         chargingBar = "----";
-    } else if (warpState == WarpDrive::WARP_READY) {
+    } else if (m_warpState == WarpDrive::WarpReady) {
         chargingBar = "----";
     }
     return "WD   |" + chargingBar + "|   " + stateAsIcon();
 }
 
-double WarpDrive::getSpeadUnit() const {
-    return warpVelocity;
-}
-
-
-
 bool WarpDrive::prepareWarp() {
-    if(warpState == WARP_DISABLED) {
-        warpState = WARP_LOADING;
-        timer.reset();
+    if (m_warpState == WarpDisabled) {
+        m_warpState = WarpLoading;
+        m_timer.reset();
         return true;
     }
     return false;
 }
 
 bool WarpDrive::warp() {
-    if(warpState == WARP_READY) {
-        warpState = WARP_EXECUTING;
-        audioPlayer.play();
-        animator.play(e172::Animator::Loop);
+    if (m_warpState == WarpReady) {
+        m_warpState = WarpExecuting;
+        m_audioPlayer.play();
+        m_animator.play(e172::Animator::Loop);
         return true;
     }
     return false;
 }
 
-uint8_t WarpDrive::abortWarp(e172::Context* context) {
-    uint8_t result = warpState;
-    if(warpState == WARP_EXECUTING) {
+WarpDrive::State WarpDrive::abortWarp(e172::Context *context)
+{
+    State result = m_warpState;
+    if (m_warpState == WarpExecuting) {
         const e172::Args args(parentUnit()->position(), parentUnit()->velocity() * 0.8, 16);
-        context->emitMessage(e172::Context::SPAWN_EXPLOSIVE, args);
-        audioPlayer.stop();
-        animator.play(e172::Animator::NotRender);
+        context->emitMessage(~MessageType::SpawnExplosive, args);
+        m_audioPlayer.stop();
+        m_animator.play(e172::Animator::NotRender);
     }
-    if(warpState == WARP_EXECUTING || warpState == WARP_READY || warpState == WARP_LOADING) warpState = WARP_RECHARGING;
+    if (m_warpState == WarpExecuting || m_warpState == WarpReady || m_warpState == WarpLoading)
+        m_warpState = WarpRecharging;
     return result;
 }
 
-void WarpDrive::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
-    if(warpState == WARP_LOADING) {
-        if(timer.check()) {
-            warpState = WARP_READY;
+void WarpDrive::proceed(e172::Context *context, e172::EventHandler *eventHandler) {
+    if (m_warpState == WarpLoading) {
+        if (m_timer.check()) {
+            m_warpState = WarpReady;
         }
-    } else if(warpState == WARP_RECHARGING) {
-        if(timer.check()) {
-            currentChargindIteration++;
-            if(currentChargindIteration >= chargindIterations) {
-                currentChargindIteration = 0;
-                warpState = WARP_DISABLED;
+    } else if (m_warpState == WarpRecharging) {
+        if (m_timer.check()) {
+            m_currentChargindIteration++;
+            if (m_currentChargindIteration >= m_chargindIterations) {
+                m_currentChargindIteration = 0;
+                m_warpState = WarpDisabled;
             }
         }
     }
@@ -133,3 +119,4 @@ void WarpDrive::proceed(e172::Context *context, e172::AbstractEventHandler *even
     this->Module::proceed(context, eventHandler);
 }
 
+} // namespace proj172::core

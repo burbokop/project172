@@ -3,7 +3,7 @@
 
 #include "guielement.h"
 
-
+namespace proj172::core {
 
 class GUIStack : public GUIElement {
 private:
@@ -12,7 +12,7 @@ private:
     e172::ptr<GUIElement> m_current = nullptr;
 
 public:
-    GUIStack();
+    GUIStack(e172::FactoryMeta &&meta);
 
     void push(const e172::ptr<GUIElement> &element);
     void pop();
@@ -21,8 +21,10 @@ public:
 
     // Entity interface
 public:
-    void proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler);
+    void proceed(e172::Context *context, e172::EventHandler *eventHandler);
     void render(e172::AbstractRenderer *renderer);
 };
+
+} // namespace proj172::core
 
 #endif // GUISTACK_H

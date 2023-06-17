@@ -1,13 +1,11 @@
 #include "guifocusswitch.h"
 
+#include <src/eventhandler.h>
 #include <src/gameapplication.h>
 
-GUIFocusSwitch::GUIFocusSwitch(e172::Scancode keyLast, e172::Scancode keyNext) {
-    m_keyLast = keyLast;
-    m_keyNext = keyNext;
-}
+namespace proj172::core {
 
-void GUIFocusSwitch::proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) {
+void GUIFocusSwitch::proceed(e172::Context *context, e172::EventHandler *eventHandler) {
     const auto ch = children();
     if(eventHandler->keySinglePressed(m_keyLast)) {
         if(m_currentIndex != 0)
@@ -34,3 +32,5 @@ void GUIFocusSwitch::render(e172::AbstractRenderer *renderer) {
         e172::GameApplication::render(c, renderer);
     }
 }
+
+} // namespace proj172::core

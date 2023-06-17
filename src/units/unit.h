@@ -1,5 +1,4 @@
-#ifndef UNIT_H
-#define UNIT_H
+#pragma once
 
 #include <src/entity.h>
 #include <src/math/physicalobject.h>
@@ -9,9 +8,12 @@
 #include <src/utility/animator.h>
 #include <src/utility/ptr.h>
 
+namespace proj172::core {
+
 class ModuleHandler;
 class Docker;
 class Capability;
+
 class Unit : public e172::Entity, public e172::Loadable, public e172::PhysicalObject, public IInformative {
     double m_health = 0;
     double m_explosiveRadius = 0;
@@ -24,7 +26,7 @@ class Unit : public e172::Entity, public e172::Loadable, public e172::PhysicalOb
 
     e172::ptr<Person> m_ownerPerson;
 public:
-    Unit();
+    Unit(e172::FactoryMeta &&meta);
 
     void addCapability(const e172::ptr<Capability> &capability);
     void removeCapability(const e172::ptr<Capability> &capability);
@@ -63,8 +65,8 @@ public:
 
     // Entity interface
 public:
-    virtual void proceed(e172::Context *context, e172::AbstractEventHandler *eventHandler) override;
+    virtual void proceed(e172::Context *context, e172::EventHandler *eventHandler) override;
     virtual void render(e172::AbstractRenderer *renderer) override;
 };
 
-#endif // UNIT_H
+} // namespace proj172::core

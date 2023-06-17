@@ -1,13 +1,14 @@
-#include "explosivespawner.h"
 #include "appextensions/screensettingsextension.h"
+#include "explosivespawner.h"
+#include "src/capabilities/docker.h"
 
-#include <src/gameapplication.h>
+#include <src/additional.h>
 #include <src/context.h>
 #include <src/debug.h>
-#include <src/additional.h>
+#include <src/gameapplication.h>
+#include <src/sdleventprovider.h>
 
 #include <src/sdlaudioprovider.h>
-#include <src/sdleventhandler.h>
 #include <src/sdlgraphicsprovider.h>
 #include <iostream>
 
@@ -51,7 +52,17 @@
 #include <src/tasks/tradetask.h>
 #include <console_impl/src/consolegraphicsprovider.h>
 
-int main(int argc, char *argv[]) {
+//template<typename T, typename... Args>
+//concept MetaType = requires(T v, e172::FactoryMeta &&meta, Args &&...args) {
+//    {
+//        T(meta, args...)
+//    };
+//};
+
+int main(int argc, const char **argv)
+{
+    using namespace proj172::core;
+
     e172::Debug::print("compiler:", e172::Debug::compilerInfo());
     enum RendererUsing {
         Undefined,
@@ -62,65 +73,74 @@ int main(int argc, char *argv[]) {
     RendererUsing rendererUsing = Undefined;
     {
         e172::GameApplication chooseGraphicsProviderApp(argc, argv);
-        SDLGraphicsProvider gprovider(chooseGraphicsProviderApp.arguments(), "choose gprovider", 118, 168);
-        SDLEventHandler eventHandler;
-        chooseGraphicsProviderApp.setGraphicsProvider(&gprovider);
-        chooseGraphicsProviderApp.setEventHandler(&eventHandler);
+        const auto gprovider
+            = std::make_shared<SDLGraphicsProvider>(chooseGraphicsProviderApp.arguments(),
+                                                    "choose gprovider",
+                                                    e172::Vector<std::uint32_t>{118, 168});
+        const auto eventProvider = std::make_shared<SDLEventProvider>();
+        chooseGraphicsProviderApp.setGraphicsProvider(gprovider);
+        chooseGraphicsProviderApp.setEventProvider(eventProvider);
 
-        Background background = 32;
-        chooseGraphicsProviderApp.addEntity(&background);
+        const auto background = e172::FactoryMeta::makeUniq<Background>(32);
+        chooseGraphicsProviderApp.addEntity(background.get());
 
-        GUIContainer rootElement;
-        GUIStack stack;
-        GUIMenu menu("renderer");
+        const auto rootElement = e172::FactoryMeta::makeUniq<GUIContainer>();
+        const auto stack = e172::FactoryMeta::makeUniq<GUIStack>();
+        const auto menu = e172::FactoryMeta::makeUniq<GUIMenu>("renderer");
         const auto apply = [&rendererUsing, &chooseGraphicsProviderApp](e172::Variant value) {
             rendererUsing = static_cast<RendererUsing>(value.toInt());
             chooseGraphicsProviderApp.quitLater();
         };
-        menu.addMenuElement(new GUIButton(std::string("SDL2"), [apply](auto) { apply(SDL); }));
-        menu.addMenuElement(new GUIButton(std::string("Vulkan"), [apply](auto) { apply(Vulkan); }));
-        menu.addMenuElement(new GUIButton(std::string("Console"), [apply](auto) { apply(Console); }));
+        menu->addMenuElement(
+            e172::FactoryMeta::make<GUIButton>(std::string("SDL2"), [apply](auto) { apply(SDL); }));
+        menu->addMenuElement(e172::FactoryMeta::make<GUIButton>(std::string("Vulkan"),
+                                                                [apply](auto) { apply(Vulkan); }));
+        menu->addMenuElement(e172::FactoryMeta::make<GUIButton>(std::string("Console"),
+                                                                [apply](auto) { apply(Console); }));
 
-        stack.push(&menu);
-        rootElement.addChildElement(&stack);
+        stack->push(menu.get());
+        rootElement->addChildElement(stack.get());
 
-        gprovider.loadFont(std::string(),
-                           chooseGraphicsProviderApp.context()->absolutePath(
-                               "./assets/fonts/ZCOOL.ttf"));
+        gprovider->loadFont(std::string(),
+                            chooseGraphicsProviderApp.context()->absolutePath(
+                                "./assets/fonts/ZCOOL.ttf"));
 
-        chooseGraphicsProviderApp.addEntity(&rootElement);
+        chooseGraphicsProviderApp.addEntity(rootElement.get());
         chooseGraphicsProviderApp.exec();
     }
 
-
     e172::GameApplication app(argc, argv);
 
-    e172::AbstractGraphicsProvider *graphicsProvider = nullptr;
+    std::shared_ptr<e172::AbstractGraphicsProvider> graphicsProvider;
     if(rendererUsing == Vulkan) {
-        graphicsProvider = new VulkanGraphicsProvider(app.arguments());
+        graphicsProvider = std::make_shared<VulkanGraphicsProvider>(app.arguments());
         if(!graphicsProvider->isValid()) {
-            delete graphicsProvider;
-            graphicsProvider = new SDLGraphicsProvider(app.arguments(), "project172", 900, 600);
+            graphicsProvider
+                = std::make_shared<SDLGraphicsProvider>(app.arguments(),
+                                                        "project172",
+                                                        e172::Vector<std::uint32_t>{900, 600});
             if(!graphicsProvider->isValid()) {
                 e172::Debug::fatal("error: no graphics provider are valid.");
                 return -1;
             }
         }
     } else if(rendererUsing == SDL) {
-        graphicsProvider = new SDLGraphicsProvider(app.arguments(), "project172", 900, 600);
+        graphicsProvider = std::make_shared<SDLGraphicsProvider>(app.arguments(),
+                                                                 "project172",
+                                                                 e172::Vector<std::uint32_t>{900,
+                                                                                             600});
     } else if(rendererUsing == Console) {
-        graphicsProvider = new ConsoleGraphicsProvider(app.arguments(), std::cout);
+        graphicsProvider = std::make_shared<ConsoleGraphicsProvider>(app.arguments(), std::cout);
     } else {
         return 0;
     }
 
     app.setRenderInterval(1000 / 30);
 
-
-    SDLEventHandler eventHandler;
-    SDLAudioProvider audioProvider;
-    app.setEventHandler(&eventHandler);
-    app.setAudioProvider(&audioProvider);
+    const auto eventProvider = std::make_shared<SDLEventProvider>();
+    const auto audioProvider = std::make_shared<SDLAudioProvider>();
+    app.setEventProvider(eventProvider);
+    app.setAudioProvider(audioProvider);
     app.setGraphicsProvider(graphicsProvider);
 
     app.graphicsProvider()->renderer()->setAutoClear(false);
@@ -157,16 +177,16 @@ int main(int argc, char *argv[]) {
     //APP INITIALIZATION CONMPLEATED
 
     //initialization background
-    Background background = 128;
-    app.addEntity(&background);
+    const auto background = e172::FactoryMeta::makeUniq<Background>(128);
+    app.addEntity(background.get());
 
     //mem stat
-    MemStatEarner memStat;
-    app.addEntity(&memStat);
+    const auto memStat = e172::FactoryMeta::makeUniq<MemStatEarner>();
+    app.addEntity(memStat.get());
 
     //setup radar near
-    Near radarNear;
-    app.addEntity(&radarNear);
+    const auto radarNear = e172::FactoryMeta::makeUniq<Near>();
+    app.addEntity(radarNear.get());
 
     //create task console
     TaskConsole taskConsole;
@@ -177,48 +197,48 @@ int main(int argc, char *argv[]) {
     taskConsole.registerTask<TradeTask>();
 
     //setup gui
-    GUIMaker guiMaker(app.context(), &radarNear, &taskConsole);
+    GUIMaker guiMaker(app.context(), radarNear.get(), &taskConsole);
     app.addEntity(guiMaker.rootElement());
 
     //setup camera
-    Camera camera;
-    app.addEntity(&camera);
-    background.bindToPhysicalObject(&camera);
+    const auto camera = e172::FactoryMeta::makeUniq<Camera>();
+    app.addEntity(camera.get());
+    background->bindToPhysicalObject(camera.get());
 
     //setup world strategy
-    WorldPresetStrategy worldPresetStrategy;
-    worldPresetStrategy.registerType<DefaultWorld>();
-    worldPresetStrategy.registerType<ArenaWorld>();
-    worldPresetStrategy.registerType<HeapWorld>();
-    app.addEntity(&worldPresetStrategy);
+    const auto worldPresetStrategy = e172::FactoryMeta::makeUniq<WorldPresetStrategy>();
+    worldPresetStrategy->registerType<DefaultWorld>();
+    worldPresetStrategy->registerType<ArenaWorld>();
+    worldPresetStrategy->registerType<HeapWorld>();
+    app.addEntity(worldPresetStrategy.get());
 
-    worldPresetStrategy.controllersChanged([&guiMaker, &camera, &radarNear](const std::list<e172::ptr<Controller>> &c){
-        if(c.size() > 0) {
-            const auto controller = c.front();
-            camera.setTarget(controller);
-            guiMaker.rootElement()->setController(controller);
-            radarNear.setCenter(controller);
-        }
-    });
+    worldPresetStrategy->controllersChanged(
+        [&guiMaker, &camera, &radarNear](const std::list<e172::ptr<Controller>> &c) {
+            if (c.size() > 0) {
+                const auto controller = c.front();
+                camera->setTarget(controller);
+                guiMaker.rootElement()->setController(controller);
+                radarNear->setCenter(controller);
+            }
+        });
 
+    const auto presetNames = worldPresetStrategy->presetNames();
+    if (presetNames.size() > 0) {
+        worldPresetStrategy->activatePreset(worldPresetStrategy->presetNames().front());
+    }
 
-    const auto presetNames = worldPresetStrategy.presetNames();
-    if(presetNames.size() > 0)
-        worldPresetStrategy.activatePreset(worldPresetStrategy.presetNames().front());
-
-    guiMaker.setWorldPresetStrategy(&worldPresetStrategy);
-
+    guiMaker.setWorldPresetStrategy(worldPresetStrategy.get());
 
     //independent services initialization
 
-    ExplosiveSpawner explosiveSpawner;
-    app.addEntity(&explosiveSpawner);
+    const auto explosiveSpawner = e172::FactoryMeta::makeUniq<ExplosiveSpawner>();
+    app.addEntity(explosiveSpawner.get());
 
     app.addApplicationExtension<ScreenSettingsExtension>();
     app.addApplicationExtension<VolumeObserverExtension>();
 
     //debug utitlity
-    ChartView chartView;
+    const auto chartView = e172::FactoryMeta::makeUniq<ChartView>();
 
     //const auto f = [](double x, double x0){
     //    return std::sqrt(x) * x * 0.5;
@@ -239,11 +259,10 @@ int main(int argc, char *argv[]) {
     //    return std::pow(2, x) - 1;
     //};
 
-
-    chartView.setOffset({ 100, 500 });
-    chartView.setFunction(f);
-    chartView.setCoeficient(200);
-    chartView.setPointCount(300);
+    chartView->setOffset({100, 500});
+    chartView->setFunction(f);
+    chartView->setCoeficient(200);
+    chartView->setPointCount(300);
     //app.addEntity(&chartView);
 
     //start application

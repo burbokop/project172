@@ -2,22 +2,30 @@
 #define GUICOMBOBOX_H
 
 #include "guibutton.h"
-
 #include <src/gui/base/guilistview.h>
+
+namespace proj172::core {
 
 template<typename T>
 class GUIComboBox : public GUIListView {
     std::vector<T> m_data;
     std::function<void(T)> m_callback;
-    GUIButton *button = new GUIButton("", [this](auto md){ onEnter(md.toInt()); });
+    std::unique_ptr<GUIButton> m_button = e172::FactoryMeta::makeUniq<GUIButton>("", [this](auto md) {
+        onEnter(md.toInt());
+    });
 
     void onEnter(int index) {
         if(m_callback && index < m_data.size() && index >= 0)
             m_callback(m_data[index]);
     }
 public:
-    GUIComboBox(const std::string &title, const std::function<void(T)> &callback = std::function<void(T)>()) : GUIListView(title) { m_callback = callback; }
-    ~GUIComboBox() { delete button; }
+    GUIComboBox(e172::FactoryMeta &&meta,
+                const std::string &title,
+                const std::function<void(T)> &callback = std::function<void(T)>())
+        : GUIListView(std::move(meta), title)
+    {
+        m_callback = callback;
+    }
     // Entity interface
 public:
     std::vector<T> data() const { return m_data; }
@@ -30,8 +38,10 @@ public:
 public:
     virtual int rowCount() const override { return m_data.size(); }
     virtual std::string rowText(int index) const override { return m_data[index]; };
-    virtual e172::ptr<GUIMenuElement> rowElement(int) const override { return button; };
+    virtual e172::ptr<GUIMenuElement> rowElement(int) const override { return m_button.get(); };
     virtual e172::Variant rowModelData(int index) const override { return index; };
 };
+
+} // namespace proj172::core
 
 #endif // GUICOMBOBOX_H

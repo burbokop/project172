@@ -1,9 +1,8 @@
-#ifndef SCREENSETTINGSEXTENSION_H
-#define SCREENSETTINGSEXTENSION_H
+#pragma once
 
 #include <src/gameapplication.h>
 
-
+namespace proj172::core {
 
 class ScreenSettingsExtension : public e172::GameApplicationExtension {
 public:
@@ -14,4 +13,4 @@ public:
     virtual void proceed(e172::GameApplication *application) override;
 };
 
-#endif // SCREENSETTINGSEXTENSION_H
+} // namespace proj172::core

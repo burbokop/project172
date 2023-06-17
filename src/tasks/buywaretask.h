@@ -7,6 +7,7 @@
 
 #include <src/utility/option.h>
 
+namespace proj172::core {
 
 class BuyWareTask : public Task {
     e172::Option<std::string> m_targetWare = e172::None;
@@ -31,5 +32,7 @@ public:
     virtual bool start(e172::Context *context) override;
     virtual void initFromCommand(const std::vector<std::string> &args, e172::Context *) override;
 };
+
+} // namespace proj172::core
 
 #endif // BUYWARETASK_H

@@ -3,16 +3,24 @@
 
 #include <src/gui/base/guilistview.h>
 
-
+namespace proj172::core {
 
 class GUIStringListView : public GUIListView {
     std::vector<std::string> m_data;
-public:
 
-    GUIStringListView(const std::string &title, const std::vector<std::string>& data) : GUIListView(title) { m_data = data; }
+public:
+    GUIStringListView(e172::FactoryMeta &&meta,
+                      const std::string &title,
+                      const std::vector<std::string> &data)
+        : GUIListView(std::move(meta), title)
+    {
+        m_data = data;
+    }
 
     template<typename T>
-    GUIStringListView(const std::string &title, const T& container) : GUIListView(title) {
+    GUIStringListView(e172::FactoryMeta &&meta, const std::string &title, const T &container)
+        : GUIListView(std::move(meta), title)
+    {
         m_data.resize(container.size());
         int i = 0;
         for(auto a : container)
@@ -30,5 +38,7 @@ public:
     virtual e172::Variant rowModelData(int) const override;
 
 };
+
+} // namespace proj172::core
 
 #endif // GUISTRINGLISTVIEW_H
