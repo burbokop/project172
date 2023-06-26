@@ -14,7 +14,7 @@ public:
 
     // Entity interface
 public:
-    virtual void render(e172::AbstractRenderer *renderer) override;
+    virtual void render(e172::Context *context, e172::AbstractRenderer *renderer) override;
 };
 
 } // namespace proj172::core

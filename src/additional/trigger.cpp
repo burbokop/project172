@@ -1,8 +1,6 @@
 #include "trigger.h"
 
-Trigger::Trigger() {
-
-}
+namespace proj172::core {
 
 void Trigger::enable() {
     enabled = true;
@@ -17,3 +15,5 @@ bool Trigger::check() {
     enabled = false;
     return tmp;
 }
+
+} // namespace proj172::core

@@ -47,7 +47,10 @@ e172::ptr<GUIElement> GUIMaker::rootElement() const {
     return m_rootElement;
 }
 
-GUIMaker::GUIMaker(e172::Context *context, Near *radarNear, TaskConsole *console) {
+GUIMaker::GUIMaker(e172::Context *context,
+                   Near *radarNear,
+                   const std::shared_ptr<TaskConsole> &console)
+{
     m_rootElement = e172::FactoryMeta::make<GUIContainer>();
     {
         auto menuFocusSwitch = e172::FactoryMeta::make<GUIFocusSwitch>(e172::ScancodeLeft,
@@ -303,11 +306,11 @@ GUIMaker::GUIMaker(e172::Context *context, Near *radarNear, TaskConsole *console
         m_rootElement->addChildElement(menuFocusSwitch);
 
         if (console) {
-            m_rootElement->addChildElement(
-                e172::FactoryMeta::make<GuiConsole>(e172::bind(console,
-                                                               &TaskConsole::executeCommand),
-                                                    e172::bind(console,
-                                                               &TaskConsole::compleateVariants)));
+            m_rootElement->addChildElement(e172::FactoryMeta::make<GuiConsole>(
+                [console](const std::string &c, e172::ClosableOutputStream &s, e172::Context *ctx) {
+                    console->executeCommand(c, s, ctx);
+                },
+                [console]() -> std::list<std::string> { return console->compleateVariants(); }));
         }
         m_rootElement->addChildElement(e172::FactoryMeta::make<GUIMiniMap>());
         m_rootElement->addChildElement(e172::FactoryMeta::make<GUIDebugValueInfo>());

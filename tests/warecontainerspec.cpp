@@ -1,10 +1,5 @@
 #include "warecontainerspec.h"
 
-#include <iostream>
-
-
-
-
 void WareContainerSpec::test0() {
     WareContainer container0(4);
     container0.addWare("ware0", 2, true);

@@ -50,7 +50,8 @@ void Background::proceed(e172::Context *context, e172::EventHandler *) {
     context->popMessage(~MessageType::BackgroundFlashing, this, &Background::flashing);
 }
 
-void Background::render(e172::AbstractRenderer *renderer) {
+void Background::render(e172::Context *context, e172::AbstractRenderer *renderer)
+{
     const auto resolution = renderer->resolution();
     if(m_lastResolution != resolution) {
         onResolutionChanged(resolution);

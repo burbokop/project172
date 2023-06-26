@@ -7,7 +7,7 @@
 
 namespace proj172::core {
 
-class Module : public Capability, public IInformative
+class Module : public Capability, public Informative
 {
 public:
     Module(e172::FactoryMeta &&meta);
@@ -16,7 +16,7 @@ public:
     // Entity interface
 public:
     void proceed(e172::Context *, e172::EventHandler *);
-    void render(e172::AbstractRenderer *renderer);
+    void render(e172::Context *context, e172::AbstractRenderer *renderer);
 
 protected:
     e172::Animator m_animator;

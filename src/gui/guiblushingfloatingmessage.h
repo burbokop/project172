@@ -19,7 +19,7 @@ public:
 
     GUIBlushingFloatingMessage(e172::FactoryMeta &&meta,
                                const e172::ptr<Unit> &parent,
-                               IInformative *informative)
+                               Informative *informative)
         : GUIFloatingMessage(std::move(meta), parent, informative)
     {}
 

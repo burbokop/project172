@@ -4,6 +4,8 @@
 #include <src/math/vector.h>
 #include <src/time/elapsedtimer.h>
 
+namespace proj172::core {
+
 class LightParticle : public e172::Entity {
 public:
     static const unsigned PIXEL;
@@ -25,7 +27,7 @@ public:
     // Entity interface
 public:
     void proceed(e172::Context *context, e172::EventHandler *eventHandler);
-    void render(e172::AbstractRenderer *renderer);
+    void render(e172::Context *context, e172::AbstractRenderer *renderer);
 
 private:
     e172::Vector<double> m_pos;
@@ -37,3 +39,5 @@ private:
     e172::ElapsedTimer *m_destroyTimer = nullptr;
     double m_velocityMultiplier = 0;
 };
+
+} // namespace proj172::core

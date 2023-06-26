@@ -12,7 +12,8 @@ class Capability : public e172::Entity, public e172::Loadable {
 public:
     Capability(e172::FactoryMeta &&meta)
         : e172::Entity(std::move(meta))
-    {}
+    {
+    }
 
     e172::ptr<Unit> parentUnit() { return m_parentUnit; }
     e172::ptr<const Unit> parentUnit() const { return m_parentUnit; }

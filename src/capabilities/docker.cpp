@@ -100,6 +100,6 @@ void Docker::proceed(e172::Context *, e172::EventHandler *) {
     }
 }
 
-void Docker::render(e172::AbstractRenderer *renderer) {}
+void Docker::render(e172::Context *context, e172::AbstractRenderer *renderer) {}
 
 } // namespace proj172::core

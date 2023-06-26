@@ -9,18 +9,19 @@
 
 namespace proj172::core {
 
-void GUIMiniMap::proceed(e172::Context *context, e172::EventHandler *eventHandler) {
-    m_entities = context->entities();
-
-    if(eventHandler->keySinglePressed(e172::ScancodeEquals) || eventHandler->keySinglePressed(e172::ScancodeKpPlus)) {
+void GUIMiniMap::proceed(e172::Context *context, e172::EventHandler *eventHandler)
+{
+    if (eventHandler->keySinglePressed(e172::ScancodeEquals)
+        || eventHandler->keySinglePressed(e172::ScancodeKpPlus)) {
         m_range /= 2;
-    }
-    else if(eventHandler->keySinglePressed(e172::ScancodeMinus) || eventHandler->keySinglePressed(e172::ScancodeKpMinus)) {
+    } else if (eventHandler->keySinglePressed(e172::ScancodeMinus)
+               || eventHandler->keySinglePressed(e172::ScancodeKpMinus)) {
         m_range *= 2;
     }
 }
 
-void GUIMiniMap::render(e172::AbstractRenderer *renderer) {
+void GUIMiniMap::render(e172::Context *context, e172::AbstractRenderer *renderer)
+{
     e172::Vector size = renderer->resolution() / m_sizeRelation;
 
     e172::Vector point2 = renderer->resolution() - e172::Vector<double>(margin(), margin());
@@ -29,7 +30,7 @@ void GUIMiniMap::render(e172::AbstractRenderer *renderer) {
         renderer->drawRect(point1, point2, DefaultColor);
 
         e172::Vector<double> playerShipPosOnMap;
-        for(const auto& entity : m_entities) {
+        for (const auto &entity : context->entities()) {
             const auto unit = e172::smart_cast<Unit>(entity);
             if(unit) {
                 e172::Vector posOnMap = ((unit->position() - renderer->cameraPosition()) / m_range

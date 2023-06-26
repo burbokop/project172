@@ -22,7 +22,7 @@ public:
     // Entity interface
 public:
     virtual void proceed(e172::Context *context, e172::EventHandler *eventHandler) override;
-    virtual void render(e172::AbstractRenderer *) override {}
+    virtual void render(e172::Context *context, e172::AbstractRenderer *) override {}
 
 private:
     static const unsigned FLOATING_LIFE_TIME;

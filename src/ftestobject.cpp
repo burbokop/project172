@@ -63,7 +63,8 @@ void FTestObject::proceed(e172::Context *context, e172::EventHandler *eventHandl
     proceedPhysics(context->deltaTime());
 }
 
-void FTestObject::render(e172::AbstractRenderer *renderer) {
+void FTestObject::render(e172::Context *context, e172::AbstractRenderer *renderer)
+{
     const auto r0 = 8;
     const auto r1 = 4;
 

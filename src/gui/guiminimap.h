@@ -17,13 +17,12 @@ public:
 
     // Entity interface
 public:
-    void proceed(e172::Context *context, e172::EventHandler *eventHandler);
-    void render(e172::AbstractRenderer *renderer);
+    void proceed(e172::Context *context, e172::EventHandler *eventHandler) override;
+    void render(e172::Context *context, e172::AbstractRenderer *renderer) override;
 
 private:
     unsigned m_sizeRelation = 6;
     unsigned m_range = 4098;
-    std::list<e172::ptr<e172::Entity>> m_entities;
 };
 
 } // namespace proj172::core

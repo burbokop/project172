@@ -106,7 +106,8 @@ void Controller::proceed(e172::Context *context, e172::EventHandler *eventHandle
     }
 }
 
-void Controller::render(e172::AbstractRenderer *renderer) {
+void Controller::render(e172::Context *context, e172::AbstractRenderer *renderer)
+{
     UNUSED(renderer);
 }
 

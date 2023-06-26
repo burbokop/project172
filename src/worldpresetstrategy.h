@@ -25,7 +25,7 @@ public:
     // Entity interface
 public:
     virtual void proceed(e172::Context *context, e172::EventHandler *) override;
-    virtual void render(e172::AbstractRenderer *) override;
+    virtual void render(e172::Context *context, e172::AbstractRenderer *) override;
 
 private:
     e172::AbstractStrategy<std::string, WorldPreset> m_strategy;

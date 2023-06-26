@@ -1,14 +1,11 @@
-#ifndef MEMSTATEARNER_H
-#define MEMSTATEARNER_H
+#pragma once
 
 #include <src/entity.h>
-
 #include <src/math/averagecalculator.h>
 #include <src/math/differentiator.h>
-
 #include <src/time/elapsedtimer.h>
 
-
+namespace proj172::core {
 
 class MemStatEarner : public e172::Entity {
     e172::Differentiator vm_size_differentiator;
@@ -37,7 +34,7 @@ public:
     // Entity interface
 public:
     virtual void proceed(e172::Context *context, e172::EventHandler *e) override;
-    virtual void render(e172::AbstractRenderer *renderer) override;
+    virtual void render(e172::Context *context, e172::AbstractRenderer *renderer) override;
 };
 
-#endif // MEMSTATEARNER_H
+} // namespace proj172::core

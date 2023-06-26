@@ -22,8 +22,8 @@ public:
 
     // Entity interface
 public:
-    void proceed(e172::Context *context, e172::EventHandler *);
-    void render(e172::AbstractRenderer *renderer);
+    void proceed(e172::Context *context, e172::EventHandler *) override;
+    void render(e172::Context *context, e172::AbstractRenderer *renderer) override;
 };
 
 } // namespace proj172::core

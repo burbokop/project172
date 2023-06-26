@@ -118,7 +118,8 @@ void GuiConsole::proceed(e172::Context *context, e172::EventHandler *eventHandle
     }
 }
 
-void GuiConsole::render(e172::AbstractRenderer *renderer) {
+void GuiConsole::render(e172::Context *context, e172::AbstractRenderer *renderer)
+{
     if(m_consoleEnabled) {
         renderer->drawRect({}, renderer->resolution(), 0xaa000000, e172::ShapeFormat(true));
         const auto textFormat = e172::TextFormat::fromFont(m_font, 20);

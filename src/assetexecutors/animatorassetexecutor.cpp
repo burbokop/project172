@@ -1,15 +1,13 @@
 #include "animatorassetexecutor.h"
 
 #include <src/graphics/abstractgraphicsprovider.h>
-
 #include <src/utility/animator.h>
 
-
-AnimatorAssetExecutor::AnimatorAssetExecutor() {}
+namespace proj172::core {
 
 e172::Variant AnimatorAssetExecutor::proceed(const e172::Variant &value) {
     const auto object = value.toMap();
-    if(object.size() > 0) {
+    if (object.size() > 0 && graphicsProvider()) {
         const auto spritesheet = object.at("spritesheet");
         const auto frames = object.at("frames");
         const auto tracks = object.at("tracks");
@@ -30,3 +28,5 @@ e172::Variant AnimatorAssetExecutor::proceed(const e172::Variant &value) {
     }
     return e172::Variant();
 }
+
+} // namespace proj172::core

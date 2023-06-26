@@ -1,6 +1,10 @@
 #include "iinformative.h"
 
-std::string IInformative::info() const { return ""; }
+namespace proj172::core {
 
+std::string Informative::info() const
+{
+    return "";
+}
 
-IInformative::~IInformative() {}
+} // namespace proj172::core

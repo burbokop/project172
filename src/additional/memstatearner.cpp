@@ -6,6 +6,8 @@
 #include <src/graphics/abstractrenderer.h>
 #include <src/utility/systeminfo.h>
 
+namespace proj172::core {
+
 MemStatEarner::MemStatEarner(e172::FactoryMeta &&meta)
     : e172::Entity(std::move(meta))
 {
@@ -38,7 +40,8 @@ void MemStatEarner::proceed(e172::Context *context, e172::EventHandler *e)
     }
 }
 
-void MemStatEarner::render(e172::AbstractRenderer *renderer) {
+void MemStatEarner::render(e172::Context *context, e172::AbstractRenderer *renderer)
+{
     if(enabled) {
         e172::TextFormat textFormat;
         textFormat.setFontSize(12);
@@ -103,3 +106,5 @@ void MemStatEarner::render(e172::AbstractRenderer *renderer) {
                              textFormat);
     }
 }
+
+} // namespace proj172::core

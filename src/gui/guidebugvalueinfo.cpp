@@ -19,7 +19,8 @@ void GUIDebugValueInfo::proceed(e172::Context *, e172::EventHandler *eventHandle
     }
 }
 
-void GUIDebugValueInfo::render(e172::AbstractRenderer *renderer) {
+void GUIDebugValueInfo::render(e172::Context *context, e172::AbstractRenderer *renderer)
+{
     const auto res = renderer->resolution();
     if(controller()) {
         const double module = std::round(controller()->parentUnit()->velocity().module());

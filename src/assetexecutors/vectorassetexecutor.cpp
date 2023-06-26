@@ -2,7 +2,7 @@
 
 #include <src/math/vector.h>
 
-VectorAssetExecutor::VectorAssetExecutor() {}
+namespace proj172::core {
 
 e172::Variant VectorAssetExecutor::proceed(const e172::Variant &value) {
     const auto object = value.toMap();
@@ -11,3 +11,5 @@ e172::Variant VectorAssetExecutor::proceed(const e172::Variant &value) {
                 object.at("y").toDouble()
                 ));
 }
+
+} // namespace proj172::core

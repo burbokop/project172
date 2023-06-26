@@ -1,11 +1,12 @@
 #pragma once
 
 #include "world.h"
-#include <src/units/camera.h>
-#include <src/near.h>
-#include <src/worldpresetstrategy.h>
-#include <src/gui/guicombobox.h>
+#include <config/project.h>
 #include <src/additional/taskconsole.h>
+#include <src/gui/guicombobox.h>
+#include <src/near.h>
+#include <src/units/camera.h>
+#include <src/worldpresetstrategy.h>
 
 namespace proj172::core {
 
@@ -14,7 +15,7 @@ class GUIMaker {
             \n---info---\
             \n   --project:\
             \n      name: project172\
-            \n      version: 0.004\
+            \n      version: " PROJECT_VER "\
             \n      autor: burbokop\
             \n   --control:\
             \n      WASD = fly\
@@ -32,7 +33,10 @@ class GUIMaker {
 
     e172::ptr<Unit> m_currentOppositeUnit;
 public:
-    GUIMaker(e172::Context *context, Near *radarNear = nullptr, TaskConsole *console = nullptr);
+    GUIMaker(e172::Context *context,
+             Near *radarNear = nullptr,
+             const std::shared_ptr<TaskConsole> &console = nullptr);
+
     void setWorldPresetStrategy(WorldPresetStrategy *worldPresetStrategy);
     e172::ptr<GUIElement> rootElement() const;
 };

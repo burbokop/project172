@@ -22,7 +22,7 @@ public:
     // Entity interface
 public:
     void proceed(e172::Context *context, e172::EventHandler *eventHandler);
-    void render(e172::AbstractRenderer *renderer);
+    void render(e172::Context *context, e172::AbstractRenderer *renderer);
 };
 
 } // namespace proj172::core

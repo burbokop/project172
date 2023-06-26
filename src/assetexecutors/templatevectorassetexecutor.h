@@ -1,19 +1,16 @@
-#ifndef TEMPLATEVECTORASSETEXECUTOR_H
-#define TEMPLATEVECTORASSETEXECUTOR_H
+#pragma once
 
 #include <src/assettools/abstractassetexecutor.h>
 
-
+namespace proj172::core {
 
 class TemplateVectorAssetExecutor : public e172::AbstractAssetExecutor {
 public:
-    TemplateVectorAssetExecutor();
+    TemplateVectorAssetExecutor() = default;
 
     // AbstractAssetExecutor interface
 public:
     virtual e172::Variant proceed(const e172::Variant &value) override;
 };
 
-
-
-#endif // TEMPLATEVECTORASSETEXECUTOR_H
+} // namespace proj172::core

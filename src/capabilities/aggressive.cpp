@@ -70,7 +70,8 @@ void Aggressive::proceed(e172::Context *context, e172::EventHandler *eventHandle
     this->Controller::proceed(context, eventHandler);
 }
 
-void Aggressive::render(e172::AbstractRenderer *renderer) {
+void Aggressive::render(e172::Context *context, e172::AbstractRenderer *renderer)
+{
     UNUSED(renderer);
 }
 

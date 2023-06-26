@@ -1,5 +1,6 @@
 #include "stringformer.h"
 
+namespace proj172::core {
 
 std::string StringFormer::line(unsigned number) {
     return line(number, '-');
@@ -70,3 +71,5 @@ std::string StringFormer::horisontalBar(unsigned number) {
         return "\uE00B \uE00B";
     }
 }
+
+} // namespace proj172::core

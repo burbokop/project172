@@ -10,9 +10,10 @@ void GUIContainer::proceed(e172::Context *context, e172::EventHandler *eventHand
     }
 }
 
-void GUIContainer::render(e172::AbstractRenderer *renderer) {
+void GUIContainer::render(e172::Context *context, e172::AbstractRenderer *renderer)
+{
     for(const auto& c : children()) {
-        e172::GameApplication::render(c, renderer);
+        e172::GameApplication::render(c, context, renderer);
     }
 }
 

@@ -1,12 +1,10 @@
 #include "lightparticle.h"
 
 #include <inttypes.h>
-
 #include <src/context.h>
-
 #include <src/graphics/abstractrenderer.h>
 
-//#include <vulkan/vulkan_intel.h>
+namespace proj172::core {
 
 const unsigned LightParticle::PIXEL = 0;
 const unsigned LightParticle::SQUARE = 1;
@@ -47,7 +45,8 @@ void LightParticle::proceed(e172::Context *context, e172::EventHandler *eventHan
     m_pos += m_vel * context->deltaTime() * 0.1;
 }
 
-void LightParticle::render(e172::AbstractRenderer *renderer) {
+void LightParticle::render(e172::Context *context, e172::AbstractRenderer *renderer)
+{
     switch (m_shape) {
     case PIXEL:
         renderer->drawPixel(renderer->offset() + m_pos, m_color);
@@ -60,3 +59,5 @@ void LightParticle::render(e172::AbstractRenderer *renderer) {
         break;
     }
 }
+
+} // namespace proj172::core

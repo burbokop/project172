@@ -34,7 +34,7 @@ public:
     // Entity interface
 public:
     virtual void proceed(e172::Context *context, e172::EventHandler *) override;
-    virtual void render(e172::AbstractRenderer *renderer) override;
+    virtual void render(e172::Context *context, e172::AbstractRenderer *renderer) override;
 
 private:
     struct Item

@@ -27,9 +27,10 @@ void GUIFocusSwitch::proceed(e172::Context *context, e172::EventHandler *eventHa
     }
 }
 
-void GUIFocusSwitch::render(e172::AbstractRenderer *renderer) {
+void GUIFocusSwitch::render(e172::Context *context, e172::AbstractRenderer *renderer)
+{
     for(const auto& c : children()) {
-        e172::GameApplication::render(c, renderer);
+        e172::GameApplication::render(c, context, renderer);
     }
 }
 

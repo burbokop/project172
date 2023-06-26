@@ -49,7 +49,8 @@ void GUIListView::proceed(e172::Context *context, e172::EventHandler *eventHandl
     }
 }
 
-void GUIListView::render(e172::AbstractRenderer *renderer) {
+void GUIListView::render(e172::Context *context, e172::AbstractRenderer *renderer)
+{
     const auto row_c = rowCount();
     e172::Vector<double> pointer;
 

@@ -28,7 +28,7 @@ public:
     // Entity interface
 public:
     virtual void proceed(e172::Context *, e172::EventHandler *) override;
-    virtual void render(e172::AbstractRenderer*) override {};
+    virtual void render(e172::Context *, e172::AbstractRenderer *) override{};
 
     // WareStorage interface
 protected:

@@ -37,6 +37,6 @@ void WorldPresetStrategy::proceed(e172::Context *context, e172::EventHandler *) 
     }
 }
 
-void WorldPresetStrategy::render(e172::AbstractRenderer *) {}
+void WorldPresetStrategy::render(e172::Context *context, e172::AbstractRenderer *) {}
 
 } // namespace proj172::core

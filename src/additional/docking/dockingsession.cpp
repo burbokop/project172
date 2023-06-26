@@ -91,7 +91,8 @@ void DockingSession::proceed(e172::Context *context, e172::EventHandler *) {
     }
 }
 
-void DockingSession::render(e172::AbstractRenderer *renderer) {
+void DockingSession::render(e172::Context *context, e172::AbstractRenderer *renderer)
+{
     if (m_physicalDockingAttractor.state() == PhysicalDockingAttractor::InInterception) {
         renderer->drawLineShifted(m_item0.physicalNode.position(),
                                   m_item0.physicalNode.center(),

@@ -12,10 +12,10 @@ InjectableEntity::InjectableEntity(e172::FactoryMeta &&meta)
                           capability->proceed(c, h);
                       }
                   },
-                  [](e172::Entity *e, e172::AbstractRenderer *r) {
+                  [](e172::Entity *e, e172::Context *c, e172::AbstractRenderer *r) {
                       const auto capabilities = e->cast<InjectableEntity>()->m_capabilities;
                       for (const auto &capability : capabilities) {
-                          capability->render(r);
+                          capability->render(c, r);
                       }
                   }});
 }

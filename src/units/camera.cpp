@@ -61,7 +61,8 @@ void Camera::proceed(e172::Context *context, e172::EventHandler *) {
     proceedPhysics(context->deltaTime());
 }
 
-void Camera::render(e172::AbstractRenderer *renderer) {
+void Camera::render(e172::Context *context, e172::AbstractRenderer *renderer)
+{
     if(r_cam.isNull()) {
         r_cam = renderer->detachCamera();
     }

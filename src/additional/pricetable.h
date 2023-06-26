@@ -1,11 +1,11 @@
-#ifndef PRICETABLE_H
-#define PRICETABLE_H
+#pragma once
 
 #include <map>
 #include <optional>
 #include <src/object.h>
 #include <src/utility/option.h>
 
+namespace proj172::core {
 
 struct PriceTable : public e172::Object {
     class Price {
@@ -21,7 +21,7 @@ struct PriceTable : public e172::Object {
 private:
     std::map<std::string, std::pair<e172::Option<int64_t>, e172::Option<int64_t>>> m_data;
 public:
-    PriceTable();
+    PriceTable() = default;
     void setBuyPrice(const std::string& ware, int64_t price);
     void setSellPrice(const std::string& ware, int64_t price);
     void removeBuyPrice(const std::string& ware);
@@ -34,4 +34,4 @@ public:
     std::map<std::string, Price> priceMap() const;
 };
 
-#endif // PRICETABLE_H
+} // namespace proj172::core

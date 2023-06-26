@@ -5,15 +5,19 @@
 #include <src/graphics/abstractrenderer.h>
 #include <src/math/math.h>
 
-SegmentPaiter::SegmentPaiter(e172::FactoryMeta &&meta)
+namespace proj172::core {
+
+SegmentPainter::SegmentPainter(e172::FactoryMeta &&meta)
     : e172::Entity(std::move(meta))
 {}
 
-void SegmentPaiter::proceed(e172::Context *context, e172::EventHandler *eventHandler) {
+void SegmentPainter::proceed(e172::Context *context, e172::EventHandler *eventHandler)
+{
     proceedPhysics(context->deltaTime());
 }
 
-void SegmentPaiter::render(e172::AbstractRenderer *renderer) {
+void SegmentPainter::render(e172::Context *context, e172::AbstractRenderer *renderer)
+{
     static const double c = clock();
     const double time = timer.elapsed();
     const auto lineCount = 3;
@@ -38,3 +42,5 @@ void SegmentPaiter::render(e172::AbstractRenderer *renderer) {
         }
     }
 }
+
+} // namespace proj172::core

@@ -41,7 +41,8 @@ void Module::proceed(e172::Context *, e172::EventHandler *) {
     m_audioPlayer.proceed();
 }
 
-void Module::render(e172::AbstractRenderer *renderer) {
+void Module::render(e172::Context *context, e172::AbstractRenderer *renderer)
+{
     m_audioPlayer.setDistance((parentUnit()->position() - renderer->cameraPosition()).module());
 
     m_animator.setAngle(parentUnit()->rotation());

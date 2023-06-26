@@ -40,9 +40,10 @@ void ModuleHandler::proceed(e172::Context *context, e172::EventHandler *eventHan
     }
 }
 
-void ModuleHandler::render(e172::AbstractRenderer *renderer) {
+void ModuleHandler::render(e172::Context *context, e172::AbstractRenderer *renderer)
+{
     for (const auto &module : m_modules) {
-        module->render(renderer);
+        module->render(context, renderer);
     }
 }
 

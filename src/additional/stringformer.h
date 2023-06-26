@@ -1,10 +1,8 @@
-#ifndef STRING_H
-#define STRING_H
+#pragma once
 
 #include <string>
 
-
-
+namespace proj172::core {
 
 struct StringFormer {
     static std::string line(unsigned number);
@@ -17,4 +15,4 @@ struct StringFormer {
     static std::string horisontalBar(unsigned number);
 };
 
-#endif // STRING_H
+} // namespace proj172::core

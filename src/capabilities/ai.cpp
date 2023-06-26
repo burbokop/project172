@@ -8,11 +8,11 @@
 #include <src/debug.h>
 #include <src/math/line2d.h>
 #include <src/math/math.h>
-#include <iostream>
 
 namespace proj172::core {
 
-void AI::render(e172::AbstractRenderer *renderer) {
+void AI::render(e172::Context *context, e172::AbstractRenderer *renderer)
+{
     /*
     if(dockingTask.status() != DockingTask::Idle && dockingTask.status() != DockingTask::Docked) {
         const auto format = e172::TextFormat(e172::TextFormat::AlignHCenter | e172::TextFormat::AlignTop, 10);

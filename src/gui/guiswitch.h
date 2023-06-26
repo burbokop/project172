@@ -28,7 +28,7 @@ public:
     {}
 
     GUISwitch(e172::FactoryMeta &&meta,
-              IInformative *informative,
+              Informative *informative,
               std::function<void()> on = nullptr,
               std::function<void()> off = nullptr)
         : GUIMenuElement(std::move(meta), informative)

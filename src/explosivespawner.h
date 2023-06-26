@@ -13,8 +13,8 @@ public:
 
     // Entity interface
 public:
-    void proceed(e172::Context *context, e172::EventHandler *);
-    void render(e172::AbstractRenderer *) {}
+    void proceed(e172::Context *, e172::EventHandler *) override;
+    void render(e172::Context *, e172::AbstractRenderer *) override {}
 
 private:
     void spawnExplosive(e172::Context *context, const e172::Variant &value);

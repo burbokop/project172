@@ -1,12 +1,14 @@
-#ifndef IINFORMATIVE_H
-#define IINFORMATIVE_H
+#pragma once
 
 #include <string>
 
-class IInformative {
+namespace proj172::core {
+
+class Informative
+{
 public:
     std::string virtual info() const;
-    virtual ~IInformative();
+    virtual ~Informative() = default;
 };
 
-#endif // IINFORMATIVE_H
+} // namespace proj172::core

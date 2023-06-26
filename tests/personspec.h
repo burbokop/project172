@@ -23,8 +23,8 @@ class PersonSpec {
 
         // Entity interface
     public:
-        virtual void proceed(e172::Context *, e172::EventHandler *) override{};
-        virtual void render(e172::AbstractRenderer *) override {};
+        void proceed(e172::Context *, e172::EventHandler *) override{};
+        void render(e172::Context *context, e172::AbstractRenderer *) override{};
 
         // WareStorage interface
     protected:

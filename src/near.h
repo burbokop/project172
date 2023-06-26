@@ -50,7 +50,7 @@ public:
     // Entity interface
 public:
     virtual void proceed(e172::Context *context, e172::EventHandler *) override;
-    virtual void render(e172::AbstractRenderer *) override {};
+    virtual void render(e172::Context *context, e172::AbstractRenderer *) override{};
     e172::ptr<Capability> center() const { return m_center; }
     void setCenter(const e172::ptr<Capability> &center) { m_center = center; }
 };

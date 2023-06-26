@@ -56,7 +56,7 @@ WorldPreset::GenerationResult DefaultWorld::generatePlayer(e172::Context *contex
     result.controllers.push_back(player);
 
     auto playerShip = context->assetProvider()->createLoadable<Unit>("sh1").unwrap();
-    playerShip->resetPhysicsProperties(e172::Vector<double>::createRandom(m_random, 500),
+    playerShip->resetPhysicsProperties(e172::Vector<double>::createRandom(m_random, 200, 500),
                                        m_random.nextInRange(0., e172::Math::Pi * 2));
     playerShip->setOwnerPerson(person);
     playerShip->addCapability(player);
@@ -100,7 +100,7 @@ WorldPreset::GenerationResult DefaultWorld::generateSomeShips(e172::Context *con
             someShipModules->addModule(
                 context->assetProvider()->createLoadable<Module>("engine2").unwrap());
             ship->addCapability(someShipModules);
-            ship->resetPhysicsProperties(e172::Vector<double>::createRandom(m_random, 500),
+            ship->resetPhysicsProperties(e172::Vector<double>::createRandom(m_random, 0, 500),
                                          m_random.nextInRange(0., e172::Math::Pi * 2));
             result.entities.push_back(ship);
             ++i;
@@ -125,7 +125,7 @@ WorldPreset::GenerationResult DefaultWorld::generateSomeStations(e172::Context *
             const auto controller = e172::FactoryMeta::make<Controller>();
             controller->setPerson(person);
             station->addCapability(controller);
-            station->resetPhysicsProperties(e172::Vector<double>::createRandom(m_random, 500),
+            station->resetPhysicsProperties(e172::Vector<double>::createRandom(m_random, 0, 1000),
                                             m_random.nextInRange(0., e172::Math::Pi * 2));
             result.entities.push_back(station);
             ++i;

@@ -1,6 +1,6 @@
 #include "pricetable.h"
 
-PriceTable::PriceTable() {}
+namespace proj172::core {
 
 void PriceTable::setBuyPrice(const std::string &ware, int64_t price) {
     std::get<0>(m_data[ware]) = price;
@@ -68,3 +68,5 @@ e172::Option<int64_t> PriceTable::Price::sellPrice() const {
 PriceTable::Price::operator std::string() const {
     return "{ buy: " + m_buyPrice.toString() + ", sell: " + m_sellPrice.toString() + " }";
 }
+
+} // namespace proj172::core

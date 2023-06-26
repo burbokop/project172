@@ -1,10 +1,10 @@
 #pragma once
 
-#include <src/entity.h>
-#include <src/math/physicalobject.h>
-#include <memory>
 #include <iostream>
+#include <memory>
+#include <src/entity.h>
 #include <src/math/colider.h>
+#include <src/math/physicalobject.h>
 
 namespace e172 {
 
@@ -69,7 +69,7 @@ public:
     // Entity interface
 public:
     virtual void proceed(e172::Context *context, e172::EventHandler *eventHandler) override;
-    virtual void render(e172::AbstractRenderer *renderer) override;
+    virtual void render(e172::Context *context, e172::AbstractRenderer *renderer) override;
     e172::Vector<double> cOffset() const { return m_cOffset; }
     void setCOffset(const e172::Vector<double> &cOffset);
     double cAngle() const { return m_cAngle; }

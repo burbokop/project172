@@ -22,8 +22,8 @@ public:
 
     // Entity interface
 public:
-    void proceed(e172::Context *context, e172::EventHandler *);
-    void render(e172::AbstractRenderer *renderer);
+    void proceed(e172::Context *context, e172::EventHandler *) override;
+    void render(e172::Context *context, e172::AbstractRenderer *renderer) override;
     void bindToPhysicalObject(e172::PhysicalObject *value);
 
     void flashing(e172::Context *, const e172::Variant &repeats);

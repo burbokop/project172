@@ -1,12 +1,12 @@
-#ifndef TRIGGER_H
-#define TRIGGER_H
+#pragma once
 
+namespace proj172::core {
 
 class Trigger {
 private:
     bool enabled = false;
 public:
-    Trigger();
+    Trigger() = default;
     void enable();
     void disanable();
 
@@ -14,4 +14,4 @@ public:
     bool check();
 };
 
-#endif // TRIGGER_H
+} // namespace proj172::core

@@ -2,35 +2,10 @@
 
 #include <src/graphics/abstractrenderer.h>
 
-double ChartView::coeficient() const {
-    return m_coeficient;
-}
+namespace proj172::core {
 
-void ChartView::setCoeficient(double coeficient) {
-    m_coeficient = coeficient;
-}
-
-e172::Vector<double> ChartView::offset() const {
-    return m_offset;
-}
-
-void ChartView::setOffset(const e172::Vector<double> &offset) {
-    m_offset = offset;
-}
-
-size_t ChartView::pointCount() const {
-    return m_pointCount;
-}
-
-void ChartView::setPointCount(const size_t &pointCount) {
-    m_pointCount = pointCount;
-}
-
-ChartView::ChartView(e172::FactoryMeta &&meta)
-    : e172::Entity(std::move(meta))
-{}
-
-void ChartView::render(e172::AbstractRenderer *renderer) {
+void ChartView::render(e172::Context *context, e172::AbstractRenderer *renderer)
+{
     if(m_function) {
         e172::Vector<double> last;
         renderer->drawSquare(m_offset, 2, 0xffffff);
@@ -47,3 +22,5 @@ void ChartView::render(e172::AbstractRenderer *renderer) {
         }
     }
 }
+
+} // namespace proj172::core

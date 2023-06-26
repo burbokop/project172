@@ -2,6 +2,8 @@
 
 #include <src/graphics/abstractrenderer.h>
 
+namespace proj172::core {
+
 class SpeedIndicator {
 public:
     SpeedIndicator() = default;
@@ -13,3 +15,5 @@ private:
     int m_lastNumber = 0;
     int m_position = 0;
 };
+
+} // namespace proj172::core

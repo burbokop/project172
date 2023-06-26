@@ -5,12 +5,12 @@
 namespace proj172::core {
 
 enum class MessageType : std::underlying_type<e172::Context::MessageType>::type {
-    SpawnExplosive = e172::Context::UserMessage,
+    AddCapability = e172::Context::UserMessage,
+    RemoveCapability,
+    SpawnExplosive,
     SpawnEngineParticles,
     SpawnUnit,
     SpawnSurface,
-    AddCapability,
-    RemoveCapability,
     EmergencyMessage,
     BackgroundFlashing,
     FloatingMessage,

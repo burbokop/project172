@@ -57,8 +57,9 @@ void GUIStack::proceed(e172::Context *context, e172::EventHandler *eventHandler)
     e172::GameApplication::proceed(m_current, context, eventHandler);
 }
 
-void GUIStack::render(e172::AbstractRenderer *renderer) {
-    e172::GameApplication::render(m_current, renderer);
+void GUIStack::render(e172::Context *context, e172::AbstractRenderer *renderer)
+{
+    e172::GameApplication::render(m_current, context, renderer);
 }
 
 } // namespace proj172::core

@@ -123,7 +123,8 @@ void Player::proceed(e172::Context *context, e172::EventHandler *eventHandler) {
     this->Controller::proceed(context, eventHandler);
 }
 
-void Player::render(e172::AbstractRenderer *renderer) {
+void Player::render(e172::Context *context, e172::AbstractRenderer *renderer)
+{
     UNUSED(renderer);
 }
 

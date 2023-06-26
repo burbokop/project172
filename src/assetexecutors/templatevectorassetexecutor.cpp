@@ -1,6 +1,6 @@
 #include "templatevectorassetexecutor.h"
 
-TemplateVectorAssetExecutor::TemplateVectorAssetExecutor() {}
+namespace proj172::core {
 
 e172::Variant TemplateVectorAssetExecutor::proceed(const e172::Variant &value) {
     std::vector<e172::LoadableTemplate> result;
@@ -15,3 +15,5 @@ e172::Variant TemplateVectorAssetExecutor::proceed(const e172::Variant &value) {
     }
     return e172::Variant::fromValue(result);
 }
+
+} // namespace proj172::core

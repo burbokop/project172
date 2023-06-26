@@ -1,13 +1,13 @@
-#ifndef UNITSAMOUNTINFO_H
-#define UNITSAMOUNTINFO_H
+#pragma once
 
 #include <list>
-
 #include <src/entity.h>
-
 #include <src/iinformative.h>
 
-class UnitsAmountInfo : public IInformative {
+namespace proj172::core {
+
+class UnitsAmountInfo : public Informative
+{
 private:
     e172::Context *m_context = nullptr;
 public:
@@ -18,4 +18,4 @@ public:
     std::string info() const override;
 };
 
-#endif // UNITSAMOUNTINFO_H
+} // namespace proj172::core

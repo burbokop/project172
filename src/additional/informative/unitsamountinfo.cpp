@@ -1,6 +1,9 @@
 #include "unitsamountinfo.h"
+
 #include <list>
 #include <src/context.h>
+
+namespace proj172::core {
 
 UnitsAmountInfo::UnitsAmountInfo(e172::Context *context) {
     m_context = context;
@@ -11,3 +14,5 @@ std::string UnitsAmountInfo::info() const {
         return "Units amount: " + std::to_string(m_context->entities().size()) + '\n';
     return "Context missing\n";
 }
+
+} // namespace proj172::core

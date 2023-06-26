@@ -1,5 +1,4 @@
-#ifndef GUICENTRALMESSAGE_H
-#define GUICENTRALMESSAGE_H
+#pragma once
 
 #include <src/gui/base/guimenuelement.h>
 #include <src/time/elapsedtimer.h>
@@ -19,7 +18,7 @@ public:
         : GUIMenuElement(std::move(meta), label)
     {}
 
-    GUICentralMessage(e172::FactoryMeta &&meta, IInformative *informative)
+    GUICentralMessage(e172::FactoryMeta &&meta, Informative *informative)
         : GUIMenuElement(std::move(meta), informative)
     {}
 
@@ -32,4 +31,3 @@ public:
 
 } // namespace proj172::core
 
-#endif // GUICENTRALMESSAGE_H

@@ -1,13 +1,12 @@
-#ifndef PLAYER2FINDER_H
-#define PLAYER2FINDER_H
+#pragma once
 
 #include <src/iinformative.h>
 #include <src/capabilities/controller.h>
 
 namespace proj172::core {
 
-class ControllerFinder : public IInformative {
-
+class ControllerFinder : public Informative
+{
 private:
     Controller *p1 = nullptr;
     Controller *p2 = nullptr;
@@ -21,4 +20,3 @@ public:
 
 } // namespace proj172::core
 
-#endif // PLAYER2FINDER_H

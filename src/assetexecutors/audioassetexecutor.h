@@ -1,17 +1,16 @@
-#ifndef AUDIOASSETEXECUTOR_H
-#define AUDIOASSETEXECUTOR_H
+#pragma once
 
 #include <src/assettools/abstractassetexecutor.h>
 
-
+namespace proj172::core {
 
 class AudioAssetExecutor : public e172::AbstractAssetExecutor {
 public:
-    AudioAssetExecutor();
+    AudioAssetExecutor() = default;
 
     // AssetExecutor interface
 public:
     e172::Variant proceed(const e172::Variant &value) override;
 };
 
-#endif // AUDIOASSETEXECUTOR_H
+} // namespace proj172::core

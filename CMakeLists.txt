@@ -1,13 +1,19 @@
 cmake_minimum_required(VERSION 3.16)
 
-project(project172)
+project(project172 VERSION 0.0.5)
 
-add_compile_options(-no-pie)
+if (NOT (CMAKE_CXX_COMPILER_ID STREQUAL "Clang"))
+    add_compile_options(-no-pie)
+endif()
+
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_EXE_LINKER_FLAGS "-Wl,-rpath='${ORIGIN}'")
 
 set(ENABLE_E172_LINT ON)
+
+configure_file(${CMAKE_CURRENT_LIST_DIR}/project.h.in ${CMAKE_CURRENT_BINARY_DIR}/config/project.h)
+include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
 include_directories(${CMAKE_CURRENT_LIST_DIR})
 link_directories(${CMAKE_CURRENT_BINARY_DIR})
@@ -89,7 +95,11 @@ add_library(project172_core SHARED
     ${CMAKE_CURRENT_LIST_DIR}/src/assetexecutors/templatevectorassetexecutor.h
     ${CMAKE_CURRENT_LIST_DIR}/src/assetexecutors/nodesassetexecutor.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/assetexecutors/nodesassetexecutor.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/assetexecutors/assetexecutors.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/assetexecutors/assetexecutors.cpp
 
+    ${CMAKE_CURRENT_LIST_DIR}/src/capabilities/capabilitysynchronizer.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/capabilities/capabilitysynchronizer.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/capabilities/modules/engine.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/capabilities/modules/engine.h
     ${CMAKE_CURRENT_LIST_DIR}/src/capabilities/modules/module.cpp
@@ -119,6 +129,8 @@ add_library(project172_core SHARED
     ${CMAKE_CURRENT_LIST_DIR}/src/capabilities/warestorage.h
     ${CMAKE_CURRENT_LIST_DIR}/src/capabilities/factory.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/capabilities/factory.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/capabilities/capabilities.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/capabilities/capabilities.cpp
 
     ${CMAKE_CURRENT_LIST_DIR}/src/tasks/task.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/tasks/task.h
@@ -130,6 +142,8 @@ add_library(project172_core SHARED
     ${CMAKE_CURRENT_LIST_DIR}/src/tasks/sellwaretask.h
     ${CMAKE_CURRENT_LIST_DIR}/src/tasks/tradetask.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/tasks/tradetask.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/tasks/tasks.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/tasks/tasks.cpp
 
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/base/guielement.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/gui/base/guielement.h
@@ -189,6 +203,8 @@ add_library(project172_core SHARED
     ${CMAKE_CURRENT_LIST_DIR}/src/units/station.h
     ${CMAKE_CURRENT_LIST_DIR}/src/units/unit.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/units/unit.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/units/units.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/units/units.cpp
 
     ${CMAKE_CURRENT_LIST_DIR}/src/persons/person.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/persons/person.h
@@ -209,7 +225,8 @@ add_library(project172_core SHARED
     ${CMAKE_CURRENT_LIST_DIR}/src/explosivespawner.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/explosivespawner.h
     ${CMAKE_CURRENT_LIST_DIR}/src/ftestobject.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/ftestobject.h)
+    ${CMAKE_CURRENT_LIST_DIR}/src/ftestobject.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/packagetype.h)
 
 include(${CMAKE_CURRENT_LIST_DIR}/e172/e172.cmake)
 include(${CMAKE_CURRENT_LIST_DIR}/sdl_implementation/sdl_implementation.cmake)
@@ -236,7 +253,13 @@ if (WIN32)
 endif (WIN32)
 
 add_executable(project172
-    ${CMAKE_CURRENT_LIST_DIR}/src/main.cpp)
+    ${CMAKE_CURRENT_LIST_DIR}/src/main.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/renderlayer.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/renderlayer.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/flags.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/flags.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/debugchart.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/debugchart.cpp)
 
 target_link_libraries(project172
     sdl_impl

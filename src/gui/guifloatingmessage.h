@@ -21,7 +21,7 @@ public:
 
     GUIFloatingMessage(e172::FactoryMeta &&meta,
                        const e172::ptr<Unit> &parent,
-                       IInformative *informative)
+                       Informative *informative)
         : GUIMenuElement(std::move(meta), informative)
         , m_parent(parent)
     {}
@@ -30,8 +30,8 @@ public:
 
     // GUIElement interface
 public:
-    virtual void render(e172::AbstractRenderer *renderer) override;
     virtual void proceed(e172::Context *context, e172::EventHandler *eventHandler) override;
+    virtual void render(e172::Context *context, e172::AbstractRenderer *renderer) override;
 
 protected:
     static const uint32_t DEFAULT_COLOR;

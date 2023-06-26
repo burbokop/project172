@@ -1,7 +1,9 @@
 #include "unit.h"
 
 #include "projectile.h"
+#include "src/debug.h"
 #include "src/messagetype.h"
+#include "src/net/common.h"
 #include <src/args.h>
 #include <src/assettools/assetprovider.h>
 #include <src/assettools/loadabletemplate.h>
@@ -15,15 +17,8 @@
 
 namespace proj172::core {
 
-bool Unit::selected() const {
-    return m_selected;
-}
-
-double Unit::health() const {
-    return m_health;
-}
-
-std::string Unit::info() const {
+std::string Unit::info() const
+{
     return templateId();
 }
 
@@ -35,7 +30,8 @@ void Unit::proceed(e172::Context *context, e172::EventHandler *eventHandler) {
     proceedPhysics(context->deltaTime());
 }
 
-void Unit::render(e172::AbstractRenderer *renderer) {
+void Unit::render(e172::Context *context, e172::AbstractRenderer *renderer)
+{
     m_animator.setAngle(rotation());
     m_animator.setPosition(position());
     const auto spriteSize = m_animator.render(renderer);
@@ -45,7 +41,7 @@ void Unit::render(e172::AbstractRenderer *renderer) {
     }
 
     for(const auto& cap : m_capabilities) {
-        cap->render(renderer);
+        cap->render(context, renderer);
     }
 
     {
@@ -62,7 +58,7 @@ void Unit::render(e172::AbstractRenderer *renderer) {
         double yOffset = 0;
         const auto format = e172::TextFormat(e172::TextFormat::AlignHCenter | e172::TextFormat::AlignBottom, 12);
         for(const auto& c : m_capabilities) {
-            auto offset = renderer->drawStringShifted(c->className(),
+            auto offset = renderer->drawStringShifted(c->meta().typeName(),
                                                       position()
                                                           + e172::Vector<double>(60,
                                                                                  spriteSize.y() * 0.5
@@ -72,6 +68,7 @@ void Unit::render(e172::AbstractRenderer *renderer) {
             yOffset += offset.y();
         }
     }
+
     if(auto storage = capability<WareStorage>()) {
         const auto format = e172::TextFormat(e172::TextFormat::AlignHCenter | e172::TextFormat::AlignBottom, 12);
         double yOffset = 0;
@@ -87,24 +84,77 @@ void Unit::render(e172::AbstractRenderer *renderer) {
         }
     }
 
-    renderer->drawStringShifted(std::to_string(entityId()),
+    renderer->drawStringShifted(templateId() + ":" + std::to_string(entityId()),
                                 position() + e172::Vector<double>(0, -spriteSize.y() * 0.5 - 16),
                                 0x00B358,
                                 e172::TextFormat::fromFontSize(11));
 }
 
-e172::ptr<Person> Unit::ownerPerson() const {
-    return m_ownerPerson;
+void Unit::writeNet(e172::WriteBuffer &buf)
+{
+    const auto needSyncSelf = e172::Entity::needSyncNet();
+    buf.write<std::uint8_t>(needSyncSelf ? 1 : 0);
+    if (needSyncSelf) {
+        e172::Entity::writeNet(buf);
+    }
+    std::vector<e172::ptr<Capability>> capsToSync;
+    capsToSync.reserve(m_capabilities.size());
+    for (const auto &c : m_capabilities) {
+        if (c->needSyncNet()) {
+            capsToSync.push_back(c);
+        }
+    }
+    buf.writeDyn(capsToSync.size(), [&capsToSync](std::size_t i, e172::WriteBuffer &buf) {
+        buf.write<e172::PackedEntityId>(capsToSync[i]->entityId());
+        capsToSync[i]->writeNet(buf);
+    });
 }
 
-void Unit::setOwnerPerson(const e172::ptr<Person> &ownerPerson) {
-    m_ownerPerson = ownerPerson;
+bool Unit::readNet(e172::ReadBuffer &&buf)
+{
+    const auto &needSyncSelf = buf.read<std::uint8_t>();
+    if (!needSyncSelf)
+        return false;
+    if (*needSyncSelf > 0) {
+        if (!e172::Entity::readNet(std::move(buf))) {
+            return false;
+        }
+    }
+
+    return buf
+        .readDyn([this](std::size_t i, e172::ReadBuffer &&buf) -> bool {
+            const auto capId = buf.read<e172::PackedEntityId>();
+            if (!capId)
+                return false;
+
+            const auto it = std::find_if(m_capabilities.begin(),
+                                         m_capabilities.end(),
+                                         [&capId](const e172::ptr<Capability> &cap) {
+                                             return cap->entityId() == *capId;
+                                         });
+            if (it == m_capabilities.end()) {
+                (*it)->readNet(std::move(buf));
+            } else {
+                e172::Debug::warning("Can not sync capability:", *capId, "not found");
+            }
+            return true;
+        })
+        .has_value();
+}
+
+bool Unit::needSyncNet() const
+{
+    for (const auto &c : m_capabilities) {
+        if (c->needSyncNet()) {
+            return true;
+        }
+    }
+    return e172::Entity::needSyncNet();
 }
 
 Unit::Unit(e172::FactoryMeta &&meta)
     : e172::Entity(std::move(meta))
 {
-    std::srand(clock());
     m_selectedColor = e172::randomColor(e172::Random::uniq());
     registerInitFunction([this]() {
         m_health = asset<double>("health");
@@ -124,9 +174,16 @@ Unit::Unit(e172::FactoryMeta &&meta)
 }
 
 void Unit::addCapability(const e172::ptr<Capability> &capability) {
-    if(capability->setParentUnit(this)) {
+    assert(capability);
+    if (capability && capability->setParentUnit(this)) {
         m_capabilities.push_back(capability);
     }
+}
+
+void Unit::addCapability(std::unique_ptr<Capability> &&capability)
+{
+    assert(capability);
+    addCapability(capability.release());
 }
 
 void Unit::removeCapability(const e172::ptr<Capability> &capability) {
@@ -171,6 +228,13 @@ void Unit::hit(e172::Context *context, int value) {
             context->emitMessage(~MessageType::FloatingMessage,
                                  e172::VariantVector{entityId(), "no damage"});
         }
+    }
+}
+
+Unit::~Unit()
+{
+    for (const auto &c : m_capabilities) {
+        c.destroy();
     }
 }
 

@@ -4,6 +4,8 @@
 #include <src/math/math.h>
 #include <src/additional.h>
 
+namespace proj172::core {
+
 e172::Variant NodesAssetExecutor::proceed(const e172::Variant &value) {
     std::list<std::pair<e172::Vector<double>, double>> result;
     const auto nodes = value.toList();
@@ -34,3 +36,5 @@ e172::Variant NodesAssetExecutor::proceed(const e172::Variant &value) {
     }
     return e172::Variant::fromValue(result);
 }
+
+} // namespace proj172::core

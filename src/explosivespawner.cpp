@@ -26,7 +26,7 @@ void ExplosiveSpawner::spawnExplosive(e172::Context *context, const e172::Vector
                                                                          radius * 400);
 
         particle->place(position,
-                        e172::Vector<double>::createRandom(e172::Random::uniq(), v0) + velocity);
+                        e172::Vector<double>::createRandom(e172::Random::uniq(), 0, v0) + velocity);
         context->addEntity(particle);
     }
 }
