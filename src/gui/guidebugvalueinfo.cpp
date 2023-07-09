@@ -1,11 +1,10 @@
 #include "guidebugvalueinfo.h"
 
-#include "src/abstracteventprovider.h"
-#include "src/eventhandler.h"
-#include <math.h>
-#include <src/capabilities/controller.h>
-#include <src/graphics/abstractrenderer.h>
-#include <src/units/unit.h>
+#include "../capabilities/controller.h"
+#include "../units/unit.h"
+#include <e172/abstracteventprovider.h>
+#include <e172/eventhandler.h>
+#include <e172/graphics/abstractrenderer.h>
 
 namespace proj172::core {
 

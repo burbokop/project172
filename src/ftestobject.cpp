@@ -1,11 +1,11 @@
 #include "ftestobject.h"
 
-#include "src/eventhandler.h"
-#include <src/context.h>
-#include <src/graphics/abstractrenderer.h>
-#include <src/math/math.h>
-#include <src/math/matrix.h>
-#include <src/utility/ptr.h>
+#include <e172/context.h>
+#include <e172/eventhandler.h>
+#include <e172/graphics/abstractrenderer.h>
+#include <e172/math/math.h>
+#include <e172/math/matrix.h>
+#include <e172/utility/ptr.h>
 
 void FTestObject::setCOffset(const e172::Vector<double> &cOffset)
 {

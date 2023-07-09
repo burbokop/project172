@@ -1,6 +1,6 @@
 #include "vectorassetexecutor.h"
 
-#include <src/math/vector.h>
+#include <e172/math/vector.h>
 
 namespace proj172::core {
 

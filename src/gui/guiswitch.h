@@ -1,9 +1,7 @@
-#ifndef GUISWITCH_H
-#define GUISWITCH_H
+#pragma once
 
+#include "base/guimenuelement.h"
 #include <functional>
-
-#include <src/gui/base/guimenuelement.h>
 
 namespace proj172::core {
 
@@ -48,5 +46,3 @@ private:
 };
 
 } // namespace proj172::core
-
-#endif // GUISWITCH_H

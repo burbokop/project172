@@ -1,8 +1,7 @@
-#ifndef GUICOMBOBOX_H
-#define GUICOMBOBOX_H
+#pragma once
 
+#include "base/guilistview.h"
 #include "guibutton.h"
-#include <src/gui/base/guilistview.h>
 
 namespace proj172::core {
 
@@ -44,4 +43,3 @@ public:
 
 } // namespace proj172::core
 
-#endif // GUICOMBOBOX_H

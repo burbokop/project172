@@ -1,10 +1,10 @@
 #include "memstatearner.h"
 
-#include <src/context.h>
-#include <src/debug.h>
-#include <src/eventhandler.h>
-#include <src/graphics/abstractrenderer.h>
-#include <src/utility/systeminfo.h>
+#include <e172/context.h>
+#include <e172/debug.h>
+#include <e172/eventhandler.h>
+#include <e172/graphics/abstractrenderer.h>
+#include <e172/utility/systeminfo.h>
 
 namespace proj172::core {
 

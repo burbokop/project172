@@ -1,14 +1,14 @@
 #include "player.h"
 
 #include "../messagetype.h"
-#include <src/args.h>
-#include <src/capabilities/docker.h>
-#include <src/capabilities/modulehandler.h>
-#include <src/capabilities/modules/weapon.h>
-#include <src/context.h>
-#include <src/debug.h>
-#include <src/eventhandler.h>
-#include <src/units/ship.h>
+#include "../units/ship.h"
+#include "docker.h"
+#include "modulehandler.h"
+#include "modules/weapon.h"
+#include <e172/args.h>
+#include <e172/context.h>
+#include <e172/debug.h>
+#include <e172/eventhandler.h>
 
 namespace proj172::core {
 

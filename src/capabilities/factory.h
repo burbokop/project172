@@ -1,8 +1,7 @@
 #pragma once
 
 #include "warestorage.h"
-#include <src/additional/ware/waremultibaycontainer.h>
-#include <src/time/elapsedtimer.h>
+#include <e172/time/elapsedtimer.h>
 
 namespace proj172::core {
 

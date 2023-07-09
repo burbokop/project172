@@ -1,6 +1,6 @@
 #pragma once
 
-#include <src/gameapplication.h>
+#include <e172/gameapplication.h>
 
 namespace proj172::core {
 

@@ -1,10 +1,10 @@
 #pragma once
 
-#include <src/object.h>
-#include <src/variant.h>
-#include <src/utility/closableoutputstream.h>
-#include <src/utility/ptr.h>
-#include <src/utility/signalstreambuffer.h>
+#include <e172/object.h>
+#include <e172/utility/closableoutputstream.h>
+#include <e172/utility/ptr.h>
+#include <e172/utility/signalstreambuffer.h>
+#include <e172/variant.h>
 #include <list>
 #include <set>
 

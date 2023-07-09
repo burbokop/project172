@@ -1,7 +1,7 @@
 #pragma once
 
 #include "base/guilistview.h"
-#include <src/time/elapsedtimer.h>
+#include <e172/time/elapsedtimer.h>
 
 namespace proj172::core {
 

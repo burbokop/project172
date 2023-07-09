@@ -1,11 +1,9 @@
 #include "taskconsole.h"
 
-#include <src/additional.h>
-#include <src/context.h>
-
-#include <src/units/unit.h>
-
-#include <src/capabilities/controller.h>
+#include "../capabilities/controller.h"
+#include "../units/unit.h"
+#include <e172/additional.h>
+#include <e172/context.h>
 
 namespace proj172::core {
 

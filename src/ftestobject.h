@@ -1,10 +1,10 @@
 #pragma once
 
+#include <e172/entity.h>
+#include <e172/math/colider.h>
+#include <e172/math/physicalobject.h>
 #include <iostream>
 #include <memory>
-#include <src/entity.h>
-#include <src/math/colider.h>
-#include <src/math/physicalobject.h>
 
 namespace e172 {
 

@@ -1,8 +1,8 @@
 #pragma once
 
+#include "base/guicontainer.h"
 #include "guicentralmessage.h"
 #include "guifloatingmessage.h"
-#include <src/gui/base/guicontainer.h>
 
 namespace proj172::core {
 

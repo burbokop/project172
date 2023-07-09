@@ -1,7 +1,7 @@
 #include "volumeobserverextension.h"
 
-#include <src/context.h>
-#include <src/audio/abstractaudioprovider.h>
+#include <e172/audio/abstractaudioprovider.h>
+#include <e172/context.h>
 
 VolumeObserverExtension::VolumeObserverExtension()
     : e172::GameApplicationExtension(GameApplicationExtension::InitExtension) {}

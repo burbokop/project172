@@ -1,7 +1,7 @@
 #include "warestorage.h"
 
-#include <src/additional/ware/warecontainer.h>
-#include <src/functional/metafunction.h>
+#include "../additional/ware/warecontainer.h"
+#include <e172/functional/metafunction.h>
 
 namespace proj172::core {
 

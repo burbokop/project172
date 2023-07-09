@@ -1,8 +1,8 @@
 #pragma once
 
-#include <src/capabilities/controller.h>
-#include <src/graphics/abstractrenderer.h>
-#include <src/math/physicalobject.h>
+#include "../capabilities/controller.h"
+#include <e172/graphics/abstractrenderer.h>
+#include <e172/math/physicalobject.h>
 
 namespace proj172::core {
 

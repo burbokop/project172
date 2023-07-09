@@ -1,6 +1,6 @@
 #pragma once
 
-#include <src/assettools/abstractassetexecutor.h>
+#include <e172/assettools/abstractassetexecutor.h>
 
 namespace proj172::core {
 

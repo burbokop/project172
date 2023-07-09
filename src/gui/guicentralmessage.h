@@ -1,7 +1,7 @@
 #pragma once
 
-#include <src/gui/base/guimenuelement.h>
-#include <src/time/elapsedtimer.h>
+#include "base/guimenuelement.h"
+#include <e172/time/elapsedtimer.h>
 
 namespace proj172::core {
 

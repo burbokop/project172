@@ -1,20 +1,17 @@
 #include "defaultworld.h"
 
-#include <src/capabilities/player.h>
-#include <src/capabilities/ai.h>
-#include <src/capabilities/docker.h>
-#include <src/capabilities/modulehandler.h>
-#include <src/capabilities/warestorage.h>
-#include <src/ftestobject.h>
-#include <src/math/math.h>
-#include <src/units/ship.h>
-#include <src/units/station.h>
-#include <src/units/unit.h>
-#include <src/additional/segmentpaiter.h>
-#include <src/capabilities/modules/weapon.h>
-#include <src/context.h>
-#include <src/debug.h>
-#include <src/math/physicalobject.h>
+#include "../capabilities/ai.h"
+#include "../capabilities/modulehandler.h"
+#include "../capabilities/modules/weapon.h"
+#include "../capabilities/player.h"
+#include "../capabilities/warestorage.h"
+#include "../units/ship.h"
+#include "../units/station.h"
+#include "../units/unit.h"
+#include <e172/context.h>
+#include <e172/debug.h>
+#include <e172/math/math.h>
+#include <e172/math/physicalobject.h>
 
 namespace proj172::core {
 

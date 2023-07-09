@@ -1,12 +1,12 @@
 #pragma once
 
-#include <list>
-#include <string>
+#include "../tasks/task.h"
+#include <e172/memcontrol/abstractfactory.h>
+#include <e172/utility/closableoutputstream.h>
 #include <functional>
+#include <list>
 #include <map>
-#include <src/memcontrol/abstractfactory.h>
-#include <src/tasks/task.h>
-#include <src/utility/closableoutputstream.h>
+#include <string>
 
 namespace proj172::core {
 

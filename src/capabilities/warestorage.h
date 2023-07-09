@@ -1,8 +1,8 @@
 #pragma once
 
+#include "../additional/pricetable.h"
+#include "../additional/ware/abstractwarecontainer.h"
 #include "capability.h"
-#include <src/additional/ware/abstractwarecontainer.h>
-#include <src/additional/pricetable.h>
 
 namespace proj172::core {
 

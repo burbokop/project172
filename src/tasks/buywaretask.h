@@ -1,11 +1,8 @@
-#ifndef BUYWARETASK_H
-#define BUYWARETASK_H
+#pragma once
 
+#include "../capabilities/warestorage.h"
 #include "task.h"
-
-#include <src/capabilities/warestorage.h>
-
-#include <src/utility/option.h>
+#include <e172/utility/option.h>
 
 namespace proj172::core {
 
@@ -34,5 +31,3 @@ public:
 };
 
 } // namespace proj172::core
-
-#endif // BUYWARETASK_H

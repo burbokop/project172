@@ -1,9 +1,7 @@
-#ifndef VOLUMEOBSERVEREXTENSION_H
-#define VOLUMEOBSERVEREXTENSION_H
+#pragma once
 
-#include <src/gameapplication.h>
-
-#include <src/utility/observer.h>
+#include <e172/gameapplication.h>
+#include <e172/utility/observer.h>
 
 class VolumeObserverExtension : public e172::GameApplicationExtension {
     e172::Observer<e172::Variant> value;
@@ -17,4 +15,3 @@ public:
     virtual void proceed(e172::GameApplication *application) override;
 };
 
-#endif // VOLUMEOBSERVEREXTENSION_H

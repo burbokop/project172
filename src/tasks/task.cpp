@@ -1,8 +1,7 @@
 #include "task.h"
 
-#include <src/capabilities/controller.h>
-
-#include <src/debug.h>
+#include "../capabilities/controller.h"
+#include <e172/debug.h>
 
 namespace proj172::core {
 

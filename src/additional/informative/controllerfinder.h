@@ -1,7 +1,7 @@
 #pragma once
 
-#include <src/iinformative.h>
-#include <src/capabilities/controller.h>
+#include "../../capabilities/controller.h"
+#include "../../informative.h"
 
 namespace proj172::core {
 

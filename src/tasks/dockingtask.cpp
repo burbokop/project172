@@ -1,10 +1,10 @@
 #include "dockingtask.h"
 
-#include <src/capabilities/controller.h>
-#include <src/math/math.h>
-#include <src/capabilities/docker.h>
-#include <src/context.h>
-#include <src/units/unit.h>
+#include "../capabilities/controller.h"
+#include "../capabilities/docker.h"
+#include "../units/ship.h"
+#include <e172/context.h>
+#include <e172/math/math.h>
 
 namespace proj172::core {
 

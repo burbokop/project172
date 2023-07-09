@@ -1,10 +1,10 @@
 #include "capabilitysynchronizer.h"
 
-#include <src/gameapplication.h>
-#include <src/net/gameclient.h>
-#include <src/net/gameserver.h>
-#include <src/packagetype.h>
-#include <src/units/unit.h>
+#include "../packagetype.h"
+#include "../units/unit.h"
+#include <e172/gameapplication.h>
+#include <e172/net/gameclient.h>
+#include <e172/net/gameserver.h>
 
 void proj172::core::CapabilitySyncClient::entityAdded(const e172::ptr<e172::Entity> &entity)
 {

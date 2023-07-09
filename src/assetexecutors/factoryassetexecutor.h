@@ -1,7 +1,6 @@
-#ifndef RECIEPTASSETEXECUTOR_H
-#define RECIEPTASSETEXECUTOR_H
+#pragma once
 
-#include <src/assettools/abstractassetexecutor.h>
+#include <e172/assettools/abstractassetexecutor.h>
 
 namespace proj172::core {
 
@@ -15,5 +14,3 @@ public:
 };
 
 } // namespace proj172::core
-
-#endif // RECIEPTASSETEXECUTOR_H

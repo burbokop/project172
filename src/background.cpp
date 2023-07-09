@@ -1,10 +1,9 @@
 #include "background.h"
 
-#include "src/messagetype.h"
-#include <src/context.h>
-#include <src/debug.h>
-#include <src/graphics/abstractrenderer.h>
-#include <src/time/elapsedtimer.h>
+#include "messagetype.h"
+#include <e172/debug.h>
+#include <e172/graphics/abstractrenderer.h>
+#include <e172/time/elapsedtimer.h>
 
 namespace proj172::core {
 

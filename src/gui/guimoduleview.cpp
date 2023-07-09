@@ -1,8 +1,8 @@
 #include "guimoduleview.h"
 
-#include <src/capabilities/modulehandler.h>
-#include <src/units/unit.h>
-#include <src/capabilities/controller.h>
+#include "../capabilities/controller.h"
+#include "../capabilities/modulehandler.h"
+#include "../units/unit.h"
 
 namespace proj172::core {
 

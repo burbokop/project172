@@ -1,10 +1,9 @@
 #include "guistack.h"
 
-#include "guicontainer.h"
 #include "guilistview.h"
-#include <src/abstracteventprovider.h>
-#include <src/eventhandler.h>
-#include <src/gameapplication.h>
+#include <e172/abstracteventprovider.h>
+#include <e172/eventhandler.h>
+#include <e172/gameapplication.h>
 
 namespace proj172::core {
 

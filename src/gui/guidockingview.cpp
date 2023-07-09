@@ -1,8 +1,8 @@
 #include "guidockingview.h"
 
-#include <src/units/unit.h>
-#include <src/capabilities/docker.h>
-#include <src/capabilities/controller.h>
+#include "../capabilities/controller.h"
+#include "../capabilities/docker.h"
+#include "../units/unit.h"
 
 namespace proj172::core {
 

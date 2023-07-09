@@ -1,9 +1,8 @@
 #pragma once
 
-#include <src/entity.h>
-#include <src/math/physicalobject.h>
-
-#include <src/time/elapsedtimer.h>
+#include <e172/entity.h>
+#include <e172/math/physicalobject.h>
+#include <e172/time/elapsedtimer.h>
 
 namespace proj172::core {
 

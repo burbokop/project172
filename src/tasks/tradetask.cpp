@@ -1,8 +1,8 @@
-#include "buywaretask.h"
-#include "sellwaretask.h"
 #include "tradetask.h"
 
-#include <src/context.h>
+#include "buywaretask.h"
+#include "sellwaretask.h"
+#include <e172/context.h>
 
 namespace proj172::core {
 

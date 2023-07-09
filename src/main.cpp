@@ -1,33 +1,34 @@
+#include "additional/chartview.h"
+#include "additional/memstatearner.h"
+#include "additional/taskconsole.h"
+#include "appextensions/screensettingsextension.h"
+#include "appextensions/volumeobserverextension.h"
+#include "assetexecutors/assetexecutors.h"
 #include "background.h"
+#include "capabilities/capabilities.h"
+#include "capabilities/capabilitysynchronizer.h"
+#include "debugchart.h"
 #include "explosivespawner.h"
 #include "flags.h"
 #include "near.h"
 #include "renderlayer.h"
-#include "src/additional/taskconsole.h"
-#include "src/assetexecutors/assetexecutors.h"
-#include "src/capabilities/capabilities.h"
-#include "src/debugchart.h"
-#include "src/tasks/tasks.h"
-#include "src/worlds/guimaker.h"
+#include "tasks/tasks.h"
+#include "units/units.h"
+#include "worldpresetstrategy.h"
+#include "worlds/arenaworld.h"
+#include "worlds/defaultworld.h"
+#include "worlds/guimaker.h"
+#include "worlds/heapworld.h"
+#include <e172/assettools/assetprovider.h>
+#include <e172/context.h>
+#include <e172/debug.h>
+#include <e172/gameapplication.h>
+#include <e172/graphics/abstractgraphicsprovider.h>
+#include <e172/impl/sdl/audioprovider.h>
+#include <e172/impl/sdl/eventprovider.h>
+#include <e172/net/linux/networker.h>
+#include <e172/net/mem/networker.h>
 #include <iostream>
-#include <src/additional/chartview.h>
-#include <src/additional/memstatearner.h>
-#include <src/appextensions/screensettingsextension.h>
-#include <src/appextensions/volumeobserverextension.h>
-#include <src/assettools/assetprovider.h>
-#include <src/capabilities/capabilitysynchronizer.h>
-#include <src/context.h>
-#include <src/debug.h>
-#include <src/gameapplication.h>
-#include <src/graphics/abstractgraphicsprovider.h>
-#include <src/net/linux/networker.h>
-#include <src/net/mem/networker.h>
-#include <src/sdlaudioprovider.h>
-#include <src/sdleventprovider.h>
-#include <src/units/units.h>
-#include <src/worlds/arenaworld.h>
-#include <src/worlds/defaultworld.h>
-#include <src/worlds/heapworld.h>
 #include <thread>
 
 namespace proj172 {
@@ -151,8 +152,8 @@ int client(int argc,
     app.setMode(e172::GameApplication::Mode::Render);
     const auto graphicsProvider = chooseGraphicsProvider(app);
     std::cout << "Graphics provider choosed" << std::endl;
-    app.setEventProvider(std::make_shared<SDLEventProvider>());
-    app.setAudioProvider(std::make_shared<SDLAudioProvider>());
+    app.setEventProvider(std::make_shared<e172::impl::sdl::EventProvider>());
+    app.setAudioProvider(std::make_shared<e172::impl::sdl::AudioProvider>());
     app.setGraphicsProvider(graphicsProvider);
 
     auto client = net->connect(app, 4444).unwrap();
@@ -172,8 +173,8 @@ int both(int argc, const char **argv, bool displayChart)
 {
     e172::GameApplication app(argc, argv);
     const auto graphicsProvider = chooseGraphicsProvider(app);
-    app.setEventProvider(std::make_shared<SDLEventProvider>());
-    app.setAudioProvider(std::make_shared<SDLAudioProvider>());
+    app.setEventProvider(std::make_shared<e172::impl::sdl::EventProvider>());
+    app.setAudioProvider(std::make_shared<e172::impl::sdl::AudioProvider>());
     app.setGraphicsProvider(graphicsProvider);
 
     setupBoth(app);
@@ -226,8 +227,8 @@ int old(int argc, const char **argv)
 
     app.setRenderInterval(1000 / 30);
 
-    app.setEventProvider(std::make_shared<SDLEventProvider>());
-    app.setAudioProvider(std::make_shared<SDLAudioProvider>());
+    app.setEventProvider(std::make_shared<e172::impl::sdl::EventProvider>());
+    app.setAudioProvider(std::make_shared<e172::impl::sdl::AudioProvider>());
     app.setGraphicsProvider(graphicsProvider);
 
     registerAssetExecutors(*app.assetProvider());

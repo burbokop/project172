@@ -1,8 +1,7 @@
 #include "dockingnodepool.h"
 
-#include <src/graphics/abstractrenderer.h>
-
-#include <src/math/physicalobject.h>
+#include <e172/graphics/abstractrenderer.h>
+#include <e172/math/physicalobject.h>
 
 DockingNodePool::DockingNodePool() {
 

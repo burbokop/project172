@@ -1,7 +1,6 @@
-#ifndef GUISTRINGLISTVIEW_H
-#define GUISTRINGLISTVIEW_H
+#pragma once
 
-#include <src/gui/base/guilistview.h>
+#include "base/guilistview.h"
 
 namespace proj172::core {
 
@@ -41,4 +40,3 @@ public:
 
 } // namespace proj172::core
 
-#endif // GUISTRINGLISTVIEW_H

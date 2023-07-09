@@ -1,12 +1,8 @@
-#ifndef INJECTABLEENTITY_H
-#define INJECTABLEENTITY_H
+#pragma once
 
 #include "__capability.h"
-
+#include <e172/entity.h>
 #include <list>
-
-#include <src/entity.h>
-
 
 class InjectableEntity : public e172::Entity {
     std::list<__Capability*> m_capabilities;
@@ -35,4 +31,3 @@ public:
     }
 };
 
-#endif // INJECTABLEUNIT_H

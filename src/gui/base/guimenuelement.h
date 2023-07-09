@@ -1,9 +1,9 @@
 #pragma once
 
+#include "../../informative.h"
 #include "guielement.h"
-#include <src/iinformative.h>
-#include <src/variant.h>
-#include <src/graphics/textformat.h>
+#include <e172/graphics/textformat.h>
+#include <e172/variant.h>
 
 namespace proj172::core {
 

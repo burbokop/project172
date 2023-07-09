@@ -1,7 +1,7 @@
 #pragma once
 
-#include <src/gui/base/guielement.h>
-#include <src/utility/ptr.h>
+#include "base/guielement.h"
+#include <e172/utility/ptr.h>
 
 namespace e172 {
 class Entity;

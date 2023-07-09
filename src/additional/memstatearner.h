@@ -1,9 +1,9 @@
 #pragma once
 
-#include <src/entity.h>
-#include <src/math/averagecalculator.h>
-#include <src/math/differentiator.h>
-#include <src/time/elapsedtimer.h>
+#include <e172/entity.h>
+#include <e172/math/averagecalculator.h>
+#include <e172/math/differentiator.h>
+#include <e172/time/elapsedtimer.h>
 
 namespace proj172::core {
 

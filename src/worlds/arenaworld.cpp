@@ -1,13 +1,10 @@
 #include "arenaworld.h"
 
-
-#include <src/capabilities/player.h>
-#include <src/capabilities/aggressive.h>
-#include <src/capabilities/modulehandler.h>
-
-#include <src/context.h>
-
-#include <src/units/ship.h>
+#include "../capabilities/aggressive.h"
+#include "../capabilities/modulehandler.h"
+#include "../capabilities/player.h"
+#include "../units/ship.h"
+#include <e172/context.h>
 
 namespace proj172::core {
 

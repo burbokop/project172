@@ -1,7 +1,7 @@
 #ifndef __CAPABILITY_H
 #define __CAPABILITY_H
 
-#include <src/entity.h>
+#include <e172/entity.h>
 
 class InjectableEntity;
 

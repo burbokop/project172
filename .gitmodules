@@ -1,12 +1,12 @@
 [submodule "e172"]
-	path = e172
+	path = 3rdparty/e172
 	url = https://github.com/burbokop/e172.git
-[submodule "sdl_implementation"]
-	path = sdl_implementation
-	url = https://github.com/burbokop/sdl_implementation.git
-[submodule "vulkan_implementation"]
-	path = vulkan_implementation
-	url = https://github.com/burbokop/vulkan_implementation.git
-[submodule "console_impl"]
-	path = console_impl
-	url = https://github.com/burbokop/console_impl.git
+[submodule "e172_sdl_impl"]
+	path = 3rdparty/e172_sdl_impl
+	url = https://github.com/burbokop/e172_sdl_impl.git
+[submodule "e172_vulkan_impl"]
+	path = 3rdparty/e172_vulkan_impl
+	url = https://github.com/burbokop/e172_vulkan_impl.git
+[submodule "e172_console_impl"]
+	path = 3rdparty/e172_console_impl
+	url = https://github.com/burbokop/e172_console_impl.git

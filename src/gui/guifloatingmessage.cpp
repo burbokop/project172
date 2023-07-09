@@ -1,8 +1,8 @@
 #include "guifloatingmessage.h"
 
-#include <src/graphics/abstractrenderer.h>
-#include <src/units/unit.h>
-#include <src/context.h>
+#include "../units/unit.h"
+#include <e172/context.h>
+#include <e172/graphics/abstractrenderer.h>
 
 namespace proj172::core {
 

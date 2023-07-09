@@ -1,8 +1,6 @@
-#ifndef GUIBUTTON_H
-#define GUIBUTTON_H
+#pragma once
 
-#include <src/gui/base/guimenuelement.h>
-
+#include "base/guimenuelement.h"
 #include <functional>
 
 namespace proj172::core {
@@ -41,5 +39,3 @@ private:
 };
 
 } // namespace proj172::core
-
-#endif // GUIBUTTON_H

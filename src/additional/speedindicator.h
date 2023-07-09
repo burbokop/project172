@@ -1,6 +1,6 @@
 #pragma once
 
-#include <src/graphics/abstractrenderer.h>
+#include <e172/graphics/abstractrenderer.h>
 
 namespace proj172::core {
 

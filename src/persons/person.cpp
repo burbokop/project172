@@ -1,8 +1,8 @@
 #include "person.h"
 
-#include <src/units/unit.h>
-#include <src/capabilities/controller.h>
-#include <src/math/math.h>
+#include "../capabilities/controller.h"
+#include "../units/unit.h"
+#include <e172/math/math.h>
 
 namespace proj172::core {
 

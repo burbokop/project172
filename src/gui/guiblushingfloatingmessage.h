@@ -1,6 +1,6 @@
 #pragma once
 
-#include <src/gui/guifloatingmessage.h>
+#include "guifloatingmessage.h"
 
 namespace proj172::core {
 

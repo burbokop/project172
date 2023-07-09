@@ -1,12 +1,12 @@
 #include "guiconsole.h"
-#include "src/abstracteventprovider.h"
-#include "src/eventhandler.h"
 
-#include <src/additional.h>
-#include <src/context.h>
-#include <src/debug.h>
-#include <src/graphics/abstractrenderer.h>
-#include <src/conversion.h>
+#include <e172/abstracteventprovider.h>
+#include <e172/additional.h>
+#include <e172/context.h>
+#include <e172/conversion.h>
+#include <e172/debug.h>
+#include <e172/eventhandler.h>
+#include <e172/graphics/abstractrenderer.h>
 
 namespace proj172::core {
 

@@ -1,16 +1,14 @@
-#ifndef ABSTRACTWARECONTAINER_H
-#define ABSTRACTWARECONTAINER_H
+#pragma once
 
+#include <e172/object.h>
+#include <e172/utility/option.h>
+#include <e172/utility/ptr.h>
 #include <limits>
-#include <src/object.h>
 #include <string>
 #include <vector>
 
-#include <src/utility/option.h>
-#include <src/utility/ptr.h>
-
-
-class WareInfo {
+class WareInfo
+{
     std::string m_wareName;
     size_t m_count = 0;
     bool m_isValid = false;
@@ -49,5 +47,3 @@ public:
 
     virtual ~AbstractWareContainer() {}
 };
-
-#endif // ABSTRACTWARECONTAINER_H

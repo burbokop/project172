@@ -1,8 +1,8 @@
 #include "screensettingsextension.h"
 
 #include "../messagetype.h"
-#include <src/context.h>
-#include <src/graphics/abstractgraphicsprovider.h>
+#include <e172/context.h>
+#include <e172/graphics/abstractgraphicsprovider.h>
 
 namespace proj172::core {
 

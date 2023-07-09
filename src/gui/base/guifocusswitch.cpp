@@ -1,7 +1,7 @@
 #include "guifocusswitch.h"
 
-#include <src/eventhandler.h>
-#include <src/gameapplication.h>
+#include <e172/eventhandler.h>
+#include <e172/gameapplication.h>
 
 namespace proj172::core {
 

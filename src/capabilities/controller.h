@@ -1,9 +1,9 @@
 #pragma once
 
+#include "../additional/trigger.h"
+#include "../tasks/task.h"
 #include "capability.h"
-#include <src/additional/trigger.h>
-#include <src/time/elapsedtimer.h>
-#include <src/tasks/task.h>
+#include <e172/time/elapsedtimer.h>
 
 namespace proj172::core {
 

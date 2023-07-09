@@ -7,7 +7,7 @@
 #include "spriteassetexecutor.h"
 #include "templatevectorassetexecutor.h"
 #include "vectorassetexecutor.h"
-#include <src/assettools/assetprovider.h>
+#include <e172/assettools/assetprovider.h>
 
 void proj172::core::registerAssetExecutors(e172::AssetProvider &ap)
 {

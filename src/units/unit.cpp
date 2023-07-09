@@ -1,19 +1,19 @@
 #include "unit.h"
 
+#include "../capabilities/capability.h"
+#include "../capabilities/controller.h"
+#include "../capabilities/docker.h"
+#include "../capabilities/modulehandler.h"
+#include "../capabilities/warestorage.h"
+#include "../messagetype.h"
 #include "projectile.h"
-#include "src/debug.h"
-#include "src/messagetype.h"
-#include "src/net/common.h"
-#include <src/args.h>
-#include <src/assettools/assetprovider.h>
-#include <src/assettools/loadabletemplate.h>
-#include <src/capabilities/capability.h>
-#include <src/capabilities/controller.h>
-#include <src/capabilities/docker.h>
-#include <src/capabilities/modulehandler.h>
-#include <src/capabilities/warestorage.h>
-#include <src/context.h>
-#include <src/graphics/abstractrenderer.h>
+#include <e172/args.h>
+#include <e172/assettools/assetprovider.h>
+#include <e172/assettools/loadabletemplate.h>
+#include <e172/context.h>
+#include <e172/debug.h>
+#include <e172/graphics/abstractrenderer.h>
+#include <e172/net/common.h>
 
 namespace proj172::core {
 

@@ -1,8 +1,7 @@
-#ifndef TRADETASK_H
-#define TRADETASK_H
+#pragma once
 
 #include "task.h"
-#include <src/smartenum.h>
+#include <e172/smartenum.h>
 
 namespace proj172::core {
 
@@ -28,4 +27,3 @@ public:
 
 } // namespace proj172::core
 
-#endif // TRADETASK_H

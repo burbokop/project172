@@ -1,8 +1,7 @@
-#ifndef GUIELEMENT_H
-#define GUIELEMENT_H
+#pragma once
 
-#include <src/entity.h>
-#include <src/utility/ptr.h>
+#include <e172/entity.h>
+#include <e172/utility/ptr.h>
 
 namespace proj172::core {
 
@@ -42,4 +41,3 @@ public:
 
 } // namespace proj172::core
 
-#endif // GUIELEMENT_H

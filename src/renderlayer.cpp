@@ -1,18 +1,18 @@
 #include "renderlayer.h"
 
 #include "background.h"
-#include <console_impl/src/consolegraphicsprovider.h>
+#include "gui/base/guicontainer.h"
+#include "gui/base/guimenu.h"
+#include "gui/base/guistack.h"
+#include "gui/guibutton.h"
+#include <e172/context.h>
+#include <e172/debug.h>
+#include <e172/gameapplication.h>
+#include <e172/impl/console/graphicsprovider.h>
+#include <e172/impl/sdl/eventprovider.h>
+#include <e172/impl/sdl/graphicsprovider.h>
+#include <e172/impl/vulkan/graphicsprovider.h>
 #include <iostream>
-#include <src/context.h>
-#include <src/debug.h>
-#include <src/gameapplication.h>
-#include <src/gui/base/guicontainer.h>
-#include <src/gui/base/guimenu.h>
-#include <src/gui/base/guistack.h>
-#include <src/gui/guibutton.h>
-#include <src/sdleventprovider.h>
-#include <src/sdlgraphicsprovider.h>
-#include <src/vulkangraphicsprovider.h>
 
 namespace proj172 {
 
@@ -26,11 +26,11 @@ RenderLayer chooseRenderLayer(const std::vector<std::string> &args)
     RenderLayer result = Undefined;
     {
         e172::GameApplication chooseGraphicsProviderApp(args);
-        const auto gprovider
-            = std::make_shared<SDLGraphicsProvider>(chooseGraphicsProviderApp.arguments(),
-                                                    "choose gprovider",
-                                                    e172::Vector<std::uint32_t>{118, 168});
-        const auto eventProvider = std::make_shared<SDLEventProvider>();
+        const auto gprovider = std::make_shared<e172::impl::sdl::GraphicsProvider>(
+            chooseGraphicsProviderApp.arguments(),
+            "choose gprovider",
+            e172::Vector<std::uint32_t>{118, 168});
+        const auto eventProvider = std::make_shared<e172::impl::sdl::EventProvider>();
         chooseGraphicsProviderApp.setGraphicsProvider(gprovider);
         chooseGraphicsProviderApp.setEventProvider(eventProvider);
 
@@ -72,12 +72,11 @@ std::shared_ptr<e172::AbstractGraphicsProvider> chooseGraphicsProvider(
     const auto renderLayer = chooseRenderLayer(app.arguments());
 
     if (renderLayer == Vulkan) {
-        const auto graphicsProvider = std::make_shared<VulkanGraphicsProvider>(app.arguments());
+        const auto graphicsProvider = std::make_shared<e172::impl::vulkan::GraphicsProvider>(
+            app.arguments());
         if (!graphicsProvider->isValid()) {
-            const auto graphicsProvider
-                = std::make_shared<SDLGraphicsProvider>(app.arguments(),
-                                                        "project172",
-                                                        e172::Vector<std::uint32_t>{900, 600});
+            const auto graphicsProvider = std::make_shared<e172::impl::sdl::GraphicsProvider>(
+                app.arguments(), "project172", e172::Vector<std::uint32_t>{900, 600});
             if (!graphicsProvider->isValid()) {
                 e172::Debug::fatal("error: no graphics provider are valid.");
                 std::exit(2);
@@ -86,11 +85,12 @@ std::shared_ptr<e172::AbstractGraphicsProvider> chooseGraphicsProvider(
         }
         return graphicsProvider;
     } else if (renderLayer == SDL) {
-        return std::make_shared<SDLGraphicsProvider>(app.arguments(),
-                                                     "project172",
-                                                     e172::Vector<std::uint32_t>{900, 600});
+        return std::make_shared<e172::impl::sdl::GraphicsProvider>(app.arguments(),
+                                                                   "project172",
+                                                                   e172::Vector<std::uint32_t>{900,
+                                                                                               600});
     } else if (renderLayer == Console) {
-        return std::make_shared<ConsoleGraphicsProvider>(app.arguments(), std::cout);
+        return std::make_shared<e172::impl::console::GraphicsProvider>(app.arguments(), std::cout);
     } else {
         return nullptr;
     }

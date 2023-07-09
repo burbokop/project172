@@ -1,8 +1,8 @@
 #include "physicaldockingattractor.h"
 
-#include <src/math/math.h>
+#include <e172/math/math.h>
 
-#include <src/debug.h>
+#include <e172/debug.h>
 
 namespace proj172::core {
 

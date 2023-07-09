@@ -1,8 +1,8 @@
 #pragma once
 
+#include "units/camera.h"
 #include "worlds/world.h"
-#include <src/units/camera.h>
-#include <src/memcontrol/abstractstrategy.h>
+#include <e172/memcontrol/abstractstrategy.h>
 
 namespace proj172::core {
 

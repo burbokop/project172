@@ -1,8 +1,9 @@
 #include "docker.h"
-#include <src/math/math.h>
-#include <src/units/unit.h>
-#include <src/context.h>
-#include <src/debug.h>
+
+#include "../units/unit.h"
+#include <e172/context.h>
+#include <e172/debug.h>
+#include <e172/math/math.h>
 
 namespace proj172::core {
 

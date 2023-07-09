@@ -1,10 +1,10 @@
 #ifndef GUICONSOLE_H
 #define GUICONSOLE_H
 
-#include <src/gui/base/guielement.h>
+#include "base/guielement.h"
+#include <e172/time/elapsedtimer.h>
+#include <e172/utility/closableoutputstream.h>
 #include <functional>
-#include <src/utility/closableoutputstream.h>
-#include <src/time/elapsedtimer.h>
 
 namespace proj172::core {
 

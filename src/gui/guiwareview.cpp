@@ -1,8 +1,8 @@
 #include "guiwareview.h"
 
-#include <src/units/unit.h>
-#include <src/capabilities/warestorage.h>
-#include <src/capabilities/controller.h>
+#include "../capabilities/controller.h"
+#include "../capabilities/warestorage.h"
+#include "../units/unit.h"
 
 namespace proj172::core {
 

@@ -1,8 +1,8 @@
 #include "lightparticle.h"
 
+#include <e172/context.h>
+#include <e172/graphics/abstractrenderer.h>
 #include <inttypes.h>
-#include <src/context.h>
-#include <src/graphics/abstractrenderer.h>
 
 namespace proj172::core {
 

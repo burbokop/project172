@@ -1,14 +1,15 @@
 #pragma once
 
-#include "world.h"
+#include "../gui/guicombobox.h"
 #include <config/project.h>
-#include <src/additional/taskconsole.h>
-#include <src/gui/guicombobox.h>
-#include <src/near.h>
-#include <src/units/camera.h>
-#include <src/worldpresetstrategy.h>
+#include <e172/utility/ptr.h>
 
 namespace proj172::core {
+
+class Unit;
+class TaskConsole;
+class WorldPresetStrategy;
+class Near;
 
 class GUIMaker {
     static inline const std::string manual = "\

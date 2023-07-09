@@ -1,10 +1,10 @@
 #include "tasks.h"
 
+#include "../additional/taskconsole.h"
 #include "buywaretask.h"
 #include "dockingtask.h"
 #include "sellwaretask.h"
 #include "tradetask.h"
-#include <src/additional/taskconsole.h>
 
 void proj172::core::registerConsoleTasks(TaskConsole &console)
 {

@@ -1,8 +1,7 @@
 #include "nodesassetexecutor.h"
 
-#include <src/additional.h>
-#include <src/math/math.h>
-#include <src/additional.h>
+#include <e172/additional.h>
+#include <e172/math/math.h>
 
 namespace proj172::core {
 

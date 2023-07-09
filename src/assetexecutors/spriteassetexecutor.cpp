@@ -1,7 +1,7 @@
 #include "spriteassetexecutor.h"
 
-#include <src/graphics/abstractgraphicsprovider.h>
-#include <src/utility/animator.h>
+#include <e172/graphics/abstractgraphicsprovider.h>
+#include <e172/utility/animator.h>
 
 namespace proj172::core {
 

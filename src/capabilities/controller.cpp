@@ -1,10 +1,10 @@
 #include "controller.h"
-#include "src/messagetype.h"
+#include "../messagetype.h"
 
-#include <src/args.h>
-#include <src/context.h>
-#include <src/units/ship.h>
-#include <src/capabilities/docker.h>
+#include "../capabilities/docker.h"
+#include "../units/ship.h"
+#include <e172/args.h>
+#include <e172/context.h>
 
 namespace proj172::core {
 

@@ -1,9 +1,9 @@
 #include "guifloatingmessagecontainer.h"
 
 #include "../messagetype.h"
+#include "../units/unit.h"
 #include "guiblushingfloatingmessage.h"
-#include <src/context.h>
-#include <src/units/unit.h>
+#include <e172/context.h>
 
 namespace proj172::core {
 

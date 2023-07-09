@@ -1,11 +1,11 @@
 #pragma once
 
+#include "../capabilities/warestorage.h"
+#include <e172/object.h>
+#include <e172/smartenum.h>
+#include <e172/utility/ptr.h>
 #include <set>
 #include <string>
-#include <src/object.h>
-#include <src/utility/ptr.h>
-#include <src/capabilities/warestorage.h>
-#include <src/smartenum.h>
 
 namespace proj172::core {
 

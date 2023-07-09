@@ -1,8 +1,8 @@
 #include "module.h"
 
-#include <src/units/camera.h>
-#include <src/math/math.h>
-#include <src/units/unit.h>
+#include "../../units/unit.h"
+#include <e172/graphics/abstractrenderer.h>
+#include <e172/math/math.h>
 
 namespace proj172::core {
 

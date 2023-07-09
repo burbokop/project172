@@ -1,6 +1,6 @@
 #pragma once
 
-#include <src/gui/base/guisingleelementlistview.h>
+#include "base/guisingleelementlistview.h"
 
 namespace proj172::core {
 

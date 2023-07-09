@@ -1,9 +1,11 @@
 #include "buywaretask.h"
+
+#include "../capabilities/controller.h"
+#include "../units/unit.h"
 #include "dockingtask.h"
-#include <src/capabilities/controller.h>
-#include <src/context.h>
-#include <src/debug.h>
-#include <src/consolecolor.h>
+#include <e172/consolecolor.h>
+#include <e172/context.h>
+#include <e172/debug.h>
 
 namespace proj172::core {
 

@@ -1,9 +1,9 @@
 #pragma once
 
+#include "../../informative.h"
 #include "../capability.h"
-#include <src/iinformative.h>
-#include <src/utility/animator.h>
-#include <src/audio/audioplayer.h>
+#include <e172/audio/audioplayer.h>
+#include <e172/utility/animator.h>
 
 namespace proj172::core {
 

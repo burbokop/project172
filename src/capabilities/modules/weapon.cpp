@@ -1,10 +1,10 @@
 #include "weapon.h"
 
-#include <src/additional/stringformer.h>
-#include <src/units/projectile.h>
-#include <src/context.h>
-#include <src/assettools/assetprovider.h>
-#include <src/gameapplication.h>
+#include "../../additional/stringformer.h"
+#include "../../units/projectile.h"
+#include <e172/assettools/assetprovider.h>
+#include <e172/context.h>
+#include <e172/gameapplication.h>
 
 namespace proj172::core {
 

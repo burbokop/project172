@@ -1,9 +1,8 @@
 #include "camera.h"
 
-#include <src/context.h>
-#include <src/units/unit.h>
-#include <math.h>
-#include <src/math/math.h>
+#include "../units/unit.h"
+#include <e172/context.h>
+#include <e172/math/math.h>
 
 namespace proj172::core {
 

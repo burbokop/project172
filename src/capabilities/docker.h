@@ -1,13 +1,11 @@
-#ifndef DOCKER_H
-#define DOCKER_H
+#pragma once
 
+#include "../additional/docking/dockingnodepool.h"
+#include "../additional/docking/dockingsession.h"
+#include "../near.h"
 #include "capability.h"
-#include <src/near.h>
-#include <src/math/vector.h>
-#include <src/additional/docking/dockingnodepool.h>
-#include <src/additional/docking/dockingsession.h>
-#include <src/additional/docking/physicaldockingattractor.h>
-#include <e172/src/smartenum.h>
+#include <e172/math/vector.h>
+#include <e172/smartenum.h>
 
 namespace proj172::core {
 
@@ -36,4 +34,3 @@ public:
 
 } // namespace proj172::core
 
-#endif // DOCKER_H

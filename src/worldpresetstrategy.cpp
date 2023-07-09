@@ -1,7 +1,7 @@
 #include "worldpresetstrategy.h"
 
-#include <src/context.h>
-#include <src/gameapplication.h>
+#include <e172/context.h>
+#include <e172/gameapplication.h>
 
 namespace proj172::core {
 

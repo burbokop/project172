@@ -1,11 +1,11 @@
 #include "guiminimap.h"
 
-#include "src/abstracteventprovider.h"
-#include "src/eventhandler.h"
-#include <src/additional/lightparticle.h>
-#include <src/context.h>
-#include <src/units/camera.h>
-#include <src/units/projectile.h>
+#include "../additional/lightparticle.h"
+#include "../units/camera.h"
+#include "../units/projectile.h"
+#include <e172/abstracteventprovider.h>
+#include <e172/context.h>
+#include <e172/eventhandler.h>
 
 namespace proj172::core {
 

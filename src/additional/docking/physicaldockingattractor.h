@@ -1,6 +1,6 @@
 #pragma once
 
-#include <src/math/physicalobject.h>
+#include <e172/math/physicalobject.h>
 
 namespace proj172::core {
 

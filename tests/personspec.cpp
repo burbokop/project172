@@ -1,9 +1,9 @@
 #include "personspec.h"
 
-#include <src/persons/person.h>
-#include <src/units/unit.h>
-#include <src/capabilities/controller.h>
-#include <src/additional/ware/warecontainer.h>
+#include "../src/additional/ware/warecontainer.h"
+#include "../src/capabilities/controller.h"
+#include "../src/persons/person.h"
+#include "../src/units/unit.h"
 
 namespace proj172::core::tests {
 

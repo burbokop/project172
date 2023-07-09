@@ -1,9 +1,8 @@
 #include "segmentpaiter.h"
 
-#include <src/context.h>
-#include <math.h>
-#include <src/graphics/abstractrenderer.h>
-#include <src/math/math.h>
+#include <e172/context.h>
+#include <e172/graphics/abstractrenderer.h>
+#include <e172/math/math.h>
 
 namespace proj172::core {
 

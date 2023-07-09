@@ -1,6 +1,6 @@
 #pragma once
 
-#include <src/entitylifetimeobserver.h>
+#include <e172/entitylifetimeobserver.h>
 
 namespace e172 {
 class GameServer;

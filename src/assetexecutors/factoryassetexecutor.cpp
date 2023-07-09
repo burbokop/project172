@@ -1,6 +1,6 @@
 #include "factoryassetexecutor.h"
 
-#include <src/capabilities/factory.h>
+#include "../capabilities/factory.h"
 
 namespace proj172::core {
 

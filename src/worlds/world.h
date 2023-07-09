@@ -1,8 +1,8 @@
 #pragma once
 
-#include <functional>
-#include <src/assettools/assetprovider.h>
 #include "../capabilities/controller.h"
+#include <e172/assettools/assetprovider.h>
+#include <functional>
 
 namespace proj172::core {
 

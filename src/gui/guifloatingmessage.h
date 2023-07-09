@@ -1,7 +1,7 @@
 #pragma once
 
-#include <src/gui/base/guimenuelement.h>
-#include <src/utility/ptr.h>
+#include "base/guimenuelement.h"
+#include <e172/utility/ptr.h>
 
 namespace proj172::core {
 

@@ -1,14 +1,14 @@
 #pragma once
 
-#include "src/graphics/color.h"
-#include "src/utility/signal.h"
-#include <src/assettools/loadable.h>
-#include <src/entity.h>
-#include <src/iinformative.h>
-#include <src/math/physicalobject.h>
-#include <src/persons/person.h>
-#include <src/utility/animator.h>
-#include <src/utility/ptr.h>
+#include "../informative.h"
+#include "../persons/person.h"
+#include <e172/assettools/loadable.h>
+#include <e172/entity.h>
+#include <e172/graphics/color.h>
+#include <e172/math/physicalobject.h>
+#include <e172/utility/animator.h>
+#include <e172/utility/ptr.h>
+#include <e172/utility/signal.h>
 
 namespace proj172::core {
 

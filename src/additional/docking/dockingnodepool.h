@@ -1,9 +1,7 @@
-#ifndef DOCKINGNODEPOOL_H
-#define DOCKINGNODEPOOL_H
+#pragma once
 
-#include <src/math/vector.h>
+#include <e172/math/vector.h>
 #include <list>
-
 
 namespace e172 {
 class PhysicalObject;
@@ -41,4 +39,3 @@ public:
 
 };
 
-#endif // DOCKINGNODEPULL_H

@@ -1,14 +1,15 @@
-#ifndef DOCKINGTASK_H
-#define DOCKINGTASK_H
+#pragma once
 
 #include "task.h"
-#include <src/math/line2d.h>
-#include <src/math/vector.h>
-#include <src/units/ship.h>
-#include <src/additional/docking/dockingsession.h>
-#include <src/smartenum.h>
+#include <e172/math/line2d.h>
+#include <e172/math/vector.h>
+#include <e172/smartenum.h>
 
 namespace proj172::core {
+
+class Unit;
+class Docker;
+class DockingSession;
 
 class DockingTask : public Task {
     e172_enum_member(
@@ -39,5 +40,3 @@ public:
 };
 
 } // namespace proj172::core
-
-#endif // DOCKINGTASK_H

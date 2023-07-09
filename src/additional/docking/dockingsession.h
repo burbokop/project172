@@ -2,9 +2,9 @@
 
 #include "dockingnodepool.h"
 #include "physicaldockingattractor.h"
-#include <src/entity.h>
-#include <src/math/physicalobject.h>
-#include <src/utility/ptr.h>
+#include <e172/entity.h>
+#include <e172/math/physicalobject.h>
+#include <e172/utility/ptr.h>
 
 namespace proj172::core {
 

@@ -1,10 +1,10 @@
 #include "warpdrive.h"
 
-#include <src/additional/stringformer.h>
-#include <src/args.h>
-#include <src/context.h>
-#include <src/messagetype.h>
-#include <src/units/unit.h>
+#include "../../additional/stringformer.h"
+#include "../../messagetype.h"
+#include "../../units/unit.h"
+#include <e172/args.h>
+#include <e172/context.h>
 
 namespace proj172::core {
 

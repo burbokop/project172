@@ -1,7 +1,7 @@
 #pragma once
 
 #include "guielement.h"
-#include <src/abstracteventprovider.h>
+#include <e172/abstracteventprovider.h>
 
 namespace proj172::core {
 

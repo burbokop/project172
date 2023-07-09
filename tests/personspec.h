@@ -1,7 +1,7 @@
 #pragma once
 
-#include <src/testing.h>
-#include <src/capabilities/warestorage.h>
+#include "../src/capabilities/warestorage.h"
+#include <e172/testing.h>
 
 namespace proj172::core::tests {
 

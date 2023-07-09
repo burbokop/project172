@@ -1,9 +1,8 @@
 #include "explosivespawner.h"
 
-#include <math.h>
-#include <src/additional/lightparticle.h>
-#include <src/context.h>
-#include <src/messagetype.h>
+#include "additional/lightparticle.h"
+#include "messagetype.h"
+#include <e172/context.h>
 
 namespace proj172::core {
 

@@ -1,35 +1,33 @@
 #include "guimaker.h"
-#include "src/messagetype.h"
 
-#include <src/capabilities/controller.h>
-#include <src/capabilities/docker.h>
-#include <src/capabilities/player.h>
-#include <src/capabilities/warestorage.h>
+#include "../messagetype.h"
 
-#include <src/gui/guibutton.h>
-#include <src/gui/guidebugvalueinfo.h>
-#include <src/gui/guiconsole.h>
-#include <src/gui/guidockingview.h>
-#include <src/gui/guifloatingmessagecontainer.h>
-#include <src/gui/guiminimap.h>
-#include <src/gui/guimoduleview.h>
-#include <src/gui/guiradar.h>
-#include <src/gui/guistringlistview.h>
-#include <src/gui/guiswitch.h>
-#include <src/gui/guiwareview.h>
-
-#include <src/units/unit.h>
-#include <src/context.h>
-#include <src/debug.h>
-#include <src/gameapplication.h>
-#include <src/capabilities/docker.h>
-#include <src/additional/informative/controllerfinder.h>
-#include <src/additional/informative/unitsamountinfo.h>
-
-#include <e172/src/functional/metafunction.h>
-#include <src/gui/base/guicontainer.h>
-#include <src/gui/base/guifocusswitch.h>
-#include <src/gui/base/guimenu.h>
+#include "../additional/informative/unitsamountinfo.h"
+#include "../additional/taskconsole.h"
+#include "../capabilities/controller.h"
+#include "../capabilities/docker.h"
+#include "../capabilities/player.h"
+#include "../capabilities/warestorage.h"
+#include "../gui/base/guicontainer.h"
+#include "../gui/base/guifocusswitch.h"
+#include "../gui/base/guimenu.h"
+#include "../gui/guibutton.h"
+#include "../gui/guiconsole.h"
+#include "../gui/guidebugvalueinfo.h"
+#include "../gui/guidockingview.h"
+#include "../gui/guifloatingmessagecontainer.h"
+#include "../gui/guiminimap.h"
+#include "../gui/guimoduleview.h"
+#include "../gui/guiradar.h"
+#include "../gui/guistringlistview.h"
+#include "../gui/guiswitch.h"
+#include "../gui/guiwareview.h"
+#include "../units/unit.h"
+#include "../worldpresetstrategy.h"
+#include <e172/context.h>
+#include <e172/debug.h>
+#include <e172/functional/metafunction.h>
+#include <e172/gameapplication.h>
 
 namespace proj172::core {
 

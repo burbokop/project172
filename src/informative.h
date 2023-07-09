@@ -7,7 +7,7 @@ namespace proj172::core {
 class Informative
 {
 public:
-    std::string virtual info() const;
+    virtual std::string info() const { return {}; }
     virtual ~Informative() = default;
 };
 

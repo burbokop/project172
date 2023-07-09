@@ -1,8 +1,8 @@
 #include "guilistview.h"
 
-#include "src/abstracteventprovider.h"
-#include "src/eventhandler.h"
-#include <src/graphics/abstractrenderer.h>
+#include <e172/abstracteventprovider.h>
+#include <e172/eventhandler.h>
+#include <e172/graphics/abstractrenderer.h>
 
 namespace proj172::core {
 

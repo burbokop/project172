@@ -1,10 +1,9 @@
 #include "ship.h"
 
-#include <src/capabilities/modules/engine.h>
-#include <src/capabilities/modules/warpdrive.h>
-#include <src/capabilities/modulehandler.h>
-#include <src/math/math.h>
-#include <math.h>
+#include "../capabilities/modulehandler.h"
+#include "../capabilities/modules/engine.h"
+#include "../capabilities/modules/warpdrive.h"
+#include <e172/math/math.h>
 
 namespace proj172::core {
 

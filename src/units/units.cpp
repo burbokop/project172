@@ -4,8 +4,8 @@
 #include "ship.h"
 #include "station.h"
 #include "unit.h"
-#include <src/assettools/assetprovider.h>
-#include <src/gameapplication.h>
+#include <e172/assettools/assetprovider.h>
+#include <e172/gameapplication.h>
 
 void proj172::core::registerUnits(e172::GameApplication &app)
 {

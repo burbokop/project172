@@ -1,8 +1,8 @@
 #pragma once
 
+#include "../../informative.h"
+#include <e172/entity.h>
 #include <list>
-#include <src/entity.h>
-#include <src/iinformative.h>
 
 namespace proj172::core {
 

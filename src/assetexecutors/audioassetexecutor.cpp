@@ -1,7 +1,8 @@
 #include "audioassetexecutor.h"
-#include <src/audio/abstractaudioprovider.h>
-#include <src/audio/audioplayer.h>
-#include <src/additional.h>
+
+#include <e172/additional.h>
+#include <e172/audio/abstractaudioprovider.h>
+#include <e172/audio/audioplayer.h>
 
 namespace proj172::core {
 

@@ -1,8 +1,7 @@
 #ifndef GUIWAREVIEW_H
 #define GUIWAREVIEW_H
 
-#include <src/gui/base/guisingleelementlistview.h>
-
+#include "base/guisingleelementlistview.h"
 #include <functional>
 
 namespace proj172::core {

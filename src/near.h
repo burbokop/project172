@@ -1,7 +1,7 @@
 #pragma once
 
-#include <src/entity.h>
-#include <src/utility/ptr.h>
+#include <e172/entity.h>
+#include <e172/utility/ptr.h>
 
 namespace proj172::core {
 

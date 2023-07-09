@@ -1,9 +1,9 @@
 #pragma once
 
 #include "controller.h"
+#include <e172/abstracteventprovider.h>
+#include <e172/assettools/loadable.h>
 #include <queue>
-#include <src/abstracteventprovider.h>
-#include <src/assettools/loadable.h>
 
 namespace proj172::core {
 

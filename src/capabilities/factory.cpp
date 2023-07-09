@@ -1,8 +1,8 @@
 #include "factory.h"
 
-#include <src/math/math.h>
-
-#include <src/debug.h>
+#include "../additional/ware/waremultibaycontainer.h"
+#include <e172/debug.h>
+#include <e172/math/math.h>
 
 namespace proj172::core {
 

@@ -7,8 +7,8 @@
 #include "modules/warpdrive.h"
 #include "modules/weapon.h"
 #include "player.h"
-#include <src/assettools/assetprovider.h>
-#include <src/gameapplication.h>
+#include <e172/assettools/assetprovider.h>
+#include <e172/gameapplication.h>
 
 void proj172::core::registerCapabilities(e172::GameApplication &app)
 {

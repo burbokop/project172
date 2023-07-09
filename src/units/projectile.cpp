@@ -1,9 +1,8 @@
 #include "projectile.h"
 
+#include "../additional/lightparticle.h"
 #include "camera.h"
-
-#include <src/additional/lightparticle.h>
-#include <src/context.h>
+#include <e172/context.h>
 
 namespace proj172::core {
 

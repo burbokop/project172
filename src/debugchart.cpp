@@ -1,7 +1,7 @@
 #include "debugchart.h"
 
-#include <src/additional/chartview.h>
-#include <src/gameapplication.h>
+#include "additional/chartview.h"
+#include <e172/gameapplication.h>
 
 namespace proj172 {
 

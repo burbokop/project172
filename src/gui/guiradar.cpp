@@ -1,8 +1,8 @@
 #include "guiradar.h"
 
-#include <src/debug.h>
-#include <src/near.h>
-#include <src/assettools/loadable.h>
+#include "../near.h"
+#include <e172/assettools/loadable.h>
+#include <e172/debug.h>
 
 namespace proj172::core {
 

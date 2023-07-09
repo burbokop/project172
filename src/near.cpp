@@ -1,10 +1,10 @@
 #include "near.h"
 
-#include <src/context.h>
-#include <src/debug.h>
-#include <src/units/ship.h>
-#include <src/capabilities/capability.h>
-#include <src/capabilities/modules/warpdrive.h>
+#include "capabilities/capability.h"
+#include "capabilities/modules/warpdrive.h"
+#include "units/ship.h"
+#include <e172/context.h>
+#include <e172/debug.h>
 
 namespace proj172::core {
 

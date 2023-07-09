@@ -1,13 +1,9 @@
 #include "ai.h"
-#include "warestorage.h"
 
-#include <src/graphics/abstractrenderer.h>
-#include <src/units/ship.h>
-#include <src/units/unit.h>
-#include <e172/src/math/math.h>
-#include <src/debug.h>
-#include <src/math/line2d.h>
-#include <src/math/math.h>
+#include <e172/debug.h>
+#include <e172/graphics/abstractrenderer.h>
+#include <e172/math/line2d.h>
+#include <e172/math/math.h>
 
 namespace proj172::core {
 
