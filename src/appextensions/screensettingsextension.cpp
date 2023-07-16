@@ -11,14 +11,12 @@ ScreenSettingsExtension::ScreenSettingsExtension()
 {}
 
 void ScreenSettingsExtension::proceed(e172::GameApplication *application) {
-    auto context = application->context();
-    const auto graphicsProcider = application->graphicsProvider();
-    if(context && graphicsProcider) {
-        auto renderer = graphicsProcider->renderer();
-        if (renderer) {
+    if (const auto context = application->context()) {
+        if (const auto renderer = application->renderer()) {
             context->popMessage(~MessageType::ChangeResolution,
                                 [renderer](auto, const e172::Variant &value) {
-                                    renderer->setResolution(value.toMathVector<double>());
+                                    renderer->setResolution(
+                                        value.toMathVector<double>().into<std::uint32_t>());
                                 });
 
             context->popMessage(~MessageType::ChangeFullscreen,

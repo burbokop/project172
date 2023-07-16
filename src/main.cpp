@@ -42,7 +42,6 @@ void setupClient(e172::GameApplication &app,
     app.setRenderInterval(1000 / 30);
 
     if (graphicsProvider) {
-        graphicsProvider->renderer()->setAutoClear(false);
         graphicsProvider->loadFont(std::string(),
                                    app.context()->absolutePath("./assets/fonts/ZCOOL.ttf"));
         graphicsProvider->loadFont("Consolas",
@@ -150,11 +149,13 @@ int client(int argc,
 {
     e172::GameApplication app(argc, argv);
     app.setMode(e172::GameApplication::Mode::Render);
-    const auto graphicsProvider = chooseGraphicsProvider(app);
+    const auto platform = choosePlatform(app);
     std::cout << "Graphics provider choosed" << std::endl;
-    app.setEventProvider(std::make_shared<e172::impl::sdl::EventProvider>());
-    app.setAudioProvider(std::make_shared<e172::impl::sdl::AudioProvider>());
-    app.setGraphicsProvider(graphicsProvider);
+    app.setEventProvider(platform.eventProvider);
+    app.setAudioProvider(platform.audioProvider);
+    app.setGraphicsProvider(platform.graphicsProvider);
+    app.initRenderer("project172", {900, 600});
+    app.renderer()->setAutoClear(false);
 
     auto client = net->connect(app, 4444).unwrap();
     const auto capClient = std::make_shared<core::CapabilitySyncClient>(client);
@@ -165,21 +166,27 @@ int client(int argc,
     });
 
     setupBoth(app);
-    setupClient(app, graphicsProvider, net, displayChart);
+    setupClient(app, platform.graphicsProvider, net, displayChart);
     return app.exec();
 }
 
 int both(int argc, const char **argv, bool displayChart)
 {
     e172::GameApplication app(argc, argv);
-    const auto graphicsProvider = chooseGraphicsProvider(app);
-    app.setEventProvider(std::make_shared<e172::impl::sdl::EventProvider>());
-    app.setAudioProvider(std::make_shared<e172::impl::sdl::AudioProvider>());
-    app.setGraphicsProvider(graphicsProvider);
+    const auto platform = choosePlatform(app);
+    app.setEventProvider(platform.eventProvider);
+    app.setAudioProvider(platform.audioProvider);
+    app.setGraphicsProvider(platform.graphicsProvider);
+    app.initRenderer("project172", {900, 600});
+    app.renderer()->setAutoClear(false);
+
+    app.scheduleRepeated(1000 / 30, [&app] {
+        std::cout << "app.renderer()->resolution(): " << app.renderer()->resolution() << std::endl;
+    });
 
     setupBoth(app);
     setupServer(app);
-    setupClient(app, graphicsProvider, nullptr, displayChart);
+    setupClient(app, platform.graphicsProvider, nullptr, displayChart);
     return app.exec();
 }
 
@@ -223,13 +230,15 @@ int old(int argc, const char **argv)
 
     e172::GameApplication app(argc, argv);
 
-    const auto graphicsProvider = chooseGraphicsProvider(app);
+    const auto platform = choosePlatform(app);
 
     app.setRenderInterval(1000 / 30);
 
-    app.setEventProvider(std::make_shared<e172::impl::sdl::EventProvider>());
-    app.setAudioProvider(std::make_shared<e172::impl::sdl::AudioProvider>());
-    app.setGraphicsProvider(graphicsProvider);
+    app.setEventProvider(platform.eventProvider);
+    app.setAudioProvider(platform.audioProvider);
+    app.setGraphicsProvider(platform.graphicsProvider);
+    app.initRenderer("project172", {900, 600});
+    app.renderer()->setAutoClear(false);
 
     registerAssetExecutors(*app.assetProvider());
     registerUnits(app);
@@ -237,11 +246,10 @@ int old(int argc, const char **argv)
 
     app.assetProvider()->addDirToSearch(app.context()->absolutePath("./assets"));
 
-    graphicsProvider->renderer()->setAutoClear(false);
-    graphicsProvider->loadFont(std::string(),
-                               app.context()->absolutePath("./assets/fonts/ZCOOL.ttf"));
-    graphicsProvider->loadFont("Consolas",
-                               app.context()->absolutePath("./assets/fonts/consolas.ttf"));
+    platform.graphicsProvider->loadFont(std::string(),
+                                        app.context()->absolutePath("./assets/fonts/ZCOOL.ttf"));
+    platform.graphicsProvider->loadFont("Consolas",
+                                        app.context()->absolutePath("./assets/fonts/consolas.ttf"));
 
     //APP INITIALIZATION CONMPLEATED
 

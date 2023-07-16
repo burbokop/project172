@@ -15,7 +15,7 @@ void GUICentralMessage::start(int flashesRemains, unsigned interval) {
 
 void GUICentralMessage::render(e172::AbstractRenderer *renderer) {
     if(visible) {
-        e172::Vector center = renderer->resolution() / 2.0;
+        const auto center = renderer->resolution().into<double>() / 2.0;
         std::string string = title();
 
         const auto half_size = renderer->drawString(string, center, 0xFFBA73, e172::TextFormat::AlignCenter) / 2;

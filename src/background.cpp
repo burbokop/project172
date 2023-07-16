@@ -31,7 +31,7 @@ Background::Background(e172::FactoryMeta &&meta, unsigned int amount, double sli
     setDepth(-100);
 }
 
-void Background::onResolutionChanged(const e172::Vector<double> &resolution)
+void Background::onResolutionChanged(const e172::Vector<uint32_t> &resolution)
 {
     uint32_t colors[] = { 0xdeff17, 0xfe4600, 0xf9990f, 0x8a27ff };
 

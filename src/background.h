@@ -30,7 +30,7 @@ public:
     void flashing(const int &repeats);
 
 private:
-    void onResolutionChanged(const e172::Vector<double> &resolution);
+    void onResolutionChanged(const e172::Vector<std::uint32_t> &resolution);
 
 private:
     static const double STARS_SLIDING_SPEED;
@@ -43,7 +43,7 @@ private:
     std::vector<Star> m_stars;
     unsigned int m_amount;
     double m_slidingStart;
-    e172::Vector<double> m_lastResolution;
+    e172::Vector<std::uint32_t> m_lastResolution;
     e172::ElapsedTimer m_flashingTimer = e172::ElapsedTimer(DEFAULT_FLASHING_INTERVAL);
     uint32_t m_flashingColor = DEFAULT_FLASHING_COLOR;
     uint32_t m_colorBuffer = DEFAULT_MAIN_COLOR;

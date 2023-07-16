@@ -8,10 +8,13 @@
 #include <e172/context.h>
 #include <e172/debug.h>
 #include <e172/gameapplication.h>
+#include <e172/impl/console/eventprovider.h>
 #include <e172/impl/console/graphicsprovider.h>
+#include <e172/impl/sdl/audioprovider.h>
 #include <e172/impl/sdl/eventprovider.h>
 #include <e172/impl/sdl/graphicsprovider.h>
 #include <e172/impl/vulkan/graphicsprovider.h>
+#include <fstream>
 #include <iostream>
 
 namespace proj172 {
@@ -20,19 +23,19 @@ namespace {
 
 enum RenderLayer { Undefined, SDL, Vulkan, Console };
 
-RenderLayer chooseRenderLayer(const std::vector<std::string> &args)
+RenderLayer choosePlatformType(const std::vector<std::string> &args)
 {
     using namespace proj172::core;
     RenderLayer result = Undefined;
     {
         e172::GameApplication chooseGraphicsProviderApp(args);
-        const auto gprovider = std::make_shared<e172::impl::sdl::GraphicsProvider>(
-            chooseGraphicsProviderApp.arguments(),
-            "choose gprovider",
-            e172::Vector<std::uint32_t>{118, 168});
+        const auto gprovider = std::make_shared<e172::impl::sdl::GraphicsProvider>();
         const auto eventProvider = std::make_shared<e172::impl::sdl::EventProvider>();
         chooseGraphicsProviderApp.setGraphicsProvider(gprovider);
         chooseGraphicsProviderApp.setEventProvider(eventProvider);
+
+        chooseGraphicsProviderApp.initRenderer("choose gprovider",
+                                               e172::Vector<std::uint32_t>{118, 168});
 
         const auto background = e172::FactoryMeta::makeUniq<Background>(32);
         chooseGraphicsProviderApp.addEntity(background.get());
@@ -64,35 +67,32 @@ RenderLayer chooseRenderLayer(const std::vector<std::string> &args)
     return result;
 }
 
+std::ofstream log("/tmp/event-provider.log");
+
 } // namespace
 
-std::shared_ptr<e172::AbstractGraphicsProvider> chooseGraphicsProvider(
-    const e172::GameApplication &app)
+Platform choosePlatform(const e172::GameApplication &app)
 {
-    const auto renderLayer = chooseRenderLayer(app.arguments());
+    const auto renderLayer = choosePlatformType(app.arguments());
 
     if (renderLayer == Vulkan) {
-        const auto graphicsProvider = std::make_shared<e172::impl::vulkan::GraphicsProvider>(
-            app.arguments());
-        if (!graphicsProvider->isValid()) {
-            const auto graphicsProvider = std::make_shared<e172::impl::sdl::GraphicsProvider>(
-                app.arguments(), "project172", e172::Vector<std::uint32_t>{900, 600});
-            if (!graphicsProvider->isValid()) {
-                e172::Debug::fatal("error: no graphics provider are valid.");
-                std::exit(2);
-            }
-            return graphicsProvider;
-        }
-        return graphicsProvider;
+        return Platform{.graphicsProvider = std::make_shared<e172::impl::vulkan::GraphicsProvider>(),
+                        .eventProvider = std::make_shared<e172::impl::sdl::EventProvider>(),
+                        .audioProvider = std::make_shared<e172::impl::sdl::AudioProvider>()};
     } else if (renderLayer == SDL) {
-        return std::make_shared<e172::impl::sdl::GraphicsProvider>(app.arguments(),
-                                                                   "project172",
-                                                                   e172::Vector<std::uint32_t>{900,
-                                                                                               600});
+        return Platform{.graphicsProvider = std::make_shared<e172::impl::sdl::GraphicsProvider>(),
+                        .eventProvider = std::make_shared<e172::impl::sdl::EventProvider>(),
+                        .audioProvider = std::make_shared<e172::impl::sdl::AudioProvider>()};
     } else if (renderLayer == Console) {
-        return std::make_shared<e172::impl::console::GraphicsProvider>(app.arguments(), std::cout);
+        return Platform{.graphicsProvider = std::make_shared<e172::impl::console::GraphicsProvider>(
+                            std::cout,
+                            e172::impl::console::Style{
+                                .colorizer
+                                = std::make_shared<e172::impl::console::AnsiTrueColorizer>(1)}),
+                        .eventProvider = std::make_shared<e172::impl::console::EventProvider>(log),
+                        .audioProvider = nullptr};
     } else {
-        return nullptr;
+        throw std::logic_error("no platform choosed");
     }
 }
 

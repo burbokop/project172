@@ -121,7 +121,10 @@ void GuiConsole::proceed(e172::Context *context, e172::EventHandler *eventHandle
 void GuiConsole::render(e172::Context *context, e172::AbstractRenderer *renderer)
 {
     if(m_consoleEnabled) {
-        renderer->drawRect({}, renderer->resolution(), 0xaa000000, e172::ShapeFormat(true));
+        renderer->drawRect({},
+                           renderer->resolution().into<double>(),
+                           0xaa000000,
+                           e172::ShapeFormat(true));
         const auto textFormat = e172::TextFormat::fromFont(m_font, 20);
 
         const auto offset = renderer->drawText(m_text,
@@ -132,7 +135,7 @@ void GuiConsole::render(e172::Context *context, e172::AbstractRenderer *renderer
 
         const auto lineStart = e172::Vector<double>(margin() * 2, margin() * 2 + offset.y());
         renderer->drawRect(e172::Vector<double>(margin(), margin()),
-                           renderer->resolution() - margin(),
+                           renderer->resolution().into<double>() - margin(),
                            m_color);
         if(m_streamPool.available()) {
             renderer->drawString(m_cmdPreffix + m_currentLine, lineStart, m_color, textFormat);

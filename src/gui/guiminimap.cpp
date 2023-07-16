@@ -22,9 +22,10 @@ void GUIMiniMap::proceed(e172::Context *context, e172::EventHandler *eventHandle
 
 void GUIMiniMap::render(e172::Context *context, e172::AbstractRenderer *renderer)
 {
-    e172::Vector size = renderer->resolution() / m_sizeRelation;
+    e172::Vector size = renderer->resolution().into<double>() / m_sizeRelation;
 
-    e172::Vector point2 = renderer->resolution() - e172::Vector<double>(margin(), margin());
+    e172::Vector point2 = renderer->resolution().into<double>()
+                          - e172::Vector<double>(margin(), margin());
     e172::Vector point1 = point2 - size;
     if (point1.quarter() == e172::Vector<double>::Quarter::RightBottom) {
         renderer->drawRect(point1, point2, DefaultColor);
