@@ -300,9 +300,11 @@ target_include_directories(project172_tests
                            PRIVATE ${DEPENDENCIES_PREFIX}/include)
 target_link_directories(project172_tests PRIVATE ${DEPENDENCIES_PREFIX}/lib)
 
-target_include_directories(console_video_player
+if(ENABLE_EXAMPLES)
+    target_include_directories(console_video_player
                            PRIVATE ${DEPENDENCIES_PREFIX}/include)
-target_link_directories(console_video_player PRIVATE ${DEPENDENCIES_PREFIX}/lib)
+    target_link_directories(console_video_player PRIVATE ${DEPENDENCIES_PREFIX}/lib)
+endif()
 
 enable_testing()
 include(CTest)
