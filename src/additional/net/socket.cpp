@@ -2,6 +2,11 @@
 
 #include <sstream>
 
+#ifdef _WIN32
+#include <BaseTsd.h>
+using ssize_t = SSIZE_T;
+#endif
+
 inline int inline_connect(CROSS_SOCKET socket, const struct sockaddr *name, int namelen) {
     return connect(socket, name, namelen);
 }
@@ -32,7 +37,7 @@ std::string Socket::getError() {
 }
 
 bool Socket::init() {
-#ifdef __WIN32__
+#ifdef _WIN32
     WSADATA wsaData;
     WORD DLLVersion = MAKEWORD(2, 1);
     if(WSAStartup(DLLVersion, &wsaData) != 0) {
@@ -60,7 +65,7 @@ Socket::Socket(unsigned short port, std::string ip) {
             instance_initialized = false;
         }
     }
-#ifdef __WIN32__
+#ifdef _WIN32
 
     if(instance_initialized) {
         addr.sin_addr.s_addr = inet_addr(ip.c_str());
@@ -73,7 +78,7 @@ Socket::Socket(unsigned short port, std::string ip) {
 }
 
 Socket *Socket::listen() {
-#ifdef __WIN32__
+#ifdef _WIN32
 
     int sizeofaddr = sizeof(addr);
     bind(sys_socket, reinterpret_cast<SOCKADDR*>(&addr), sizeofaddr);
@@ -90,7 +95,7 @@ Socket *Socket::listen() {
 }
 
 bool burbokop::Socket::connect() {
-#ifdef __WIN32__
+#ifdef _WIN32
 
     if(inline_connect(sys_socket, reinterpret_cast<SOCKADDR*>(&addr), sizeof(addr))) {
         setError("<connection error>");
@@ -117,7 +122,7 @@ char *burbokop::Socket::recv(int length) {
 }
 
 void Socket::close() {
-#ifdef __WIN32__
+#ifdef _WIN32
 
     closesocket(sys_socket);
 #endif

@@ -1,0 +1,143 @@
+# This starter workflow is for a CMake project running on multiple platforms. There is a different starter workflow if you just want a single platform.
+# See: https://github.com/actions/starter-workflows/blob/main/ci/cmake-single-platform.yml
+name: CMake on multiple platforms
+
+on:
+  push:
+    branches: [ "master" ]
+    tags-ignore:
+      - 'v*'
+  pull_request:
+    branches: [ "master" ]
+  workflow_call:
+    secrets:
+      envPAT:
+        required: true
+    outputs:
+      project-version:
+        description: "Project version described in CMakeLists.txt"
+        value: ${{ jobs.build-test-pack.outputs.project-version }}
+
+permissions:
+  # deployments permission to deploy GitHub pages website
+  deployments: write
+  # contents permission to update benchmark contents in gh-pages branch
+  contents: write
+
+jobs:
+  build-test-pack:
+    runs-on: ${{ matrix.os }}
+    outputs:
+      project-version: ${{ steps.get-project-version.outputs.project-version }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-22.04, ubuntu-26.04, windows-2022]
+        build_type: [Release, Debug]
+        c_compiler: [gcc, clang, cl]
+        include:
+          - os: windows-2022
+            c_compiler: cl
+            cpp_compiler: cl
+          - os: ubuntu-22.04
+            c_compiler: gcc
+            cpp_compiler: g++
+          - os: ubuntu-22.04
+            c_compiler: clang
+            cpp_compiler: clang++
+          - os: ubuntu-26.04
+            c_compiler: gcc
+            cpp_compiler: g++
+          - os: ubuntu-26.04
+            c_compiler: clang
+            cpp_compiler: clang++
+        exclude:
+          - os: windows-2022
+            c_compiler: gcc
+          - os: windows-2022
+            c_compiler: clang
+          - os: ubuntu-22.04
+            c_compiler: cl
+          - os: ubuntu-26.04
+            c_compiler: cl
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set reusable strings
+      # Turn repeated input strings (such as the build output directory) into step outputs. These step outputs can be used throughout the workflow file.
+      id: strings
+      shell: bash
+      run: |
+        echo "build-output-dir=${{ github.workspace }}/build" >> "$GITHUB_OUTPUT"
+
+    - name: Installing dependencies
+      if: matrix.os != 'windows-2022'
+      run: |
+        sudo apt update && sudo apt install -y libtbb-dev
+
+    - name: Configure CMake
+      # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
+      # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
+      run: >
+        cmake -B ${{ steps.strings.outputs.build-output-dir }}
+        -DCMAKE_CXX_COMPILER=${{ matrix.cpp_compiler }}
+        -DCMAKE_C_COMPILER=${{ matrix.c_compiler }}
+        -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
+        -DENABLE_LINT=OFF
+        -DENABLE_STATIC_BUILD=ON
+        -S ${{ github.workspace }}
+
+    - name: Retrieve project version from CMakeLists.txt
+      id: get-project-version
+      working-directory: ${{ steps.strings.outputs.build-output-dir }}
+      shell: bash
+      run: |
+        echo "project-version=$(cmake --system-information | awk -F= '$1~/CMAKE_PROJECT_VERSION:STATIC/{print$2}')" >> "$GITHUB_OUTPUT"
+
+    - name: Build
+      run: cmake --build ${{ steps.strings.outputs.build-output-dir }} --config ${{ matrix.build_type }}
+
+    - name: Test
+      working-directory: ${{ steps.strings.outputs.build-output-dir }}
+      run: ctest --build-config ${{ matrix.build_type }}
+
+    - name: Check benchmarks existence
+      id: check-benchmarks
+      uses: andstor/file-existence-action@v2
+      with:
+        files: ${{ steps.strings.outputs.build-output-dir }}/benchmarks/e172_benchmarks
+
+    - name: Benchmark
+      id: benchmark
+      working-directory: ${{ steps.strings.outputs.build-output-dir }}
+      if: steps.check-benchmarks.outputs.files_exists == 'true' && matrix.build_type == 'Release'
+      shell: bash
+      run: |
+        ./benchmarks/e172_benchmarks --benchmark_format=json > benchmark_result.json
+        echo "benchmarks-enabled=true" >> "$GITHUB_OUTPUT"
+
+    - name: Store benchmark result
+      if: steps.check-benchmarks.outputs.files_exists == 'true' && matrix.build_type == 'Release' && matrix.c_compiler == 'clang' && github.ref == 'refs/heads/master'
+      uses: benchmark-action/github-action-benchmark@v1
+      with:
+        tool: 'googlecpp'
+        output-file-path: ${{ steps.strings.outputs.build-output-dir }}/benchmark_result.json
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        auto-push: true
+
+    - name: Pack
+      if: ${{ matrix.build_type == 'Release' }}
+      working-directory: ${{ steps.strings.outputs.build-output-dir }}
+      run: cpack
+
+    - name: Upload artifacts
+      if: ${{ matrix.build_type == 'Release' }}
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ matrix.os }}.${{ matrix.c_compiler }}.${{ matrix.build_type }}
+        path: |
+          ${{ steps.strings.outputs.build-output-dir }}/libe172*.deb
+          ${{ steps.strings.outputs.build-output-dir }}/libe172*.zip
+          ${{ steps.strings.outputs.build-output-dir }}/libe172*.sh

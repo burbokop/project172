@@ -1,0 +1,77 @@
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+name: CMake on multiple platforms (Release)
+
+jobs:
+  build:
+    name: Build
+    uses: burbokop/e172/.github/workflows/cmake-multi-platform.yml@master
+    secrets:
+      envPAT: ${{ secrets.envPAT }}
+
+  release:
+    name: Release
+    needs: build
+    runs-on: ubuntu-latest
+    permissions: write-all
+    steps:
+      - name: Check project version
+        shell: bash
+        run: |
+          if [[ "v${{ needs.build.outputs.project-version }}" != "${{ github.ref_name }}" ]]; then
+            echo "CMake version 'v${{ needs.build.outputs.project-version }}' does not match tag '${{ github.ref_name }}'"
+            exit 1
+          fi
+
+      - uses: actions/download-artifact@v3
+        with:
+          path: ${{ github.workspace }}
+
+      - name: Display structure of downloaded files
+        run: ls -R
+        working-directory: ${{ github.workspace }}
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+
+      - name: Upload libe172-${{ needs.build.outputs.project-version }}-Linux.deb
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ${{ github.workspace }}/ubuntu-22.04.gcc.Release/libe172-${{ needs.build.outputs.project-version }}-Linux.deb
+          asset_name: libe172-${{ needs.build.outputs.project-version }}-Linux.deb
+          asset_content_type: application/vnd.debian.binary-package
+
+      - name: Upload libe172-${{ needs.build.outputs.project-version }}-Linux.sh
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ${{ github.workspace }}/ubuntu-22.04.gcc.Release/libe172-${{ needs.build.outputs.project-version }}-Linux.sh
+          asset_name: libe172-${{ needs.build.outputs.project-version }}-Linux.sh
+          asset_content_type: application/x-shellscript
+
+      - name: Upload libe172-${{ needs.build.outputs.project-version }}-win64.zip
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ${{ github.workspace }}/windows-2022.cl.Release/libe172-${{ needs.build.outputs.project-version }}-win64.zip
+          asset_name: libe172-${{ needs.build.outputs.project-version }}-win64.zip
+          asset_content_type: application/zip

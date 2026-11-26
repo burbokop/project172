@@ -5,6 +5,7 @@
 #include <e172/entity.h>
 #include <e172/math/physicalobject.h>
 #include <e172/utility/ptr.h>
+#include <array>
 
 namespace proj172::core {
 

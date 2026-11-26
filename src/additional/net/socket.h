@@ -1,7 +1,7 @@
 #ifndef SOCKET_H
 #define SOCKET_H
 
-#ifdef __WIN32__
+#ifdef _WIN32
 
 #include <winsock2.h>
 typedef SOCKET CROSS_SOCKET;

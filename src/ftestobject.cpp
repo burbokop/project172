@@ -24,7 +24,7 @@ void FTestObject::setColiderVertices(const std::vector<e172::Vector<double> > &v
 
 void FTestObject::proceed(e172::Context *context, e172::EventHandler *eventHandler)
 {
-    static id_t ee = entityId();
+    static const auto ee = entityId();
 
     if(ee == entityId()) {
         if(eventHandler->keyHolded(e172::ScancodeKp4)) {

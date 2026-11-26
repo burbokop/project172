@@ -1,0 +1,25 @@
+name: Lint
+
+on:
+  push:
+    branches: [ "master" ]
+    tags-ignore:
+      - 'v*'
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  lint:
+    runs-on: ubuntu-26.04
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Installing dependencies
+      run: sudo apt install cpplint
+      
+    - name: Lint
+      working-directory: ${{github.workspace}}
+      run: |
+        cpplint --recursive ./src
+        cpplint --recursive ./tests
